@@ -460,10 +460,240 @@ def tabla_ioc(ioc, procedencia, indice):
     return "\n".join(filas)
 
 
+PORTADA = "index.html"
+
+CSS_PORTADA = """
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --amber:#f7a400;--mint:#4db99c;--deep:#375d9d;--sky:#5a7ebe;
+  --amber-soft:rgba(247,164,0,.14);--mint-soft:rgba(77,185,156,.14);
+  --bg:#080c18;--surface:#0f1830;--surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);--line-strong:rgba(90,126,190,.42);
+  --ink:#e9eefb;--ink-2:#b9c6e2;--ink-3:#8294b8;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --r:14px;--r-s:9px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+  line-height:1.62;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 600px at 20% -10%,rgba(55,93,157,.20),transparent 60%),
+                   radial-gradient(900px 500px at 95% 5%,rgba(247,164,0,.07),transparent 55%);
+  background-repeat:no-repeat}
+.tlp-bar{background:#fff;color:#000;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.14em;text-align:center;padding:5px 10px;font-weight:700}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 72px}
+header.hero{padding:62px 0 34px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+h1{font-size:clamp(30px,5.2vw,50px);line-height:1.08;letter-spacing:-.022em;font-weight:680}
+.lede{color:var(--ink-2);font-size:17.5px;max-width:68ch;margin-top:18px}
+h2{font-size:21px;letter-spacing:-.01em;margin:52px 0 6px;font-weight:620}
+h2 .num{font-family:var(--mono);font-size:12px;color:var(--sky);
+  letter-spacing:.14em;display:block;margin-bottom:7px;font-weight:500}
+.sub{color:var(--ink-3);font-size:14.5px;margin-bottom:22px;max-width:70ch}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(318px,1fr))}
+.card{background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  border:1px solid var(--line);border-radius:var(--r);padding:20px 21px;
+  display:flex;flex-direction:column;gap:11px;
+  transition:border-color .18s ease,transform .18s ease}
+.card:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.card .id{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--sky)}
+.card h3{font-size:17px;line-height:1.3;letter-spacing:-.008em;font-weight:600}
+.card h3 a{color:var(--ink);text-decoration:none}
+.card h3 a:hover{color:var(--amber)}
+.card .meta{color:var(--ink-3);font-size:13px;flex:1}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;padding:3px 8px;
+  border-radius:99px;border:1px solid var(--line-strong);color:var(--ink-2);white-space:nowrap}
+.pill.ok{background:var(--mint-soft);border-color:rgba(77,185,156,.5);color:#9fe0cb}
+.pill.warn{background:var(--amber-soft);border-color:rgba(247,164,0,.5);color:#ffd27a}
+.pill.bad{background:rgba(214,77,77,.16);border-color:rgba(214,77,77,.5);color:#ffb3b3}
+.links{display:flex;gap:9px;border-top:1px solid var(--line);padding-top:12px}
+.links a{font-family:var(--mono);font-size:12px;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--line-strong);border-radius:var(--r-s);padding:5px 11px;transition:.16s}
+.links a.primary{background:var(--amber);border-color:var(--amber);color:#1a1200;font-weight:600}
+.links a:hover{border-color:var(--amber);color:var(--amber)}
+.links a.primary:hover{color:#1a1200;filter:brightness(1.08)}
+table{width:100%;border-collapse:collapse;font-size:14px;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:rgba(55,93,157,.16);font-size:11.5px;font-family:var(--mono);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+tr:last-child td{border-bottom:none}
+td code,.mono{font-family:var(--mono);font-size:12.5px;color:var(--amber)}
+td a{color:var(--sky)}
+.note{border-left:3px solid var(--amber);background:var(--amber-soft);
+  border-radius:0 var(--r-s) var(--r-s) 0;padding:16px 19px;margin:22px 0;
+  font-size:14.5px;color:var(--ink-2)}
+.note strong{color:var(--ink)}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+.stat{background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-s);padding:16px 17px}
+.stat .n{font-family:var(--mono);font-size:27px;color:var(--amber);letter-spacing:-.02em}
+.stat .l{color:var(--ink-3);font-size:12.5px;margin-top:3px;line-height:1.45}
+footer{margin-top:58px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--ink-3);font-size:13px}
+footer a{color:var(--sky)}
+@media(max-width:620px){header.hero{padding:38px 0 26px}.wrap{padding:0 16px 52px}
+  table{font-size:13px}th,td{padding:9px 10px}}
+"""
+
+
+def pagina_portada(lista, ioc, indice, hoy):
+    """Genera la portada de GitHub Pages.
+
+    Se escribe aquí, y no a mano, por la misma razón que el índice del README:
+    un listado mantenido a mano miente en cuanto se añade un informe. Reutiliza
+    la paleta de `render/cti_theme.css` para que la portada no parezca ajena a
+    los informes que indexa, y es autocontenida —sin CDN ni fuentes remotas—,
+    igual que ellos.
+    """
+    import html as _h
+    e = _h.escape
+    publicables = [i for i in lista if i["publicable"]]
+    reciente = max((i["fm"].get("fecha", "") for i in publicables), default="")
+
+    tarjetas = []
+    for inf in sorted(publicables, key=lambda x: x["id"], reverse=True):
+        fm = inf["fm"]
+        estado, dias = vigencia(fm, hoy)
+        clase = {"vigente": "ok", "por caducar": "warn",
+                 "caducado": "bad", "sin fecha": ""}[estado]
+        if estado == "caducado":
+            txt_vig = "caducado hace %d d" % abs(dias)
+        elif dias is not None:
+            txt_vig = "vigente · %d d" % dias
+        else:
+            txt_vig = "sin fecha"
+        tarjetas.append(
+            '<article class="card">\n'
+            '  <div class="id">%s · %s</div>\n'
+            '  <h3><a href="%s">%s</a></h3>\n'
+            '  <div class="meta">%s</div>\n'
+            '  <div class="pills"><span class="pill">v%s</span>'
+            '<span class="pill">%s</span>'
+            '<span class="pill %s">%s</span></div>\n'
+            '  <div class="links"><a class="primary" href="%s">Leer el informe</a>'
+            '<a href="%s">fuente .md</a></div>\n'
+            '</article>' % (
+                e(inf["id"]), e(fm.get("fecha", "")),
+                e(inf["html"]), e(fm.get("actor", inf["id"])),
+                e(fm.get("tipo", "")),
+                e(fm.get("version", "?")), e(inf["tlp"] or "—"),
+                clase, e(txt_vig),
+                e(inf["html"]), e(inf["md"]),
+            )
+        )
+
+    filas_ioc_tabla = []
+    desc = {
+        "ipv4": "Direcciones IPv4, una por línea, ya desenmascaradas",
+        "ipv6": "Direcciones IPv6 (hoy ningún informe declara ninguna)",
+        "url": "Dominios y URL, una por línea",
+    }
+    for clase, fichero in FICHEROS_IOC.items():
+        filas_ioc_tabla.append(
+            "<tr><td><a href=\"%s\"><code>%s</code></a></td><td class=\"mono\">%d</td>"
+            "<td>%s</td></tr>" % (fichero, fichero, len(ioc[clase]), e(desc[clase]))
+        )
+    filas_ioc_tabla.append(
+        "<tr><td><a href=\"%s\"><code>%s</code></a></td><td class=\"mono\">%d</td>"
+        "<td>Todos los tipos, con informe de origen, confianza, caducidad, "
+        "acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>"
+        % (FICHERO_INDICE, FICHERO_INDICE, len(indice))
+    )
+
+    retro = sum(1 for f in indice
+                if f["agregado"] and "retrohunt" in f["accion_permitida"].lower()
+                and "bloqueo" not in f["accion_permitida"].lower())
+    caducados = sum(1 for i in publicables if vigencia(i["fm"], hoy)[0] == "caducado")
+
+    return """<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cti_daily — informes de ciberinteligencia</title>
+<meta name="description" content="Informes de ciberinteligencia de producción propia, en Markdown y HTML autocontenido. Marcado TLP:CLEAR.">
+<style>%(css)s</style>
+</head>
+<body>
+<div class="tlp-bar">TLP:CLEAR &nbsp;·&nbsp; DIFUSIÓN SIN RESTRICCIÓN, CONSERVANDO LA ATRIBUCIÓN DE LAS FUENTES</div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Célula CTI · ciclo diario</div>
+  <h1>Informes de ciberinteligencia</h1>
+  <p class="lede">Producción propia, escrita en Markdown y publicada como HTML autocontenido.
+  Cada informe está escrito para que alguien decida algo: si un párrafo no cambia lo que
+  alguien va a hacer, va al anexo o se borra. El repositorio se revisa a diario y los
+  agregados de indicadores se reconstruyen desde los informes en cada construcción.</p>
+</header>
+
+<h2><span class="num">01 · catálogo</span>Informes publicados</h2>
+<p class="sub">%(n)d informes. El botón abre el informe renderizado; la fuente en Markdown
+es el documento canónico y se versiona.</p>
+<div class="grid">
+%(tarjetas)s
+</div>
+
+<h2><span class="num">02 · indicadores</span>Agregados de IOC</h2>
+<p class="sub">Reconstruidos en cada construcción desde las tablas del Anexo A de cada
+informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier proceso de ingesta.</p>
+<table>
+<thead><tr><th>Fichero</th><th>Núm.</th><th>Qué contiene</th></tr></thead>
+<tbody>
+%(filas_ioc)s
+</tbody>
+</table>
+
+<div class="note">
+<strong>Antes de cargar un <code>.txt</code> en un bloqueo.</strong> Las listas planas pierden
+la confianza, la caducidad y la acción permitida de cada indicador: %(retro)d de los que
+contienen están marcados <em>solo retrohunt</em>, y hay indicadores marcados
+<em>no bloquear — herramienta legítima</em>. Cargarlas sin filtrar provocará cortes de
+servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
+<code>accion_permitida</code>, escrita por quien analizó cada indicador.
+</div>
+
+<h2><span class="num">03 · estado</span>Estado del ciclo</h2>
+<div class="stats">
+  <div class="stat"><div class="n">%(n)d</div><div class="l">informes publicados</div></div>
+  <div class="stat"><div class="n">%(n_ioc)d</div><div class="l">indicadores con contexto</div></div>
+  <div class="stat"><div class="n">%(caducados)d</div><div class="l">caducados, exigen revisión</div></div>
+  <div class="stat"><div class="n">%(reciente)s</div><div class="l">informe más reciente</div></div>
+</div>
+
+<footer>
+  Todo el material está marcado <code>TLP:CLEAR</code>; la mayoría conserva
+  <code>PAP:AMBER</code>, que condiciona el uso activo de los indicadores.
+  Fuente, plantilla y utillaje en
+  <a href="https://github.com/cabezoide/cti_daily">github.com/cabezoide/cti_daily</a>.
+  Esta portada y los agregados los regenera <code>tools/cti_build.py</code>;
+  editarlos a mano no sirve de nada.
+</footer>
+
+</div>
+</body>
+</html>
+""" % {
+        "css": CSS_PORTADA.strip(),
+        "n": len(publicables),
+        "n_ioc": len(indice),
+        "tarjetas": "\n".join(tarjetas),
+        "filas_ioc": "\n".join(filas_ioc_tabla),
+        "retro": retro,
+        "caducados": caducados,
+        "reciente": e(reciente or "—"),
+    }
+
+
 def bloque_indice(lista, ioc, procedencia, indice, hoy):
     publicables = [i for i in lista if i["publicable"]]
     total_ioc = sum(len(v) for v in ioc.values())
     caducados = [i for i in publicables if vigencia(i["fm"], hoy)[0] == "caducado"]
+    reciente = max((i["fm"].get("fecha", "") for i in publicables), default="")
     por_caducar = [i for i in publicables if vigencia(i["fm"], hoy)[0] == "por caducar"]
 
     partes = [
@@ -492,7 +722,7 @@ def bloque_indice(lista, ioc, procedencia, indice, hoy):
             len(por_caducar),
             " — " + ", ".join("`%s`" % i["id"] for i in por_caducar) if por_caducar else "",
         ),
-        "| Última construcción | %s |" % hoy.isoformat(),
+        "| Informe más reciente | %s |" % (reciente or "—"),
         "",
         MARCA_FIN,
     ]
@@ -569,6 +799,10 @@ def main():
         escritor.writerow(fila)
     if escribir_si_cambia(os.path.join(RAIZ, FICHERO_INDICE), buf.getvalue(), opt.check):
         cambios.append("%s (%d indicadores con contexto)" % (FICHERO_INDICE, len(indice)))
+
+    portada = pagina_portada(lista, ioc, indice, hoy)
+    if escribir_si_cambia(os.path.join(RAIZ, PORTADA), portada, opt.check):
+        cambios.append("%s (portada de GitHub Pages)" % PORTADA)
 
     ruta_readme = os.path.join(RAIZ, "README.md")
     if os.path.exists(ruta_readme):

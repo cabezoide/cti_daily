@@ -16,7 +16,7 @@ fi
 
 python3 tools/cti_build.py
 
-for f in README.md ioc_ipv4.txt ioc_ipv6.txt ioc_url.txt ioc_index.csv; do
+for f in README.md index.html ioc_ipv4.txt ioc_ipv6.txt ioc_url.txt ioc_index.csv; do
     [ -f "$f" ] && git add "$f"
 done
 for f in CTI-*.html; do

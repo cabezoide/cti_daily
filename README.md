@@ -2,6 +2,8 @@
 
 Informes de ciberinteligencia de producción propia, escritos en Markdown y publicados también como HTML autocontenido. El repositorio se revisa **a diario**: cada informe vivo se vuelve a investigar cuando aparece información nueva, y los agregados de indicadores se reconstruyen desde los informes en cada construcción.
 
+**Publicado en https://cabezoide.github.io/cti_daily** — los informes se leen mejor ahí: el HTML lleva su índice lateral, búsqueda, cronologías filtrables y la matriz ATT&CK navegable.
+
 No es un archivo histórico ni un volcado de *feeds*. Cada documento está escrito para que alguien decida algo: si un párrafo no cambia lo que alguien va a hacer, va al anexo o se borra.
 
 ---
@@ -39,7 +41,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | Indicadores en el índice con contexto | 193 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
-| Última construcción | 2026-11-16 |
+| Informe más reciente | 2026-11-16 |
 
 <!-- FIN AUTO-ÍNDICE -->
 
@@ -132,6 +134,8 @@ ioc_ipv4.txt               listas planas de indicadores, para ingesta automátic
 ioc_ipv6.txt
 ioc_url.txt
 ioc_index.csv              los mismos indicadores con contexto, confianza y acción permitida
+index.html                 portada de GitHub Pages, generada; editarla a mano no sirve
+.nojekyll                  desactiva Jekyll: las páginas se sirven tal cual, sin procesar
 plantilla-informe-cti-v2.md   plantilla vigente
 plantilla-informe-cti.md      plantilla v1, conservada por referencia
 render/cti_render.py       Markdown → HTML, sólo biblioteca estándar
@@ -148,6 +152,36 @@ git config core.hooksPath .githooks
 ```
 
 ---
+
+## Publicación
+
+El repositorio se sirve con GitHub Pages desde la rama `main`, directorio raíz, en
+**https://cabezoide.github.io/cti_daily**. No hay paso de compilación: los informes ya son
+HTML autocontenido —sin CDN, sin fuentes remotas, sin una sola petición a terceros— y se
+publican tal cual.
+
+Dos detalles que conviene no deshacer:
+
+- **`.nojekyll`** desactiva el procesado de Jekyll. Sin él, GitHub intentaría convertir los
+  `.md` a HTML con su plantilla por omisión, y quedarían dos versiones del mismo informe
+  compitiendo: una renderizada por nosotros con el sistema de diseño y otra por Jekyll sin
+  él. Con el fichero presente, los `.md` se sirven como fuente y los `.html` como lo que son.
+- **`index.html` la genera el constructor**, no se escribe a mano, por la misma razón que el
+  índice de este README: un listado mantenido a mano miente en cuanto se añade un informe.
+
+Los agregados de indicadores quedan accesibles como URL estables, utilizables directamente
+desde un proceso de ingesta:
+
+```bash
+curl -s https://cabezoide.github.io/cti_daily/ioc_index.csv
+curl -s https://cabezoide.github.io/cti_daily/ioc_ipv4.txt
+```
+
+GitHub Pages sirve con una caché de unos diez minutos, de modo que un cambio tarda ese orden
+de tiempo en verse. Y publicar en Pages hace el contenido indexable por buscadores: es
+coherente con `TLP:CLEAR`, pero si en algún momento se prefiere que las listas de indicadores
+no acaben en agregadores de terceros fuera de su contexto, el lugar para decirlo es un
+`robots.txt` en la raíz.
 
 ## Método
 
