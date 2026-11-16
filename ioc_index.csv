@@ -614,3 +614,97 @@ CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,fa1bd87281ed0d2ffbed269160008
 CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,fab0b6945c1ee0057349254760469b7d5a502819517b31049efc51a71b25c46d,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
 CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://archive.org/replace_202505/REPLACE.txt,,Alta,,Detección; bloqueo de ruta,ioc_url.txt,"Depósito de la carga en base64 en la campaña Shadow Vector. Servicio legítimo: bloquear la ruta, no el dominio"
 CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://t.me/xworm_v2,,Media,,Solo detección,ioc_url.txt,"Canal de Telegram que distribuye la versión crackeada de XWorm, con más de 300 miembros. Es inteligencia de proveedor, no infraestructura de ataque"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,6e24a5fb.ngrok.io,,Alta,,Detección,ioc_url.txt,"Túneles ngrok usados como mando y control, ruta /file.php. Los subdominios caducan; el patrón de abuso no"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,adtiomtardecessd.zapto.org,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control sobre DNS dinámico (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,agaliarept.com,,Media,,Bloqueo y retrohunt,ioc_url.txt,"Infraestructura de 2014 (Kaspersky). Toda comunicación con ellos es, en palabras de la fuente, «extremadamente sospechosa»"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,artyomt.com,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Servidor de mando y control, ruta /file3.php (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,blogwhereyou.com,,Media,,Solo detección,ioc_url.txt,Infraestructura de 2014 sumidero por Kaspersky: una resolución hoy no indica compromiso activo
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,ceofanb18.mipropia.com,,Alta,,Bloqueo y retrohunt,ioc_url.txt,Mando y control cuyo nombre suplanta a la Fuerza Armada Nacional Bolivariana. Es el indicador que mejor resume el conjunto de objetivos del actor
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,djcaps.gotdns.ch,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control sobre DNS dinámico (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,f9527d03.ngrok.io,,Alta,,Detección,ioc_url.txt,"Túneles ngrok usados como mando y control, ruta /file.php. Los subdominios caducan; el patrón de abuso no"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,frejabe.com,,Media,,Bloqueo y retrohunt,ioc_url.txt,"Infraestructura de 2014 (Kaspersky). Toda comunicación con ellos es, en palabras de la fuente, «extremadamente sospechosa»"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,grannegral.com,,Media,,Solo detección,ioc_url.txt,Infraestructura de 2014 sumidero por Kaspersky: una resolución hoy no indica compromiso activo
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,java.serveblog.net,,Media,,Bloqueo y retrohunt,ioc_url.txt,"Infraestructura de 2014 (Kaspersky), origen de Signed_Update.jar"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,koliast.com,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Servidor FTP de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,lawyersofficial.mipropia.com,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control con nombre de apariencia jurídica, coherente con los señuelos de citación judicial"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,mcsi.gotdns.ch,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control sobre DNS dinámico (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,plushbr.com,,Media,,Bloqueo y retrohunt,ioc_url.txt,"Infraestructura de 2014 (Kaspersky). Toda comunicación con ellos es, en palabras de la fuente, «extremadamente sospechosa»"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,tobabean.expert,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Servidor FTP de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,tokeiss.ddns.net,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control sobre DNS dinámico (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,u154611594.hostingerapp.com,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control en alojamiento compartido gratuito, ruta /file.php"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,u929489355.hostingerapp.com,,Alta,,Bloqueo y retrohunt,ioc_url.txt,"Mando y control en alojamiento compartido gratuito, ruta /file.php"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,xmailliwx.com,,Media,,Bloqueo y retrohunt,ioc_url.txt,"Infraestructura de 2014 (Kaspersky). Toda comunicación con ellos es, en palabras de la fuente, «extremadamente sospechosa»"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,%ProgramData%\USOEnable,,Alta,,Detección,,Instalación y persistencia de la versión de 2020 (360)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,C:\Users\MITM\Desktop\malware\3_svchostt\Proyecto1.vbp,,Alta,,Detección,,"Ruta de compilación del liberador de 2020, con el nombre de usuario del desarrollador"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,Java Update.lnk,,Media,,Detección,,Instalación y persistencia de la versión de 2014 (Kaspersky)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,NisSrv.bat,,Alta,,Detección,,Instalación y persistencia de la versión de 2020 (360)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,_setupXOX.msi,,Alta,,Detección,,Instalación y persistencia de la versión de 2020 (360)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,appdata/Jre6/java.exe,,Media,,Detección,,Instalación y persistencia de la versión de 2014 (Kaspersky)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,appdata/MicroDes/,,Media,,Detección,,Instalación y persistencia de la versión de 2014 (Kaspersky)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,svchostt.exe,,Alta,,Detección,,Instalación y persistencia de la versión de 2020 (360)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,109.61.164.33,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Servidor de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,142.44.236.215,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Servidor de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,156.67.222.88,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Servidor de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,158.69.9.209,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Servidor de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,185.224.137.63,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Servidor de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,185.70.105.33,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura de la campaña HpReact (360, sep-2020)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,199.79.63.188,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Servidor de exfiltración (ESET, 2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,92.249.44.53,,Alta,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura de la campaña HpReact (360, sep-2020)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,61d33dc5b257a18eb6514e473c1495fe,,Media,,Solo retrohunt,ioc_hash.txt,"AwgXuBV31pGV.eXe — artefacto de infección (Kaspersky, 2014)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,6b33fa0c52ca413d4214dcde007f89c1,,Alta,,Solo retrohunt,ioc_hash.txt,"Componente de la campaña HpReact (360, sep-2020)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,b26d1aec219ce45b2e80769368310471,,Media,,Solo retrohunt,ioc_hash.txt,Signed_Update.jar — artefacto Java de infección por web (2014)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,b5ada760476ba9a815ca56f12a11d557,,Media,,Solo retrohunt,ioc_hash.txt,EL ARTE DE LA GUERRA.exe — señuelo de 2014
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,d6c112d951cb48cab37e5d7ebed2420b,,Media,,Solo retrohunt,ioc_hash.txt,Hermosa XXX.rar — señuelo de temática sexual (2014)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,df2889df7ac209e7b696733aa6b52af5,,Media,,Solo retrohunt,ioc_hash.txt,Hermosa XXX.pps.rar — señuelo con presentación de PowerPoint (2014)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,e486eddffd13bed33e68d6d8d4052270,,Media,,Solo retrohunt,ioc_hash.txt,Hermosa XXX.pps.rar — segunda muestra del mismo señuelo
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,e9b2499b92279669a09fef798af7f45b,,Media,,Solo retrohunt,ioc_hash.txt,Suntzu.rar — señuelo de 2014
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,f7e23b876fc887052ac8e2558f0d6c38,,Media,,Solo retrohunt,ioc_hash.txt,Hot Brazilian XXX.rar — señuelo de 2014
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,f85489c1d1ff3374f92ccb7267032016,,Alta,,Solo retrohunt,ioc_hash.txt,"Componente de la campaña HpReact (360, sep-2020)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,fbe5b66db57fb52b231c5374ac2ac805,,Alta,,Solo retrohunt,ioc_hash.txt,"Componente de la campaña HpReact (360, sep-2020). Es uno de los artefactos más recientes publicados de este actor"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,Clip.html,,Media,,Detección,,Fichero donde se almacena el portapapeles capturado (estudio académico)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,Microsoft_up,,Media,,Detección,,Nombre de la tarea programada de persistencia (2014)
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,0468d3776435e527dba52b9da61d38c076dda09a,,Alta,,Solo retrohunt,ioc_hash.txt,FORMATO UNICO DE RENDIMIENTO OPERATIVO GNB 11JUNIO2019 CZGNB-13 xlsx.scr — señuelo de la Guardia Nacional Bolivariana
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,048c40eb606da3def08c9f6997c1948afbbc959b,,Alta,,Solo retrohunt,ioc_hash.txt,"GoogleUpdate.exe — componente de mando y control, Python/Machete.F (ESET, jul-2019)"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,07e383e9ff04f587769845306dc4bfe75630baaa,,Alta,,Solo retrohunt,ioc_hash.txt,"_elementree.pyw — componente en Python, Python/Machete.G"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,0b6f61af3e2c6551f15e0f888177eec91f20ba99,,Alta,,Solo retrohunt,ioc_hash.txt,"_multiproccessing.pyw — componente en Python, Python/Machete.G"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,0c33b75f6c4fc0413abdbcda1c5e18c907f13dc3,,Alta,,Solo retrohunt,ioc_hash.txt,"_bsdbd.pyw — componente en Python, Python/Machete.G"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,10eb152039cb0a379daab272151bc1baa8c6d4db,,Alta,,Solo retrohunt,ioc_hash.txt,Radiograma 004026_pdf.scr — señuelo con documento de comunicación militar venezolana
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,1b3723651e1d321d4f34f2a243d7751d17288257,,Alta,,Solo retrohunt,ioc_hash.txt,"_hashlbi.pyw — componente en Python, Python/Machete.G"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,204a2850548e5994d4696e9002f90dfccbe2093a,,Alta,,Solo retrohunt,ioc_hash.txt,"GoogleCrash.exe — componente principal y persistencia, Python/Machete.C"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,24752dab28c3add4c31591f2ec480ce3ca83e0aa,,Alta,,Solo retrohunt,ioc_hash.txt,python27.exe — autoextraíble con intérprete y componentes
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,26fb301af7393b5e564b8c802f5795edebd7cecf,,Alta,,Solo retrohunt,ioc_hash.txt,"_clypes.pyw — componente en Python, Python/Machete.G"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,2b7404f6b0075bc1192d61d4af135d521d5f08a3,,Alta,,Solo retrohunt,ioc_hash.txt,"RdrCEF.exe — descargador, Python/Machete.A"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,2e8d8508096caa38493414f6ba788d0041ea9e15,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleUpdate.exe — Python/Machete.F
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,318496b58cf5052efd49a95c721d9165278e9fce,,Alta,,Solo retrohunt,ioc_hash.txt,"Chrome.exe — componente de recolección, Python/Machete.B"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,3792588edc809270e6666a4677ec85a3400ba4cf,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleCrash.exe — Python/Machete.E
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,3bb345032b6d0226d6771ba65fe4da0faf628631,,Alta,,Solo retrohunt,ioc_hash.txt,Chrome.exe — Python/Machete.B
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,4899a2c2ceceb92d2cc4ed17d092d1d599379284,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleCrash.exe — Python/Machete.A
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,52b680f472ae463436979da325db7ad64d5af1ef,,Alta,,Solo retrohunt,ioc_hash.txt,"Mapa_monitoreo_WRF_ind02052018.scr — señuelo cartográfico, el único de la serie que anticipa el interés GIS"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,53102e57b40feacb64566c26d101d9242dece77c,,Alta,,Solo retrohunt,ioc_hash.txt,"Down.exe — descargador, Python/Machete.A"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,56e8743e0773286a4b9e055147d96d53a43beca1,,Alta,,Solo retrohunt,ioc_hash.txt,"Down.exe — descargador, Python/Machete.A"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,5c56ac14ca7159804a9d53fe037cfd0d99d45ab1,,Alta,,Solo retrohunt,ioc_hash.txt,JUNIO_19_PROPUESTA_CLARO_RENOVACION.scr — señuelo de propuesta comercial a un operador de telecomunicaciones
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,6b42091ca2f89a59f4e27e30acdacf32eb83f824,,Alta,,Solo retrohunt,ioc_hash.txt,"_mssi.pyw — componente en Python, Python/Machete.G"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,71f69f04307c8f5675dcadeaa80b8c2b95691b01,,Alta,,Solo retrohunt,ioc_hash.txt,"Down.exe — descargador, Python/Machete.A"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,7a1ad75a1aa73ec72ee21b213fcca55d57a0cd58,,Alta,,Solo retrohunt,ioc_hash.txt,S_E_ARLETTE_MARENCO_NOTA_INFORMANDO_TERMINO_DE_MISION_001.scr — señuelo diplomático con nombre propio
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,85bdd7d871108c737701ac30c14a2d343cbdef94,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleUpdate.exe — Python/Machete.D
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,8ed8cb784512f7dadd147347fc94e945faf16338,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleUpdate.exe — Python/Machete.F
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,904137b61f1ded66c8ca76ebf198dec1b638b5d4,,Alta,,Solo retrohunt,ioc_hash.txt,"Down.exe — descargador, Python/Machete.A"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,946a24dfbd0ae94209ef7c284d3f462548566a3c,,Alta,,Solo retrohunt,ioc_hash.txt,Chrome.exe — Python/Machete.B
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,984b9202a6dbd7d3dd696cae1220338a68092dc9,,Alta,,Solo retrohunt,ioc_hash.txt,Chrome.exe — Python/Machete.B
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,9c413075aab7ef7876b8dc8d7b7c1b9b96842c6e,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleUpdate.exe — Python/Machete.A
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,9d65b55168526161a79f4743a37b1a7358c67037,,Alta,,Solo retrohunt,ioc_hash.txt,INSTRUCCIONES DEL JSO 08JUN19 docx.scr — señuelo militar
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,9e52e1c015b97d4fb2cac888f8fc69d729af78f5,,Alta,,Solo retrohunt,ioc_hash.txt,finaser.aes — fichero de configuración cifrada
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,9ea7832d83c74c839a49580b4211e627a24571be,,Alta,,Solo retrohunt,ioc_hash.txt,"Programa Formacion en Contratacion Publica.scr — señuelo de contratación pública, el de perfil más transferible a una empresa"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,a42756280aa352f4612bed85aabf7f3267e676c2,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleCrash.exe — Python/Machete.E
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,a94916f9696d861fe040891634b3f2da09557f13,,Alta,,Solo retrohunt,ioc_hash.txt,REPORTE OPERACIONAL 10JUN19 pdf.scr — señuelo militar
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,a97cf05ad7f3102bde45e4b4947ed435efea1968,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleCrash.exe — Python/Machete.E
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,ab8dd6b0cc950618589603012863b57f7adb9d9b,,Alta,,Solo retrohunt,ioc_hash.txt,GoogleUpdate.exe — Python/Machete.A
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,c39b9d966aed0372619b3989995ab9ad12f94d38,,Alta,,Solo retrohunt,ioc_hash.txt,NOTA_CICR_00079.scr — señuelo diplomático que invoca al Comité Internacional de la Cruz Roja
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,eabd45d0a86113f5ccff9fd292c1e482a5727815,,Alta,,Solo retrohunt,ioc_hash.txt,Chrome.exe — Python/Machete.B
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,f05bc018c90b560dc4932758956adffbc10588ce,,Alta,,Solo retrohunt,ioc_hash.txt,Chrome.exe — Python/Machete.B
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,fb871aaca0ddcf2f009a2d11ecf672cfb61b7357,,Alta,,Solo retrohunt,ioc_hash.txt,CALENDARIO_ACTIVIDADES_COLCO_EC.scr — señuelo con referencia a Ecuador
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,fbb485b40477f5a014e7096747b1b4a494ce50ef,,Alta,,Solo retrohunt,ioc_hash.txt,"Down.exe — descargador, Python/Machete.A"
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,fd52b10e9d4e5d343e589627444a6766357d5e47,,Alta,,Solo retrohunt,ioc_hash.txt,Security.exe — autoextraíble con los componentes
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,url,http://artyomt.com/file3.php,,Alta,,Detección,ioc_url.txt,Rutas de mando y control observadas. El patrón /file.php es más útil que el dominio
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,url,http://koliast.com/file.php,,Alta,,Detección,ioc_url.txt,Rutas de mando y control observadas. El patrón /file.php es más útil que el dominio
+CTI-2026-023,2026-11-16,TLP:CLEAR,PAP:AMBER,url,http://tobabean.expert/file.php,,Alta,,Detección,ioc_url.txt,Rutas de mando y control observadas. El patrón /file.php es más útil que el dominio
