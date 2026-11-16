@@ -58,6 +58,7 @@ FICHEROS_IOC = {
     "ipv4": "ioc_ipv4.txt",
     "ipv6": "ioc_ipv6.txt",
     "url": "ioc_url.txt",
+    "hash": "ioc_hash.txt",
 }
 
 # El índice con contexto. Los `ioc_*.txt` son listas planas para ingesta
@@ -83,7 +84,18 @@ TIPO_A_FICHERO = {
     "url": "url",
     "fqdn": "url",
     "hostname": "url",
+    "sha256": "hash",
+    "sha1": "hash",
+    "sha512": "hash",
+    "md5": "hash",
+    "imphash": "hash",
 }
+
+# Longitud en caracteres hexadecimales de cada algoritmo admitido. Un valor que
+# no case exactamente con una de estas longitudes no es un hash y se descarta:
+# en las tablas del Anexo A conviven hashes con nombres de fichero y con notas.
+LONGITUD_HASH = {32: "md5", 40: "sha1", 64: "sha256", 128: "sha512"}
+RE_HEX = re.compile(r"^[0-9a-fA-F]+$")
 
 RE_DOMINIO = re.compile(
     r"^(?=.{1,253}$)(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$", re.I
@@ -288,6 +300,10 @@ def clasificar(fila):
         except ValueError:
             return None
         return "ipv6"
+    if destino == "hash":
+        if RE_HEX.match(v) and len(v) in LONGITUD_HASH:
+            return "hash"
+        return None
     if "://" in v or RE_DOMINIO.match(v):
         return "url"
     return None
@@ -307,8 +323,12 @@ def construir_ioc(lista):
             indice.append(fila)
             if not clase:
                 continue
-            v = fila["valor"] if clase != "url" else (
-                fila["valor"] if "://" in fila["valor"] else fila["valor"].lower())
+            if clase == "hash":
+                v = fila["valor"].lower()
+            elif clase == "url" and "://" not in fila["valor"]:
+                v = fila["valor"].lower()
+            else:
+                v = fila["valor"]
             agregados[clase].add(v)
             procedencia[clase].setdefault(v, [])
             if inf["id"] not in procedencia[clase][v]:
@@ -319,6 +339,9 @@ def construir_ioc(lista):
             ordenado[clase] = sorted(valores, key=lambda x: int(ipaddress.IPv4Address(x)))
         elif clase == "ipv6":
             ordenado[clase] = sorted(valores, key=lambda x: int(ipaddress.IPv6Address(x)))
+        elif clase == "hash":
+            # agrupados por algoritmo: md5, sha1, sha256, sha512
+            ordenado[clase] = sorted(valores, key=lambda x: (len(x), x))
         else:
             ordenado[clase] = sorted(valores)
     indice.sort(key=lambda f: (f["informe"], f["tipo"], f["valor"]))
@@ -441,6 +464,7 @@ def tabla_ioc(ioc, procedencia, indice):
         "ipv4": "`ipv4`, `ip`, `ipv4:puerto`",
         "ipv6": "`ipv6`",
         "url": "`domain`, `url`, `fqdn`, `hostname`",
+        "hash": "`md5`, `sha1`, `sha256`, `sha512`, `imphash`",
     }
     for clase, fichero in FICHEROS_IOC.items():
         fuentes = sorted({i for v in ioc[clase] for i in procedencia[clase][v]})
@@ -591,6 +615,7 @@ def pagina_portada(lista, ioc, indice, hoy):
         "ipv4": "Direcciones IPv4, una por línea, ya desenmascaradas",
         "ipv6": "Direcciones IPv6 (hoy ningún informe declara ninguna)",
         "url": "Dominios y URL, una por línea",
+        "hash": "Hashes de fichero, agrupados por algoritmo según su longitud",
     }
     for clase, fichero in FICHEROS_IOC.items():
         filas_ioc_tabla.append(

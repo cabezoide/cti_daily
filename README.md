@@ -22,23 +22,25 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-017` | FamousSparrow (SparroWocky) | Perfil de actor + informe de campaña | 2026-09-21 | 1.1 | `TLP:CLEAR` | vigente · 35 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
 | `CTI-2026-018` | Abuso de dominios de primer nivel (ecosistema de registro DNS) | Evaluación estratégica | 2026-11-15 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
 | `CTI-2026-019` | ARTEX (framework ofensivo agéntico) y los clústeres que lo operan | Evaluación estratégica + perfil de capacidad adversaria | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
+| `CTI-2026-020` | Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98) | Perfil de actor + informe de campaña | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 56 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 89 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 0 | `ipv6` | — |
-| [`ioc_url.txt`](ioc_url.txt) | 28 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019` |
-| [`ioc_index.csv`](ioc_index.csv) | 193 | todos: `appid`, `artefacto`, `asn`, `cve`, `domain`, `filename`, `filepath`, `herramienta`, `ipv4`, `ipv4:puerto`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019` |
+| [`ioc_url.txt`](ioc_url.txt) | 52 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 77 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020` |
+| [`ioc_index.csv`](ioc_index.csv) | 327 | todos: `appid`, `artefacto`, `asn`, `cve`, `domain`, `filename`, `filepath`, `herramienta`, `ipv4`, `ipv4:puerto`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 6 |
-| Indicadores en listas planas | 84 |
-| Indicadores en el índice con contexto | 193 |
+| Informes publicados | 7 |
+| Indicadores en listas planas | 218 |
+| Indicadores en el índice con contexto | 327 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-16 |
@@ -52,7 +54,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 Todo lo publicado aquí está marcado **`TLP:CLEAR`**: puede redistribuirse sin restricción, conservando la atribución de las fuentes y las salvedades metodológicas de cada informe. La mayoría conserva **`PAP:AMBER`**, y eso sí impone una condición: los indicadores llevan una **acción permitida individual** en el Anexo A de su informe, y no todos admiten bloqueo.
 
 > **Lea esto antes de cargar un `ioc_*.txt` en un bloqueo.**
-> Los tres ficheros de texto son listas planas, sin contexto por diseño, y eso
+> Los cuatro ficheros de texto son listas planas, sin contexto por diseño, y eso
 > significa que **pierden la confianza, la caducidad y la acción permitida** de
 > cada indicador. En ellos conviven direcciones de mando y control que deben
 > bloquearse con infraestructura compartida, servicios legítimos de terceros y
@@ -72,6 +74,14 @@ Todo lo publicado aquí está marcado **`TLP:CLEAR`**: puede redistribuirse sin 
 > `Solo retrohunt`, `No bloquear — herramienta legítima` y otras variantes
 > escritas por quien analizó el indicador. Filtrar por ella antes de actuar es
 > la diferencia entre usar esto bien y provocar una interrupción.
+>
+> Sobre `ioc_hash.txt` en particular: agrupa md5, sha1 y sha256 en un solo fichero,
+> ordenados por algoritmo según su longitud, porque es lo que esperan la mayoría de
+> las plataformas de ingesta. Conviene recordar que un hash solo detecta la muestra
+> exacta: contra los actores cuyo empaquetador se automuta en cada ejecución —y este
+> repositorio documenta al menos uno— su valor preventivo es nulo y sirven únicamente
+> para búsqueda retrospectiva. La columna `accion_permitida` del CSV lo dice fichero
+> por fichero.
 
 Los informes marcados `TLP:AMBER` o superior **no se publican en este repositorio** y aparecen en el índice como *no publicados*. La exclusión está implementada en el propio constructor (`TLP_PUBLICABLE` en `tools/cti_build.py`), de modo que un informe restringido que se añada mañana queda fuera —y fuera de los agregados de IOC— sin depender de que alguien se acuerde.
 
@@ -133,6 +143,7 @@ CTI-2026-0NN-*.html        informes renderizados, autocontenidos (sin red, sin C
 ioc_ipv4.txt               listas planas de indicadores, para ingesta automática
 ioc_ipv6.txt
 ioc_url.txt
+ioc_hash.txt
 ioc_index.csv              los mismos indicadores con contexto, confianza y acción permitida
 index.html                 portada de GitHub Pages, generada; editarla a mano no sirve
 .nojekyll                  desactiva Jekyll: las páginas se sirven tal cual, sin procesar
@@ -175,6 +186,7 @@ desde un proceso de ingesta:
 ```bash
 curl -s https://cabezoide.github.io/cti_daily/ioc_index.csv
 curl -s https://cabezoide.github.io/cti_daily/ioc_ipv4.txt
+curl -s https://cabezoide.github.io/cti_daily/ioc_hash.txt
 ```
 
 GitHub Pages sirve con una caché de unos diez minutos, de modo que un cambio tarda ese orden

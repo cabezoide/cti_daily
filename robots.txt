@@ -6,7 +6,7 @@
 #
 # El motivo es operativo, no de confidencialidad. Las listas planas pierden
 # por diseño la confianza, la caducidad y la acción permitida de cada
-# indicador: 23 de los que contienen están marcados «solo retrohunt» y hay
+# indicador: buena parte de los que contienen están marcados «solo retrohunt» y hay
 # dos marcados «no bloquear — herramienta legítima». Un buscador o un
 # agregador que las absorba fuera de contexto convierte una lista con
 # salvedades en una lista de bloqueo, y el coste de eso lo paga quien la
@@ -37,4 +37,5 @@ Allow: /cti_daily/
 Disallow: /cti_daily/ioc_ipv4.txt
 Disallow: /cti_daily/ioc_ipv6.txt
 Disallow: /cti_daily/ioc_url.txt
+Disallow: /cti_daily/ioc_hash.txt
 Disallow: /cti_daily/ioc_index.csv
