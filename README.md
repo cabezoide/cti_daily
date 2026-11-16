@@ -178,10 +178,33 @@ curl -s https://cabezoide.github.io/cti_daily/ioc_ipv4.txt
 ```
 
 GitHub Pages sirve con una caché de unos diez minutos, de modo que un cambio tarda ese orden
-de tiempo en verse. Y publicar en Pages hace el contenido indexable por buscadores: es
-coherente con `TLP:CLEAR`, pero si en algún momento se prefiere que las listas de indicadores
-no acaben en agregadores de terceros fuera de su contexto, el lugar para decirlo es un
-`robots.txt` en la raíz.
+de tiempo en verse.
+
+### Indexación por buscadores
+
+Publicar en Pages hace el contenido indexable, lo que es coherente con `TLP:CLEAR` para los
+informes —se quiere que se encuentren— pero no para los agregados de indicadores, que fuera
+de contexto se convierten en listas de bloqueo sin las salvedades que los acompañan.
+
+Hay un [`robots.txt`](robots.txt) con las reglas que corresponden, y conviene saber que
+**mientras el sitio viva en una subcarpeta no surte efecto**: esto es una *project page*
+servida en `cabezoide.github.io/cti_daily/`, y los rastreadores solo leen el `robots.txt`
+de la raíz del host, `cabezoide.github.io/robots.txt`. Esa raíz la sirve un repositorio
+distinto, `cabezoide.github.io`, que hoy no existe.
+
+Para que las reglas se apliquen de verdad hay dos caminos:
+
+1. **Crear el repositorio `cabezoide.github.io`** con un `robots.txt` que contenga estas
+   mismas directivas. Tiene un efecto colateral que conviene decidir a conciencia: ese
+   repositorio publica además el sitio raíz de la cuenta.
+2. **Poner un dominio propio** en los ajustes de Pages del repositorio. El sitio pasaría a
+   servirse en la raíz de ese dominio y el `robots.txt` de este repositorio empezaría a
+   leerse —quitando entonces el prefijo `/cti_daily/` de las rutas—.
+
+Y en ningún caso es un control de acceso: `robots.txt` es una convención voluntaria que
+solo evita la aparición en resultados de búsqueda. Quien quiera descargar estos ficheros
+podrá, y debe poder: son `TLP:CLEAR`. La mitigación que no depende de la buena voluntad de
+nadie es que el contexto viaje con el dato, y para eso está `ioc_index.csv`.
 
 ## Método
 

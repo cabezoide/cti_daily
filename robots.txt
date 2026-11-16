@@ -1,0 +1,40 @@
+# cti_daily — https://cabezoide.github.io/cti_daily
+#
+# Los informes son TLP:CLEAR y su difusión es libre: se quiere que se
+# encuentren, se lean y se citen. Lo que no se quiere es que los agregados de
+# indicadores se indexen como datos sueltos.
+#
+# El motivo es operativo, no de confidencialidad. Las listas planas pierden
+# por diseño la confianza, la caducidad y la acción permitida de cada
+# indicador: 23 de los que contienen están marcados «solo retrohunt» y hay
+# dos marcados «no bloquear — herramienta legítima». Un buscador o un
+# agregador que las absorba fuera de contexto convierte una lista con
+# salvedades en una lista de bloqueo, y el coste de eso lo paga quien la
+# aplique: cortes de servicio por bloquear infraestructura compartida,
+# herramientas legítimas y direcciones de nube ya reasignadas.
+#
+# Las rutas de robots.txt se interpretan siempre respecto a la raíz del host,
+# nunca respecto a la carpeta donde está el fichero. De ahí el prefijo
+# /cti_daily/. Si este sitio pasa algún día a un dominio propio, hay que
+# quitarlo.
+#
+# ADVERTENCIA SOBRE EL ALCANCE REAL DE ESTE FICHERO
+# Este sitio es una «project page» servida en https://cabezoide.github.io/cti_daily/
+# y los rastreadores solo leen el robots.txt de la raíz del host, es decir
+# https://cabezoide.github.io/robots.txt. Mientras el sitio viva en esa
+# subcarpeta, ESTE FICHERO NO SE LEE y no surte efecto. Para que surta efecto
+# hay que publicar un robots.txt con estas mismas reglas en el repositorio
+# «cabezoide.github.io», que es el que sirve la raíz del host. Véase la
+# sección «Publicación» del README.
+#
+# Y en cualquier caso: robots.txt es una convención que los rastreadores
+# respetuosos acatan voluntariamente. No es un control de acceso. Quien
+# quiera descargar estos ficheros lo hará, y debe poder hacerlo: son
+# TLP:CLEAR. Esto solo evita que aparezcan en resultados de búsqueda.
+
+User-agent: *
+Allow: /cti_daily/
+Disallow: /cti_daily/ioc_ipv4.txt
+Disallow: /cti_daily/ioc_ipv6.txt
+Disallow: /cti_daily/ioc_url.txt
+Disallow: /cti_daily/ioc_index.csv
