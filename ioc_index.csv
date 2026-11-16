@@ -1,0 +1,194 @@
+informe,fecha_informe,tlp,pap,tipo,valor,puerto,confianza,caducidad,accion_permitida,agregado,contexto
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,ipv4:puerto,193.233.202.17,44729,Media,Caducado — observación de 2025,Solo retrohunt,ioc_ipv4.txt,C2 (proxy SOCKS vía tarea programada)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,ipv4:puerto,77.110.122.137,37182,Media,Caducado — observación de 2025,Solo retrohunt,ioc_ipv4.txt,C2
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,md5,42c062d6299ca9f76554441a29429404,,,,Bloqueo,,VCENTER.ps1 — desactiva HA/DRS y apaga VM
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,md5,d65c293efb5e6d033c83b2ac472bf0cb,,,,Bloqueo,,SoftPerfect Network Scanner crackeado
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha1,c0979ec20b87084317d1bfa50405f7149c3b5c5f,,,,Bloqueo,,All.exe (anti-AV)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha1,c12c4d58541cc4f75ae19b65295a52c559570054,,Alta,,Retrohunt,,Cifrador (muestra Trend)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha1,df249727c12741ca176d5f1ccba3ce188a546d28,,,,Bloqueo,,Allpatch2.exe (anti-AV a medida)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha1,e00293ce0eb534874efd615ae590cf6aa3858ba4,,,,Bloqueo,,PowerRun.exe (escalada)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b,,Alta,,No bloquear — herramienta legítima,,PsExec embebido
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,0be8f415a485b11747bcfd71c9cd9781e090354728f076791ed6845b69ed78fb,,,,Lista de bloqueo de drivers,,nogbc.sys (driver vulnerable)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,22b38dad7da097ea03aa28d0614164cd25fafeb1383dbc15047e34c8050f6f67,,Alta,,Retrohunt,,Cifrador Gentlemen
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,2d91a78e739891c9854c254f5b2a6b84c0e167dfa253466cbccd2cdd1c20145d,,,,Lista de bloqueo de drivers,,G11.sys (driver vulnerable)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,3c71537b64487bbf4d1793f72c75d332650d09a77b71e4d884ff15c266a847f6,,,,Bloqueo,,y7D0.exe (EDR killer)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,50f2cdf16f05da9253fa2d6eb60d5a42da14c02c551c0874c9e953d4119da69c,,,,Bloqueo,,sophos.exe (EDR killer)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,81053c2c3be8b7dbf7d5087dba05c940b3ee4fd95524272651c816b72c5a9443,,,,Bloqueo,,g111.exe (EDR killer)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,a348f5fa048a09188bd706fd3d4efca978990caf3355ecfee501c9f1e19c0efd,,,,Bloqueo,,acronis.exe (EDR killer)
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,f918535f974591ef031bd0f30a8171e3da27a6754e6426a8ba095f83195661c8,,Alta,,Retrohunt,,G_hlm7jj_windows_amd64.exe
+CTI-2026-014,2026-09-15,TLP:CLEAR,PAP:AMBER,sha256,fe1033335a045c696c900d435119d210361966e2fb5cd1ba3382608cfa2c8e68,,Alta,,Retrohunt,,Bitmap del fondo de escritorio
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,cve,CVE-2023-27532,,Alta,,Parcheo prioritario,,Veeam Backup & Replication: extracción de credenciales cifradas de la base de configuración
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,cve,CVE-2026-0257,,Alta,,Parcheo prioritario,,"Omisión de autenticación en portal y gateway de PAN-OS (CVSS 7.8), explotada desde junio de 2026"
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,cve,CVE-2026-50751,,Media,,Parcheo prioritario,,"Omisión de autenticación en Check Point Remote Access VPN y Mobile Access (CVSS 9.3), explotada desde el 7 de mayo de 2026"
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,README-RECOVER-<company_id>.txt,,Alta,,Alerta crítica,,Nota de rescate; confirma impacto consumado
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,SysWOW64,,Alta,,Alerta,,Cargador PE de primera etapa por DLL side-loading
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,System32,,Alta,,Alerta,,Cargador PE de primera etapa por DLL side-loading
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,avupdate.dll,,Alta,,Alerta,,Despliegue de EDRSandblast personalizado
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,hlpdrv.sys,,Alta,,Alerta y contención,,Controlador que termina procesos de más de 300 productos EDR
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,msimg32.dll,,Alta,,Alerta,,Cargador PE de primera etapa por DLL side-loading
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,rwdrv.sys,,Alta,,Alerta y contención,,Controlador vulnerable (ThrottleStop renombrado) del módulo neutralizador de EDR
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,upd.exe,,Alta,,Alerta,,Despliegue de EDRSandblast personalizado
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,ipv4,168.235.85.66,,Media,,Solo retrohunt,ioc_ipv4.txt,"Acceso remoto del atacante, campaña contra víctima chilena (CSIRT Nacional, 2025)"
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,ipv4,5.61.62.32,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura del atacante, misma campaña (CSIRT Nacional, 2025)"
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,path,C:\PerfLogs\*.exe,,Media,,Alerta,,Ruta de preparación de la carga útil observada en intrusiones vía PAN-OS
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,pattern,*,,Media,,Alerta,,Persistencia observada tras la explotación de PAN-OS
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,6d0b950eceb1bcdf7517ff79eb05121f3966c3e175c8bd0804b07f103942d251,,Alta,,Bloqueo,,"Cifrador para VMware ESXi, muestra recuperada en Chile"
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,9f1f11a708d393e0a4109ae189bc64f1f3e312653dcf317a2bd406f18ffcc507,,Media,,Bloqueo,,Muestra de cifrador Qilin (repositorio de proveedor)
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,a31f222fc283227f5e7988d1ad9c0aecd66d58bb7b4d8518ae23e110308dbf91,,Media,,Bloqueo,,Muestra de cifrador Qilin (repositorio de proveedor)
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,d628914c72a4294d6b67126eb8b5a08fa4974d05469852cb7ef872721b207498,,Media,,Bloqueo,,Muestra asociada a regla YARA pública de TEHTRIS
+CTI-2026-015,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,e90bdaaf5f9ca900133b699f18e4062562148169b29cb4eb37a0577388c22527,,Media,,Bloqueo,,Muestra usada en escenarios de validación de detección
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,ReadMeForDecrypt.txt,,Alta,,Detección y alerta,,"Nota de rescate, constante en Windows, Linux y ESXi. El artefacto de mayor fidelidad de esta lista"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,filename,_.sf_,,Moderada,,Detección; verificar contexto antes de bloquear,,Cobalt Strike observado con este nombre en almacenes de datos ESXi
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,md5,95daa771a28eaed76eb01e1e8f403f7c,,Moderada,,Retrohunt,,Muestra LockBit 5.0 (ASEC)
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,md5,97e97e8cde5cc795b4d0a1fb7202b5ed,,Moderada,,Retrohunt,,Muestra LockBit 5.0 (ASEC)
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,md5,c15a79d4b3c17bdb01edb097bae53212,,Moderada,,Retrohunt,,Muestra LockBit 5.0 (ASEC)
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,md5,c462c6b02b35df2910689947c5090fae,,Moderada,,Retrohunt,,Muestra LockBit 5.0 (ASEC)
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,md5,cd6e182fe655724f3d8e711b451a2e93,,Moderada,,Retrohunt,,Muestra LockBit 5.0 (ASEC)
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,mutex,<variable por build>,,Baja,,Solo contexto,,La versión 5.0 introduce mutex configurable; no hay valor constante publicado. Desactivable con -nomutex
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,pattern,^\.[0-9a-f]{16}$,,Alta,,Detección y alerta,,Extensión aleatoria de 16 caracteres hexadecimales de los archivos cifrados
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,0DA8CFBA645951768B16DB7707ED2C75BBBB2E396E7DA6DA71A9DCA6EF35DF17,,Alta,,Solo retrohunt histórico,,"injector.exe — LockBit Black (3.0), 2022. CSIRT Nacional"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,180e93a091f8ab584a827da92c560c78f468c45f2539f73ab2deb308fb837b38,,Alta,,Bloqueo y retrohunt,,"Cifrador LockBit 5.0, muestra Windows"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,385D4FBD3A3AAB0CFE109F0EB2626863B91EC02CEAA4C3E4C104F63CA6DC0C93,,Alta,,Solo retrohunt histórico,,"123.cmd — LockBit Black (3.0), ataque al Poder Judicial de Chile, 2022. CSIRT Nacional"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,4dc06ecee904b9165fa699b026045c1b6408cc7061df3d2a7bc2b7b4f0879f4d,,Alta,,Bloqueo y retrohunt,,"Cifrador LockBit 5.0, muestra Linux (ELF, autónoma)"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,5EF365469867CB30F5094D668E596819BF7163411E2A92CC1D7BD117FCD11BFE,,Alta,,Solo retrohunt histórico,,"lbb.dll — LockBit Black (3.0), 2022. CSIRT Nacional"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,7ea5afbc166c4e23498aa9747be81ceaf8dad90b8daa07a6e4644dc7c2277b82,,Alta,,Bloqueo y retrohunt,,"Cifrador LockBit 5.0, muestra Windows"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,90b06f07eb75045ea3d4ba6577afc9b58078eafeb2cdd417e2a88d7ccf0c0273,,Alta,,Bloqueo y retrohunt,,"Cifrador LockBit 5.0, muestra Linux/ESXi"
+CTI-2026-016,2026-09-16,TLP:CLEAR,PAP:AMBER,sha256,98d8c7870c8e99ca6c8c25bb9ef79f71c25912fbb65698a9a6f22709b8ad34b6,,Alta,,Bloqueo y retrohunt,,"Cifrador LockBit 5.0, muestra Linux/ESXi"
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,0x11328712,,Alta,,Caza (véase D-2),,Valor mágico al inicio del payload .dat del cargador
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,MyEventName,,Alta,,Caza (véase D-4),,Objetos de sincronización del implante
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,MyMutexName,,Alta,,Caza (véase D-4),,Objetos de sincronización del implante
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,MySharedMemName,,Alta,,Caza (véase D-4),,Objetos de sincronización del implante
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,ProcAuditManager,,Alta,,Caza (véase D-3),,Nombre y nombre mostrado del servicio de persistencia
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,SnapCart,,Alta,,Caza (véase D-6),,Valor de la clave Run de persistencia
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,artefacto,acdbenus,,Moderada,,Caza en memoria,,Cadena de personalización del generador de bits aleatorios
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,domain,amelicen.com,,Moderada,,Solo retrohunt,ioc_url.txt,Campaña 2024 · dominio de C2 de SparrowDoor
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,103.85.25.166,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Campaña 2024 · C2 de SparrowDoor · Starry Network Limited · 2024-06-06
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,130.94.101.82,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · NTT America · 2026-02-26
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,140.99.164.199,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · cliente privado · 2026-02-26
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,149.104.87.228,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · LightNode México · 2026-02-24
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,149.104.90.203,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · BEDGE CO LIMITED · 2026-01-22
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,216.238.105.53,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Constant Company/Vultr · 2026-01-22
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,216.238.106.150,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Campaña 2024 · C2 de ShadowPad · Vultr · 2024-03-11
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,216.238.110.120,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Constant Company/Vultr · 2025-12-11
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,216.238.121.164,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Constant Company/Vultr · 2026-03-16
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,216.238.92.2,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Constant Company/Vultr · 2026-02-25
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,27.102.113.240,,Baja,,Solo retrohunt histórico,ioc_ipv4.txt,Infraestructura compartida con GhostEmperor en 2021
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.54.57.17,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · LightNode Brasil · 2026-02-25
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.197.55,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Kaopu Cloud HK · 2026-03-16
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.209.106,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Kaopu Cloud HK · 2026-02-26
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.224.235,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Kaopu Cloud HK · 2026-02-24
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.224.51,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Kaopu Cloud HK · 2026-02-25
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.241.127,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Cogent Communications · 2026-03-04
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.241.193,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Kaopu Cloud Brasil · 2026-01-22
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,38.60.241.65,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Cogent Communications · 2026-03-10
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,43.254.216.195,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Campaña 2024 · servidor de entrega y C2 · Hongkong Wen Jing Network · 2024-06-27
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,45.131.179.24,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Campaña 2024 · C2 de SparrowDoor · XNNET LLC · 2024-07-05
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,77.111.101.40,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Latitude.sh · 2026-05-20
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,ipv4,91.148.134.115,,Alta,,Bloqueo + retrohunt,ioc_ipv4.txt,C2 SparroWocky · Charles-R Paquet · 2026-06-17
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,1B06E877C2C12D74336E7532BC0ECF761E5FA5D4,,Moderada,,Bloqueo + retrohunt,,Campaña 2024 · cargador de SparrowDoor K7AVWScn.dll
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,3209689E509205CCDB7E49062B7B407DDC23CAC1,,Alta,,Bloqueo + retrohunt,,Cargador SparroWocky — winfsp-x64.dll parcheada
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,44F0A22B143B79FA760BF31E14C8FFF714C8A2A1,,Alta,,Retrohunt (no aparecerá en disco),,"SparroWocky descifrado, solo en memoria"
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,5265E8EDC9B5F7DD00FC772522511B8F3BE217E3,,Moderada,,Bloqueo + retrohunt,,Campaña 2024 · cargador de ShadowPad imjp14k.dll
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,52C6646759CF6037BB17466203631C4BD794532F,,Alta,,Bloqueo + retrohunt,,Cargador SparroWocky — winfsp-x64.dll parcheada
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,5DF3C882DB6BE14887182B7439B72A86BD28B83F,,Moderada,,Bloqueo + retrohunt,,Campaña 2024 · taskhosk.exe — SparrowDoor/HemiGate
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,99E7070B5AF24A0FE1E6FEBE5954B03CB385E91F,,Alta,,Bloqueo + retrohunt,,Cargador SparroWocky — DukeQt.dll parcheada
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,9AA9FF61BC63CCAB9074FE837F39C980CA9DDC8C,,Alta,,Retrohunt (no aparecerá en disco),,"SparroWocky descifrado, solo en memoria"
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,BAED2895C80EB6E827A6D47C3DD7B8EFB61ED70B,,Moderada,,Retrohunt en telemetría TLS,,"Campaña 2024 · huella del certificado TLS del C2 de ShadowPad, con formato que suplanta a Dell"
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,C26F04790C6FB7950D89AB1B08207ACE01EFB536,,Moderada,,Bloqueo + retrohunt,,Campaña 2024 · webshell DotNetNuke.ashx
+CTI-2026-017,2026-09-21,TLP:CLEAR,PAP:AMBER,sha1,EF189737FB7D61B110B9293E8838526DCE920127,,Moderada,,Bloqueo + retrohunt,,Campaña 2024 · cargador de SparrowDoor libvlc.dll
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,asn,AS203273,,Media,,Investigar,,NetCrafters OU. Resto de la infraestructura de Macfinger
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,asn,AS210644,,Alta,,Investigar · bloqueo con validación de negocio,,Aeza Group. Toda la infraestructura de Macfinger. Sancionado por OFAC el 01-07-2025
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,asn,AS216246,,Alta,,Investigar · bloqueo con validación de negocio,,Aeza Group. Toda la infraestructura de Macfinger. Sancionado por OFAC el 01-07-2025
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,ahrefs.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de Ahrefs. Name.com, 2026-08-31"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,beroniw.com,,Media,,Bloqueo,ioc_url.txt,Redirector con cloaking de un segundo inyector independiente de Macfinger
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,discounttire-retail.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de Discount Tire. Dynadot, 2026-09-05"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,erc.report,,Media,,Bloqueo,ioc_url.txt,"Señuelo Okta, celda ok10. GoDaddy, 2026-09-16 (el más reciente del clúster)"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,expeditors.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de Expeditors International (logística). Dynadot, 2026-09-12"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,gen.report,,Alta,,Bloqueo,ioc_url.txt,"Señuelo Okta. El único de los 33 con contenido activo: HTTP 200 con redirección a /login/?next=/. NameCheap, registrado 2026-09-06"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,hcahealthcare.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de HCA Healthcare (salud). Dynadot, 2026-09-10"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,hollow-badger-moasfraum.life,,Media,,Bloqueo,ioc_url.txt,Cargador Macfinger activo desde el 24-09-2026
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,lyrahealth.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de Lyra Health (salud mental). Dynadot, 2026-09-14"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,monday.report,,Media,,Bloqueo,ioc_url.txt,"Posible suplantación de monday.com. Porkbun, 2026-08-23, HTTP 200"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,offerup.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de OfferUp. Global Domain Group, 2026-08-20 (el más antiguo)"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,rbx.report,,Media,,Bloqueo,ioc_url.txt,"Posible suplantación de Roblox. Dynadot, 2026-09-10"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,support.report,,Alta,,Bloqueo,ioc_url.txt,"Imita el portal de soporte oficial de Okta, no un cliente. Porkbun, 2026-09-08, HTTP 200"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,unum.report,,Media,,Bloqueo,ioc_url.txt,"Suplanta tenant de Unum (seguros). Dynadot, 2026-09-07"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,domain,velvet-otter-glagceis.life,,Media,,Bloqueo,ioc_url.txt,Cargador Macfinger (ClickFix macOS). Patrón de tres palabras
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,filename,ext-b.4f9db6afd06a.js,,Alta,,Detección,,"Cargador Macfinger. Los 12 hexadecimales son el prefijo de su SHA-256, verificado en 13 compilaciones"
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,pattern,ok1-crtrs.tng.okta.com,,Alta,,Solo verificación,,No es malicioso: es el criterio de verificación que distingue un tenant Okta real de uno inventado
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,pattern,ok14-crtrs.tng.okta.com,,Alta,,Solo verificación,,No es malicioso: es el criterio de verificación que distingue un tenant Okta real de uno inventado
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://cl-correos.shop,,Media,,Bloqueo,ioc_url.txt,Smishing Correos de Chile
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://cl-correoss.top/,,Media,,Bloqueo,ioc_url.txt,Smishing suplantando Correos de Chile
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://clpost-zip.top/,,Media,,Bloqueo,ioc_url.txt,Smishing Correos de Chile
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://correos-cl.space/,,Media,,Bloqueo,ioc_url.txt,Smishing Correos de Chile
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://correos.autos/,,Media,,Bloqueo,ioc_url.txt,Smishing Correos de Chile
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://correoscli.icu/address,,Media,,Bloqueo,ioc_url.txt,Smishing Correos de Chile
+CTI-2026-018,2026-11-15,TLP:CLEAR,PAP:WHITE,url,https://postag.vip/index,,Media,,Bloqueo,ioc_url.txt,Smishing Correos de Chile
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,appid,*(cuarto identificador no publicado)*,,Baja,,Consulta al proveedor,,El proveedor menciona cuatro credenciales de aplicación afectadas y publica tres. Brecha G-8
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,appid,0de14c77-b9b0-4137-9360-34878a929827,,Alta,,Revisión obligatoria en el tenant,,Aplicación multiinquilino ConnectWise - MS Graph
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,appid,24205314-2b89-4e07-a2a4-579e898a5640,,Alta,,Revisión obligatoria en el tenant,,Aplicación multiinquilino ConnectWise - MS Teams
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,appid,506e08f9-6e9a-4da4-942b-a099a03644ae,,Alta,,Revisión obligatoria en el tenant,,"Aplicación multiinquilino ConnectWise Cloud Backup — buscar por este identificador, no por nombre visible"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,artefacto,ArtexProbe,,Alta,,Detección y caza,,Marcadores autoidentificativos creados por el framework por descuido
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,artefacto,art18-,,Alta,,Detección y caza,,Marcadores autoidentificativos creados por el framework por descuido
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,artefacto,artex-probe-*,,Alta,,Detección y caza,,Marcadores autoidentificativos creados por el framework por descuido
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,artefacto,artx-,,Alta,,Detección y caza,,Marcadores autoidentificativos creados por el framework por descuido
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,artefacto,【ARTEX 平台管控·非目标防御】,,Alta,,Caza en instalaciones propias,,Marcador escrito en el registro de auditoría del framework en cada llamada de herramienta bloqueada por su capa de guarda. Solo aparece en el host del operador
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,domain,nginxmysql.com,,Alta,,Bloqueo,ioc_url.txt,Dominio C2 de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,domain,sqlserver-sqlite.com,,Alta,,Bloqueo,ioc_url.txt,Dominio C2 de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,domain,webhook.site,,Alta,,Bloqueo desde segmentos de servidor únicamente,ioc_url.txt,Destino de devolución de resultados de comando — 491 URL rotatorias en una sola operación. Servicio legítimo de terceros
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,domain,www.ddduuuppp.com,,Alta,,Bloqueo,ioc_url.txt,Dominio C2 de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,domain,xcai.pro,,Alta,,Bloqueo,ioc_url.txt,Revendedor de API de modelos de lenguaje — campaña financiera surcoreana. Útil también como indicador de intención en egreso
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filename,cl1217.jsp,,Moderada,,Detección; nombres triviales de cambiar,,Webshells escritas vía envenenamiento de general_log de MySQL
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filename,f1219a.jsp,,Moderada,,Detección; nombres triviales de cambiar,,Webshells escritas vía envenenamiento de general_log de MySQL
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filename,graphics-hook-filter64.dll,,Alta,,Bloqueo,,Cargador de BLOODALCHEMY por carga lateral de DLL
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filename,graphics-hook_config.bin,,Alta,,Bloqueo,,Carga cifrada de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filename,z1219.jsp,,Moderada,,Detección; nombres triviales de cambiar,,Webshells escritas vía envenenamiento de general_log de MySQL
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filepath,C:\ProgramData\artx5v\,,Alta,,Detección y caza,,Directorio de trabajo del framework en host comprometido
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,filepath,D:\ProjectX\Merman_New\,,Alta,,Caza por cadena en binarios,,"Ruta de proyecto interna del desarrollador de BLOODALCHEMY, embebida en el binario"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,herramienta,CLIProxyAPI,,Alta,,Detección en egreso,,Pasarelas y revendedores de API de modelos autoalojados; el FBI los solicita explícitamente como indicador en sus peticiones de información
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,herramienta,Chisel · SoftEther,,Alta,,Detección por firma y por política,,Túneles usados para C2 y pivote
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,herramienta,New API,,Alta,,Detección en egreso,,Pasarelas y revendedores de API de modelos autoalojados; el FBI los solicita explícitamente como indicador en sus peticiones de información
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,herramienta,WISP · vshell · AdaptixC2,,Alta,,Detección por firma de EDR,,"RAT de código abierto desplegados para persistencia y movimiento lateral, descargados con curl y netcat"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,101.53.80.20,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,103.248.148.84,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,104.194.150.21,,Moderada,,Bloqueo tras verificación,ioc_ipv4.txt,Infraestructura de pulverización y abuso de identidad contra proveedores de TI y software
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,124.155.252.63,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,144.172.64.128,,Alta,,Bloqueo,ioc_ipv4.txt,Inicios de sesión y actividad de Microsoft Graph en entornos de cliente — campaña ConnectWise
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,144.172.64.60,,Alta,,Bloqueo,ioc_ipv4.txt,Inicios de sesión y actividad de Microsoft Graph en entornos de cliente — campaña ConnectWise
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,144.172.64.99,,Alta,,Bloqueo,ioc_ipv4.txt,"Origen de la pulverización entre tenants del 10 al 14-oct-2026 y, desde el 15-oct, del uso de credenciales de aplicación de ConnectWise. Coincide exactamente con la IP del aviso del proveedor"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,154.201.79.246,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,167.88.172.97,,Moderada,,Bloqueo tras verificación,ioc_ipv4.txt,Infraestructura de pulverización y abuso de identidad contra proveedores de TI y software
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,178.16.54.129,,Baja,,Solo retrohunt,ioc_ipv4.txt,"Servidor ARTEX — campaña Storm-3358, visto por primera vez el 19-oct-2026. Discrepancia en origen: la consulta de Sentinel del proveedor indica 178.15.54.129. Verificar antes de bloquear"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,187.15.88.186,,Moderada,,Solo retrohunt,ioc_ipv4.txt,"Acceso a Microsoft Graph vía aplicaciones comprometidas — IP de VPN transitoria, relevante solo para el 15 y 16-oct-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,187.15.89.186,,Moderada,,Solo retrohunt,ioc_ipv4.txt,"Acceso a Microsoft Graph vía aplicaciones comprometidas — IP de VPN transitoria, 15–16-oct-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,187.15.90.217,,Moderada,,Solo retrohunt,ioc_ipv4.txt,"Acceso a Microsoft Graph vía aplicaciones comprometidas — IP de VPN transitoria, 15–16-oct-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,192.121.47.20,,Alta,,Bloqueo,ioc_ipv4.txt,Resuelve www[.]ddduuuppp[.]com — infraestructura C2 de BLOODALCHEMY (VAPOR PANDA)
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,199.19.95.66,,Alta,,Bloqueo,ioc_ipv4.txt,"Nodo C2 del RAT WISP — campaña Storm-3358, activo al 6-nov-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,199.19.95.67,,Alta,,Bloqueo,ioc_ipv4.txt,"Nodo C2 del RAT WISP — campaña Storm-3358, activo al 6-nov-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,199.19.95.68,,Alta,,Bloqueo,ioc_ipv4.txt,"Nodo C2 del RAT WISP — campaña Storm-3358, activo al 6-nov-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,203.160.133.172,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,205.214.59.31,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,209.209.85.38,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,23.158.220.98,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,23.248.249.90,,Moderada,,Solo retrohunt,ioc_ipv4.txt,Proxy — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,31.77.229.35,,Alta,,Bloqueo,ioc_ipv4.txt,"Servidor ARTEX — campaña Storm-3358, visto por primera vez el 28-oct-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,38.244.50.120,,Alta,,Bloqueo,ioc_ipv4.txt,Host ARTEX con directorio abierto — campaña financiera surcoreana
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,45.153.126.223,,Alta,,Bloqueo,ioc_ipv4.txt,Resuelve nginxmysql[.]com — infraestructura C2 de BLOODALCHEMY (VAPOR PANDA)
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,85.11.167.52,,Alta,,Bloqueo,ioc_ipv4.txt,"Servidor C2 — campaña Storm-3358, activo al 6-nov-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,85.11.168.45,,Alta,,Bloqueo,ioc_ipv4.txt,"Servidor ARTEX — campaña Storm-3358, visto por primera vez el 4-nov-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,89.46.234.50,,Alta,,Bloqueo,ioc_ipv4.txt,Resuelve sqlserver-sqlite[.]com — infraestructura C2 de BLOODALCHEMY (VAPOR PANDA)
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,ipv4,91.92.240.238,,Alta,,Bloqueo,ioc_ipv4.txt,"Servidor ARTEX — campaña Storm-3358, visto por primera vez el 4-nov-2026"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,puerto,8787,,Moderada,,Caza interna y descubrimiento externo,,Puertos por defecto del framework. Configurables con -addr y -proxy
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,puerto,8788,,Moderada,,Caza interna y descubrimiento externo,,Puertos por defecto del framework. Configurables con -addr y -proxy
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,sha256,364251838edfcf5ef1107fa692da3c5bd9a540482449f645992830134bf807ab,,Alta,,Bloqueo,,graphics-hook_config.bin — carga cifrada de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,sha256,3fb5a9fb3e2cb1d6208966bd4e55d10282d19c7250d827efa560463d60a12ee4,,Alta,,Bloqueo,,graphics-hook-filter64.dll — cargador de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,sha256,49fe70419fd19b81ca8d730a6ef7c1ec71b681d60b390761070d42686c7d2068,,Alta,,Bloqueo,,Binario legítimo GameHook renombrado a svchost.exe — portador de BLOODALCHEMY
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,Python-urllib/3.12,,Baja,,Solo retrohunt y correlación,,Agentes por defecto de las herramientas invocadas por los agentes. Genéricos: el proveedor advierte explícitamente que no son exclusivos de este actor
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,ReconProbe/1.0,,Moderada,,Detección,,Observado en reconocimiento del mismo clúster
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,artex-enrich/1.0,,Alta,,Detección y bloqueo,,Sonda de enriquecimiento del framework — el único agente de usuario atribuible con alta fidelidad
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,artex-selfupdate,,Alta,,Detección en egreso propio,,"Llamada de autoactualización del framework; visible en el egreso del host operador, no en el tráfico al objetivo"
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,aws-cli/1.46.1,,Baja,,Solo retrohunt y correlación,,Agentes por defecto de las herramientas invocadas por los agentes. Genéricos: el proveedor advierte explícitamente que no son exclusivos de este actor
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,curl/7.88.1,,Baja,,Solo retrohunt y correlación,,Agentes por defecto de las herramientas invocadas por los agentes. Genéricos: el proveedor advierte explícitamente que no son exclusivos de este actor
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,norma/0.4,,Moderada,,Detección; no bloquear sin verificar,,Herramienta de obtención web del SDK subyacente. Compartido con otras herramientas basadas en el mismo SDK
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,python-requests/2.31.0,,Baja,,Solo retrohunt y correlación,,Agentes por defecto de las herramientas invocadas por los agentes. Genéricos: el proveedor advierte explícitamente que no son exclusivos de este actor
+CTI-2026-019,2026-11-16,TLP:CLEAR,PAP:WHITE,useragent,python-requests/2.34.2,,Baja,,Solo retrohunt y correlación,,Agentes por defecto de las herramientas invocadas por los agentes. Genéricos: el proveedor advierte explícitamente que no son exclusivos de este actor

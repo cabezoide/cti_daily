@@ -25,7 +25,9 @@ Sin dependencias: sólo la biblioteca estándar de Python 3.8+.
 """
 
 import argparse
+import csv
 import datetime as _dt
+import io
 import ipaddress
 import json
 import os
@@ -54,6 +56,19 @@ FICHEROS_IOC = {
     "ipv6": "ioc_ipv6.txt",
     "url": "ioc_url.txt",
 }
+
+# El índice con contexto. Los `ioc_*.txt` son listas planas para ingesta
+# automática; este CSV es la misma información con lo que esas listas pierden:
+# de qué informe sale cada indicador, con qué confianza, qué acción permite y
+# por qué está ahí. Incluye TODOS los tipos de indicador, no sólo los tres que
+# tienen fichero agregado propio: hashes, nombres de fichero, agentes de
+# usuario, identificadores de aplicación, ASN, CVE y cuanto declare el Anexo A.
+FICHERO_INDICE = "ioc_index.csv"
+
+COLUMNAS_INDICE = [
+    "informe", "fecha_informe", "tlp", "pap", "tipo", "valor", "puerto",
+    "confianza", "caducidad", "accion_permitida", "agregado", "contexto",
+]
 
 # Tipos de la primera columna del Anexo A que alimentan cada fichero.
 TIPO_A_FICHERO = {
@@ -127,69 +142,174 @@ def informes():
 
 # ─────────────────────────────────────────────────────────── extracción IOC
 
-def extraer_ioc(inf):
-    """Extrae indicadores de las tablas marcadas con `cti:ioc`.
+def _normalizar_cabecera(c):
+    return re.sub(r"[*`]", "", c).strip().lower()
 
-    Deliberadamente NO rastrea la prosa. Las tablas del Anexo A son la lista
-    curada, con contexto, confianza y acción permitida; la prosa contiene
-    indicadores citados, variantes erróneas señaladas como tales y ejemplos.
-    Agregar la prosa produciría ruido que nadie podría auditar después.
+
+def _limpiar_prosa(c):
+    """Deja una celda de tabla legible en un CSV: sin énfasis ni comillas."""
+    c = re.sub(r"\*\*|\*|`", "", c)
+    c = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", c)   # enlaces → sólo el texto
+    return re.sub(r"\s+", " ", c).strip()
+
+
+ALIAS_COLUMNA = {
+    "tipo": ("tipo", "type"),
+    "valor": ("valor", "value", "indicador"),
+    "contexto": ("contexto", "context", "descripción", "descripcion"),
+    "confianza": ("confianza", "confidence"),
+    "caducidad": ("caducidad", "validez", "vigencia"),
+    "accion": ("acción permitida", "accion permitida", "uso",
+               "acción", "accion", "acción recomendada"),
+}
+
+NORMALIZA_TIPO = {
+    "sha-256": "sha256", "sha-1": "sha1", "sha-512": "sha512",
+    "md-5": "md5", "ip": "ipv4", "dominio": "domain",
+    "user-agent": "useragent", "agente de usuario": "useragent",
+    "nombre de fichero": "filename", "ruta": "filepath",
+}
+
+
+def filas_ioc(inf):
+    """Genera una fila por indicador a partir de las tablas marcadas `cti:ioc`.
+
+    Un único parser alimenta tanto los agregados `ioc_*.txt` como el índice
+    `ioc_index.csv`: así no puede ocurrir que un fichero contenga un indicador
+    que el otro no.
+
+    Tres cosas que este parser hace y conviene no deshacer:
+
+    - **Mapea las columnas por nombre, no por posición.** Las tablas no son
+      uniformes entre informes: CTI-2026-014 tiene una con columna `Caducidad`
+      y otra sin `Confianza`. Por posición se leería la confianza de una
+      columna que contiene otra cosa.
+    - **Sigue dentro del anexo al cruzar un `###`.** El Anexo A de 014 está
+      dividido en A.1 a A.4, y detenerse en el primer subtítulo dejaba fuera
+      la infraestructura de red de A.3. Sólo termina en el siguiente `## `.
+    - **Toma como valores los segmentos entre tildes invertidas, y no los
+      parte más.** Una celda puede llevar varios indicadores, cada uno
+      entrecomillado; partir además por `·` destrozaría valores que contienen
+      ese carácter, como el marcador de auditoría de ARTEX.
+
+    Deliberadamente NO rastrea la prosa: las tablas del Anexo A son la lista
+    curada, con contexto, confianza y acción permitida, mientras que la prosa
+    contiene indicadores citados, ejemplos y variantes señaladas como erróneas
+    —como la errata de transcripción que CTI-2026-019 documenta en una IP de
+    Microsoft—. Agregarla produciría ruido que nadie podría auditar después.
     """
-    halladas = {k: set() for k in FICHEROS_IOC}
-    en_tabla = False
+    fm = inf["fm"]
+    dentro, mapa = False, None
     for linea in inf["texto"].split("\n"):
         if "<!-- cti:ioc" in linea:
-            en_tabla = True
+            dentro, mapa = True, None
             continue
-        if en_tabla and linea.startswith("#"):
-            en_tabla = False            # se acabó el anexo
+        if not dentro:
             continue
-        if not en_tabla or not linea.lstrip().startswith("|"):
+        if linea.startswith("## "):          # fin del anexo
+            dentro, mapa = False, None
             continue
-        celdas = [c.strip() for c in linea.strip().strip("|").split("|")]
-        if len(celdas) < 2:
+        s = linea.strip()
+        if not s.startswith("|"):
             continue
-        tipo = celdas[0].lower().strip("* `")
-        destino = TIPO_A_FICHERO.get(tipo)
-        if not destino:
+        celdas = [c.strip() for c in s.strip("|").split("|")]
+        normal = [_normalizar_cabecera(c) for c in celdas]
+        if normal and set("".join(normal)) <= set("-: "):
+            continue                         # fila separadora
+        if "tipo" in normal and ("valor" in normal or "indicador" in normal):
+            mapa = {}
+            for idx, nombre in enumerate(normal):
+                for campo, alias in ALIAS_COLUMNA.items():
+                    if nombre in alias and campo not in mapa:
+                        mapa[campo] = idx
             continue
-        # una celda puede llevar varios valores separados por · o coma
-        crudos = re.findall(r"`([^`]+)`", celdas[1]) or [celdas[1]]
-        for crudo in crudos:
-            for parte in re.split(r"[·,;]| y ", crudo):
-                valor = desenmascarar(parte)
-                if not valor or valor.startswith("("):
-                    continue
-                if destino == "ipv4":
+        if not mapa or "valor" not in mapa:
+            continue
+
+        def celda(campo):
+            i = mapa.get(campo)
+            return celdas[i] if i is not None and i < len(celdas) else ""
+
+        tipo = _normalizar_cabecera(celda("tipo"))
+        tipo = NORMALIZA_TIPO.get(tipo, tipo)
+        bruto = celda("valor")
+        valores = re.findall(r"`([^`]+)`", bruto)
+        if not valores and bruto:
+            valores = [bruto]
+        for v in valores:
+            valor = desenmascarar(v)
+            if not valor or valor.startswith("(") or valor in ("—", "-"):
+                continue
+            puerto = ""
+            # tipos del estilo `ipv4:puerto`, con el valor 1.2.3.4:5678
+            if tipo.startswith(("ipv4", "ip")) and ":" in valor:
+                posible, _, resto = valor.partition(":")
+                if resto.isdigit():
                     try:
-                        ip = ipaddress.IPv4Address(valor)
+                        ipaddress.IPv4Address(posible)
+                        valor, puerto = posible, resto
                     except ValueError:
-                        continue
-                    halladas["ipv4"].add(str(ip))
-                elif destino == "ipv6":
-                    try:
-                        ip = ipaddress.IPv6Address(valor)
-                    except ValueError:
-                        continue
-                    halladas["ipv6"].add(str(ip))
-                else:
-                    if "://" in valor:
-                        halladas["url"].add(valor)
-                    elif RE_DOMINIO.match(valor):
-                        halladas["url"].add(valor.lower())
-    return halladas
+                        pass
+            yield {
+                "informe": inf["id"],
+                "fecha_informe": fm.get("fecha", ""),
+                "tlp": inf["tlp"],
+                "pap": fm.get("pap", ""),
+                "tipo": tipo,
+                "valor": valor,
+                "puerto": puerto,
+                "confianza": _limpiar_prosa(celda("confianza")),
+                "caducidad": _limpiar_prosa(celda("caducidad")),
+                "accion_permitida": _limpiar_prosa(celda("accion")),
+                "contexto": _limpiar_prosa(celda("contexto")),
+            }
+
+
+def clasificar(fila):
+    """Devuelve el agregado `ioc_*.txt` que corresponde a la fila, o None."""
+    destino = TIPO_A_FICHERO.get(fila["tipo"])
+    if not destino and fila["tipo"].startswith("ipv4"):
+        destino = "ipv4"                     # cubre `ipv4:puerto`
+    if not destino:
+        return None
+    v = fila["valor"]
+    if destino == "ipv4":
+        try:
+            ipaddress.IPv4Address(v)
+        except ValueError:
+            return None
+        return "ipv4"
+    if destino == "ipv6":
+        try:
+            ipaddress.IPv6Address(v)
+        except ValueError:
+            return None
+        return "ipv6"
+    if "://" in v or RE_DOMINIO.match(v):
+        return "url"
+    return None
 
 
 def construir_ioc(lista):
+    """Devuelve (agregados ordenados, procedencia, filas del índice CSV)."""
     agregados = {k: set() for k in FICHEROS_IOC}
     procedencia = {k: {} for k in FICHEROS_IOC}
+    indice = []
     for inf in lista:
         if not inf["publicable"]:
             continue
-        for clase, valores in extraer_ioc(inf).items():
-            agregados[clase] |= valores
-            for v in valores:
-                procedencia[clase].setdefault(v, []).append(inf["id"])
+        for fila in filas_ioc(inf):
+            clase = clasificar(fila)
+            fila["agregado"] = FICHEROS_IOC[clase] if clase else ""
+            indice.append(fila)
+            if not clase:
+                continue
+            v = fila["valor"] if clase != "url" else (
+                fila["valor"] if "://" in fila["valor"] else fila["valor"].lower())
+            agregados[clase].add(v)
+            procedencia[clase].setdefault(v, [])
+            if inf["id"] not in procedencia[clase][v]:
+                procedencia[clase][v].append(inf["id"])
     ordenado = {}
     for clase, valores in agregados.items():
         if clase == "ipv4":
@@ -198,7 +318,8 @@ def construir_ioc(lista):
             ordenado[clase] = sorted(valores, key=lambda x: int(ipaddress.IPv6Address(x)))
         else:
             ordenado[clase] = sorted(valores)
-    return ordenado, procedencia
+    indice.sort(key=lambda f: (f["informe"], f["tipo"], f["valor"]))
+    return ordenado, procedencia, indice
 
 
 # ──────────────────────────────────────────────────────────────── vigencia
@@ -286,13 +407,13 @@ def tabla_indice(lista, hoy):
     return "\n".join(filas)
 
 
-def tabla_ioc(ioc, procedencia):
+def tabla_ioc(ioc, procedencia, indice):
     filas = [
         "| Fichero | Indicadores | Tipos incluidos | Informes que aportan |",
         "|---|---|---|---|",
     ]
     desc = {
-        "ipv4": "`ipv4`, `ip`",
+        "ipv4": "`ipv4`, `ip`, `ipv4:puerto`",
         "ipv6": "`ipv6`",
         "url": "`domain`, `url`, `fqdn`, `hostname`",
     }
@@ -303,10 +424,18 @@ def tabla_ioc(ioc, procedencia):
             % (fichero, fichero, len(ioc[clase]), desc[clase],
                ", ".join("`%s`" % f for f in fuentes) if fuentes else "—")
         )
+    tipos = sorted({f["tipo"] for f in indice})
+    fuentes = sorted({f["informe"] for f in indice})
+    filas.append(
+        "| [`%s`](%s) | %d | todos: %s | %s |"
+        % (FICHERO_INDICE, FICHERO_INDICE, len(indice),
+           ", ".join("`%s`" % t for t in tipos) if tipos else "—",
+           ", ".join("`%s`" % f for f in fuentes) if fuentes else "—")
+    )
     return "\n".join(filas)
 
 
-def bloque_indice(lista, ioc, procedencia, hoy):
+def bloque_indice(lista, ioc, procedencia, indice, hoy):
     publicables = [i for i in lista if i["publicable"]]
     total_ioc = sum(len(v) for v in ioc.values())
     caducados = [i for i in publicables if vigencia(i["fm"], hoy)[0] == "caducado"]
@@ -321,14 +450,15 @@ def bloque_indice(lista, ioc, procedencia, hoy):
         "",
         "### Agregados de indicadores",
         "",
-        tabla_ioc(ioc, procedencia),
+        tabla_ioc(ioc, procedencia, indice),
         "",
         "### Estado del ciclo",
         "",
         "| Métrica | Valor |",
         "|---|---|",
         "| Informes publicados | %d |" % len(publicables),
-        "| Indicadores agregados | %d |" % total_ioc,
+        "| Indicadores en listas planas | %d |" % total_ioc,
+        "| Indicadores en el índice con contexto | %d |" % len(indice),
         "| Caducados (exigen revisión) | %d%s |" % (
             len(caducados),
             " — " + ", ".join("`%s`" % i["id"] for i in caducados) if caducados else "",
@@ -400,16 +530,25 @@ def main():
     if rehechos:
         cambios.append("HTML regenerado: " + ", ".join(rehechos))
 
-    ioc, procedencia = construir_ioc(lista)
+    ioc, procedencia, indice = construir_ioc(lista)
     for clase, fichero in FICHEROS_IOC.items():
         cuerpo = "".join(v + "\n" for v in ioc[clase])
         if escribir_si_cambia(os.path.join(RAIZ, fichero), cuerpo, opt.check):
             cambios.append("%s (%d indicadores)" % (fichero, len(ioc[clase])))
 
+    buf = io.StringIO()
+    escritor = csv.DictWriter(buf, fieldnames=COLUMNAS_INDICE,
+                              lineterminator="\n", extrasaction="ignore")
+    escritor.writeheader()
+    for fila in indice:
+        escritor.writerow(fila)
+    if escribir_si_cambia(os.path.join(RAIZ, FICHERO_INDICE), buf.getvalue(), opt.check):
+        cambios.append("%s (%d indicadores con contexto)" % (FICHERO_INDICE, len(indice)))
+
     ruta_readme = os.path.join(RAIZ, "README.md")
     if os.path.exists(ruta_readme):
         readme = open(ruta_readme, encoding="utf-8").read()
-        nuevo = bloque_indice(lista, ioc, procedencia, hoy)
+        nuevo = bloque_indice(lista, ioc, procedencia, indice, hoy)
         if MARCA_INI in readme and MARCA_FIN in readme:
             ini = readme.index(MARCA_INI)
             fin = readme.index(MARCA_FIN) + len(MARCA_FIN)

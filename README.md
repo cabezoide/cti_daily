@@ -25,16 +25,18 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 54 | `ipv4`, `ip` | `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 56 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 0 | `ipv6` | — |
 | [`ioc_url.txt`](ioc_url.txt) | 28 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019` |
+| [`ioc_index.csv`](ioc_index.csv) | 193 | todos: `appid`, `artefacto`, `asn`, `cve`, `domain`, `filename`, `filepath`, `herramienta`, `ipv4`, `ipv4:puerto`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
 | Informes publicados | 6 |
-| Indicadores agregados | 82 |
+| Indicadores en listas planas | 84 |
+| Indicadores en el índice con contexto | 193 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Última construcción | 2026-11-16 |
@@ -47,17 +49,27 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 Todo lo publicado aquí está marcado **`TLP:CLEAR`**: puede redistribuirse sin restricción, conservando la atribución de las fuentes y las salvedades metodológicas de cada informe. La mayoría conserva **`PAP:AMBER`**, y eso sí impone una condición: los indicadores llevan una **acción permitida individual** en el Anexo A de su informe, y no todos admiten bloqueo.
 
-> **Lea esto antes de cargar `ioc_*.txt` en un bloqueo.**
-> Los tres ficheros agregados son listas planas, sin contexto por diseño. Eso
+> **Lea esto antes de cargar un `ioc_*.txt` en un bloqueo.**
+> Los tres ficheros de texto son listas planas, sin contexto por diseño, y eso
 > significa que **pierden la confianza, la caducidad y la acción permitida** de
 > cada indicador. En ellos conviven direcciones de mando y control que deben
 > bloquearse con infraestructura compartida, servicios legítimos de terceros y
 > direcciones de nube reasignables que sólo sirven para búsqueda retrospectiva.
 > Cargarlos sin filtrar provocará cortes de servicio propios.
 >
-> El Anexo A de cada informe es la fuente con contexto. Los agregados son para
-> automatizar la ingesta en una plataforma que después aplique ese contexto, no
-> para alimentar un cortafuegos directamente.
+> Para eso está [`ioc_index.csv`](ioc_index.csv): los mismos indicadores **más
+> todos los demás tipos** —hashes, nombres de fichero, agentes de usuario,
+> identificadores de aplicación, ASN, CVE, mutex—, cada uno con su informe de
+> origen, su fecha, su marcado TLP y PAP, su confianza, su caducidad cuando el
+> informe la declara, la acción que el analista autorizó y el contexto que
+> explica por qué está en la lista. Es el fichero que debe ingerir una
+> plataforma de inteligencia; los `.txt` son para cuando ya se ha decidido qué
+> hacer con cada cosa.
+>
+> Una columna merece atención especial: `accion_permitida`. Dice `Bloqueo`,
+> `Solo retrohunt`, `No bloquear — herramienta legítima` y otras variantes
+> escritas por quien analizó el indicador. Filtrar por ella antes de actuar es
+> la diferencia entre usar esto bien y provocar una interrupción.
 
 Los informes marcados `TLP:AMBER` o superior **no se publican en este repositorio** y aparecen en el índice como *no publicados*. La exclusión está implementada en el propio constructor (`TLP_PUBLICABLE` en `tools/cti_build.py`), de modo que un informe restringido que se añada mañana queda fuera —y fuera de los agregados de IOC— sin depender de que alguien se acuerde.
 
@@ -116,9 +128,10 @@ El tema visual vive en [`render/cti_theme.css`](render/cti_theme.css) y se aplic
 ```
 CTI-2026-0NN-*.md          informes — la fuente
 CTI-2026-0NN-*.html        informes renderizados, autocontenidos (sin red, sin CDN)
-ioc_ipv4.txt               agregados de indicadores, regenerados en cada construcción
+ioc_ipv4.txt               listas planas de indicadores, para ingesta automática
 ioc_ipv6.txt
 ioc_url.txt
+ioc_index.csv              los mismos indicadores con contexto, confianza y acción permitida
 plantilla-informe-cti-v2.md   plantilla vigente
 plantilla-informe-cti.md      plantilla v1, conservada por referencia
 render/cti_render.py       Markdown → HTML, sólo biblioteca estándar
