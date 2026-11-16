@@ -27,13 +27,16 @@ Sin dependencias: sólo la biblioteca estándar de Python 3.8+.
 import argparse
 import csv
 import datetime as _dt
+import filecmp
 import io
 import ipaddress
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -350,21 +353,43 @@ ETIQUETA = {
 # ───────────────────────────────────────────────────────────────── renderizado
 
 def renderizar(lista, forzar=False, simular=False):
-    """Regenera el HTML de los informes cuyo .md sea más reciente."""
+    """Regenera el HTML que no coincida con lo que produce su `.md`.
+
+    La comparación es **por contenido, no por fecha de modificación**. git no
+    preserva los mtime: en un clon nuevo o en un runner de CI todos los
+    ficheros reciben la hora del checkout en un orden arbitrario, así que
+    comparar mtimes da un resultado aleatorio —y de hecho hizo fallar la
+    primera ejecución del flujo de verificación, que declaró obsoleto un
+    informe intacto—. El renderizador es determinista: produce el mismo byte
+    para la misma entrada. La pregunta correcta, por tanto, es si el HTML
+    publicado es el que produce el `.md` de hoy.
+    """
     hechos = []
-    for inf in lista:
-        html = os.path.join(RAIZ, inf["html"])
-        hay_que = forzar or not os.path.exists(html) or \
-            os.path.getmtime(inf["ruta"]) > os.path.getmtime(html)
-        if not hay_que:
-            continue
-        hechos.append(inf["md"])
-        if simular:
-            continue
-        subprocess.run(
-            [sys.executable, os.path.join(RAIZ, "render", "cti_render.py"), inf["ruta"]],
-            check=True, cwd=RAIZ, stdout=subprocess.DEVNULL,
-        )
+    tmp = tempfile.mkdtemp(prefix="cti-build-")
+    try:
+        for inf in lista:
+            destino = os.path.join(RAIZ, inf["html"])
+            candidato = os.path.join(tmp, inf["html"])
+            proc = subprocess.run(
+                [sys.executable, os.path.join(RAIZ, "render", "cti_render.py"),
+                 inf["ruta"], "-o", candidato],
+                check=True, cwd=RAIZ,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+            )
+            # El renderizador anuncia cada éxito por stderr: eso es ruido aquí.
+            # Sus avisos de directiva mal puesta, en cambio, hay que verlos.
+            for linea in (proc.stderr or "").splitlines():
+                if re.search(r"aviso|error|warning", linea, re.I):
+                    print("  %s: %s" % (inf["md"], linea.strip()), file=sys.stderr)
+            igual = os.path.exists(destino) and \
+                filecmp.cmp(candidato, destino, shallow=False)
+            if igual and not forzar:
+                continue
+            hechos.append(inf["md"])
+            if not simular:
+                shutil.copyfile(candidato, destino)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
     return hechos
 
 
