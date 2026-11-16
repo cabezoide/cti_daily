@@ -24,24 +24,25 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-019` | ARTEX (framework ofensivo agéntico) y los clústeres que lo operan | Evaluación estratégica + perfil de capacidad adversaria | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
 | `CTI-2026-020` | Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98) | Perfil de actor + informe de campaña | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
 | `CTI-2026-021` | Ecosistema de troyanos bancarios brasileños (Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON) | Perfil de ecosistema de malware + evaluación regional | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-021-troyanos-br.md) · [html](CTI-2026-021-troyanos-br.html) |
+| `CTI-2026-022` | Red Akodon (SCILabs) · solapamiento con TAG-144 / Blind Eagle / APT-C-36 / AguilaCiega / APT-Q-98 · campañas «Shadow Vector» (Acronis) | Perfil de actor en disputa + evaluación de transferibilidad del método | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-022-redakodon.md) · [html](CTI-2026-022-redakodon.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 110 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 152 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 0 | `ipv6` | — |
-| [`ioc_url.txt`](ioc_url.txt) | 86 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021` |
-| [`ioc_hash.txt`](ioc_hash.txt) | 112 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021` |
-| [`ioc_index.csv`](ioc_index.csv) | 464 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cve`, `domain`, `filename`, `filepath`, `herramienta`, `ipv4`, `ipv4:puerto`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021` |
+| [`ioc_url.txt`](ioc_url.txt) | 123 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 157 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022` |
+| [`ioc_index.csv`](ioc_index.csv) | 615 | todos: `appid`, `artefacto`, `asn`, `asunto`, `clave`, `cve`, `domain`, `email`, `filename`, `filepath`, `herramienta`, `ipv4`, `ipv4:puerto`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 8 |
-| Indicadores en listas planas | 308 |
-| Indicadores en el índice con contexto | 464 |
+| Informes publicados | 9 |
+| Indicadores en listas planas | 432 |
+| Indicadores en el índice con contexto | 615 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-16 |

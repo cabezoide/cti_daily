@@ -463,3 +463,154 @@ CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://52zd.com/profile/analyti
 CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://s3.sa-east-1.amazonaws.com/8151218-25.2025.7.12.5178/modmarco2026-2.zip,,Alta,,Detección; no bloquear el dominio,ioc_url.txt,Carga de VENON en almacenamiento en la nube. Servicio legítimo
 CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://storage.googleapis.com/mydns2026/startabril2026,,Alta,,Detección; no bloquear el dominio,ioc_url.txt,Depósito de configuración de VENON. Servicio legítimo
 CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,useragent,Microsoft-WebDAV-MiniRedir,,Media,,Detección por contexto,,Petición WebDAV disparada por el .url de Mispadu. Componente legítimo de Windows: la señal es el destino externo
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,clave,zZ5OP9zoIeGTxRmoYxR6XEu0yUxV6wAE,,Alta,,Detección,,Clave AES de la configuración de AsyncRAT en la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,ansy10jun.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 5; gotemburgoxm sirve REMCOS y XWorm, romanovas sirve LimeRAT"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,armandovillareal504010.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 3, patrón de nombre y apellido español más dígitos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,asegurar2octubre.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 5; gotemburgoxm sirve REMCOS y XWorm, romanovas sirve LimeRAT"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,asynk02.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 de AsyncRAT, puerto 7788, campaña Shadow Vector"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,asynpro.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 del Cluster 4
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,camarasdeseguridad202420242024.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 2, patrón de palabras en español"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,carlosmendoza504070.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 3, patrón de nombre y apellido español más dígitos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,cococovid202420242024.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 de AsyncRAT del Cluster 2, entregado por GitHub Gist"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,dcfast.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 del Cluster 4
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,deadpoolstart2025.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de XWorm del Cluster 2. La serie deadpoolstart llega hasta el año 2065: el patrón vale más que el dominio
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,deadpoolstart2026.con-ip.com,,Alta,,Bloqueo,ioc_url.txt,C2 de XWorm del Cluster 2. La serie deadpoolstart llega hasta el año 2065: el patrón vale más que el dominio
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,deadpoolstart2064.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de XWorm del Cluster 2. La serie deadpoolstart llega hasta el año 2065: el patrón vale más que el dominio
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,dominioseternosgraciasadios20230230230.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 2, patrón de palabras en español"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio01.ddns.net,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, serie envio que Insikt describe como probablemente generada por un algoritmo"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio07.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, serie envio que Insikt describe como probablemente generada por un algoritmo"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio1010.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, serie envio que Insikt describe como probablemente generada por un algoritmo"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio14-05.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, variante con día y mes en el nombre"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio16-05.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, variante con día y mes en el nombre"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio19-05.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, variante con día y mes en el nombre"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio2020.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, serie envio que Insikt describe como probablemente generada por un algoritmo"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,envio21-05.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 1, variante con día y mes en el nombre"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,gotemburgoxm.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 5; gotemburgoxm sirve REMCOS y XWorm, romanovas sirve LimeRAT"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,newremco.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de REMCOS del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,pesosdepesoslibras.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 2, patrón de palabras en español"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,qua25q.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de QuasarRAT del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,qua25qua.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de QuasarRAT del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,rem25rem.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de REMCOS del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,remc21.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de REMCOS del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,respaldito01.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de respaldo del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,respaldomax3.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de respaldo del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,respaldomx1.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 de respaldo del Cluster 1
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,romanovas.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 5; gotemburgoxm sirve REMCOS y XWorm, romanovas sirve LimeRAT"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,sebastiancorrea905040.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,"C2 del Cluster 3, patrón de nombre y apellido español más dígitos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,sostenermio2025.duckdns.org,,Alta,,Bloqueo,ioc_url.txt,C2 del Cluster 4
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,testedark.writesthisblog.com,,Alta,,Bloqueo,ioc_url.txt,C2 del Cluster 4
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,abogados@hujmb.gov.co,,Media,,Solo detección; verificar contexto,,"Cuenta de un hospital público usada para enviar SVG maliciosos (citado a través de ¡Mucho Hacker!, oct-2024)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,alcaldia@simacota-santander.gov.co,,Alta,,Solo detección; verificar contexto,,Remitente «probablemente comprometido» del correo del 1-jul-2025 con el adjunto SVG
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,ftorreshe@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,Cuentas institucionales de la Rama Judicial asociadas a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,j01pmpalchiquinquira@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,Cuentas institucionales de la Rama Judicial asociadas a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,j02cctochiquinquira@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,Cuentas institucionales de la Rama Judicial asociadas a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,j03mpmixartado@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; jamás bloquear,,"Cuenta confirmada como legítima por Recorded Future, perteneciente a la secretaría de un juzgado civil; apareció en registros de un ladrón de credenciales"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,jcmpalchoconta@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,Cuentas institucionales de la Rama Judicial asociadas a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,nomina@magdalena.gov.co,,Alta,,Solo detección; verificar contexto,,"Cuenta institucional legítima comprometida, atribuida a Red Akodon (según la cita del informe de SCILabs). NO bloquear el dominio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,npereza@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,"Cuenta de la Rama Judicial legítima comprometida, atribuida a Red Akodon (ídem). NO bloquear el dominio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,raccionestutj02cctochiquinquira@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,Cuentas institucionales de la Rama Judicial asociadas a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,repchiquinquiraboy@cendoj.ramajudicial.gov.co,,Alta,,Solo detección; verificar contexto,,Cuentas institucionales de la Rama Judicial asociadas a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,email,silay.salamanca699@educacionbogota.edu.co,,Alta,,Solo detección; verificar contexto,,Cuenta de la secretaría de educación de Bogotá asociada a los envíos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,%Temp%\VFZE6ksYnpPfSnEWUNg.sys,,Alta,,Detección,,Controladores vulnerables y carga de REMCOS de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,%Temp%\cuDX73ob9SxeAS0IdV.sys,,Alta,,Detección,,Controladores vulnerables y carga de REMCOS de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,%Temp%\svchost.exe,,Alta,,Detección,,Controladores vulnerables y carga de REMCOS de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,C:\Users\DEV\AppData\Roaming\DEMANDA LABORAL JUDICIAL 2313154.exe,,Alta,,Detección,,Objetivo de la tarea programada Yt4Bvc2G; la cadena \DEV\ es del entorno del atacante
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,146.70.137.90,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,"C2 de DcRAT, AsyncRAT y REMCOS del Cluster 1; servidor de VPN comercial TorGuard (AS9009)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,146.70.50.42,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; todas servidores de VPN comercial compartida
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,146.70.51.42,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; todas servidores de VPN comercial compartida
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,146.70.57.58,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; todas servidores de VPN comercial compartida
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,146.70.83.218,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; todas servidores de VPN comercial compartida
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,172.93.160.188,,Media,,Detección; bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 2, mezcla de VPS e ISP colombianos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,177.255.84.173,,Media,,Detección; bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 2, mezcla de VPS e ISP colombianos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,178.73.192.3,,Alta,,Bloqueo con validación,ioc_ipv4.txt,C2 del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,178.73.218.2,,Alta,,Bloqueo con validación,ioc_ipv4.txt,C2 del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,178.73.218.8,,Alta,,Bloqueo,ioc_ipv4.txt,C2 del Cluster 4 en VPS europeos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,179.14.8.131,,Media,,Detección; bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 2, mezcla de VPS e ISP colombianos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.131.216.206,,Media,,Solo detección,ioc_ipv4.txt,"C2 de REMCOS y AsyncRAT del Cluster 3 (AS13489, ISP colombiano)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.131.217.63,,Media,,Detección; bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 2, mezcla de VPS e ISP colombianos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.131.218.182,,Media,,Solo detección,ioc_ipv4.txt,"C2 de REMCOS y AsyncRAT del Cluster 3 (AS13489, ISP colombiano)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.131.219.42,,Media,,Solo detección,ioc_ipv4.txt,"C2 de REMCOS y AsyncRAT del Cluster 3 (AS13489, ISP colombiano)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.235.10.163,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano (AS3816). Probables equipos de terceros comprometidos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.235.15.197,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano (AS3816). Probables equipos de terceros comprometidos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.235.3.0,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 4 en ISP colombianos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,181.235.4.255,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano (AS3816). Probables equipos de terceros comprometidos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,186.169.48.180,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,186.169.50.123,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,186.169.80.199,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,186.169.82.147,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 1 en ISP colombiano
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,188.126.90.2,,Alta,,Bloqueo con validación,ioc_ipv4.txt,C2 del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,191.88.249.175,,Media,,Detección; bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 2, mezcla de VPS e ISP colombianos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,191.93.113.151,,Media,,Solo detección,ioc_ipv4.txt,C2 del Cluster 4 en ISP colombianos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,193.56.253.66,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; VPN comercial
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,45.133.180.154,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; VPN comercial
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,45.133.180.162,,Alta,,Bloqueo con validación,ioc_ipv4.txt,C2 del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,45.133.180.26,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; VPN comercial
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,45.135.232.38,,Alta,,Bloqueo,ioc_ipv4.txt,C2 del Cluster 4 en VPS europeos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,45.77.72.102,,Alta,,Bloqueo,ioc_ipv4.txt,"VPS del Cluster 2 (AS20473), AsyncRAT"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.14.2,,Alta,,Bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 5 (AS42708); el conjunto más amplio, con medio centenar de direcciones en el mismo espacio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.4.3,,Alta,,Bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 5 (AS42708); el conjunto más amplio, con medio centenar de direcciones en el mismo espacio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.6.4,,Alta,,Bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 5 (AS42708); el conjunto más amplio, con medio centenar de direcciones en el mismo espacio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.80.3,,Alta,,Bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 5 (AS42708); el conjunto más amplio, con medio centenar de direcciones en el mismo espacio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.82.9,,Alta,,Bloqueo,ioc_ipv4.txt,C2 del Cluster 4 en VPS europeos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.84.5,,Alta,,Bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 5 (AS42708); el conjunto más amplio, con medio centenar de direcciones en el mismo espacio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,46.246.86.4,,Alta,,Bloqueo con validación,ioc_ipv4.txt,"C2 del Cluster 5 (AS42708); el conjunto más amplio, con medio centenar de direcciones en el mismo espacio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,64.188.9.172,,Alta,,Bloqueo con validación,ioc_ipv4.txt,Servidores proxy del Cluster 2 (AS36352); resuelven la serie deadpoolstart
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,64.188.9.173,,Alta,,Bloqueo con validación,ioc_ipv4.txt,Servidores proxy del Cluster 2 (AS36352); resuelven la serie deadpoolstart
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,64.188.9.175,,Alta,,Bloqueo con validación,ioc_ipv4.txt,Servidores proxy del Cluster 2 (AS36352); resuelven la serie deadpoolstart
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,64.188.9.177,,Alta,,Bloqueo con validación,ioc_ipv4.txt,Servidores proxy del Cluster 2 (AS36352); resuelven la serie deadpoolstart
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,89.117.23.25,,Alta,,Bloqueo,ioc_ipv4.txt,C2 del Cluster 4 en VPS europeos
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,93.115.35.146,,Alta,,Solo detección; no bloquear,ioc_ipv4.txt,C2 del Cluster 1; VPN comercial
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,1e97ead369,,Alta,,Detección,,Mutex de AsyncRAT del Cluster 2 y de LimeRAT del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,AsyncMutex_6SI8OkPnk,,Alta,,Detección,,"Mutex de la variante crackeada de XWorm y de AsyncRAT; aparece en las dos fuentes primarias, lo que lo convierte en el lazo técnico más duro entre ambos conjuntos"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,CookiesGoogleChrome,,Alta,,Detección,,Mutex de AsyncRAT del Cluster 2 y de LimeRAT del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,WinCookies,,Alta,,Detección,,Mutex de AsyncRAT del Cluster 2 y de LimeRAT del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,tempcokies,,Alta,,Detección,,Mutex de AsyncRAT del Cluster 2 y de LimeRAT del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,tempcookiee,,Alta,,Detección,,Mutex de AsyncRAT del Cluster 2 y de LimeRAT del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,mutex,tempcookieess,,Alta,,Detección,,Mutex de AsyncRAT del Cluster 2 y de LimeRAT del Cluster 5
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,04878a5889e3368c2cf093d42006ba18a87c5054f1464900094e6864f4919899,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Notificacion_electronica_sentencia_preliminar_Departamento_Juridico_sxyebfiv.svg — adjunto del correo del 1-jul-2025 desde la alcaldía de Simacota (Recorded Future)
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,0b188c53a446ce7b8acbc58d4e0b02ba4b87ece9c9b9bb14bf10e8d9c34d26cd,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,0c4eb3c0537182c4cd5281f08559534b2eb44ae20b91867c115b9fc404c1b425,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,0e5a768a611a4d0ed7cb984b2ee790ad419c6ce0be68c341a2d4f64c531d8122,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector (AsyncRAT o REMCOS según variante)
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,11cdb65e5b007e249a51a7410da0653ec6c6b28f68b33e1de88ac3989dd745d6,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,1226a8d066328a8b6f353c9d98f1dc8128bd84f3909ae1cc6811dc1adff33c81,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Notificacion_electronica_sentencia_preliminar_Departamento_De-Justicia_01.js — segunda etapa servida desde la red de distribución de Discord
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,15818f97142d49cbc9662d51bb0155a7a8dc650bf1daf26e07a5fff4ff15d93f,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,17ac16f1cd25ea3b31b2a89b193d51c7b1959d48cb72364eb05081d806178f1d,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,1920d23a395aa729cc7658b8471939ef871108a94e93456793d1322dcbe9750b,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,1af14cc00b1044636f6623f5f26343dfef3003f1c2a0181c995a573eae832c7a,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,1b3c1501b3fbcd0a4fbcb1f8bbc21a34f89232aa1e794dc2821cc92eee4ce44c,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,2ad823885a7406219944bd07a438b53495ab7440b857857f7d2b48001d43c841,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,2bbc6b9dd5e6d0327250b32305be20c89b19b56d33a096522ee33f22d8c82ff1,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,30aa90270ca9f04c554b2a6e17d22b49e5e3f6fb526e133fd35364b08784925d,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,3150ef6e48e403c8667aea84bfa1585878df68c0cea1925edcc2a745759b119e,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,49abf67639aca4a12e4205b407b82d281cbc4e47d9f0dae799a6900b3c48aa13,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,4d292a785ec35530bac5f4674a97c0dffa2a2396bd8b0cc6f8b478ba13d73611,,Alta,,Retrohunt; bloqueo de escaso valor,ioc_hash.txt,"Muestras SVG de la campaña Shadow Vector (Acronis, jun-2025)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,5201e12cfdbeb48488599eefc84e9bafd9feabf208da15b3c25c56243de1eba7,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,52d2b4ac1a84449c72226e1deed8d33ebbe8fd00d4853e026adef679d7fa273d,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,53cad386b6af155952380eb8050eebef368836bcb035dffe2ca8a58ae22c055c,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Paquete comprimido de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,5576f8e746f206f9a682b9bbb4a623c72b60892c96979fbe2ffab3b32d6aea7e,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Paquete comprimido de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,589dc2e8e4528ee6c18ac1c7cf5964a352d3cb245a8b32c7f81c12cf51f5f926,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,591744244c7ca9cea69cde263187efde3f65a157f8e5eb885ccc1f9e078b5572,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Cuerpo de la respuesta de Paste.ee ejecutado como JavaScript por la etapa anterior
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,64e971f0fed4da9d71cd742db56f73b6f7da8fec3b8aebd17306e8e0d4f1d29d,,Alta,,Retrohunt; bloqueo de escaso valor,ioc_hash.txt,"Muestras SVG de la campaña Shadow Vector (Acronis, jun-2025)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,651f8771e83fe70a57215adb225de065c9cfd3485bd041768cb5923b29449b18,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,721df71a5491d481044c149d24e19ca6dbce34baf6ad98fe4f4cc66af0d1826b,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,906c7cf78cff18b7d43c4137937a75b3be41eaf654e835afb473168b7ed24f2d,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,92706a73c54332b33f845adb4ed8f0e2fbbb6cba0cae53a0e695257621ba269e,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,9e6aa602427a41bcf12c5ffa022941a6eb1d51be71e36ecebd714e6c9e9ab51e,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,ad1d1b6fea71c28a555341f8591c59272b0509df9b2c75519a813066c3053ff6,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,b04ea3c83515c3daf2de76c18e72cb87c0772746ec7369acce8212891d0d8997,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,bb20c46a817a7c0cdffb513ec4d14bd2026ea70b8f1a0ec07bb699cd0d70a29a,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Paquete comprimido de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,bf596502f05062d156f40322bdbe9033b28df967ce694832a78482b47dcdd967,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Paquete comprimido de la campaña Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,c5399f7e0adefb814ae8b921273f96c612e20fc66dd9d3048749a2ee9e39850e,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,d1f7e55aee74a868f8defd411231d0fbd7a9f2050a5a32660a8845e5e890efb9,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,d713793b0b6dd1fe7c2432a28069745bc4bf97c098f1217de0731c7ed7c1d70a,,Alta,,Retrohunt; bloqueo de escaso valor,ioc_hash.txt,"Muestras SVG de la campaña Shadow Vector (Acronis, jun-2025)"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,dd5fab6baa5967e6b1d023f6d98dcbe0d7a03cedafc7bddbab6d9b5bc07f6a2d,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,ddd31270f6150d004bd857785096d0ebd6ba68a5657ca64decce494dc26fb824,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,e407403a0ab5fcd89fa7bafb82de1d6261b9260398122d105cd1a97f4258ac1f,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,e50f96eb8fd7ca90df3db47368b413ffb875d5cd3685b9d601bb884ebe980ef9,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,ea81ab0c9daee3a3e5a34e1a94a5a7f1ea1ed664ee6df4596671c30f56d06f30,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,f847d48b3007ab27c5b3207d41cb36a7f5b15f2192d1bbb7cec58f371fdce685,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Carga final de Shadow Vector
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,f9b6c8f6f6a2f69286b298dd6375ebc25a07eb2012e226af1dfafd861b9edb3e,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,fa1bd87281ed0d2ffbed269160008cd9fa758a5a3e1702c5871cffe2b8837bb5,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,fab0b6945c1ee0057349254760469b7d5a502819517b31049efc51a71b25c46d,,Alta,,Retrohunt,ioc_hash.txt,Muestras SVG de la misma campaña
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://archive.org/replace_202505/REPLACE.txt,,Alta,,Detección; bloqueo de ruta,ioc_url.txt,"Depósito de la carga en base64 en la campaña Shadow Vector. Servicio legítimo: bloquear la ruta, no el dominio"
+CTI-2026-022,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://t.me/xworm_v2,,Media,,Solo detección,ioc_url.txt,"Canal de Telegram que distribuye la versión crackeada de XWorm, con más de 300 miembros. Es inteligencia de proveedor, no infraestructura de ataque"
