@@ -94,9 +94,16 @@ footer a{color:var(--sky)}
 </header>
 
 <h2><span class="num">01 · catálogo</span>Informes publicados</h2>
-<p class="sub">7 informes. El botón abre el informe renderizado; la fuente en Markdown
+<p class="sub">8 informes. El botón abre el informe renderizado; la fuente en Markdown
 es el documento canónico y se versiona.</p>
 <div class="grid">
+<article class="card">
+  <div class="id">CTI-2026-021 · 2026-11-16</div>
+  <h3><a href="CTI-2026-021-troyanos-br.html">Ecosistema de troyanos bancarios brasileños (Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON)</a></h3>
+  <div class="meta">Perfil de ecosistema de malware + evaluación regional</div>
+  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <div class="links"><a class="primary" href="CTI-2026-021-troyanos-br.html">Leer el informe</a><a href="CTI-2026-021-troyanos-br.md">fuente .md</a></div>
+</article>
 <article class="card">
   <div class="id">CTI-2026-020 · 2026-11-16</div>
   <h3><a href="CTI-2026-020-blindeagle.html">Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98)</a></h3>
@@ -154,17 +161,17 @@ informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier pro
 <table>
 <thead><tr><th>Fichero</th><th>Núm.</th><th>Qué contiene</th></tr></thead>
 <tbody>
-<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">89</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
+<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">110</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
 <tr><td><a href="ioc_ipv6.txt"><code>ioc_ipv6.txt</code></a></td><td class="mono">0</td><td>Direcciones IPv6 (hoy ningún informe declara ninguna)</td></tr>
-<tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">52</td><td>Dominios y URL, una por línea</td></tr>
-<tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">77</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
-<tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">327</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
+<tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">86</td><td>Dominios y URL, una por línea</td></tr>
+<tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">112</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
+<tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">464</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
 </tbody>
 </table>
 
 <div class="note">
 <strong>Antes de cargar un <code>.txt</code> en un bloqueo.</strong> Las listas planas pierden
-la confianza, la caducidad y la acción permitida de cada indicador: 71 de los que
+la confianza, la caducidad y la acción permitida de cada indicador: 85 de los que
 contienen están marcados <em>solo retrohunt</em>, y hay indicadores marcados
 <em>no bloquear — herramienta legítima</em>. Cargarlas sin filtrar provocará cortes de
 servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
@@ -173,8 +180,8 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 
 <h2><span class="num">03 · estado</span>Estado del ciclo</h2>
 <div class="stats">
-  <div class="stat"><div class="n">7</div><div class="l">informes publicados</div></div>
-  <div class="stat"><div class="n">327</div><div class="l">indicadores con contexto</div></div>
+  <div class="stat"><div class="n">8</div><div class="l">informes publicados</div></div>
+  <div class="stat"><div class="n">464</div><div class="l">indicadores con contexto</div></div>
   <div class="stat"><div class="n">0</div><div class="l">caducados, exigen revisión</div></div>
   <div class="stat"><div class="n">2026-11-16</div><div class="l">informe más reciente</div></div>
 </div>

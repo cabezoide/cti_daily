@@ -326,3 +326,140 @@ CTI-2026-020,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://raw.githubusercontent.co
 CTI-2026-020,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://textbin.net/raw/xsi2eulwpw,,Media,,Detección,ioc_url.txt,Etapa intermedia en servicio de pegado de texto (jun-2025)
 CTI-2026-020,2026-11-16,TLP:CLEAR,PAP:AMBER,useragent,Microsoft-WebDAV-MiniRedir/10.0.19044,,Media,,Detección por contexto,,"Petición WebDAV disparada por el fichero .url. Agente legítimo de Windows: la señal es el destino externo por puerto 80, no la cadena"
 CTI-2026-020,2026-11-16,TLP:CLEAR,PAP:AMBER,useragent,Microsoft-WebDAV-MiniRedir/10.0.19045,,Media,,Detección por contexto,,"Igual que el anterior, versión observada por Darktrace. La discrepancia entre ambas está consignada en §3.3"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,ArrMF,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,ArrMSG,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,ArrURL,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,BaixarWAJS,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,Cleanup,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,DEL,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,EF01,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,ENA,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,FCX,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,Formato de comando C2 `<\,,"> · elementos de página new-chat-outline, settings-refreshed, chat · patrón de adjunto m_<número>_NUMERO_",,Artefactos de protocolo de Mekotio y del gusano de WhatsApp,,comando\
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,HL,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,L0@D_S3CR3T_K3Y_X9F2_PR0D_2024!,,Alta,,Caza,,Material criptográfico y persistencia de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,LOAD_SALT_2024!!,,Alta,,Caza,,Material criptográfico y persistencia de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,LT,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,LoadConfigs,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,NVIDIA Notification Service,,Alta,,Caza,,Material criptográfico y persistencia de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,PFX,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,ProcessarContatos,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,ProcessarEnvio,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,TenHaVunf!@#2026,,Alta,,Caza en memoria y en disco,,Configuración del spambot de WhatsApp de Astaroth
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,WebDriverUpdater,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,enviarParaContato,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,artefacto,mensagemSaudacao,,Alta,,Caza por cadena en binarios,,Nombres de función compartidos entre el spambot de Astaroth y Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,asunto,Notificacion de Factura Pendiente,,Alta,,Búsqueda retrospectiva en el correo,,Asuntos exactos de dos campañas chilenas (CSIRT CMV25-00499 y CMV24-00483)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,asunto,Restitución de Valores de Impuestos. 08/21/2024 06:15:11 pm,,Alta,,Búsqueda retrospectiva en el correo,,Asuntos exactos de dos campañas chilenas (CSIRT CMV25-00499 y CMV24-00483)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,anchoriaatrade.com,,Alta,,Bloqueo,ioc_url.txt,"Redirección, campaña de la CGE (CSIRT CMV24-00455)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,arconmat.org,,Alta,,Bloqueo,ioc_url.txt,"Falso formulario, campaña de la Tesorería General (CSIRT CMV24-00483)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,artin-services.com,,Alta,,Bloqueo,ioc_url.txt,"Descarga del fichero, campaña de la Tesorería General"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,brasilmotorsvs14.com,,Alta,,Bloqueo,ioc_url.txt,C2 principal de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,cmg-technology.ro,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Contenedor de malware, campaña del SII. Probable sitio legítimo comprometido"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,digitalmoineyp.com,,Alta,,Bloqueo,ioc_url.txt,Distribución de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,digitalmukesh.info,,Alta,,Bloqueo,ioc_url.txt,"Descarga del fichero, campaña de la CGE"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,docsmoonstudioclayworks.online,,Alta,,Bloqueo,ioc_url.txt,C2 del componente PowerShell de Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,ebccarpentrydublin.com,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Redirección, campaña de la Tesorería General. Probable sitio legítimo comprometido"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,enviroecobusiness.ro,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Comprobación, campaña de la Tesorería General. Probable sitio legítimo comprometido"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,gptplan.ro,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Infraestructura de la campaña del Ministerio de Energía (CronUp, feb-2025). Probables sitios legítimos comprometidos"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,graconxonjal.empresaeficiente.sbs,,Alta,,Bloqueo,ioc_url.txt,"C2 del instalador de Astaroth (CrowdStrike, jul-2026)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,greatcreekcanines.com,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Infraestructura de la campaña del Ministerio de Energía (CronUp, feb-2025). Probables sitios legítimos comprometidos"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,gscjgn.org,,Alta,,Bloqueo,ioc_url.txt,"Descarga del fichero, campaña del SII (CSIRT 2CMV23-00417-01)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,inovia.com.ao,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Infraestructura de la campaña del Ministerio de Energía (CronUp, feb-2025). Probables sitios legítimos comprometidos"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,lazybearpottery.net,,Alta,,Bloqueo,ioc_url.txt,C2 alternativo de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,meridianeyecare.com,,Media,,Detección; bloqueo con validación,ioc_url.txt,"Infraestructura de la campaña del Ministerio de Energía (CronUp, feb-2025). Probables sitios legítimos comprometidos"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,molejo.online,,Alta,,Bloqueo,ioc_url.txt,"C2 de la campaña del Ministerio de Energía, puerto 7957"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,moscovatech.com,,Alta,,Bloqueo,ioc_url.txt,C2 de la variante de Mispadu de CVE-2023-36025 (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,pexinxaria.com.br,,Alta,,Bloqueo,ioc_url.txt,"Sitio falso del SII, campaña CMV24-00463"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,plansonval.impostosrapido.top,,Alta,,Bloqueo,ioc_url.txt,"C2 del instalador de Astaroth (CrowdStrike, jul-2026)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,plinqok.com,,Alta,,Bloqueo,ioc_url.txt,C2 de la variante de Mispadu de CVE-2023-36025 (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,pluginsafeguard.help,,Media,,Detección,ioc_url.txt,"Configuración de reserva de VENON; no figura en su tabla de indicadores, solo en el cuerpo del informe"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,portalhondihs.com,,Alta,,Bloqueo,ioc_url.txt,Distribución de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,portalriosul.com.br,,Alta,,Bloqueo,ioc_url.txt,"Redirección, campaña CMV24-00463"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,sii-mail.cl,,Alta,,Bloqueo,ioc_url.txt,"Dominio que suplanta al SII, usado como remitente (Informe-N40351073@sii-mail[.]cl)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,stretar7.contabilfacil.sbs,,Alta,,Bloqueo,ioc_url.txt,"C2 del instalador de Astaroth (CrowdStrike, jul-2026)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,trilivok.com,,Alta,,Bloqueo,ioc_url.txt,C2 de la variante de Mispadu de CVE-2023-36025 (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,varegjopeaks.com,,Alta,,Bloqueo,ioc_url.txt,C2 del componente Python de Vareg
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,domain,xalticainvest.com,,Alta,,Bloqueo,ioc_url.txt,C2 de la variante de Mispadu de CVE-2023-36025 (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,Bizarro.txt,,Alta,,Detección y caza,,Ficheros de marca de Mekotio en la raíz del perfil del usuario. La mayoría no coexisten: encontrar uno ya es sospechoso
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,DevolucionImpuestopiendenteTGR_16081.zip,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,Etc,,Alta,,Detección y caza,,Ficheros de marca de Mekotio en la raíz del perfil del usuario. La mayoría no coexisten: encontrar uno ya es sospechoso
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,FacturaContabilSolutionsDiciembre.msi,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,Informe-21-2024.zip,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,Informe-Detallado.msi,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,NVIDIANotification.exe,,Alta,,Detección y caza,,Ficheros de la cadena de VENON; el primero lleva el carácter U+00AE como prefijo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,Ok.txt,,Alta,,Detección y caza,,Ficheros de marca de Mekotio en la raíz del perfil del usuario. La mayoría no coexisten: encontrar uno ya es sospechoso
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,Siifactmarzo.zip,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,V.txt,,Alta,,Detección y caza,,Ficheros de marca de Mekotio en la raíz del perfil del usuario. La mayoría no coexisten: encontrar uno ya es sospechoso
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,factnuevamarzocgeboletaeletricidad.zip,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,libcef.dll,,Alta,,Detección y caza,,Ficheros de la cadena de VENON; el primero lleva el carácter U+00AE como prefijo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,nopagadafacSiimarzo.msi,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,nopagadafacturaSii.zip,,Alta,,Detección y caza,,Nombres de fichero de las cinco campañas chilenas. Son los más útiles para búsqueda retrospectiva en el correo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,qYogBt.zip,,Alta,,Detección y caza,,Ficheros de la cadena de VENON; el primero lleva el carácter U+00AE como prefijo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filename,®mjtgr.exe,,Alta,,Detección y caza,,Ficheros de la cadena de VENON; el primero lleva el carácter U+00AE como prefijo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,C:\ProgramData\USOShared\NuPLihaOH\,,Alta,,Detección y caza,,Carpeta de preparación de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,filepath,C:\Users\Public\Temp\ChromeAuto_,,Alta,,Detección y caza,,Carpeta de perfil de navegador clonado del gusano de WhatsApp. El artefacto más específico de la amenaza de 2026
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,103.235.105.113,,Media,,Solo retrohunt,ioc_ipv4.txt,"Página de descarga, campaña del SII de 2023"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,104.21.7.106,,Baja,,Solo retrohunt,ioc_ipv4.txt,Resuelven los C2 de VENON; ambas son de un proveedor de CDN compartido
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,140.82.18.85,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,"C2 observado en la configuración de Mispadu (Cofense, feb-2026)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,148.66.147.215,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura SMTP, campaña del SII de 2024"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,158.69.109.191,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura de correo, campaña del SII de 2023"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,162.214.157.170,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura de correo, campaña del SII de 2023"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,185.43.207.177,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura SMTP, campaña de la Tesorería General"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,188.114.96.3,,Baja,,Solo retrohunt,ioc_ipv4.txt,Resuelven los C2 de VENON; ambas son de un proveedor de CDN compartido
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,188.240.2.189,,Media,,Solo retrohunt,ioc_ipv4.txt,"Página contenedora, campaña del SII de 2023"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,192.99.226.117,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,Panel de control de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,206.0.29.58,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,Panel de control de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,209.59.174.255,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura SMTP, campaña de la CGE"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,212.69.5.84,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,Panel de control de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,23.239.3.218,,Alta,,Bloqueo,ioc_ipv4.txt,"C2 de la campaña de la CGE, puerto 9091 (CSIRT CMV24-00455)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,24.199.98.128,,Alta,,Bloqueo,ioc_ipv4.txt,"Servidor WebDAV de la variante de Mispadu de CVE-2023-36025, puerto 80"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,34.227.229.85,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,Panel de control de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,45.79.86.87,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura SMTP, campaña de factura impaga, puerto 57496"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,50.116.72.199,,Media,,Solo retrohunt,ioc_ipv4.txt,"Infraestructura de correo, campaña del SII de 2023"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,51.222.75.248,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,Panel de control de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,51.222.75.250,,Media,,Bloqueo tras verificación,ioc_ipv4.txt,Panel de control de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,ipv4,95.164.22.60,,Alta,,Bloqueo,ioc_ipv4.txt,"C2 de la campaña del Ministerio de Energía, puerto 7957"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,md5,0adb9b817f1df7807576c2d7068dd931,,Alta,,Solo detección; verificar ruta y padre,ioc_hash.txt,Intérprete legítimo de AutoIt usado en casi todas las campañas de Mispadu desde jun-2024 (Cofense). NO BLOQUEAR por hash
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,puerto,57496,,Media,,Detección por contexto,,"Puertos de C2 de las campañas chilenas. Detectar por combinación con proceso no reconocido, no por puerto suelto"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,puerto,7957,,Media,,Detección por contexto,,"Puertos de C2 de las campañas chilenas. Detectar por combinación con proceso no reconocido, no por puerto suelto"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,puerto,9091,,Media,,Detección por contexto,,"Puertos de C2 de las campañas chilenas. Detectar por combinación con proceso no reconocido, no por puerto suelto"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha1,8b683c897ecc6fa6881d29f6c41c7c159d65fa62,,Media,,Retrohunt,ioc_hash.txt,OZIW6737LTREEE.exe — campaña dirigida a Chile de ago-2019 (ESET)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,03bdae4d40d3eb2db3c12d27b76ee170c4813f616fec5257cf25a068c46ba15f,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Variante de Mispadu del mismo conglomerado (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,101665452ebc6e400550380510e8db10a9ce2af1e458f928ca4b0188daeceb9d,,Alta,,Solo detección; verificar contexto,ioc_hash.txt,"PDQConnectUpdater-0.3.0.msi — software legítimo, mismo caso"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,19ef6dcc8257fc55032aa97eb5613a8dc35cfd41bf4804d239ee349d03b7129c,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,factnuevamarzocgeboletaeletricidad.zip — campaña que suplanta a la CGE (CSIRT CMV24-00455)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,1e74435045984691a9d8bce58101b8e3509c1031142b8aedd8f81d1c67eedbd2,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,DevolucionImpuestopiendenteTGR_b1Gz5R2UBS.cmd — misma campaña (CSIRT CMV24-00483)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,203d8a6e596cad036eae854e7484509a11ee35547ca5e1f2b2249ae825ec714f,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,nopagadafacSiimarzo.zip — campaña que suplanta al SII (CSIRT 2CMV23-00417-01)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,28225c5622637cdaed8342e14560e8de7b53dd6ba145d973643fc4b5bdd67b75,,Media,,Retrohunt,ioc_hash.txt,Fichero sin nombre asignado en la alerta de la Tesorería General (CSIRT CMV24-00483)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,307215945683763731f3bdd61ada911367be4d25e02c8a158d6c314c16865d47,,Alta,,Solo detección; verificar contexto,ioc_hash.txt,"pdq-connect-agent.exe — software legítimo de administración remota, listado por el CSIRT como indicador de la campaña. NO BLOQUEAR por hash"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,3d5f0dbce1204d0db72b9574800bef878015fdbbe7b24dc5b553caed5da4dc5a,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"MSI de la campaña del SII, el mismo hash servido con tres nombres distintos (CSIRT 2CMV23-00417-01)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,3f9ee99d2336918d7a3df73df04115d14aebf029dacffcebedefadd88ec8c49b,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,FacturaContabilSolutionsDiciembre.msi — campaña de factura impaga genérica (CSIRT CMV25-00499)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,4236f4d3626e61dc37d83cbd26597ee2ce1adcbfdb36bf101435d0d3e134b4ea,,Media,,Retrohunt,ioc_hash.txt,shfolder.dll — misma campaña de 2019; el informe lo publica bajo encabezado SHA1 pero su longitud corresponde a SHA-256
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,46d20fa82c936c5784f86106838697ab79a1f6dc243ae6721b42f0da467eaf52,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Variante de Mispadu del mismo conglomerado (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,5cc97524d9ab2d29019d545b06f8ef8fcf5b9fb8ee257d7352a619f8950f5449,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,factnuevamarzocgeboletaeletricidad.msi — misma campaña (CSIRT CMV24-00455)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,6168d63fad22a4e5e45547ca6116ef68bb5173e17e25fd1714f7cc1e4f7b41e1,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"Componente en Python de Vareg, cuyo desarrollador «probablemente usó IA» según CrowdStrike"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,6d2f67ddd2438baa14e2565e02e015296db31daf3d03410e7c783e89c785e614,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Siifactmarzo.zip — campaña del SII (CSIRT 2CMV23-00417-01)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,75d1a2560cf93c6a028aa3573febddaf713014d64b0e8904488111772e4cff49,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,libcef.dll desempaquetado de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,7e643c188a1ee3b0251b7dfcab000b7c48fd840eff35189e8a45901852e3910a,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"ssleay32.dll — aparece en dos campañas chilenas distintas, SII y CGE: es el componente reutilizado (CSIRT CMV24-00463 y CMV24-00455)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,8daa7bc4f2e938960186dfd65ee38cc8917361c90dc9cfef5f2ce83306691988,,Alta,,Solo detección; verificar contexto,ioc_hash.txt,"pdq-connect-updater.exe — software legítimo, mismo caso"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,8e1d354dccc3c689899dc4e75fdbdd0ab076ac457de7fb83645fb735a46ad4ea,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"Variante de Mispadu que abusa de CVE-2023-36025 (Unit 42, feb-2024)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,a1aa786e02fb9a37a71e0f76b052ab284ba877f2aaa2fb28f05d60487389976a,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"Componente en PowerShell de Vareg, versión anterior a la reescritura"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,bc25f7836c273763827e1680856ec6d53bd73bbc4a03e9f743eddfc53cf68789,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Variante de Mispadu del mismo conglomerado (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,c482286a7fdfb64d308c197a4deabcd773b8b62d9e74d1d08fcfd02568d75d72,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"libcef.dll empaquetado de VENON (ZenoX, mar-2026)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,c7c62303ee1a37fd7a6e2db9c590ba75c647bc4d22d7dca50cfa8879222ac9e1,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"Spambot de Astaroth cifrado (CrowdStrike, jul-2026)"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,caa9da1c55e33446eaeb783957e990847369423c7dd652f07a5c93bf1d786a66,,Alta,,Solo detección; verificar contexto,ioc_hash.txt,"WixSharp.dll — biblioteca legítima de construcción de instaladores, mismo caso"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,d12f56009bcdf27276235380343948f1f909cf17c1490c5c91ec2c2a8cffc699,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Informe-Detallado.msi — misma campaña (CSIRT CMV24-00463)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,d89105c4d567a95f674ed6eac538e32e288b658a4222a3d52e284a77782af4d5,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,"Spambot de Astaroth descifrado, PE Delphi de 32 bits compilado el 2026-02-13"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,dc626f8f3b32c1e751d02c3e881bdfdc701a8db9dcb11a424b68f69fd7c4ce5c,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,DevolucionImpuestopiendenteTGR_16081.zip — campaña de la Tesorería General (CSIRT CMV24-00483)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,dd2c7a676fa3497a3761e17aab18cbcf301e6e389f63469d61c0eeb849917db6,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,5nkdggch.dll — misma campaña (CSIRT CMV25-00499)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,e28e34fbdaff077669586dcdb4e10f0ba2ca6c9973ed4d372a5c3ec3b8ad20e7,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,libeay32.dll — también en ambas campañas (CSIRT CMV24-00463 y CMV24-00455)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,e87329c39e9647d1f4bd64400a2988f9c83b3547845c998ae6bfbcb361d6240c,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Informe-21-2024.zip — campaña del SII por boletas electrónicas (CSIRT CMV24-00463)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,ec43a17685e3a555c2eb5f0a2802e9e45d5a2a5d49a0803155acbd74d9ecdbd7,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Configuración cifrada del spambot
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,f178861e00b0a2ba7d50c103ac41ac6eb89e7c6232bd25bd1fa8752a8871e445,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,nopagadafacturaSii.zip — campaña del SII (CSIRT 2CMV23-00417-01)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,fb3995289bac897e881141e281c18c606a772a53356cc81caf38e5c6296641d4,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Variante de Mispadu del mismo conglomerado (Unit 42)
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,sha256,fd5d9effc1ef77a49b0720d2691bc144f513609760c22fa62bc1e8b84dedf879,,Alta,,Bloqueo y retrohunt,ioc_hash.txt,Itau_swap_install.vbs — script de secuestro de accesos directos de VENON
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,http://trilivok.com/4g3031ar0/cb6y1dh/it.php,,Alta,,Bloqueo,ioc_url.txt,Extremo de exfiltración de Mispadu; el sufijo it.php se repite entre campañas
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://52zd.com/profile/analytic/Informe-21-2024.zip,,Alta,,Bloqueo,ioc_url.txt,"Contenedor del malware, campaña del SII de 2024"
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://s3.sa-east-1.amazonaws.com/8151218-25.2025.7.12.5178/modmarco2026-2.zip,,Alta,,Detección; no bloquear el dominio,ioc_url.txt,Carga de VENON en almacenamiento en la nube. Servicio legítimo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,url,https://storage.googleapis.com/mydns2026/startabril2026,,Alta,,Detección; no bloquear el dominio,ioc_url.txt,Depósito de configuración de VENON. Servicio legítimo
+CTI-2026-021,2026-11-16,TLP:CLEAR,PAP:AMBER,useragent,Microsoft-WebDAV-MiniRedir,,Media,,Detección por contexto,,Petición WebDAV disparada por el .url de Mispadu. Componente legítimo de Windows: la señal es el destino externo
