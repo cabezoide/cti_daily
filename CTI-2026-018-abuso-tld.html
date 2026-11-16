@@ -1,0 +1,1395 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-018 · Abuso de dominios de primer nivel (ecosistema de registro DNS)</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-018<small>Abuso de dominios de primer nivel (ecosistema de registro DNS)</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-requisitos-y-limitaciones">3. Alcance, requisitos y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-que-representa-este-fenomeno-en-el-panorama">E-1. Qué representa este fenómeno en el panorama</a><a href="#e-2-distribucion-del-abuso-las-dos-tablas-que-no-coinciden">E-2. Distribución del abuso — las dos tablas que no coinciden</a><a href="#e-3-tendencia-y-pronostico">E-3. Tendencia y pronóstico</a><a href="#e-4-decisiones-que-este-informe-pide-al-nivel-estrategico">E-4. Decisiones que este informe pide al nivel estratégico</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion-y-equivalencia-de-metricas">O-1. Identificación y equivalencia de métricas</a><a href="#o-2-estructura-del-mercado-y-donde-esta-la-palanca">O-2. Estructura del mercado y dónde está la palanca</a><a href="#o-3-modelo-de-operacion-del-abuso">O-3. Modelo de operación del abuso</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-cronologia">O-5. Cronología</a><a href="#o-6-hipotesis-alternativas-consideradas">O-6. Hipótesis alternativas consideradas</a><a href="#o-7-indicadores-y-senales-de-alerta">O-7. Indicadores y señales de alerta</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-cadena-de-abuso-del-dominio">T-1. Cadena de abuso del dominio</a><a href="#t-2-mapa-mitre-att-ck">T-2. Mapa MITRE ATT&amp;CK</a><a href="#t-3-donde-atacamos-en-la-piramide-del-dolor">T-3. Dónde atacamos en la Pirámide del Dolor</a><a href="#t-4-hipotesis-de-caza-prioritarias">T-4. Hipótesis de caza prioritarias</a><a href="#t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero">T-5. Brechas de visibilidad que hay que cerrar primero</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-conjuntos-de-tld-para-politica-de-puntuacion">X-1. Conjuntos de TLD para política de puntuación</a><a href="#x-2-artefactos-duraderos-lo-que-no-cambia-al-rotar-el-dominio">X-2. Artefactos duraderos — lo que no cambia al rotar el dominio</a><a href="#x-3-logica-de-deteccion-prioritaria">X-3. Lógica de detección prioritaria</a><a href="#x-4-consultas-de-caza">X-4. Consultas de caza</a><a href="#x-5-mitigaciones-de-configuracion-con-efecto-directo">X-5. Mitigaciones de configuración con efecto directo</a><a href="#14-brechas-de-inteligencia-y-nuevos-requisitos-de-coleccion">14. Brechas de inteligencia y nuevos requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores-de-compromiso">Anexo A — Indicadores de compromiso</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-marcos-de-referencia-empleados">Anexo D — Marcos de referencia empleados</a><a href="#anexo-e-paquete-legible-por-maquina">Anexo E — Paquete legible por máquina</a><a href="#anexo-f-control-de-cambios">Anexo F — Control de cambios</a><a href="#anexo-g-realimentacion-del-consumidor">Anexo G — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Evaluación estratégica</span><span class="pill p-mint">Global · Latinoamérica · Chile</span><span class="pill p-sky">v1.0 · 2026-11-15</span></div><h1>Abuso de dominios de primer nivel<br><span class="hl">ecosistema de registro DNS</span></h1><p class="sub">El abuso de TLD no se concentra donde se mide: <code>.com</code> lidera todas las listas por volumen mientras once gTLD baratos superan el 10 % de su zona completa marcada como maliciosa</p><p class="sub2">Doce meses de datos primarios (may-2025 → abr-2026) más cuatro trimestres de seguimiento. El predictor útil no es la terminación: es la tupla TLD + registrador + edad del dominio</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-018</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2027-02-15</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<div class="note info rv"><div class="t">Regla de oro del producto:</div><p>todo párrafo debe responder a un requisito de inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que alguien va a hacer, va al anexo o se borra.</p></div>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-018</code></dd></div><div><dt>Versión / fecha</dt><dd class="m"><code>1.0</code> — 2026-11-15</dd></div><div><dt>Tipo de producto</dt><dd>Evaluación estratégica (infraestructura y ecosistema, no actor)</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Foco regional</dt><dd>Global, con lectura específica para Latinoamérica y Chile</dd></div><div><dt>Marcado de difusión</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Clasificación interna</dt><dd>Uso interno — no sensible</dd></div><div><dt>Requisitos atendidos</dt><dd class="m"><code>PIR-02</code> (superficie de phishing y suplantación de marca), <code>PIR-06</code> (política de bloqueo y listas de reputación), <code>PIR-09</code> (indicadores tempranos de campaña)</dd></div><div><dt>Solicitante / consumidor primario</dt><dd>Jefatura de SOC · Ingeniería de Detección · Administración de proxy/DNS · Comité de Riesgo Operacional</dd></div><div><dt>Ventana de observación</dt><dd>2025-05-01 → 2026-09-30 (datos anuales may-25/abr-26 + cuatro trimestres de seguimiento hasta sep-2026)</dd></div><div><dt>Base de colección</dt><dd>4 conjuntos de datos primarios (CSV y PDF de origen, no resúmenes de prensa): Interisle / Cybercrime Information Center —tablas anuales y 4 trimestrales de phishing, 3 trimestrales de malware—, Spamhaus Domain Reputation Update abr-sep 2026 y oct-25/mar-26, lista oficial de TLD de IANA (versión 2026111500), y el repositorio público de IoC <code>intellroom/IoC</code> (550 ficheros) medido por nosotros. <strong>Sin telemetría propia incorporada</strong></dd></div><div><dt>Autor (analista)</dt><dd class="m">Célula CTI</dd></div><div><dt>Revisión por pares</dt><dd class="m">Pendiente</dd></div><div><dt>Aprobación</dt><dd class="m">Pendiente</dd></div><div><dt>Caducidad / revisión</dt><dd>2027-02-15, o antes si Interisle publica el trimestre ago-oct 2026, si Spamhaus publica el informe oct-26/mar-27, o si un gTLD supera el 20 % de su zona listada</dd></div><div><dt>Productos relacionados</dt><dd class="m"><code>CTI-2026-014</code> (TheGentlemen), <code>CTI-2026-015</code> (Qilin), <code>CTI-2026-016</code> (LockBit 5.0), <code>CTI-2026-017</code> (FamousSparrow). <strong>Este producto es transversal a los cuatro:</strong> no describe un adversario, describe el insumo de infraestructura que todos ellos compran</dd></div><div><dt>Paquete legible por máquina</dt><dd>Pendiente de generar (véase §14)</dd></div></dl>
+<div class="note warn rv"><div class="t">Limitación estructural de este producto</div><p>Se ha elaborado con datos primarios de terceros y con medición propia de un repositorio público, pero <strong>sin telemetría de la organización</strong>. Por tanto <strong>§O-4 (nuestra exposición) está sin rellenar</strong>: no sabemos qué proporción del tráfico saliente propio va a los TLD de alto riesgo, ni cuántos dominios parecidos a nuestra marca existen en ellos. Hasta que se rellene, toda recomendación de bloqueo de §E-4 es una hipótesis de política, no una decisión evaluada.</p></div>
+<div class="note warn rv"><p><strong>Advertencia metodológica que invalida la mayoría de los rankings publicados — léase antes que cualquier otra cosa.</strong> Existen dos métricas incompatibles y la prensa técnica las mezcla sistemáticamente. <strong>Volumen</strong> (cuántos dominios maliciosos tiene un TLD) premia a los TLD grandes: <code>.com</code> encabeza todas las listas porque tiene 162 millones de dominios, no porque sea peligroso —solo el 0,54 % de su zona aparece en phishing—. <strong>Tasa</strong> (dominios maliciosos / tamaño de la zona) identifica dónde el abuso es estructural. Las dos listas comparten pocos nombres. <strong>Una lista única de «TLD más usados en ciberataques» no es accionable</strong>: según la métrica elegida, el primer puesto es <code>.com</code> o es <code>.xin</code>, y las decisiones que se derivan son opuestas.</p></div>
+<div class="note warn rv"><div class="t">Segunda advertencia: phishing y malware no comparten TLD</div><p>El phishing vive en gTLD nuevos y baratos registrados maliciosamente (74 % de los dominios de phishing del período fueron registrados con ese fin, no comprometidos). La distribución de malware vive en <code>.com</code>, <code>.ru</code>, <code>.org</code>, <code>.net</code> y ccTLD europeos, porque se apoya en <strong>sitios legítimos comprometidos</strong>. Aplicar la lista de phishing a la detección de malware produce cobertura casi nula; aplicar la de malware al phishing produce bloqueo masivo de infraestructura legítima.</p></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>El abuso de TLD es un fenómeno de concentración extrema por registrador, no por terminación. En los diez TLD con mayor tasa de phishing del año, un único registrador concentra entre el 18 % y el 97 % de los dominios maliciosos del TLD: .garden 97 % en Spaceship, .win 87 % en Dominet (HK), .mom 76 % en NameSilo, .mobi 73 % en Eranet, .help 67 % en NameSilo, .rest 63 % en NameCheap</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que la tupla <strong>TLD + registrador + edad del dominio</strong> sea un discriminante sustancialmente mejor que el TLD aislado.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Cálculo propio sobre el CSV primario de Interisle con los 233 TLD del período; la columna de registrador dominante viene en el propio conjunto de datos.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>Nueve gTLD superan el umbral que la industria considera indicativo de un TLD problemático, y ninguno de ellos aparece en los titulares. Con el criterio de Spamhaus —5 % de la zona listada es señal de alarma, por encima del 10 % indica un TLD problemático—, en el año .xin tiene el 59,1 % de su zona en phishing, .win 16,4 %, .icu 16,1 %, .garden 15,7 %, .cfd 13,9 %, .pro 12,0 % y .help 10,6 % (siete)</h4><p>En el semestre abr-sep 2026 Spamhaus mide <code>.help</code> en <strong>26,5 %</strong> —el valor más alto de todo el conjunto de datos—, <code>.qpon</code> 15,1 % y <code>.study</code> 12,4 %, lo que añade dos nombres nuevos. Justo por debajo del umbral quedan <code>.mom</code> (10,0 %) y <code>.rest</code> (9,8 %). Esto es <strong>hecho medido</strong>, no estimación.</p><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>La dinámica trimestral es tan grande que cualquier lista estática caduca en un trimestre. .top osciló entre 161.534 y 57.316 dominios de phishing en cuatro trimestres; .cn se multiplicó por 3,7 en un solo trimestre (39.798 → 147.217) y pasó a segundo lugar mundial; .garden pasó de no estar rankeado en marzo de 2026 a top-5 mundial por tasa; .cfd cayó un 53 % y bajó del 17,54 % al 7,01 % de su zona listada</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que una lista de bloqueo por TLD fijada hoy y no revisada esté desalineada en menos de seis meses.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Cuatro trimestres consecutivos de datos primarios más dos semestres de Spamhaus.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-4</div>
+<h4>El volumen total de abuso está creciendo, no estabilizándose. Spamhaus registró 3,37 millones de dominios maliciosos o sospechosos en abr-sep 2026, un +56,6 % sobre el semestre anterior, con 1,15 millones solo en septiembre de 2026 — el máximo mensual de su serie histórica</h4><p>Dentro de ese agregado, los C&amp;C de botnet en dominios comprometidos crecieron <strong>+145 %</strong>. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la tendencia continúe en el semestre oct-26/mar-27.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Serie de un único proveedor; el propio informe advierte que parte del alza se debe a mejoras en su ingesta de datos y al listado preventivo de carteras completas de dominios, es decir, <strong>parte del crecimiento es de medición, no de amenaza</strong>.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>Las campañas dirigidas de alto impacto ocurren en gTLD de nicho que ningún ranking global detecta. La medición propia del repositorio intellroom/IoC encontró 317 dominios .report registrados entre el 18-08 y el 16-09-2026 que copian identificadores reales de tenants de Okta, de los cuales 33 fueron verificados de forma independiente contra celdas Okta activas, con marcas reconocibles de salud, seguros y logística</h4><p><strong><code>.report</code> no aparece en ningún top-20 mundial, por ninguna métrica.</strong> Valoramos <strong>probable</strong> <em>(55–80 %)</em> que el patrón se repita en otros gTLD de bajo volumen y semántica corporativa creíble.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Medición propia reproducible sobre datos publicados; la atribución a un actor nombrado <strong>no está confirmada</strong> y la propia fuente original usó la palabra «potencial».</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-6</div>
+<h4>La diversificación deliberada de TLD dentro de una misma campaña ya es práctica estándar y degrada el bloqueo por terminación. Dos campañas de 2026 medidas en el repositorio lo muestran</h4><p>Macfinger (ClickFix contra macOS) usó <strong>56 dominios de cargador repartidos en nueve terminaciones</strong> (<code>.life</code>, <code>.live</code>, <code>.xyz</code>, <code>.com</code>, <code>.icu</code>, <code>.space</code>, <code>.site</code>, <code>.lol</code>, <code>.digital</code>) con rotación casi diaria; Phexia (C2 de macOS) repartió 71 dominios entre <code>.com</code>, <code>.xyz</code>, <code>.digital</code>, <code>.pro</code>, <code>.sbs</code>, <code>.top</code> y <code>.beer</code>. Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que bloquear por TLD obligue al adversario solo a cambiar de terminación, a coste cercano a cero.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-7</div>
+<h4>El .cl aparece en los datos como víctima, no como vector. .cl tiene una tasa de phishing baja (score 11,1; 0,11 % de su zona)</h4><p>Los 914 dominios <code>.cl</code> que encontramos en el repositorio provienen de un único barrido de webshells expuestas, es decir, <strong>sitios chilenos comprometidos</strong>. En cambio, el smishing que suplanta marcas chilenas se aloja en <code>.top</code>, <code>.icu</code>, <code>.vip</code>, <code>.autos</code>, <code>.shop</code> y <code>.space</code>. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la exposición chilena se concentre en dos frentes distintos: WordPress comprometido en <code>.cl</code> como plataforma de distribución, y gTLD baratos extranjeros como plataforma de suplantación.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Una sola fuente de indicadores regional, con sesgo de colección declarado en §3.3.</p></div></div>
+<p class="rv"><strong>Qué cambiaría estos juicios:</strong> que la concentración por registrador se diluyera en el próximo trimestre (rompería KJ-1 y con él toda la lógica de detección de §X-3); que <code>.cn</code> sostuviera el primer puesto mundial dos trimestres seguidos (convertiría un pico en estructura y obligaría a reescribir §E-3); o que telemetría propia mostrara que el tráfico legítimo del negocio hacia los TLD de alto riesgo es material (invalidaría §E-4).</p>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">El nombre de dominio es el insumo más barato de la cadena de ataque, y el mercado que lo suministra está midiendo mal su propio problema. Durante los doce meses de may-2025 a abr-2026 se reportaron <strong>3.071.768 dominios de phishing</strong> repartidos en 233 TLD, y <strong>tres de cada cuatro fueron registrados con ese fin desde el principio</strong> —no son sitios legítimos comprometidos—. Eso significa que hubo un momento, antes del ataque, en que alguien pagó por ese dominio en un registrador concreto: es el punto de intervención más temprano y más barato de toda la cadena.</p>
+<p class="rv">La mala noticia operativa es que la respuesta intuitiva —bloquear las terminaciones sospechosas— no funciona y además es cara. Las campañas reparten su infraestructura entre seis y nueve terminaciones distintas, rotan a diario y cambiar de TLD les cuesta unos dólares. Y los TLD con peor tasa de abuso siguen alojando negocio legítimo: bloquear <code>.pro</code> o <code>.live</code> por completo tiene un coste de falsos positivos que ninguna organización va a aceptar.</p>
+<p class="rv">La buena noticia es que el abuso está concentrado en un puñado de pares registro-registrador identificables por nombre, y que la combinación de terminación, registrador y edad del dominio es un discriminante fuerte y fácil de implementar en proxy, correo y DNS. Esto no pide comprar nada: pide escribir reglas de puntuación y revisarlas cada trimestre.</p>
+<p class="rv">Lo que se solicita a Dirección es, por tanto, modesto en coste y acotado en plazo: autorizar una política de <strong>cuarentena de dominios recién registrados</strong> —no de bloqueo por terminación—, financiar la vigilancia de marca en un conjunto nombrado de gTLD de nicho, y aceptar que esta lista se revisa cada tres meses porque los datos demuestran que caduca.</p>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · economía</div>
+<h4 style="margin:0 0 6px">El dominio malicioso cuesta unos dólares y se registra días antes del ataque</h4><p style="font-size:13.8px;margin:0">La edad del dominio es nuestra señal más fuerte y la más fácil de obtener; el 74 % de registro malicioso convierte la cuarentena de NRD en la medida de mayor rendimiento por esfuerzo</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · concentración</div>
+<h4 style="margin:0 0 6px">El abuso se concentra en pocos pares registro-registrador, no en terminaciones</h4><p style="font-size:13.8px;margin:0">Podemos construir puntuación con nombres propios y pocas reglas, en vez de listas de cientos de TLD imposibles de mantener</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · elasticidad</div>
+<h4 style="margin:0 0 6px">Las campañas reparten su infraestructura en 6–9 terminaciones y rotan a diario</h4><p style="font-size:13.8px;margin:0">El bloqueo por TLD traslada el problema sin resolverlo; el pivote duradero es el proveedor de alojamiento y el patrón de nombre, no el sufijo</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · doctrina</div>
+<h4 style="margin:0 0 6px">Phishing y malware habitan TLD distintos</h4><p style="font-size:13.8px;margin:0">Necesitamos dos políticas separadas: reputación por dominio para malware en TLD legítimos, puntuación por TLD solo para phishing y suplantación</p></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="3071768">0</div><div class="l">Dominios de phishing reportados en 12 meses (may-25 → abr-26)</div><div class="s">Repartidos en 233 TLD distintos</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="74">0<small>%</small></div><div class="l">Proporción registrada maliciosamente, no comprometida</div><div class="s">Hay un punto de intervención antes del ataque</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n">59,1 %</div><div class="l">Porcentaje de la zona de <code>.xin</code> reportada en phishing</div><div class="s">El umbral de «TLD problemático» de la industria es 10 %</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="97">0<small>%</small></div><div class="l">Cuota del phishing de <code>.garden</code> en un único registrador</div><div class="s">La concentración es la vulnerabilidad del adversario</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n">1,15 M</div><div class="l">Dominios maliciosos listados solo en septiembre de 2026</div><div class="s">Máximo mensual de la serie histórica de Spamhaus</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="317">0</div><div class="l">Dominios <code>.report</code> suplantando tenants de Okta en 30 días</div><div class="s"><code>.report</code> no figura en ningún top-20 mundial</div></div></div>
+<div class="note good rv"><div class="t">✅ Decisión que se solicita a Dirección:</div><p>(a) autorizar cuarentena de 30 días para dominios recién registrados en el conjunto de TLD de §X-1, con excepción documentada por negocio — 30 días; (b) encargar el inventario de §O-4 para poder medir el coste real de esa política antes de aplicarla en modo bloqueo — 45 días; (c) incorporar los gTLD de nicho de §O-7 a la vigilancia de marca — 60 días.</p></div>
+</section>
+<section id="3-alcance-requisitos-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance, requisitos y limitaciones</h2><p><strong>3.1 Requisitos de inteligencia atendidos</strong></p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Req.</th><th>Enunciado</th><th>¿Respondido?</th><th>Dónde</th></tr></thead><tbody>
+<tr><td>PIR-02</td><td>¿Dónde se aloja la infraestructura de suplantación que nos afecta y cómo se distribuye?</td><td>Sí</td><td>§E-1, §E-2, §X-1</td></tr>
+<tr><td>PIR-06</td><td>¿Qué política de bloqueo y reputación por TLD es defendible y sostenible?</td><td>Sí</td><td>§E-4, §X-3, §X-5</td></tr>
+<tr><td>PIR-09</td><td>¿Qué señales tempranas anticipan una campaña de suplantación contra nuestra marca?</td><td>Parcial</td><td>§O-7, §T-4</td></tr>
+<tr><td>PIR-04</td><td>¿Cuál es nuestra exposición concreta?</td><td><strong>No</strong></td><td>§O-4 — requiere telemetría propia</td></tr></tbody></table></div>
+<p class="rv"><strong>3.2 Fuera de alcance.</strong> No evalúa actores concretos (véanse los informes 014 a 017). No cubre abuso de subdominios en servicios de alojamiento gratuito —un vector creciente y significativo que las métricas por TLD no capturan, porque el dominio padre es legítimo—. No cubre homoglifos ni IDN. No cubre abuso de DNS dinámico. No evalúa proveedores comerciales de inteligencia de dominios.</p>
+<p class="rv"><strong>3.3 Limitaciones de la colección.</strong></p><ul class="rv"><li><strong>Dependencia de dos proveedores.</strong> Casi todas las cifras provienen de Interisle/CIC y de Spamhaus. Ambos miden lo que sus fuentes de alimentación les reportan, no la realidad: Spamhaus lo dice de forma explícita en su propio informe. Un TLD con poco abuso reportado puede ser un TLD poco observado.</li><li><strong>Contaminación por mejoras de medición.</strong> Spamhaus atribuye parte del alza de abr-sep 2026 a mejor ingesta de datos de <em>smishing</em> de operadoras estadounidenses y al listado preventivo de carteras de dominios enteras. <strong>El crecimiento medido no es todo crecimiento real.</strong></li><li><strong>Sesgos del repositorio <code>intellroom/IoC</code>, medido por nosotros.</strong> Tres, todos aislados antes de usar el dato: <em>(i)</em> mezcla temporal —sus conjuntos más grandes (Formbook, Qakbot, Conficker, Lazarus) son de 2022-2023 y quedaron <strong>excluidos</strong> de toda cifra de este informe—; <em>(ii)</em> sesgo geográfico hacia Chile; <em>(iii)</em> mezcla de categorías —914 dominios <code>.cl</code> son víctimas con webshells expuestas, no infraestructura de atacante, y se contaron por separado—. Es un repositorio de un equipo pequeño, no una muestra representativa: <strong>sirve para detectar patrones que los agregados ocultan, no para medir prevalencia.</strong></li><li><strong>Ventana ciega.</strong> No existe trimestre de phishing publicado posterior a may-jul 2026 ni tabla de malware posterior a jul-sep 2026. Las seis semanas más recientes no están cubiertas por ninguna fuente.</li><li><strong>No se encontraron datos DAAR de ICANN de 2026</strong> con desglose por TLD, que habrían dado un tercer punto de apoyo independiente.</li></ul>
+<p class="rv"><strong>3.4 Metodología.</strong> Descarga de los conjuntos primarios (CSV de 233 TLD, cuatro páginas trimestrales de phishing, tres de malware, dos PDF semestrales de Spamhaus extraídos a texto). Cálculo propio de los rankings anuales por volumen, por tasa y por registro malicioso —las tablas publicadas están como imágenes, de modo que los rankings de §E-2 son nuestros, derivados del dato crudo—. Para el repositorio: clonado, extracción de indicadores de dominio con normalización de <em>defanging</em> (<code>[.]</code>, <code>hxxp</code>), validación contra la lista oficial de TLD de IANA del 15-11-2026, descarte de falsos positivos por extensión de fichero (<code>.sh</code>, <code>.py</code>, <code>.zip</code> se interpretaban como TLD), deduplicación a dominio registrable y separación entre infraestructura de atacante y víctima. Técnicas analíticas estructuradas: hipótesis alternativas competidoras (§O-6) y pre-mortem.</p>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> Consejo</span><span>CISO</span><span>Riesgo Operacional</span><span>Compras de seguridad</span><span><b>Horizonte:</b> 6–24 meses</span></div></div>
+<section id="e-1-que-representa-este-fenomeno-en-el-panorama" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Qué representa este fenómeno en el panorama</h2><p>El nombre de dominio es el único insumo de la cadena de ataque que se compra en un mercado abierto, regulado y con nombres propios conocidos. Esa es a la vez la mala y la buena noticia de este informe.</p></div></div>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">registro</div>
+<h4 style="margin:0 0 6px">El 74 % de los dominios de phishing se registran maliciosamente</h4><p style="font-size:13.8px;margin:0">Existe una ventana de intervención <strong>anterior</strong> al ataque: la edad del dominio es señal, no metadato</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">economía</div>
+<h4 style="margin:0 0 6px">La barrera de entrada es de unos dólares por dominio</h4><p style="font-size:13.8px;margin:0">No se compite subiendo el coste del dominio, sino el coste de <strong>usarlo sin ser visto</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">gobernanza</div>
+<h4 style="margin:0 0 6px">Un puñado de registradores concentra la mayoría del abuso de los peores TLD</h4><p style="font-size:13.8px;margin:0">El problema tiene nombres propios y es, en principio, remediable por política del registro</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">palanca</div>
+<h4 style="margin:0 0 6px">La mitigación funciona cuando se aplica: <code>.cfd</code> cayó del 17,54 % al 7,01 % de su zona</h4><p style="font-size:13.8px;margin:0">La presión sobre registros y registradores produce efectos medibles en un semestre</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">desplazamiento</div>
+<h4 style="margin:0 0 6px">Pero el abuso se desplaza, no desaparece: mientras <code>.cfd</code> caía, <code>.help</code> subía al 26,5 %</h4><p style="font-size:13.8px;margin:0">El desplazamiento es la norma; la política debe apuntar al comportamiento, no al sufijo</p></div></div>
+<div class="note info rv"><div class="t">Lectura estratégica</div><p>El par <code>.cfd</code> / <code>.help</code> es el hallazgo más importante de este informe para el nivel de dirección: demuestra <strong>a la vez</strong> que la mitigación funciona y que no resuelve el problema. El abuso se comporta como un fluido: se presiona en un TLD y aparece en otro en el mismo semestre. Cualquier inversión planteada como «bloquear la lista de TLD malos» está comprando una foto de un fluido.</p></div>
+</section>
+<section id="e-2-distribucion-del-abuso-las-dos-tablas-que-no-coinciden" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>Distribución del abuso — las dos tablas que no coinciden</h2><p><strong>Por volumen</strong> (may-2025 → abr-2026, cálculo propio sobre el CSV primario de 233 TLD):</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>TLD</th><th>Dominios de phishing</th><th>% de su zona</th><th>% registrado maliciosamente</th></tr></thead><tbody>
+<tr><td>1</td><td><code>.com</code></td><td>869.180</td><td>0,54 %</td><td>66,5 %</td></tr>
+<tr><td>2</td><td><code>.top</code></td><td>375.514</td><td>5,96 %</td><td>79,2 %</td></tr>
+<tr><td>3</td><td><code>.cn</code></td><td>167.651</td><td>1,36 %</td><td>39,3 %</td></tr>
+<tr><td>4</td><td><code>.pro</code></td><td>130.945</td><td>12,00 %</td><td>84,5 %</td></tr>
+<tr><td>5</td><td><code>.info</code></td><td>99.602</td><td>1,90 %</td><td>71,8 %</td></tr>
+<tr><td>6</td><td><code>.xyz</code></td><td>93.987</td><td>1,18 %</td><td>84,5 %</td></tr>
+<tr><td>7</td><td><code>.vip</code></td><td>83.816</td><td>5,01 %</td><td>95,1 %</td></tr>
+<tr><td>8</td><td><code>.shop</code></td><td>79.625</td><td>2,02 %</td><td>60,9 %</td></tr>
+<tr><td>9</td><td><code>.cc</code></td><td>77.660</td><td>3,19 %</td><td>93,1 %</td></tr>
+<tr><td>10</td><td><code>.icu</code></td><td>74.786</td><td>16,07 %</td><td>95,0 %</td></tr>
+<tr><td>11</td><td><code>.cfd</code></td><td>70.944</td><td>13,87 %</td><td>95,1 %</td></tr>
+<tr><td>12</td><td><code>.sbs</code></td><td>63.518</td><td>4,64 %</td><td>94,0 %</td></tr></tbody></table></div>
+<p class="rv"><strong>Por tasa</strong>, que es el ranking del que se derivan decisiones:</p>
+<div class="card rv">
+<h4 style="margin-top:0">Porcentaje de la zona del TLD reportado en phishing (may-25 → abr-26)</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn"><code>.xin</code></span><span class="bt"><i data-w="100"></i></span><span class="bv">59,1</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.win</code></span><span class="bt"><i data-w="28"></i></span><span class="bv">16,4</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.icu</code></span><span class="bt"><i data-w="27"></i></span><span class="bv">16,1</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.garden</code></span><span class="bt"><i data-w="27"></i></span><span class="bv">15,7</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.cfd</code></span><span class="bt"><i data-w="24"></i></span><span class="bv">13,9</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.pro</code></span><span class="bt"><i data-w="20"></i></span><span class="bv">12,0</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.help</code></span><span class="bt"><i data-w="18"></i></span><span class="bv">10,6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.mom</code></span><span class="bt"><i data-w="17"></i></span><span class="bv">10,0</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.rest</code></span><span class="bt"><i data-w="17"></i></span><span class="bv">9,8</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.mobi</code></span><span class="bt"><i data-w="14"></i></span><span class="bv">8,5</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.qpon</code></span><span class="bt"><i data-w="14"></i></span><span class="bv">8,2</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.live</code></span><span class="bt"><i data-w="13"></i></span><span class="bv">7,4</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.ink</code></span><span class="bt"><i data-w="12"></i></span><span class="bv">7,2</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.best</code></span><span class="bt"><i data-w="12"></i></span><span class="bv">7,1</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.lat</code></span><span class="bt"><i data-w="11"></i></span><span class="bv">6,6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.cyou</code></span><span class="bt"><i data-w="11"></i></span><span class="bv">6,6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn"><code>.top</code></span><span class="bt"><i data-w="10"></i></span><span class="bv">6,0</span></div></div></div>
+<div class="note warn rv"><div class="t">⚠ Lectura clave — la columna que decide</div><p>Compárense las dos tablas en la columna «% registrado maliciosamente»: <code>.bond</code> 99,0 %, <code>.vip</code> 95,1 %, <code>.cfd</code> 95,1 %, <code>.icu</code> 95,0 %, <code>.sbs</code> 94,0 %, <code>.cc</code> 93,1 %, frente a <code>.com</code> 66,5 % y <code>.cn</code> 39,3 %. En los gTLD baratos <strong>casi no hay víctimas comprometidas: hay infraestructura comprada</strong>. Eso cambia la respuesta correcta: bloquear un dominio de <code>.bond</code> no arrastra a un tercero inocente; bloquear uno de <code>.cn</code> o <code>.com</code> probablemente sí.</p></div>
+<p class="rv"><strong>Y la concentración por registrador</strong>, que es el hallazgo accionable (KJ-1):</p>
+<div class="tw rv"><table><thead>
+<tr><th>TLD</th><th>Tasa de phishing</th><th>Registrador dominante</th><th>Su cuota del phishing del TLD</th></tr></thead><tbody>
+<tr><td><code>.garden</code></td><td>15,7 %</td><td>Spaceship, Inc.</td><td><strong>97 %</strong></td></tr>
+<tr><td><code>.win</code></td><td>16,4 %</td><td>Dominet (HK) Limited</td><td><strong>87 %</strong></td></tr>
+<tr><td><code>.mom</code></td><td>10,0 %</td><td>NameSilo, LLC</td><td>76 %</td></tr>
+<tr><td><code>.mobi</code></td><td>8,5 %</td><td>Eranet International</td><td>73 %</td></tr>
+<tr><td><code>.help</code></td><td>10,6 %</td><td>NameSilo, LLC</td><td>67 %</td></tr>
+<tr><td><code>.rest</code></td><td>9,8 %</td><td>NameCheap, Inc.</td><td>63 %</td></tr>
+<tr><td><code>.xin</code></td><td>59,1 %</td><td>Dominet (HK) Limited</td><td>55 %</td></tr>
+<tr><td><code>.pro</code></td><td>12,0 %</td><td>NameCheap, Inc.</td><td>23 %</td></tr>
+<tr><td><code>.icu</code></td><td>16,1 %</td><td>Gname.com Pte. Ltd.</td><td>23 %</td></tr>
+<tr><td><code>.cfd</code></td><td>13,9 %</td><td>Web Commerce Communications</td><td>18 %</td></tr></tbody></table></div>
+</section>
+<section id="e-3-tendencia-y-pronostico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Tendencia y pronóstico</h2></div></div>
+<p class="rv">Serie trimestral completa, dominios de phishing reportados. Etiqueta de periodo = mes central del trimestre. <code>.com</code> se omite por escala: oscila entre 188.756 y 297.244 sin tendencia clara, lo que por sí solo refuta la idea de que sea «el TLD más atacado» en términos útiles.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Periodo</th><th><code>.top</code></th><th><code>.cn</code></th><th><code>.icu</code></th><th><code>.cfd</code></th><th><code>.vip</code></th><th><code>.garden</code></th></tr></thead><tbody>
+<tr><td>Ago-oct 2025</td><td>161.534</td><td>45.684</td><td>26.830</td><td>24.128</td><td>30.988</td><td>no rankeado</td></tr>
+<tr><td>Nov 25-ene 26</td><td>57.316</td><td>52.597</td><td>27.662</td><td>22.870</td><td>22.015</td><td>no rankeado</td></tr>
+<tr><td>Feb-abr 2026</td><td>124.452</td><td>39.798</td><td>14.196</td><td>20.767</td><td>18.248</td><td>10.332</td></tr>
+<tr><td>May-jul 2026</td><td>59.586</td><td><strong>147.217</strong></td><td>46.542</td><td>44.284</td><td>31.181</td><td>15.255</td></tr></tbody></table></div>
+<div class="chart rv">
+<h4><code>.cn</code> — la irrupción del período</h4><p class="cap">De 39.798 a 147.217 dominios de phishing en un trimestre (×3,7). Fuente: tablas trimestrales de Interisle/CIC.</p><svg viewBox="0 0 720 250" role="img" aria-label=".cn — la irrupción del período"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">36804</text><text x="42" y="116.0">73608</text><text x="42" y="72.0">110413</text><text x="42" y="28.0">147217</text></g><path d="M50.0,145.4 L263.3,137.1 L476.7,152.4 L690.0,24.0 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,145.4 L263.3,137.1 L476.7,152.4 L690.0,24.0"/><g><circle class="pt" cx="50.0" cy="145.4" r="5" fill="#5a7ebe"><title>Ago·25: 45.684</title></circle><circle class="pt" cx="263.3" cy="137.1" r="5" fill="#5a7ebe"><title>Nov·25: 52.597</title></circle><circle class="pt" cx="476.7" cy="152.4" r="5" fill="#5a7ebe"><title>Feb·26: 39.798</title></circle><circle class="pt" cx="690.0" cy="24.0" r="6.5" fill="#f7a400"><title>May·26: 147.217</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="134.4">45.684</text><text x="263.3" y="126.1">52.597</text><text x="476.7" y="141.4">39.798</text><text x="690.0" y="13.0" fill="#f7a400">147.217</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">Ago·25</text><text x="263.3" y="222">Nov·25</text><text x="476.7" y="222">Feb·26</text><text x="690.0" y="222">May·26</text></g></svg></div>
+<div class="chart rv">
+<h4><code>.top</code> — volatilidad, no tendencia</h4><p class="cap">Cuatro trimestres, dos máximos y dos mínimos: el perfil típico de un TLD bajo presión de mitigación intermitente.</p><svg viewBox="0 0 720 250" role="img" aria-label=".top — volatilidad, no tendencia"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">40384</text><text x="42" y="116.0">80767</text><text x="42" y="72.0">121150</text><text x="42" y="28.0">161534</text></g><path d="M50.0,24.0 L263.3,137.6 L476.7,64.4 L690.0,135.1 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,24.0 L263.3,137.6 L476.7,64.4 L690.0,135.1"/><g><circle class="pt" cx="50.0" cy="24.0" r="5" fill="#5a7ebe"><title>Ago·25: 161.534</title></circle><circle class="pt" cx="263.3" cy="137.6" r="5" fill="#5a7ebe"><title>Nov·25: 57.316</title></circle><circle class="pt" cx="476.7" cy="64.4" r="5" fill="#5a7ebe"><title>Feb·26: 124.452</title></circle><circle class="pt" cx="690.0" cy="135.1" r="6.5" fill="#f7a400"><title>May·26: 59.586</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="13.0">161.534</text><text x="263.3" y="126.6">57.316</text><text x="476.7" y="53.4">124.452</text><text x="690.0" y="124.1" fill="#f7a400">59.586</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">Ago·25</text><text x="263.3" y="222">Nov·25</text><text x="476.7" y="222">Feb·26</text><text x="690.0" y="222">May·26</text></g></svg></div>
+<p class="rv">Cuatro movimientos merecen lectura estratégica:</p>
+<p class="rv"><strong><code>.cn</code> se multiplicó por 3,7 en un trimestre</strong> y tomó el segundo puesto mundial. Spamhaus lo corrobora desde otro ángulo y añade el mecanismo: +84 % de listados, de los cuales aproximadamente el 40 % son <code>.com.cn</code>, y cerca del 12 % de esos contienen la cadena «whatsapp». No es un TLD barato descontrolado: es una campaña de suplantación de mensajería a escala nacional.</p>
+<p class="rv"><strong><code>.garden</code> apareció de la nada.</strong> No estaba rankeado en marzo de 2026; en el trimestre siguiente era top-5 mundial por tasa, con el 97 % de su abuso en un solo registrador. Interisle lo describió como el gran pequeño relato de phishing del período. Es el ejemplo canónico de por qué la vigilancia debe cubrir gTLD de nicho.</p>
+<p class="rv"><strong><code>.cfd</code> demuestra que la mitigación funciona:</strong> −53 % en listados y del 17,54 % al 7,01 % de zona listada en un semestre.</p>
+<p class="rv"><strong><code>.help</code> demuestra que el abuso se desplaza:</strong> entrada nueva en el top-20 de Spamhaus con el <strong>26,5 %</strong> de su zona listada —el valor más alto del semestre—, impulsado principalmente por <em>cold email</em>.</p>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px">Rotación continua</h4><p style="font-size:13.8px;margin:0">Uno o dos gTLD de nicho nuevos entran al top-5 por tasa y uno de los actuales cae por presión del registro, sin que el agregado baje</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Posibilidad real · 45–55 %</div>
+<h4 style="margin:0 0 6px">Consolidación en <code>.cn</code></h4><p style="font-size:13.8px;margin:0">El pico de <code>.cn</code> se sostiene y el centro de gravedad del phishing se desplaza a ccTLD asiáticos, con implicaciones de idioma y horario para el SOC</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Poco probable · 20–35 %</div>
+<h4 style="margin:0 0 6px">Contracción real del agregado</h4><p style="font-size:13.8px;margin:0">La presión regulatoria —incluida la iniciativa de ICANN sobre «dominios asociados» de enero de 2026— reduce el total de forma sostenida</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Posibilidad real · 45–55 %</div>
+<h4 style="margin:0 0 6px">Salto a subdominios gratuitos</h4><p style="font-size:13.8px;margin:0">El abuso migra masivamente a alojamiento gratuito, donde la métrica por TLD queda ciega y el dominio padre es legítimo</p></div></div>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide-al-nivel-estrategico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide al nivel estratégico</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>Fundamento</th><th>Plazo</th></tr></thead><tbody>
+<tr><td>E-a</td><td>Aprobar <strong>cuarentena de 30 días para dominios recién registrados</strong> en el conjunto de TLD de §X-1 (aviso al usuario e inspección, no bloqueo duro), con vía de excepción documentada</td><td>KJ-1, KJ-2: 74 % de registro malicioso y tasas superiores al 10 % hacen de la edad del dominio la señal más rentable</td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr><td>E-b</td><td>Encargar el inventario de §O-4: volumen de tráfico legítimo propio hacia esos TLD</td><td>Sin esa cifra no se puede estimar el coste de E-a y la política no es defendible ante negocio</td><td><span class="pill p-amber">45 días</span></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-c</td><td>Incorporar a la vigilancia de marca los gTLD de nicho de §O-7, no solo <code>.com</code> y <code>.cl</code></td><td>KJ-5: el caso <code>.report</code> ocurrió íntegramente fuera del radar de los rankings</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td>E-d</td><td>Fijar <strong>revisión trimestral obligatoria</strong> de la lista de TLD, con responsable nombrado</td><td>KJ-3: cuatro trimestres de datos demuestran que la lista caduca</td><td>Permanente</td></tr>
+<tr><td>E-e</td><td>Rechazar explícitamente cualquier propuesta de bloqueo total por TLD que no venga acompañada del cálculo de falsos positivos de E-b</td><td>Los TLD de peor tasa alojan negocio legítimo; el bloqueo total es un riesgo operativo mal entendido como control</td><td>Inmediato</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-f</td><td><strong>Eje regional:</strong> tratar el parque WordPress <code>.cl</code> propio y de proveedores como superficie de distribución de malware, no solo como riesgo de defacement</td><td>KJ-7: el <code>.cl</code> aparece en los datos como víctima comprometida, y Macfinger se pivoteó desde un sitio chileno</td><td><span class="pill p-amber">60 días</span></td></tr></tbody></table></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> Jefatura de SOC</span><span>Respuesta a Incidentes</span><span>Threat Hunting</span><span><b>Horizonte:</b> semanas–meses</span></div></div>
+<section id="o-1-identificacion-y-equivalencia-de-metricas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación y equivalencia de métricas</h2><p>El equivalente aquí de la fusión indebida de alias es la fusión indebida de métricas. Antes de citar cualquier cifra de abuso de TLD hay que saber cuál se está citando.</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Métrica</th><th>Origen</th><th>Qué mide realmente</th><th>Grado de equivalencia</th></tr></thead><tbody>
+<tr><td><em>Phishing Domains</em></td><td>Interisle / CIC</td><td>Dominios distintos reportados en phishing</td><td>Referencia de volumen</td></tr>
+<tr><td><em>Phishing Domain Score</em></td><td>Interisle / CIC</td><td>(dominios de phishing / dominios delegados) × 10.000</td><td>Referencia de tasa — <strong>no comparable con volumen</strong></td></tr>
+<tr><td><em>Malicious Phishing Domains</em></td><td>Interisle / CIC</td><td>Subconjunto registrado con intención maliciosa</td><td>Más estrecho y más accionable</td></tr>
+<tr><td><em>Listados maliciosos/sospechosos</em></td><td>Spamhaus</td><td>Dominios con reputación negativa por cualquier causa: spam, <em>cold email</em>, phishing, malware, asociación</td><td><strong>Más amplio.</strong> No equivale a phishing</td></tr>
+<tr><td><em>% de zona listada</em></td><td>Spamhaus</td><td>Listados / tamaño de la zona</td><td>Conceptualmente similar a la tasa, distinta base de datos</td></tr>
+<tr><td><em>Malware Domains</em></td><td>Interisle / CIC</td><td>Dominios que sirven malware</td><td><strong>Población distinta.</strong> No mezclar</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota de tradecraft</div><p>Las cifras de Spamhaus y de Interisle <strong>no son sumables ni directamente comparables</strong>: distinta definición, distinta ventana, distintas fuentes de alimentación. Coinciden en la dirección de los movimientos —<code>.cfd</code> a la baja, <code>.cn</code> al alza— y esa coincidencia es lo que da confianza alta a KJ-2 y KJ-3. Citar una cifra de una y una de otra en la misma frase, como si midieran lo mismo, es el error más común en la prensa técnica sobre este tema.</p></div>
+</section>
+<section id="o-2-estructura-del-mercado-y-donde-esta-la-palanca" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>Estructura del mercado y dónde está la palanca</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Eje</th><th>Valoración</th><th>Confianza</th></tr></thead><tbody>
+<tr><td>Concentración por registro (TLD)</td><td>Alta: 9 gTLD superan el 10 % de zona abusada; 2 más quedan a menos de un punto</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Concentración por registrador</td><td>Muy alta: hasta 97 % del abuso de un TLD en un registrador</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Concentración por alojamiento</td><td>Alta en campañas concretas: Macfinger entera en Aeza Group (AS210644, AS216246, sancionado por OFAC el 01-07-2025) y NetCrafters OU (AS203273)</td><td>Moderada — una sola campaña medida</td></tr>
+<tr><td>Modelo de registro masivo</td><td>Visible en el <em>churn</em>: <code>.bond</code> registró 1,13 M de dominios nuevos con una zona total de 1,15 M</td><td><span class="pill p-mint">Alta</span></td></tr></tbody></table></div>
+<p class="rv"><em>Razonamiento:</em> los TLD con peor tasa comparten tres rasgos —precio de registro bajo, política de verificación laxa y un registrador que concentra el volumen—. <em>Contraargumento que hay que sostener:</em> la correlación no implica complicidad; un registrador grande y barato atrae abuso por su modelo de negocio sin participar en él, y los datos que tenemos no distinguen una cosa de la otra.</p>
+</section>
+<section id="o-3-modelo-de-operacion-del-abuso" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Modelo de operación del abuso</h2><p>Tres modelos distintos, con respuestas defensivas distintas:</p></div></div>
+<p class="rv"><strong>Registro masivo desechable.</strong> Comprar cientos o miles de dominios en un gTLD barato, usarlos días y abandonarlos. La firma es el <em>churn</em>: <code>.bond</code> con registros nuevos casi iguales a su zona total. Contramedida: edad del dominio.</p>
+<p class="rv"><strong>Registro dirigido de bajo volumen.</strong> Comprar decenas de dominios en un gTLD de nicho con semántica creíble, cada uno copiando el identificador real de un objetivo. Es el caso <code>.report</code>: 317 dominios, 13 registradores distintos, registro continuo durante un mes para no generar una ráfaga detectable. <strong>Esta es la que las métricas por TLD no ven</strong>, y es la de mayor impacto por dominio. Contramedida: vigilancia de marca y de identificadores propios (tenants SaaS incluidos).</p>
+<p class="rv"><strong>Compromiso de sitio legítimo.</strong> No se registra nada: se inyecta en WordPress ajeno. Es la población de la tabla de malware (<code>.com</code>, <code>.ru</code>, <code>.de</code>, <code>.br</code>, <code>.cl</code>). Contramedida: reputación por dominio e integridad del propio parque web. El bloqueo por TLD es inservible aquí.</p>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="note gap rv"><div class="t">⬛ Sección sin evaluar — requiere telemetría interna</div><p>Es la brecha principal de este producto (véase §14, G-1). Mientras no se rellene, §E-4 propone política sin coste calculado.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Pregunta</th><th>Fuente</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>X-1</td><td>¿Qué volumen de tráfico saliente legítimo va a los TLD de §X-1? ¿Qué destinos concretos y qué unidad de negocio los usa?</td><td>Logs de proxy / DNS, 90 días</td><td>SOC + Redes</td></tr>
+<tr><td>X-2</td><td>¿Cuántos dominios registrados en los últimos 30 días contienen nuestra marca o nuestras marcas de producto, en cualquier TLD?</td><td>Vigilancia de marca / CT logs</td><td>Célula CTI</td></tr>
+<tr><td>X-3</td><td>¿Cuál es el identificador de nuestros tenants SaaS (Okta, Entra, Workspace) y existe algún dominio que lo replique? Es exactamente el patrón <code>.report</code></td><td>Inventario de SaaS + DNS</td><td>TI + CTI</td></tr>
+<tr><td>X-4</td><td>¿Cuántos sitios WordPress <code>.cl</code> propios o de proveedores exponemos, con qué versión y quién los parchea?</td><td>Inventario de activos externos</td><td>TI / Marketing</td></tr>
+<tr><td>X-5</td><td>¿Nuestro gateway de correo puntúa la edad del dominio del remitente? ¿Y el proxy la del destino?</td><td>Configuración de SEG y proxy</td><td>Ingeniería</td></tr>
+<tr><td>X-6</td><td>¿Tenemos registro de consultas DNS con retención suficiente para hacer retrohunt de 90 días?</td><td>Plataforma DNS</td><td>Redes</td></tr></tbody></table></div>
+</section>
+<section id="o-5-cronologia" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Cronología</h2></div></div>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="global">Global</button><button class="chip" data-tl="gobernanza">Gobernanza</button><button class="chip" data-tl="chile">Chile</button><button class="chip" data-tl="latamchile">LATAM · Chile</button><button class="chip" data-tl="x">—</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev gl" data-k="global"><div class="d">2025-05-01</div><div class="x">Inicio de la ventana anual de medición de Interisle</div></div>
+<div class="ev gl" data-k="global"><div class="d">2025-08/10</div><div class="x"><code>.top</code> marca su máximo del período: 161.534 dominios de phishing en un trimestre</div></div>
+<div class="ev gl" data-k="global"><div class="d">2025-10-21</div><div class="x">Spamhaus publica el semestre abr-sep 2025: C&amp;C de botnet +289 %, malware +206 %</div></div>
+<div class="ev gl big" data-k="gobernanza big"><div class="d">2026-01</div><div class="x"><strong>ICANN gNSO anuncia la iniciativa «DNS Abuse Mitigation: PDP 1 on Associated Domain Checks»</strong>, que obligaría a los registradores a revisar dominios asociados al detectar uno malicioso</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2026-02/04</div><div class="x"><strong><code>.garden</code> entra de la nada al top-5 mundial por tasa de phishing</strong>, con el 97 % de su abuso en un registrador</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2026-04-15</div><div class="x">Spamhaus publica oct-25/mar-26: <code>.cfd</code> alcanza el <strong>17,54 %</strong> de su zona listada, el peor valor del semestre</div></div>
+<div class="ev cl big" data-k="chile big"><div class="d">2026-06-09 / 17</div><div class="x">Barrido que expone <strong>914 dominios <code>.cl</code> con webshells</strong>: el <code>.cl</code> aparece como víctima, no como vector</div></div>
+<div class="ev cl" data-k="latamchile"><div class="d">2026-08-06</div><div class="x">Inicio estimado de la campaña Macfinger: 56 dominios de cargador en nueve terminaciones, rotación casi diaria</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2026-08-18</div><div class="x"><strong>Primer registro del clúster de 317 dominios <code>.report</code> que copian tenants reales de Okta</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2026-09-16</div><div class="x">Último registro del clúster <code>.report</code>: un mes de registro continuo, no una ráfaga</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2026-09-17</div><div class="x">Verificación independiente: <strong>33 de 317</strong> dominios <code>.report</code> corresponden a tenants Okta activos</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2026-09</div><div class="x"><strong>Récord histórico de Spamhaus: 1,15 millones de dominios maliciosos listados en un mes</strong></div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2026-10-15</div><div class="x">Spamhaus publica abr-sep 2026: <code>.help</code> al <strong>26,5 %</strong> de zona listada; <code>.cfd</code> baja al 7,01 %</div></div>
+<div class="ev gl" data-k="x"><div class="d">2026-11-15</div><div class="x">Cierre de datos de este informe</div></div></div>
+</section>
+<section id="o-6-hipotesis-alternativas-consideradas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Hipótesis alternativas consideradas</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Retenida parcial</div>
+<h4 style="margin:0 0 6px">H1 — El TLD es un predictor fuerte de malicia por sí solo</h4><p style="font-size:13.8px;margin:0"><strong>Retenida con matiz.</strong> Cierto para <code>.xin</code>, <code>.win</code>, <code>.icu</code>, <code>.garden</code>, <code>.cfd</code>: con tasas del 10–59 % el prior es alto. Falso para los 200 TLD restantes</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Retenida · limitación</div>
+<h4 style="margin:0 0 6px">H2 — Los rankings reflejan sesgo de observación, no abuso real</h4><p style="font-size:13.8px;margin:0"><strong>Retenida como limitación.</strong> Es el argumento más fuerte contra todo el informe y no se puede refutar con los datos disponibles. Mitigación: dos proveedores con metodologías distintas coinciden en la dirección de los movimientos</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Posibilidad real · 45–55 %</div>
+<h4 style="margin:0 0 6px">H3 — El crecimiento de abuso de 2026 es artefacto de medición</h4><p style="font-size:13.8px;margin:0"><strong>Parcialmente retenida.</strong> Spamhaus declara mejoras de ingesta y listado preventivo de carteras. Rebaja KJ-4 a confianza moderada; no explica el pico de <code>.cn</code>, que Interisle ve con otra metodología</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Poco probable · 20–35 %</div>
+<h4 style="margin:0 0 6px">H4 — Bloquear los TLD de peor tasa reduciría materialmente nuestro riesgo</h4><p style="font-size:13.8px;margin:0"><strong>Poco probable.</strong> KJ-6: las campañas usan 6–9 terminaciones y rotan a diario; el coste de cambiar de TLD es de dólares</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Descartada como hecho</div>
+<h4 style="margin:0 0 6px">H5 — El clúster <code>.report</code> es obra de ShinyHunters</h4><p style="font-size:13.8px;margin:0"><strong>Sin confianza.</strong> Ni la fuente original lo afirma —usó «potencial»—, y el patrón es indistinguible de TTP de Scattered Spider. Se consigna para que no se reabra como hecho</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Retenida · sin medir</div>
+<h4 style="margin:0 0 6px">H6 — El abuso se está desplazando a subdominios de alojamiento gratuito</h4><p style="font-size:13.8px;margin:0"><strong>Retenida, no medida.</strong> Queda fuera del alcance (§3.2) y es una brecha de colección declarada (G-2)</p></div></div>
+<p class="rv"><strong>Supuesto clave:</strong> que las fuentes de alimentación de Interisle y Spamhaus cubren el phishing que nos afecta. Si el phishing dirigido a Chile está sistemáticamente sub-reportado en ellas, la tabla de §E-2 describe el abuso global pero no el nuestro, y §E-4 estaría optimizando para la amenaza de otro.</p>
+<p class="rv"><strong>Pre-mortem.</strong> Es mayo de 2027 y este informe resultó equivocado. La causa más probable: dedicamos el trimestre a afinar listas de TLD mientras el abuso real contra nosotros llegó por subdominios de alojamiento gratuito y de SaaS legítimo, donde el dominio padre tiene reputación impecable y ninguna de nuestras reglas nuevas aplica. Segunda causa más probable: aplicamos la cuarentena de NRD sin el inventario de §O-4, rompimos un flujo de negocio y la política se revirtió por completo tras la primera queja.</p>
+</section>
+<section id="o-7-indicadores-y-senales-de-alerta" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>Indicadores y señales de alerta</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Indicador observable</th><th>Qué señalaría</th><th>Disciplina</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>I-1</td><td>Dominio registrado hace menos de 30 días que contiene nuestra marca, en cualquier TLD</td><td>Preparación de campaña contra nosotros</td><td>OSINT / CT logs</td><td>Célula CTI</td></tr>
+<tr><td>I-2</td><td>Dominio que replica el identificador de uno de nuestros tenants SaaS (patrón <code>.report</code>)</td><td>Preparación de vishing de soporte/TI</td><td>OSINT / DNS</td><td>CTI + TI</td></tr>
+<tr><td>I-3</td><td>Aparición de un gTLD de nicho nuevo (semántica corporativa: informes, reclamaciones, soporte, facturación) con pico de registros</td><td>Nuevo nicho de suplantación antes de que entre en los rankings</td><td>OSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-4</td><td>Tráfico saliente propio hacia <code>.xin</code>, <code>.win</code>, <code>.garden</code>, <code>.help</code>, <code>.qpon</code>, <code>.study</code>, <code>.mom</code>, <code>.rest</code></td><td>Con tasas del 10–59 %, el prior de malicia justifica investigar cada caso</td><td>Proxy / DNS</td><td>SOC</td></tr>
+<tr><td>I-5</td><td>Resolución de dominio con patrón de tres palabras separadas por guiones (<code>velvet-otter-glagceis.life</code>)</td><td>Cargador tipo Macfinger; el patrón sobrevive a la rotación de dominio</td><td>DNS</td><td>SOC</td></tr>
+<tr><td>I-6</td><td>Petición a un sitio <code>.cl</code> legítimo que devuelve JavaScript inyectado con reCAPTCHA falso</td><td>WordPress propio o de proveedor comprometido como distribuidor</td><td>Proxy / web</td><td>SOC + TI</td></tr>
+<tr><td>I-7</td><td>Cambio de más de 20 puestos en el top-20 de Spamhaus o Interisle entre trimestres</td><td>Desplazamiento del abuso: toca revisar la lista (E-d)</td><td>OSINT</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Analistas de SOC</span><span>Ingeniería de Detección</span><span>Threat Hunting</span><span><b>Horizonte:</b> días–semanas</span></div></div>
+<section id="t-1-cadena-de-abuso-del-dominio" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Cadena de abuso del dominio</h2></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">Del registro al impacto: tres etapas y dos oportunidades de detección anticipada</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">Etapa 01 · Adquisición</div><h5>Compra del nombre en un registrador barato</h5><ul><li>gTLD de bajo coste</li><li>registro masivo o dirigido</li><li>privacidad de WHOIS</li><li>74 % con intención maliciosa desde el inicio</li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 02 · Armado</div><h5>Certificado, DNS, alojamiento y señuelo</h5><ul><li>Certificado TLS gratuito (visible en CT logs)</li><li>alojamiento concentrado (Aeza, NetCrafters)</li><li>kit de phishing o cargador</li><li><em>cloaking</em> contra rastreadores</li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 03 · Uso e impacto</div><h5>Entrega y rotación</h5><ul><li>Correo, SMS, inyección en sitio legítimo</li><li>ClickFix</li><li>vishing con señuelo de portal SSO</li><li>rotación diaria del dominio y abandono</li></ul></div></div><div class="dwell"><span>⏱</span><span><strong>Ventana de detección:</strong> entre el registro y el primer uso pasan <strong>días</strong>, no horas —el clúster <code>.report</code> se registró entre el 18-08 y el 16-09 y seguía sin contenido activo en varios dominios al 17-09—. Las etapas 01 y 02 dejan rastro público (WHOIS, CT logs, DNS pasivo) <strong>antes</strong> de que llegue el primer correo.</span></div></div>
+</section>
+<section id="t-2-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Desarrollo de recursos <i>7</i></h5>
+<div class="tq" data-s="desarrollo de recursos t1583.001 acquire infrastructure: domains registro masivo en gtld baratos; .bond con 1,13 m de registros nuevos sobre una zona de 1,15 m"><div class="tid">T1583.001</div><div class="tn">Acquire Infrastructure: Domains</div><div class="tp">Registro masivo en gTLD baratos; <code>.bond</code> con 1,13 M de registros nuevos sobre una zona de 1,15 M</div></div>
+<div class="tq" data-s="desarrollo de recursos t1583.001 acquire infrastructure: domains registro dirigido: 317 dominios .report en 13 registradores, repartidos en 30 días para evitar una ráfaga"><div class="tid">T1583.001</div><div class="tn">Acquire Infrastructure: Domains</div><div class="tp">Registro dirigido: 317 dominios <code>.report</code> en 13 registradores, repartidos en 30 días para evitar una ráfaga</div></div>
+<div class="tq" data-s="desarrollo de recursos t1583.004 acquire infrastructure: server concentración de toda la infraestructura de macfinger en dos asn (as210644, as216246 de aeza; as203273 de netcrafters)"><div class="tid">T1583.004</div><div class="tn">Acquire Infrastructure: Server</div><div class="tp">Concentración de toda la infraestructura de Macfinger en dos ASN (AS210644, AS216246 de Aeza; AS203273 de NetCrafters)</div></div>
+<div class="tq" data-s="desarrollo de recursos t1587.003 develop capabilities: digital certificates certificados tls gratuitos sobre dominios recién registrados; rastro en ct logs"><div class="tid">T1587.003</div><div class="tn">Develop Capabilities: Digital Certificates</div><div class="tp">Certificados TLS gratuitos sobre dominios recién registrados; rastro en CT logs</div></div>
+<div class="tq" data-s="desarrollo de recursos t1588.004 obtain capabilities: digital certificates —"><div class="tid">T1588.004</div><div class="tn">Obtain Capabilities: Digital Certificates</div><div class="tp">—</div></div>
+<div class="tq" data-s="desarrollo de recursos t1584.001 compromise infrastructure: domains población de la tabla de malware: wordpress legítimo en .com, .ru, .de, .br, .cl"><div class="tid">T1584.001</div><div class="tn">Compromise Infrastructure: Domains</div><div class="tp">Población de la tabla de malware: WordPress legítimo en <code>.com</code>, <code>.ru</code>, <code>.de</code>, <code>.br</code>, <code>.cl</code></div></div>
+<div class="tq" data-s="desarrollo de recursos t1585.003 establish accounts: cloud accounts alojamiento del señuelo en servicios de páginas gratuitos (cloudflare pages en la campaña phexia)"><div class="tid">T1585.003</div><div class="tn">Establish Accounts: Cloud Accounts</div><div class="tp">Alojamiento del señuelo en servicios de páginas gratuitos (Cloudflare Pages en la campaña Phexia)</div></div></div>
+<div class="mcol" data-col><h5>Reconocimiento <i>1</i></h5>
+<div class="tq" data-s="reconocimiento t1598 phishing for information señuelo de portal sso que replica el identificador real del tenant"><div class="tid">T1598</div><div class="tn">Phishing for Information</div><div class="tp">Señuelo de portal SSO que replica el identificador real del tenant</div></div></div>
+<div class="mcol" data-col><h5>Acceso inicial <i>2</i></h5>
+<div class="tq" data-s="acceso inicial t1566.002 phishing: spearphishing link enlace a dominio recién registrado en gtld de nicho"><div class="tid">T1566.002</div><div class="tn">Phishing: Spearphishing Link</div><div class="tp">Enlace a dominio recién registrado en gTLD de nicho</div></div>
+<div class="tq" data-s="acceso inicial t1660 phishing (móvil) smishing con .top, .icu, .vip, .autos, .shop, .space suplantando correo postal y organismos"><div class="tid">T1660</div><div class="tn">Phishing (móvil)</div><div class="tp">Smishing con <code>.top</code>, <code>.icu</code>, <code>.vip</code>, <code>.autos</code>, <code>.shop</code>, <code>.space</code> suplantando correo postal y organismos</div></div></div>
+<div class="mcol" data-col><h5>Ejecución <i>1</i></h5>
+<div class="tq" data-s="ejecución t1204.004 user execution: malicious copy and paste clickfix con recaptcha falso (macfinger)"><div class="tid">T1204.004</div><div class="tn">User Execution: Malicious Copy and Paste</div><div class="tp">ClickFix con reCAPTCHA falso (Macfinger)</div></div></div>
+<div class="mcol" data-col><h5>Evasión <i>1</i></h5>
+<div class="tq" data-s="evasión t1656 impersonation suplantación del identificador de tenant corporativo y de portales de soporte"><div class="tid">T1656</div><div class="tn">Impersonation</div><div class="tp">Suplantación del identificador de tenant corporativo y de portales de soporte</div></div></div>
+<div class="mcol" data-col><h5>Mando y control <i>3</i></h5>
+<div class="tq" data-s="mando y control t1568.002 dynamic resolution: domain generation algorithms dominios de patrón pseudoaleatorio en .ws, .life y similares"><div class="tid">T1568.002</div><div class="tn">Dynamic Resolution: Domain Generation Algorithms</div><div class="tp">Dominios de patrón pseudoaleatorio en <code>.ws</code>, <code>.life</code> y similares</div></div>
+<div class="tq" data-s="mando y control t1102.001 web service: dead drop resolver resolución del c2 mediante contrato inteligente en polygon (phexia)"><div class="tid">T1102.001</div><div class="tn">Web Service: Dead Drop Resolver</div><div class="tp">Resolución del C2 mediante contrato inteligente en Polygon (Phexia)</div></div>
+<div class="tq" data-s="mando y control t1071.001 application layer protocol: web protocols rotación diaria del dominio de cargador manteniendo el identificador de víctima"><div class="tid">T1071.001</div><div class="tn">Application Layer Protocol: Web Protocols</div><div class="tp">Rotación diaria del dominio de cargador manteniendo el identificador de víctima</div></div></div></div>
+</section>
+<section id="t-3-donde-atacamos-en-la-piramide-del-dolor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Dónde atacamos en la Pirámide del Dolor</h2></div></div>
+<div class="pyr-wrap rv">
+<div class="pyr" id="pyr">
+<div class="pyr-in" id="pyrIn"><div class="slab" data-i="0" style="--w:296px;--d:296px;--z:0px;--col:#375d9d" data-lv="Base · el nivel más barato de eludir" data-t="Hashes" data-b="Base · valor trivial" data-s="En este informe: No aplica: este producto no analiza binarios. Los hashes de las campañas citadas están en sus fichas de origen"><span>Hashes</span></div><div class="slab" data-i="1" style="--w:246px;--d:246px;--z:30px;--col:#5a7ebe" data-lv="Nivel 2 de 5" data-t="IP · Dominios" data-b="Valor bajo" data-s="En este informe: Anexo A. &lt;strong&gt;Perecedero por diseño:&lt;/strong&gt; el adversario rota a diario y abandona en días. Bloquear sí, pero contar con que caduca en horas"><span>IP · Dominios</span></div><div class="slab" data-i="2" style="--w:196px;--d:196px;--z:60px;--col:#4db99c" data-lv="Nivel 3 de 5" data-t="Artefactos" data-b="Valor medio" data-s="En este informe: Patrón de nombre (tres palabras con guiones), nombre de fichero cuyos hexadecimales son el prefijo del SHA-256, identificador de víctima estable entre rotaciones"><span>Artefactos</span></div><div class="slab" data-i="3" style="--w:146px;--d:146px;--z:90px;--col:#a2ae4e" data-lv="Nivel 4 de 5" data-t="Herramientas" data-b="Valor alto" data-s="En este informe: Registradores y ASN concretos: Dominet (HK), Spaceship, NameSilo, Gname, Eranet; Aeza Group, NetCrafters. &lt;strong&gt;El pivote que dura&lt;/strong&gt;"><span>Herramientas</span></div><div class="slab" data-i="4" style="--w:96px;--d:96px;--z:120px;--col:#f7a400" data-lv="Cima · máximo valor defensivo" data-t="TTP" data-b="Cima · valor máximo" data-s="En este informe: Registro masivo desechable, registro dirigido en gTLD de nicho, suplantación de identificador de tenant, ClickFix. Aquí debe concentrarse el esfuerzo"><span>TTP</span></div></div></div>
+<div class="pyr-info card" id="pyrInfo" style="--pc:#f7a400"><div class="lv" id="pyrLv"></div>
+<h4 id="pyrTitle"></h4><p id="pyrBody"></p><div class="pv" id="pyrSrc"></div></div></div>
+<div class="note info rv"><div class="t">Lectura</div><p>Este es el informe donde la pirámide se nota más: la tentación es llevarse la lista de dominios del Anexo A y darse por satisfecho, cuando <strong>el TLD es apenas un escalón por encima de la IP en durabilidad</strong>. Lo que dura es el par registrador + proveedor de alojamiento, y el patrón de nombre.</p></div>
+</section>
+<section id="t-4-hipotesis-de-caza-prioritarias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-4</span><div><h2>Hipótesis de caza prioritarias</h2></div></div><div class="rv">
+<div class="acc h-crit"><button><span class="hid">H-1</span><span class="ht">Resolución a TLD de tasa extrema</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar en logs de DNS y de proxy, ventana de 90 días, toda resolución a <code>.xin</code>, <code>.win</code>, <code>.garden</code>, <code>.help</code>, <code>.qpon</code>, <code>.study</code>, <code>.mom</code>, <code>.rest</code>, <code>.icu</code>, <code>.cfd</code>. Con tasas de abuso del 10 al 59 %, cada acierto merece revisión individual. Fidelidad esperada alta por la escasez de uso legítimo; falsos positivos previsibles en herramientas de marketing y acortadores. Esta caza es también el insumo de §O-4 X-1: su resultado dice si E-a es viable.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-2</span><span class="ht">Suplantación del identificador de nuestros tenants SaaS</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Enumerar los identificadores de nuestros tenants (Okta, Entra, Workspace, Zoom, Slack) y buscar su aparición como dominio registrable en cualquier TLD, con prioridad en gTLD de semántica corporativa. Es la reproducción exacta del hallazgo <code>.report</code>. <strong>Criterio discriminante aprendido del caso:</strong> que <code>&lt;id&gt;.okta.com</code> resuelva no prueba nada —el front-door genérico responde a cualquier texto inventado—; lo que discrimina es que enrute a una <strong>celda específica</strong> (<code>ok1-crtrs.tng.okta.com</code> … <code>ok14-crtrs.tng.okta.com</code>). Con el criterio ingenuo salían 317 de 317; con el correcto, 33.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-3</span><span class="ht">Dominios recién registrados en el correo entrante</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Correlacionar el dominio del remitente y de los enlaces con su fecha de registro. Priorizar menos de 30 días. Dado el 74 % de registro malicioso, el valor predictivo es alto. Requiere enriquecimiento de edad de dominio en el SEG: si no existe, es la brecha de §T-5.</p></div></div>
+<div class="acc "><button><span class="hid">H-4</span><span class="ht">Patrón de nombre de cargador tipo Macfinger</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar resoluciones a dominios con estructura de tres palabras en inglés separadas por guiones, siendo la última pseudoaleatoria (<code>velvet-otter-glagceis.life</code>, <code>hollow-badger-moasfraum.life</code>), en <code>.life</code>, <code>.live</code>, <code>.xyz</code>, <code>.icu</code>, <code>.space</code>, <code>.site</code>, <code>.lol</code>, <code>.digital</code>. El patrón sobrevive a la rotación diaria del dominio concreto.</p></div></div>
+<div class="acc "><button><span class="hid">H-5</span><span class="ht">Pivote por ASN en lugar de por dominio</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar tráfico saliente a AS210644 y AS216246 (Aeza Group, sancionado por OFAC el 01-07-2025) y AS203273 (NetCrafters OU). Toda la infraestructura de Macfinger cabía en esos tres. El ASN dura semanas; el dominio, horas.</p></div></div>
+<div class="acc "><button><span class="hid">H-6</span><span class="ht">Certificados nuevos con nuestra marca</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Monitorizar CT logs por emisión de certificados que contengan nuestras marcas en el SAN. Captura la etapa 02 de §T-1, antes del primer correo.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-7</span><span class="ht">Eje regional: nuestro parque .cl como distribuidor</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Revisar los sitios WordPress <code>.cl</code> propios y de proveedores buscando JavaScript inyectado que presente un reCAPTCHA falso. Advertencia operativa del caso Macfinger: el kit <strong>evade rastreadores de IA y SEO</strong> (GPTBot, ClaudeBot, CCBot, AhrefsBot, SemrushBot), de modo que <strong>no encontrar nada en Google no prueba que el sitio esté limpio</strong>; hay que pedir la página con un <code>User-Agent</code> de navegador real.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-8</span><span class="ht">Eje regional: smishing de marcas chilenas</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar en registros de DNS y proxy móvil resoluciones a dominios que combinen nombres de servicios chilenos (correo postal, organismos, banca) con <code>.top</code>, <code>.icu</code>, <code>.vip</code>, <code>.autos</code>, <code>.shop</code>, <code>.space</code>, y con acortadores (<code>cutt.ly</code>, <code>is.gd</code>) como primer salto.</p></div></div></div>
+</section>
+<section id="t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-5</span><div><h2>Brechas de visibilidad que hay que cerrar primero</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Brecha</th><th>Por qué importa aquí</th></tr></thead><tbody>
+<tr><td>Sin enriquecimiento de edad de dominio en el SEG</td><td>H-3 queda ciega y, con ella, la señal de mayor valor predictivo del informe (74 % de registro malicioso)</td></tr>
+<tr><td>Sin retención de logs DNS a 90 días</td><td>H-1, H-4 y H-5 no se pueden ejecutar en modo retrohunt</td></tr>
+<tr><td>Sin inventario de identificadores de tenants SaaS</td><td>H-2 no se puede ni formular; es el patrón exacto del caso <code>.report</code></td></tr>
+<tr><td>Sin vigilancia de CT logs</td><td>H-6 inexistente; se pierde la única señal previa al primer correo</td></tr>
+<tr><td>Sin inventario de sitios web externos propios y de proveedores</td><td>H-7 no tiene alcance definido</td></tr>
+<tr><td>Sin resolución de ASN en los logs de proxy</td><td>H-5 obliga a resolución manual, lo que en la práctica significa que no se hace</td></tr></tbody></table></div>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>Automatización</span><span>TIP/SIEM</span><span><b>Vida útil:</b> un trimestre (revisión obligatoria, E-d)</span></div></div>
+<section id="x-1-conjuntos-de-tld-para-politica-de-puntuacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>Conjuntos de TLD para política de puntuación</h2><p>Tres niveles, con la acción que corresponde a cada uno. <strong>Ningún nivel implica bloqueo total:</strong> todos alojan negocio legítimo.</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel</th><th>TLD</th><th>Criterio</th><th>Acción recomendada</th></tr></thead><tbody>
+<tr><td><strong>A — Prior extremo</strong></td><td><code>.xin</code> <code>.win</code> <code>.icu</code> <code>.garden</code> <code>.cfd</code> <code>.pro</code> <code>.help</code> <code>.mom</code> <code>.rest</code> <code>.qpon</code> <code>.study</code></td><td>Zona reportada en phishing ≥ 9,8 % en el año (Interisle may-25/abr-26) o zona listada ≥ 12 % en el semestre (Spamhaus abr-sep 26). Nueve superan el 10 %; <code>.mom</code> y <code>.rest</code> quedan a menos de un punto y se incluyen por prudencia</td><td>Puntuación máxima; cuarentena de NRD; investigación individual de cada acierto; alerta al SOC</td></tr>
+<tr><td><strong>B — Prior alto</strong></td><td><code>.top</code> <code>.vip</code> <code>.sbs</code> <code>.bond</code> <code>.cyou</code> <code>.cc</code> <code>.mobi</code> <code>.live</code> <code>.ink</code> <code>.best</code> <code>.lat</code> <code>.life</code> <code>.homes</code> <code>.click</code> <code>.wang</code></td><td>Entre el 3 % y el 10 % de zona abusada, o presencia sostenida en los cuatro trimestres</td><td>Puntuación alta; cuarentena de NRD; revisión por muestreo</td></tr>
+<tr><td><strong>C — Volumen, prior bajo</strong></td><td><code>.com</code> <code>.cn</code> <code>.net</code> <code>.org</code> <code>.info</code> <code>.xyz</code> <code>.shop</code> <code>.online</code> <code>.site</code> <code>.store</code></td><td>Mucho abuso absoluto pero menos del 2 % de zona abusada</td><td><strong>No puntuar por TLD.</strong> Reputación por dominio y edad del dominio. Puntuar aquí genera falsos positivos masivos</td></tr>
+<tr><td><strong>D — Nicho a vigilar</strong></td><td><code>.report</code> <code>.claims</code> <code>.beer</code> <code>.lol</code> <code>.casino</code> <code>.surf</code> <code>.autos</code> <code>.space</code> <code>.digital</code></td><td>Sin señal en los agregados, pero con clústeres dirigidos observados en 2026</td><td>No puntuar. <strong>Vigilancia de marca</strong> e inclusión en I-3</td></tr></tbody></table></div>
+<div class="note warn rv"><div class="t">⚠ Caducidad de esta tabla</div><p>Se construyó con datos que terminan en sep-2026. Cuatro trimestres de evidencia (KJ-3) indican que estará desalineada en marzo de 2027. La tabla sin la revisión trimestral de E-d es un pasivo, no un control.</p></div>
+</section>
+<section id="x-2-artefactos-duraderos-lo-que-no-cambia-al-rotar-el-dominio" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Artefactos duraderos — lo que no cambia al rotar el dominio</h2></div></div>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">registro</div>
+<h4 style="margin:0 0 6px">Registradores concentradores</h4><p style="font-size:13.8px;margin:0">Dominet (HK) Limited · Spaceship, Inc. · NameSilo, LLC · Gname.com Pte. Ltd. · Eranet International · Web Commerce Communications</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">alojamiento</div>
+<h4 style="margin:0 0 6px">ASN de alojamiento</h4><p style="font-size:13.8px;margin:0">AS210644 y AS216246 (Aeza Group, OFAC 01-07-2025) · AS203273 (NetCrafters OU)</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">nomenclatura</div>
+<h4 style="margin:0 0 6px">Patrón de nombre</h4><p style="font-size:13.8px;margin:0">Tres palabras en inglés con guiones, última pseudoaleatoria: <code>velvet-otter-glagceis</code> · <code>hollow-badger-moasfraum</code></p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">suplantación</div>
+<h4 style="margin:0 0 6px">Patrón de nombre dirigido</h4><p style="font-size:13.8px;margin:0"><code>&lt;identificador-real-de-tenant&gt;.&lt;gTLD de nicho&gt;</code> — sin guiones, sin typosquatting, idéntico al legítimo</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">cargador</div>
+<h4 style="margin:0 0 6px">Patrón de fichero</h4><p style="font-size:13.8px;margin:0"><code>ext-b.4f9db6afd06a.js</code>: los 12 hexadecimales son el prefijo del SHA-256 del propio fichero</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">verificación</div>
+<h4 style="margin:0 0 6px">Celdas de enrutamiento Okta</h4><p style="font-size:13.8px;margin:0"><code>ok1-crtrs.tng.okta.com</code> … <code>ok14-crtrs.tng.okta.com</code> — distinguen tenant real de inventado</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">cloaking</div>
+<h4 style="margin:0 0 6px">Evasión de rastreadores</h4><p style="font-size:13.8px;margin:0">GPTBot · ClaudeBot · CCBot · AhrefsBot · SemrushBot</p></div></div>
+</section>
+<section id="x-3-logica-de-deteccion-prioritaria" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-3</span><div><h2>Lógica de detección prioritaria</h2></div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-1</span><span class="dn">Suplantación del identificador de un tenant SaaS propio</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>dns.question.name MATCHES &quot;^(&lt;id_tenant_1&gt;|&lt;id_tenant_2&gt;|&lt;id_tenant_n&gt;)\.[a-z]{2,}$&quot;
+AND NOT dns.question.name ENDSWITH (&quot;.okta.com&quot;, &quot;.&lt;dominio_corporativo&gt;&quot;)</code></pre><div class="act">Alerta inmediata al SOC y a TI. Es el patrón <code>.report</code>: señuelo para vishing de soporte. Verificar contra celda Okta antes de concluir, y bloquear sin esperar confirmación de contenido activo: en el clúster medido, la mayoría de los dominios no servía nada el día del hallazgo. <strong>Contención automática justificada.</strong></div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-2</span><span class="dn">Dominio recién registrado en TLD de nivel A con interacción de credenciales</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>proxy.destination.tld IN (xin, win, garden, help, qpon, study, mom, rest, icu, cfd)
+AND domain.age_days &lt; 30
+AND (http.method == &quot;POST&quot; OR url.path MATCHES &quot;(login|signin|verify|portal|account)&quot;)</code></pre><div class="act">Bloqueo y alerta. La combinación de prior extremo, dominio nuevo y envío de formulario no tiene uso legítimo plausible. <strong>Contención automática justificada.</strong></div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-3</span><span class="dn">Patrón de cargador de tres palabras</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>dns.question.name MATCHES &quot;^[a-z]{4,10}-[a-z]{4,10}-[a-z]{6,14}\.(life|live|xyz|icu|space|site|lol|digital)$&quot;</code></pre><div class="act">Aislar el endpoint y buscar ejecución de Terminal o <code>curl</code>/<code>osascript</code> en la ventana siguiente. Patrón Macfinger; sobrevive a la rotación diaria del dominio.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-4</span><span class="dn">ClickFix: portapapeles a intérprete</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>(macOS) process.name IN (&quot;osascript&quot;,&quot;curl&quot;,&quot;bash&quot;) AND parent.name == &quot;Terminal&quot;
+AND cmdline CONTAINS_ANY (&quot;curl&quot;, &quot;| sh&quot;, &quot;| bash&quot;, &quot;history -c&quot;, &quot;clear&quot;)</code></pre><div class="act">Aislar. Es la ejecución del comando que el kit copió al portapapeles. Detecta la campaña <strong>independientemente del dominio</strong>, que es lo que la hace duradera.</div></div>
+<div class="det d-med rv"><div class="dh"><span class="did">D-5</span><span class="dn">Tráfico a ASN de alojamiento concentrador</span><span class="pill p-grey">MEDIO</span></div>
+<pre><code>network.destination.asn IN (210644, 216246, 203273)</code></pre><div class="act">Investigar. Bajo volumen esperado de uso legítimo; Aeza está sancionado por OFAC, lo que añade una dimensión de cumplimiento a la de seguridad.</div></div>
+<div class="det d-med rv"><div class="dh"><span class="did">D-6</span><span class="dn">Certificado nuevo con nuestra marca</span><span class="pill p-grey">MEDIO</span></div>
+<pre><code>ct_log.san CONTAINS_ANY (&quot;&lt;marca&gt;&quot;, &quot;&lt;marca-producto&gt;&quot;, &quot;&lt;marca&gt;-soporte&quot;)
+AND ct_log.issued_days_ago &lt; 7
+AND NOT ct_log.issuer IN (&lt;nuestras_CA_autorizadas&gt;)</code></pre><div class="act">Apertura de caso de vigilancia de marca. Captura la etapa 02 antes del primer correo.</div></div>
+<div class="note warn rv"><div class="t">⚠ Regla de operación</div><p>D-1 y D-2 deben ejecutar contención automática sin escalado humano. Fundamento: en el clúster <code>.report</code> el intervalo entre el registro y la disponibilidad de un formulario de login activo fue de días, y los dominios se abandonaron en semanas; una cola de triaje humano de 24 horas consume la ventana útil completa. D-3 a D-6 son de investigación, no de contención.</p></div>
+</section>
+<section id="x-4-consultas-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-4</span><div><h2>Consultas de caza</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-1 — Resolución a TLD de nivel A, 90 días. Microsoft Defender / Sentinel.
+<span class="tok-k">let</span> tld_nivel_a = dynamic([<span class="tok-s">&quot;xin&quot;</span>,<span class="tok-s">&quot;win&quot;</span>,<span class="tok-s">&quot;garden&quot;</span>,<span class="tok-s">&quot;help&quot;</span>,<span class="tok-s">&quot;qpon&quot;</span>,<span class="tok-s">&quot;study&quot;</span>,<span class="tok-s">&quot;mom&quot;</span>,<span class="tok-s">&quot;rest&quot;</span>,<span class="tok-s">&quot;icu&quot;</span>,<span class="tok-s">&quot;cfd&quot;</span>]);
+DeviceNetworkEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(90d)
+| <span class="tok-k">extend</span> host = tolower(tostring(parse_url(RemoteUrl).Host))
+| <span class="tok-k">extend</span> tld = tostring(split(host, <span class="tok-s">&quot;.&quot;</span>)[-1])
+| <span class="tok-k">where</span> tld <span class="tok-k">in</span> (tld_nivel_a)
+| <span class="tok-k">summarize</span> Hits = count(), Dispositivos = dcount(DeviceName),
+            Primero = min(Timestamp), Ultimo = max(Timestamp) <span class="tok-k">by</span> host, tld
+| <span class="tok-k">order by</span> Hits desc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-2 — Suplantación del identificador de tenant propio. Rellenar la lista de ids.
+<span class="tok-k">let</span> ids_tenant = dynamic([&quot;&lt;id1&gt;<span class="tok-s">&quot;,&quot;</span>&lt;id2&gt;<span class="tok-s">&quot;,&quot;</span>&lt;id3&gt;&quot;]);
+DeviceNetworkEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(30d)
+| <span class="tok-k">extend</span> host = tolower(tostring(parse_url(RemoteUrl).Host))
+| <span class="tok-k">extend</span> etiqueta = tostring(split(host, <span class="tok-s">&quot;.&quot;</span>)[0])
+| <span class="tok-k">where</span> etiqueta <span class="tok-k">in</span> (ids_tenant)
+| <span class="tok-k">where</span> <span class="tok-k">not</span>(host endswith <span class="tok-s">&quot;.okta.com&quot;</span>)
+| <span class="tok-k">project</span> Timestamp, DeviceName, AccountName, host, RemoteUrl, InitiatingProcessFileName</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-4 — Patrón de cargador de tres palabras (Macfinger).
+DeviceNetworkEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(60d)
+| <span class="tok-k">extend</span> host = tolower(tostring(parse_url(RemoteUrl).Host))
+| <span class="tok-k">where</span> host matches regex @<span class="tok-s">&quot;^[a-z]{4,10}-[a-z]{4,10}-[a-z]{6,14}\.(life|live|xyz|icu|space|site|lol|digital)$&quot;</span>
+| <span class="tok-k">summarize</span> Eventos = count(), Primero = min(Timestamp) <span class="tok-k">by</span> DeviceName, host
+| <span class="tok-k">order by</span> Primero asc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>YAML</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># Sigma — Dominio recién registrado en TLD de prior extremo con envío de formulario</span>
+<span class="tok-c"># Autor: Célula CTI · Fecha: 2026-11-15 · ATT&amp;CK: T1566.002, T1598</span>
+<span class="tok-c"># Nivel: high</span>
+<span class="tok-c"># Requiere: enriquecimiento de edad de dominio en el proxy (véase T-5)</span>
+<span class="tok-c"># Falsos positivos conocidos: campañas de marketing con dominio efímero propio;</span>
+<span class="tok-c">#   herramientas SaaS recién adquiridas por el negocio; acortadores de enlaces.</span>
+<span class="tok-n">title</span>: Envio de formulario a dominio nuevo en TLD de alto abuso
+<span class="tok-n">logsource</span>:
+  <span class="tok-n">category</span>: proxy
+<span class="tok-n">detection</span>:
+  <span class="tok-n">seleccion_tld</span>:
+    <span class="tok-n">dest_tld</span>:
+      - &#x27;xin&#x27;
+      - &#x27;win&#x27;
+      - &#x27;garden&#x27;
+      - &#x27;help&#x27;
+      - &#x27;qpon&#x27;
+      - &#x27;study&#x27;
+      - &#x27;mom&#x27;
+      - &#x27;rest&#x27;
+      - &#x27;icu&#x27;
+      - &#x27;cfd&#x27;
+  <span class="tok-n">seleccion_edad</span>:
+    domain_age_days|lt: 30
+  <span class="tok-n">seleccion_credencial</span>:
+    - http_method: &#x27;POST&#x27;
+    - url_path|contains:
+        - &#x27;login&#x27;
+        - &#x27;signin&#x27;
+        - &#x27;verify&#x27;
+        - &#x27;portal&#x27;
+        - &#x27;account&#x27;
+  <span class="tok-n">condition</span>: seleccion_tld and seleccion_edad and seleccion_credencial
+<span class="tok-n">fields</span>:
+  - src_ip
+  - user
+  - dest_host
+  - url_path
+<span class="tok-n">falsepositives</span>:
+  - Marketing con dominios efimeros propios
+  - Altas de SaaS no inventariadas
+<span class="tok-n">level</span>: high</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>YAML</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># Sigma — ClickFix en macOS: portapapeles a interprete desde Terminal</span>
+<span class="tok-c"># Autor: Célula CTI · Fecha: 2026-11-15 · ATT&amp;CK: T1204.004</span>
+<span class="tok-c"># Nivel: critical</span>
+<span class="tok-c"># Falsos positivos conocidos: desarrolladores e ingenieria de plataforma, que</span>
+<span class="tok-c">#   ejecutan instaladores por una linea de forma legitima y frecuente. Afinar</span>
+<span class="tok-c">#   excluyendo grupos tecnicos antes de habilitar la contencion.</span>
+<span class="tok-n">title</span>: Ejecucion de comando pegado en Terminal con descarga y borrado de historial
+<span class="tok-n">logsource</span>:
+  <span class="tok-n">category</span>: process_creation
+  <span class="tok-n">product</span>: macos
+<span class="tok-n">detection</span>:
+  <span class="tok-n">seleccion_proceso</span>:
+    ParentImage|endswith: &#x27;/Terminal&#x27;
+    Image|endswith:
+      - &#x27;/osascript&#x27;
+      - &#x27;/curl&#x27;
+      - &#x27;/bash&#x27;
+      - &#x27;/sh&#x27;
+  <span class="tok-n">seleccion_cadena</span>:
+    CommandLine|contains:
+      - &#x27;| sh&#x27;
+      - &#x27;| bash&#x27;
+      - &#x27;history -c&#x27;
+      - &#x27;curl -s&#x27;
+  <span class="tok-n">condition</span>: seleccion_proceso and seleccion_cadena
+<span class="tok-n">fields</span>:
+  - ComputerName
+  - User
+  - CommandLine
+  - ParentCommandLine
+<span class="tok-n">falsepositives</span>:
+  - Personal tecnico ejecutando instaladores de una linea
+<span class="tok-n">level</span>: critical</code></pre></div>
+</section>
+<section id="x-5-mitigaciones-de-configuracion-con-efecto-directo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-5</span><div><h2>Mitigaciones de configuración con efecto directo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Control</th><th>Corta</th></tr></thead><tbody>
+<tr><td>Cuarentena de dominios con menos de 30 días en proxy y SEG</td><td>La etapa 03 completa de la mayoría de campañas de registro masivo: el 74 % de los dominios de phishing nace malicioso y se usa en días</td></tr>
+<tr><td>Enriquecimiento de edad de dominio en el gateway de correo</td><td>Habilita D-2 y H-3; sin esto, la señal de mayor valor del informe no es computable</td></tr>
+<tr><td>Bloqueo de ejecución de comandos pegados: política de endpoint que impida <code>osascript</code>/<code>curl</code> con hijo de Terminal para usuarios no técnicos</td><td>La etapa de ejecución de ClickFix, con independencia del dominio y del TLD</td></tr>
+<tr><td>FIDO2 / claves de paso resistentes a phishing en el SSO corporativo</td><td>Vuelve inútil el señuelo de portal SSO del patrón <code>.report</code>, que es el de mayor impacto por dominio</td></tr>
+<tr><td>Vigilancia de CT logs sobre nuestras marcas</td><td>La etapa 02, antes del primer contacto con el usuario</td></tr>
+<tr><td>Endurecimiento y parcheo del parque WordPress propio y de proveedores</td><td>Nos saca de la población de la tabla de malware: deja de usarse nuestro dominio legítimo como distribuidor</td></tr>
+<tr><td>Resolución de ASN en los logs de proxy</td><td>Habilita H-5 y D-5, el pivote más duradero de todos</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-nuevos-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y nuevos requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto en el juicio</th><th>Requisito propuesto</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td>G-1</td><td>Sin telemetría propia de DNS y proxy</td><td>§O-4 vacía; el coste de E-a no se puede estimar y toda la política queda sin validar</td><td>Extracción de 90 días de logs de DNS y proxy, agregados por TLD de destino</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-2</td><td>Sin medición del abuso en subdominios de alojamiento gratuito</td><td>H6 retenida sin medir; si el abuso migró allí, este informe optimiza para el lugar equivocado</td><td>Incorporar una fuente que mida abuso a nivel de subdominio, no de TLD</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-3</td><td>Sin datos DAAR de ICANN de 2026 por TLD</td><td>Solo dos proveedores sostienen las cifras; H2 (sesgo de observación) no se puede acotar</td><td>Solicitar o localizar los informes DAAR mensuales de 2026</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-4</td><td>Ventana ciega desde oct-2026</td><td>Las seis semanas más recientes no están cubiertas por ninguna fuente</td><td>Reconsultar Interisle y Spamhaus en el próximo trimestre (E-d)</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-5</td><td>Sin visibilidad de phishing dirigido específicamente a Chile en las fuentes usadas</td><td>El supuesto clave de §O-6 queda sin verificar; §E-2 puede describir una amenaza que no es la nuestra</td><td>Contraste con CSIRT de Gobierno y con la comunidad CTI regional</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-6</td><td>Sin verificación independiente de la atribución del clúster <code>.report</code></td><td>KJ-5 se queda en confianza moderada</td><td>Seguimiento de reportes de proveedor sobre ShinyHunters y Scattered Spider</td><td><span class="pill p-grey">Baja</span></td></tr></tbody></table></div>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores-de-compromiso" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores de compromiso</h2></div></div>
+<div class="note warn rv"><div class="t">⚠ Leer antes de usar</div><p>Estos indicadores son el nivel más perecedero del producto y en este informe más que en ninguno: el adversario rota dominios a diario. Se entregan <strong>con contexto, confianza y acción permitida</strong>. La lista completa de los 317 dominios <code>.report</code> y de los 56 cargadores de Macfinger está en el repositorio de origen (Anexo B); aquí va la muestra verificada y de mayor valor. Valores <em>defanged</em>.</p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="domain gen[.]report señuelo okta. el único de los 33 con contenido activo: http 200 con redirección a /login/?next=/. namecheap, registrado 2026-09-06 · alta bloqueo"><span class="ty">domain</span><span class="vv">gen[.]report<em>Señuelo Okta. El único de los 33 con contenido activo: HTTP 200 con redirección a /login/?next=/. NameCheap, registrado 2026-09-06 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain support[.]report imita el portal de soporte oficial de okta, no un cliente. porkbun, 2026-09-08, http 200 · alta bloqueo"><span class="ty">domain</span><span class="vv">support[.]report<em>Imita el portal de soporte oficial de Okta, no un cliente. Porkbun, 2026-09-08, HTTP 200 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain hcahealthcare[.]report suplanta tenant de hca healthcare (salud). dynadot, 2026-09-10 · media bloqueo"><span class="ty">domain</span><span class="vv">hcahealthcare[.]report<em>Suplanta tenant de HCA Healthcare (salud). Dynadot, 2026-09-10 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain lyrahealth[.]report suplanta tenant de lyra health (salud mental). dynadot, 2026-09-14 · media bloqueo"><span class="ty">domain</span><span class="vv">lyrahealth[.]report<em>Suplanta tenant de Lyra Health (salud mental). Dynadot, 2026-09-14 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain unum[.]report suplanta tenant de unum (seguros). dynadot, 2026-09-07 · media bloqueo"><span class="ty">domain</span><span class="vv">unum[.]report<em>Suplanta tenant de Unum (seguros). Dynadot, 2026-09-07 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain expeditors[.]report suplanta tenant de expeditors international (logística). dynadot, 2026-09-12 · media bloqueo"><span class="ty">domain</span><span class="vv">expeditors[.]report<em>Suplanta tenant de Expeditors International (logística). Dynadot, 2026-09-12 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain discounttire-retail[.]report suplanta tenant de discount tire. dynadot, 2026-09-05 · media bloqueo"><span class="ty">domain</span><span class="vv">discounttire-retail[.]report<em>Suplanta tenant de Discount Tire. Dynadot, 2026-09-05 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain offerup[.]report suplanta tenant de offerup. global domain group, 2026-08-20 (el más antiguo) · media bloqueo"><span class="ty">domain</span><span class="vv">offerup[.]report<em>Suplanta tenant de OfferUp. Global Domain Group, 2026-08-20 (el más antiguo) · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain rbx[.]report posible suplantación de roblox. dynadot, 2026-09-10 · media bloqueo"><span class="ty">domain</span><span class="vv">rbx[.]report<em>Posible suplantación de Roblox. Dynadot, 2026-09-10 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain monday[.]report posible suplantación de monday.com. porkbun, 2026-08-23, http 200 · media bloqueo"><span class="ty">domain</span><span class="vv">monday[.]report<em>Posible suplantación de monday.com. Porkbun, 2026-08-23, HTTP 200 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain ahrefs[.]report suplanta tenant de ahrefs. name.com, 2026-08-31 · media bloqueo"><span class="ty">domain</span><span class="vv">ahrefs[.]report<em>Suplanta tenant de Ahrefs. Name.com, 2026-08-31 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain erc[.]report señuelo okta, celda ok10. godaddy, 2026-09-16 (el más reciente del clúster) · media bloqueo"><span class="ty">domain</span><span class="vv">erc[.]report<em>Señuelo Okta, celda ok10. GoDaddy, 2026-09-16 (el más reciente del clúster) · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain velvet-otter-glagceis[.]life cargador macfinger (clickfix macos). patrón de tres palabras · media bloqueo"><span class="ty">domain</span><span class="vv">velvet-otter-glagceis[.]life<em>Cargador Macfinger (ClickFix macOS). Patrón de tres palabras · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain hollow-badger-moasfraum[.]life cargador macfinger activo desde el 24-09-2026 · media bloqueo"><span class="ty">domain</span><span class="vv">hollow-badger-moasfraum[.]life<em>Cargador Macfinger activo desde el 24-09-2026 · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain beroniw[.]com redirector con cloaking de un segundo inyector independiente de macfinger · media bloqueo"><span class="ty">domain</span><span class="vv">beroniw[.]com<em>Redirector con cloaking de un segundo inyector independiente de Macfinger · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://cl-correoss[.]top/ smishing suplantando correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://cl-correoss[.]top/<em>Smishing suplantando Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://correoscli[.]icu/address smishing correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://correoscli[.]icu/address<em>Smishing Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://clpost-zip[.]top/ smishing correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://clpost-zip[.]top/<em>Smishing Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://correos[.]autos/ smishing correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://correos[.]autos/<em>Smishing Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://postag[.]vip/index smishing correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://postag[.]vip/index<em>Smishing Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://cl-correos[.]shop smishing correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://cl-correos[.]shop<em>Smishing Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="url hxxps://correos-cl[.]space/ smishing correos de chile · media bloqueo"><span class="ty">url</span><span class="vv">hxxps://correos-cl[.]space/<em>Smishing Correos de Chile · Media</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="asn as210644 · as216246 aeza group. toda la infraestructura de macfinger. sancionado por ofac el 01-07-2025 · alta investigar · bloqueo con validación de negocio"><span class="ty">asn</span><span class="vv">AS210644 · AS216246<em>Aeza Group. Toda la infraestructura de Macfinger. Sancionado por OFAC el 01-07-2025 · Alta</em></span><span class="pill p-mint">Investigar · bloqueo con validación de negocio</span></div>
+<div class="ioc-row" data-s="asn as203273 netcrafters ou. resto de la infraestructura de macfinger · media investigar"><span class="ty">asn</span><span class="vv">AS203273<em>NetCrafters OU. Resto de la infraestructura de Macfinger · Media</em></span><span class="pill p-mint">Investigar</span></div>
+<div class="ioc-row" data-s="filename ext-b.4f9db6afd06a.js cargador macfinger. los 12 hexadecimales son el prefijo de su sha-256, verificado en 13 compilaciones · alta detección"><span class="ty">filename</span><span class="vv">ext-b.4f9db6afd06a.js<em>Cargador Macfinger. Los 12 hexadecimales son el prefijo de su SHA-256, verificado en 13 compilaciones · Alta</em></span><span class="pill p-mint">Detección</span></div>
+<div class="ioc-row" data-s="pattern ok1-crtrs.tng.okta.com … ok14-crtrs.tng.okta.com no es malicioso: es el criterio de verificación que distingue un tenant okta real de uno inventado · alta solo verificación"><span class="ty">pattern</span><span class="vv">ok1-crtrs.tng.okta.com … ok14-crtrs.tng.okta.com<em>No es malicioso: es el criterio de verificación que distingue un tenant Okta real de uno inventado · Alta</em></span><span class="pill p-grey">Solo verificación</span></div></div>
+<p class="rv"><em>Nota de higiene:</em> los acortadores presentes en la campaña de smishing (<code>cutt.ly</code>, <code>is.gd</code>, <code>is.id</code>) son <strong>infraestructura compartida legítima</strong>: no bloquear el dominio del acortador, sino resolver y bloquear el destino. Los dominios <code>.cl</code> del barrido de webshells son <strong>víctimas</strong>: no deben publicarse como IoC ni bloquearse; corresponde notificación, y por eso no figuran en este anexo.</p>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Disciplina</th><th>Fiabilidad</th><th>Credibilidad</th><th>Notas de sesgo</th></tr></thead><tbody>
+<tr><td>Interisle / Cybercrime Information Center — CSV anual de 233 TLD (may-25/abr-26)</td><td>OSINT · medición primaria</td><td><span class="pill p-mint">A</span></td><td>1</td><td>Mide lo que sus fuentes de alimentación reportan. Rankings de §E-2 calculados por nosotros desde el dato crudo</td></tr>
+<tr><td>Interisle / CIC — cuatro tablas trimestrales de phishing (ago-25 → jul-26)</td><td>OSINT · medición primaria</td><td><span class="pill p-mint">A</span></td><td>1</td><td>Umbral de elegibilidad: 30.000 dominios y 25 de phishing; excluye TLD pequeños</td></tr>
+<tr><td>Interisle / CIC — tres tablas trimestrales de malware (ene-mar, abr-jun, jul-sep 2026)</td><td>OSINT · medición primaria</td><td><span class="pill p-mint">A</span></td><td>2</td><td>Agrega cuatro fuentes de terceros (Malware Patrol, MalwareURL, Spamhaus, URLhaus)</td></tr>
+<tr><td>Spamhaus — Domain Reputation Update abr-sep 2026 (PDF, publicado 15-10-2026)</td><td>OSINT · medición primaria</td><td><span class="pill p-mint">A</span></td><td>2</td><td>Declara mejoras de ingesta y listado preventivo de carteras: parte del alza es de medición</td></tr>
+<tr><td>Spamhaus — Domain Reputation Update oct-25/mar-26 (PDF, publicado 15-04-2026)</td><td>OSINT · medición primaria</td><td><span class="pill p-mint">A</span></td><td>2</td><td>Ídem</td></tr>
+<tr><td>Interisle — serie «Phishing Landscape 2026» (Substack)</td><td>OSINT · análisis de proveedor</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Tablas publicadas como imágenes: no citables como dato; se usó solo el texto interpretativo</td></tr>
+<tr><td>IANA — <code>tlds-alpha-by-domain.txt</code>, versión 2026111500</td><td>Autoritativa</td><td><span class="pill p-mint">A</span></td><td>1</td><td>Ninguno. Usada para validar TLD y descartar falsos positivos</td></tr>
+<tr><td><code>intellroom/IoC</code> (GitHub, medido por nosotros)</td><td>OSINT · repositorio de equipo</td><td><span class="pill p-amber">C</span></td><td>3</td><td>Tres sesgos declarados en §3.3. <strong>No es muestra representativa.</strong> Valioso para patrones, no para prevalencia</td></tr>
+<tr><td>Macfinger: ficha del repositorio, derivada de SANS ISC 33360 (Brad Duncan, 22-09-2026)</td><td>OSINT técnico</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Fuente primaria de proveedor, ampliada por el repositorio con verificación propia declarada</td></tr>
+<tr><td>Clúster <code>.report</code>: ficha del repositorio, derivada de X/@0x534c (17-09-2026)</td><td>OSINT · fuente única</td><td><span class="pill p-amber">C</span></td><td>4</td><td>Investigador independiente; el propio autor dice «potencial». La verificación DNS de las 33 coincidencias sí es reproducible</td></tr></tbody></table></div>
+<p class="rv"><strong>Escalas</strong></p><ul class="rv"><li><strong>A</strong> completamente fiable · <strong>B</strong> normalmente fiable · <strong>C</strong> bastante fiable · <strong>D</strong> normalmente no fiable · <strong>E</strong> no fiable · <strong>F</strong> no evaluable.</li><li><strong>1</strong> confirmada por otras fuentes · <strong>2</strong> probablemente cierta · <strong>3</strong> posiblemente cierta · <strong>4</strong> dudosa · <strong>5</strong> improbable · <strong>6</strong> no evaluable.</li></ul>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Probabilidad estimativa — cuán probable es que el hecho sea cierto</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">Remoto</span><span class="bt"><i data-w="5"></i></span><span class="bv">5</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy poco probable</span><span class="bt"><i data-w="20"></i></span><span class="bv">20</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Poco probable</span><span class="bt"><i data-w="45"></i></span><span class="bv">45</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Posibilidad real</span><span class="bt"><i data-w="56"></i></span><span class="bv">55</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Probable</span><span class="bt"><i data-w="81"></i></span><span class="bv">80</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy probable</span><span class="bt"><i data-w="96"></i></span><span class="bv">95</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">Casi con certeza</span><span class="bt"><i data-w="100"></i></span><span class="bv">99</span></div></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel de confianza</th><th>Criterio</th></tr></thead><tbody>
+<tr><td>Alta</td><td>Múltiples fuentes de calidad, corroboradas, sin brechas relevantes</td></tr>
+<tr><td>Moderada</td><td>Fuentes creíbles pero corroboración parcial o brechas conocidas</td></tr>
+<tr><td>Baja</td><td>Fuente única, no corroborada, fuerte dependencia de supuestos</td></tr></tbody></table></div>
+<div class="note info rv"><p>Usar siempre el término <strong>y</strong> el porcentaje. No usar «podría» ni «es posible» como juicio: son afirmaciones no falsables.</p></div>
+</section>
+<section id="anexo-d-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Marcos de referencia empleados</h2><p><code>MITRE ATT&amp;CK v18</code> (énfasis en Resource Development) · <code>Pirámide del Dolor</code> · <code>ICD 203</code> · <code>ACH y pre-mortem</code> · <code>TLP 2.0</code> · <code>PAP</code> · <code>Admiralty Code</code> · <code>Sigma</code> · <code>Umbrales de abuso de zona de Spamhaus (5 % / 10 %)</code> · <code>Phishing Domain Score de Interisle</code></p></div></div>
+</section>
+<section id="anexo-e-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Paquete legible por máquina</h2></div></div><ul class="rv"><li>Bundle STIX 2.1: pendiente de generar. Objetos previstos: <code>domain-name</code> (Anexo A), <code>autonomous-system</code> (AS210644, AS216246, AS203273), <code>indicator</code> con patrones de D-1 a D-6.</li><li>Evento MISP: pendiente. Taxonomías: <code>tlp</code>, <code>admiralty-scale</code>, <code>estimative-language</code>, <code>PAP</code>.</li><li>Reglas: las dos reglas Sigma de §X-4 están listas para comitear al repositorio de detección; requieren el enriquecimiento de edad de dominio (G-1) para la primera.</li><li>Datos de respaldo: CSV anual de 233 TLD, cuatro tablas trimestrales de phishing, tres de malware, dos PDF de Spamhaus extraídos a texto y los scripts de medición del repositorio.</li></ul>
+</section>
+<section id="anexo-f-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-15</td><td>Emisión inicial</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<section id="anexo-g-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Realimentación del consumidor</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Pregunta</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>¿Respondió a su requisito?</td><td></td></tr>
+<tr><td>¿Qué decisión tomó o cambió con este informe?</td><td></td></tr>
+<tr><td>¿Se aprobó la cuarentena de NRD de E-a? ¿Con qué excepciones?</td><td></td></tr>
+<tr><td>¿Qué faltó?</td><td></td></tr>
+<tr><td>¿Llegó a tiempo?</td><td></td></tr></tbody></table></div>
+<div class="note info rv"><p>Sin este anexo devuelto, el ciclo de inteligencia queda abierto y el próximo producto no mejora. En este caso en concreto: <strong>sin el dato de §O-4 que se pide en E-b, la versión 1.1 no podrá pasar de política propuesta a política evaluada.</strong></p></div>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-018 · v1.0 · 2026-11-15</strong> · caduca 2027-02-15</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Elaborado íntegramente con fuentes abiertas y datos primarios publicados. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

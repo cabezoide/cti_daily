@@ -1,0 +1,1475 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-014 · TheGentlemen (Storm-2697)</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-014<small>TheGentlemen (Storm-2697)</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-que-representa-este-actor-en-el-panorama">E-1. Qué representa este actor en el panorama</a><a href="#e-2-victimologia-donde-cae-y-que-significa-para-nosotros">E-2. Victimología: dónde cae y qué significa para nosotros</a><a href="#e-2-1-foco-regional-chile-y-latinoamerica">E-2.1 Foco regional: Chile y Latinoamérica</a><a href="#e-3-tendencia-y-pronostico">E-3. Tendencia y pronóstico</a><a href="#e-4-decisiones-que-este-informe-pide-al-nivel-estrategico">E-4. Decisiones que este informe pide al nivel estratégico</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion-y-alias">O-1. Identificación y alias</a><a href="#o-2-estructura-y-atribucion">O-2. Estructura y atribución</a><a href="#o-3-modelo-de-negocio-por-que-escala">O-3. Modelo de negocio: por qué escala</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-acontecimiento-de-mayo-de-2026-la-filtracion-interna">O-5. Acontecimiento de mayo de 2026: la filtración interna</a><a href="#o-6-cronologia-del-actor">O-6. Cronología del actor</a><a href="#o-6-1-actividad-confirmada-en-chile-y-latinoamerica">O-6.1 Actividad confirmada en Chile y Latinoamérica</a><a href="#o-7-hipotesis-alternativas-consideradas">O-7. Hipótesis alternativas consideradas</a><a href="#o-8-indicadores-y-senales-de-alerta">O-8. Indicadores y señales de alerta</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-cadena-de-intrusion">T-1. Cadena de intrusión</a><a href="#t-2-mapa-mitre-att-ck">T-2. Mapa MITRE ATT&amp;CK</a><a href="#t-3-donde-atacamos-en-la-piramide-del-dolor">T-3. Dónde atacamos en la Pirámide del Dolor</a><a href="#t-4-hipotesis-de-caza-prioritarias">T-4. Hipótesis de caza prioritarias</a><a href="#t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero">T-5. Brechas de visibilidad que hay que cerrar primero</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-el-cifrador">X-1. El cifrador</a><a href="#x-2-artefactos-de-host-persistentes-entre-builds">X-2. Artefactos de host persistentes entre builds</a><a href="#x-3-cadena-de-auto-propagacion-detalle">X-3. Cadena de auto-propagación (detalle)</a><a href="#x-4-anti-forense">X-4. Anti-forense</a><a href="#x-5-logica-de-deteccion-prioritaria-pseudocodigo-para-portar-a-sigma-kql-spl">X-5. Lógica de detección prioritaria (pseudocódigo para portar a Sigma/KQL/SPL)</a><a href="#x-6-consultas-de-caza">X-6. Consultas de caza</a><a href="#x-7-nombres-de-deteccion-de-proveedor">X-7. Nombres de detección de proveedor</a><a href="#x-8-mitigaciones-de-configuracion-con-efecto-directo">X-8. Mitigaciones de configuración con efecto directo</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores-de-compromiso">Anexo A — Indicadores de compromiso</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-marcos-empleados">Anexo D — Marcos empleados</a><a href="#anexo-e-paquete-legible-por-maquina">Anexo E — Paquete legible por máquina</a><a href="#anexo-f-control-de-cambios">Anexo F — Control de cambios</a><a href="#anexo-g-realimentacion-del-consumidor">Anexo G — Realimentación del consumidor</a><a href="#fuentes-consultadas">Fuentes consultadas</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de actor + informe de campaña</span><span class="pill p-mint">Chile · Latinoamérica</span><span class="pill p-sky">v1.2 · 2026-09-15</span></div><h1>TheGentlemen<br><span class="hl">Storm-2697</span></h1><p class="sub">TheGentlemen (Storm-2697): RaaS de alto volumen con cifrador auto-propagante y acceso por borde de red</p><p class="sub2">Con evaluación de actividad confirmada en Chile y Latinoamérica</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-014</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-15</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:AMBER</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-014</code></dd></div><div><dt>Versión / fecha</dt><dd class="m"><code>1.2</code> — 2026-09-15</dd></div><div><dt>Tipo de producto</dt><dd>Perfil de actor + informe de campaña</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Foco regional</dt><dd>Chile · Latinoamérica</dd></div><div><dt>Marcado de difusión</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:AMBER</code></dd></div><div><dt>Ventana de observación</dt><dd class="m">2025-07-17 → 2026-09-15</dd></div><div><dt>Base de colección</dt><dd>17 fuentes externas todo-fuente (OSINT, TECHINT de proveedor, CLOSINT derivado de filtración adversaria, CERT nacional). <strong>Sin telemetría propia incorporada</strong></dd></div><div><dt>Caducidad / revisión</dt><dd>2026-12-15, o antes si se confirma rebranding</dd></div><div><dt>Productos relacionados</dt><dd>— (emisión inicial)</dd></div><div><dt>Paquete legible por máquina</dt><dd>Pendiente de generar (véase §14)</dd></div></dl>
+<div class="note warn rv"><div class="t">Limitación estructural de este producto</div><p>Se ha elaborado exclusivamente con fuentes abiertas y de proveedor. No incorpora telemetría de la organización, por lo que <strong>la sección de exposición propia (§Operacional-4) está sin rellenar</strong> y los juicios sobre riesgo para nosotros son condicionales, no evaluados.</p></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>TheGentlemen es, a la fecha de este informe, la segunda operación de ransomware-como-servicio más activa del mundo por volumen de víctimas publicadas, solo por detrás de Qilin, con ~868 víctimas reivindicadas en 12 meses</h4><p>Valoramos <strong>casi con certeza (95–99 %)</strong> que siga operativa durante los próximos seis meses en ausencia de acción policial.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>95–99 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Concordancia de cinco fuentes independientes (A-2 a C-2) sobre la tendencia, pese a discrepancias en las cifras absolutas.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>El vector de acceso inicial dominante es el borde de red: appliances Fortinet sin parchear (CVE-2024-55591) y portales VPN/SSL sin MFA</h4><p>El grupo mantiene un inventario de aproximadamente <strong>14.700 dispositivos FortiGate ya comprometidos</strong> que distribuye a sus afiliados. Valoramos <strong>muy probable (80–95 %)</strong> que una intrusión de este actor contra nosotros comenzara por esa vía.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Coincidencia de Unit 42, Sophos, Group-IB y Halcyon.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>El cifrador se auto-propaga sin intervención del operador: con unas credenciales de dominio válidas, un solo host comprometido intenta 21 operaciones de ejecución remota contra cada máquina alcanzable</h4><p>Esto está <strong>confirmado por análisis de binario</strong>. <em>Implicación de doctrina:</em> la premisa clásica de contención —"aislar el host paciente cero y luego investigar"— <strong>no es válida contra este actor</strong>. La ventana de contención efectiva se mide en minutos.</p><div class="gauge" data-p="100"><div class="lab"><span>Confirmado</span><b>hecho</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-4</div>
+<h4>La mediana de permanencia entre acceso inicial y cifrado es de aproximadamente 2 días, con casos observados por debajo de 24 horas</h4><p>Valoramos <strong>probable (55–80 %)</strong> que un proceso de respuesta que dependa de escalado manual en horario laboral llegue tarde.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Sophos (A-2, telemetría de IR propia); una fuente secundaria discrepa al alza (3–5 días).</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>La filtración de su infraestructura interna del 4 de mayo de 2026 no ha degradado su operación —el volumen de víctimas siguió creciendo después—</h4><p>Valoramos <strong>probable (55–80 %)</strong> un rebranding o pivote de infraestructura en los próximos 6–12 meses, lo que <strong>invalidará los indicadores técnicos de este informe pero no sus TTP</strong>.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Precedente de LockBit y ALPHV; razonamiento por analogía, no por observación directa.</p></div>
+<div class="kj kj-lo rv"><div class="id">KJ-6</div>
+<h4>Las cifras públicas subestiman el volumen real de víctimas en torno a un 45 %: un servidor C2 incautado apuntaba a más de 1.570 víctimas frente a las ~868 publicadas en el sitio de filtración</h4><p class="base"><b>Confianza: baja.</b> Fuente única, sin corroboración. Se incluye por su relevancia para el cálculo de riesgo, marcado explícitamente como no confirmado.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-7</div>
+<h4>TheGentlemen opera en Latinoamérica con víctimas confirmadas en al menos doce países, Chile incluido, donde reivindicó el ataque a un organismo público en febrero de 2026</h4><p>El contexto agrava el juicio: <strong>Chile atraviesa el peor momento de ransomware de su historia registrada</strong> —agosto de 2026 marcó el máximo histórico mensual de víctimas y los ocho primeros meses de 2026 ya superan cualquier año completo anterior—. Valoramos <strong>muy probable (80–95 %)</strong> que la presión sobre organizaciones chilenas se mantenga o aumente en el próximo trimestre.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Monitorización de CronUp (ATRc®) y alerta oficial del CSIRT Nacional/ANCI, corroboradas por ESET y a3sec.</p></div></div>
+<p class="rv"><strong>Qué cambiaría estos juicios:</strong> (a) una detención o incautación de infraestructura confirmada por autoridades; (b) la aparición de un cifrador con un esquema criptográfico distinto bajo la misma marca —indicaría cambio de desarrollador—; (c) observación de acceso inicial por phishing masivo, que contradiría el modelo actual centrado en borde de red.</p>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">TheGentlemen es un grupo criminal de habla rusa, con ánimo exclusivamente de lucro, que en catorce meses ha pasado de no existir a copar aproximadamente el 10 % de todos los ataques de ransomware reivindicados a escala mundial. No innova: <strong>industrializa</strong>. Su ventaja competitiva son tres decisiones de negocio.</p>
+<p class="rv">Primera, paga a sus afiliados <strong>el 90 % del rescate</strong>, frente al 70–80 % habitual del sector, lo que le ha permitido captar operadores experimentados de programas rivales. Segunda, <strong>entrega el acceso ya hecho</strong>: en lugar de exigir a sus afiliados que consigan la entrada, les reparte un inventario de miles de cortafuegos Fortinet previamente comprometidos, eliminando la parte más lenta y más cara de una intrusión. Tercera, su cifrador <strong>se propaga solo por la red</strong>, de modo que un afiliado con poca pericia técnica puede provocar un cifrado de dominio completo.</p>
+<p class="rv">Para nosotros, esto se traduce en tres consecuencias concretas. <strong>Una:</strong> el riesgo se concentra en los activos perimetrales —VPN, cortafuegos, portales de acceso remoto—, que son precisamente los que no tienen agente EDR y peor telemetría generan. <strong>Dos:</strong> el margen de reacción es de unas 48 horas desde el acceso hasta el cifrado, y menos de 24 en el peor caso observado; cualquier proceso de respuesta que dependa de escalado humano en horario de oficina llega tarde. <strong>Tres:</strong> el grupo ataca deliberadamente la infraestructura de respaldo (Veeam, VMware ESXi) antes de cifrar, por lo que la copia de seguridad solo es una defensa si está fuera del dominio y es inmutable.</p>
+<p class="rv"><strong>Decisión que se solicita a Dirección:</strong> aprobar (a) una revisión extraordinaria de la exposición perimetral con plazo de 30 días, (b) la validación de la inmutabilidad y el aislamiento de las copias de seguridad, y (c) la autorización de contención automatizada fuera de horario —aislar un host sin esperar aprobación humana—, que es la única contramedida proporcionada a la velocidad de propagación descrita en §Técnico-3.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2><p><strong>Requisitos atendidos.</strong> Perfilado de un actor de alta actividad con relevancia potencial para nuestra superficie expuesta; caracterización de su modelo de acceso inicial; extracción de contenido de detección accionable.</p></div></div>
+<p class="rv"><strong>Fuera de alcance.</strong> Evaluación de nuestra exposición real (requiere telemetría propia); valoración de terceros y proveedores; análisis de la viabilidad de pago.</p>
+<p class="rv"><strong>Limitaciones de la colección.</strong></p><ul class="rv"><li><strong>Ninguna fuente primaria propia.</strong> Todo procede de terceros.</li><li><strong>Las cifras de víctimas proceden del sitio de filtración del propio adversario</strong>, que es una fuente que él controla: puede inflar (reivindicaciones falsas), omitir (víctimas que pagaron) y duplicar. Se usan como indicador de tendencia, no como recuento.</li><li><strong>Parte del material sobre estructura interna procede de datos filtrados por un tercero criminal</strong> (§Operacional-5). Un adversario puede haber salado esa filtración. Se le asigna credibilidad limitada.</li><li><strong>Discrepancia no resuelta sobre el liderazgo</strong> del grupo entre dos proveedores de primer nivel (§Operacional-2).</li><li><strong>Sesgo de proveedor:</strong> una de las fuentes es el fabricante cuyo producto constituye el vector principal, y otra es un proveedor con incentivo comercial a dramatizar la escala. Ambos marcados en el Anexo B.</li><li><strong>Cobertura regional asimétrica.</strong> Los datos de Chile son de buena calidad (CERT nacional + proveedor local con monitorización continua). Los del resto de Latinoamérica proceden en su mayoría de un único análisis regional, por lo que <strong>la ausencia de víctimas reportadas en un país no es evidencia de ausencia de actividad</strong>, sino probablemente de menor cobertura de reporte.</li></ul>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> Consejo, CISO, Riesgo, Legal</span><span><b>Horizonte:</b> 6–24 meses</span></div></div>
+<section id="e-1-que-representa-este-actor-en-el-panorama" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Qué representa este actor en el panorama</h2><p>TheGentlemen no es una amenaza <em>nueva</em> en términos técnicos; es la evidencia de <strong>tres cambios estructurales del mercado criminal que ya afectan a cualquier organización expuesta a Internet</strong>:</p></div></div>
+<p class="rv"><strong>La barrera de entrada ha desaparecido.</strong> El grupo vende no solo el cifrador, sino el acceso. Un afiliado ya no necesita saber explotar un cortafuegos: recibe una lista de dispositivos ya comprometidos. Esto desacopla la capacidad ofensiva de la pericia técnica, y explica por qué el volumen crece más rápido que la sofisticación.</p>
+<p class="rv"><strong>La marca ya no informa.</strong> El grupo nació escindido de Qilin —sus operadores eran el afiliado «ArmCorp»— tras una disputa por 48.000 USD de comisiones impagadas. Sus miembros rotan, colaboran con LockBit, DragonForce y otros, y someten a ingeniería inversa los cifradores de Babuk, Qilin, LockBit 5.0 y Medusa para incorporar lo mejor de cada uno. <strong>Defenderse "de TheGentlemen" es un error de marco: hay que defenderse de los comportamientos, porque los afiliados y las técnicas sobreviven a las marcas.</strong></p>
+<p class="rv"><strong>La IA ya está integrada en el flujo de trabajo ofensivo.</strong> Las comunicaciones internas filtradas muestran uso corriente de asistentes comerciales y de modelos abiertos sin restricciones para desarrollo de código y de scripts. La consecuencia defensiva no es alarmista sino concreta: <strong>las heurísticas que dependen de "errores del atacante" —redacción defectuosa, código torpe— pierden valor</strong>.</p>
+</section>
+<section id="e-2-victimologia-donde-cae-y-que-significa-para-nosotros" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>Victimología: dónde cae y qué significa para nosotros</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Dimensión</th><th>Distribución observada (a 2026-09-15)</th></tr></thead><tbody>
+<tr><td><strong>Países</strong></td><td>EE. UU. 156 · Alemania 40 · Tailandia 39 · Francia 38 · Reino Unido 37 · 70+ países en total</td></tr>
+<tr><td><strong>Sectores</strong></td><td>Manufactura 171 · Tecnología 114 · Servicios profesionales 108 · Sanidad 76 · Retail 68</td></tr>
+<tr><td><strong>Exclusión</strong></td><td>Rusia y CEI, por prohibición interna de los operadores</td></tr></tbody></table></div>
+<p class="rv">Dos lecturas relevantes para el cálculo de riesgo:</p>
+<p class="rv"><strong>El grupo es geográficamente indiferente.</strong> A diferencia del patrón habitual del ransomware —donde en torno al 50 % de las víctimas son estadounidenses—, aquí la cuota de EE. UU. es marcadamente menor. Esto indica <strong>selección oportunista por exposición técnica, no por geografía o tamaño</strong>. No existe la protección de «somos poco interesantes» ni la de «no operamos en el mercado estadounidense»: el criterio de selección es tener un FortiGate sin parchear accesible desde Internet.</p>
+<p class="rv"><strong>Ataca sanidad sin restricción.</strong> El grupo no aplica las limitaciones autoimpuestas que algunos programas de RaaS declararon históricamente. Sanidad es su cuarto sector.</p>
+</section>
+<section id="e-2-1-foco-regional-chile-y-latinoamerica" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2.1</span><div><h2>Foco regional: Chile y Latinoamérica</h2></div></div>
+<h3 class="rv">El actor en la región</h3>
+<p class="rv">TheGentlemen no trata a Latinoamérica como periferia. Su expansión regional —Colombia primero, después Argentina y Chile— es coherente con su criterio global de selección: <strong>exposición técnica, no relevancia económica</strong>.</p>
+<div class="tw rv"><table><thead>
+<tr><th>País</th><th>Víctima / sector</th><th>Fecha</th></tr></thead><tbody>
+<tr><td><strong>Chile</strong></td><td>Organismo público de derechos humanos (Instituto Nacional de Derechos Humanos)</td><td>Feb 2026</td></tr>
+<tr><td>Argentina</td><td>Instituto público de investigación científica</td><td>Feb 2026</td></tr>
+<tr><td>Colombia</td><td>Dos organizaciones: sanidad y medios de comunicación</td><td>Mar 2026</td></tr>
+<tr><td>Brasil · Perú · Ecuador · Venezuela · Guatemala · Rep. Dominicana · Costa Rica · Panamá · México</td><td>Presencia confirmada, detalle no publicado</td><td>2026</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Lectura clave</div><p>Las tres primeras víctimas latinoamericanas conocidas son <strong>organismos públicos e instituciones de investigación</strong>, no grandes corporaciones. Esto es consistente con KJ-2 y refuerza el juicio: el grupo entra por donde el perímetro está sin parchear, y el sector público regional concentra appliances de borde con ciclos de actualización largos.</p></div>
+<h3 class="rv">El contexto chileno: por qué este informe es urgente aquí</h3>
+<p class="rv">Chile ha dejado de ser un objetivo oportunista para integrarse en campañas sostenidas alineadas con la dinámica global. Los datos de monitorización continua del mercado local dibujan un deterioro sin precedentes:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Indicador</th><th>Valor</th></tr></thead><tbody>
+<tr><td><strong>Agosto 2026</strong></td><td><strong>Máximo histórico mensual</strong>: al menos 10 organizaciones afectadas</td></tr>
+<tr><td>Enero–agosto 2026</td><td>Ya supera el total de <strong>cualquier año completo anterior</strong></td></tr>
+<tr><td>Promedio mensual 2026</td><td>~4 víctimas/mes — <strong>cuadruplica</strong> el promedio de 2023</td></tr>
+<tr><td>Dic 2025 – mar 2026</td><td>13 organizaciones atacadas en 4 meses · 15 publicaciones · 9 grupos distintos</td></tr>
+<tr><td>Grupos activos simultáneamente en Chile</td><td>Qilin · Inc Ransom · <strong>The Gentlemen</strong> · Akira · Direwolf · Aurora · LockBit5 · Leakeddata · DragonForce · Pear</td></tr>
+<tr><td>Sectores más golpeados</td><td>Salud · Educación · Servicios profesionales · Manufactura · Sector público</td></tr></tbody></table></div>
+<p class="rv">Casos públicos del periodo que ilustran el patrón: una clínica privada (Devman, dic 2025, ~250 GB exfiltrados), el sector energético (Anubis, ene 2026), varias empresas de logística, comercio y agroindustria (Qilin, Lynx/Minteye), hotelería, y en septiembre de 2026 un hospital clínico universitario (Direwolf).</p>
+<p class="rv"><strong>Los vectores de acceso observados en Chile coinciden con el perfil de este informe y añaden uno propio de la región:</strong></p><ol class="rv"><li><strong>Credenciales comprometidas y VPN sin MFA</strong> — incluido al menos un caso documentado donde usuario y contraseña eran idénticos.</li><li><strong>Superficies expuestas sin parchear</strong> — el patrón de KJ-2.</li><li><strong>Cloud y SaaS mal configurados, señaladamente Microsoft 365</strong> — vector con <strong>más peso en Chile que en la media global</strong> reflejada en §Táctico.</li><li><strong>Credenciales procedentes de infostealers</strong>, según la alerta del CERT nacional.</li><li><strong>Re-victimización</strong>: organizaciones atacadas más de una vez.</li></ol>
+<div class="note info rv"><div class="t">Implicación para nuestro plan de detección</div><p>El peso del compromiso de identidad en M365 en el escenario chileno significa que <strong>las hipótesis de caza de §Táctico deben complementarse con vigilancia del plano de identidad en la nube</strong> —autenticaciones anómalas, reglas de reenvío de correo, consentimientos OAuth—, que el análisis global centrado en el cifrador no cubre.</p></div>
+<h3 class="rv">Obligación regulatoria (Chile)</h3>
+<p class="rv">Chile cuenta desde 2024 con Ley Marco de Ciberseguridad y con la <strong>Agencia Nacional de Ciberseguridad (ANCI)</strong>, que opera el CSIRT Nacional. Las entidades sujetas a la ley tienen <strong>deber de reportar incidentes de efecto significativo en plazos muy breves —del orden de horas para la alerta temprana—</strong>.</p>
+<div class="note warn rv"><div class="t">⚠ Verificar con Legal</div><p>el plazo exacto vigente y si nuestra organización está dentro del ámbito de aplicación. Este informe no sustituye ese análisis. El punto relevante para Dirección es que <strong>el reloj regulatorio empieza a correr antes de que el análisis técnico haya concluido</strong>, lo que exige tener decidido de antemano quién declara un incidente como significativo.</p><p>Canal del CSIRT Nacional / ANCI: <code>+56 2 1510</code> · <code>soc@anci.gob.cl</code></p></div>
+<p class="rv"><strong>El CSIRT Nacional emitió alerta específica sobre este actor</strong> (<code>AIA26-00012</code>, 10 de febrero de 2026, TLP:CLEAR), lo que constituye reconocimiento oficial de la amenaza en el país y refuerza la exigibilidad de las medidas de §Técnico-8.</p>
+</section>
+<section id="e-3-tendencia-y-pronostico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Tendencia y pronóstico</h2></div></div>
+<div class="chart rv">
+<h4>Víctimas publicadas por mes</h4><p class="cap">Fuente: sitio de filtración del adversario. Indicador de tendencia, no recuento.</p><svg viewBox="0 0 720 250" role="img" aria-label="Víctimas publicadas por mes"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">42</text><text x="42" y="116.0">84</text><text x="42" y="72.0">127</text><text x="42" y="28.0">169</text></g><path d="M50.0,179.2 L210.0,150.0 L370.0,105.2 L530.0,78.2 L690.0,24.0 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,179.2 L210.0,150.0 L370.0,105.2 L530.0,78.2 L690.0,24.0"/><g><circle class="pt" cx="50.0" cy="179.2" r="5" fill="#5a7ebe"><title>Últimos meses de 2025: &lt; 20</title></circle><circle class="pt" cx="210.0" cy="150.0" r="5" fill="#5a7ebe"><title>Enero 2026: 48</title></circle><circle class="pt" cx="370.0" cy="105.2" r="5" fill="#5a7ebe"><title>Febrero 2026: 91</title></circle><circle class="pt" cx="530.0" cy="78.2" r="5" fill="#4db99c"><title>Junio 2026: 117</title></circle><circle class="pt" cx="690.0" cy="24.0" r="6.5" fill="#f7a400"><title>Julio 2026: 169</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="168.2">&lt; 20</text><text x="210.0" y="139.0">48</text><text x="370.0" y="94.2">91</text><text x="530.0" y="67.2">117</text><text x="690.0" y="13.0" fill="#f7a400">169</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">2025</text><text x="210.0" y="222">Enero 2026</text><text x="370.0" y="222">Febrero 2026</text><text x="530.0" y="222">Junio 2026</text><text x="690.0" y="222">Julio 2026</text></g></svg></div>
+<p class="rv">Alcanzó en cinco meses el volumen que a Akira le costó doce y a Qilin dieciocho.</p>
+<p class="rv"><strong>Escenario más probable</strong> <em>(probable, 55–70 %; confianza moderada)</em> — Continuidad con crecimiento moderado. El grupo mantiene el modelo de 90 %, sigue explotando appliances de borde y añade CVE nuevos a medida que se publican. El volumen se estabiliza en la horquilla de 100–170 víctimas mensuales.</p>
+<p class="rv"><strong>Alternativa creíble</strong> <em>(poco probable, 20–35 %)</em> — <strong>Rebranding</strong>. La filtración de mayo de 2026 expuso su cadena de herramientas completa a investigadores y fuerzas de seguridad. El precedente del sector indica que esto suele preceder a un cambio de marca con continuidad de personal. <em>Consecuencia defensiva:</em> los indicadores caducan, los TTP no.</p>
+<p class="rv"><strong>Baja probabilidad / alto impacto</strong> <em>(remoto, 5–10 %)</em> — Acción policial coordinada con detenciones. Reduciría el volumen de forma transitoria; el precedente de LockBit sugiere reconstitución parcial en meses.</p>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide-al-nivel-estrategico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide al nivel estratégico</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>Fundamento</th><th>Plazo</th></tr></thead><tbody>
+<tr><td>E-a</td><td>Revisión extraordinaria de superficie perimetral expuesta, con inventario nominal de appliances y su versión</td><td>KJ-2: el 100 % del acceso inicial documentado pasa por ahí</td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr><td>E-b</td><td>Validar que las copias de seguridad son inmutables y están <strong>fuera del dominio de Windows</strong></td><td>El actor destruye respaldos antes de cifrar, con credenciales de dominio</td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr><td>E-c</td><td>Autorizar contención automatizada 24×7 sin aprobación humana previa</td><td>KJ-3 + KJ-4: la propagación es automática y la mediana de permanencia es de 2 días</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td>E-d</td><td>Extender la exigencia de MFA en acceso remoto a <strong>proveedores y terceros</strong> por vía contractual</td><td>La ausencia de MFA en VPN es el habilitador documentado</td><td>Trimestre siguiente</td></tr>
+<tr><td>E-e</td><td>Asumir en el plan de continuidad un escenario de <strong>cifrado simultáneo de dominio completo, incluida la capa de virtualización</strong></td><td>El cifrador tiene variantes para ESXi, Linux, NAS y BSD</td><td>Próximo ejercicio</td></tr>
+<tr><td>E-f</td><td><strong>Confirmar con Legal el ámbito de aplicación de la Ley Marco y el plazo de reporte a la ANCI</strong>, y designar nominalmente quién declara un incidente «de efecto significativo»</td><td>El plazo de alerta temprana corre en horas, antes de que exista análisis técnico concluyente</td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr><td>E-g</td><td>Extender el alcance de la revisión de identidad a <strong>Microsoft 365</strong> (MFA resistente a phishing, revisión de consentimientos OAuth, reglas de reenvío)</td><td>Vector con peso específico mayor en el escenario chileno que en el global</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td>E-h</td><td>Suscribir la organización a las alertas del <strong>CSIRT Nacional / ANCI</strong> y a monitorización regional continua</td><td>La alerta <code>AIA26-00012</code> sobre este actor se publicó 7 meses antes que buena parte del análisis internacional</td><td><span class="pill p-amber">15 días</span></td></tr></tbody></table></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> Jefatura de SOC, Respuesta a Incidentes, Threat Hunting</span><span><b>Horizonte:</b> semanas–meses</span></div></div>
+<section id="o-1-identificacion-y-alias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación y alias</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Designación</th><th>Origen</th><th>Grado de equivalencia</th></tr></thead><tbody>
+<tr><td>The Gentlemen / TheGentlemen</td><td>Autodenominación (sitio de filtración)</td><td><span class="pill p-mint">Referencia</span></td></tr>
+<tr><td><strong>Storm-2697</strong></td><td>Microsoft</td><td><span class="pill p-mint">Equivalente</span></td></tr>
+<tr><td>ArmCorp</td><td>Identidad previa como afiliado de Qilin</td><td>Antecesor, no equivalente</td></tr>
+<tr><td>«Spikey Scorpius»</td><td>Unit 42</td><td><strong>Ambiguo</strong> — la redacción de la fuente no permite determinar si designa a TheGentlemen, a ArmCorp o a Qilin. <strong>No usar hasta aclaración</strong></td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota de tradecraft</div><p>El cuarto alias se deja marcado como ambiguo en lugar de resolverlo por conveniencia. Fusionar alias mal atribuidos es una de las principales fuentes de error en correlación de inteligencia.</p></div>
+</section>
+<section id="o-2-estructura-y-atribucion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>Estructura y atribución</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Eje de atribución</th><th>Valoración</th><th>Confianza</th></tr></thead><tbody>
+<tr><td>Clúster técnico</td><td>Actividad coherente: mismo cifrador, misma nota, mismo esquema criptográfico</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Grupo organizado</td><td>~20 miembros, 8 en el núcleo, con roles diferenciados</td><td><span class="pill p-sky">Moderada</span></td></tr>
+<tr><td>Nexo estatal</td><td><strong>Ninguno.</strong> Motivación exclusivamente económica</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Identidad nominal</td><td>Alias de foro conocidos; sin identificación real pública</td><td><span class="pill p-grey">Baja</span></td></tr>
+<tr><td>Origen geográfico</td><td>Habla rusa; prohibición de atacar CEI</td><td><strong>Moderada</strong> (inferencia por comportamiento, no por evidencia directa)</td></tr></tbody></table></div>
+<p class="rv"><strong>Roles identificados en la filtración interna:</strong> <code>zeta88</code> como administrador —percibe el 10 % de cada rescate—; <code>Wick</code> y <code>mAst3r</code> como operadores de intrusión; <code>Kunder</code> como validador de accesos; <code>qbit</code>, <code>quant</code>, <code>Protagor</code> y <code>JeLLy</code> en funciones de soporte y herramientas; <code>hastalamuerte</code> como corredor de accesos iniciales colaborador.</p>
+<div class="note warn rv"><div class="t">⚠ Discrepancia de fuentes no resuelta</div><p>Group-IB presenta a <code>hastalamuerte</code> como <strong>administrador principal</strong> del grupo, mientras que el análisis de la filtración interna lo sitúa como <strong>colaborador externo de acceso inicial</strong>, con <code>zeta88</code> en la administración. Ambas fuentes son de calidad. Posibles explicaciones: (a) cambio de rol entre el periodo analizado por cada una; (b) <code>hastalamuerte</code> es el rostro público y <code>zeta88</code> el operador real; (c) error de una de las dos. <strong>No se resuelve en este informe.</strong> Impacto práctico: ninguno sobre la defensa, relevante solo para correlación con futuros informes y para eventual acción legal.</p></div>
+</section>
+<section id="o-3-modelo-de-negocio-por-que-escala" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Modelo de negocio: por qué escala</h2></div></div>
+<p class="rv"><strong>Reparto 90/10.</strong> Anunciado en el foro RAMP en septiembre de 2025 y corroborado por la filtración interna, donde el administrador percibe el 10 %. Es el reparto más agresivo del mercado y explica la captación de operadores veteranos. <em>(Group-IB indica 70/30; valoramos que corresponde a una condición anterior o a un nivel distinto de afiliado — discrepancia menor, sin efecto defensivo.)</em></p>
+<p class="rv"><strong>Acceso entregado, no exigido.</strong> Es la diferencia de fondo con un RaaS clásico. El operador reparte entre sus afiliados:</p><ul class="rv"><li>Un inventario de <strong>~14.700 dispositivos FortiGate comprometidos</strong>, distribuido como documento HTML.</li><li><strong>969 credenciales de VPN validadas</strong> por fuerza bruta.</li><li>Scripts, herramientas de evasión de EDR y guía técnica.</li></ul>
+<p class="rv"><strong>Criterios de selección de víctima</strong> documentados internamente: capacidad de pago alta; presión legal o regulatoria que incentive pagar; parque relevante de cuentas VPN de Fortinet; servicios críticos; autenticación débil o integración LDAP expuesta.</p>
+<p class="rv"><strong>Reconocimiento previo de honeypots.</strong> Su diccionario de fuerza bruta incluye combinaciones deliberadamente absurdas para detectar si el dispositivo es un señuelo antes de invertir esfuerzo. <em>Consecuencia:</em> un honeypot perimetral mal construido será descartado por el atacante y no generará inteligencia.</p>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="note gap rv"><div class="t">⬛ SECCIÓN SIN EVALUAR — requiere telemetría interna</div><p>Esta es la sección que convierte un informe genérico en inteligencia útil, y es la que este producto <strong>no puede rellenar</strong> con las fuentes disponibles. Debe completarse antes de dar el informe por cerrado. Preguntas a responder:</p>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Pregunta</th><th>Fuente</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>X-1</td><td>¿Exponemos appliances Fortinet a Internet? ¿Qué versión de FortiOS? ¿Parcheadas frente a CVE-2024-55591?</td><td>Inventario + escaneo externo</td><td>TI/Redes</td></tr>
+<tr><td>X-2</td><td>¿Hay algún portal de acceso remoto <strong>sin MFA</strong>, incluidos los de proveedores?</td><td>Gestión de identidad</td><td>IAM</td></tr>
+<tr><td>X-3</td><td>¿Existen cuentas administrativas en los appliances con nombres anómalos (<code>support_fortinet</code>, <code>badmin</code>, <code>forti-api</code>, cuentas «guest»)?</td><td>Config de los dispositivos</td><td>TI/Redes</td></tr>
+<tr><td>X-4</td><td>¿Nuestro Veeam/backup usa credenciales de dominio? ¿Es inmutable? ¿Está fuera del dominio?</td><td>Backup</td><td>Infraestructura</td></tr>
+<tr><td>X-5</td><td>¿Tenemos SMB1 habilitado en algún segmento? ¿Y <code>EveryoneIncludesAnonymous</code>?</td><td>GPO / auditoría</td><td>Sistemas</td></tr>
+<tr><td>X-6</td><td>¿Registramos y alertamos la creación de servicios y tareas programadas remotas?</td><td>SIEM/EDR</td><td>SOC</td></tr>
+<tr><td>X-7</td><td>¿Qué cobertura de EDR tenemos en hosts ESXi y NAS?</td><td>Inventario</td><td>Infraestructura</td></tr></tbody></table></div></div>
+</section>
+<section id="o-5-acontecimiento-de-mayo-de-2026-la-filtracion-interna" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Acontecimiento de mayo de 2026: la filtración interna</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fecha</th><th>Hecho</th></tr></thead><tbody>
+<tr><td>2026-05-04</td><td>El administrador reconoce públicamente en Exploit.in el compromiso de su base de datos interna</td></tr>
+<tr><td>2026-05-05</td><td>La cuenta <code>n7778</code> pone a la venta «The Gentlemen – Hacked Data for Sale» en el foro Cracked por 10.000 USD en BTC</td></tr>
+<tr><td>—</td><td>Contenido: registros de chat, listado de afiliados, transcripciones de negociación, discusiones de herramientas y credenciales de servidor. Ventana 2025-11-07 → 2026-04-30</td></tr>
+<tr><td>—</td><td>Los investigadores obtuvieron ~44,4 MB de un conjunto total estimado en ~16,22 GB</td></tr></tbody></table></div>
+<p class="rv"><strong>Valoración.</strong> La filtración expuso la cadena de herramientas completa del grupo. No obstante, <strong>julio de 2026 fue su mes de mayor actividad (169 víctimas)</strong>, es decir, posterior a la filtración. Valoramos por tanto que <strong>el impacto operativo fue nulo o marginal (confianza moderada)</strong> y que su principal efecto será acelerar un eventual rebranding (KJ-5).</p>
+<p class="rv"><em>Nota de fuente:</em> estos datos proceden de una filtración publicada por un actor criminal. No puede descartarse contaminación deliberada. Se tratan con credibilidad 3.</p>
+</section>
+<section id="o-6-cronologia-del-actor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Cronología del actor</h2></div></div>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev " data-k=""><div class="d">~2025 (1S)</div><div class="x">Opera como «ArmCorp», afiliado de Qilin</div></div>
+<div class="ev " data-k=""><div class="d">2025-07-17</div><div class="x">Primera muestra Windows del cifrador subida a VirusTotal — desarrollo propio ya en marcha estando aún en Qilin</div></div>
+<div class="ev " data-k=""><div class="d">2025-07-22</div><div class="x">Arbitraje en el foro RAMP contra Qilin por 48.000 USD de comisiones</div></div>
+<div class="ev " data-k=""><div class="d">2025-07 (mediados)</div><div class="x">Sitio de filtración operativo, aún sin anuncio público</div></div>
+<div class="ev " data-k=""><div class="d">2025-09 (inicio)</div><div class="x">Anuncio público del sitio de filtración — 94 víctimas</div></div>
+<div class="ev " data-k=""><div class="d">2025-09-10</div><div class="x">Publicación de la variante específica para ESXi</div></div>
+<div class="ev " data-k=""><div class="d">2025-09-21</div><div class="x">Se añade temporizador en segundo plano y propagación agresiva por WMI</div></div>
+<div class="ev " data-k=""><div class="d">2025-12</div><div class="x">Disputa pública con el afiliado <code>Devman</code> sobre prácticas de OpSec</div></div>
+<div class="ev " data-k=""><div class="d">2026-01 → 2026-05</div><div class="x">328 víctimas; ~10 % de las reivindicaciones mundiales</div></div>
+<div class="ev " data-k=""><div class="d">2026-05-04/05</div><div class="x">Filtración de su base de datos interna</div></div>
+<div class="ev " data-k=""><div class="d">2026-05</div><div class="x">Acuerdo con BreachForums para captación de pentesters y corredores de acceso</div></div>
+<div class="ev " data-k=""><div class="d">2026-06</div><div class="x">117 víctimas en el mes</div></div>
+<div class="ev big" data-k="big"><div class="d">2026-07</div><div class="x"><strong>Pico: 169 víctimas</strong>; total acumulado ~683</div></div>
+<div class="ev " data-k=""><div class="d">2026-09-15</div><div class="x">~868 víctimas acumuladas; actividad sostenida</div></div></div>
+</section>
+<section id="o-6-1-actividad-confirmada-en-chile-y-latinoamerica" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6.1</span><div><h2>Actividad confirmada en Chile y Latinoamérica</h2></div></div>
+<h3 class="rv">Cronología regional</h3>
+<div class="tlfilter rv" data-for="timeline2"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline2">
+<div class="ev big" data-k="big"><div class="d">2026-02-04</div><div class="x">Detección del ataque a un <strong>organismo público chileno de derechos humanos</strong> (INDH). Primer caso confirmado del actor en Chile</div></div>
+<div class="ev " data-k=""><div class="d">2026-02</div><div class="x">Argentina: instituto público de investigación científica</div></div>
+<div class="ev big" data-k="big"><div class="d">2026-02-10</div><div class="x"><strong>El CSIRT Nacional / ANCI de Chile publica la alerta <code>AIA26-00012</code> sobre The Gentlemen</strong> (TLP:CLEAR)</div></div>
+<div class="ev big" data-k="big"><div class="d">2026-02</div><div class="x">El actor es el <strong>segundo grupo más activo del mundo</strong> en el mes, con 78 víctimas</div></div>
+<div class="ev " data-k=""><div class="d">2026-02-26</div><div class="x">CronUp publica el análisis del deterioro del escenario chileno: 13 organizaciones en 4 meses, 9 grupos</div></div>
+<div class="ev " data-k=""><div class="d">2026-03</div><div class="x">Colombia: dos organizaciones —sanidad y medios de comunicación—</div></div>
+<div class="ev " data-k=""><div class="d">2026-03-26</div><div class="x">ESET documenta la expansión latinoamericana del actor</div></div>
+<div class="ev " data-k=""><div class="d">2026-04-07</div><div class="x">a3sec emite boletín regional: expansión Colombia → Argentina → Chile</div></div>
+<div class="ev big" data-k="big"><div class="d">2026-08</div><div class="x"><strong>Chile registra su máximo histórico mensual de víctimas de ransomware</strong> (≥10 organizaciones)</div></div>
+<div class="ev " data-k=""><div class="d">2026-09-04</div><div class="x">CronUp confirma la continuidad del pico; The Gentlemen sigue entre los grupos activos en el país</div></div></div>
+<h3 class="rv">Lo que aporta el CERT nacional que no aporta el análisis internacional</h3>
+<p class="rv">La alerta <code>AIA26-00012</code> describe un perfil de intrusión <strong>parcialmente distinto</strong> al de los informes globales, y la diferencia es operativamente relevante:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Aspecto</th><th>Informes internacionales</th><th><strong>CSIRT Nacional de Chile</strong></th></tr></thead><tbody>
+<tr><td>Acceso inicial</td><td>Explotación de CVE en appliance (T1190)</td><td><strong>Cuentas válidas (T1078) con credenciales procedentes de infostealers</strong></td></tr>
+<tr><td>Movimiento lateral</td><td>PsExec, SMB, WMI</td><td><strong>RDP (T1021.001)</strong> hacia servidores internos</td></tr>
+<tr><td>Señal temprana</td><td>Artefactos del cifrador</td><td><strong>Autenticaciones VPN exitosas desde geografías inusuales fuera de Chile</strong> y ráfagas de autenticación fallida contra cuentas privilegiadas</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Valoración analítica</div><p>Esto <strong>no contradice</strong> los informes internacionales: refleja que los afiliados que operan en la región <strong>no siempre necesitan explotar un CVE</strong>, porque disponen de credenciales válidas compradas a corredores de acceso o extraídas de registros de infostealers. Es una vía más barata y más silenciosa que la explotación.</p><p><strong>Consecuencia práctica:</strong> parchear CVE-2024-55591 <strong>no cierra el vector chileno</strong>. Si no hay MFA, un parche perfecto no impide la entrada. Esto eleva la prioridad de las decisiones E-d, E-g y de la hipótesis de caza H-10.</p></div>
+<h3 class="rv">Indicadores y recomendaciones del CSIRT Nacional (AIA26-00012)</h3>
+<p class="rv"><strong>Indicadores citados oficialmente:</strong></p><ul class="rv"><li>Tarea programada <code>gentlemen_system</code></li><li>Volúmenes anómalos de tráfico RDP</li><li>Múltiples intentos fallidos de autenticación contra cuentas privilegiadas</li></ul>
+<p class="rv"><strong>Medidas recomendadas</strong> —coincidentes con §Técnico-8, con dos añadidos propios: MFA en VPN, acceso administrativo y sistemas críticos · <strong>restricciones geográficas en el SSL VPN de Fortinet</strong> · EDR con protección contra manipulación · mínimo privilegio · respaldos inmutables y fuera de línea (3-2-1) · <strong>pruebas mensuales de restauración</strong> · segmentación de Directorio Activo, hipervisores y respaldos · restricción de SMB, RDP y SSH entre segmentos internos.</p>
+<div class="note info rv"><p>La <strong>restricción geográfica del SSL VPN</strong> es la medida de mayor relación eficacia/coste para una organización chilena frente a este actor concreto, dado el indicador de autenticaciones desde fuera del país.</p></div>
+<h3 class="rv">Diferencias con el perfil global, y qué significan</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Hallazgo regional</th><th>Divergencia respecto al perfil global</th><th>Implicación</th></tr></thead><tbody>
+<tr><td>Peso de <strong>Microsoft 365</strong> como superficie comprometida en Chile</td><td>Los informes globales sobre este actor apenas lo mencionan</td><td>Añadir vigilancia de identidad en la nube (no cubierta por §Táctico)</td></tr>
+<tr><td>Acceso vía <strong>infostealers</strong></td><td>Los informes globales priorizan CVE de borde</td><td>Vigilar credenciales corporativas en volcados de infostealers</td></tr>
+<tr><td><strong>Re-victimización</strong> observada en Chile</td><td>No documentada globalmente para este actor</td><td>Una organización ya atacada sigue siendo objetivo: el acceso puede persistir</td></tr>
+<tr><td>Sector público como primera víctima regional</td><td>Globalmente domina manufactura</td><td>El sector público chileno concentra riesgo por ciclos de parcheo largos</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota de tradecraft</div><p>Estas divergencias pueden deberse a (a) diferencias reales de comportamiento de los afiliados que operan en la región, o (b) a un sesgo de observación: el CERT nacional ve incidentes reportados por organizaciones chilenas, mientras que los proveedores globales ven su propia base de clientes. <strong>No se resuelve con las fuentes disponibles</strong>; se consigna porque afecta a cómo se ponderan las recomendaciones.</p></div>
+</section>
+<section id="o-7-hipotesis-alternativas-consideradas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>Hipótesis alternativas consideradas</h2><p><strong>H1 — Es un RaaS genuino con afiliados independientes.</strong> <em>(Hipótesis retenida.)</em> Consistente con el programa público, el reparto 90/10, el reclutamiento en foros y la variabilidad de TTP entre incidentes.</p></div></div>
+<p class="rv"><strong>H2 — Es un equipo central compacto que simula un programa de afiliados.</strong> No descartable. Una fuente observa que la «precisión operativa» es más propia de un equipo coordinado que de afiliados heterogéneos, y la filtración muestra solo ocho miembros nucleares. <em>Inconsistencia:</em> el volumen de 169 víctimas mensuales es difícil de sostener con ocho personas. <strong>Se valora poco probable (20–35 %).</strong></p>
+<p class="rv"><strong>H3 — Existe un patrocinio o tolerancia estatal.</strong> <em>(Descartada.)</em> No hay evidencia. La exclusión de la CEI es característica común de la criminalidad rusófona y <strong>no constituye por sí sola indicio de patrocinio</strong>. Se consigna explícitamente para evitar que se reabra sin evidencia nueva.</p>
+<p class="rv"><strong>Supuesto clave que sostiene buena parte del informe:</strong> que las víctimas publicadas en el sitio de filtración son reales y no reivindicaciones infladas. Si fuera falso, la magnitud del actor estaría sobrestimada —aunque no su capacidad técnica, que está corroborada por análisis de binario independiente.</p>
+<p class="rv"><strong>Pre-mortem.</strong> Si dentro de seis meses este informe resulta equivocado, la causa más probable será haber tratado un ecosistema de afiliados rotatorios como si fuera una organización estable, y haber orientado la defensa a la marca en lugar de al comportamiento.</p>
+</section>
+<section id="o-8-indicadores-y-senales-de-alerta" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-8</span><div><h2>Indicadores y señales de alerta</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Indicador observable</th><th>Qué señalaría</th><th>Disciplina</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>I-1</td><td>Aparición de nuestra organización o de un proveedor nuestro en su sitio de filtración</td><td>Compromiso ya consumado en la cadena</td><td>OSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-2</td><td>Publicación de un CVE crítico en appliance de borde que nosotros exponemos</td><td>Ventana de explotación de días</td><td>OSINT / KEV</td><td>Vulnerabilidades</td></tr>
+<tr><td>I-3</td><td>Nueva marca de RaaS con cifrador Go + Curve25519/XChaCha20 y nota análoga</td><td>Rebranding consumado (KJ-5)</td><td>TECHINT</td><td>CTI</td></tr>
+<tr><td>I-4</td><td>Venta de accesos a nuestra geografía/sector en RAMP, Rehub o Exploit.in</td><td>Preparación de acceso inicial</td><td>CLOSINT</td><td>CTI</td></tr>
+<tr><td>I-5</td><td>Autenticación correcta en VPN desde ASN inhabitual fuera de horario</td><td>Uso de credencial comprometida</td><td>Telemetría propia</td><td>SOC</td></tr>
+<tr><td>I-6</td><td>Cuenta administrativa nueva en un appliance perimetral</td><td>Puerta trasera post-explotación</td><td>Telemetría propia</td><td>TI/Redes</td></tr>
+<tr><td>I-7</td><td><strong>Autenticación VPN exitosa desde geografía inusual fuera de Chile</strong></td><td>Uso de credencial comprometida — indicador oficial del CSIRT Nacional</td><td>Telemetría propia</td><td>SOC</td></tr>
+<tr><td>I-8</td><td><strong>Aparición de credenciales corporativas en volcados de infostealers</strong></td><td>Vector de acceso regional documentado</td><td>OSINT / CLOSINT</td><td>CTI</td></tr>
+<tr><td>I-9</td><td><strong>Nueva alerta del CSIRT Nacional / ANCI sobre este actor o sobre un CVE de borde</strong></td><td>Reconocimiento oficial de campaña activa en el país</td><td>CERT nacional</td><td>CTI</td></tr>
+<tr><td>I-10</td><td>Publicación de una organización chilena de nuestro sector en cualquier sitio de filtración</td><td>Campaña sectorial en curso</td><td>OSINT</td><td>CTI</td></tr></tbody></table></div>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Analistas de SOC, Ingeniería de Detección, Threat Hunting</span><span><b>Horizonte:</b> días–semanas</span></div></div>
+<section id="t-1-cadena-de-intrusion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Cadena de intrusión</h2><p>Del borde de red al cifrado de dominio completo, en una mediana de dos días.</p></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">Tres etapas, un solo movimiento continuo</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">Etapa 01 · Borde</div><h5>Entrada por el perímetro</h5><ul><li><code>CVE-2024-55591</code> en FortiGate</li><li>VPN sin MFA</li><li>Cuenta backdoor: <code>support_fortinet</code>, <code>badmin</code>, <code>forti-api</code></li><li>Persistencia RMM: AnyDesk, Cloudflared, MeshCentral, Datto</li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 02 · Dominio</div><h5>Reconocimiento y credenciales</h5><ul><li>Advanced IP Scanner, SoftPerfect, Nmap</li><li>Credenciales: NetExec, DonPAPI, DPAPI, relay NTLM, Chrome</li><li>Movimiento lateral: RDP, PsExec, SMB</li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 03 · Impacto</div><h5>Neutralizar, exfiltrar, cifrar</h5><ul><li>Matar EDR por BYOVD: <code>ThrottleBlood.sys</code>, <code>viragt64.sys</code></li><li>Destruir respaldos: Veeam, VSS, ESXi</li><li>Exfiltrar: <code>avastrclone.exe</code>, Restic, MinIO, WinSCP</li><li><strong>Cifrar y auto-propagar</strong>: NETLOGON, GPO, 21 métodos</li></ul></div></div><div class="dwell"><span>⏱</span><span><strong>Permanencia:</strong> mediana ≈ <strong>2 días</strong> · mínimo observado <strong>&lt; 24 h</strong> — una vez arranca el cifrador, la ventana de contención efectiva se mide en <strong>minutos</strong>.</span></div></div>
+</section>
+<section id="t-2-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Acceso inicial <i>4</i></h5>
+<div class="tq" data-s="acceso inicial t1190 exploit public-facing app cve-2024-55591 (fortios/fortiproxy), cve-2025-32433 (erlang/otp ssh), cve-2025-55182"><div class="tid">T1190</div><div class="tn">Exploit Public-Facing App</div><div class="tp">CVE-2024-55591 (FortiOS/FortiProxy), CVE-2025-32433 (Erlang/OTP SSH), CVE-2025-55182</div></div>
+<div class="tq" data-s="acceso inicial t1133 external remote services ssl vpn sin mfa, rdp expuesto"><div class="tid">T1133</div><div class="tn">External Remote Services</div><div class="tp">SSL VPN sin MFA, RDP expuesto</div></div>
+<div class="tq" data-s="acceso inicial t1078.002 valid accounts: domain cuenta administrativa de fortigate comprometida"><div class="tid">T1078.002</div><div class="tn">Valid Accounts: Domain</div><div class="tp">Cuenta administrativa de FortiGate comprometida</div></div>
+<div class="tq" data-s="acceso inicial t1110.001 password guessing diccionario fortinet + detección de honeypots"><div class="tid">T1110.001</div><div class="tn">Password Guessing</div><div class="tp">Diccionario Fortinet + detección de honeypots</div></div></div>
+<div class="mcol" data-col><h5>Ejecución <i>4</i></h5>
+<div class="tq" data-s="ejecución t1059.001 powershell comandos codificados en base64 para evasión y despliegue"><div class="tid">T1059.001</div><div class="tn">PowerShell</div><div class="tp">Comandos codificados en Base64 para evasión y despliegue</div></div>
+<div class="tq" data-s="ejecución t1059.003 windows command shell cmd.exe para servicios y procesos"><div class="tid">T1059.003</div><div class="tn">Windows Command Shell</div><div class="tp"><code>cmd.exe</code> para servicios y procesos</div></div>
+<div class="tq" data-s="ejecución t1047 wmi wmic y win32_process para ejecución remota"><div class="tid">T1047</div><div class="tn">WMI</div><div class="tp"><code>WMIC</code> y <code>Win32_Process</code> para ejecución remota</div></div>
+<div class="tq" data-s="ejecución t1053.005 scheduled task tareas con patrón gentlemen, updateuser, updatesystem"><div class="tid">T1053.005</div><div class="tn">Scheduled Task</div><div class="tp">Tareas con patrón <code>gentlemen*</code>, <code>UpdateUser</code>, <code>UpdateSystem</code></div></div></div>
+<div class="mcol" data-col><h5>Persistencia <i>4</i></h5>
+<div class="tq" data-s="persistencia t1219 remote access software anydesk, meshcentral, datto rmm, cloudflared como servicio"><div class="tid">T1219</div><div class="tn">Remote Access Software</div><div class="tp">AnyDesk, MeshCentral, Datto RMM, Cloudflared como servicio</div></div>
+<div class="tq" data-s="persistencia t1547.001 registry run keys gupdates (hklm), gupdateu (hkcu)"><div class="tid">T1547.001</div><div class="tn">Registry Run Keys</div><div class="tp"><code>GupdateS</code> (HKLM), <code>GupdateU</code> (HKCU)</div></div>
+<div class="tq" data-s="persistencia t1136.002 create account: domain cuentas tipo microsoftsupporte con acceso a sql/veeam"><div class="tid">T1136.002</div><div class="tn">Create Account: Domain</div><div class="tp">Cuentas tipo <code>MicrosoftSupporte</code> con acceso a SQL/Veeam</div></div>
+<div class="tq" data-s="persistencia t1098 account manipulation reseteo de contraseña root en esxi"><div class="tid">T1098</div><div class="tn">Account Manipulation</div><div class="tp">Reseteo de contraseña root en ESXi</div></div></div>
+<div class="mcol" data-col><h5>Escalada <i>3</i></h5>
+<div class="tq" data-s="escalada t1548.008 abuse elevation control cve-2025-7771 (throttlestop.sys)"><div class="tid">T1548.008</div><div class="tn">Abuse Elevation Control</div><div class="tp">CVE-2025-7771 (<code>ThrottleStop.sys</code>)</div></div>
+<div class="tq" data-s="escalada t1484.001 domain policy modification gpo vía gpme.msc para distribución dominio-completo"><div class="tid">T1484.001</div><div class="tn">Domain Policy Modification</div><div class="tp">GPO vía <code>gpme.msc</code> para distribución dominio-completo</div></div>
+<div class="tq" data-s="escalada t1068 exploitation for priv esc badsuccessor, cve-2025-32463, cve-2024-37085 (esxi)"><div class="tid">T1068</div><div class="tn">Exploitation for Priv Esc</div><div class="tp">BadSuccessor, CVE-2025-32463, CVE-2024-37085 (ESXi)</div></div></div>
+<div class="mcol" data-col><h5>Evasión <i>7</i></h5>
+<div class="tq" data-s="evasión t1562.001 disable or modify tools set-mppreference -disablerealtimemonitoring; exclusión de c:\"><div class="tid">T1562.001</div><div class="tn">Disable or Modify Tools</div><div class="tp"><code>Set-MpPreference -DisableRealtimeMonitoring</code>; exclusión de <code>C:\</code></div></div>
+<div class="tq" data-s="evasión t1562.004 disable system firewall set-netfirewallprofile -enabled false"><div class="tid">T1562.004</div><div class="tn">Disable System Firewall</div><div class="tp"><code>Set-NetFirewallProfile -Enabled False</code></div></div>
+<div class="tq" data-s="evasión t1562.008 disable windows event logging wevtutil; registro autologger/globallogger de wmi"><div class="tid">T1562.008</div><div class="tn">Disable Windows Event Logging</div><div class="tp"><code>wevtutil</code>; registro AutoLogger/GlobalLogger de WMI</div></div>
+<div class="tq" data-s="evasión t1014 rootkit / byovd throttleblood.sys, viragt64.sys, nogbc.sys, g11.sys"><div class="tid">T1014</div><div class="tn">Rootkit / BYOVD</div><div class="tp"><code>ThrottleBlood.sys</code>, <code>viragt64.sys</code>, <code>nogbc.sys</code>, <code>G11.sys</code></div></div>
+<div class="tq" data-s="evasión t1036.005 masquerading avastrclone.exe, svchost32.exe, edr killers con nombre de av"><div class="tid">T1036.005</div><div class="tn">Masquerading</div><div class="tp"><code>avastrclone.exe</code>, <code>svchost32.exe</code>, EDR killers con nombre de AV</div></div>
+<div class="tq" data-s="evasión t1112 modify registry restrictsendingntlmtraffic=0, disablerestrictedadmin=0, everyoneincludesanonymous=1"><div class="tid">T1112</div><div class="tn">Modify Registry</div><div class="tp"><code>RestrictSendingNTLMTraffic=0</code>, <code>DisableRestrictedAdmin=0</code>, <code>EveryoneIncludesAnonymous=1</code></div></div>
+<div class="tq" data-s="evasión t1070.001 clear windows event logs security, system, application (eid 1102 / 104)"><div class="tid">T1070.001</div><div class="tn">Clear Windows Event Logs</div><div class="tp">Security, System, Application (EID 1102 / 104)</div></div></div>
+<div class="mcol" data-col><h5>Acceso credenciales <i>3</i></h5>
+<div class="tq" data-s="acceso credenciales t1003.004 dpapi backup key impacket dpapi.py, donpapi"><div class="tid">T1003.004</div><div class="tn">DPAPI Backup Key</div><div class="tp">Impacket <code>dpapi.py</code>, DonPAPI</div></div>
+<div class="tq" data-s="acceso credenciales t1555 credentials from password stores chromekb3.exe, bases de datos de veeam (cve-2023-27532)"><div class="tid">T1555</div><div class="tn">Credentials from Password Stores</div><div class="tp"><code>ChromeKB3.exe</code>, bases de datos de Veeam (CVE-2023-27532)</div></div>
+<div class="tq" data-s="acceso credenciales t1557.001 llmnr/nbt-ns poisoning y smb relay módulo coerce_plus de netexec; petitpotam, printerbug"><div class="tid">T1557.001</div><div class="tn">LLMNR/NBT-NS Poisoning y SMB Relay</div><div class="tp">Módulo <code>coerce_plus</code> de NetExec; PetitPotam, PrinterBug</div></div></div>
+<div class="mcol" data-col><h5>Descubrimiento <i>3</i></h5>
+<div class="tq" data-s="descubrimiento t1018 remote system discovery advanced ip scanner, softperfect (crackeado), nmap 7.97"><div class="tid">T1018</div><div class="tn">Remote System Discovery</div><div class="tp">Advanced IP Scanner, SoftPerfect (crackeado), Nmap 7.97</div></div>
+<div class="tq" data-s="descubrimiento t1087.002 domain account discovery 1.bat enumerando 60+ cuentas"><div class="tid">T1087.002</div><div class="tn">Domain Account Discovery</div><div class="tp"><code>1.bat</code> enumerando 60+ cuentas</div></div>
+<div class="tq" data-s="descubrimiento t1615 group policy discovery gpresult, repadmin"><div class="tid">T1615</div><div class="tn">Group Policy Discovery</div><div class="tp"><code>gpresult</code>, <code>repadmin</code></div></div></div>
+<div class="mcol" data-col><h5>Mov. lateral <i>5</i></h5>
+<div class="tq" data-s="mov. lateral t1021.001 rdp habilitado por registro; manipulación de grupo rdp"><div class="tid">T1021.001</div><div class="tn">RDP</div><div class="tp">Habilitado por registro; manipulación de grupo RDP</div></div>
+<div class="tq" data-s="mov. lateral t1021.002 smb / admin shares psexec; c$; netlogon"><div class="tid">T1021.002</div><div class="tn">SMB / Admin Shares</div><div class="tp">PsExec; <code>C$</code>; <code>NETLOGON</code></div></div>
+<div class="tq" data-s="mov. lateral t1021.006 winrm / ps remoting invoke-command"><div class="tid">T1021.006</div><div class="tn">WinRM / PS Remoting</div><div class="tp"><code>Invoke-Command</code></div></div>
+<div class="tq" data-s="mov. lateral t1570 lateral tool transfer copia a c:\temp + recurso oculto share$"><div class="tid">T1570</div><div class="tn">Lateral Tool Transfer</div><div class="tp">Copia a <code>C:\Temp</code> + recurso oculto <code>share$</code></div></div>
+<div class="tq" data-s="mov. lateral t1550.002 pass the token --spread &quot;&quot; reutiliza el token de sesión actual"><div class="tid">T1550.002</div><div class="tn">Pass the Token</div><div class="tp"><code>--spread ""</code> reutiliza el token de sesión actual</div></div></div>
+<div class="mcol" data-col><h5>C2 <i>2</i></h5>
+<div class="tq" data-s="c2 t1071.001 web protocols webdav; systembc en puertos no estándar"><div class="tid">T1071.001</div><div class="tn">Web Protocols</div><div class="tp">WebDAV; SystemBC en puertos no estándar</div></div>
+<div class="tq" data-s="c2 t1572 protocol tunneling chisel (socks)"><div class="tid">T1572</div><div class="tn">Protocol Tunneling</div><div class="tp">Chisel (SOCKS)</div></div></div>
+<div class="mcol" data-col><h5>Recolección <i>1</i></h5>
+<div class="tq" data-s="recolección t1074.001 local data staging c:\programdata\data\, c:\perflogs, c:\temp"><div class="tid">T1074.001</div><div class="tn">Local Data Staging</div><div class="tp"><code>C:\ProgramData\data\</code>, <code>C:\PerfLogs</code>, <code>C:\Temp</code></div></div></div>
+<div class="mcol" data-col><h5>Exfiltración <i>1</i></h5>
+<div class="tq" data-s="exfiltración t1048 exfil over alternative protocol rclone (sftp), restic, minio mc, winscp, filezilla, megasync"><div class="tid">T1048</div><div class="tn">Exfil over Alternative Protocol</div><div class="tp">Rclone (SFTP), Restic, MinIO <code>mc</code>, WinSCP, FileZilla, MEGAsync</div></div></div>
+<div class="mcol" data-col><h5>Impacto <i>5</i></h5>
+<div class="tq" data-s="impacto t1489 service stop 80+ servicios: veeam, sql, backup, edr, virtualización"><div class="tid">T1489</div><div class="tn">Service Stop</div><div class="tp">80+ servicios: Veeam, SQL, backup, EDR, virtualización</div></div>
+<div class="tq" data-s="impacto t1490 inhibit system recovery vssadmin delete shadows, wmic shadowcopy delete"><div class="tid">T1490</div><div class="tn">Inhibit System Recovery</div><div class="tp"><code>vssadmin delete shadows</code>, <code>wmic shadowcopy delete</code></div></div>
+<div class="tq" data-s="impacto t1486 data encrypted for impact cifrador go; windows, linux, esxi, nas, bsd"><div class="tid">T1486</div><div class="tn">Data Encrypted for Impact</div><div class="tp">Cifrador Go; Windows, Linux, ESXi, NAS, BSD</div></div>
+<div class="tq" data-s="impacto t1561 disk wipe argumento --wipe"><div class="tid">T1561</div><div class="tn">Disk Wipe</div><div class="tp">Argumento <code>--wipe</code></div></div>
+<div class="tq" data-s="impacto t1491.001 internal defacement fondo de escritorio %temp%\gentlemen.bmp"><div class="tid">T1491.001</div><div class="tn">Internal Defacement</div><div class="tp">Fondo de escritorio <code>%TEMP%\gentlemen.bmp</code></div></div></div></div>
+</section>
+<section id="t-3-donde-atacamos-en-la-piramide-del-dolor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Dónde atacamos en la Pirámide del Dolor</h2></div></div>
+<div class="pyr-wrap rv">
+<div class="pyr" id="pyr">
+<div class="pyr-in" id="pyrIn"><div class="slab" data-i="0" style="--w:296px;--d:296px;--z:0px;--col:#375d9d" data-lv="Base · el nivel más barato de eludir" data-t="Hashes" data-b="&lt;strong&gt;Trivial de eludir.&lt;/strong&gt; Cada build cambia. Solo retrohunt" data-s="En este informe: Anexo A"><span>Hashes</span></div><div class="slab" data-i="1" style="--w:246px;--d:246px;--z:30px;--col:#5a7ebe" data-lv="Nivel 2 de 5" data-t="IP / dominios" data-b="&lt;strong&gt;Bajo.&lt;/strong&gt; Rotación rápida, VPS bulletproof" data-s="En este informe: Anexo A"><span>IP / dominios</span></div><div class="slab" data-i="2" style="--w:196px;--d:196px;--z:60px;--col:#4db99c" data-lv="Nivel 3 de 5" data-t="Artefactos de red/host" data-b="&lt;strong&gt;Medio.&lt;/strong&gt; Duraderos entre builds" data-s="En este informe: Nombres de tareas, claves Run, &lt;code&gt;share$&lt;/code&gt;, extensiones"><span>Artefactos de red/host</span></div><div class="slab" data-i="3" style="--w:146px;--d:146px;--z:90px;--col:#a2ae4e" data-lv="Nivel 4 de 5" data-t="Herramientas" data-b="&lt;strong&gt;Alto&lt;/strong&gt;, pero son legítimas: detectar por contexto, no por presencia" data-s="En este informe: Rclone, NetExec, AnyDesk, PsExec, BYOVD"><span>Herramientas</span></div><div class="slab" data-i="4" style="--w:96px;--d:96px;--z:120px;--col:#f7a400" data-lv="Cima · máximo valor defensivo" data-t="TTP" data-b="&lt;strong&gt;Máximo.&lt;/strong&gt; Aquí debe concentrarse el esfuerzo" data-s="En este informe: &lt;strong&gt;§T-4&lt;/strong&gt;"><span>TTP</span></div></div></div>
+<div class="pyr-info card" id="pyrInfo" style="--pc:#f7a400"><div class="lv" id="pyrLv"></div>
+<h4 id="pyrTitle"></h4><p id="pyrBody"></p><div class="pv" id="pyrSrc"></div></div></div>
+<div class="note info rv"><p>Las detecciones propuestas en §T-4 se sitúan deliberadamente en los dos niveles superiores. Las del Anexo A son complementarias y caducan.</p></div>
+</section>
+<section id="t-4-hipotesis-de-caza-prioritarias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-4</span><div><h2>Hipótesis de caza prioritarias</h2></div></div><div class="rv">
+<div class="acc h-crit"><button><span class="hid">H-1</span><span class="ht">Preparación de evasión (la señal más fiable)</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar exclusiones amplias de Defender, especialmente <code>-ExclusionPath C:\</code>, y <code>Set-MpPreference -DisableRealtimeMonitoring</code>. <em>Ningún administrador legítimo excluye la unidad completa.</em> Precisión muy alta; casi sin falsos positivos.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-2</span><span class="ht">Carga de driver vulnerable (BYOVD)</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Carga de driver firmado no presente en la línea base, seguida en minutos de terminación de procesos de EDR. Buscar <code>ThrottleBlood.sys</code>, <code>viragt64.sys</code>, <code>nogbc.sys</code>, <code>G11.sys</code>; y genéricamente, cualquier driver nuevo escrito en <code>C:\Windows\Temp</code>, <code>C:\PerfLogs</code> o <code>C:\ProgramData</code>.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-3</span><span class="ht">Recurso SMB oculto creado en un endpoint</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Creación del recurso <code>share$</code> apuntando a <code>C:\Temp</code>, junto con modificación del registro para acceso anónimo. <strong>Es firma del mecanismo de auto-propagación.</strong> Un endpoint de usuario no comparte carpetas.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-4</span><span class="ht">Ráfaga de ejecución remota multi-método</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>El cifrador intenta 21 operaciones por host objetivo. Buscar el <strong>patrón temporal</strong>: un mismo origen creando servicios (<code>DefSvc</code>, <code>UpdateSvc</code>, <code>UpdateSvc2</code>), tareas programadas y procesos WMI contra múltiples destinos en una ventana de minutos. Alta fidelidad: es un comportamiento que ninguna herramienta de administración legítima reproduce.</p></div></div>
+<div class="acc "><button><span class="hid">H-5</span><span class="ht">Habilitación de SMB1 y relajación de LSA</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p><code>Enable-WindowsOptionalFeature -FeatureName SMB1Protocol</code> o <code>EveryoneIncludesAnonymous=1</code>. En 2026 esto es <strong>siempre</strong> anómalo.</p></div></div>
+<div class="acc "><button><span class="hid">H-6</span><span class="ht">Servicios de descubrimiento de red activados en masa</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Arranque de <code>fdrespub</code>, <code>fdPHost</code>, <code>SSDPSRV</code>, <code>upnphost</code> en varios hosts a la vez, con habilitación de reglas de cortafuegos de Detección de redes.</p></div></div>
+<div class="acc "><button><span class="hid">H-7</span><span class="ht">Exfiltración enmascarada</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Proceso con nombre de producto de seguridad (<code>avastrclone.exe</code>, <code>acronis.exe</code>, <code>sophos.exe</code>) que establece conexiones salientes de gran volumen. Contrastar nombre de archivo contra firma digital y ruta esperada.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-8</span><span class="ht">Preparación anti-recuperación</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p><code>vssadmin delete shadows /all /quiet</code> o <code>wmic shadowcopy delete</code>, y comandos <code>sc config</code> contra <code>VeeamBackupSvc</code>, <code>SQLWriter</code>, <code>BackupExecAgent</code>. <strong>Si esto se detecta, el cifrado es inminente: la respuesta debe ser automática.</strong></p></div></div>
+<div class="acc "><button><span class="hid">H-9</span><span class="ht">Retrohunt en el perímetro</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar cuentas administrativas creadas en appliances Fortinet con nombres <code>support_fortinet</code>, <code>badmin</code>, <code>forti-api</code>, o cuentas <code>guest</code> con acceso SSLVPN no registrado. Cubrir <strong>hacia atrás</strong> hasta la fecha de parcheo de CVE-2024-55591.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-10</span><span class="ht">Acceso por credencial válida (vía regional prioritaria)</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Derivada de la alerta <code>AIA26-00012</code> del CSIRT Nacional. Es la hipótesis de mayor prioridad para una organización chilena, porque <strong>el parcheo no la cubre</strong>:</p><ul><li>Autenticación VPN <strong>exitosa</strong> desde ASN o país fuera del perfil operativo —con atención específica a conexiones desde fuera de Chile.</li><li>«Viaje imposible»: dos autenticaciones geográficamente incompatibles.</li><li>Ráfagas de autenticación fallida contra cuentas privilegiadas seguidas de un éxito.</li><li>Cuentas de servicio o genéricas autenticando de forma interactiva en VPN.</li><li>Cruce con volcados de <em>infostealers</em>: credenciales corporativas expuestas.</li></ul></div></div>
+<div class="acc h-reg"><button><span class="hid">H-11</span><span class="ht">Compromiso de identidad en Microsoft 365</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>No documentada en el análisis global de este actor, pero con peso específico en el escenario chileno:</p><ul><li>Reglas de reenvío o de ocultación de correo creadas por el usuario.</li><li>Consentimientos OAuth a aplicaciones de terceros no aprobadas.</li><li>Descarga masiva desde SharePoint/OneDrive fuera de patrón.</li><li>Registro de un nuevo método de MFA inmediatamente tras un inicio de sesión desde geografía anómala.</li></ul></div></div>
+<div class="acc h-reg"><button><span class="hid">H-12</span><span class="ht">Retrohunt de re-victimización</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Si la organización ha sufrido un incidente previo, buscar persistencia residual: cuentas creadas en el periodo del incidente anterior, herramientas de RMM no inventariadas, claves SSH y tokens no rotados. La re-victimización está documentada en el escenario chileno.</p></div></div></div>
+</section>
+<section id="t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-5</span><div><h2>Brechas de visibilidad que hay que cerrar primero</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Brecha</th><th>Por qué importa aquí</th></tr></thead><tbody>
+<tr><td>Sin EDR en appliances de borde</td><td>Es el punto de entrada y no genera telemetría</td></tr>
+<tr><td>Sin registro de creación de servicios remotos (EID 7045) centralizado</td><td>Es uno de los 8 métodos de propagación</td></tr>
+<tr><td>Sin auditoría de creación de recursos compartidos</td><td>H-3 es indetectable sin ella</td></tr>
+<tr><td>Sin cobertura en ESXi / NAS</td><td>Existen variantes específicas del cifrador</td></tr>
+<tr><td>Registro de PowerShell (ScriptBlock, EID 4104) desactivado</td><td>La evasión y la propagación pasan por ahí</td></tr>
+<tr><td>Logs del appliance no centralizados</td><td>El actor borra los locales</td></tr>
+<tr><td><strong>Sin geolocalización ni alerta sobre autenticaciones VPN exitosas</strong></td><td>Es el indicador oficial del CSIRT Nacional y la vía de acceso regional (H-10)</td></tr>
+<tr><td><strong>Sin monitorización de identidad en Microsoft 365</strong></td><td>Superficie con peso propio en el escenario chileno (H-11)</td></tr>
+<tr><td><strong>Sin vigilancia de credenciales corporativas en volcados de infostealers</strong></td><td>Alimenta el acceso por cuenta válida antes de cualquier explotación</td></tr></tbody></table></div>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección, automatización, TIP/SIEM</span><span><b>Vida útil:</b> días–semanas</span></div></div>
+<section id="x-1-el-cifrador" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>El cifrador</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Propiedad</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Lenguaje / ofuscación</td><td>Go, ofuscado con <strong>Garble</strong></td></tr>
+<tr><td>Criptografía</td><td><strong>Curve25519 efímera por archivo + XChaCha20</strong>. ECDH con clave pública del operador embebida; nonce derivado de los primeros 24 bytes de la pública efímera; se añade la pública efímera en Base64 al pie del archivo</td></tr>
+<tr><td>Archivos &gt; 1 MB</td><td>Tres fragmentos; el último byte del nonce se XOR-ea con el índice de fragmento (0,1,2) para evitar reutilización de flujo</td></tr>
+<tr><td>Recuperación sin clave</td><td><strong>Inviable.</strong> Clave efímera por archivo; no hay fallo criptográfico conocido</td></tr>
+<tr><td>Extensión</td><td><strong>Variable por build</strong>, 6 caracteres — observadas <code>.umc16h</code>, <code>.7mtzhh</code>. Coincide con el nombre del binario: <code>locker_&lt;ext&gt;_windows_amd64.exe</code></td></tr>
+<tr><td>Nota de rescate</td><td><code>README-GENTLEMEN.txt</code></td></tr>
+<tr><td>Plataformas</td><td>Windows, Linux, ESXi, NAS, BSD</td></tr>
+<tr><td>Autenticación</td><td>Contraseña de 8 bytes embebida en el build (p. ej. <code>9VoAvR7G</code>); sin ella responde <code>bad args</code> y termina</td></tr></tbody></table></div>
+<p class="rv"><strong>Argumentos de línea de comandos</strong> — su presencia en una línea de proceso es, por sí sola, indicador de alta fidelidad:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Argumento</th><th>Efecto</th></tr></thead><tbody>
+<tr><td><code>--password &lt;pwd&gt;</code></td><td>Obligatorio</td></tr>
+<tr><td><code>--path &lt;rutas&gt;</code></td><td>Objetivos separados por comas</td></tr>
+<tr><td><code>--T &lt;minutos&gt;</code></td><td>Retardo antes de cifrar (evasión de sandbox y de turno de SOC)</td></tr>
+<tr><td><code>--silent</code></td><td>No cambia fondo de escritorio</td></tr>
+<tr><td><code>--system</code></td><td>Cifra unidades locales como SYSTEM</td></tr>
+<tr><td><code>--shares</code></td><td>Recursos mapeados y UNC</td></tr>
+<tr><td><code>--full</code></td><td>Dos fases: sistema + recursos</td></tr>
+<tr><td><code>--spread &lt;dom/user:pass&gt;</code></td><td><strong>Auto-propagación.</strong> Con <code>""</code> reutiliza el token actual</td></tr>
+<tr><td><code>--fast</code> / <code>--superfast</code> / <code>--ultrafast</code></td><td>9 % / 3 % / 1 % / 0,3 % por fragmento</td></tr>
+<tr><td><code>--keep</code></td><td>No se autoelimina</td></tr>
+<tr><td><code>--wipe</code></td><td>Sobrescribe espacio libre en bloques de 64 MB vía <code>wipefile.tmp</code></td></tr></tbody></table></div>
+</section>
+<section id="x-2-artefactos-de-host-persistentes-entre-builds" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Artefactos de host persistentes entre builds</h2></div></div>
+<div class="note info rv"><div class="t">Esto es lo que hay que detectar</div><p>A diferencia de los hashes, estos artefactos sobreviven a la recompilación.</p></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>TAREAS PROGRAMADAS   UpdateSystem · UpdateUser · gentlemen_system · gentlemen*
+SERVICIOS            DefSvc · UpdateSvc · UpdateSvc2
+CLAVES RUN           HKLM\...\Run\GupdateS     HKCU\...\Run\GupdateU
+RECURSO SMB          share$  →  C:\Temp        (+ acceso anónimo por registro)
+VARIABLE ENTORNO     LOCKER_BACKGROUND=1
+FONDO ESCRITORIO     %TEMP%\gentlemen.bmp
+AUTOBORRADO          &lt;ruta_binario&gt;.bat  (retardo mediante ping ICMP)
+ESPACIO LIBRE        wipefile.tmp
+STAGING              C:\Temp · C:\PerfLogs · C:\ProgramData\data\</code></pre></div>
+<p class="rv"><strong>Registro modificado:</strong></p>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0  RestrictSendingNTLMTraffic = 0
+HKLM\SYSTEM\CurrentControlSet\Control\Lsa         DisableRestrictedAdmin     = 0
+HKLM\SYSTEM\CurrentControlSet\Control\Lsa         EveryoneIncludesAnonymous  = 1
+HKLM\SYSTEM\...\Terminal Server\WinStations\RDP-Tcp  SecurityLayer = 1
+HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run   GupdateU</code></pre></div>
+</section>
+<section id="x-3-cadena-de-auto-propagacion-detalle" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-3</span><div><h2>Cadena de auto-propagación (detalle)</h2></div></div><ol class="rv"><li><strong>Preparación local</strong> — copia el binario a <code>C:\Temp</code>, crea el recurso oculto <code>share$</code> y habilita acceso anónimo por registro.</li><li><strong>PsExec</strong> — usa una copia embebida o la descarga de Sysinternals Live.</li><li><strong>Descubrimiento</strong> — enumera estaciones, servidores y controladores de dominio; arranca <code>fdrespub</code>, <code>fdPHost</code>, <code>SSDPSRV</code>, <code>upnphost</code>; habilita las reglas de cortafuegos de Detección de redes.</li><li><strong>Evasión remota previa</strong> — ejecuta en cada objetivo:
+<div class="codewrap rv"><div class="codehead"><span>POWERSHELL</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-k">Set-MpPreference</span> -DisableRealtimeMonitoring $true;
+<span class="tok-k">Add-MpPreference</span> -ExclusionPath &#x27;C:\&#x27;;
+<span class="tok-k">Set-NetFirewallProfile</span> -Profile Domain,Public,Private -Enabled False;
+<span class="tok-k">Enable-WindowsOptionalFeature</span> -Online -FeatureName SMB1Protocol -NoRestart;
+<span class="tok-k">reg</span> add &#x27;HKLM\SYSTEM\CurrentControlSet\Control\Lsa&#x27; /v EveryoneIncludesAnonymous /t REG_DWORD /d 1 /f</code></pre></div></li><li><strong>Ejecución — 8 familias de método, 21 operaciones por host:</strong> copia remota por <code>C$</code> · PsExec · <code>WMIC process call create</code> (3 variantes) · tareas programadas en contexto de usuario (3) · tareas en contexto SYSTEM (3) · servicios <code>DefSvc</code>/<code>UpdateSvc</code>/<code>UpdateSvc2</code> · PowerShell remoting por WinRM · WMI <code>Win32_Process</code>. Cada método intenta cargar desde <code>\\&lt;origen&gt;\share$\&lt;payload&gt;</code> y desde <code>C:\Temp\&lt;payload&gt;</code>. <strong>Basta un éxito para que el ciclo se repita desde el nuevo host.</strong></li></ol>
+</section>
+<section id="x-4-anti-forense" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-4</span><div><h2>Anti-forense</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>CMD</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-k">vssadmin</span> delete shadows /all /quiet
+<span class="tok-k">wmic</span> shadowcopy delete
+<span class="tok-k">wevtutil</span> cl System  &amp;  wevtutil cl Application  &amp;  wevtutil cl Security
+<span class="tok-k">del</span> /f /q %SystemRoot%\Prefetch\*.pf
+<span class="tok-k">del</span>  %AppData%\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+<span class="tok-c">:: + logs de RDP, logs de diagnóstico de Defender, papelera de reciclaje</span></code></pre></div>
+<p class="rv">Termina <strong>más de 50 procesos</strong> y deshabilita <strong>más de 80 servicios</strong> (<code>taskkill /IM</code>, <code>sc stop</code>): virtualización, bases de datos, respaldo, EDR, SAP, Office, correo, servidores web, navegadores, acceso remoto.</p>
+</section>
+<section id="x-5-logica-de-deteccion-prioritaria-pseudocodigo-para-portar-a-sigma-kql-spl" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-5</span><div><h2>Lógica de detección prioritaria (pseudocódigo para portar a Sigma/KQL/SPL)</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>D-1  CRÍTICO  Exclusión total de Defender
+     process.name == &quot;powershell.exe&quot;
+     AND cmdline CONTAINS_ANY (&quot;ExclusionPath C:\&quot;, &quot;ExclusionPath &#x27;C:\&#x27;&quot;,
+                               &quot;DisableRealtimeMonitoring $true&quot;)
+     → Aislar host. Falsos positivos ≈ 0.
+
+D-2  CRÍTICO  Recurso oculto de propagación
+     (net share OR Win32_Share create) AND share_name == &quot;share$&quot;
+     AND path CONTAINS &quot;\Temp&quot;
+     → Aislar host y bloquear SMB saliente del host.
+
+D-3  CRÍTICO  Servicios de la cadena de propagación
+     EID 7045 AND service_name IN (&quot;DefSvc&quot;,&quot;UpdateSvc&quot;,&quot;UpdateSvc2&quot;)
+     → Aislar host de origen.
+
+D-4  CRÍTICO  Argumentos del cifrador
+     cmdline MATCHES &quot;--password\s+\S{8}&quot; AND cmdline CONTAINS_ANY (&quot;--spread&quot;,&quot;--superfast&quot;,&quot;--ultrafast&quot;,&quot;--wipe&quot;)
+     → Matar proceso y aislar.
+
+D-5  ALTO     Persistencia por clave Run
+     registry_path ENDSWITH &quot;\CurrentVersion\Run&quot; AND value_name IN (&quot;GupdateS&quot;,&quot;GupdateU&quot;)
+
+D-6  ALTO     Tareas de la cadena
+     EID 4698 AND task_name IN (&quot;UpdateSystem&quot;,&quot;UpdateUser&quot;) OR task_name STARTSWITH &quot;gentlemen&quot;
+
+D-7  ALTO     Reactivación de SMB1 / relajación de LSA
+     cmdline CONTAINS_ANY (&quot;SMB1Protocol&quot;, &quot;EveryoneIncludesAnonymous&quot;,
+                           &quot;RestrictSendingNTLMTraffic&quot;, &quot;DisableRestrictedAdmin&quot;)
+
+D-8  ALTO     Anti-recuperación  → respuesta AUTOMÁTICA, no escalado manual
+     cmdline CONTAINS_ANY (&quot;vssadmin delete shadows&quot;, &quot;wmic shadowcopy delete&quot;,
+                           &quot;wbadmin delete&quot;, &quot;bcdedit /set recoveryenabled no&quot;)
+     OR (sc config AND target IN (&quot;VeeamBackupSvc&quot;,&quot;SQLWriter&quot;,&quot;BackupExecAgent&quot;))
+
+D-9  ALTO     Borrado de rastro
+     EID 1102 (Security cleared) OR EID 104 (System/App cleared)
+     OR cmdline CONTAINS &quot;wevtutil cl&quot;
+     OR file_delete PATH CONTAINS &quot;\Prefetch\&quot;
+
+D-10 ALTO     BYOVD
+     driver_load AND (driver_name IN (&quot;ThrottleBlood.sys&quot;,&quot;viragt64.sys&quot;,&quot;nogbc.sys&quot;,&quot;G11.sys&quot;)
+                      OR driver_path CONTAINS_ANY (&quot;\Temp\&quot;,&quot;\PerfLogs\&quot;,&quot;\ProgramData\&quot;))
+
+D-11 MEDIO    Enmascaramiento con nombre de producto de seguridad
+     process.name IN (&quot;avastrclone.exe&quot;,&quot;acronis.exe&quot;,&quot;sophos.exe&quot;,&quot;g111.exe&quot;,&quot;svchost32.exe&quot;)
+     OR (process.name MATCHES &quot;(avast|acronis|sophos|defender|eset)&quot; AND signer NOT IN allowlist)
+
+D-12 MEDIO    Ráfaga de ejecución remota multi-método
+     COUNT(DISTINCT dest_host) &gt; 5
+     WHERE (EID 7045 OR EID 4698 OR wmic_process_create) AND source_host == X
+     WITHIN 10 minutes</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>D-13 ALTO     Autenticación VPN desde geografía inusual  [origen: CSIRT Nacional AIA26-00012]
+     vpn_auth.result == &quot;success&quot;
+     AND geo_country NOT IN (paises_operativos)
+     → Verificación fuera de banda con el titular de la cuenta. No basta con alertar.
+
+D-14 MEDIO    Fuerza bruta contra cuenta privilegiada seguida de éxito
+     COUNT(auth.result==&quot;failure&quot; AND account IN privileged) &gt; 10 WITHIN 15 minutes
+     FOLLOWED BY auth.result==&quot;success&quot; SAME account WITHIN 60 minutes</code></pre></div>
+<div class="note info rv"><div class="t">Regla de operación derivada de KJ-3/KJ-4</div><p>D-1 a D-4 y D-8 deben ejecutar <strong>aislamiento automático</strong> del host, sin escalado humano previo. Con una mediana de permanencia de 2 días y propagación automática, un flujo que dependa de validación manual fuera de horario llega tarde.</p></div>
+</section>
+<section id="x-6-consultas-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-6</span><div><h2>Consultas de caza</h2><p><strong>Microsoft Defender XDR (KQL)</strong> — exclusiones amplias:</p></div></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>DeviceProcessEvents
+| <span class="tok-k">where</span> FileName <span class="tok-k">in</span>~ (<span class="tok-s">&quot;powershell.exe&quot;</span>,<span class="tok-s">&quot;pwsh.exe&quot;</span>)
+| <span class="tok-k">where</span> ProcessCommandLine <span class="tok-k">has_any</span> (<span class="tok-s">&quot;ExclusionPath C:\\&quot;</span>,<span class="tok-s">&quot;DisableRealtimeMonitoring&quot;</span>,
+                                    <span class="tok-s">&quot;EnableControlledFolderAccess Disabled&quot;</span>)
+| <span class="tok-k">project</span> Timestamp, DeviceName, AccountName, ProcessCommandLine, InitiatingProcessFileName</code></pre></div>
+<p class="rv"><strong>Recurso de propagación:</strong></p>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>DeviceProcessEvents
+| <span class="tok-k">where</span> ProcessCommandLine <span class="tok-k">has</span> <span class="tok-s">&quot;share$&quot;</span>
+   <span class="tok-k">or</span> (ProcessCommandLine <span class="tok-k">has</span> <span class="tok-s">&quot;net share&quot;</span> <span class="tok-k">and</span> ProcessCommandLine <span class="tok-k">has</span> @<span class="tok-s">&quot;C:\Temp&quot;</span>)
+| <span class="tok-k">project</span> Timestamp, DeviceName, ProcessCommandLine</code></pre></div>
+<p class="rv"><strong>Ráfaga multi-método (correlación):</strong></p>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>DeviceEvents
+| <span class="tok-k">where</span> ActionType <span class="tok-k">in</span> (<span class="tok-s">&quot;ServiceInstalled&quot;</span>,<span class="tok-s">&quot;ScheduledTaskCreated&quot;</span>)
+| <span class="tok-k">summarize</span> Destinos=dcount(DeviceName), Metodos=make_set(ActionType)
+    <span class="tok-k">by</span> InitiatingProcessRemoteSessionDeviceName, bin(Timestamp, 10m)
+| <span class="tok-k">where</span> Destinos &gt; 5</code></pre></div>
+</section>
+<section id="x-7-nombres-de-deteccion-de-proveedor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-7</span><div><h2>Nombres de detección de proveedor</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Proveedor</th><th>Firma</th></tr></thead><tbody>
+<tr><td>Microsoft</td><td><code>Ransom:Win64/Gentlemen</code> · <code>Ransom:Win64/Gentlemen.SH!MTB</code> · <code>Trojan:Win32/MpTamperBulkExcl.H</code></td></tr>
+<tr><td>Trend</td><td><code>Ransom.Win64.GENTLEMAN.THHAIBE</code> · <code>Trojan.Win64.KILLAV.THHBHBE</code> · <code>HackTool.Win32.PowerRun.THHBHBE</code></td></tr></tbody></table></div>
+</section>
+<section id="x-8-mitigaciones-de-configuracion-con-efecto-directo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-8</span><div><h2>Mitigaciones de configuración con efecto directo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Control</th><th>Corta</th></tr></thead><tbody>
+<tr><td>MFA obligatorio en <strong>todo</strong> acceso remoto, terceros incluidos</td><td>Acceso inicial por credencial</td></tr>
+<tr><td>Parcheo de CVE-2024-55591 + <strong>auditoría de cuentas creadas</strong> en el appliance</td><td>Vector primario y su puerta trasera</td></tr>
+<tr><td>Protección contra manipulación (Tamper Protection) de Defender</td><td>D-1</td></tr>
+<tr><td>Lista de bloqueo de drivers vulnerables (HVCI / WDAC / Microsoft vulnerable driver blocklist)</td><td>BYOVD</td></tr>
+<tr><td>SMB1 deshabilitado y <strong>bloqueado por política</strong></td><td>Paso 4 de la propagación</td></tr>
+<tr><td>Firma SMB obligatoria y <code>RestrictSendingNTLMTraffic</code> forzado por GPO</td><td>Relay NTLM, PetitPotam, PrinterBug</td></tr>
+<tr><td>Bloquear creación de procesos por PsExec y WMI (regla ASR)</td><td>4 de los 8 métodos de propagación</td></tr>
+<tr><td>Restringir <code>C$</code> / admin shares entre estaciones</td><td>Copia remota</td></tr>
+<tr><td>Cuentas de respaldo <strong>fuera del dominio</strong>, repositorio inmutable</td><td>Destrucción de respaldos</td></tr>
+<tr><td>EDR en modo bloqueo + interrupción automática de ataque</td><td>Ventana de 2 días</td></tr>
+<tr><td>Segmentación que impida SMB estación↔estación</td><td>Auto-propagación</td></tr>
+<tr><td><strong>Restricción geográfica en el SSL VPN</strong> (recomendación explícita del CSIRT Nacional)</td><td>Acceso por credencial comprometida desde fuera del país</td></tr>
+<tr><td><strong>MFA resistente a phishing en Microsoft 365</strong> + revisión de consentimientos OAuth</td><td>Vector de identidad con peso regional</td></tr>
+<tr><td>Rotación de credenciales cruzada con volcados de infostealers</td><td>Acceso por cuenta válida (T1078)</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto</th><th>Requisito propuesto</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td>G-1</td><td><strong>Exposición propia sin evaluar</strong> (§O-4)</td><td>El informe no puede cuantificar nuestro riesgo</td><td>Responder X-1 a X-7 con inventario y telemetría</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-2</td><td>IOC de red muy escasos y de vida corta</td><td>Detección técnica limitada</td><td>Suscripción a fuente con C2 de este actor; unirse a canal ISAC sectorial</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-3</td><td>Conflicto de fuentes sobre liderazgo</td><td>Afecta a correlación futura</td><td>Solicitar aclaración a proveedores; seguimiento de RAMP/Exploit.in</td><td><span class="pill p-grey">Baja</span></td></tr>
+<tr><td>G-4</td><td>Sin muestra propia del cifrador</td><td>No podemos validar detecciones contra binario real</td><td>Solicitar muestra a ISAC o proveedor; alternativamente pruebas atómicas</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-5</td><td>Cifras de víctimas no verificables (fuente controlada por el adversario)</td><td>Magnitud posiblemente sesgada</td><td>Contraste con datos de aseguradoras/reguladores</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-6</td><td>CVE atribuidos por agregación de proveedor sin evidencia publicada</td><td>Riesgo de parchear por ruido</td><td>Verificar cada CVE contra informe con evidencia antes de priorizar</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-7</td><td>Sin datos sobre variantes Linux/ESXi/NAS con el detalle de la de Windows</td><td>Cobertura de detección incompleta en virtualización</td><td>Solicitar análisis específico</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-8</td><td><strong>Sin IOC técnicos asociados al caso chileno</strong> (la alerta nacional es conductual, sin hashes ni IP)</td><td>No podemos hacer retrohunt específico del incidente regional</td><td>Solicitar al CSIRT Nacional / ANCI los IOC bajo el marcado que corresponda; explorar canal sectorial</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-9</td><td><strong>Cobertura desigual del resto de LATAM</strong>: ausencia de datos ≠ ausencia de actividad</td><td>Subestimación del riesgo en la cadena de suministro regional</td><td>Monitorizar CERT de los países donde operamos o tenemos proveedores</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-10</td><td><strong>Desconocemos si nuestras credenciales corporativas figuran en volcados de infostealers</strong></td><td>Es el vector de acceso documentado en Chile, y es previo a cualquier explotación</td><td>Contratar o activar vigilancia de credenciales filtradas</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-11</td><td>Ámbito de aplicación de la Ley Marco y plazo exacto de reporte a la ANCI sin confirmar</td><td>Riesgo de incumplimiento en las primeras horas de un incidente</td><td>Consulta a Legal (decisión E-f)</td><td><span class="pill p-amber">Alta</span></td></tr></tbody></table></div>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores-de-compromiso" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores de compromiso</h2></div></div>
+<div class="note warn rv"><div class="t">⚠ Leer antes de usar</div><p>Los indicadores siguientes son el componente de <strong>menor valor y más perecedero</strong> de este informe. El cifrador se recompila por víctima: los hashes son válidos para retrohunt, <strong>no</strong> para bloqueo preventivo. La defensa real está en §T-4 y §X-5.</p></div>
+<h3 class="rv">A.1 Hashes — cifrador y componentes</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="sha-256 22b38dad7da097ea03aa28d0614164cd25fafeb1383dbc15047e34c8050f6f67 cifrador gentlemen · alta retrohunt"><span class="ty">SHA-256</span><span class="vv">22b38dad7da097ea03aa28d0614164cd25fafeb1383dbc15047e34c8050f6f67<em>Cifrador Gentlemen · Alta</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="sha-256 f918535f974591ef031bd0f30a8171e3da27a6754e6426a8ba095f83195661c8 g_hlm7jj_windows_amd64.exe · alta retrohunt"><span class="ty">SHA-256</span><span class="vv">f918535f974591ef031bd0f30a8171e3da27a6754e6426a8ba095f83195661c8<em>G_hlm7jj_windows_amd64.exe · Alta</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="sha-256 078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b psexec embebido · alta no bloquear — herramienta legítima"><span class="ty">SHA-256</span><span class="vv">078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b<em>PsExec embebido · Alta</em></span><span class="pill p-amber">No bloquear — herramienta legítima</span></div>
+<div class="ioc-row" data-s="sha-256 fe1033335a045c696c900d435119d210361966e2fb5cd1ba3382608cfa2c8e68 bitmap del fondo de escritorio · alta retrohunt"><span class="ty">SHA-256</span><span class="vv">fe1033335a045c696c900d435119d210361966e2fb5cd1ba3382608cfa2c8e68<em>Bitmap del fondo de escritorio · Alta</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="sha-1 c12c4d58541cc4f75ae19b65295a52c559570054 cifrador (muestra trend) · alta retrohunt"><span class="ty">SHA-1</span><span class="vv">c12c4d58541cc4f75ae19b65295a52c559570054<em>Cifrador (muestra Trend) · Alta</em></span><span class="pill p-grey">Retrohunt</span></div></div>
+<h3 class="rv">A.2 Hashes — evasión de EDR y drivers vulnerables</h3>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="sha-256 a348f5fa048a09188bd706fd3d4efca978990caf3355ecfee501c9f1e19c0efd acronis.exe (edr killer) bloqueo"><span class="ty">SHA-256</span><span class="vv">a348f5fa048a09188bd706fd3d4efca978990caf3355ecfee501c9f1e19c0efd<em>acronis.exe (EDR killer)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha-256 3c71537b64487bbf4d1793f72c75d332650d09a77b71e4d884ff15c266a847f6 y7d0.exe (edr killer) bloqueo"><span class="ty">SHA-256</span><span class="vv">3c71537b64487bbf4d1793f72c75d332650d09a77b71e4d884ff15c266a847f6<em>y7D0.exe (EDR killer)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha-256 50f2cdf16f05da9253fa2d6eb60d5a42da14c02c551c0874c9e953d4119da69c sophos.exe (edr killer) bloqueo"><span class="ty">SHA-256</span><span class="vv">50f2cdf16f05da9253fa2d6eb60d5a42da14c02c551c0874c9e953d4119da69c<em>sophos.exe (EDR killer)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha-256 81053c2c3be8b7dbf7d5087dba05c940b3ee4fd95524272651c816b72c5a9443 g111.exe (edr killer) bloqueo"><span class="ty">SHA-256</span><span class="vv">81053c2c3be8b7dbf7d5087dba05c940b3ee4fd95524272651c816b72c5a9443<em>g111.exe (EDR killer)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha-256 0be8f415a485b11747bcfd71c9cd9781e090354728f076791ed6845b69ed78fb nogbc.sys (driver vulnerable) lista de bloqueo de drivers"><span class="ty">SHA-256</span><span class="vv">0be8f415a485b11747bcfd71c9cd9781e090354728f076791ed6845b69ed78fb<em>nogbc.sys (driver vulnerable)</em></span><span class="pill p-mint">Lista de bloqueo de drivers</span></div>
+<div class="ioc-row" data-s="sha-256 2d91a78e739891c9854c254f5b2a6b84c0e167dfa253466cbccd2cdd1c20145d g11.sys (driver vulnerable) lista de bloqueo de drivers"><span class="ty">SHA-256</span><span class="vv">2d91a78e739891c9854c254f5b2a6b84c0e167dfa253466cbccd2cdd1c20145d<em>G11.sys (driver vulnerable)</em></span><span class="pill p-mint">Lista de bloqueo de drivers</span></div>
+<div class="ioc-row" data-s="sha-1 c0979ec20b87084317d1bfa50405f7149c3b5c5f all.exe (anti-av) bloqueo"><span class="ty">SHA-1</span><span class="vv">c0979ec20b87084317d1bfa50405f7149c3b5c5f<em>All.exe (anti-AV)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha-1 df249727c12741ca176d5f1ccba3ce188a546d28 allpatch2.exe (anti-av a medida) bloqueo"><span class="ty">SHA-1</span><span class="vv">df249727c12741ca176d5f1ccba3ce188a546d28<em>Allpatch2.exe (anti-AV a medida)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha-1 e00293ce0eb534874efd615ae590cf6aa3858ba4 powerrun.exe (escalada) bloqueo"><span class="ty">SHA-1</span><span class="vv">e00293ce0eb534874efd615ae590cf6aa3858ba4<em>PowerRun.exe (escalada)</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="md5 d65c293efb5e6d033c83b2ac472bf0cb softperfect network scanner crackeado bloqueo"><span class="ty">MD5</span><span class="vv">d65c293efb5e6d033c83b2ac472bf0cb<em>SoftPerfect Network Scanner crackeado</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="md5 42c062d6299ca9f76554441a29429404 vcenter.ps1 — desactiva ha/drs y apaga vm bloqueo"><span class="ty">MD5</span><span class="vv">42c062d6299ca9f76554441a29429404<em>VCENTER.ps1 — desactiva HA/DRS y apaga VM</em></span><span class="pill p-mint">Bloqueo</span></div></div>
+<h3 class="rv">A.3 Infraestructura de red</h3>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="ipv4:puerto 193.233.202[.]17:44729 c2 (proxy socks vía tarea programada) · media · caducado — observación de 2025 solo retrohunt"><span class="ty">ipv4:puerto</span><span class="vv">193.233.202[.]17:44729<em>C2 (proxy SOCKS vía tarea programada) · Media · Caducado — observación de 2025</em></span><span class="pill p-grey">Solo retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4:puerto 77.110.122[.]137:37182 c2 · media · caducado — observación de 2025 solo retrohunt"><span class="ty">ipv4:puerto</span><span class="vv">77.110.122[.]137:37182<em>C2 · Media · Caducado — observación de 2025</em></span><span class="pill p-grey">Solo retrohunt</span></div></div>
+<div class="note info rv"><div class="t">Advertencia operativa</div><p>Solo se dispone públicamente de dos direcciones, ambas antiguas. El grupo usa VPS <em>bulletproof</em>, Amnezia VPN y Cloudflare Tunnel. <strong>No construir la defensa sobre bloqueo de IP.</strong> Además, bloquear infraestructura compartida —Cloudflare, MEGA, servicios de RMM— tiene impacto operativo: restringir por política de uso, no por lista negra.</p></div>
+<h3 class="rv">A.4 Artefactos de nombre (mayor vida útil que los hashes)</h3>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>README-GENTLEMEN.txt · gentlemen.bmp · wipefile.tmp · share$ · 1.bat
+All.exe · Allpatch2.exe · PowerRun.exe · ThrottleBlood.sys · viragt64.sys
+avastrclone.exe · svchost32.exe · ChromeKB3.exe · userpassfort.py · VCENTER.ps1
+locker_&lt;6 caracteres&gt;_windows_amd64.exe · G_&lt;6 caracteres&gt;_windows_amd64.exe
+Cuentas backdoor en appliance: support_fortinet · badmin · forti-api · guest
+Cuentas de dominio: MicrosoftSupporte</code></pre></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="note info rv"><p>La numeración de esta tabla es propia del anexo y agrupa fuentes; no coincide con la de la lista bibliográfica del final del documento.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Fuente</th><th>Fecha</th><th>Disciplina</th><th>Fiab.</th><th>Cred.</th><th>Sesgo declarado</th></tr></thead><tbody>
+<tr><td>1</td><td>Microsoft Security Blog — análisis del cifrador Go</td><td>2026-05-28</td><td>TECHINT (análisis de binario)</td><td><strong>A</strong></td><td><strong>1</strong></td><td>Telemetría propia amplia; promociona su producto</td></tr>
+<tr><td>2</td><td>Unit 42 (Palo Alto) — «No Manners Here»</td><td>2026-07-10</td><td>TECHINT + OSINT</td><td><strong>A</strong></td><td><strong>2</strong></td><td>—</td></tr>
+<tr><td>3</td><td>Sophos — «Ungentlemanly behavior»</td><td>2026-09</td><td>TECHINT + telemetría de IR</td><td><strong>A</strong></td><td><strong>2</strong></td><td>Base de casos propios, no representativa del universo</td></tr>
+<tr><td>4</td><td>Trend Micro — «Unmasking The Gentlemen»</td><td>2025-09-09</td><td>TECHINT (caso de IR único)</td><td><strong>A</strong></td><td><strong>2</strong></td><td><strong>Un solo incidente</strong>: no generalizar la victimología (Tailandia)</td></tr>
+<tr><td>5</td><td>Huntress — TTP de evasión</td><td>2026</td><td>TECHINT</td><td><strong>A</strong></td><td><strong>2</strong></td><td>Sesgo hacia PYME</td></tr>
+<tr><td>6</td><td>Group-IB — «Hastalamuerte / Gentlemen RaaS»</td><td>2026</td><td>CLOSINT + HUMINT</td><td><strong>B</strong></td><td><strong>2</strong></td><td><strong>Conflicto con la fuente 7 sobre liderazgo</strong> y sobre el reparto 70/30</td></tr>
+<tr><td>7</td><td>KELA — análisis de la filtración interna</td><td>2026-05-14</td><td>CLOSINT (datos de origen adversario)</td><td><strong>B</strong></td><td><strong>3</strong></td><td>Material filtrado por un criminal; posible contaminación deliberada</td></tr>
+<tr><td>8</td><td>Halcyon — evaluación de amenaza</td><td>2026 (mediados)</td><td>OSINT comercial</td><td><strong>B</strong></td><td><strong>3</strong></td><td>Incentivo comercial a enfatizar la escala</td></tr>
+<tr><td>9</td><td>Picus Security</td><td>2026-07-06</td><td>OSINT derivado</td><td><strong>B</strong></td><td><strong>3</strong></td><td>Derivado en gran medida de la fuente 1; <strong>no es corroboración independiente</strong></td></tr>
+<tr><td>10</td><td>FortiGuard Labs</td><td>2026-09-15</td><td>OSINT agregado</td><td><strong>B</strong></td><td><strong>4</strong></td><td><strong>Doble cautela:</strong> listado de 14 CVE sin evidencia publicada por CVE; además el fabricante es el del producto que constituye el vector principal</td></tr>
+<tr><td>11</td><td>ransomware.live</td><td>2026-09-15</td><td>OSINT (raspado de DLS)</td><td><strong>C</strong></td><td><strong>2</strong></td><td><strong>Fuente controlada por el adversario.</strong> Contiene además un artefacto evidente («primera víctima: 2023-02-28»), que se descarta</td></tr>
+<tr><td>12</td><td>Darkfield / SOCRadar / Smarttech247</td><td>2026</td><td>OSINT (raspado de DLS)</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Metodologías de recuento divergentes</td></tr>
+<tr><td><strong>13</strong></td><td><strong>CSIRT Nacional / ANCI (Chile) — alerta <code>AIA26-00012</code></strong></td><td>2026-02-10</td><td><strong>CERT nacional oficial</strong></td><td><strong>A</strong></td><td><strong>1</strong></td><td>Máxima fiabilidad y autoridad en el ámbito chileno. Refleja incidentes <strong>reportados</strong> en Chile: no es una muestra del universo global</td></tr>
+<tr><td><strong>14</strong></td><td><strong>CronUp Ciberseguridad (Chile) — «Chile en el radar del ransomware»</strong></td><td>2026-02-26</td><td>OSINT + monitorización propia (ATRc®)</td><td><strong>A</strong></td><td><strong>2</strong></td><td>Proveedor nacional con monitorización continua del país; la mejor cobertura disponible del escenario chileno. Proveedor comercial de servicios de CTI</td></tr>
+<tr><td><strong>15</strong></td><td><strong>CronUp — Panorama semanal de ciberseguridad</strong></td><td>2026-09-04</td><td>OSINT + ATRc®</td><td><strong>A</strong></td><td><strong>2</strong></td><td>Dato más reciente disponible sobre el pico de agosto de 2026</td></tr>
+<tr><td><strong>16</strong></td><td>ESET WeLiveSecurity (C. Ali Bravo) — expansión LATAM</td><td>2026-03-26</td><td>OSINT + TECHINT</td><td><strong>B</strong></td><td><strong>2</strong></td><td>Fuente regional con investigación propia; base de telemetría con fuerte implantación en LATAM</td></tr>
+<tr><td><strong>17</strong></td><td>a3sec — boletín de alerta regional</td><td>2026-04-07</td><td>OSINT derivado</td><td><strong>B</strong></td><td><strong>3</strong></td><td>Integrador regional; contenido en parte derivado de las fuentes 4 y 16 — <strong>no es corroboración independiente</strong></td></tr>
+<tr><td>—</td><td>securityarsenal · tech-insider · decryptiondigest · bmsp.tech · paubox</td><td>2026</td><td>OSINT derivado</td><td><strong>D</strong></td><td><strong>4</strong></td><td>Contenido derivado sin investigación original. <strong>No usados como base de ningún juicio</strong></td></tr></tbody></table></div>
+<h3 class="rv">B.1 Nota sobre la discrepancia de cifras</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Cifra</th><th>Fecha de corte</th></tr></thead><tbody>
+<tr><td>Group-IB</td><td>94</td><td>2025-09</td></tr>
+<tr><td>Halcyon</td><td>~300 (66+ países)</td><td>2026 (mediados)</td></tr>
+<tr><td>KELA</td><td>328 (ene–may)</td><td>2026-05</td></tr>
+<tr><td>Unit 42</td><td>580 (77 países)</td><td>2026-07-07</td></tr>
+<tr><td>Sophos</td><td>683</td><td>2026-07</td></tr>
+<tr><td>Darkfield</td><td>838</td><td>2026-09-09</td></tr>
+<tr><td>ransomware.live</td><td>868</td><td>2026-09-15</td></tr>
+<tr><td>Smarttech247</td><td>~330 (70+ países)</td><td>2026-09</td></tr>
+<tr><td>— <em>sin publicar</em> —</td><td><strong>&gt;1.570</strong> (servidor C2 incautado)</td><td>2026</td></tr></tbody></table></div>
+<p class="rv"><strong>Valoración:</strong> la serie temporal es internamente coherente salvo la fuente 12, cuya cifra parece corresponder a un corte anterior o a un criterio de recuento distinto. Se adopta <strong>~868 como cifra de referencia a 2026-09-15</strong>, con la advertencia explícita de que procede del sitio del propio adversario, y que la cifra de 1.570 —de fuente única, no corroborada— sugiere que las víctimas reales podrían casi doblar a las publicadas.</p>
+<h3 class="rv">B.2 Nota sobre la convergencia y divergencia regional</h3>
+<p class="rv">Las fuentes 13 a 17 <strong>convergen</strong> con las internacionales en lo esencial —el actor, su modelo de doble extorsión, su presencia en la región— y <strong>divergen</strong> en el vector de acceso predominante: el CERT chileno documenta cuentas válidas con credenciales de infostealers y RDP, mientras los proveedores globales priorizan la explotación de CVE en appliances de borde.</p>
+<p class="rv">Esta divergencia <strong>eleva la confianza en el perfil combinado</strong> en lugar de reducirla: dos observadores con visibilidad distinta describen dos vías de entrada que coexisten. La conclusión defensiva es acumulativa, no alternativa —hay que cerrar ambas—, y así se refleja en §Estratégico E-4 y §Técnico X-8.</p>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2><p><strong>Probabilidad estimativa</strong> — cuán probable es que el hecho sea cierto:</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Término</th><th>Rango</th></tr></thead><tbody>
+<tr><td>Remoto / casi con certeza no</td><td>1–5 %</td></tr>
+<tr><td>Muy poco probable</td><td>5–20 %</td></tr>
+<tr><td>Poco probable</td><td>20–45 %</td></tr>
+<tr><td>Posibilidad real</td><td>45–55 %</td></tr>
+<tr><td>Probable</td><td>55–80 %</td></tr>
+<tr><td>Muy probable</td><td>80–95 %</td></tr>
+<tr><td>Casi con certeza</td><td>95–99 %</td></tr></tbody></table></div>
+<p class="rv"><strong>Nivel de confianza</strong> — cuán sólida es la base analítica:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel</th><th>Criterio</th></tr></thead><tbody>
+<tr><td><span class="pill p-amber">Alta</span></td><td>Varias fuentes de calidad corroboradas, sin brechas relevantes</td></tr>
+<tr><td><span class="pill p-sky">Moderada</span></td><td>Fuentes creíbles con corroboración parcial o brechas conocidas</td></tr>
+<tr><td><span class="pill p-grey">Baja</span></td><td>Fuente única, sin corroborar, o dependiente de supuestos</td></tr></tbody></table></div>
+</section>
+<section id="anexo-d-marcos-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Marcos empleados</h2><p>MITRE ATT&amp;CK · Cyber Kill Chain · Pirámide del Dolor (Bianco) · ICD 203 (estándares analíticos) · Técnicas Analíticas Estructuradas: ACH, verificación de supuestos clave, pre-mortem · TLP 2.0 · PAP · Admiralty Code (OTAN)</p></div></div>
+</section>
+<section id="anexo-e-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Paquete legible por máquina</h2><p>Pendiente. Generar bundle STIX 2.1 y evento MISP con los indicadores del Anexo A, aplicando las taxonomías <code>tlp</code>, <code>PAP</code>, <code>admiralty-scale</code> y <code>estimative-language</code>, y <strong>fijando fecha de caducidad en los objetos de red</strong> conforme a las advertencias de A.3.</p></div></div>
+</section>
+<section id="anexo-f-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-09-15</td><td>Emisión inicial. Todo-fuente externa; §O-4 pendiente de telemetría propia</td></tr>
+<tr><td>1.1</td><td>2026-09-15</td><td><strong>Incorporación del eje regional Chile/LATAM</strong> (fuentes 13–17): nuevo KJ-7; §E-2.1 con contexto chileno y obligación regulatoria; §O-6.1 con cronología regional y contraste con la alerta <code>AIA26-00012</code> del CSIRT Nacional; hipótesis de caza H-10 a H-12; detecciones D-13 y D-14; decisiones E-f a E-h; brechas G-8 a G-11. <strong>Cambio de juicio:</strong> el acceso inicial deja de considerarse exclusivamente por explotación de CVE — se añade la vía de cuenta válida con credenciales de infostealer como concurrente y no cubierta por el parcheo</td></tr>
+<tr><td>1.2</td><td>2026-11-16</td><td><strong>Reclasificación de TLP:AMBER a TLP:CLEAR</strong> por decisión del emisor, para publicación en el repositorio abierto <code>cti_daily</code>. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. <strong>Sin cambios en los juicios analíticos ni en los indicadores.</strong> Se mantiene PAP:AMBER</td></tr></tbody></table></div>
+</section>
+<section id="anexo-g-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Realimentación del consumidor</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Pregunta</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>¿Respondió a su requisito?</td><td></td></tr>
+<tr><td>¿Qué decisión tomó o cambió?</td><td></td></tr>
+<tr><td>¿Qué faltó?</td><td></td></tr>
+<tr><td>¿Llegó a tiempo?</td><td></td></tr></tbody></table></div>
+</section>
+<section id="fuentes-consultadas" class="wrap"><div class="sec-head rv"><div><h2>Fuentes consultadas</h2></div></div><ol class="rv"><li><a href="https://www.microsoft.com/en-us/security/blog/2026/05/28/the-gentlemen-ransomware-dissecting-a-self-propagating-go-encryptor/">Microsoft Security Blog — The Gentlemen ransomware: dissecting a self-propagating Go encryptor</a> (2026-05-28)</li><li><a href="https://unit42.paloaltonetworks.com/the-gentlemen-ransomware/">Unit 42 — No Manners Here: The Ruthless Rise of The Gentlemen Ransomware</a> (2026-07-10)</li><li><a href="https://www.sophos.com/en-us/blog/ungentlemanly-behavior-insights-into-a-ransomware-operation">Sophos — Ungentlemanly behavior: Insights into a ransomware operation</a> (2026-09)</li><li><a href="https://www.trendaisecurity.com/en-us/resources-insights/trendai-security-blog/unmasking-the-gentlemen-ransomware">Trend Micro — Unmasking The Gentlemen Ransomware</a> (2025-09-09)</li><li><a href="https://www.huntress.com/blog/the-gentlemen-ransomware-defense-evasion-ttps">Huntress — The Gentlemen Ransomware: Defense Evasion TTPs</a></li><li><a href="https://www.group-ib.com/blog/hastalamuerte-gentlemen-raas-ttps/">Group-IB — How Hastalamuerte Operates: The Gentlemen's Attack Methods</a></li><li><a href="https://www.kelacyber.com/blog/the-gentlemen-ransomware-internal-chat-leak-analysis-2026/">KELA — Inside The Gentlemen Leak</a> (2026-05-14)</li><li><a href="https://www.halcyon.ai/ransomware-research-reports/threat-assessment-the-gentlemen-ransomware-group">Halcyon — Threat Assessment: The Gentlemen Ransomware Group</a></li><li><a href="https://www.picussecurity.com/resource/blog/how-the-gentlemen-ransomware-spreads-and-encrypts-entire-networks">Picus Security — How The Gentlemen Ransomware Spreads and Encrypts Entire Networks</a> (2026-07-06)</li><li><a href="https://www.fortiguard.com/threat-actor/6387/the-gentlemen-ransomware">FortiGuard Labs — The Gentlemen Ransomware Threat Actor</a> (2026-09-15)</li><li><a href="https://www.ransomware.live/group/Thegentlemen">Ransomware.live — Thegentlemen</a> (2026-09-15)</li><li><a href="https://socradar.io/blog/gentlemen-ransomware-leak/">SOCRadar — Inside The Gentlemen Ransomware Leak</a></li><li><a href="https://www.smarttech247.com/threat-intel-reports/escalated-activity-from-the-gentlemen-ransomware-group">Smarttech247 — Escalated Activity from The Gentlemen Ransomware Group</a></li><li><a href="https://darkfield.orizon.one/groups/thegentlemen">Darkfield — thegentlemen ransomware group</a></li><li><a href="https://www.bankinfosecurity.com/tables-turned-gentlemen-ransomware-group-suffers-data-leak-a-31654">BankInfoSecurity — Tables Turned: Gentlemen Ransomware Group Suffers Data Leak</a></li></ol>
+<h3 class="rv">Fuentes regionales — Chile y Latinoamérica</h3><ol class="rv"><li><a href="https://csirt.gob.cl/alertas/aia26-00012/">CSIRT Nacional / ANCI (Chile) — Alerta AIA26-00012: The Gentlemen Ransomware</a> (2026-02-10, TLP:CLEAR)</li><li><a href="https://www.cronup.com/chile-en-el-radar-del-ransomware-meses-que-cambiaron-el-escenario/">CronUp Ciberseguridad — Chile en el radar del ransomware: meses que cambiaron el escenario</a> (2026-02-26)</li><li><a href="https://www.cronup.com/panorama-de-ciberseguridad-semana-del-31-de-agosto-al-04-de-septiembre-de-2026/">CronUp Ciberseguridad — Panorama de ciberseguridad: semana del 31 de agosto al 04 de septiembre de 2026</a> (2026-09-04)</li><li><a href="https://www.cronup.com/panorama-de-ciberseguridad-semana-del-24-al-28-de-agosto-de-2026/">CronUp Ciberseguridad — Panorama de ciberseguridad: semana del 24 al 28 de agosto de 2026</a></li><li><a href="https://www.welivesecurity.com/es/ransomware/the-gentlemen-la-nueva-generacion-de-ransomware-que-ataca-a-medida/">ESET WeLiveSecurity — The Gentlemen: la nueva generación de ransomware que ataca a medida</a> (2026-03-26)</li><li><a href="https://a3sec.com/alertas/the-gentlemen-ransomware-as-a-service-amenaza-en-america-latina">a3sec — «The Gentlemen»: la creciente operación de RaaS constituye una grave amenaza en América Latina</a> (2026-04-07)</li><li><a href="https://www.netprovider.com/post/ransomware-en-chile-2026-ataques-que-cambiaron-el-escenario">NetProvider — Ransomware en Chile y Latinoamérica 2026: ataques que cambiaron el escenario</a> (2026-03-10) — <em>fuente derivada, cita a CronUp</em></li></ol>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-014 · v1.2 · 2026-09-15</strong> · caduca 2026-12-15</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

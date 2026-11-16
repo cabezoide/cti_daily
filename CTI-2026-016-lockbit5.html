@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-016 · LockBit 5.0 (ChuongDong)</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-016<small>LockBit 5.0 (ChuongDong)</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-requisitos-y-limitaciones">3. Alcance, requisitos y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-que-representa-este-actor-en-el-panorama">E-1. Qué representa este actor en el panorama</a><a href="#e-2-victimologia">E-2. Victimología</a><a href="#e-3-tendencia-y-pronostico">E-3. Tendencia y pronóstico</a><a href="#e-4-decisiones-que-este-informe-pide-al-nivel-estrategico">E-4. Decisiones que este informe pide al nivel estratégico</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion-y-alias">O-1. Identificación y alias</a><a href="#o-2-estructura-y-atribucion">O-2. Estructura y atribución</a><a href="#o-3-modelo-de-negocio-de-operacion">O-3. Modelo de negocio / de operación</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-cronologia">O-5. Cronología</a><a href="#o-6-hipotesis-alternativas-consideradas">O-6. Hipótesis alternativas consideradas</a><a href="#o-7-indicadores-y-senales-de-alerta">O-7. Indicadores y señales de alerta</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-cadena-de-intrusion">T-1. Cadena de intrusión</a><a href="#t-2-mapa-mitre-att-ck">T-2. Mapa MITRE ATT&amp;CK</a><a href="#t-3-donde-atacamos-en-la-piramide-del-dolor">T-3. Dónde atacamos en la Pirámide del Dolor</a><a href="#t-4-hipotesis-de-caza-prioritarias">T-4. Hipótesis de caza prioritarias</a><a href="#t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero">T-5. Brechas de visibilidad que hay que cerrar primero</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-arsenal-y-capacidad">X-1. Arsenal y capacidad</a><a href="#x-2-artefactos-de-host-persistentes-entre-builds">X-2. Artefactos de host persistentes entre builds</a><a href="#x-3-logica-de-deteccion-prioritaria">X-3. Lógica de detección prioritaria</a><a href="#x-4-consultas-de-caza">X-4. Consultas de caza</a><a href="#x-5-mitigaciones-de-configuracion-con-efecto-directo">X-5. Mitigaciones de configuración con efecto directo</a><a href="#14-brechas-de-inteligencia-y-nuevos-requisitos-de-coleccion">14. Brechas de inteligencia y nuevos requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores-de-compromiso">Anexo A — Indicadores de compromiso</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-marcos-de-referencia-empleados">Anexo D — Marcos de referencia empleados</a><a href="#anexo-e-paquete-legible-por-maquina">Anexo E — Paquete legible por máquina</a><a href="#anexo-f-control-de-cambios">Anexo F — Control de cambios</a><a href="#anexo-g-realimentacion-del-consumidor">Anexo G — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de actor + informe de campaña</span><span class="pill p-mint">Chile · Latinoamérica</span><span class="pill p-sky">v1.1 · 2026-09-16</span></div><h1>LockBit 5.0<br><span class="hl">ChuongDong</span></h1><p class="sub">LockBit 5.0 «ChuongDong»: una marca degradada con un cifrador mejor que nunca, que ha desplazado su presión desde Estados Unidos hacia Europa del sur y Latinoamérica</p><p class="sub2">Con víctima confirmada en Chile y evaluación bajo el régimen de la Ley 21.663</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-016</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-16</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:AMBER</dd></div></dl></div>
+</section>
+<div class="note info rv"><div class="t">Regla de oro del producto:</div><p>todo párrafo debe responder a un requisito de inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que alguien va a hacer, va al anexo o se borra.</p></div>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-016</code></dd></div><div><dt>Versión / fecha</dt><dd class="m"><code>1.1</code> — 2026-09-16</dd></div><div><dt>Tipo de producto</dt><dd>Perfil de actor + informe de campaña</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Foco regional</dt><dd>Chile · Latinoamérica</dd></div><div><dt>Marcado de difusión</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:AMBER</code></dd></div><div><dt>Clasificación interna</dt><dd>Público — apto para difusión abierta</dd></div><div><dt>Requisitos atendidos</dt><dd class="m"><code>PIR-01</code>, <code>PIR-02</code>, <code>PIR-04</code>, <code>PIR-07</code></dd></div><div><dt>Solicitante / consumidor primario</dt><dd>CISO · Jefatura de SOC · Comité de Riesgo Operacional</dd></div><div><dt>Ventana de observación</dt><dd class="m">2025-09-01 → 2026-09-16</dd></div><div><dt>Base de colección</dt><dd>21 fuentes externas todo-fuente (OSINT, TECHINT de proveedor, análisis de binario independiente, CLOSINT derivado de sitio de filtración y de foro RAMP, CERT nacional). <strong>Sin telemetría propia incorporada</strong></dd></div><div><dt>Autor (analista)</dt><dd class="m">Célula CTI</dd></div><div><dt>Revisión por pares</dt><dd class="m">Pendiente</dd></div><div><dt>Aprobación</dt><dd class="m">Pendiente</dd></div><div><dt>Caducidad / revisión</dt><dd>2026-12-16, o antes si se confirma nueva acción policial, rebranding, filtración de claves o cambio del esquema criptográfico</dd></div><div><dt>Productos relacionados</dt><dd class="m"><code>CTI-2026-015</code> (Qilin) y <code>CTI-2026-014</code> (TheGentlemen) — complementa: los tres actores integran o rodean la misma coalición y compiten por los mismos afiliados</dd></div><div><dt>Paquete legible por máquina</dt><dd>Pendiente de generar (véase §14)</dd></div></dl>
+<div class="note warn rv"><div class="t">Limitación estructural de este producto</div><p>Se ha elaborado exclusivamente con fuentes abiertas, de proveedor y de análisis independiente de binario. No incorpora telemetría de la organización, por lo que <strong>la sección de exposición propia (§O-4) está sin rellenar</strong> y todo juicio sobre riesgo para nosotros es condicional, no evaluado. Un informe con §O-4 vacía es inteligencia genérica, no inteligencia propia.</p></div>
+<div class="note warn rv"><div class="t">Nota sobre la denominación «APT»</div><p>El requisito se formuló como «APT LockBit 5». LockBit <strong>no es un actor de amenaza persistente avanzada con patrocinio estatal</strong>: es una operación criminal de ransomware-como-servicio con ánimo de lucro, y lo ha sido desde 2019. La distinción cambia el modelo de motivación, el horizonte temporal y las opciones de disuasión: frente a un APT se compite por resistencia; frente a un RaaS se compite por coste de oportunidad —hacer que atacarnos salga más caro que atacar a otro—. El matiz relevante se trata en §O-2.</p></div>
+<div class="note warn rv"><div class="t">Nota de precisión histórica</div><p>El ataque al <strong>Poder Judicial de Chile fue en septiembre de 2022 y se ejecutó con LockBit Black (3.0)</strong>, no con LockBit 5.0. Varias fuentes secundarias mezclan ambos hechos. Se consigna como precedente nacional del actor —§O-5—, pero <strong>no debe citarse como actividad de la versión 5.0</strong>.</p></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-md rv"><div class="id">KJ-1</div>
+<h4>LockBit volvió con la versión 5.0 en septiembre de 2025, pero no ha recuperado su escala anterior y su ritmo está en declive desde abril de 2026</h4><p>El sitio de filtración acumula 362 organizaciones en doce meses, frente a las más de 7.000 reivindicadas históricamente por la marca; el ritmo pasó de una media de 54 víctimas al mes en el primer trimestre de 2026 a aproximadamente 18 al mes entre abril y septiembre. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la operación siga sin volver al primer puesto del ecosistema en los próximos seis meses.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Concordancia aritmética entre Check Point (79 víctimas en Q4-2025, 163 en Q1-2026), Halcyon (335 acumuladas al 17-08-2026) y ransomware.live (362 al 14-09-2026); ninguna fuente publica la serie mensual completa, por lo que las medias son derivadas.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-2</div>
+<h4>La degradación de la marca es el hecho estratégico central. Tras la Operación Cronos (febrero de 2024), la identificación y sanción de su administrador Dmitry Khoroshev y el hackeo de su propio panel de administración en mayo de 2025, LockBit redujo la barrera de entrada de afiliados a un depósito de unos 500 dólares en bitcoin</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que esto traduzca en afiliados menos experimentados y más oportunistas: tradecraft inconsistente, más ruido, menos sigilo, pero también menos predecibilidad.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Check Point y Flare documentan el depósito y la reapertura del reclutamiento; Flare recoge además que «los afiliados en gran medida no quieren trabajar con ellos». Es inferencia razonada sobre la calidad del afiliado, no observación directa de su desempeño.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>El cifrador 5.0 opera sin red. Usa ChaCha20/XChaCha20 con intercambio de claves Curve25519 y clave pública embebida en el binario; un análisis dinámico independiente registró cero paquetes capturados durante el cifrado completo</h4><p>Esto es <strong>un hecho confirmado por análisis de binario</strong>, no una estimación. <em>Implicación de doctrina:</em> <strong>ninguna detección basada en red —C2, DNS, beaconing— verá la fase de cifrado.</strong> La oportunidad de detección en red existe <em>antes</em>, en la exfiltración y el movimiento lateral, y <em>nunca</em> durante el impacto. Un corte de conectividad no detiene el cifrado.</p><div class="gauge" data-p="100"><div class="lab"><span>Confirmado</span><b>hecho</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>El cifrador ciega deliberadamente la telemetría de endpoint antes de actuar: parchea EtwEventWrite con una instrucción de retorno (0xC3) para desactivar Event Tracing for Windows, retira los enganches de usuario del EDR (unhooking), ejecuta por reflexión de DLL sin tocar disco, termina 63 servicios identificados por hash —incluidos VSS, Veeam, Acronis, BackupExec y Windows Search— y borra los registros de eventos con EvtClearLog al terminar</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que un análisis forense posterior al cifrado, apoyado solo en artefactos del host, sea insuficiente para reconstruir la intrusión.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Trend Micro, LevelBlue/SpiderLabs y ASEC coinciden de forma independiente sobre el conjunto de técnicas.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>El actor ha desplazado su presión fuera de Estados Unidos de forma deliberada. La proporción de víctimas estadounidenses cayó de más del 50 % histórico al 21,2 % en el primer trimestre de 2026, mientras crecían Italia (8,6 %), Brasil (8,6 %), Turquía (5,1 %) y México</h4><p>En el acumulado de la versión 5.0, <strong>Brasil y México suman 44 de 362 víctimas</strong> y Latinoamérica representa en torno al 12–15 % del total. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la exposición relativa de organizaciones chilenas y latinoamericanas a este actor sea hoy mayor que en cualquier momento anterior de la marca.</p><div class="gauge" data-p="14"><div class="lab"><span>Probable</span><b>12–15 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Check Point (Q1-2026) y ransomware.live (acumulado) concuerdan en la dirección; la interpretación como evasión deliberada de jurisdicciones con presión policial agresiva es inferencia analítica, no declaración del actor.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-6</div>
+<h4>Hay actividad confirmada de LockBit 5.0 en Chile. El 20 de febrero de 2026 el actor reivindicó públicamente el compromiso de Red Dávila, prestador de salud, con amenaza de publicación de datos sensibles</h4><p>El contexto nacional agrava el juicio: <strong>agosto de 2026 fue el peor mes de ransomware registrado en Chile</strong> —al menos diez organizaciones afectadas según CronUp— y los ocho primeros meses del año superan cualquier año completo anterior. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que aparezcan nuevas víctimas chilenas de este actor en los próximos seis meses.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> La reivindicación de Red Dávila está documentada por una única fuente comercial (DeXpose) sin corroboración de CSIRT nacional; el contexto de agosto procede de CronUp, con buen historial en el país.</p></div>
+<div class="kj kj-lo rv"><div class="id">KJ-7</div>
+<h4>LockBit forma parte de la coalición anunciada en septiembre de 2025 con DragonForce y Qilin para «dictar las condiciones del mercado» y compartir técnicas e infraestructura</h4><p>Valoramos <strong>posibilidad real</strong> <em>(45–55 %)</em> de que capacidades hoy características de Qilin —en particular la neutralización de EDR desde el kernel mediante controladores vulnerables firmados— aparezcan en intrusiones de afiliados de LockBit dentro de los próximos doce meses.</p><div class="gauge" data-p="50"><div class="lab"><span>Posibilidad real</span><b>45–55 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: baja.</b> El anuncio de la coalición está corroborado por múltiples fuentes, pero <strong>no se ha observado todavía transferencia técnica verificada entre los tres grupos</strong>. Es un pronóstico por razonamiento, no por evidencia. Se consigna marcado como especulativo.</p></div></div>
+<p class="rv"><strong>Qué cambiaría estos juicios:</strong> (a) una detención, incautación o filtración de claves privadas que permita un descifrador gratuito —colapsaría la operación—; (b) la observación de un cifrador LockBit con esquema criptográfico distinto, que indicaría cambio de desarrollador o suplantación de marca por terceros; (c) la aparición documentada de BYOVD o de un módulo de neutralización de EDR a nivel de kernel en una intrusión LockBit, que confirmaría KJ-7 y elevaría la severidad; (d) un repunte sostenido por encima de 50 víctimas mensuales, que invalidaría el declive de KJ-1; (e) la atribución por el CSIRT Nacional de un incidente de efecto significativo a este actor en Chile.</p>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">LockBit fue durante cuatro años la mayor operación de ransomware del mundo. En febrero de 2024 una acción policial internacional —Operación Cronos— incautó su infraestructura y sus claves; en mayo de 2024 se identificó y sancionó a su administrador, el ciudadano ruso Dmitry Khoroshev, con una recompensa de diez millones de dólares por información que lleve a su detención; en mayo de 2025 el propio grupo fue hackeado y su base de datos de negociaciones, afiliados y carteras quedó expuesta. <strong>La marca sobrevivió a todo eso, pero no intacta.</strong></p>
+<p class="rv">En septiembre de 2025, coincidiendo con su sexto aniversario, LockBit anunció en el foro ruso RAMP la versión 5.0, de nombre interno «ChuongDong», con un cifrador reescrito para Windows, Linux y VMware ESXi. Doce meses después ha reivindicado 362 organizaciones en 68 países. Es una cifra significativa en términos absolutos —cualquiera de esas organizaciones tuvo un día muy malo— pero <strong>modesta para lo que fue LockBit</strong>, y en clara desaceleración: la operación alcanzó su máximo en el primer trimestre de 2026, cuando fue el cuarto grupo más activo del mundo, y desde abril su ritmo ha caído en torno a dos tercios.</p>
+<p class="rv">Lo relevante para nosotros no es el volumen, sino <strong>dónde y cómo</strong>. Dónde: el actor ha reducido su presión sobre Estados Unidos del 50 % histórico al 21 % y la ha redirigido hacia Italia, Brasil, Turquía y México. Latinoamérica pesa ya entre el 12 % y el 15 % de sus víctimas, y hay una reivindicación confirmada en Chile —Red Dávila, prestador de salud, en febrero de 2026—. Cómo: el cifrador 5.0 es <strong>técnicamente mejor que cualquier versión anterior de LockBit</strong>. Cifra sin necesidad de red alguna, lo que hace inútil toda detección de C2 durante el impacto; apaga el Event Tracing for Windows parcheando una sola API; retira los enganches del EDR en espacio de usuario; mata 63 servicios de respaldo y seguridad identificados por hash; y borra los registros de eventos al terminar. Contra hipervisores ESXi puede cifrar una infraestructura virtual completa en un solo movimiento.</p>
+<p class="rv">La paradoja gobierna la decisión: <strong>una operación en decadencia comercial con una herramienta en mejora técnica, ofrecida a afiliados de menor nivel por un depósito de quinientos dólares</strong>. El riesgo no es un adversario de élite: es un operador mediocre con un arma excelente, más difícil de predecir y menos disciplinado en su selección de objetivos.</p>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · detección</div>
+<h4 style="margin:0 0 6px">Cifra sin tocar la red: clave pública embebida, cero tráfico</h4><p style="font-size:13.8px;margin:0">Nuestra detección de red no verá el impacto. La única ventana útil en red es anterior: exfiltración y movimiento lateral</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · telemetría</div>
+<h4 style="margin:0 0 6px">Ciega el ETW y desengancha el EDR antes de cifrar</h4><p style="font-size:13.8px;margin:0">La telemetría de endpoint puede estar muerta cuando ocurre el daño. El reenvío de logs fuera del host deja de ser opcional</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · continuidad</div>
+<h4 style="margin:0 0 6px">Mata 63 servicios, entre ellos VSS, Veeam, Acronis y BackupExec</h4><p style="font-size:13.8px;margin:0">La capacidad de recuperación se decide antes del ataque, con respaldos inmutables y fuera de dominio</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · virtualización</div>
+<h4 style="margin:0 0 6px">Variante ESXi dedicada: cifra la infraestructura virtual completa</h4><p style="font-size:13.8px;margin:0">Un solo acierto en el hipervisor equivale a cientos de servidores. La administración de virtualización necesita su propio perímetro de identidad</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">05 · exposición regional</div>
+<h4 style="margin:0 0 6px">Desplazamiento deliberado de EE. UU. hacia el sur de Europa y LATAM</h4><p style="font-size:13.8px;margin:0">Nuestra geografía ha dejado de ser un factor de protección relativa frente a este actor</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">06 · perfil del adversario</div>
+<h4 style="margin:0 0 6px">Barrera de entrada de afiliados de 500 USD</h4><p style="font-size:13.8px;margin:0">Operadores menos capaces, pero más impredecibles y menos disciplinados en la selección de objetivos</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">07 · regulatorio</div>
+<h4 style="margin:0 0 6px">Víctima confirmada en Chile: prestador de salud, febrero 2026</h4><p style="font-size:13.8px;margin:0">La amenaza es local y sectorialmente sensible; activa consideraciones de datos de salud y de notificación regulatoria</p></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="362">0</div><div class="l">Organizaciones reivindicadas por LockBit 5.0 desde septiembre de 2025</div><div class="s">Frente a más de 7.000 atribuidas históricamente a la marca LockBit</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="68">0</div><div class="l">Países con víctimas de la versión 5.0</div><div class="s">Alcance global sin discriminación geográfica, salvo la exclusión de la CEI</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="163">0</div><div class="l">Víctimas en el primer trimestre de 2026</div><div class="s">Su máximo: cuarto puesto mundial, +106 % sobre el trimestre anterior</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n">21,2 %</div><div class="l">Proporción de víctimas en EE. UU. en Q1-2026</div><div class="s">Frente a más del 50 % histórico: desplazamiento deliberado de jurisdicción</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="0">0</div><div class="l">Paquetes de red observados durante el cifrado</div><div class="s">Cifrado totalmente autónomo: la detección de red no cubre la fase de impacto</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="63">0</div><div class="l">Servicios de seguridad y respaldo que termina por hash</div><div class="s">Incluye VSS, Veeam, Acronis, BackupExec y Windows Search</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="500">0<small>USD</small></div><div class="l">Depósito de entrada para nuevos afiliados</div><div class="s">Barrera mínima: capta operadores de bajo nivel y difícil de perfilar</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n">80,6 días</div><div class="l">Retraso medio entre el ataque y su publicación en el sitio de filtración</div><div class="s">La ausencia de publicación no es prueba de ausencia de compromiso</div></div></div>
+<div class="note good rv"><div class="t">✅ Decisión que se solicita a Dirección:</div><p>(a) instruir el reenvío en tiempo real de los registros de eventos de Windows a un destino fuera del host, con plazo de 60 días, porque la telemetría que vive solo en el endpoint es destruible por este actor; (b) aprobar el aislamiento de la administración de la plataforma de virtualización (ESXi/vCenter) en un plano de identidad y red separado, con MFA propio, plazo de 90 días; (c) financiar la verificación trimestral de restauración desde respaldos inmutables, desconectados y fuera del dominio de Active Directory, con la primera prueba antes de 45 días; (d) autorizar la ejecución del cuestionario de exposición de §O-4 y la reemisión de este informe con telemetría propia, plazo 30 días.</p></div>
+</section>
+<section id="3-alcance-requisitos-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance, requisitos y limitaciones</h2><p><strong>3.1 Requisitos de inteligencia atendidos</strong></p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Req.</th><th>Enunciado</th><th>¿Respondido?</th><th>Dónde</th></tr></thead><tbody>
+<tr><td>PIR-01</td><td>¿Qué actores tienen intención y capacidad contra nuestro sector y geografía?</td><td>Sí</td><td>§E-1, §E-2, §O-2</td></tr>
+<tr><td>PIR-02</td><td>¿Cuál es el vector de acceso inicial más probable contra nuestra superficie expuesta?</td><td><strong>Parcial</strong> — el actor no tiene un vector dominante documentado</td><td>§T-1, §14 (G-1)</td></tr>
+<tr><td>PIR-04</td><td>¿Qué capacidades adversarias invalidan controles que hoy damos por eficaces?</td><td>Sí</td><td>§KJ-3, §KJ-4, §X-1, §X-3</td></tr>
+<tr><td>PIR-07</td><td>¿Qué obligaciones regulatorias se activan ante un incidente de este actor en Chile?</td><td>Parcial</td><td>§E-4, §14</td></tr>
+<tr><td>—</td><td>¿Estamos ya comprometidos?</td><td><strong>No</strong> — requiere telemetría propia</td><td>§O-4</td></tr></tbody></table></div>
+<p class="rv"><strong>3.2 Fuera de alcance.</strong> No se evalúa la exposición concreta de la organización (inventario, versiones, cobertura de EDR, superficie ESXi), no se cuantifica el impacto financiero de un escenario de cifrado, y no se cubren los otros integrantes de la coalición salvo por comparación —Qilin se trata en <code>CTI-2026-015</code>—. Tampoco se evalúa la conveniencia de pagar un rescate: es una decisión de Dirección con asesoría legal, no un juicio de inteligencia.</p>
+<p class="rv"><strong>3.3 Limitaciones de la colección.</strong> (a) Todas las cifras de víctimas proceden de un sitio de filtración <strong>controlado por el adversario</strong>: miden lo que el actor decide publicar, no lo que ocurre; las víctimas que pagan rara vez aparecen, y el retraso medio documentado entre ataque y publicación es de <strong>80,6 días</strong>. (b) <strong>Ninguna fuente pública ofrece la serie mensual completa de LockBit 5.0 en 2026</strong>: las medias mensuales de este informe son <em>derivadas</em> por diferencia entre acumulados de fuentes distintas —Check Point, Halcyon, ransomware.live— con criterios de deduplicación que no coinciden; se declaran como estimación y no deben citarse como recuento. (c) Durante la colección se detectó <strong>contaminación cruzada de fuentes secundarias</strong> entre la actividad de LockBit 3.0 tras Cronos (2024) y la de LockBit 5.0 (2026), y entre el ataque al Poder Judicial de Chile de 2022 y la versión actual; ambas se han descartado y se documentan en §O-6 como hipótesis rechazadas. (d) No existe un vector de acceso inicial dominante documentado ni un conjunto de CVE atribuido a esta versión: es la principal brecha de este producto (§14, G-1). (e) Sin telemetría propia, según §0.</p>
+<p class="rv"><strong>3.4 Metodología.</strong> Disciplinas empleadas: OSINT, OSINT comercial de proveedor, análisis independiente de binario publicado por terceros (TECHINT de segunda mano), CLOSINT derivado del sitio de filtración adversario y del foro RAMP, y reporte de CERT nacional (véase Anexo B). Técnicas analíticas estructuradas aplicadas: análisis de hipótesis competidoras (§O-6), verificación de supuestos clave y pre-mortem (§O-6), y triangulación aritmética de acumulados discordantes (§E-3). Marcos de referencia en el Anexo D. Léxico estimativo conforme a ICD 203 (Anexo C).</p>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> Consejo</span><span>CISO</span><span>Riesgo</span><span>Legal</span><span><b>Horizonte:</b> 6–24 meses</span></div></div>
+<section id="e-1-que-representa-este-actor-en-el-panorama" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Qué representa este actor en el panorama</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · disuasión</div>
+<h4 style="margin:0 0 6px"><strong>La acción policial funciona, pero no mata la marca.</strong> Cronos incautó infraestructura y claves en 2024; LockBit volvió en 2025 con un producto mejor y una cuarta parte de su tamaño</h4><p style="font-size:13.8px;margin:0">No podemos esperar que la disuasión externa resuelva el problema. La desarticulación degrada al adversario; no lo elimina, y el que vuelve suele volver técnicamente mejorado</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · difusión de TTP</div>
+<h4 style="margin:0 0 6px"><strong>Cartelización del ecosistema.</strong> Coalición LockBit–Qilin–DragonForce anunciada en septiembre de 2025 para «dictar las condiciones del mercado»</h4><p style="font-size:13.8px;margin:0">Una TTP observada en un grupo puede propagarse a los otros. La inteligencia sobre un actor deja de ser específica de ese actor: hay que defenderse del repertorio conjunto</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · mercado</div>
+<h4 style="margin:0 0 6px"><strong>Fragmentación simultánea.</strong> El ecosistema pasó de 71 grupos activos en Q1-2026 a 93 en Q2, el máximo histórico, y la concentración del top-10 cayó del 71 % al 57,6 %</h4><p style="font-size:13.8px;margin:0">Más marcas, más pequeñas y más volátiles. El valor de la inteligencia centrada en un único grupo baja; el valor de la inteligencia centrada en TTP sube</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · perfil del adversario</div>
+<h4 style="margin:0 0 6px"><strong>Devaluación de la marca como activo criminal.</strong> Tras la sanción de su administrador y el hackeo de su propio panel, los afiliados de primer nivel evitan a LockBit</h4><p style="font-size:13.8px;margin:0">Nos enfrentamos con más probabilidad a un operador de segundo nivel: menos sigiloso, más ruidoso, pero también menos previsible y más propenso a errores con consecuencias destructivas</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">05 · geografía del riesgo</div>
+<h4 style="margin:0 0 6px"><strong>Arbitraje de jurisdicción.</strong> La caída de víctimas estadounidenses del 50 % al 21 % coincide con la mayor presión policial y de sanciones sobre ataques a EE. UU.</h4><p style="font-size:13.8px;margin:0">El adversario optimiza por riesgo legal, no solo por rentabilidad. Latinoamérica es atractiva precisamente por su menor densidad de acción policial internacional</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">06 · arquitectura</div>
+<h4 style="margin:0 0 6px"><strong>Ataque al hipervisor como estrategia.</strong> Variante ESXi dedicada, presente desde el lanzamiento en las tres plataformas</h4><p style="font-size:13.8px;margin:0">La consolidación en virtualización que abarató nuestra infraestructura también concentró el radio de daño. Un hipervisor comprometido no es un servidor: son todos</p></div></div>
+</section>
+<section id="e-2-victimologia" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>Victimología</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Países con más víctimas de LockBit 5.0 (acumulado, sep. 2025 – sep. 2026)</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn">Estados Unidos</span><span class="bt"><i data-w="100"></i></span><span class="bv">66</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Italia</span><span class="bt"><i data-w="42"></i></span><span class="bv">28</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Brasil</span><span class="bt"><i data-w="42"></i></span><span class="bv">28</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Alemania</span><span class="bt"><i data-w="38"></i></span><span class="bv">25</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">México</span><span class="bt"><i data-w="24"></i></span><span class="bv">16</span></div></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Sectores más golpeados por LockBit 5.0 (acumulado)</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn">Servicios profesionales</span><span class="bt"><i data-w="100"></i></span><span class="bv">62</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">Manufactura</span><span class="bt"><i data-w="100"></i></span><span class="bv">62</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Tecnología</span><span class="bt"><i data-w="77"></i></span><span class="bv">48</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Salud</span><span class="bt"><i data-w="52"></i></span><span class="bv">32</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Agricultura y alimentación</span><span class="bt"><i data-w="40"></i></span><span class="bv">25</span></div></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Distribución geográfica en el primer trimestre de 2026 (% de víctimas)</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">Estados Unidos</span><span class="bt"><i data-w="38"></i></span><span class="bv">21.2</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Italia</span><span class="bt"><i data-w="15"></i></span><span class="bv">8.6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Brasil</span><span class="bt"><i data-w="15"></i></span><span class="bv">8.6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Turquía</span><span class="bt"><i data-w="9"></i></span><span class="bv">5.1</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">Resto del mundo</span><span class="bt"><i data-w="100"></i></span><span class="bv">56.5</span></div></div></div>
+<div class="note info rv"><div class="t">Lectura clave</div><p>Dos cosas importan aquí y ninguna es el primer puesto de la tabla. La primera: <strong>Estados Unidos ha dejado de ser la mitad del negocio</strong>. Pasar del 50 % al 21 % en una operación que conserva capacidad global no es azar estadístico, es política de selección. La segunda: <strong>Brasil empata con Italia en el segundo puesto</strong>, y con México suma 44 de 362 víctimas. Latinoamérica pesa entre el 12 % y el 15 % del total de esta versión. La distribución sectorial —servicios profesionales, manufactura, tecnología, salud, agroalimentación— no describe una preferencia ideológica: describe <strong>qué industrias operan infraestructura heredada, ventanas de mantenimiento estrechas y accesos remotos de proveedor sin MFA</strong>. No estamos protegidos por ser quienes somos; estamos expuestos en la medida en que nuestro acceso remoto y nuestra virtualización se parezcan a los de esas víctimas.</p></div>
+<p class="rv"><strong>Presencia confirmada en Chile.</strong> El 20 de febrero de 2026, LockBit 5.0 reivindicó en su sitio de filtración el compromiso de <strong>Red Dávila</strong> (<code>davila.cl</code>), prestador de salud, con amenaza de divulgación de datos sensibles. Es la única víctima chilena identificable de esta versión documentada en fuentes abiertas al cierre de este informe, y procede de <strong>una sola fuente comercial sin corroboración de CSIRT nacional</strong>: se consigna con confianza moderada. El contexto nacional, en cambio, está bien establecido: según la monitorización de CronUp, <strong>agosto de 2026 fue el peor mes de ransomware registrado en Chile</strong>, con al menos diez organizaciones afectadas, y la media mensual de 2026 —unas cuatro víctimas— cuadruplica la de 2023.</p>
+</section>
+<section id="e-3-tendencia-y-pronostico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Tendencia y pronóstico</h2></div></div>
+<div class="chart rv">
+<h4>Víctimas acumuladas en el sitio de filtración de LockBit 5.0</h4><p class="cap">Serie construida por triangulación de acumulados de tres fuentes con criterios de deduplicación distintos (Check Point, Halcyon, ransomware.live). Los puntos intermedios son derivados, no recuentos publicados. Fuente controlada por el adversario: indica intención de publicar, no organizaciones comprometidas.</p><svg viewBox="0 0 720 250" role="img" aria-label="Víctimas acumuladas en el sitio de filtración de LockBit 5.0"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">90</text><text x="42" y="116.0">181</text><text x="42" y="72.0">272</text><text x="42" y="28.0">362</text></g><path d="M50.0,189.8 L210.0,151.4 L370.0,72.1 L530.0,37.1 L690.0,24.0 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,189.8 L210.0,151.4 L370.0,72.1 L530.0,37.1 L690.0,24.0"/><g><circle class="pt" cx="50.0" cy="189.8" r="5" fill="#5a7ebe"><title>Oct·25: 21</title></circle><circle class="pt" cx="210.0" cy="151.4" r="5" fill="#5a7ebe"><title>Dic·25: 100</title></circle><circle class="pt" cx="370.0" cy="72.1" r="5" fill="#5a7ebe"><title>Mar·26: 263</title></circle><circle class="pt" cx="530.0" cy="37.1" r="5" fill="#4db99c"><title>Ago·26: 335</title></circle><circle class="pt" cx="690.0" cy="24.0" r="6.5" fill="#f7a400"><title>Sep·26: 362</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="178.8">21</text><text x="210.0" y="140.4">100</text><text x="370.0" y="61.1">263</text><text x="530.0" y="26.1">335</text><text x="690.0" y="13.0" fill="#f7a400">362</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">Oct·25</text><text x="210.0" y="222">Dic·25</text><text x="370.0" y="222">Mar·26</text><text x="530.0" y="222">Ago·26</text><text x="690.0" y="222">Sep·26</text></g></svg></div>
+<div class="card rv">
+<h4 style="margin-top:0">Ritmo de publicación: media de nuevas víctimas al mes (derivada)</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">Q4 2025</span><span class="bt"><i data-w="48"></i></span><span class="bv">26</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">Q1 2026</span><span class="bt"><i data-w="100"></i></span><span class="bv">54</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Abr–sep 2026</span><span class="bt"><i data-w="33"></i></span><span class="bv">18</span></div></div></div>
+<p class="rv">La forma de la curva es el juicio. LockBit 5.0 <strong>creció rápido hasta marzo de 2026 y después se aplanó</strong>: el acumulado sube 163 víctimas en un trimestre y apenas 99 en los cinco meses y medio siguientes. En septiembre de 2026 el ritmo de publicación cayó un 42 % respecto del mes anterior. Esto no describe una operación en expansión, sino una que <strong>alcanzó su techo en el primer trimestre y desde entonces retrocede</strong>, en un ecosistema que mientras tanto batía su récord mensual absoluto —964 víctimas en agosto de 2026 repartidas entre 83 grupos—. LockBit ya no marca el ritmo: lo sigue.</p>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px"><strong>Declive sostenido con capacidad intacta</strong></h4><p style="font-size:13.8px;margin:0">El volumen se estabiliza entre 15 y 25 víctimas al mes. La operación sobrevive como marca de segundo nivel con un cifrador de primer nivel, alimentada por afiliados de bajo coste. La amenaza técnica no baja aunque el volumen sí</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Posibilidad real · 45–55 % (a 12 meses)</div>
+<h4 style="margin:0 0 6px"><strong>Transferencia técnica desde la coalición</strong></h4><p style="font-size:13.8px;margin:0">Capacidades de Qilin —BYOVD, neutralización de EDR en kernel— aparecen en intrusiones de afiliados LockBit. El volumen no cambia, pero la severidad por incidente sube de golpe</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>Rebranding o disolución</strong></h4><p style="font-size:13.8px;margin:0">La marca, ya devaluada, se abandona; el desarrollador de «ChuongDong» reaparece bajo otro nombre conservando el cifrador. Los IOC de este informe caducan de golpe; las TTP siguen vigentes</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Muy poco probable · 5–20 %</div>
+<h4 style="margin:0 0 6px"><strong>Recuperación del liderazgo</strong></h4><p style="font-size:13.8px;margin:0">LockBit vuelve al primer puesto del ecosistema. Requeriría recuperar afiliados de élite, lo que la reputación actual de la marca no sostiene</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>Segunda disrupción policial efectiva</strong></h4><p style="font-size:13.8px;margin:0">Nueva operación internacional con incautación de claves y publicación de descifrador. Existe precedente directo —Cronos— y el administrador está identificado y sancionado</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Posibilidad real · 45–55 %, impacto analítico</div>
+<h4 style="margin:0 0 6px"><strong>Suplantación de marca por terceros</strong></h4><p style="font-size:13.8px;margin:0">Grupos no afiliados usan cifradores LockBit filtrados o construidos con builders robados. Ya ocurrió con LockBit 3.0 en 2022–2023. Contamina la atribución y la estadística</p></div></div>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide-al-nivel-estrategico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide al nivel estratégico</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>Fundamento</th><th>Plazo</th></tr></thead><tbody>
+<tr><td>E-a</td><td>Instruir el <strong>reenvío en tiempo real de los registros de eventos de Windows y de los hipervisores a un destino fuera del host</strong>, con retención independiente del endpoint</td><td>KJ-4: el actor parchea ETW y borra los registros con <code>EvtClearLog</code>. La telemetría que vive solo en el equipo es destruible por diseño</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td>E-b</td><td>Aprobar el <strong>aislamiento del plano de administración de la virtualización</strong> (ESXi, vCenter, Proxmox): red segregada, cuentas dedicadas no vinculadas al dominio, MFA propio y bastión</td><td>KJ-3 y §X-1: existe una variante ESXi dedicada capaz de cifrar toda la infraestructura virtual en un movimiento</td><td><span class="pill p-amber">90 días</span></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-c</td><td>Financiar <strong>respaldos inmutables, desconectados y fuera del dominio</strong>, con prueba de restauración verificada trimestralmente, incluida la infraestructura de respaldo misma (Veeam, Acronis, BackupExec, VSS)</td><td>KJ-4: el cifrador termina 63 servicios por hash, entre ellos los de las tres suites de respaldo más habituales</td><td>45 días (primera prueba)</td></tr>
+<tr><td>E-d</td><td>Exigir <strong>MFA resistente a phishing en el 100 % de los accesos remotos</strong>, incluidos los de proveedores y los de administración de virtualización, y eliminar todo RDP expuesto a Internet</td><td>§T-1: sin vector dominante documentado, las credenciales válidas sin MFA sobre accesos remotos expuestos son el denominador común de los casos descritos</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-e</td><td>Instruir a Legal y Comunicaciones la preparación del procedimiento de notificación a la <strong>ANCI</strong> bajo la <strong>Ley 21.663</strong> y del guion de respuesta a doble extorsión, con atención específica a datos de salud y de terceros</td><td>KJ-6: hay víctima confirmada en Chile en el sector salud, y <strong>agosto de 2026 fue el peor mes de ransomware del país</strong></td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-f</td><td>Decidir y documentar <strong>por anticipado</strong> la postura institucional ante el pago de rescate, con criterio legal y de continuidad</td><td>El administrador de LockBit está <strong>sancionado por OFAC, el Reino Unido y Australia</strong>: un pago a esta operación puede constituir incumplimiento de régimen de sanciones, además de una decisión de negocio</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td>E-g</td><td>Encargar a la célula CTI la ejecución del cuestionario de exposición de §O-4 y la reemisión de este informe con telemetría propia incorporada</td><td>§0 y §14: sin ese paso, este producto no permite calcular riesgo propio</td><td><span class="pill p-amber">30 días</span></td></tr></tbody></table></div>
+<div class="note warn rv"><div class="t">⚠ Advertencia de sanciones</div><p>Dmitry Khoroshev, administrador de LockBit, fue identificado y sancionado en mayo de 2024 por OFAC (EE. UU.), el FCDO (Reino Unido) y el Departamento de Asuntos Exteriores de Australia, con una recompensa de hasta 10 millones de dólares por información que conduzca a su detención. <strong>Un pago de rescate a esta operación tiene una dimensión de cumplimiento normativo que no tienen otros actores.</strong> Esta advertencia no constituye asesoría legal: la decisión E-f debe tomarse con asesoría jurídica formal.</p></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> Jefatura de SOC</span><span>Respuesta a Incidentes</span><span>Threat Hunting</span><span><b>Horizonte:</b> semanas–meses</span></div></div>
+<section id="o-1-identificacion-y-alias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación y alias</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Designación</th><th>Origen</th><th>Grado de equivalencia</th></tr></thead><tbody>
+<tr><td><code>LockBit</code></td><td>Autodenominación (desde septiembre de 2019)</td><td>Referencia — designa la operación completa</td></tr>
+<tr><td><code>LockBit 5.0</code></td><td>Autodenominación de la versión (septiembre de 2025)</td><td>Referencia — designa la generación actual del cifrador y su programa de afiliados</td></tr>
+<tr><td><code>ChuongDong</code></td><td>Nombre interno de la compilación, presente en los artefactos</td><td>Equivalente a LockBit 5.0 — <strong>es un identificador de build, no un grupo ni una persona</strong></td></tr>
+<tr><td><code>LB_Black_14_01_2026</code>, <code>LB_Linux_14_01_2026</code>, <code>LB_ESXi_14_01_2026</code>, <code>LB_ChuongDong_14_01_2026</code></td><td>Nombres de variante en el panel de afiliados</td><td><strong>No son grupos</strong>: son variantes de compilación datadas</td></tr>
+<tr><td><code>Bitwise Spider</code></td><td>CrowdStrike</td><td>Equivalente — designa al núcleo operador</td></tr>
+<tr><td><code>Storm-0506</code> / clústeres afiliados</td><td>Microsoft</td><td><strong>Solapamiento parcial</strong> — designan afiliados concretos, no la operación</td></tr>
+<tr><td><code>LockBitSupp</code></td><td>Alias del administrador en foros</td><td>Persona, no grupo. Identificado como Dmitry Khoroshev (NCA, mayo de 2024)</td></tr>
+<tr><td><code>G0128</code></td><td>MITRE ATT&amp;CK</td><td>Referencia formal del marco</td></tr>
+<tr><td><code>LockBit Black</code> / <code>LockBit 3.0</code></td><td>Versión anterior (2022)</td><td><strong>Generación distinta.</strong> Su builder fue filtrado en 2022 y usado por terceros no afiliados</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota de tradecraft</div><p>Tres errores frecuentes con este actor, todos con consecuencias analíticas reales. <strong>Primero:</strong> tratar <code>ChuongDong</code> como un grupo o un autor; es el nombre interno de la compilación. <strong>Segundo:</strong> fusionar LockBit 3.0 con LockBit 5.0; el builder de 3.0 se filtró en septiembre de 2022 y desde entonces cualquiera puede generar un cifrador «LockBit» sin relación alguna con la operación —una parte no determinada de los incidentes atribuidos a la marca entre 2023 y 2025 corresponde a terceros—. <strong>Tercero:</strong> atribuir a LockBit 5.0 hechos anteriores a septiembre de 2025, en particular el ataque al Poder Judicial de Chile de 2022. La fusión indebida de alias y generaciones es una de las principales fuentes de error analítico en este dominio.</p></div>
+</section>
+<section id="o-2-estructura-y-atribucion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>Estructura y atribución</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Eje de atribución</th><th>Valoración</th><th>Confianza</th></tr></thead><tbody>
+<tr><td>Clúster técnico</td><td>Familia de cifradores coherente y documentada desde 2019, con reescritura completa en la generación 5.0: ChaCha20/XChaCha20 + Curve25519, builds para Windows, Linux y ESXi</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Grupo organizado</td><td>RaaS con panel de afiliados, builders propios, portal de negociación en Tor, reglas de targeting publicadas y depósito de entrada de ~500 USD</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Nexo estatal</td><td><strong>Ninguno identificado.</strong> Operación con ánimo exclusivamente de lucro. La exclusión de trece países post-soviéticos es tolerancia de facto, no patrocinio</td><td><span class="pill p-sky">Moderada</span></td></tr>
+<tr><td>Origen geográfico</td><td>Operación de habla rusa: actividad en el foro RAMP, comprobación de configuración regional e idioma ruso en el binario con terminación de la ejecución</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Identidad nominal</td><td><strong>Dmitry Yuryevich Khoroshev</strong>, alias <code>LockBitSupp</code>, identificado y sancionado por NCA, OFAC y Australia en mayo de 2024 como administrador y desarrollador</td><td>Alta — caso excepcional en este dominio</td></tr></tbody></table></div>
+<p class="rv"><em>Razonamiento:</em> la atribución de LockBit es, de forma inusual, <strong>sólida y oficial</strong>. No descansa en inferencia de proveedor sino en una identificación gubernamental formal acompañada de sanciones y acusación. A ello se suma evidencia técnica directa: el cifrador 5.0 <strong>termina su ejecución al detectar configuración de idioma o geolocalización rusa</strong>, comportamiento que solo tiene sentido como seguro de supervivencia dentro de la jurisdicción de origen.</p>
+<p class="rv"><em>Contraargumento:</em> la identificación del administrador <strong>no se extiende a los afiliados</strong>, que son quienes ejecutan las intrusiones y cuyo tradecraft varía enormemente. Atribuir una intrusión «a LockBit» dice poco sobre quién estuvo realmente dentro de la red. Además, el builder filtrado de la generación 3.0 permite que terceros sin vínculo alguno generen cifradores de marca LockBit: <strong>la presencia de la marca no prueba la participación de la operación</strong>.</p>
+</section>
+<section id="o-3-modelo-de-negocio-de-operacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Modelo de negocio / de operación</h2><p>LockBit 5.0 es una reconstrucción a la baja de un negocio que antes fue dominante.</p></div></div>
+<p class="rv"><strong>Reclutamiento.</strong> El anuncio de la versión 5.0 se publicó en el foro ruso RAMP en septiembre de 2025, coincidiendo con el sexto aniversario de la marca y planteado explícitamente como una llamada a nuevos afiliados. La barrera de entrada se fijó en un depósito de aproximadamente <strong>500 dólares en bitcoin</strong> —una cifra simbólica frente a los estándares del sector—, lo que revela el problema real del actor: <strong>no consigue afiliados de calidad</strong>. El análisis de Flare sobre el panel filtrado recoge que «la reputación de LockBit ya no está tan bien considerada y los afiliados en gran medida no quieren trabajar con ellos».</p>
+<p class="rv"><strong>Reglas de targeting.</strong> El programa <strong>permite explícitamente</strong> atacar infraestructura crítica, centros médicos y organismos de gobierno, y <strong>prohíbe</strong> operar contra trece países post-soviéticos. No existe restricción sectorial que nos proteja.</p>
+<p class="rv"><strong>Economía.</strong> El reparto histórico es de 70–80 % para el afiliado. El hackeo del panel en mayo de 2025 expuso la escala real del negocio en su etapa previa: en cinco meses —diciembre de 2024 a abril de 2025— el conjunto de la operación movió unos 2,3 millones de dólares, de los que el núcleo retuvo alrededor de 456.000. Los rescates se concentraban entre <strong>2.000 y 40.000 dólares</strong>, con demandas excepcionales de hasta 4,5 millones. Es una operación de <strong>volumen y ticket bajo</strong>, no de caza mayor; el corolario defensivo es que <strong>una organización mediana es un objetivo perfectamente rentable para este actor</strong>.</p>
+<p class="rv"><strong>Producto.</strong> El panel entrega al afiliado builders para Windows, Linux y ESXi, carga autónoma de datos robados y de imágenes al sitio de filtración sin intervención del operador, y chat de negociación en Tor. La herramienta propia de exfiltración es <strong>StealBit</strong>, con búsqueda automática de archivos de interés.</p>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="note gap rv"><div class="t">⬛ Sección sin evaluar — requiere telemetría interna</div><p>Este informe no incorpora datos de la organización. Hasta que este cuestionario se responda, todo juicio de riesgo propio es condicional. Borrar esta nota al rellenarla.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Pregunta</th><th>Fuente</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>X-1</td><td>¿Qué servicios de acceso remoto exponemos a Internet (RDP, VPN, portales de proveedor, RMM) y cuáles carecen de MFA resistente a phishing?</td><td>Inventario externo + IAM</td><td>TI/Redes</td></tr>
+<tr><td>X-2</td><td>¿Están nuestros hosts ESXi/vCenter accesibles desde la red de usuarios? ¿Con qué cuentas y con qué MFA?</td><td>Inventario de virtualización</td><td>TI/Infraestructura</td></tr>
+<tr><td>X-3</td><td>¿Reenviamos los registros de eventos de Windows fuera del host en tiempo real? ¿Cuánto tiempo sobreviviría la evidencia a un <code>EvtClearLog</code>?</td><td>Arquitectura de SIEM</td><td>SOC</td></tr>
+<tr><td>X-4</td><td>¿Nuestro EDR detecta el parcheo de <code>EtwEventWrite</code> y el <em>unhooking</em> en espacio de usuario? ¿Está la protección antimanipulación activa y verificada?</td><td>Configuración de EDR</td><td>SOC / Ingeniería</td></tr>
+<tr><td>X-5</td><td>¿Tenemos cobertura de EDR o telemetría equivalente en hosts Linux y en los hipervisores, o solo en Windows?</td><td>Inventario de agentes</td><td>SOC</td></tr>
+<tr><td>X-6</td><td>¿Nuestros respaldos son inmutables, están desconectados y viven <strong>fuera</strong> del dominio de Active Directory? ¿Cuándo se probó la última restauración completa?</td><td>Plataforma de respaldo</td><td>TI/Continuidad</td></tr>
+<tr><td>X-7</td><td>¿Las cuentas de servicio de las suites de respaldo (Veeam, Acronis, BackupExec) tienen privilegios de dominio innecesarios?</td><td>Revisión de AD</td><td>IAM</td></tr>
+<tr><td>X-8</td><td>¿Detectamos transferencias salientes anómalas de gran volumen <strong>con independencia</strong> de que haya cifrado?</td><td>Telemetría de red / DLP</td><td>SOC</td></tr>
+<tr><td>X-9</td><td>¿Algún proveedor nuestro figura entre las víctimas publicadas por este actor en los últimos doce meses?</td><td>Gestión de terceros</td><td>Riesgo / Compras</td></tr></tbody></table></div>
+</section>
+<section id="o-5-cronologia" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Cronología</h2></div></div>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="global">Global</button><button class="chip" data-tl="chile">Chile</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev gl" data-k="global"><div class="d">2019-09</div><div class="x">Aparece LockBit (inicialmente «ABCD»). Inicio de la operación RaaS</div></div>
+<div class="ev gl" data-k="global"><div class="d">2022-06</div><div class="x">Lanzamiento de LockBit 3.0 «LockBit Black»</div></div>
+<div class="ev cl big" data-k="chile big"><div class="d">2022-09</div><div class="x"><strong>Ataque al Poder Judicial de Chile con LockBit Black: unos 150 equipos infectados, mayoritariamente Windows 7.</strong> Generación 3.0 — <strong>no confundir con 5.0</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2022-09</div><div class="x">Filtración del builder de LockBit 3.0. Desde aquí, terceros no afiliados pueden generar cifradores de marca LockBit</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2024-02-20</div><div class="x"><strong>Operación Cronos: NCA, FBI y Europol incautan infraestructura, servidores y claves de descifrado</strong></div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2024-05-07</div><div class="x"><strong>Identificación y sanción de Dmitry Khoroshev (<code>LockBitSupp</code>) por NCA, OFAC y Australia. Recompensa de 10 M USD</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2025-05-07</div><div class="x">El panel de administración de LockBit es hackeado: se filtran 4.400 mensajes de negociación, 62.400 carteras bitcoin y 75 cuentas de afiliado con contraseñas en claro</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2025-09</div><div class="x"><strong>Anuncio de LockBit 5.0 «ChuongDong» en el foro RAMP. Nuevo sitio de filtración, reclutamiento abierto con depósito de ~500 USD</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2025-09</div><div class="x">DragonForce propone públicamente una coalición con LockBit y Qilin; LockBit acepta y el cartel se declara activo</div></div>
+<div class="ev gl" data-k="global"><div class="d">2025-10</div><div class="x">Primeras 21 víctimas publicadas en el nuevo sitio de filtración</div></div>
+<div class="ev gl" data-k="global"><div class="d">2026-01-14</div><div class="x">Nuevas variantes datadas en el panel: <code>LB_Black</code>, <code>LB_Linux</code>, <code>LB_ESXi</code>, <code>LB_ChuongDong</code></div></div>
+<div class="ev cl big" data-k="chile big"><div class="d">2026-02-20</div><div class="x"><strong>LockBit 5.0 reivindica el compromiso de Red Dávila, prestador de salud chileno</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2026-03-31</div><div class="x">Cierre de su mejor trimestre: 163 víctimas, cuarto puesto mundial, +106 % sobre Q4-2025</div></div>
+<div class="ev cl big" data-k="chile big"><div class="d">2026-08</div><div class="x"><strong>Mes récord de ransomware en Chile: al menos diez organizaciones afectadas (todos los actores)</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2026-09-14</div><div class="x">Última víctima publicada al cierre de este informe. Acumulado 362 en 68 países; ritmo mensual −42 %</div></div></div>
+</section>
+<section id="o-6-hipotesis-alternativas-consideradas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Hipótesis alternativas consideradas</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Retenida — hipótesis principal</div>
+<h4 style="margin:0 0 6px"><strong>H1 — LockBit 5.0 está en declive estructural y no recuperará el liderazgo</strong></h4><p style="font-size:13.8px;margin:0">Consistente con la serie de acumulados, con el aplanamiento desde abril de 2026, con el −42 % de septiembre y con la evidencia sobre la reputación de la marca entre afiliados</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H2 — El declive es aparente: el actor publica menos porque cobra más</strong></h4><p style="font-size:13.8px;margin:0">Inconsistente con el modelo de ticket bajo documentado en el panel filtrado (2.000–40.000 USD) y con la tasa de pago del ecosistema en mínimos. Un actor que cobra más publica más, no menos: la publicación <strong>es</strong> el instrumento de presión</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Retenida como factor de ruido</div>
+<h4 style="margin:0 0 6px"><strong>H3 — Parte de las víctimas atribuidas no corresponde a la operación, sino a terceros con builders filtrados</strong></h4><p style="font-size:13.8px;margin:0">Plausible y <strong>no descartable</strong>: el builder de 3.0 circula desde 2022. Sin embargo, las variantes 5.0 no se han filtrado públicamente, lo que limita el efecto a incidentes mal clasificados por marca</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Retenida en paralelo a KJ-7</div>
+<h4 style="margin:0 0 6px"><strong>H4 — La coalición con Qilin y DragonForce es propaganda sin contenido operativo</strong></h4><p style="font-size:13.8px;margin:0"><strong>Consistente con la evidencia disponible.</strong> Un año después del anuncio no se ha documentado transferencia técnica verificada entre los tres grupos. KJ-7 se emite con confianza baja precisamente por esto</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Descartada</div>
+<h4 style="margin:0 0 6px"><strong>H5 — El Poder Judicial de Chile fue víctima de LockBit 5.0</strong></h4><p style="font-size:13.8px;margin:0"><strong>Falsa.</strong> El incidente es de septiembre de 2022 y se ejecutó con LockBit Black (3.0), documentado por el CSIRT Nacional con cadena de infección <code>123.cmd → injector.exe → lbb.dll</code>. Varias fuentes secundarias lo mezclan con la versión actual</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Descartada</div>
+<h4 style="margin:0 0 6px"><strong>H6 — LockBit es un actor patrocinado por un Estado</strong></h4><p style="font-size:13.8px;margin:0">Sin evidencia. La tolerancia jurisdiccional y la exclusión de la CEI son rasgos comunes a todo el ecosistema criminal ruso-parlante. Se consigna para que no se reabra</p></div></div>
+<p class="rv"><strong>Supuesto clave:</strong> que el sitio de filtración refleja de forma razonablemente consistente el volumen real de la operación. <strong>Si es falso</strong> —por ejemplo, si el actor ha cambiado su política de publicación, o si negocia en privado con la mayoría de sus víctimas— entonces KJ-1 se invierte y estaríamos ante una operación activa que simplemente se ha vuelto silenciosa, lo cual es peor. El retraso medio de <strong>80,6 días</strong> entre ataque y publicación hace que este supuesto sea frágil en el corto plazo: <strong>el volumen de los dos últimos meses siempre está subestimado</strong>.</p>
+<p class="rv"><strong>Pre-mortem:</strong> es marzo de 2027 y este informe resultó equivocado. La explicación más probable: tratamos el descenso de volumen como descenso de amenaza. Un afiliado de bajo coste entró por un acceso de proveedor sin MFA, encontró el vCenter alcanzable desde la red de usuarios y cifró toda la granja virtual en una noche. El volumen global del actor siguió siendo bajo todo el año; el nuestro fue del 100 %. <strong>El volumen de un actor no es su severidad.</strong></p>
+</section>
+<section id="o-7-indicadores-y-senales-de-alerta" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>Indicadores y señales de alerta</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Indicador observable</th><th>Qué señalaría</th><th>Disciplina</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>I-1</td><td>Aparición de una organización chilena o de un proveedor nuestro en el sitio de filtración de LockBit 5.0</td><td>Actividad regional activa; posible exposición por terceros</td><td>OSINT / CLOSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-2</td><td>Publicación de un cifrador LockBit con esquema criptográfico distinto de ChaCha20/Curve25519</td><td>Cambio de desarrollador, suplantación de marca o nueva generación</td><td>TECHINT</td><td>Célula CTI</td></tr>
+<tr><td>I-3</td><td>Primer caso documentado de BYOVD o neutralización de EDR en kernel en una intrusión LockBit</td><td>Confirmación de KJ-7: transferencia técnica desde la coalición. Elevaría la severidad</td><td>TECHINT / OSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-4</td><td>Anuncio de descifrador gratuito o incautación de claves privadas</td><td>Colapso de la operación; oportunidad de recuperación para víctimas históricas</td><td>OSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-5</td><td>Repunte sostenido por encima de 50 víctimas mensuales durante dos meses consecutivos</td><td>Invalidación de KJ-1: la operación se recupera</td><td>OSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-6</td><td>Alerta del CSIRT Nacional o de la ANCI que mencione a LockBit o a <code>ReadMeForDecrypt.txt</code></td><td>Actividad confirmada en territorio nacional con validación oficial</td><td>CERT nacional</td><td>Célula CTI</td></tr>
+<tr><td>I-7</td><td>Aparición de nuevas variantes datadas en el panel (patrón <code>LB_*_DD_MM_AAAA</code>)</td><td>Desarrollo activo: el cifrador sigue mantenido pese al declive comercial</td><td>CLOSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-8</td><td>Actividad del alias <code>LockBitSupp</code> o sucesor en RAMP tras un periodo de silencio</td><td>Señal temprana de rebranding o de nueva campaña de reclutamiento</td><td>CLOSINT</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Analistas de SOC</span><span>Ingeniería de Detección</span><span>Threat Hunting</span><span><b>Horizonte:</b> días–semanas</span></div></div>
+<section id="t-1-cadena-de-intrusion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Cadena de intrusión</h2></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">Tres etapas, y solo las dos primeras son observables</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">Etapa 01 · Acceso</div><h5>Credencial válida antes que exploit</h5><ul><li>Acceso remoto sin MFA (RDP, VPN, portal de proveedor)</li><li>credenciales compradas a infostealers</li><li>fuerza bruta</li><li>phishing (~22 %)</li><li>explotación de servicio expuesto (~22 %)</li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 02 · Dominio</div><h5>Identidad, no malware</h5><ul><li>Volcado de credenciales y robo de token</li><li>propagación por SMB y RDP</li><li>cuentas de servicio sobreprivilegiadas</li><li>abuso de RMM</li><li>Cobalt Strike (observado en ESXi como <code>_.sf_</code>)</li><li>Volatility reutilizado para extraer credenciales de memoria de máquinas virtuales</li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 03 · Impacto</div><h5>Ciega, destruye, cifra — sin red</h5><ul><li>ETW parcheado</li><li><em>unhooking</em> de EDR</li><li>63 servicios terminados por hash</li><li>exfiltración con StealBit</li><li>borrado de instantáneas y de TEMP</li><li>cifrado ChaCha20 sin tráfico de red</li><li><code>EvtClearLog</code></li><li>borrado de espacio libre (<code>-w</code>)</li><li>autoeliminación</li></ul></div></div><div class="dwell"><span>⏱</span><span><strong>Permanencia:</strong> no existe una mediana publicada para LockBit 5.0 —es una brecha declarada en §14—. La referencia disponible del ecosistema sitúa las intrusiones más rápidas en <strong>exfiltración a los ~72 minutos</strong> del acceso inicial. Planificar la respuesta sobre horas, no sobre días.</span></div></div>
+<div class="note warn rv"><div class="t">⚠ La etapa 03 no es detectable en red</div><p>El cifrador lleva la clave pública Curve25519 embebida y genera sus claves de sesión localmente desde <code>/dev/urandom</code> o desde tiempo y memoria del sistema. <strong>Cero paquetes durante el cifrado.</strong> Toda la oportunidad de detección en red está en las etapas 01 y 02; una vez iniciada la 03, desconectar la red no detiene nada.</p></div>
+</section>
+<section id="t-2-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Acceso inicial <i>4</i></h5>
+<div class="tq" data-s="acceso inicial t1078 valid accounts credenciales válidas sin mfa sobre accesos remotos expuestos; compra en mercados de infostealers"><div class="tid">T1078</div><div class="tn">Valid Accounts</div><div class="tp">Credenciales válidas sin MFA sobre accesos remotos expuestos; compra en mercados de infostealers</div></div>
+<div class="tq" data-s="acceso inicial t1133 external remote services rdp y portales vpn expuestos a internet"><div class="tid">T1133</div><div class="tn">External Remote Services</div><div class="tp">RDP y portales VPN expuestos a Internet</div></div>
+<div class="tq" data-s="acceso inicial t1190 exploit public-facing application explotación de servicios expuestos (~22 % de los casos). sin cve específica atribuida a esta versión"><div class="tid">T1190</div><div class="tn">Exploit Public-Facing Application</div><div class="tp">Explotación de servicios expuestos (~22 % de los casos). <strong>Sin CVE específica atribuida a esta versión</strong></div></div>
+<div class="tq" data-s="acceso inicial t1566 phishing ~22 % de los casos; señuelos asistidos por ia"><div class="tid">T1566</div><div class="tn">Phishing</div><div class="tp">~22 % de los casos; señuelos asistidos por IA</div></div></div>
+<div class="mcol" data-col><h5>Ejecución <i>2</i></h5>
+<div class="tq" data-s="ejecución t1059.001 powershell cadenas de ejecución ofuscadas para descarga y carga de componentes"><div class="tid">T1059.001</div><div class="tn">PowerShell</div><div class="tp">Cadenas de ejecución ofuscadas para descarga y carga de componentes</div></div>
+<div class="tq" data-s="ejecución t1106 native api resolución dinámica de api y ejecución en memoria"><div class="tid">T1106</div><div class="tn">Native API</div><div class="tp">Resolución dinámica de API y ejecución en memoria</div></div></div>
+<div class="mcol" data-col><h5>Persistencia <i>1</i></h5>
+<div class="tq" data-s="persistencia t1543.003 create or modify system process: windows service creación de servicios para ejecución privilegiada"><div class="tid">T1543.003</div><div class="tn">Create or Modify System Process: Windows Service</div><div class="tp">Creación de servicios para ejecución privilegiada</div></div></div>
+<div class="mcol" data-col><h5>Escalada <i>1</i></h5>
+<div class="tq" data-s="escalada t1134 access token manipulation robo y suplantación de token para movimiento con privilegios"><div class="tid">T1134</div><div class="tn">Access Token Manipulation</div><div class="tp">Robo y suplantación de token para movimiento con privilegios</div></div></div>
+<div class="mcol" data-col><h5>Evasión <i>9</i></h5>
+<div class="tq" data-s="evasión t1055.012 process injection: process hollowing ejecución del cifrador dentro de un proceso legítimo vaciado"><div class="tid">T1055.012</div><div class="tn">Process Injection: Process Hollowing</div><div class="tp">Ejecución del cifrador dentro de un proceso legítimo vaciado</div></div>
+<div class="tq" data-s="evasión t1620 reflective code loading carga del payload por reflexión de dll, sin escritura en disco"><div class="tid">T1620</div><div class="tn">Reflective Code Loading</div><div class="tp">Carga del payload por reflexión de DLL, sin escritura en disco</div></div>
+<div class="tq" data-s="evasión t1562.001 impair defenses: disable or modify tools terminación de 63 servicios de seguridad y respaldo identificados por hash crc32"><div class="tid">T1562.001</div><div class="tn">Impair Defenses: Disable or Modify Tools</div><div class="tp">Terminación de 63 servicios de seguridad y respaldo identificados por hash CRC32</div></div>
+<div class="tq" data-s="evasión t1562.006 impair defenses: indicator blocking parcheo de etweventwrite con 0xc3; unhooking de las funciones enganchadas por el edr en espacio de usuario; evasión de amsi"><div class="tid">T1562.006</div><div class="tn">Impair Defenses: Indicator Blocking</div><div class="tp">Parcheo de <code>EtwEventWrite</code> con <code>0xC3</code>; <em>unhooking</em> de las funciones enganchadas por el EDR en espacio de usuario; evasión de AMSI</div></div>
+<div class="tq" data-s="evasión t1070.001 indicator removal: clear windows event logs evtclearlog tras completar el cifrado"><div class="tid">T1070.001</div><div class="tn">Indicator Removal: Clear Windows Event Logs</div><div class="tp"><code>EvtClearLog</code> tras completar el cifrado</div></div>
+<div class="tq" data-s="evasión t1070.004 indicator removal: file deletion borrado de temp, autoeliminación (desactivable con -k) y borrado de espacio libre (-w)"><div class="tid">T1070.004</div><div class="tn">Indicator Removal: File Deletion</div><div class="tp">Borrado de TEMP, autoeliminación (desactivable con <code>-k</code>) y borrado de espacio libre (<code>-w</code>)</div></div>
+<div class="tq" data-s="evasión t1027.002 obfuscated files or information: software packing empaquetado y ofuscación del loader; carga xor + lz del payload"><div class="tid">T1027.002</div><div class="tn">Obfuscated Files or Information: Software Packing</div><div class="tp">Empaquetado y ofuscación del loader; carga XOR + LZ del payload</div></div>
+<div class="tq" data-s="evasión t1497 virtualization/sandbox evasion detección de tracerpid en /proc/self/status y huella de vm por /proc/ioports (linux); retardo de ejecución configurable"><div class="tid">T1497</div><div class="tn">Virtualization/Sandbox Evasion</div><div class="tp">Detección de <code>TracerPid</code> en <code>/proc/self/status</code> y huella de VM por <code>/proc/ioports</code> (Linux); retardo de ejecución configurable</div></div>
+<div class="tq" data-s="evasión t1614.001 system location discovery: language discovery termina la ejecución ante configuración de idioma o geolocalización rusa"><div class="tid">T1614.001</div><div class="tn">System Location Discovery: Language Discovery</div><div class="tp"><strong>Termina la ejecución ante configuración de idioma o geolocalización rusa</strong></div></div></div>
+<div class="mcol" data-col><h5>Acceso a credenciales <i>1</i></h5>
+<div class="tq" data-s="acceso a credenciales t1003 os credential dumping volcado de credenciales; volatility reutilizado contra memoria de máquinas virtuales"><div class="tid">T1003</div><div class="tn">OS Credential Dumping</div><div class="tp">Volcado de credenciales; <strong>Volatility reutilizado contra memoria de máquinas virtuales</strong></div></div></div>
+<div class="mcol" data-col><h5>Descubrimiento <i>1</i></h5>
+<div class="tq" data-s="descubrimiento t1082 system information discovery enumeración previa a la selección de modo de cifrado (all/local/net)"><div class="tid">T1082</div><div class="tn">System Information Discovery</div><div class="tp">Enumeración previa a la selección de modo de cifrado (<code>all</code>/<code>local</code>/<code>net</code>)</div></div></div>
+<div class="mcol" data-col><h5>Movimiento lateral <i>2</i></h5>
+<div class="tq" data-s="movimiento lateral t1021.001 remote services: remote desktop protocol propagación por rdp con credenciales válidas"><div class="tid">T1021.001</div><div class="tn">Remote Services: Remote Desktop Protocol</div><div class="tp">Propagación por RDP con credenciales válidas</div></div>
+<div class="tq" data-s="movimiento lateral t1021.002 remote services: smb/windows admin shares propagación y despliegue por recursos administrativos"><div class="tid">T1021.002</div><div class="tn">Remote Services: SMB/Windows Admin Shares</div><div class="tp">Propagación y despliegue por recursos administrativos</div></div></div>
+<div class="mcol" data-col><h5>Recolección <i>1</i></h5>
+<div class="tq" data-s="recolección t1560 archive collected data preparación de datos para exfiltración"><div class="tid">T1560</div><div class="tn">Archive Collected Data</div><div class="tp">Preparación de datos para exfiltración</div></div></div>
+<div class="mcol" data-col><h5>Exfiltración <i>1</i></h5>
+<div class="tq" data-s="exfiltración t1567 exfiltration over web service vector principal de robo: servicios en la nube, ftp/sftp y túneles propios. herramienta: stealbit"><div class="tid">T1567</div><div class="tn">Exfiltration Over Web Service</div><div class="tp"><strong>Vector principal de robo</strong>: servicios en la nube, FTP/SFTP y túneles propios. Herramienta: StealBit</div></div></div>
+<div class="mcol" data-col><h5>Impacto <i>4</i></h5>
+<div class="tq" data-s="impacto t1486 data encrypted for impact chacha20/xchacha20 + curve25519; extensión aleatoria de 16 caracteres; cifrado parcial configurable (-r 10-90)"><div class="tid">T1486</div><div class="tn">Data Encrypted for Impact</div><div class="tp">ChaCha20/XChaCha20 + Curve25519; extensión aleatoria de 16 caracteres; cifrado parcial configurable (<code>-r 10-90</code>)</div></div>
+<div class="tq" data-s="impacto t1490 inhibit system recovery borrado de instantáneas de volumen; terminación de vss y de los servicios de las suites de respaldo"><div class="tid">T1490</div><div class="tn">Inhibit System Recovery</div><div class="tp">Borrado de instantáneas de volumen; terminación de VSS y de los servicios de las suites de respaldo</div></div>
+<div class="tq" data-s="impacto t1489 service stop detención masiva de servicios antes del cifrado"><div class="tid">T1489</div><div class="tn">Service Stop</div><div class="tp">Detención masiva de servicios antes del cifrado</div></div>
+<div class="tq" data-s="impacto t1675 unauthorized virtualization administration activity cifrado de infraestructura esxi completa desde el plano de administración del hipervisor"><div class="tid">T1675</div><div class="tn">Unauthorized Virtualization Administration Activity</div><div class="tp">Cifrado de infraestructura ESXi completa desde el plano de administración del hipervisor</div></div></div></div>
+</section>
+<section id="t-3-donde-atacamos-en-la-piramide-del-dolor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Dónde atacamos en la Pirámide del Dolor</h2></div></div>
+<div class="pyr-wrap rv">
+<div class="pyr" id="pyr">
+<div class="pyr-in" id="pyrIn"><div class="slab" data-i="0" style="--w:296px;--d:296px;--z:0px;--col:#375d9d" data-lv="Base · el nivel más barato de eludir" data-t="Hashes" data-b="Base · valor trivial" data-s="En este informe: Anexo A: cinco SHA-256 y cinco MD5 de muestras públicas. Cada afiliado compila su propia variante desde el panel —hay builds datadas cada pocas semanas—. Sirven solo para retrohunt"><span>Hashes</span></div><div class="slab" data-i="1" style="--w:246px;--d:246px;--z:30px;--col:#5a7ebe" data-lv="Nivel 2 de 5" data-t="IP · Dominios" data-b="Valor bajo" data-s="En este informe: &lt;strong&gt;Prácticamente nulo en este actor.&lt;/strong&gt; El cifrado no genera tráfico y la negociación vive en Tor. No hay infraestructura de C2 que bloquear durante el impacto"><span>IP · Dominios</span></div><div class="slab" data-i="2" style="--w:196px;--d:196px;--z:60px;--col:#4db99c" data-lv="Nivel 3 de 5" data-t="Artefactos" data-b="Valor medio" data-s="En este informe: &lt;code&gt;ReadMeForDecrypt.txt&lt;/code&gt;, extensión aleatoria de 16 caracteres hexadecimales, tamaño original embebido en el pie del archivo cifrado, nombres de servicio detenidos. Duraderos entre builds"><span>Artefactos</span></div><div class="slab" data-i="3" style="--w:146px;--d:146px;--z:90px;--col:#a2ae4e" data-lv="Nivel 4 de 5" data-t="Herramientas" data-b="Valor alto" data-s="En este informe: Cobalt Strike, StealBit, RMM legítimos, &lt;strong&gt;Volatility contra memoria de máquinas virtuales&lt;/strong&gt;. Legítimas o de doble uso: detectar por contexto, nunca por presencia"><span>Herramientas</span></div><div class="slab" data-i="4" style="--w:96px;--d:96px;--z:120px;--col:#f7a400" data-lv="Cima · máximo valor defensivo" data-t="TTP" data-b="Cima · valor máximo" data-s="En este informe: Parcheo de &lt;code&gt;EtwEventWrite&lt;/code&gt;, &lt;em&gt;unhooking&lt;/em&gt; de EDR, terminación masiva de servicios por hash, &lt;code&gt;EvtClearLog&lt;/code&gt;, cifrado ESXi desde el plano de administración. &lt;strong&gt;Aquí debe concentrarse el esfuerzo&lt;/strong&gt;"><span>TTP</span></div></div></div>
+<div class="pyr-info card" id="pyrInfo" style="--pc:#f7a400"><div class="lv" id="pyrLv"></div>
+<h4 id="pyrTitle"></h4><p id="pyrBody"></p><div class="pv" id="pyrSrc"></div></div></div>
+<div class="note info rv"><div class="t">Lectura clave</div><p>Este actor <strong>invierte la economía habitual de los IOC</strong>. En un ransomware con C2 activo, bloquear dominios compra tiempo. Aquí no: el impacto es autónomo y silencioso en red. Todo el presupuesto de detección debe subir a los dos pisos superiores de la pirámide, y muy especialmente al comportamiento previo: identidad anómala, exfiltración y administración inusual del hipervisor.</p></div>
+</section>
+<section id="t-4-hipotesis-de-caza-prioritarias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-4</span><div><h2>Hipótesis de caza prioritarias</h2></div></div><div class="rv">
+<div class="acc h-crit"><button><span class="hid">H-1</span><span class="ht">Parcheo de ETW en memoria</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar escrituras en la página de código de <code>ntdll!EtwEventWrite</code> dentro de procesos que no sean depuradores legítimos, o la ausencia súbita de eventos ETW de un proceso que estaba emitiendo. Fuente: telemetría de EDR con visibilidad de modificación de memoria de módulo; ventana de 30 días. Fidelidad esperada alta, falsos positivos concentrados en herramientas de seguridad, perfiladores y anticheat. <strong>Si el EDR no puede responder a esta consulta, esa es la brecha número uno y debe escalarse como hallazgo, no como carencia de la caza.</strong></p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-2</span><span class="ht">Desenganche de EDR en espacio de usuario</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar procesos que releen <code>ntdll.dll</code> desde disco o desde <code>\KnownDlls</code> y reescriben secciones de código ya cargadas. Fuente: EDR, eventos de acceso a <code>\Device\HarddiskVolume*\Windows\System32\ntdll.dll</code> con posterior <code>WriteProcessMemory</code> sobre el propio proceso. Fidelidad media-alta; falsos positivos en EDR competidores, empaquetadores comerciales y algunos motores antitrampa.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-3</span><span class="ht">Terminación masiva de servicios seguida de silencio de respaldo</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar la detención de tres o más servicios del conjunto {<code>VSS</code>, <code>vmms</code>, <code>WSearch</code>, <code>BackupExecVSSProvider</code>, <code>VeeamTransportSvc</code>, <code>AcrSch2Svc</code>, <code>EdgeUpdate</code>} en una ventana de cinco minutos en un mismo host. Fuente: EID 7036/7040 del registro de sistema y telemetría de EDR. <strong>Fidelidad muy alta</strong>: es un patrón que casi nunca ocurre de forma legítima fuera de una ventana de mantenimiento planificada. Cruzar con el calendario de cambios para eliminar el único falso positivo real.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-4</span><span class="ht">Administración anómala del hipervisor</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar sesiones SSH o de consola contra hosts ESXi desde direcciones que no sean el bastión de administración, habilitación de SSH en hosts donde estaba deshabilitado, y ejecución de <code>esxcli vm process kill</code> o apagados masivos de máquinas virtuales fuera de ventana. Fuente: <code>hostd</code>/<code>vpxa</code>, registros de vCenter, NetFlow hacia la VLAN de gestión. <strong>Fidelidad muy alta y es la hipótesis con mayor relación daño evitado/esfuerzo de todo este informe</strong>: un solo acierto aquí evita el escenario de peor caso.</p></div></div>
+<div class="acc "><button><span class="hid">H-5</span><span class="ht">Borrado de registros de eventos</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar EID 1102 (Security) y 104 (System) en cualquier host, y muy especialmente su ausencia posterior de eventos. Fuente: SIEM con reenvío en tiempo real. <strong>La consulta solo funciona si los logs salen del host antes del borrado</strong>: si la única copia está en el equipo, este evento se borra a sí mismo. Fidelidad alta cuando hay reenvío; nula cuando no lo hay.</p></div></div>
+<div class="acc "><button><span class="hid">H-6</span><span class="ht">Creación masiva de archivos con extensión aleatoria de 16 caracteres</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar en telemetría de sistema de archivos renombrados en cadena hacia extensiones de exactamente 16 caracteres hexadecimales, con más de 500 eventos por proceso y minuto. Fuente: EDR o auditoría de archivos. <strong>Es una detección de última milla</strong>: si dispara, el cifrado ya empezó. Debe ejecutar contención automática sin escalado.</p></div></div>
+<div class="acc "><button><span class="hid">H-7</span><span class="ht">Aparición de ReadMeForDecrypt.txt</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar la creación de ese nombre exacto en cualquier ruta, incluidos recursos compartidos y almacenes de respaldo. Fidelidad máxima, falsos positivos nulos, valor temporal mínimo —llega tarde—, pero es el disparador natural de la declaración de incidente y del reloj regulatorio.</p></div></div>
+<div class="acc "><button><span class="hid">H-8</span><span class="ht">Exfiltración previa al cifrado</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar transferencias salientes superiores a 1 GB hacia servicios de almacenamiento en la nube, FTP/SFTP o destinos nuevos, desde servidores que normalmente no originan tráfico saliente masivo. Fuente: NetFlow, proxy, DLP. Fidelidad media, muchos falsos positivos en entornos con respaldo en la nube: <strong>hay que construir primero la línea base por host, no por organización</strong>. Esta es la última ventana de detección con margen real de reacción.</p></div></div>
+<div class="acc "><button><span class="hid">H-9</span><span class="ht">Cobalt Strike disfrazado en almacén de datos ESXi</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar archivos con nombres tipo <code>_.sf_</code> o extensiones atípicas en los datastores, y procesos no pertenecientes a VMware ejecutándose en el hipervisor. Fuente: inventario de datastore, integridad de host ESXi. Fidelidad alta, volumen bajo.</p></div></div>
+<div class="acc "><button><span class="hid">H-10</span><span class="ht">Volatility o herramientas forenses contra memoria de máquinas virtuales</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar lectura o copia de archivos <code>.vmem</code>, <code>.vmsn</code> y <code>.vmss</code> por procesos ajenos a la plataforma de respaldo aprobada. Fuente: auditoría de acceso a archivos en datastores. <strong>Técnica poco conocida y muy poco cubierta</strong>: el adversario extrae credenciales de la memoria de una VM sin tocar el sistema operativo invitado, con lo que el EDR de esa VM nunca ve nada.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-11</span><span class="ht">Accesos desde ASN o geografías anómalas a portales de acceso remoto</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar autenticaciones exitosas sin MFA, o con MFA satisfecho de forma sospechosa, contra VPN, RDP Gateway y portales de proveedor. Priorizar cuentas de proveedores y cuentas de servicio. Fuente: IdP y concentradores VPN. <strong>Prioridad regional</strong>: es el vector común de los casos LATAM documentados.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-12</span><span class="ht">Credenciales de la organización en volcados de infostealer</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar dominios corporativos y de filiales en colecciones de credenciales robadas. El 35,6 % de las víctimas de este actor presenta datos de dominio asociados a infostealers. Fuente: servicios de monitorización de credenciales. <strong>Prioridad regional y de tercera parte</strong>: incluir a proveedores con acceso a nuestra red.</p></div></div></div>
+</section>
+<section id="t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-5</span><div><h2>Brechas de visibilidad que hay que cerrar primero</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Brecha</th><th>Por qué importa aquí</th></tr></thead><tbody>
+<tr><td>Registros de eventos que solo viven en el host</td><td>H-5 queda anulada por diseño: el actor borra la única copia. Sin reenvío en tiempo real no hay forense posterior</td></tr>
+<tr><td>Sin telemetría en hipervisores ESXi</td><td>H-4, H-9 y H-10 quedan ciegas, y son las tres hipótesis de mayor valor contra el escenario de peor caso</td></tr>
+<tr><td>Sin visibilidad de modificación de memoria de módulos</td><td>H-1 y H-2 quedan ciegas. El actor opera precisamente en esa capa</td></tr>
+<tr><td>Cobertura de EDR solo en Windows</td><td>La variante Linux es funcionalmente equivalente y <strong>totalmente autónoma</strong>: sin agente no hay ninguna señal</td></tr>
+<tr><td>Sin línea base de tráfico saliente por host</td><td>H-8 genera demasiado ruido para ser operable, y es la última oportunidad de detección con margen</td></tr>
+<tr><td>Protección antimanipulación del EDR no verificada</td><td>Todo el capítulo de evasión de este actor asume que el agente puede ser degradado desde espacio de usuario</td></tr>
+<tr><td>Sin inventario de accesos remotos de proveedores</td><td>H-11 no puede priorizarse sin saber qué cuentas de tercero existen y qué alcanzan</td></tr></tbody></table></div>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>Automatización</span><span>TIP/SIEM</span><span><b>Vida útil:</b> días–semanas</span></div></div>
+<section id="x-1-arsenal-y-capacidad" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>Arsenal y capacidad</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Propiedad</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Nombre interno de la generación</td><td><code>ChuongDong</code> (LockBit 5.0), anunciada en septiembre de 2025</td></tr>
+<tr><td>Arquitectura</td><td><strong>Dos componentes</strong>: loader + payload. El loader descifra el payload con XOR y descompresión LZ y lo ejecuta <strong>en memoria</strong>, por reflexión de DLL</td></tr>
+<tr><td>Criptografía</td><td><strong>ChaCha20 / XChaCha20</strong> para el contenido; <strong>Curve25519 (X25519)</strong> para el envoltorio de clave, con <strong>clave pública embebida en el binario</strong>; derivación con <strong>BLAKE2b</strong>. Nonce de 24 bytes en la cabecera del archivo</td></tr>
+<tr><td>Generación de claves</td><td>Dos valores aleatorios de 32 bytes derivados de tiempo del sistema y estado de memoria (Windows) o de <code>/dev/urandom</code> (Linux). <strong>Sin comunicación con el operador</strong></td></tr>
+<tr><td>Dependencia de red</td><td><strong>Ninguna.</strong> Análisis dinámico independiente: 0 paquetes capturados durante el cifrado completo</td></tr>
+<tr><td>Umbral de cifrado por tamaño</td><td>Archivos ≤ <code>0x5000000</code> (80 MB): una sola pasada. Mayores: por bloques de <code>0x800000</code> con hash propio</td></tr>
+<tr><td>Cifrado parcial</td><td>Configurable por el afiliado entre el 10 % y el 90 % del archivo (<code>-r</code>)</td></tr>
+<tr><td>Extensión</td><td>Aleatoria de <strong>16 caracteres hexadecimales</strong> por ejecución; el binario precalcula un conjunto de 100 extensiones de 8 bytes</td></tr>
+<tr><td>Marcador de infección</td><td><strong>No hay marcador al final del archivo.</strong> Sí se conserva el <strong>tamaño original embebido en el pie</strong> del archivo cifrado</td></tr>
+<tr><td>Nota de rescate</td><td><code>ReadMeForDecrypt.txt</code>, distribuida por directorios. Remite al sitio Tor con chat de soporte</td></tr>
+<tr><td>Plataformas</td><td>Windows (~80 % de los ataques observados), Linux y <strong>VMware ESXi</strong> (~20 % conjunto). Builds datadas: <code>LB_Black</code>, <code>LB_Linux</code>, <code>LB_ESXi</code>, <code>LB_ChuongDong</code></td></tr>
+<tr><td>Exclusiones de cifrado</td><td>Directorios de Windows y Program Files; extensiones <code>exe</code>, <code>dll</code>, <code>sys</code>, <code>lnk</code>, <code>cpl</code></td></tr>
+<tr><td>Salvaguarda geopolítica</td><td><strong>Termina la ejecución ante configuración de idioma o geolocalización rusa</strong></td></tr>
+<tr><td>Anti-análisis (Linux)</td><td>Detección de depurador por <code>TracerPid</code> en <code>/proc/self/status</code>; huella de máquina virtual por <code>/proc/ioports</code>. <code>ptrace</code>/<code>strace</code> resultan inoperantes; se requiere eBPF</td></tr>
+<tr><td>Anti-análisis (Windows)</td><td>Empaquetado y ofuscación, retardo de ejecución configurable, <em>unhooking</em> de espacio de usuario, evasión de AMSI, parcheo de ETW, process hollowing</td></tr>
+<tr><td>Higiene post-impacto</td><td>Borrado de TEMP, <code>EvtClearLog</code>, borrado de espacio libre (<code>-w</code>), autoeliminación activada por defecto (<code>-k</code> la desactiva)</td></tr>
+<tr><td>Herramienta de exfiltración</td><td><strong>StealBit</strong>, con búsqueda automática de archivos de interés</td></tr>
+<tr><td>Novedades frente a 4.0</td><td>Mutex, retardo de ejecución, barra de estado, borrado de TEMP, <strong>módulo de borrado destructivo (wiper)</strong> y reescritura completa del borrado de instantáneas y del cifrado de archivos grandes</td></tr></tbody></table></div>
+<div class="note warn rv"><div class="t">⚠ Sobre el módulo de borrado</div><p>La generación 5.0 incorpora capacidad de <strong>destrucción</strong>, no solo de cifrado. Un afiliado descontento, torpe o con instrucciones de sabotaje puede dejar datos irrecuperables <strong>aunque se pague</strong>. Esto debilita el argumento económico del pago y refuerza la decisión E-c: la recuperación debe descansar en respaldos verificados, no en la buena fe del actor.</p></div>
+</section>
+<section id="x-2-artefactos-de-host-persistentes-entre-builds" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Artefactos de host persistentes entre builds</h2></div></div>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">impacto</div>
+<h4 style="margin:0 0 6px"><strong>Nota de rescate</strong></h4><p style="font-size:13.8px;margin:0"><code>ReadMeForDecrypt.txt</code> en múltiples directorios, incluidos recursos compartidos y almacenes de respaldo</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">impacto</div>
+<h4 style="margin:0 0 6px"><strong>Archivos cifrados</strong></h4><p style="font-size:13.8px;margin:0">Extensión aleatoria de 16 caracteres hexadecimales (p. ej. <code>.840d22e34b8e1f9e</code>); sin marcador final; tamaño original en el pie del archivo</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">evasión</div>
+<h4 style="margin:0 0 6px"><strong>Servicios detenidos</strong></h4><p style="font-size:13.8px;margin:0"><code>VSS</code>, <code>vmms</code>, <code>WSearch</code>, <code>EdgeUpdate</code>, <code>BackupExecVSSProvider</code>, <code>VeeamTransportSvc</code>, <code>AcrSch2Svc</code> y 56 más identificados por hash CRC32</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">antiforense</div>
+<h4 style="margin:0 0 6px"><strong>Registro de eventos</strong></h4><p style="font-size:13.8px;margin:0">EID 1102 (Security) y 104 (System) por <code>EvtClearLog</code>; <strong>corte abrupto de eventos ETW</strong> en procesos activos</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">evasión</div>
+<h4 style="margin:0 0 6px"><strong>Memoria</strong></h4><p style="font-size:13.8px;margin:0">Sección de código de <code>ntdll!EtwEventWrite</code> modificada con <code>0xC3</code>; <code>ntdll</code> desenganchada; proceso hospedador vaciado (hollowed)</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">antiforense</div>
+<h4 style="margin:0 0 6px"><strong>Sistema de archivos</strong></h4><p style="font-size:13.8px;margin:0">Contenido de <code>%TEMP%</code> eliminado antes del cifrado; espacio libre sobrescrito si se usó <code>-w</code>; binario autoeliminado salvo <code>-k</code></p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">virtualización</div>
+<h4 style="margin:0 0 6px"><strong>ESXi</strong></h4><p style="font-size:13.8px;margin:0">Archivos atípicos en datastores (<code>_.sf_</code> observado para Cobalt Strike); SSH habilitado fuera de política; apagado masivo de máquinas virtuales</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">anti-análisis</div>
+<h4 style="margin:0 0 6px"><strong>Linux</strong></h4><p style="font-size:13.8px;margin:0">Lecturas secuenciales de <code>/proc/self/status</code> y <code>/proc/ioports</code>; renombrado masivo de archivos sin tráfico de red asociado</p></div></div>
+</section>
+<section id="x-3-logica-de-deteccion-prioritaria" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-3</span><div><h2>Lógica de detección prioritaria</h2></div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-1</span><span class="dn">Terminación coordinada de servicios de respaldo y sombra</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>EID 7036 OR 7040
+AND service_name IN (&quot;VSS&quot;,&quot;vmms&quot;,&quot;WSearch&quot;,&quot;EdgeUpdate&quot;,
+                     &quot;BackupExecVSSProvider&quot;,&quot;VeeamTransportSvc&quot;,&quot;AcrSch2Svc&quot;)
+AND count(distinct service_name) &gt;= 3 WITHIN 5 minutes BY host
+AND NOT host IN change_window_assets</code></pre><div class="act"><strong>Contención automática sin escalado humano: aislar el host de inmediato.</strong> Este patrón precede al cifrado en minutos. Esperar validación humana consume la ventana completa de reacción.</div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-2</span><span class="dn">Parcheo de EtwEventWrite</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>memory_write TARGET module=&quot;ntdll.dll&quot; symbol=&quot;EtwEventWrite&quot;
+AND writing_process NOT IN (approved_debuggers, approved_edr_agents)</code></pre><div class="act"><strong>Aislar el host y preservar volcado de memoria antes de reiniciar.</strong> Sin el volcado, la evidencia de esta técnica desaparece con el proceso.</div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-3</span><span class="dn">Creación masiva de archivos con extensión aleatoria de 16 caracteres</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>file_rename_or_create WHERE extension MATCHES &quot;^\.[0-9a-f]{16}$&quot;
+AND count() &gt; 500 WITHIN 60 seconds BY process_guid</code></pre><div class="act"><strong>Matar el proceso y aislar el host automáticamente.</strong> Es detección de última milla: cada segundo de retraso equivale a archivos perdidos.</div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-4</span><span class="dn">Administración no autorizada de hipervisor</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>(esxi_ssh_session WHERE source_ip NOT IN admin_bastions)
+OR (config_change WHERE setting=&quot;SSH&quot; AND value=&quot;enabled&quot;)
+OR (command MATCHES &quot;esxcli vm process kill&quot; AND count() &gt; 5 WITHIN 10 minutes)</code></pre><div class="act"><strong>Cortar la sesión, aislar la VLAN de gestión y escalar a guardia de infraestructura.</strong> Es el único punto donde se puede evitar el escenario de peor caso.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-5</span><span class="dn">Borrado de registros de eventos</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>EID 1102 (Security) OR EID 104 (System)
+AND NOT initiated_by IN (approved_maintenance_accounts)</code></pre><div class="act">Escalar a incidente de inmediato. <strong>Requiere reenvío en tiempo real:</strong> si el evento solo se registra localmente, se borra junto con el resto.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-6</span><span class="dn">Aparición de la nota de rescate</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>file_create WHERE file_name == &quot;ReadMeForDecrypt.txt&quot;</code></pre><div class="act">Declarar incidente mayor, activar el procedimiento de notificación a la <strong>ANCI</strong> y congelar la infraestructura de respaldo. Fidelidad máxima, valor temporal mínimo.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-7</span><span class="dn">Desenganche de ntdll en espacio de usuario</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>process_reads_file WHERE path ENDS_WITH &quot;\\System32\\ntdll.dll&quot;
+AND SAME process LATER performs WriteProcessMemory ON module=&quot;ntdll.dll&quot;</code></pre><div class="act">Aislar y analizar. Falsos positivos conocidos: agentes EDR de otros fabricantes, empaquetadores comerciales, motores antitrampa. Requiere lista de excepciones curada.</div></div>
+<div class="det d-med rv"><div class="dh"><span class="did">D-8</span><span class="dn">Acceso a memoria de máquinas virtuales por proceso no autorizado</span><span class="pill p-grey">MEDIO</span></div>
+<pre><code>file_read WHERE path MATCHES &quot;\.(vmem|vmsn|vmss)$&quot;
+AND process NOT IN (approved_backup_platform, vmware_native_processes)</code></pre><div class="act">Escalar a caza. Es el precursor de la extracción de credenciales sin tocar el sistema operativo invitado.</div></div>
+<div class="det d-med rv"><div class="dh"><span class="did">D-9</span><span class="dn">Exfiltración masiva desde servidor sin línea base de salida</span><span class="pill p-grey">MEDIO</span></div>
+<pre><code>outbound_bytes &gt; 1GB WITHIN 1 hour
+AND source_host IN server_segment
+AND destination NOT IN (approved_cloud_backup, corporate_saas)</code></pre><div class="act">Escalar a analista con contexto del host. Requiere línea base por host construida previamente; sin ella, la regla es inoperable por volumen de falsos positivos.</div></div>
+<div class="note warn rv"><div class="t">⚠ Regla de operación</div><p><strong>D-1, D-3 y D-4 deben ejecutar contención automática sin escalado humano.</strong> La justificación es aritmética: el cifrado por bloques de este actor procesa volúmenes grandes en minutos y no genera tráfico de red que permita detectarlo por otra vía. Un flujo de trabajo que requiera confirmación de un analista de turno noche llega, en el mejor de los casos, a documentar el desastre. La objeción legítima —el coste de aislar un servidor por un falso positivo— se responde con la curación de las listas de excepción (<code>change_window_assets</code>, <code>admin_bastions</code>), no con la desactivación de la respuesta automática.</p></div>
+</section>
+<section id="x-4-consultas-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-4</span><div><h2>Consultas de caza</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-3 · Terminación coordinada de servicios de respaldo y sombra (Defender XDR)
+<span class="tok-k">let</span> objetivo = dynamic([<span class="tok-s">&quot;VSS&quot;</span>,<span class="tok-s">&quot;vmms&quot;</span>,<span class="tok-s">&quot;WSearch&quot;</span>,<span class="tok-s">&quot;EdgeUpdate&quot;</span>,
+                        <span class="tok-s">&quot;BackupExecVSSProvider&quot;</span>,<span class="tok-s">&quot;VeeamTransportSvc&quot;</span>,<span class="tok-s">&quot;AcrSch2Svc&quot;</span>]);
+DeviceProcessEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(30d)
+| <span class="tok-k">where</span> ProcessCommandLine <span class="tok-k">has_any</span> (<span class="tok-s">&quot;sc stop&quot;</span>,<span class="tok-s">&quot;sc  config&quot;</span>,<span class="tok-s">&quot;net stop&quot;</span>,<span class="tok-s">&quot;Stop-Service&quot;</span>)
+| <span class="tok-k">where</span> ProcessCommandLine <span class="tok-k">has_any</span> (objetivo)
+| <span class="tok-k">summarize</span> servicios = dcount(ProcessCommandLine), muestras = make_set(ProcessCommandLine, 10)
+    <span class="tok-k">by</span> DeviceName, AccountName, bin(Timestamp, 5m)
+| <span class="tok-k">where</span> servicios &gt;= 3
+| <span class="tok-k">order by</span> Timestamp desc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-6 · Renombrado masivo hacia extensión aleatoria de 16 caracteres hexadecimales
+DeviceFileEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(7d)
+| <span class="tok-k">where</span> ActionType <span class="tok-k">in</span> (<span class="tok-s">&quot;FileRenamed&quot;</span>,<span class="tok-s">&quot;FileCreated&quot;</span>)
+| <span class="tok-k">extend</span> ext = tostring(extract(@<span class="tok-s">&quot;(\.[0-9a-f]{16})$&quot;</span>, 1, FileName))
+| <span class="tok-k">where</span> isnotempty(ext)
+| <span class="tok-k">summarize</span> archivos = count(), extensiones = dcount(ext), inicio = min(Timestamp)
+    <span class="tok-k">by</span> DeviceName, InitiatingProcessFileName, InitiatingProcessId
+| <span class="tok-k">where</span> archivos &gt; 500
+| <span class="tok-k">order by</span> inicio asc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-7 · Nota de rescate, incluidos recursos compartidos y almacenes de respaldo
+DeviceFileEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(30d)
+| <span class="tok-k">where</span> FileName =~ <span class="tok-s">&quot;ReadMeForDecrypt.txt&quot;</span>
+| <span class="tok-k">project</span> Timestamp, DeviceName, FolderPath, InitiatingProcessFileName, InitiatingProcessAccountName
+| <span class="tok-k">order by</span> Timestamp asc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-5 · Borrado de registros de eventos, con detección de silencio posterior
+DeviceEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(30d)
+| <span class="tok-k">where</span> ActionType == <span class="tok-s">&quot;SecurityLogCleared&quot;</span> <span class="tok-k">or</span> AdditionalFields <span class="tok-k">has</span> <span class="tok-s">&quot;1102&quot;</span>
+| <span class="tok-k">join</span> kind=leftouter (
+    DeviceEvents
+    | <span class="tok-k">where</span> Timestamp &gt; ago(30d)
+    | <span class="tok-k">summarize</span> ultimo_evento = max(Timestamp) <span class="tok-k">by</span> DeviceName
+  ) on DeviceName
+| <span class="tok-k">project</span> Timestamp, DeviceName, InitiatingProcessAccountName, ultimo_evento
+| <span class="tok-k">order by</span> Timestamp desc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>BASH</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># H-10 · Acceso a memoria de máquinas virtuales desde el hipervisor (ESXi)</span>
+<span class="tok-c"># Ejecutar contra el registro de shell del host; alertar sobre cualquier resultado</span>
+<span class="tok-k">grep</span> -E &quot;\.(vmem|vmsn|vmss)&quot; /var/log/shell.log /var/log/hostd.log \
+  | grep -vE &quot;vmx|hostd|vpxa|(plataforma de respaldo aprobada)&quot;</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>YAML</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># Sigma — Parcheo de EtwEventWrite por proceso no autorizado</span>
+<span class="tok-n">title</span>: Parcheo de EtwEventWrite compatible con LockBit 5.0
+<span class="tok-n">id</span>: 6a1f0c2e-7d3b-4a91-9c55-2f8e41b0d7aa
+<span class="tok-n">status</span>: experimental
+<span class="tok-n">description</span>: &gt;
+  Detecta la escritura en la sección de código de ntdll!EtwEventWrite, técnica
+  empleada por el cifrador LockBit 5.0 (ChuongDong) para desactivar Event Tracing
+  for Windows antes del cifrado. Requiere un EDR con visibilidad de modificación de
+  memoria de módulo; Sysmon por sí solo no es suficiente.
+<span class="tok-n">author</span>: Célula CTI
+<span class="tok-n">date</span>: 2026-09-16
+<span class="tok-n">references</span>:
+  - CTI-2026-016
+<span class="tok-n">tags</span>:
+  - attack.defense_evasion
+  - attack.t1562.006
+<span class="tok-n">logsource</span>:
+  <span class="tok-n">product</span>: windows
+  <span class="tok-n">category</span>: process_access
+<span class="tok-n">detection</span>:
+  <span class="tok-n">selection</span>:
+    TargetImage|endswith: &#x27;\ntdll.dll&#x27;
+    GrantedAccess|contains:
+      - &#x27;0x0008&#x27;   # VM_WRITE
+      - &#x27;0x0020&#x27;   # VM_OPERATION
+  <span class="tok-n">filtro_legitimo</span>:
+    SourceImage|endswith:
+      - &#x27;\windbg.exe&#x27;
+      - &#x27;\vsdebugconsole.exe&#x27;
+  <span class="tok-n">condition</span>: selection and not filtro_legitimo
+<span class="tok-n">falsepositives</span>:
+  - Depuradores y perfiladores legítimos
+  - Agentes EDR de otros fabricantes y motores antitrampa
+  - Empaquetadores comerciales de protección de software
+<span class="tok-n">level</span>: high</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>YAML</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># Sigma — Terminación coordinada de servicios de respaldo previa al cifrado</span>
+<span class="tok-n">title</span>: Terminación coordinada de servicios de respaldo y sombra (LockBit 5.0)
+<span class="tok-n">id</span>: 9c4d7b18-2e55-4f60-8a37-11d9c6e0b342
+<span class="tok-n">status</span>: stable
+<span class="tok-n">description</span>: &gt;
+  Tres o más servicios del conjunto de respaldo y sombra detenidos en menos de cinco
+  minutos en un mismo host. Precede al cifrado en minutos. Debe ejecutar contención
+  automática (véase D-1 de CTI-2026-016).
+<span class="tok-n">author</span>: Célula CTI
+<span class="tok-n">date</span>: 2026-09-16
+<span class="tok-n">tags</span>:
+  - attack.impact
+  - attack.t1489
+  - attack.t1490
+<span class="tok-n">logsource</span>:
+  <span class="tok-n">product</span>: windows
+  <span class="tok-n">service</span>: system
+<span class="tok-n">detection</span>:
+  <span class="tok-n">selection</span>:
+    <span class="tok-n">EventID</span>:
+      - 7036
+      - 7040
+    <span class="tok-n">ServiceName</span>:
+      - &#x27;VSS&#x27;
+      - &#x27;vmms&#x27;
+      - &#x27;WSearch&#x27;
+      - &#x27;EdgeUpdate&#x27;
+      - &#x27;BackupExecVSSProvider&#x27;
+      - &#x27;VeeamTransportSvc&#x27;
+      - &#x27;AcrSch2Svc&#x27;
+  <span class="tok-n">condition</span>: selection | count(ServiceName) by Computer &gt; 2
+  <span class="tok-n">timeframe</span>: 5m
+<span class="tok-n">falsepositives</span>:
+  - Ventanas de mantenimiento planificadas
+  - Actualización simultánea de la suite de respaldo
+<span class="tok-n">level</span>: critical</code></pre></div>
+</section>
+<section id="x-5-mitigaciones-de-configuracion-con-efecto-directo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-5</span><div><h2>Mitigaciones de configuración con efecto directo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Control</th><th>Corta</th></tr></thead><tbody>
+<tr><td>Reenvío de registros de eventos de Windows en tiempo real fuera del host</td><td>Anula el efecto de <code>EvtClearLog</code>: la evidencia ya salió cuando el actor borra la copia local</td></tr>
+<tr><td>Protección antimanipulación del EDR activada <strong>y verificada en simulacro</strong></td><td>Eleva el coste del <em>unhooking</em> y del parcheo de ETW, y genera alerta donde antes había silencio</td></tr>
+<tr><td>MFA resistente a phishing en todo acceso remoto, incluidos proveedores y cuentas de servicio</td><td>Corta la etapa 01 en su forma más común: credencial válida sin segundo factor</td></tr>
+<tr><td>Eliminación de RDP expuesto a Internet; acceso solo por bastión</td><td>Corta simultáneamente el acceso inicial y la propagación lateral por T1021.001</td></tr>
+<tr><td>Plano de administración de virtualización segregado, con cuentas propias no federadas al dominio</td><td>Corta T1675: impide llegar al hipervisor con credenciales de dominio comprometidas</td></tr>
+<tr><td>SSH deshabilitado por defecto en hosts ESXi, con alerta ante su habilitación</td><td>Corta el acceso interactivo al hipervisor y dispara D-4</td></tr>
+<tr><td>Respaldos inmutables, desconectados y <strong>fuera del dominio de AD</strong></td><td>Neutraliza T1490 y la terminación de servicios de respaldo: no basta con tener respaldos, deben estar fuera del alcance de la credencial comprometida</td></tr>
+<tr><td>Cuentas de servicio de respaldo sin privilegios de administrador de dominio</td><td>Rompe la ruta habitual desde el compromiso del servidor de respaldo hasta el dominio completo</td></tr>
+<tr><td>Bloqueo de ejecución desde <code>%TEMP%</code> y rutas de usuario mediante WDAC o AppLocker</td><td>Eleva el coste de la etapa de carga del loader</td></tr>
+<tr><td>Segmentación del tráfico SMB entre estaciones de trabajo</td><td>Corta T1021.002 y contiene la propagación del cifrador</td></tr>
+<tr><td>Línea base de tráfico saliente por host, con alerta por desviación</td><td>Habilita H-8 y D-9: la última ventana de detección con margen real de reacción</td></tr>
+<tr><td>Cobertura de EDR o telemetría equivalente en Linux y en hipervisores</td><td>Elimina el punto ciego donde la variante autónoma opera sin ninguna señal</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-nuevos-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y nuevos requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto en el juicio</th><th>Requisito propuesto</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td>G-1</td><td><strong>No existe vector de acceso inicial dominante ni conjunto de CVE atribuido a LockBit 5.0</strong> en fuentes públicas</td><td>PIR-02 queda respondido solo parcialmente; §T-1 etapa 01 se sostiene sobre patrones del ecosistema, no sobre observación de este actor</td><td>Solicitar a proveedores de IR casuística desagregada por vector para intrusiones LockBit 5.0 posteriores a enero de 2026</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-2</td><td>Sin serie mensual publicada de víctimas en 2026</td><td>KJ-1 descansa en medias derivadas por diferencia de acumulados de fuentes con criterios distintos</td><td>Instrumentar recolección propia y diaria del sitio de filtración, con deduplicación documentada</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-3</td><td>Sin mediana de permanencia (<em>dwell time</em>) para este actor</td><td>§T-1 no puede dimensionar la ventana de respuesta; los plazos de contención se fijan por analogía</td><td>Solicitar métricas de permanencia a proveedores de IR y a la aseguradora cibernética</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-4</td><td><strong>Sin telemetría propia</strong>: exposición, cobertura de EDR, superficie ESXi y visibilidad de ETW sin evaluar</td><td>§O-4 vacía. Ningún juicio de riesgo propio es calculable</td><td>Ejecutar el cuestionario de §O-4 y reemitir este informe como versión 2.0</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-5</td><td>Una sola víctima chilena identificada, de fuente comercial única</td><td>KJ-6 se emite con confianza moderada cuando el hecho podría verificarse</td><td>Consultar al CSIRT Nacional y a CronUp por actividad LockBit 5.0 en Chile; contrastar con el sitio de filtración</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-6</td><td>Sin verificación de transferencia técnica dentro de la coalición</td><td>KJ-7 se emite con confianza baja y H4 permanece abierta en paralelo</td><td>Vigilancia dirigida sobre I-3: primera aparición de BYOVD en intrusión LockBit</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-7</td><td>Proporción desconocida de incidentes de marca LockBit atribuibles a terceros con builders filtrados</td><td>Contamina toda estadística de victimología (H3)</td><td>Verificar, en cada caso de interés, la generación del cifrador por esquema criptográfico antes de atribuir</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-8</td><td>Sin visibilidad de la economía de la operación posterior a mayo de 2025</td><td>§O-3 usa cifras de rescate anteriores al lanzamiento de la versión 5.0</td><td>Monitorizar análisis de blockchain sobre carteras asociadas al nuevo programa</td><td><span class="pill p-grey">Baja</span></td></tr></tbody></table></div>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores-de-compromiso" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores de compromiso</h2></div></div>
+<div class="note warn rv"><div class="t">⚠ Leer antes de usar</div><p>Los IOC son el nivel más perecedero y menos valioso del producto, y en <strong>este actor en particular valen menos de lo habitual</strong>: cada afiliado compila su propia variante desde el panel —hay builds datadas cada pocas semanas— y el cifrado <strong>no genera tráfico de red</strong>, por lo que no existe infraestructura de C2 que bloquear durante el impacto. Los hashes sirven para <strong>retrohunt</strong>, no para defensa. El valor real de este informe está en §T-4 y §X-3.</p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="sha256 7ea5afbc166c4e23498aa9747be81ceaf8dad90b8daa07a6e4644dc7c2277b82 cifrador lockbit 5.0, muestra windows · alta bloqueo y retrohunt"><span class="ty">sha256</span><span class="vv">7ea5afbc166c4e23498aa9747be81ceaf8dad90b8daa07a6e4644dc7c2277b82<em>Cifrador LockBit 5.0, muestra Windows · Alta</em></span><span class="pill p-grey">Bloqueo y retrohunt</span></div>
+<div class="ioc-row" data-s="sha256 180e93a091f8ab584a827da92c560c78f468c45f2539f73ab2deb308fb837b38 cifrador lockbit 5.0, muestra windows · alta bloqueo y retrohunt"><span class="ty">sha256</span><span class="vv">180e93a091f8ab584a827da92c560c78f468c45f2539f73ab2deb308fb837b38<em>Cifrador LockBit 5.0, muestra Windows · Alta</em></span><span class="pill p-grey">Bloqueo y retrohunt</span></div>
+<div class="ioc-row" data-s="sha256 4dc06ecee904b9165fa699b026045c1b6408cc7061df3d2a7bc2b7b4f0879f4d cifrador lockbit 5.0, muestra linux (elf, autónoma) · alta bloqueo y retrohunt"><span class="ty">sha256</span><span class="vv">4dc06ecee904b9165fa699b026045c1b6408cc7061df3d2a7bc2b7b4f0879f4d<em>Cifrador LockBit 5.0, muestra Linux (ELF, autónoma) · Alta</em></span><span class="pill p-grey">Bloqueo y retrohunt</span></div>
+<div class="ioc-row" data-s="sha256 90b06f07eb75045ea3d4ba6577afc9b58078eafeb2cdd417e2a88d7ccf0c0273 cifrador lockbit 5.0, muestra linux/esxi · alta bloqueo y retrohunt"><span class="ty">sha256</span><span class="vv">90b06f07eb75045ea3d4ba6577afc9b58078eafeb2cdd417e2a88d7ccf0c0273<em>Cifrador LockBit 5.0, muestra Linux/ESXi · Alta</em></span><span class="pill p-grey">Bloqueo y retrohunt</span></div>
+<div class="ioc-row" data-s="sha256 98d8c7870c8e99ca6c8c25bb9ef79f71c25912fbb65698a9a6f22709b8ad34b6 cifrador lockbit 5.0, muestra linux/esxi · alta bloqueo y retrohunt"><span class="ty">sha256</span><span class="vv">98d8c7870c8e99ca6c8c25bb9ef79f71c25912fbb65698a9a6f22709b8ad34b6<em>Cifrador LockBit 5.0, muestra Linux/ESXi · Alta</em></span><span class="pill p-grey">Bloqueo y retrohunt</span></div>
+<div class="ioc-row" data-s="md5 95daa771a28eaed76eb01e1e8f403f7c muestra lockbit 5.0 (asec) · moderada retrohunt"><span class="ty">md5</span><span class="vv">95daa771a28eaed76eb01e1e8f403f7c<em>Muestra LockBit 5.0 (ASEC) · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="md5 97e97e8cde5cc795b4d0a1fb7202b5ed muestra lockbit 5.0 (asec) · moderada retrohunt"><span class="ty">md5</span><span class="vv">97e97e8cde5cc795b4d0a1fb7202b5ed<em>Muestra LockBit 5.0 (ASEC) · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="md5 c15a79d4b3c17bdb01edb097bae53212 muestra lockbit 5.0 (asec) · moderada retrohunt"><span class="ty">md5</span><span class="vv">c15a79d4b3c17bdb01edb097bae53212<em>Muestra LockBit 5.0 (ASEC) · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="md5 c462c6b02b35df2910689947c5090fae muestra lockbit 5.0 (asec) · moderada retrohunt"><span class="ty">md5</span><span class="vv">c462c6b02b35df2910689947c5090fae<em>Muestra LockBit 5.0 (ASEC) · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="md5 cd6e182fe655724f3d8e711b451a2e93 muestra lockbit 5.0 (asec) · moderada retrohunt"><span class="ty">md5</span><span class="vv">cd6e182fe655724f3d8e711b451a2e93<em>Muestra LockBit 5.0 (ASEC) · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="filename readmefordecrypt.txt nota de rescate, constante en windows, linux y esxi. el artefacto de mayor fidelidad de esta lista · alta detección y alerta"><span class="ty">filename</span><span class="vv">ReadMeForDecrypt.txt<em>Nota de rescate, constante en Windows, Linux y ESXi. El artefacto de mayor fidelidad de esta lista · Alta</em></span><span class="pill p-mint">Detección y alerta</span></div>
+<div class="ioc-row" data-s="pattern ^\.[0-9a-f]{16}$ extensión aleatoria de 16 caracteres hexadecimales de los archivos cifrados · alta detección y alerta"><span class="ty">pattern</span><span class="vv">^\.[0-9a-f]{16}$<em>Extensión aleatoria de 16 caracteres hexadecimales de los archivos cifrados · Alta</em></span><span class="pill p-mint">Detección y alerta</span></div>
+<div class="ioc-row" data-s="filename .sf cobalt strike observado con este nombre en almacenes de datos esxi · moderada detección; verificar contexto antes de bloquear"><span class="ty">filename</span><span class="vv">.sf<em>Cobalt Strike observado con este nombre en almacenes de datos ESXi · Moderada</em></span><span class="pill p-mint">Detección; verificar contexto antes de bloquear</span></div>
+<div class="ioc-row" data-s="mutex  la versión 5.0 introduce mutex configurable; no hay valor constante publicado. desactivable con -nomutex · baja solo contexto"><span class="ty">mutex</span><span class="vv"><em>La versión 5.0 introduce mutex configurable; no hay valor constante publicado. Desactivable con -nomutex · Baja</em></span><span class="pill p-grey">Solo contexto</span></div></div>
+<p class="rv"><strong>IOC históricos — no aplicar a la versión 5.0</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Tipo</th><th>Valor</th><th>Contexto</th><th>Confianza</th><th>Acción permitida</th></tr></thead><tbody>
+<tr><td>sha256</td><td><code>385D4FBD3A3AAB0CFE109F0EB2626863B91EC02CEAA4C3E4C104F63CA6DC0C93</code></td><td><code>123.cmd</code> — <strong>LockBit Black (3.0)</strong>, ataque al Poder Judicial de Chile, 2022. CSIRT Nacional</td><td><span class="pill p-mint">Alta</span></td><td>Solo retrohunt histórico</td></tr>
+<tr><td>sha256</td><td><code>0DA8CFBA645951768B16DB7707ED2C75BBBB2E396E7DA6DA71A9DCA6EF35DF17</code></td><td><code>injector.exe</code> — LockBit Black (3.0), 2022. CSIRT Nacional</td><td><span class="pill p-mint">Alta</span></td><td>Solo retrohunt histórico</td></tr>
+<tr><td>sha256</td><td><code>5EF365469867CB30F5094D668E596819BF7163411E2A92CC1D7BD117FCD11BFE</code></td><td><code>lbb.dll</code> — LockBit Black (3.0), 2022. CSIRT Nacional</td><td><span class="pill p-mint">Alta</span></td><td>Solo retrohunt histórico</td></tr></tbody></table></div>
+<p class="rv"><em>Nota de higiene:</em> no se incluyen direcciones IP ni dominios porque <strong>este actor no los usa durante el impacto</strong>; la negociación vive en Tor y la exfiltración se apoya en servicios de almacenamiento legítimos —bloquearlos por su aparición en un incidente tiene alto riesgo de impacto operativo—. Los hashes de las muestras públicas <strong>no cubren las variantes compiladas por cada afiliado</strong>: úsense para retrohunt, nunca como medida de protección principal.</p>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="note info rv"><p>Valoración doble tipo Admiralty/OTAN: <strong>fiabilidad de la fuente (A–F)</strong> × <strong>credibilidad de la información (1–6)</strong>. Se valoran por separado.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Disciplina</th><th>Fiabilidad</th><th>Credibilidad</th><th>Notas de sesgo</th></tr></thead><tbody>
+<tr><td>CSIRT Nacional de Chile</td><td>CERT nacional</td><td><span class="pill p-mint">A</span></td><td>1</td><td>Solo cubre el incidente de 2022 (LockBit Black); no hay alerta pública sobre la versión 5.0</td></tr>
+<tr><td>National Crime Agency (Operación Cronos, sanción de Khoroshev)</td><td>Gubernamental</td><td><span class="pill p-mint">A</span></td><td>1</td><td>Interés institucional en subrayar el éxito de la disrupción</td></tr>
+<tr><td>Check Point Research (<em>State of Ransomware</em> Q1 y Q2 2026)</td><td>OSINT comercial</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Serie trimestral consistente; criterios de deduplicación no publicados en detalle</td></tr>
+<tr><td>Trend Micro / TrendAI Security (análisis de binario 5.0)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>1</td><td>Análisis de muestra verificable; interés comercial en dramatizar</td></tr>
+<tr><td>LevelBlue / SpiderLabs (análisis de binario 5.0)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>1</td><td>Coincide de forma independiente con Trend Micro y ASEC</td></tr>
+<tr><td>ASEC / AhnLab (análisis de binario y servicios terminados)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>1</td><td>Detalle de servicios y umbrales de cifrado; visibilidad sesgada hacia Corea</td></tr>
+<tr><td>S2W TALON (análisis detallado 5.0)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>2</td><td>No accesible directamente en esta colección; citado a través de referencias secundarias</td></tr>
+<tr><td>Análisis independiente de la variante Linux (netacoding)</td><td>TECHINT independiente</td><td><span class="pill p-amber">C</span></td><td>2</td><td>Metodología publicada y reproducible; autor individual sin revisión por pares</td></tr>
+<tr><td>MOXFIVE (<em>Threat Actor Spotlight</em>)</td><td>TECHINT de IR</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Basado en casos reales de respuesta; muestra sesgada hacia sus clientes</td></tr>
+<tr><td>Flare (panel de afiliados filtrado)</td><td>CLOSINT comercial</td><td><span class="pill p-sky">B</span></td><td>3</td><td>Material filtrado de valor alto; no verificable de forma independiente</td></tr>
+<tr><td>Halcyon (ficha de actor, acumulados)</td><td>OSINT comercial</td><td><span class="pill p-sky">B</span></td><td>3</td><td>Cifras de acumulado sin metodología publicada</td></tr>
+<tr><td>ransomware.live</td><td>OSINT agregador</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Recolección automatizada verificable; deduplicación propia no auditable</td></tr>
+<tr><td>Breachsense (informes mensuales del ecosistema)</td><td>OSINT comercial</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Serie mensual continua; discrepa de otros trackers hasta un 5 %</td></tr>
+<tr><td>Analyst1, Trellix, TRM Labs, Qualys (filtración del panel, mayo de 2025)</td><td>OSINT / CLOSINT</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Coinciden sobre cifras económicas; los datos proceden del propio adversario</td></tr>
+<tr><td>CronUp (monitorización de ransomware en Chile)</td><td>OSINT regional</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Mejor visibilidad nacional disponible; recolección manual, posible subregistro</td></tr>
+<tr><td>DeXpose (reivindicación de Red Dávila)</td><td>OSINT comercial</td><td><span class="pill p-amber">C</span></td><td>3</td><td><strong>Fuente única sin corroboración</strong>; base de KJ-6, declarada como tal</td></tr>
+<tr><td>WeLiveSecurity / ESET (cobertura LATAM)</td><td>OSINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>3</td><td>Buena cobertura regional; cifras agregadas sin desglose metodológico</td></tr>
+<tr><td>Cybernews, CSO Online, Dark Reading, Quorum Cyber (coalición)</td><td>OSINT periodístico</td><td><span class="pill p-amber">C</span></td><td>3</td><td>Todas remiten a la misma publicación original en foro; corroboración aparente, no real</td></tr>
+<tr><td>Proven Data (TTP y mitigaciones 5.0)</td><td>OSINT comercial</td><td><span class="pill p-amber">C</span></td><td>3</td><td>Compilación de terceros; porcentajes de vector sin muestra declarada</td></tr>
+<tr><td>Sitio de filtración de LockBit 5.0</td><td>CLOSINT</td><td><span class="pill p-amber">C</span></td><td>4</td><td><strong>El actor controla el mensaje</strong>: publica lo que le conviene, cuando le conviene</td></tr>
+<tr><td>Foro RAMP (anuncios del actor)</td><td>CLOSINT</td><td><span class="pill p-amber">C</span></td><td>4</td><td>Material promocional del adversario dirigido a reclutar</td></tr></tbody></table></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Probabilidad estimativa — cuán probable es que el hecho sea cierto</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">Remoto</span><span class="bt"><i data-w="5"></i></span><span class="bv">5</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy poco probable</span><span class="bt"><i data-w="20"></i></span><span class="bv">20</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Poco probable</span><span class="bt"><i data-w="45"></i></span><span class="bv">45</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Posibilidad real</span><span class="bt"><i data-w="56"></i></span><span class="bv">55</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Probable</span><span class="bt"><i data-w="81"></i></span><span class="bv">80</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy probable</span><span class="bt"><i data-w="96"></i></span><span class="bv">95</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">Casi con certeza</span><span class="bt"><i data-w="100"></i></span><span class="bv">99</span></div></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel de confianza</th><th>Criterio</th></tr></thead><tbody>
+<tr><td>Alta</td><td>Múltiples fuentes de calidad, corroboradas, sin brechas relevantes</td></tr>
+<tr><td>Moderada</td><td>Fuentes creíbles pero corroboración parcial o brechas conocidas</td></tr>
+<tr><td>Baja</td><td>Fuente única, no corroborada, fuerte dependencia de supuestos</td></tr></tbody></table></div>
+<div class="note info rv"><p>Usar siempre el término <strong>y</strong> el porcentaje. No usar «podría» ni «es posible» como juicio: son afirmaciones no falsables.</p></div>
+</section>
+<section id="anexo-d-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Marcos de referencia empleados</h2><p><code>MITRE ATT&amp;CK v18</code> · <code>MITRE D3FEND</code> · <code>Modelo del Diamante</code> · <code>Cyber Kill Chain</code> · <code>Pirámide del Dolor</code> · <code>F3EAD</code> · <code>ICD 203</code> · <code>ACH, KAC, pre-mortem</code> · <code>TLP 2.0</code> · <code>PAP</code> · <code>STIX 2.1 / TAXII 2.1</code> · <code>Admiralty Code</code> · <code>Ley 21.663 (Chile) y marco ANCI</code></p></div></div>
+</section>
+<section id="anexo-e-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Paquete legible por máquina</h2></div></div><ul class="rv"><li>Bundle STIX 2.1: pendiente de generar (véase §14, G-2)</li><li>Evento MISP: pendiente — taxonomías previstas: <code>tlp</code>, <code>admiralty-scale</code>, <code>estimative-language</code>, <code>PAP</code></li><li>Reglas Sigma de §X-4: pendientes de commit en el repositorio de detección</li><li>Consultas KQL de §X-4: pendientes de despliegue como detecciones programadas</li></ul>
+</section>
+<section id="anexo-f-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-09-16</td><td>Emisión inicial</td><td>Célula CTI</td></tr>
+<tr><td>1.1</td><td>2026-11-16</td><td><strong>Reclasificación de TLP:AMBER a TLP:CLEAR</strong> por decisión del emisor, para publicación en el repositorio abierto <code>cti_daily</code>. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. <strong>Sin cambios en los juicios analíticos ni en los indicadores.</strong> Se mantiene PAP:AMBER</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<section id="anexo-g-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Realimentación del consumidor</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Pregunta</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>¿Respondió a su requisito?</td><td></td></tr>
+<tr><td>¿Qué decisión tomó o cambió con este informe?</td><td></td></tr>
+<tr><td>¿Qué faltó?</td><td></td></tr>
+<tr><td>¿Llegó a tiempo?</td><td></td></tr></tbody></table></div>
+<div class="note info rv"><p>Sin este anexo devuelto, el ciclo de inteligencia queda abierto y el próximo producto no mejora.</p></div>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-016 · v1.1 · 2026-09-16</strong> · caduca 2026-12-16</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

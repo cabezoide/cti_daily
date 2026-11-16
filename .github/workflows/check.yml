@@ -1,0 +1,44 @@
+name: Verificar artefactos derivados
+
+# Un índice o un agregado de IOC desincronizado es peor que ausente: miente
+# sobre su propio contenido. Esta comprobación bloquea el push que lo permita.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Comprobar que HTML, índice y agregados están al día
+        run: python3 tools/cti_build.py --check
+      - name: Comprobar integridad del HTML generado
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          import glob, sys
+          VOID = {'br','img','input','meta','link','hr','col','source'}
+          class P(HTMLParser):
+              def __init__(s): super().__init__(); s.st=[]; s.bad=0
+              def handle_starttag(s,t,a):
+                  if t not in VOID: s.st.append(t)
+              def handle_endtag(s,t):
+                  if s.st and s.st[-1]==t: s.st.pop()
+                  elif t in s.st:
+                      while s.st and s.st.pop()!=t: s.bad+=1
+                  else: s.bad+=1
+          fallo = False
+          for f in sorted(glob.glob('CTI-*.html')):
+              p = P(); p.feed(open(f, encoding='utf-8').read())
+              estado = 'ok' if not p.st and not p.bad else 'FALLO'
+              print(f'{f:<36} sin cerrar: {len(p.st):<3} desajustes: {p.bad:<3} {estado}')
+              if p.st or p.bad: fallo = True
+          sys.exit(1 if fallo else 0)
+          PY

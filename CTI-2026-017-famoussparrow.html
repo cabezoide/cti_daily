@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-017 · FamousSparrow (SparroWocky)</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-017<small>FamousSparrow (SparroWocky)</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-requisitos-y-limitaciones">3. Alcance, requisitos y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-que-representa-este-actor-en-el-panorama">E-1. Qué representa este actor en el panorama</a><a href="#e-2-victimologia">E-2. Victimología</a><a href="#e-3-tendencia-y-pronostico">E-3. Tendencia y pronóstico</a><a href="#e-4-decisiones-que-este-informe-pide-al-nivel-estrategico">E-4. Decisiones que este informe pide al nivel estratégico</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion-y-alias">O-1. Identificación y alias</a><a href="#o-2-estructura-y-atribucion">O-2. Estructura y atribución</a><a href="#o-3-modelo-de-operacion">O-3. Modelo de operación</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-cronologia">O-5. Cronología</a><a href="#o-6-hipotesis-alternativas-consideradas">O-6. Hipótesis alternativas consideradas</a><a href="#o-7-indicadores-y-senales-de-alerta">O-7. Indicadores y señales de alerta</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-cadena-de-intrusion">T-1. Cadena de intrusión</a><a href="#t-2-mapa-mitre-att-ck">T-2. Mapa MITRE ATT&amp;CK</a><a href="#t-3-donde-atacamos-en-la-piramide-del-dolor">T-3. Dónde atacamos en la Pirámide del Dolor</a><a href="#t-4-hipotesis-de-caza-prioritarias">T-4. Hipótesis de caza prioritarias</a><a href="#t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero">T-5. Brechas de visibilidad que hay que cerrar primero</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-arsenal-y-capacidad">X-1. Arsenal y capacidad</a><a href="#x-2-artefactos-de-host-persistentes-entre-builds">X-2. Artefactos de host persistentes entre builds</a><a href="#x-3-logica-de-deteccion-prioritaria">X-3. Lógica de detección prioritaria</a><a href="#x-4-consultas-de-caza">X-4. Consultas de caza</a><a href="#x-5-mitigaciones-de-configuracion-con-efecto-directo">X-5. Mitigaciones de configuración con efecto directo</a><a href="#14-brechas-de-inteligencia-y-nuevos-requisitos-de-coleccion">14. Brechas de inteligencia y nuevos requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores-de-compromiso">Anexo A — Indicadores de compromiso</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-marcos-de-referencia-empleados">Anexo D — Marcos de referencia empleados</a><a href="#anexo-e-paquete-legible-por-maquina">Anexo E — Paquete legible por máquina</a><a href="#anexo-f-control-de-cambios">Anexo F — Control de cambios</a><a href="#anexo-g-realimentacion-del-consumidor">Anexo G — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de actor + informe de campaña</span><span class="pill p-mint">Latinoamérica · Chile</span><span class="pill p-sky">v1.1 · 2026-09-21</span></div><h1>FamousSparrow<br><span class="hl">SparroWocky</span></h1><p class="sub">FamousSparrow: el ciberespionaje chino concentra el 90 % de su esfuerzo en Latinoamérica y estrena SparroWocky, un implante construido para que la memoria y la pila de llamadas no delaten nada</p><p class="sub2">Ocho gobiernos de la región comprometidos entre julio de 2025 y 2026. Chile no figura en la telemetría publicada, pero sí en la alerta de agosto de 2026 sobre sus telecomunicaciones</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-017</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-21</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:AMBER</dd></div></dl></div>
+</section>
+<div class="note info rv"><div class="t">Regla de oro del producto:</div><p>todo párrafo debe responder a un requisito de inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que alguien va a hacer, va al anexo o se borra.</p></div>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-017</code></dd></div><div><dt>Versión / fecha</dt><dd class="m"><code>1.1</code> — 2026-09-21</dd></div><div><dt>Tipo de producto</dt><dd>Perfil de actor + informe de campaña</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Foco regional</dt><dd>Latinoamérica · Chile</dd></div><div><dt>Marcado de difusión</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:AMBER</code></dd></div><div><dt>Clasificación interna</dt><dd>Público — apto para difusión abierta</dd></div><div><dt>Requisitos atendidos</dt><dd class="m"><code>PIR-01</code>, <code>PIR-03</code>, <code>PIR-05</code>, <code>PIR-08</code></dd></div><div><dt>Solicitante / consumidor primario</dt><dd>CISO · Jefatura de SOC · Comité de Riesgo Operacional · Asuntos Corporativos</dd></div><div><dt>Ventana de observación</dt><dd>2024-07-01 → 2026-09-21 (con antecedentes desde 2019)</dd></div><div><dt>Base de colección</dt><dd>9 fuentes externas todo-fuente (investigación primaria de proveedor sobre binario y telemetría, prensa técnica, prensa nacional chilena, avisos de autoridad). <strong>Sin telemetría propia incorporada</strong></dd></div><div><dt>Autor (analista)</dt><dd class="m">Célula CTI</dd></div><div><dt>Revisión por pares</dt><dd class="m">Pendiente</dd></div><div><dt>Aprobación</dt><dd class="m">Pendiente</dd></div><div><dt>Caducidad / revisión</dt><dd>2026-12-21, o antes si se publica un nuevo análisis del implante, si aparece una víctima chilena atribuida o si se resuelve públicamente la disputa de alias con Salt Typhoon</dd></div><div><dt>Productos relacionados</dt><dd class="m"><code>CTI-2026-014</code> (TheGentlemen), <code>CTI-2026-015</code> (Qilin), <code>CTI-2026-016</code> (LockBit 5.0) — <strong>no complementa: contrasta</strong>. Los tres anteriores son actores criminales con ánimo de lucro; este es espionaje estatal y exige un modelo de amenaza distinto</dd></div><div><dt>Paquete legible por máquina</dt><dd>Pendiente de generar (véase §14)</dd></div></dl>
+<div class="note warn rv"><div class="t">Limitación estructural de este producto</div><p>Se ha elaborado exclusivamente con fuentes abiertas y de proveedor. No incorpora telemetría de la organización, por lo que <strong>la sección de exposición propia (§O-4) está sin rellenar</strong> y todo juicio sobre riesgo para nosotros es condicional, no evaluado. Un informe con §O-4 vacía es inteligencia genérica, no inteligencia propia.</p></div>
+<div class="note warn rv"><div class="t">Advertencia de sesgo de visibilidad — léase antes que cualquier otra cosa</div><p>La afirmación «el 90 % de los objetivos están en Latinoamérica» procede de <strong>la telemetría de un solo proveedor de seguridad</strong>, y describe dónde ese proveedor tiene sensores, no dónde el adversario opera. Que Chile no aparezca en la lista de ocho países <strong>no es evidencia de que Chile no sea objetivo</strong>: es evidencia de que el proveedor no vio un compromiso chileno. La distinción es la diferencia entre no estar atacado y no estar mirando.</p></div>
+<div class="note warn rv"><div class="t">Nota sobre la denominación «APT»</div><p>A diferencia de los tres informes anteriores de esta serie, aquí el término sí corresponde: FamousSparrow es un actor de espionaje alineado con los intereses del Estado chino, activo desde al menos 2019, <strong>sin ánimo de lucro y sin extorsión</strong>. Esto invierte el modelo de defensa. Frente a un RaaS se compite por coste de oportunidad; frente a un actor de espionaje <strong>no hay coste de oportunidad que subir</strong>: si nuestra información le interesa, insistirá. Se compite por <strong>tiempo de permanencia</strong>: cuánto tarda en entrar y, sobre todo, cuánto tarda uno en verlo. El adversario no tiene incentivo alguno para hacer ruido, y el éxito de su operación se mide precisamente en que nada se rompa.</p></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-md rv"><div class="id">KJ-1</div>
+<h4>FamousSparrow ha reorientado casi por completo su esfuerzo hacia Latinoamérica y ese giro es deliberado, no oportunista. Desde julio de 2025, el 90 % de los objetivos del grupo registrados en la telemetría de ESET están en la región, con entidades gubernamentales comprometidas en Argentina, Ecuador, Guatemala, Honduras, Panamá, Perú, Puerto Rico y Venezuela</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que esta concentración se mantenga durante los próximos doce meses.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Investigación primaria de ESET publicada el 17-09-2026, corroborada en su contenido por tres medios técnicos que la reproducen pero <strong>no la verifican de forma independiente</strong>; la cifra del 90 % no es auditable por terceros.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-2</div>
+<h4>El motor del giro es geopolítico, no técnico. ESET valora que el foco responde a la reacción de China ante la reafirmación de los intereses de Estados Unidos en la región durante el segundo mandato de Donald Trump, que amenaza una década de inversión china en energía, minería y telecomunicaciones</h4><p>Un objetivo panameño estaba <strong>directamente implicado en la disputa por dos puertos del área del canal</strong>, antes operados por una empresa china cuya concesión el Gobierno panameño impugnó a comienzos de 2025. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que el criterio de selección de víctimas siga la agenda de intereses económicos y diplomáticos chinos en la región antes que el sector o el tamaño de la organización.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Es la valoración explícita del proveedor más un caso concreto documentado; <strong>es interpretación analítica, no declaración del actor ni evidencia documental de tasking</strong>.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>El nuevo implante SparroWocky está construido específicamente contra la telemetría de endpoint moderna. Falsifica la pila de llamadas con la técnica SilentMoonwalk para que sus hilos parezcan originarse en RtlUserThreadStart, engancha CreateThread con MinHook y usa AnimateWindow como trampolín para que la dirección de inicio del hilo declarada sea inocente, se carga reflexivamente sin tocar disco, resuelve la API de Windows por hashing y ejecuta complementos como Beacon Object Files en memoria</h4><p>Esto es <strong>hecho confirmado por análisis de binario</strong>, no estimación. <em>Implicación de doctrina:</em> <strong>las detecciones que dependen de la dirección de inicio del hilo, del recorrido de la pila o de la presencia del módulo en disco no verán este implante.</strong> La oportunidad de detección está en la persistencia, en el trío de ficheros del cargador y en la conexión TLS saliente a un VPS.</p><div class="gauge" data-p="100"><div class="lab"><span>Confirmado</span><b>hecho</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>El patrón del cargador «tridente» es el artefacto más duradero y debe ser el eje de la caza. Cada despliegue deja tres ficheros en el mismo directorio: un ejecutable legítimo firmado, una DLL legítima parcheada —conserva la firma digital, ahora inválida, del módulo que suplanta— y un fichero .dat cifrado con RC4 cuyo nombre replica el del módulo y cuya cabecera empieza por el valor mágico 0x11328712</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que este patrón sobreviva a cambios de nombres, de binarios abusados y de infraestructura.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Estructura descrita en el análisis del cargador y coherente con el esquema tridente que el mismo actor ya usaba en 2024 con <code>K7AVMScn.exe</code> + <code>K7AVWScn.dll</code> + <code>K7AVWScn.doc</code>.</p></div>
+<div class="kj kj-lo rv"><div class="id">KJ-5</div>
+<h4>La ausencia de Chile en la lista publicada no reduce nuestra exposición. Ocho de los países afectados son vecinos comerciales y diplomáticos directos, y el criterio de selección descrito en KJ-2 —intereses chinos en energía, minería, telecomunicaciones y puertos— describe con precisión incómoda el perfil económico chileno</h4><p>Valoramos <strong>posibilidad real</strong> <em>(45–55 %)</em> de que existan organizaciones chilenas dentro del conjunto de objetivos de este actor sin que ello se haya observado ni publicado.</p><div class="gauge" data-p="50"><div class="lab"><span>Posibilidad real</span><b>45–55 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: baja.</b> Razonamiento por analogía de intereses y sesgo conocido de la colección; <strong>no hay ni un solo indicador técnico que sitúe a este actor en Chile</strong>. Se consigna marcado como inferencia, no como hallazgo.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-6</div>
+<h4>El ShadowPad hallado en telecomunicaciones chilenas NO debe atribuirse a este actor. En agosto de 2026 se hizo pública una investigación de la Fiscalía Metropolitana Centro Norte por sabotaje informático, tras un aviso de Estados Unidos sobre actividad maliciosa en redes de Entel, Movistar y Telmex, con detección de ShadowPad y referencia al clúster Lilac Typhoon</h4><p>FamousSparrow usa ShadowPad desde julio de 2024, pero ShadowPad es una plataforma compartida por múltiples grupos con nexo chino. Valoramos <strong>muy poco probable</strong> <em>(5–20 %)</em> que ese caso sea atribuible a FamousSparrow.</p><div class="gauge" data-p="12"><div class="lab"><span>Muy poco probable</span><b>5–20 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> El solapamiento es de <strong>herramienta</strong>, el nivel más débil de la Pirámide del Dolor para atribuir; el clúster nombrado en el caso chileno es otro. <em>Valor del juicio:</em> está aquí <strong>para impedir una fusión indebida de alias</strong>, que es el error analítico más caro de este dominio.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-7</div>
+<h4>La disputa de alias con Salt Typhoon sigue sin resolverse y tiene consecuencias operativas. Microsoft sostiene desde septiembre de 2024 que Salt Typhoon, GhostEmperor y FamousSparrow son el mismo grupo; ESET los rastrea por separado y señala que Microsoft no ha publicado indicadores técnicos ni TTP que sostengan la fusión</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que se trate de clústeres distintos que comparten un proveedor común de herramientas —un <em>digital quartermaster</em>— antes que de una sola organización.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Solapamientos documentados y acotados (ProxyLogon y la IP <code>27.102.113[.]240</code> compartida con GhostEmperor en 2021; solapamiento de código entre SparrowDoor y HemiGate de Earth Estries) frente a arsenales propios distintos en cada clúster. <em>Consecuencia:</em> <strong>no importar la biblioteca de detección de Salt Typhoon como si cubriera a FamousSparrow.</strong> Cubre a otra cosa.</p></div></div>
+<p class="rv"><strong>Qué cambiaría estos juicios:</strong> (a) la publicación de indicadores técnicos por parte de Microsoft que sostengan la fusión de alias —invalidaría KJ-7 y obligaría a reescribir §O-1—; (b) la aparición de una víctima chilena atribuida a este actor por CSIRT Nacional o por un proveedor con telemetría local —elevaría KJ-5 de inferencia a hallazgo—; (c) la observación de SparroWocky fuera de Latinoamérica en volumen —falsaría el carácter deliberado de KJ-1—; (d) un cambio del esquema tridente a un cargador de una sola pieza o sin fichero en disco —dejaría ciega toda la caza de T-4—; (e) la identificación del vector de acceso inicial con un CVE concreto —permitiría por fin una medida preventiva y no solo detectiva—.</p>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">FamousSparrow es un grupo de ciberespionaje alineado con China, activo desde al menos 2019 y conocido públicamente desde septiembre de 2021, cuando se le documentó explotando ProxyLogon contra hoteles, gobiernos, bufetes y firmas de ingeniería en todo el mundo. Se le dio por inactivo entre 2022 y 2024. No lo estaba: siguió desarrollando herramientas en silencio, y reapareció en julio de 2024 dentro de la red de una asociación gremial del sector financiero estadounidense y de un instituto de investigación mexicano.</p>
+<p class="rv">Lo relevante ahora es otra cosa. <strong>Desde julio de 2025 el grupo ha dejado de ser un actor global para convertirse en un actor regional</strong>: nueve de cada diez de sus objetivos están en Latinoamérica, y son gobiernos. Ha abandonado el implante que lo identificaba —SparrowDoor— y lo ha sustituido por uno nuevo, <strong>SparroWocky</strong>, escrito en C++, modular y diseñado explícitamente para que las herramientas de detección de endpoint miren donde no está.</p>
+<p class="rv">Lo que esto nos cambia no es la lista de indicadores. Es el modelo de amenaza. Los tres informes anteriores de esta serie describían actores que necesitan que usted se entere: cifran, extorsionan, publican. Este necesita exactamente lo contrario. Su operación es exitosa si durante dos años nadie nota nada. No habrá rescate, no habrá sitio de filtración, no habrá interrupción de servicio que dispare un comité de crisis. Habrá, en el mejor de los casos, un servicio de Windows con un nombre verosímil y una conexión TLS al puerto 443 de un VPS que nadie mira.</p>
+<p class="rv">La decisión que se pide no es de inversión, es de reorientación: dejar de medir la defensa por capacidad de contención y empezar a medirla por <strong>capacidad de descubrimiento retrospectivo</strong>.</p>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · modelo de amenaza</div>
+<h4 style="margin:0 0 6px">Sin monetización, sin ruido</h4><p style="font-size:13.8px;margin:0">No hay evento que dispare la respuesta. La detección debe ser proactiva o no existe</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · evasión</div>
+<h4 style="margin:0 0 6px">Anti-telemetría por diseño</h4><p style="font-size:13.8px;margin:0">Falsifica pila de llamadas y dirección de hilo: el EDR ve un proceso limpio</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · suplantación</div>
+<h4 style="margin:0 0 6px">Cargador sobre binario firmado</h4><p style="font-size:13.8px;margin:0">La DLL parcheada conserva la firma del módulo legítimo, ya inválida</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · victimología</div>
+<h4 style="margin:0 0 6px">Selección por interés geopolítico</h4><p style="font-size:13.8px;margin:0">El criterio no es nuestro sector ni nuestro tamaño, es con quién negociamos</p></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="90">0<small>%</small></div><div class="l">de los objetivos del grupo están en Latinoamérica desde mediados de 2025</div><div class="s">Antes operaba de forma global; es un giro casi total</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="8">0</div><div class="l">gobiernos de la región con compromiso documentado</div><div class="s">Argentina, Ecuador, Guatemala, Honduras, Panamá, Perú, Puerto Rico y Venezuela</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="18">0</div><div class="l">servidores de mando y control observados en 9 meses</div><div class="s">Entre 2025-12-11 y 2026-06-17, todos sobre TLS/443 en VPS comerciales</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="7">0</div><div class="l">años de operación sin interrupción conocida</div><div class="s">Activo desde 2019; dado por inactivo 2022–2024 por error</div></div></div>
+<div class="note good rv"><div class="t">✅ Decisión que se solicita a Dirección:</div><p>(a) autorizar una <strong>caza retrospectiva de 24 meses</strong> sobre los artefactos de §T-4, no una revisión de indicadores de 30 días; (b) aprobar el cierre de la brecha de visibilidad de <strong>creación de servicios y de escritura de DLL en directorios de aplicación</strong>, sin la cual las hipótesis H-1 a H-5 son inejecutables; (c) incorporar al registro de riesgos el <strong>espionaje por interés geopolítico de terceros</strong> como categoría propia, distinta del cibercrimen, con dueño asignado en Asuntos Corporativos y no solo en TI.</p></div>
+</section>
+<section id="3-alcance-requisitos-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance, requisitos y limitaciones</h2><p><strong>3.1 Requisitos de inteligencia atendidos</strong></p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Req.</th><th>Enunciado</th><th>¿Respondido?</th><th>Dónde</th></tr></thead><tbody>
+<tr><td>PIR-01</td><td>¿Qué actores tienen intención y capacidad contra nuestro sector y nuestra geografía?</td><td>Sí</td><td>§E-1, §E-2, §O-2</td></tr>
+<tr><td>PIR-03</td><td>¿Qué actividad de actores con nexo estatal afecta a Chile y a su entorno regional?</td><td>Parcial</td><td>§E-2, §O-5, §KJ-5, §KJ-6</td></tr>
+<tr><td>PIR-05</td><td>¿Qué capacidades adversarias eluden nuestra pila de detección actual?</td><td>Sí</td><td>§KJ-3, §T-3, §X-1, §X-3</td></tr>
+<tr><td>PIR-08</td><td>¿Qué debemos cazar de forma retrospectiva y con qué prioridad?</td><td>Sí</td><td>§T-4, §T-5</td></tr></tbody></table></div>
+<p class="rv"><strong>3.2 Fuera de alcance.</strong> No se evalúa la actividad histórica del grupo contra el sector hotelero (2019–2021), ya cubierta por la literatura pública y sin vigencia táctica. No se analizan en profundidad SparrowDoor ni ShadowPad más allá de lo necesario para la atribución y para la caza retrospectiva. <strong>No se emite juicio sobre el caso chileno de telecomunicaciones de agosto de 2026</strong>, que corresponde a otro clúster y merece producto propio.</p>
+<p class="rv"><strong>3.3 Limitaciones de la colección.</strong> (a) Dependencia crítica de <strong>una sola fuente de investigación primaria</strong>: toda la caracterización técnica de SparroWocky procede del análisis de ESET del 17-09-2026; los demás medios lo reproducen. No existe corroboración independiente. (b) La telemetría que sostiene el «90 %» es la de ese proveedor, con la distribución de sensores que tenga en la región. (c) <strong>No se conoce el vector de acceso inicial con certeza</strong>: la matriz ATT&amp;CK del proveedor consigna explotación de servidores Exchange expuestos, mientras que la prensa técnica derivada afirma que el vector es desconocido; se consigna la discrepancia y se trata en §T-1. (d) Sin telemetría propia: §O-4 vacía. (e) Las fuentes sobre el caso chileno son de prensa nacional, no técnicas, y no permiten validar indicadores.</p>
+<p class="rv"><strong>3.4 Metodología.</strong> OSINT y TECHINT de proveedor. Análisis de hipótesis alternativas (ACH) en §O-6, pre-mortem, y valoración doble Admiralty en el Anexo B. Lenguaje estimativo según ICD 203, con la escala del Anexo C. Mapeo a MITRE ATT&amp;CK y priorización por Pirámide del Dolor.</p>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> Consejo</span><span>CISO</span><span>Riesgo</span><span>Legal</span><span>Asuntos Corporativos</span><span><b>Horizonte:</b> 6–24 meses</span></div></div>
+<section id="e-1-que-representa-este-actor-en-el-panorama" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Qué representa este actor en el panorama</h2></div></div>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">regionalización</div>
+<h4 style="margin:0 0 6px">Latinoamérica deja de ser periferia del espionaje chino</h4><p style="font-size:13.8px;margin:0">Durante años la región fue terreno de cibercrimen, no de APT estatales. Ese supuesto ya no sostiene el modelo de riesgo</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">tercero de confianza</div>
+<h4 style="margin:0 0 6px">El objetivo es el Estado, y el Estado es nuestro cliente, regulador y socio</h4><p style="font-size:13.8px;margin:0">Un compromiso de la contraparte gubernamental expone nuestra información aunque nuestra red esté intacta</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">criterio de selección</div>
+<h4 style="margin:0 0 6px">La amenaza se selecciona por geopolítica, no por sector</h4><p style="font-size:13.8px;margin:0">Un contrato con capital chino, una concesión portuaria o una licitación energética nos convierte en objetivo sin cambiar nada de lo que hacemos</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">métrica ciega</div>
+<h4 style="margin:0 0 6px">El éxito del adversario es la ausencia de evento</h4><p style="font-size:13.8px;margin:0">Nuestra métrica de seguridad —incidentes contenidos— no mide nada de esto</p></div></div>
+<p class="rv">El contraste con los tres informes anteriores de esta serie es el hallazgo estratégico. Un operador de ransomware necesita ser visto para cobrar; por eso deja huella, exige plazo y publica. Este actor cobra en información y su producto se degrada en cuanto alguien se da cuenta. La consecuencia práctica es que <strong>todo nuestro instrumental de respuesta a incidentes está calibrado sobre un disparador que aquí no va a ocurrir</strong>.</p>
+</section>
+<section id="e-2-victimologia" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>Victimología</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Distribución del esfuerzo del actor (telemetría del proveedor, mediados 2025 → 2026)</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn">Latinoamérica</span><span class="bt"><i data-w="100"></i></span><span class="bv">90</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Resto del mundo</span><span class="bt"><i data-w="11"></i></span><span class="bv">10</span></div></div></div>
+<p class="rv"><strong>Países con entidades gubernamentales comprometidas.</strong> El proveedor no publica recuento de víctimas por país, por lo que no se presenta distribución numérica: hacerlo sería fabricar precisión inexistente.</p>
+<div class="tw rv"><table><thead>
+<tr><th>País</th><th>Tipo de entidad</th><th>Nota de contexto</th></tr></thead><tbody>
+<tr><td>Argentina</td><td>Gubernamental</td><td>—</td></tr>
+<tr><td>Ecuador</td><td>Gubernamental</td><td>—</td></tr>
+<tr><td>Guatemala</td><td>Gubernamental</td><td>—</td></tr>
+<tr><td>Honduras</td><td>Gubernamental</td><td>Ya objetivo del grupo entre 2022 y 2024, con investigación en curso</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>Panamá</td><td>Gubernamental</td><td>Una entidad implicada en la disputa por dos puertos del área del canal, antes operados por una empresa china</td></tr>
+<tr><td>Perú</td><td>Gubernamental</td><td>—</td></tr>
+<tr><td>Puerto Rico</td><td>Gubernamental</td><td>Territorio estadounidense: eleva el componente de contrainteligencia del caso</td></tr>
+<tr><td>Venezuela</td><td>Gubernamental</td><td>—</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>Chile</td><td><strong>No observado</strong></td><td>Sin ningún indicador que sitúe al actor en el país. Véase KJ-5 y la advertencia de sesgo en §0</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Lectura clave</div><p>La distribución no describe un sector: describe un mapa de intereses. Energía, minería, telecomunicaciones y logística portuaria son exactamente los cuatro dominios donde la inversión china en la región se ha concentrado durante la última década y donde hoy se disputa influencia. Una organización chilena no necesita ser estratégica para el adversario por lo que hace, sino por <strong>con quién lo hace</strong>: socios, concesiones, contrapartes estatales y cadena de suministro. Esa es la superficie que ningún inventario de activos refleja.</p></div>
+</section>
+<section id="e-3-tendencia-y-pronostico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Tendencia y pronóstico</h2></div></div>
+<div class="chart rv">
+<h4>Servidores de mando y control observados por primera vez, por mes</h4><p class="cap">Mide aparición de infraestructura documentada por el proveedor, no número de víctimas ni de intrusiones. El repunte de febrero y marzo de 2026 puede reflejar tanto expansión de la campaña como mejora de la visibilidad del investigador.</p><svg viewBox="0 0 720 250" role="img" aria-label="Servidores de mando y control observados por primera vez, por mes"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">2</text><text x="42" y="116.0">4</text><text x="42" y="72.0">6</text><text x="42" y="28.0">8</text></g><path d="M50.0,178.0 L156.7,134.0 L263.3,24.0 L370.0,112.0 L476.7,200.0 L583.3,178.0 L690.0,178.0 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,178.0 L156.7,134.0 L263.3,24.0 L370.0,112.0 L476.7,200.0 L583.3,178.0 L690.0,178.0"/><g><circle class="pt" cx="50.0" cy="178.0" r="5" fill="#5a7ebe"><title>Dic·25: 1</title></circle><circle class="pt" cx="156.7" cy="134.0" r="5" fill="#5a7ebe"><title>Ene·26: 3</title></circle><circle class="pt" cx="263.3" cy="24.0" r="5" fill="#5a7ebe"><title>Feb·26: 8</title></circle><circle class="pt" cx="370.0" cy="112.0" r="5" fill="#5a7ebe"><title>Mar·26: 4</title></circle><circle class="pt" cx="476.7" cy="200.0" r="5" fill="#4db99c"><title>Abr·26: 0</title></circle><circle class="pt" cx="583.3" cy="178.0" r="5" fill="#4db99c"><title>May·26: 1</title></circle><circle class="pt" cx="690.0" cy="178.0" r="6.5" fill="#f7a400"><title>Jun·26: 1</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="167.0">1</text><text x="156.7" y="123.0">3</text><text x="263.3" y="13.0">8</text><text x="370.0" y="101.0">4</text><text x="476.7" y="189.0">0</text><text x="583.3" y="167.0">1</text><text x="690.0" y="167.0" fill="#f7a400">1</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">Dic·25</text><text x="156.7" y="222">Ene·26</text><text x="263.3" y="222">Feb·26</text><text x="370.0" y="222">Mar·26</text><text x="476.7" y="222">Abr·26</text><text x="583.3" y="222">May·26</text><text x="690.0" y="222">Jun·26</text></g></svg></div>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px">Continuidad regional</h4><p style="font-size:13.8px;margin:0">El actor mantiene el foco latinoamericano y amplía a los países de la región aún no observados, siguiendo la agenda de intereses económicos chinos. La publicación de septiembre de 2026 provoca rotación de infraestructura y cambio de nombres de servicio, pero no de esquema</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px">Retracción táctica</h4><p style="font-size:13.8px;margin:0">La exposición pública obliga a una pausa operativa y a rediseñar el cargador; reaparición en 6–12 meses con un implante distinto y sin fichero en disco</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Posibilidad real · 45–55 %</div>
+<h4 style="margin:0 0 6px">Ampliación al sector privado estratégico</h4><p style="font-size:13.8px;margin:0">El actor extiende el objetivo desde el Estado hacia operadores privados de energía, minería, puertos y telecomunicaciones que son contraparte de esos gobiernos</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Remoto · 5–20 %</div>
+<h4 style="margin:0 0 6px">Convergencia de clústeres</h4><p style="font-size:13.8px;margin:0">Se publican indicadores que confirman la fusión con Salt Typhoon y el actor pasa a tener capacidades de compromiso de operador de telecomunicaciones</p></div></div>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide-al-nivel-estrategico" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide al nivel estratégico</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>Fundamento</th><th>Plazo</th></tr></thead><tbody>
+<tr style="background:rgba(247,164,0,.05)"><td>E-a</td><td>Autorizar una campaña de <strong>caza retrospectiva de 24 meses</strong> sobre los artefactos de §T-4, con horas de analista asignadas, no como tarea de fondo</td><td>KJ-3, KJ-4: no habrá alerta que dispare la búsqueda; si no se busca, no se encuentra</td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr><td>E-b</td><td>Aprobar el cierre de las brechas de visibilidad de §T-5 —creación de servicios, escritura de DLL en directorios de aplicación, conexiones TLS salientes por proceso— y fijar retención mínima de 12 meses</td><td>Sin ellas, las hipótesis H-1 a H-6 no son ejecutables y este informe no cambia nada</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td>E-c</td><td>Incorporar al registro de riesgos corporativo la categoría <strong>espionaje por interés geopolítico de terceros</strong>, con dueño en Asuntos Corporativos y criterio de exposición basado en contrapartes y contratos, no en sector</td><td>KJ-2, E-2: el criterio de selección del adversario es relacional y hoy nadie lo modela</td><td><span class="pill p-amber">90 días</span></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-d</td><td>Extender los requisitos de seguridad y el derecho de auditoría a <strong>contrapartes gubernamentales y socios con vínculo regional</strong>, e incluir cláusula de notificación de compromiso</td><td>E-1: el compromiso del tercero expone nuestra información sin tocar nuestra red</td><td><span class="pill p-amber">90 días</span></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>E-e</td><td>Coordinar con <strong>CSIRT Nacional / ANCI</strong> la solicitud de indicadores y de contexto sobre actividad de actores con nexo chino en el país, en el marco de la Ley 21.663</td><td>KJ-5, KJ-6: hay actividad china documentada en Chile por otras vías; nuestra ceguera es de colección, no del adversario</td><td><span class="pill p-amber">60 días</span></td></tr></tbody></table></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> Jefatura de SOC</span><span>Respuesta a Incidentes</span><span>Threat Hunting</span><span><b>Horizonte:</b> semanas–meses</span></div></div>
+<section id="o-1-identificacion-y-alias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación y alias</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Designación</th><th>Origen</th><th>Grado de equivalencia</th></tr></thead><tbody>
+<tr><td>FamousSparrow</td><td>ESET</td><td><strong>Referencia de este informe</strong></td></tr>
+<tr><td>Salt Typhoon</td><td>Microsoft</td><td><strong>Ambiguo / disputado.</strong> Microsoft afirma equivalencia desde septiembre de 2024 sin publicar indicadores técnicos ni TTP. ESET los rastrea por separado</td></tr>
+<tr><td>GhostEmperor</td><td>Kaspersky</td><td><strong>Solapamiento parcial acotado.</strong> Ambos explotaron ProxyLogon y compartieron la IP <code>27.102.113[.]240</code> en 2021, pero cada uno tiene arsenal propio</td></tr>
+<tr><td>Earth Estries</td><td>Trend Micro</td><td><strong>Solapamiento parcial.</strong> TTP comunes y solapamiento de código entre SparrowDoor y HemiGate; la naturaleza y extensión del vínculo no está establecida</td></tr>
+<tr><td>CrowDoor</td><td>Trend Micro</td><td>Nombre de una familia de implante, no del actor. Una de las variantes de SparrowDoor de 2024 se le parece</td></tr>
+<tr><td>Lilac Typhoon</td><td>Microsoft</td><td><strong>Clúster distinto.</strong> Es el nombrado en el caso chileno de telecomunicaciones de agosto de 2026. No confundir</td></tr></tbody></table></div>
+<div class="note warn rv"><div class="t">⚠ Nota de tradecraft — el error caro de este dominio</div><p>Fusionar FamousSparrow con Salt Typhoon parece un detalle de nomenclatura y no lo es. Salt Typhoon es un actor con capacidad documentada de comprometer operadores de telecomunicaciones y dispositivos de borde de red a escala global; FamousSparrow es un actor de implante de endpoint sobre servidores expuestos. Si se importan las detecciones de uno creyendo que cubren al otro, se obtiene una cobertura nominal alta y una cobertura real nula. <strong>Hasta que Microsoft publique indicadores, se tratan como clústeres separados y se documenta la decisión.</strong></p></div>
+</section>
+<section id="o-2-estructura-y-atribucion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>Estructura y atribución</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Eje de atribución</th><th>Valoración</th><th>Confianza</th></tr></thead><tbody>
+<tr><td>Clúster técnico</td><td>Consistente: implante propio, esquema de cargador propio, continuidad de desarrollo 2019–2026</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Grupo organizado</td><td>Equipo con desarrollo interno sostenido; capacidad de reescribir su implante principal manteniendo doctrina de despliegue</td><td><span class="pill p-mint">Alta</span></td></tr>
+<tr><td>Nexo estatal</td><td>Alineado con los intereses del Estado chino; selección de víctimas coherente con la agenda económica y diplomática de la RPC en la región</td><td><span class="pill p-sky">Moderada</span></td></tr>
+<tr><td>Identidad nominal</td><td>Sin identificación de personas ni de unidad</td><td>Nula</td></tr>
+<tr><td>Relación con Earth Estries / GhostEmperor</td><td>Proveedor común de herramientas (<em>digital quartermaster</em>) antes que identidad</td><td><span class="pill p-sky">Moderada</span></td></tr>
+<tr><td>Relación con Salt Typhoon</td><td>No establecida. Afirmada por un proveedor sin evidencia publicada</td><td><span class="pill p-grey">Baja</span></td></tr></tbody></table></div>
+<p class="rv"><em>Razonamiento:</em> continuidad del esquema tridente entre 2024 y 2026; reutilización de la doctrina de despliegue pese al cambio completo de implante; victimología coherente con intereses estatales y sin ningún componente de monetización en siete años de operación; uso en 2024 de ShadowPad, plataforma cuyo acceso está restringido a grupos con nexo chino.</p>
+<p class="rv"><em>Contraargumento:</em> el solapamiento de herramientas entre clústeres chinos es tan extenso que la atribución basada en arsenal es intrínsecamente débil; la hipótesis del quartermaster explica los solapamientos sin necesidad de identidad, pero también <strong>impide descartar</strong> que varios de estos nombres sean vistas parciales de una misma estructura mayor. Ninguna de las dos lecturas se puede cerrar con la evidencia pública disponible.</p>
+</section>
+<section id="o-3-modelo-de-operacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Modelo de operación</h2><p>El actor no vende, no extorsiona y no alquila acceso. Su cadena de valor es: <strong>acceso duradero a servidores expuestos → implante silencioso → recolección continua → exfiltración por el mismo canal de mando</strong>. Tres rasgos definen su economía operativa:</p></div></div>
+<p class="rv"><strong>Infraestructura desechable y barata.</strong> Los dieciocho servidores de mando observados están en VPS comerciales —Kaopu Cloud (Hong Kong y Brasil), LightNode (Brasil y México), Constant Company/Vultr, Cogent, Latitude.sh, NTT America—, con vida corta y rotación constante. Varios están <strong>deliberadamente alojados en la región de las víctimas</strong>, lo que degrada la detección por geolocalización del destino: una conexión desde Santiago a un VPS brasileño no levanta la misma sospecha que una a Hong Kong.</p>
+<p class="rv"><strong>Reutilización de doctrina, no de código.</strong> SparrowDoor fue abandonado en agosto de 2025 y sustituido por SparroWocky, escrito desde cero en C++. Lo que <strong>no</strong> cambió fue la forma de entregarlo: el mismo esquema de tres ficheros, la misma lógica de cifrado RC4 del payload, la misma elección de binarios legítimos firmados. Para la defensa esto es la buena noticia del informe: <strong>el comportamiento sobrevive al código</strong>, y es ahí donde hay que atacar.</p>
+<p class="rv"><strong>Integración de componentes públicos.</strong> Mbed TLS para el canal, MinHook para los enganches, COFF Loader para ejecutar BOF, SilentMoonwalk para falsificar la pila. El actor no inventa técnicas de evasión: adopta las de la comunidad ofensiva pública, lo que acorta su ciclo de desarrollo y <strong>hace que sus técnicas sean conocidas y, por tanto, detectables en principio</strong>.</p>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="note gap rv"><div class="t">⬛ Sección sin evaluar — requiere telemetría e inventario internos</div><p>Mientras esta sección siga vacía, este informe es inteligencia genérica sobre un actor, no una evaluación de nuestro riesgo. Las preguntas de abajo son el requisito mínimo para cerrarla, y su respuesta debería estar disponible antes de la revisión de este producto.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Pregunta</th><th>Fuente</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>X-1</td><td>¿Exponemos algún <strong>Microsoft Exchange</strong> a Internet? ¿Qué versión, qué nivel de parche, desde cuándo? ¿Hay algún Exchange olvidado en modo híbrido?</td><td>Inventario + escaneo externo</td><td>TI/Mensajería</td></tr>
+<tr><td>X-2</td><td>¿Exponemos servidores <strong>IIS</strong> con aplicaciones heredadas (DotNetNuke, portales, formularios) que admitan escritura de ficheros <code>.ashx</code>?</td><td>Inventario de aplicaciones</td><td>TI/Aplicaciones</td></tr>
+<tr><td>X-3</td><td>¿Registramos y retenemos <strong>creación e instalación de servicios de Windows</strong> (EID 7045 / 4697) en todos los servidores? ¿Cuánto tiempo?</td><td>SIEM</td><td>SOC</td></tr>
+<tr><td>X-4</td><td>¿Podemos listar hoy todas las <strong>DLL no firmadas o con firma inválida</strong> cargadas por procesos firmados en servidores?</td><td>EDR</td><td>SOC</td></tr>
+<tr><td>X-5</td><td>¿Tenemos registro de <strong>conexiones TLS salientes por proceso</strong> desde servidores, con IP de destino y retención de 12 meses?</td><td>EDR + NetFlow</td><td>Redes</td></tr>
+<tr><td>X-6</td><td>¿Qué contrapartes <strong>gubernamentales de la región</strong> tienen conectividad, VPN, federación de identidad o intercambio de ficheros con nosotros?</td><td>Arquitectura + Legal</td><td>TI/Redes</td></tr>
+<tr><td>X-7</td><td>¿Participamos en proyectos, concesiones o licitaciones con capital o contraparte china en energía, minería, puertos o telecomunicaciones?</td><td>Asuntos Corporativos</td><td>Dirección</td></tr></tbody></table></div>
+</section>
+<section id="o-5-cronologia" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Cronología</h2></div></div>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="global">Global</button><button class="chip" data-tl="latam">LATAM</button><button class="chip" data-tl="chile">Chile</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev gl" data-k="global"><div class="d">2019</div><div class="x">Primera actividad conocida del grupo</div></div>
+<div class="ev gl big" data-k="global big"><div class="d">2021-09</div><div class="x"><strong>Divulgación pública inicial: explotación de ProxyLogon (CVE-2021-26855) contra hoteles, gobiernos, bufetes e ingeniería</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2021</div><div class="x">Infraestructura compartida con GhostEmperor (<code>27.102.113[.]240</code>)</div></div>
+<div class="ev cl" data-k="latam"><div class="d">2022–2024</div><div class="x">Objetivo: una institución gubernamental de Honduras. Periodo en el que se dio al grupo por inactivo</div></div>
+<div class="ev gl" data-k="global"><div class="d">2024-03-11</div><div class="x">Primera observación del C2 de ShadowPad <code>216.238.106[.]150</code></div></div>
+<div class="ev gl" data-k="global"><div class="d">2024-06-27</div><div class="x">Alta del servidor de entrega <code>43.254.216[.]195</code></div></div>
+<div class="ev cl big" data-k="latam big"><div class="d">2024-07</div><div class="x"><strong>Reaparición: compromiso de una asociación gremial financiera en EE. UU. y de un instituto de investigación en México. Primer uso documentado de ShadowPad por el grupo</strong></div></div>
+<div class="ev gl" data-k="global"><div class="d">2025-03-27</div><div class="x">Publicación del análisis de las nuevas variantes de SparrowDoor</div></div>
+<div class="ev cl big" data-k="latam big"><div class="d">2025-07</div><div class="x"><strong>Inicio del giro: el objetivo pasa a ser casi exclusivamente latinoamericano</strong></div></div>
+<div class="ev cl" data-k="latam"><div class="d">2025-08</div><div class="x">SparrowDoor es sustituido por SparroWocky como implante principal</div></div>
+<div class="ev cl" data-k="latam"><div class="d">2025-11-17</div><div class="x">Marca temporal de compilación de la muestra SparroWocky v1.8</div></div>
+<div class="ev cl" data-k="latam"><div class="d">2025-12-11</div><div class="x">Primer servidor de mando de SparroWocky observado (<code>216.238.110[.]120</code>)</div></div>
+<div class="ev cl" data-k="latam"><div class="d">2026-02</div><div class="x">Pico de despliegue de infraestructura: 8 servidores nuevos en un mes</div></div>
+<div class="ev cl big" data-k="chile big"><div class="d">2026-02</div><div class="x"><strong>La PDI recibe los antecedentes del caso de telecomunicaciones chilenas</strong></div></div>
+<div class="ev cl" data-k="latam"><div class="d">2026-06-17</div><div class="x">Último servidor de mando documentado (<code>91.148.134[.]115</code>)</div></div>
+<div class="ev cl big" data-k="chile big"><div class="d">2026-08-10</div><div class="x"><strong>Se hace pública la alerta de EE. UU. sobre ShadowPad y Lilac Typhoon en Entel, Movistar y Telmex; la Fiscalía Metropolitana Centro Norte abre investigación por sabotaje informático</strong></div></div>
+<div class="ev cl big" data-k="latam big"><div class="d">2026-09-17</div><div class="x"><strong>Publicación del análisis de SparroWocky y de la campaña latinoamericana</strong></div></div>
+<div class="ev cl" data-k="chile"><div class="d">2026-09-21</div><div class="x">Emisión de este informe</div></div></div>
+</section>
+<section id="o-6-hipotesis-alternativas-consideradas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Hipótesis alternativas consideradas</h2></div></div>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Retenida</div>
+<h4 style="margin:0 0 6px">H1 · Campaña de espionaje estatal dirigida, con selección por interés geopolítico</h4><p style="font-size:13.8px;margin:0">Consistente con toda la evidencia: victimología gubernamental, ausencia total de monetización en 7 años, caso panameño vinculado a una disputa concreta, arsenal restringido a grupos con nexo chino</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Retenida como atenuante de KJ-1</div>
+<h4 style="margin:0 0 6px">H2 · Concentración regional aparente, producto del sesgo de sensores del proveedor</h4><p style="font-size:13.8px;margin:0">No se puede descartar y explicaría parte del 90 %. Pero <strong>no explica el contenido</strong>: que los objetivos sean gobiernos y que uno esté implicado en la disputa portuaria no es un artefacto de dónde haya sensores</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px">H3 · Operación de acceso inicial para revender a otro clúster chino</h4><p style="font-size:13.8px;margin:0">Inconsistente: el implante recolecta, captura pantalla y exfiltra de forma continua durante meses. Un revendedor de acceso no invierte en capacidad de recolección sostenida</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Descartada</div>
+<h4 style="margin:0 0 6px">H4 · Falsa bandera de un tercero que imita herramientas chinas</h4><p style="font-size:13.8px;margin:0">Sin evidencia. Requeriría reproducir siete años de continuidad de desarrollo y el acceso a ShadowPad. Se consigna para que no se reabra sin evidencia nueva</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Abierta · sin evidencia</div>
+<h4 style="margin:0 0 6px">H5 · FamousSparrow y Salt Typhoon son el mismo actor</h4><p style="font-size:13.8px;margin:0">Afirmado por un proveedor, sin indicadores publicados. No se puede confirmar ni refutar con evidencia pública; se mantiene abierta y <strong>no se opera sobre ella</strong></p></div></div>
+<p class="rv"><strong>Supuesto clave:</strong> que el análisis del proveedor sobre SparroWocky es técnicamente correcto y representativo. <strong>Si es falso</strong> —muestra atípica, atribución errónea del implante al grupo— toda la sección técnica de este informe pierde validez y solo sobrevive el juicio estratégico de KJ-2. No hay forma de comprobarlo sin una muestra propia.</p>
+<p class="rv"><strong>Pre-mortem.</strong> Es marzo de 2027 y este informe resultó equivocado. Las dos causas más probables: <strong>(1)</strong> cazamos durante meses nombres de servicio y valores de registro que el actor cambió la semana siguiente a la publicación, mientras el patrón estructural —trío de ficheros, DLL firmada inválida, <code>.dat</code> con cabecera <code>0x11328712</code>— seguía intacto y sin buscarse, porque era más difícil de consultar; <strong>(2)</strong> dedicamos el esfuerzo a un actor que nunca nos miró, mientras el compromiso real entraba por una contraparte gubernamental regional con la que tenemos federación de identidad y que nadie incluyó en el alcance.</p>
+</section>
+<section id="o-7-indicadores-y-senales-de-alerta" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>Indicadores y señales de alerta</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Indicador observable</th><th>Qué señalaría</th><th>Disciplina</th><th>Responsable</th></tr></thead><tbody>
+<tr><td>I-1</td><td>Aparición de una víctima chilena atribuida a FamousSparrow por CSIRT Nacional o proveedor con telemetría local</td><td>KJ-5 pasa de inferencia a hallazgo; se activa respuesta de nivel 1</td><td>OSINT / enlace</td><td>Célula CTI</td></tr>
+<tr><td>I-2</td><td>Publicación por Microsoft de indicadores técnicos que sostengan la fusión con Salt Typhoon</td><td>Obliga a reescribir §O-1 y a reevaluar la cobertura de detección</td><td>OSINT</td><td>Célula CTI</td></tr>
+<tr><td>I-3</td><td>Nuevo análisis que documente SparroWocky sin fichero en disco o con cargador de una pieza</td><td>Invalida H-1 a H-5 de §T-4; caza queda ciega</td><td>OSINT / TECHINT</td><td>Ingeniería de detección</td></tr>
+<tr><td>I-4</td><td>Anuncio de participación de la organización en proyecto, licitación o concesión con contraparte china en energía, minería, puertos o telecomunicaciones</td><td>Cambio material de exposición según el criterio de KJ-2; requiere revisión de superficie</td><td>Interna / corporativa</td><td>Asuntos Corporativos</td></tr>
+<tr><td>I-5</td><td>Compromiso público de una entidad gubernamental chilena o de un operador regional con el que tengamos conectividad</td><td>Riesgo de compromiso indirecto por tercero de confianza</td><td>OSINT / enlace</td><td>Célula CTI</td></tr>
+<tr><td>I-6</td><td>Aviso de ANCI o CSIRT Nacional sobre actividad de actores con nexo chino en sectores regulados</td><td>Posible obligación de notificación bajo Ley 21.663 según el efecto</td><td>Autoridad</td><td>Cumplimiento</td></tr></tbody></table></div>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Analistas de SOC</span><span>Ingeniería de Detección</span><span>Threat Hunting</span><span><b>Horizonte:</b> días–semanas</span></div></div>
+<section id="t-1-cadena-de-intrusion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Cadena de intrusión</h2></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">Del servidor expuesto al implante que no aparece en ninguna parte</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">Etapa 01 · Borde</div><h5>Servidor expuesto a Internet</h5><ul><li>Exchange alcanzable públicamente</li><li>webshell <code>.ashx</code> sobre IIS</li><li>descarga por HTTP desde servidor de entrega</li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 02 · Dominio</div><h5>Consolidación y credenciales</h5><ul><li>PowerShell remoto interactivo</li><li>PowerHub</li><li><code>Invoke-BadPotato</code> a SYSTEM</li><li>volcado de SAM/SYSTEM/SECURITY</li><li>Impacket / NetExec</li><li>volcado de LSASS por DLL sideloading</li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 03 · Permanencia</div><h5>Implante silencioso y recolección continua</h5><ul><li>Cargador tridente</li><li>SparroWocky reflexivo en memoria</li><li>servicio o clave Run</li><li>captura de pantalla cíclica</li><li>proxy TCP</li><li>exfiltración por el mismo canal TLS</li></ul></div></div><div class="dwell"><span>⏱</span><span><strong>Permanencia:</strong> no publicada para esta campaña. El precedente del propio actor la sitúa en <strong>años, no en días</strong>: la institución hondureña estuvo comprometida entre 2022 y 2024, y el grupo fue dado por inactivo durante ese mismo periodo.</span></div></div>
+<div class="note warn rv"><div class="t">⚠ Discrepancia de fuentes sobre el acceso inicial — decisión de este informe</div><p>La matriz ATT&amp;CK del análisis primario consigna <code>T1190</code> con el procedimiento «obtuvo acceso explotando servidores Exchange alcanzables públicamente». La prensa técnica derivada afirma que «el vector de acceso inicial es desconocido». Ambas cosas pueden ser ciertas a la vez: Exchange como vector observado, <strong>sin CVE identificado</strong>. Operamos sobre la lectura del análisis primario —tratar todo Exchange expuesto como superficie prioritaria— y consignamos en §14 la identificación del CVE como brecha de inteligencia crítica: <strong>sin ella no hay medida preventiva posible, solo detectiva</strong>.</p></div>
+</section>
+<section id="t-2-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Desarrollo de recursos <i>3</i></h5>
+<div class="tq" data-s="desarrollo de recursos t1583.003 acquire infrastructure: vps 18 servidores en vps comerciales (kaopu cloud, lightnode, constant/vultr, cogent, latitude.sh, ntt america), varios en la región de las víctimas"><div class="tid">T1583.003</div><div class="tn">Acquire Infrastructure: VPS</div><div class="tp">18 servidores en VPS comerciales (Kaopu Cloud, LightNode, Constant/Vultr, Cogent, Latitude.sh, NTT America), varios en la región de las víctimas</div></div>
+<div class="tq" data-s="desarrollo de recursos t1587.001 develop capabilities: malware desarrollo propio de sparrowocky y de su cargador; sustitución completa de sparrowdoor"><div class="tid">T1587.001</div><div class="tn">Develop Capabilities: Malware</div><div class="tp">Desarrollo propio de SparroWocky y de su cargador; sustitución completa de SparrowDoor</div></div>
+<div class="tq" data-s="desarrollo de recursos t1608.001 stage capabilities: upload malware cargador tridente alojado en servidores de entrega controlados por el actor"><div class="tid">T1608.001</div><div class="tn">Stage Capabilities: Upload Malware</div><div class="tp">Cargador tridente alojado en servidores de entrega controlados por el actor</div></div></div>
+<div class="mcol" data-col><h5>Acceso inicial <i>1</i></h5>
+<div class="tq" data-s="acceso inicial t1190 exploit public-facing application explotación de servidores exchange alcanzables públicamente; en 2024, webshell .ashx sobre iis y dotnetnuke"><div class="tid">T1190</div><div class="tn">Exploit Public-Facing Application</div><div class="tp">Explotación de servidores Exchange alcanzables públicamente; en 2024, webshell <code>.ashx</code> sobre IIS y DotNetNuke</div></div></div>
+<div class="mcol" data-col><h5>Ejecución <i>4</i></h5>
+<div class="tq" data-s="ejecución t1059.003 windows command shell comando 0x17 ejecuta órdenes vía cmd.exe"><div class="tid">T1059.003</div><div class="tn">Windows Command Shell</div><div class="tp">Comando <code>0x17</code> ejecuta órdenes vía <code>cmd.exe</code></div></div>
+<div class="tq" data-s="ejecución t1569.002 service execution el implante arranca directamente el servicio que crea para persistir"><div class="tid">T1569.002</div><div class="tn">Service Execution</div><div class="tp">El implante arranca directamente el servicio que crea para persistir</div></div>
+<div class="tq" data-s="ejecución t1106 native api uso intensivo de la api nativa de windows resuelta dinámicamente"><div class="tid">T1106</div><div class="tn">Native API</div><div class="tp">Uso intensivo de la API nativa de Windows resuelta dinámicamente</div></div>
+<div class="tq" data-s="ejecución t1559 inter-process communication mecanismo ipc para sincronizar instancias (mymutexname, myeventname, mysharedmemname)"><div class="tid">T1559</div><div class="tn">Inter-Process Communication</div><div class="tp">Mecanismo IPC para sincronizar instancias (<code>MyMutexName</code>, <code>MyEventName</code>, <code>MySharedMemName</code>)</div></div></div>
+<div class="mcol" data-col><h5>Ejecución / Persistencia <i>1</i></h5>
+<div class="tq" data-s="ejecución / persistencia t1574.001 dll side-loading ejecutable legítimo carga una dll legítima parcheada (.text sustituida y punto de entrada redirigido)"><div class="tid">T1574.001</div><div class="tn">DLL Side-Loading</div><div class="tp">Ejecutable legítimo carga una DLL legítima <strong>parcheada</strong> (<code>.text</code> sustituida y punto de entrada redirigido)</div></div></div>
+<div class="mcol" data-col><h5>Persistencia <i>2</i></h5>
+<div class="tq" data-s="persistencia t1547.001 registry run keys valor snapcart en software\microsoft\windows\currentversion\run (hklm o hkcu según privilegio)"><div class="tid">T1547.001</div><div class="tn">Registry Run Keys</div><div class="tp">Valor <code>SnapCart</code> en <code>SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code> (HKLM o HKCU según privilegio)</div></div>
+<div class="tq" data-s="persistencia t1543.003 windows service servicio procauditmanager — «tracks process creation, termination, and related system audit events»"><div class="tid">T1543.003</div><div class="tn">Windows Service</div><div class="tp">Servicio <code>ProcAuditManager</code> — «Tracks process creation, termination, and related system audit events»</div></div></div>
+<div class="mcol" data-col><h5>Evasión <i>12</i></h5>
+<div class="tq" data-s="evasión t1036.001 invalid code signature la dll parcheada conserva la firma digital, ya inválida, del módulo legítimo que suplanta"><div class="tid">T1036.001</div><div class="tn">Invalid Code Signature</div><div class="tp">La DLL parcheada conserva la firma digital, ya inválida, del módulo legítimo que suplanta</div></div>
+<div class="tq" data-s="evasión t1036.004 masquerade task or service nombre y descripción de servicio verosímiles, indistinguibles de un componente de auditoría del sistema"><div class="tid">T1036.004</div><div class="tn">Masquerade Task or Service</div><div class="tp">Nombre y descripción de servicio verosímiles, indistinguibles de un componente de auditoría del sistema</div></div>
+<div class="tq" data-s="evasión t1027.007 dynamic api resolution algoritmo propio de hashing de api"><div class="tid">T1027.007</div><div class="tn">Dynamic API Resolution</div><div class="tp">Algoritmo propio de hashing de API</div></div>
+<div class="tq" data-s="evasión t1620 reflective code loading carga reflexiva del payload en memoria; cabeceras mz/pe eliminadas antes de mapear"><div class="tid">T1620</div><div class="tn">Reflective Code Loading</div><div class="tp">Carga reflexiva del payload en memoria; cabeceras MZ/PE eliminadas antes de mapear</div></div>
+<div class="tq" data-s="evasión t1564.010 process argument spoofing engancha getcommandline[aw], __[w]getmainargs, __p___argc, __p__[w]argv para entregar argumentos desde stdin al pe cargado"><div class="tid">T1564.010</div><div class="tn">Process Argument Spoofing</div><div class="tp">Engancha <code>GetCommandLine[AW]</code>, <code>__[w]getmainargs</code>, <code>__p___argc</code>, <code>__p__[w]argv</code> para entregar argumentos desde stdin al PE cargado</div></div>
+<div class="tq" data-s="evasión t1134.002 create process with token comando 0x2f: duplica el token de cualquier sesión activa para ejecutar como otro usuario"><div class="tid">T1134.002</div><div class="tn">Create Process with Token</div><div class="tp">Comando <code>0x2F</code>: duplica el token de cualquier sesión activa para ejecutar como otro usuario</div></div>
+<div class="tq" data-s="evasión t1140 deobfuscate/decode files configuración y payload descifrados con rc4 desde el fichero .dat"><div class="tid">T1140</div><div class="tn">Deobfuscate/Decode Files</div><div class="tp">Configuración y payload descifrados con RC4 desde el fichero <code>.dat</code></div></div>
+<div class="tq" data-s="evasión t1480.002 mutual exclusion mutex para impedir instancias concurrentes"><div class="tid">T1480.002</div><div class="tn">Mutual Exclusion</div><div class="tp">Mutex para impedir instancias concurrentes</div></div>
+<div class="tq" data-s="evasión t1070.004 file deletion autoborrado mediante .bat temporal que elimina ejecutable, dll, payload y a sí mismo"><div class="tid">T1070.004</div><div class="tn">File Deletion</div><div class="tp">Autoborrado mediante <code>.bat</code> temporal que elimina ejecutable, DLL, payload y a sí mismo</div></div>
+<div class="tq" data-s="evasión t1070.009 clear persistence comando 0x13: elimina su propia persistencia y termina"><div class="tid">T1070.009</div><div class="tn">Clear Persistence</div><div class="tp">Comando <code>0x13</code>: elimina su propia persistencia y termina</div></div>
+<div class="tq" data-s="evasión (sin id) call stack spoofing silentmoonwalk: cadenas jop/rop sobre gadgets de kernel32.dll para simular origen en rtluserthreadstart / basethreadinitthunk"><div class="tid">(sin ID)</div><div class="tn">Call Stack Spoofing</div><div class="tp">SilentMoonwalk: cadenas JOP/ROP sobre gadgets de <code>kernel32.dll</code> para simular origen en <code>RtlUserThreadStart</code> / <code>BaseThreadInitThunk</code></div></div>
+<div class="tq" data-s="evasión (sin id) thread start address hiding engancha createthread con minhook y usa animatewindow como trampolín; la dirección de inicio declarada es legítima"><div class="tid">(sin ID)</div><div class="tn">Thread Start Address Hiding</div><div class="tp">Engancha <code>CreateThread</code> con MinHook y usa <code>AnimateWindow</code> como trampolín; la dirección de inicio declarada es legítima</div></div></div>
+<div class="mcol" data-col><h5>Descubrimiento <i>4</i></h5>
+<div class="tq" data-s="descubrimiento t1082 system information discovery comando 0x10: guid, pid, hostname, ip de interfaces, usuario, versión de windows, dominio"><div class="tid">T1082</div><div class="tn">System Information Discovery</div><div class="tp">Comando <code>0x10</code>: GUID, PID, hostname, IP de interfaces, usuario, versión de Windows, dominio</div></div>
+<div class="tq" data-s="descubrimiento t1033 system owner/user discovery usuario actual y usuarios con sesión activa (comando 0x2e)"><div class="tid">T1033</div><div class="tn">System Owner/User Discovery</div><div class="tp">Usuario actual y usuarios con sesión activa (comando <code>0x2E</code>)</div></div>
+<div class="tq" data-s="descubrimiento t1083 file and directory discovery listado de ficheros y directorios en unidades mapeadas"><div class="tid">T1083</div><div class="tn">File and Directory Discovery</div><div class="tp">Listado de ficheros y directorios en unidades mapeadas</div></div>
+<div class="tq" data-s="descubrimiento t1120 peripheral device discovery comando 0x29: enumeración de dispositivos de visualización"><div class="tid">T1120</div><div class="tn">Peripheral Device Discovery</div><div class="tp">Comando <code>0x29</code>: enumeración de dispositivos de visualización</div></div></div>
+<div class="mcol" data-col><h5>Recolección <i>2</i></h5>
+<div class="tq" data-s="recolección t1113 screen capture comando 0x2a: captura cíclica cada 500 ms con compresión por diferencias"><div class="tid">T1113</div><div class="tn">Screen Capture</div><div class="tp">Comando <code>0x2A</code>: captura cíclica cada 500 ms con compresión por diferencias</div></div>
+<div class="tq" data-s="recolección t1005 data from local system exfiltración de ficheros desde almacenamiento mapeado, en bloques de 4 kb"><div class="tid">T1005</div><div class="tn">Data from Local System</div><div class="tp">Exfiltración de ficheros desde almacenamiento mapeado, en bloques de 4 kB</div></div></div>
+<div class="mcol" data-col><h5>Mando y control <i>5</i></h5>
+<div class="tq" data-s="mando y control t1573.002 encrypted channel: asymmetric tls mediante mbed tls"><div class="tid">T1573.002</div><div class="tn">Encrypted Channel: Asymmetric</div><div class="tp">TLS mediante Mbed TLS</div></div>
+<div class="tq" data-s="mando y control t1573.001 encrypted channel: symmetric rc4 por comando, con clave de 8 bytes regenerada en cada mensaje"><div class="tid">T1573.001</div><div class="tn">Encrypted Channel: Symmetric</div><div class="tp">RC4 por comando, con clave de 8 bytes regenerada en cada mensaje</div></div>
+<div class="tq" data-s="mando y control t1095 non-application layer protocol tls sobre tcp directo a ip, puertos 443 y 8080"><div class="tid">T1095</div><div class="tn">Non-Application Layer Protocol</div><div class="tp">TLS sobre TCP directo a IP, puertos 443 y 8080</div></div>
+<div class="tq" data-s="mando y control t1090.001 internal proxy comandos 0x1a–0x1d: proxy tcp y listener portmapreverseserver"><div class="tid">T1090.001</div><div class="tn">Internal Proxy</div><div class="tp">Comandos <code>0x1A</code>–<code>0x1D</code>: proxy TCP y listener <code>PortmapReverseServer</code></div></div>
+<div class="tq" data-s="mando y control t1090.002 external proxy soporte de proxy http (negotiate/ntlm/basic) y socks5 para salir de la red"><div class="tid">T1090.002</div><div class="tn">External Proxy</div><div class="tp">Soporte de proxy HTTP (Negotiate/NTLM/Basic) y SOCKS5 para salir de la red</div></div></div>
+<div class="mcol" data-col><h5>Exfiltración <i>1</i></h5>
+<div class="tq" data-s="exfiltración t1041 exfiltration over c2 channel todo sale por la misma conexión por la que entran los comandos"><div class="tid">T1041</div><div class="tn">Exfiltration Over C2 Channel</div><div class="tp">Todo sale por la misma conexión por la que entran los comandos</div></div></div></div>
+</section>
+<section id="t-3-donde-atacamos-en-la-piramide-del-dolor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Dónde atacamos en la Pirámide del Dolor</h2></div></div>
+<div class="pyr-wrap rv">
+<div class="pyr" id="pyr">
+<div class="pyr-in" id="pyrIn"><div class="slab" data-i="0" style="--w:296px;--d:296px;--z:0px;--col:#375d9d" data-lv="Base · el nivel más barato de eludir" data-t="Hashes" data-b="Base · valor trivial" data-s="En este informe: Cinco SHA-1 de cargadores y de payload en memoria, más los de 2024. Perecederos: el cargador se recompila por objetivo. Solo para retrohunt, nunca como base de la defensa"><span>Hashes</span></div><div class="slab" data-i="1" style="--w:246px;--d:246px;--z:30px;--col:#5a7ebe" data-lv="Nivel 2 de 5" data-t="IP · Dominios" data-b="Valor bajo" data-s="En este informe: 18 servidores de mando en VPS comerciales con rotación mensual y &lt;strong&gt;vida media inferior a la publicación de este informe&lt;/strong&gt;. Varios en la región: bloquear por geolocalización no sirve. Solo retrohunt"><span>IP · Dominios</span></div><div class="slab" data-i="2" style="--w:196px;--d:196px;--z:60px;--col:#4db99c" data-lv="Nivel 3 de 5" data-t="Artefactos" data-b="Valor medio" data-s="En este informe: Servicio &lt;code&gt;ProcAuditManager&lt;/code&gt;, valor Run &lt;code&gt;SnapCart&lt;/code&gt;, mutex &lt;code&gt;MyMutexName&lt;/code&gt;, cadena &lt;code&gt;acdbenus&lt;/code&gt;, cabecera &lt;code&gt;0x11328712&lt;/code&gt;, trío de ficheros homónimos. Duraderos entre compilaciones, aunque los nombres concretos cambiarán tras la publicación"><span>Artefactos</span></div><div class="slab" data-i="3" style="--w:146px;--d:146px;--z:90px;--col:#a2ae4e" data-lv="Nivel 4 de 5" data-t="Herramientas" data-b="Valor alto" data-s="En este informe: Mbed TLS, MinHook, COFF Loader, SilentMoonwalk, PowerHub, BadPotato, Impacket/NetExec. Todas públicas y legítimas en otros contextos: detectar por composición y contexto, jamás por presencia"><span>Herramientas</span></div><div class="slab" data-i="4" style="--w:96px;--d:96px;--z:120px;--col:#f7a400" data-lv="Cima · máximo valor defensivo" data-t="TTP" data-b="Cima · valor máximo" data-s="En este informe: &lt;strong&gt;Ejecutable firmado que carga una DLL con firma inválida desde su propio directorio, acompañada de un &lt;code&gt;.dat&lt;/code&gt; homónimo, que persiste como servicio y abre TLS a una IP sin nombre.&lt;/strong&gt; Esa frase es la detección. Sobrevivió al cambio completo de implante en agosto de 2025"><span>TTP</span></div></div></div>
+<div class="pyr-info card" id="pyrInfo" style="--pc:#f7a400"><div class="lv" id="pyrLv"></div>
+<h4 id="pyrTitle"></h4><p id="pyrBody"></p><div class="pv" id="pyrSrc"></div></div></div>
+<div class="note info rv"><div class="t">Lectura de doctrina</div><p>Este actor cambió de implante por completo y mantuvo intacta su doctrina de entrega. Eso es una declaración sobre dónde invertir: una regla escrita sobre el trío de ficheros y la firma inválida habría sobrevivido a la sustitución de SparrowDoor por SparroWocky; una biblioteca de hashes no habría sobrevivido ni al cambio de objetivo.</p></div>
+</section>
+<section id="t-4-hipotesis-de-caza-prioritarias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-4</span><div><h2>Hipótesis de caza prioritarias</h2></div></div><div class="rv">
+<div class="acc h-crit"><button><span class="hid">H-1</span><span class="ht">Trío de ficheros homónimos en directorio de aplicación</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar en servidores y estaciones cualquier directorio —especialmente fuera de <code>Program Files</code>, y con prioridad en <code>C:\Users\Public</code>, <code>ProgramData</code>, <code>Temp</code> y rutas de perfil— que contenga simultáneamente un <code>.exe</code> firmado, una <code>.dll</code> y un fichero de datos <strong>con el mismo nombre base que la DLL</strong> y extensión <code>.dat</code>, <code>.doc</code>, <code>.bin</code> o similar. Fuente: inventario de ficheros del EDR o barrido de sistema de ficheros. Ventana: 24 meses. Fidelidad esperada <strong>alta</strong>; falsos positivos: instaladores portables y algunas suites de respaldo que sí usan este patrón legítimamente — se resuelven en segundos mirando la firma de la DLL. Es la hipótesis de mayor rendimiento del informe y la que sobrevive a cualquier cambio de nombres.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-2</span><span class="ht">DLL con firma digital inválida cargada por proceso firmado</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Consultar todas las cargas de módulo donde el proceso padre está firmado y válido, y el módulo cargado tiene firma <strong>presente pero inválida</strong> —no ausente: inválida—. Esa combinación es la huella exacta de una DLL legítima parcheada en su sección <code>.text</code>. Fuente: eventos de carga de imagen del EDR con estado de firma. Ventana: 24 meses. Fidelidad <strong>muy alta</strong>; falsos positivos escasos, típicamente software mal empaquetado o modificado por el propio fabricante.</p></div></div>
+<div class="acc h-crit"><button><span class="hid">H-3</span><span class="ht">Fichero con la cabecera mágica del payload</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Barrer el parque buscando ficheros cuyos primeros cuatro bytes sean <code>12 87 32 11</code> (<code>0x11328712</code> en little-endian) o <code>11 32 87 12</code>. Es un indicador estructural del formato de payload, independiente del nombre, del tamaño y de la campaña. Fuente: barrido con YARA o equivalente. Ventana: 24 meses. Fidelidad <strong>muy alta</strong>, falsos positivos prácticamente nulos. Requiere capacidad de barrido de contenido, no solo de metadatos: si no la tenemos, es una brecha de §T-5, no una hipótesis descartable.</p></div></div>
+<div class="acc "><button><span class="hid">H-4</span><span class="ht">Servicios con nombre verosímil creados fuera de ventana de cambio</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Revisar EID 7045 y 4697 en 24 meses buscando servicios cuyo <code>ImagePath</code> apunte a un ejecutable fuera de <code>C:\Windows\System32</code> o <code>Program Files</code>, y en particular el nombre exacto <code>ProcAuditManager</code> y su descripción «Tracks process creation, termination, and related system audit events». Cruzar con el calendario de cambios: un servicio creado un domingo a las 03:00 y sin ticket asociado es la definición de hallazgo. Fidelidad <strong>alta</strong> si hay retención; nula si no la hay.</p></div></div>
+<div class="acc "><button><span class="hid">H-5</span><span class="ht">Persistencia por clave Run con valor SnapCart o anómalo en servidores</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Consultar <code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code> y su equivalente <code>HKCU</code> en <strong>servidores</strong> —donde una clave Run es de por sí sospechosa, a diferencia de una estación— buscando el valor <code>SnapCart</code> y, en general, cualquier entrada que apunte a un ejecutable en directorio de usuario o temporal. Fidelidad <strong>alta</strong> en servidores, media en estaciones.</p></div></div>
+<div class="acc "><button><span class="hid">H-6</span><span class="ht">Conexiones TLS salientes a IP literal sin resolución DNS previa</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Cazar sesiones TLS a puerto 443 u 8080 cuyo destino sea una IP <strong>que no fue precedida de una consulta DNS</strong> en los 60 segundos anteriores, originadas por procesos que no son navegadores ni clientes conocidos. El implante se conecta directamente a IP configurada, sin dominio. Cruzar con los 18 destinos del Anexo A y con los ASN de los proveedores citados. Fidelidad <strong>media</strong>: los falsos positivos son agentes de monitorización y actualizadores; el valor está en el cruce con H-1 o H-2 sobre el mismo host.</p></div></div>
+<div class="acc "><button><span class="hid">H-7</span><span class="ht">Hilos cuya dirección de inicio apunta a AnimateWindow o a user32.dll</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>El implante engancha <code>CreateThread</code> y declara <code>AnimateWindow</code> como dirección de inicio. Un hilo cuyo punto de arranque sea esa función —o cualquier función de <code>user32.dll</code> en un proceso sin interfaz gráfica— es una anomalía de altísimo valor. Fuente: telemetría de creación de hilos del EDR, si existe. Fidelidad <strong>muy alta</strong>, volumen muy bajo. Es la detección que convierte en indicador la propia técnica de evasión del actor.</p></div></div>
+<div class="acc "><button><span class="hid">H-8</span><span class="ht">Carga de ficheros MUI desde C:\Windows\System32\en-US\ por procesos no localizados</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>El implante camufla su proceso anfitrión cargando ficheros MUI en inglés. En un parque mayoritariamente en español, un proceso que lee MUI de <code>en-US</code> sin motivo es una señal barata y poco ruidosa. Fidelidad <strong>media-alta</strong>; requiere telemetría de acceso a ficheros.</p></div></div>
+<div class="acc "><button><span class="hid">H-9</span><span class="ht">Cadena de autoborrado por .bat con timeout /t y del %0</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Buscar creación y ejecución de ficheros <code>.bat</code> temporales cuya línea de órdenes contenga <code>timeout /t</code> seguido de varios <code>del</code> con <code>/f /q</code> y un <code>del "%0"</code> final. Es el rastro que deja la limpieza del implante y <strong>puede ser lo único que quede</strong> si el adversario ya se retiró. Fidelidad <strong>alta</strong>, falsos positivos bajos; especialmente valiosa en caza retrospectiva.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-10</span><span class="ht">Artefactos de la fase de consolidación de 2024</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Aunque pertenecen a la campaña anterior, conservan valor retrospectivo: webshells <code>.ashx</code> en directorios de DotNetNuke o IIS —en particular <code>DotNetNuke.ashx</code> y <code>C:\users\public\s.ashx</code>—, ejecución de PowerHub, invocaciones de <code>Invoke-BadPotato</code>, y volcados de las ramas <code>SYSTEM</code>, <code>SAM</code> y <code>SECURITY</code>. Fidelidad <strong>alta</strong>; cualquier hallazgo abre incidente de inmediato.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-11</span><span class="ht">Conectividad y federación con contrapartes gubernamentales regionales</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Enumerar —y luego vigilar— todo túnel, federación de identidad, conector de correo, transferencia de ficheros o acceso de proveedor que nos una con entidades de los ocho países afectados. No es una consulta de SIEM: es un trabajo de arquitectura que habilita la vigilancia posterior. Es la hipótesis que cubre el escenario del pre-mortem de §O-6.</p></div></div>
+<div class="acc h-reg"><button><span class="hid">H-12</span><span class="ht">Exchange e IIS expuestos: inventario y estado real</span><svg class="ar" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="body"><p>Enumerar todo Exchange e IIS alcanzable desde Internet, incluidos los olvidados en modo híbrido y los publicados por error, con su versión y nivel de parche. Revisar además la existencia de ficheros <code>.ashx</code>, <code>.aspx</code> o <code>.asmx</code> con fecha de modificación posterior al despliegue de la aplicación. Fidelidad <strong>alta</strong>; es prevención, no caza, pero sin ella la caza es perpetua.</p></div></div></div>
+</section>
+<section id="t-5-brechas-de-visibilidad-que-hay-que-cerrar-primero" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-5</span><div><h2>Brechas de visibilidad que hay que cerrar primero</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Brecha</th><th>Por qué importa aquí</th></tr></thead><tbody>
+<tr><td>Sin estado de firma en los eventos de carga de módulo</td><td>H-2 —la hipótesis de mayor fidelidad del informe— es inejecutable. Sin ella no se distingue una DLL parcheada de una legítima</td></tr>
+<tr><td>Sin capacidad de barrido de contenido (YARA) sobre el parque</td><td>H-3 es inejecutable. Se pierde el único indicador que no depende de nombres ni de infraestructura</td></tr>
+<tr><td>Retención de EID 7045 / 4697 inferior a 12 meses</td><td>H-4 queda limitada a una ventana en la que este actor, con permanencia de años, casi con certeza no aparecerá</td></tr>
+<tr><td>Sin telemetría de creación de hilos</td><td>H-7 es inejecutable, y con ella se pierde la detección que ataca la técnica de evasión más distintiva del implante</td></tr>
+<tr><td>Sin registro de conexiones salientes por proceso, con IP y proceso correlacionados</td><td>H-6 se degrada a un bloqueo de IP inútil: se sabe que alguien habló con el destino, no quién</td></tr>
+<tr><td>Sin inventario vivo de superficie expuesta a Internet</td><td>H-12 se convierte en un proyecto en lugar de una consulta, y el vector de acceso inicial queda sin cubrir</td></tr></tbody></table></div>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>Automatización</span><span>TIP/SIEM</span><span><b>Vida útil:</b> días–semanas</span></div></div>
+<section id="x-1-arsenal-y-capacidad" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>Arsenal y capacidad</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Propiedad</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Implante principal</td><td><strong>SparroWocky</strong> — backdoor modular en C++, versión 1.8, marca de compilación 2025-11-17. Nombre derivado de la primera estrofa de <em>Jabberwocky</em> de Lewis Carroll, incrustada en las primeras muestras</td></tr>
+<tr><td>Implante anterior</td><td><strong>SparrowDoor</strong> — dos variantes documentadas en 2025: una emparentada con CrowDoor de Earth Estries, otra modular con sistema de complementos. Abandonado en agosto de 2025</td></tr>
+<tr><td>Implante secundario</td><td><strong>ShadowPad</strong>, usado por primera vez por el grupo en julio de 2024. Plataforma compartida entre múltiples grupos con nexo chino</td></tr>
+<tr><td>Esquema de entrega</td><td>Cargador «tridente»: ejecutable legítimo + DLL legítima <strong>parcheada</strong> (sección <code>.text</code> sustituida y punto de entrada redirigido) + payload <code>.dat</code> cifrado con RC4</td></tr>
+<tr><td>Cabecera del payload</td><td>Valor mágico <code>0x11328712</code>, tamaño de configuración, tamaño de payload, clave RC4 de 16 bytes</td></tr>
+<tr><td>Bibliotecas de terceros</td><td>Mbed TLS (canal), MinHook (enganches), COFF Loader (ejecución de BOF), variante de SilentMoonwalk/StackMoonwalk (falsificación de pila)</td></tr>
+<tr><td>Criptografía</td><td>TLS para el transporte; RC4 para el payload en disco y para cada mensaje de comando, con clave de 8 bytes regenerada por mensaje. Cadena de personalización del DRBG: <code>acdbenus</code></td></tr>
+<tr><td>Canal de mando</td><td>TCP directo a IP configurada, puertos 443 y 8080. Saludo inicial: <code>0x11223344</code> en big-endian. Reintento cada 10 segundos. Soporte de proxy de sistema, HTTP (Negotiate/NTLM/Basic, User-Agent <code>Mozilla/5.0</code>) y SOCKS5</td></tr>
+<tr><td>Persistencia</td><td>Servicio de Windows (<code>ProcAuditManager</code>) o valor de registro Run (<code>SnapCart</code>), según configuración y privilegio</td></tr>
+<tr><td>Extensibilidad</td><td>Ejecución de <strong>Beacon Object Files</strong> en memoria (comando <code>0x14</code>) y de PE externos con tiempo límite (<code>0x16</code>). Los complementos nunca tocan disco</td></tr>
+<tr><td>Plataformas</td><td>Windows (x64)</td></tr>
+<tr><td>Firmas del proveedor</td><td><code>Win64/Agent.HUP</code>, <code>Win64/Agent.ISF</code> (cargadores), <code>Win64/Agent.ASW</code> (implante)</td></tr></tbody></table></div>
+<p class="rv"><strong>Conjunto de comandos observado.</strong> <code>0x10</code> huella del sistema · <code>0x11</code> sesión interactiva · <code>0x12</code> terminar proceso · <code>0x13</code> eliminar persistencia y terminar · <code>0x14</code> cargar y ejecutar BOF · <code>0x16</code> ejecutar PE con tiempo límite · <code>0x17</code> ejecutar orden por <code>cmd.exe</code> · <code>0x1A</code> proxy TCP · <code>0x1B</code>–<code>0x1D</code> gestión del listener <code>PortmapReverseServer</code> · <code>0x1E</code>–<code>0x26</code> operaciones de ficheros y directorios · <code>0x27</code> subida en bloques de 4 kB · <code>0x28</code> descarga · <code>0x29</code> enumerar dispositivos de visualización · <code>0x2A</code> captura de pantalla cíclica (500 ms, compresión por diferencias) · <code>0x2E</code> enumerar sesiones de usuario · <code>0x2F</code> ejecutar como otro usuario por duplicación de token · <code>0x30</code>–<code>0x31</code> eco · <code>0x33</code> ejecución arbitraria vía <code>CreateProcess</code>.</p>
+</section>
+<section id="x-2-artefactos-de-host-persistentes-entre-builds" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Artefactos de host persistentes entre builds</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">persistencia</div>
+<h4 style="margin:0 0 6px">Servicio</h4><p style="font-size:13.8px;margin:0">Nombre y nombre mostrado <code>ProcAuditManager</code>; descripción «Tracks process creation, termination, and related system audit events»</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">persistencia</div>
+<h4 style="margin:0 0 6px">Registro</h4><p style="font-size:13.8px;margin:0">Valor <code>SnapCart</code> en <code>SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code> (HKLM o HKCU)</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">ejecución</div>
+<h4 style="margin:0 0 6px">Objetos de sincronización</h4><p style="font-size:13.8px;margin:0"><code>MyMutexName</code>, <code>MyEventName</code>, <code>MySharedMemName</code></p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">entrega</div>
+<h4 style="margin:0 0 6px">Ficheros del cargador</h4><p style="font-size:13.8px;margin:0">DLL parcheadas observadas: <code>winfsp-x64.dll</code>, <code>DukeQt.dll</code>. Payload <code>.dat</code> con el mismo nombre base que el módulo</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">entrega</div>
+<h4 style="margin:0 0 6px">Estructura del payload</h4><p style="font-size:13.8px;margin:0">Cabecera <code>0x11328712</code> + tamaños + clave RC4 de 16 bytes</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">mando y control</div>
+<h4 style="margin:0 0 6px">Cadena del DRBG</h4><p style="font-size:13.8px;margin:0"><code>acdbenus</code> como cadena de personalización</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">evasión</div>
+<h4 style="margin:0 0 6px">Rutas de camuflaje</h4><p style="font-size:13.8px;margin:0">Lectura de ficheros MUI desde <code>C:\Windows\System32\en-US\</code></p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">limpieza</div>
+<h4 style="margin:0 0 6px">Autoborrado</h4><p style="font-size:13.8px;margin:0"><code>.bat</code> temporal con <code>timeout /t 2</code> y <code>del</code> sobre ejecutable, DLL, payload y sí mismo</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">retrohunt</div>
+<h4 style="margin:0 0 6px">Herencia 2024</h4><p style="font-size:13.8px;margin:0"><code>K7AVMScn.exe</code> + <code>K7AVWScn.dll</code> + <code>K7AVWScn.doc</code>; servicio <code>K7Soft</code>; <code>imjp14k.exe</code> + <code>imjp14k.dll</code> + <code>imjp14k.dll.dat</code> (ShadowPad); <code>HKLM\Software\CLASSES\CLSID\ID</code> como identificador de sesión</p></div></div>
+<div class="note warn rv"><div class="t">⚠ Caducidad de estos artefactos</div><p>Los <strong>nombres</strong> —<code>ProcAuditManager</code>, <code>SnapCart</code>, <code>winfsp-x64.dll</code>— casi con certeza cambiarán en las semanas siguientes a la publicación del análisis, el 17-09-2026. La <strong>estructura</strong> —trío de ficheros, firma inválida, cabecera mágica, mutex fijo— es lo que persiste. Escribir las reglas en ese orden de prioridad.</p></div>
+</section>
+<section id="x-3-logica-de-deteccion-prioritaria" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-3</span><div><h2>Lógica de detección prioritaria</h2></div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-1</span><span class="dn">DLL con firma inválida cargada por proceso firmado</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>image_load.signature_status == &quot;invalid&quot;
+AND process.signature_status == &quot;valid&quot;
+AND image_load.path NOT STARTSWITH (&quot;C:\Windows\System32\&quot;, &quot;C:\Program Files\&quot;)
+AND image_load.path DIRNAME == process.path DIRNAME</code></pre><div class="act">Alerta crítica con aislamiento automático del host. La combinación «firma presente pero inválida en el mismo directorio que un ejecutable firmado» no tiene explicación benigna frecuente y es el corazón del esquema tridente.</div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-2</span><span class="dn">Payload del cargador por cabecera mágica</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>rule FamousSparrow_SparroWocky_Payload_Header
+{
+    meta:
+        description = &quot;Cabecera del payload cifrado del cargador tridente de SparroWocky&quot;
+        reference   = &quot;CTI-2026-017&quot;
+        author      = &quot;Celula CTI&quot;
+        date        = &quot;2026-09-21&quot;
+    strings:
+        $magic = { 12 87 32 11 }
+    condition:
+        $magic at 0 and filesize &lt; 5MB
+}</code></pre><div class="act">Cualquier coincidencia abre incidente. Ejecutar como barrido retrospectivo sobre todo el parque, no solo como regla en tiempo real.</div></div>
+<div class="det d-crit rv"><div class="dh"><span class="did">D-3</span><span class="dn">Creación del servicio de persistencia</span><span class="pill p-amber">CRÍTICO</span></div>
+<pre><code>EID 7045
+AND (service_name == &quot;ProcAuditManager&quot;
+     OR service_description CONTAINS &quot;Tracks process creation, termination, and related system audit events&quot;
+     OR (image_path NOT STARTSWITH (&quot;C:\Windows\&quot;, &quot;C:\Program Files&quot;) AND image_path CONTAINS_ANY (&quot;\Users\&quot;, &quot;\ProgramData\&quot;, &quot;\Temp\&quot;)))</code></pre><div class="act">Contención automática en servidores; en estaciones, alerta de prioridad alta con verificación contra el calendario de cambios.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-4</span><span class="dn">Objetos de sincronización del implante</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>mutex_created IN (&quot;MyMutexName&quot;, &quot;MySharedMemName&quot;)
+OR event_created == &quot;MyEventName&quot;</code></pre><div class="act">Alta fidelidad mientras el actor no los cambie, y coste de implantación casi nulo. Tratar como detección de oportunidad: alta señal hoy, obsolescencia probable en semanas.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-5</span><span class="dn">Hilo con dirección de inicio en AnimateWindow</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>thread_create.start_address_symbol == &quot;user32.dll!AnimateWindow&quot;
+OR (thread_create.start_module == &quot;user32.dll&quot; AND process.has_gui == false)</code></pre><div class="act">Alerta de prioridad alta. Detecta directamente la técnica de ocultación de dirección de hilo del implante, con volumen legítimo prácticamente nulo en servidores.</div></div>
+<div class="det d-high rv"><div class="dh"><span class="did">D-6</span><span class="dn">Persistencia por clave Run en servidor</span><span class="pill p-sky">ALTO</span></div>
+<pre><code>registry.path ENDSWITH &quot;\Microsoft\Windows\CurrentVersion\Run&quot;
+AND host.role == &quot;server&quot;
+AND (registry.value_name == &quot;SnapCart&quot;
+     OR registry.data CONTAINS_ANY (&quot;\Users\Public\&quot;, &quot;\ProgramData\&quot;, &quot;\AppData\&quot;, &quot;\Temp\&quot;))</code></pre><div class="act">Alerta alta. En un servidor, una clave Run nueva es por sí sola una anomalía de configuración, con independencia de este actor.</div></div>
+<div class="det d-med rv"><div class="dh"><span class="did">D-7</span><span class="dn">Autoborrado del implante</span><span class="pill p-grey">MEDIO</span></div>
+<pre><code>process.name == &quot;cmd.exe&quot;
+AND cmdline MATCHES &quot;timeout\s+/t\s+\d+&quot;
+AND cmdline CONTAINS &quot;del &quot;
+AND cmdline CONTAINS &quot;%0&quot;</code></pre><div class="act">Alerta media, pero <strong>preservar de inmediato</strong> el host y su telemetría: la ejecución de este patrón indica que el adversario está retirándose y que la ventana forense se está cerrando.</div></div>
+<div class="det d-med rv"><div class="dh"><span class="did">D-8</span><span class="dn">Webshell reciente en directorio web (retrohunt de la campaña de 2024)</span><span class="pill p-grey">MEDIO</span></div>
+<pre><code>file.extension IN (&quot;.ashx&quot;, &quot;.aspx&quot;, &quot;.asmx&quot;)
+AND file.path CONTAINS_ANY (&quot;\inetpub\&quot;, &quot;\DotNetNuke\&quot;, &quot;\wwwroot\&quot;)
+AND file.created &gt; application_deployment_date</code></pre><div class="act">Revisión manual de cada resultado. Buscar específicamente <code>DotNetNuke.ashx</code> y <code>C:\users\public\s.ashx</code>.</div></div>
+<div class="note warn rv"><div class="t">⚠ Regla de operación</div><p>D-1, D-2 y D-3 deben ejecutar <strong>contención automática sin escalado humano</strong> en servidores. El argumento no es la velocidad del adversario —aquí es lento— sino la asimetría del coste: el falso positivo cuesta una hora de un administrador; el falso negativo cuesta dos años de exfiltración continua que nadie va a notar porque <strong>no habrá ningún otro síntoma</strong>.</p></div>
+</section>
+<section id="x-4-consultas-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-4</span><div><h2>Consultas de caza</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-1 · Trío de ficheros del cargador tridente: exe + dll + fichero de datos homónimo
+// Microsoft Defender XDR — ventana de 24 meses, ejecutar por lotes mensuales
+<span class="tok-k">let</span> candidatos = DeviceFileEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(730d)
+| <span class="tok-k">where</span> FolderPath !startswith <span class="tok-s">&quot;C:\\Windows\\&quot;</span> <span class="tok-k">and</span> FolderPath !startswith <span class="tok-s">&quot;C:\\Program Files&quot;</span>
+| <span class="tok-k">extend</span> Dir = strcat_array(array_slice(split(FolderPath, <span class="tok-s">&quot;\\&quot;</span>), 0, -2), <span class="tok-s">&quot;\\&quot;</span>)
+| <span class="tok-k">extend</span> Base = tostring(split(FileName, <span class="tok-s">&quot;.&quot;</span>)[0]), Ext = tostring(split(FileName, <span class="tok-s">&quot;.&quot;</span>)[-1])
+| <span class="tok-k">where</span> Ext <span class="tok-k">in</span>~ (<span class="tok-s">&quot;exe&quot;</span>, <span class="tok-s">&quot;dll&quot;</span>, <span class="tok-s">&quot;dat&quot;</span>, <span class="tok-s">&quot;doc&quot;</span>, <span class="tok-s">&quot;bin&quot;</span>, <span class="tok-s">&quot;log&quot;</span>)
+| distinct DeviceName, Dir, Base, Ext, FileName, SHA1;
+candidatos
+| <span class="tok-k">summarize</span> Exts = make_set(Ext), Ficheros = make_set(FileName) <span class="tok-k">by</span> DeviceName, Dir, Base
+| <span class="tok-k">where</span> set_has_element(Exts, <span class="tok-s">&quot;dll&quot;</span>) <span class="tok-k">and</span> array_length(Exts) &gt;= 2
+| <span class="tok-k">where</span> Exts <span class="tok-k">has_any</span> (<span class="tok-s">&quot;dat&quot;</span>, <span class="tok-s">&quot;doc&quot;</span>, <span class="tok-s">&quot;bin&quot;</span>, <span class="tok-s">&quot;log&quot;</span>)
+| <span class="tok-k">project</span> DeviceName, Dir, Base, Ficheros</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-2 · DLL con firma inválida cargada por proceso firmado, desde su propio directorio
+DeviceImageLoadEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(730d)
+| <span class="tok-k">where</span> InitiatingProcessSignatureStatus == <span class="tok-s">&quot;Valid&quot;</span>
+| <span class="tok-k">where</span> FolderPath !startswith <span class="tok-s">&quot;C:\\Windows\\System32&quot;</span> <span class="tok-k">and</span> FolderPath !startswith <span class="tok-s">&quot;C:\\Program Files&quot;</span>
+| <span class="tok-k">join</span> kind=inner (
+    DeviceFileCertificateInfo
+    | <span class="tok-k">where</span> IsSigned == true <span class="tok-k">and</span> IsTrusted == false
+    | <span class="tok-k">project</span> SHA1, SignatureStatus = <span class="tok-s">&quot;Invalid&quot;</span>, Signer
+  ) on SHA1
+| <span class="tok-k">project</span> Timestamp, DeviceName, InitiatingProcessFileName, FileName, FolderPath, Signer, SHA1
+| sort <span class="tok-k">by</span> Timestamp asc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-6 · TLS saliente a IP literal sin resolución DNS previa, desde proceso no navegador
+<span class="tok-k">let</span> ventana = 60s;
+<span class="tok-k">let</span> dns = DeviceEvents
+| <span class="tok-k">where</span> ActionType == <span class="tok-s">&quot;DnsQueryResponse&quot;</span>
+| <span class="tok-k">extend</span> IPs = extract_all(@<span class="tok-s">&quot;(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})&quot;</span>, tostring(AdditionalFields))
+| mv-expand IP = IPs to typeof(string)
+| <span class="tok-k">project</span> DnsTime = Timestamp, DeviceName, IP;
+DeviceNetworkEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(90d)
+| <span class="tok-k">where</span> RemotePort <span class="tok-k">in</span> (443, 8080) <span class="tok-k">and</span> RemoteIPType == <span class="tok-s">&quot;Public&quot;</span>
+| <span class="tok-k">where</span> InitiatingProcessFileName !<span class="tok-k">in</span>~ (<span class="tok-s">&quot;chrome.exe&quot;</span>,<span class="tok-s">&quot;msedge.exe&quot;</span>,<span class="tok-s">&quot;firefox.exe&quot;</span>,<span class="tok-s">&quot;svchost.exe&quot;</span>)
+| <span class="tok-k">join</span> kind=leftouter dns on DeviceName, $left.RemoteIP == $right.IP
+| <span class="tok-k">where</span> isnull(DnsTime) <span class="tok-k">or</span> Timestamp - DnsTime &gt; ventana
+| <span class="tok-k">summarize</span> Conexiones = count(), Primera = min(Timestamp), Ultima = max(Timestamp)
+    <span class="tok-k">by</span> DeviceName, InitiatingProcessFileName, InitiatingProcessFolderPath, RemoteIP
+| <span class="tok-k">where</span> Conexiones &gt; 5
+| sort <span class="tok-k">by</span> Conexiones desc</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>KQL</span><button class="copy">copiar</button></div>
+<pre><code>// H-7 · Hilos cuya dirección de inicio cae en user32.dll (AnimateWindow como trampolín)
+// Requiere telemetría de creación de hilos; si no existe, es la brecha T-5 número 4
+DeviceEvents
+| <span class="tok-k">where</span> Timestamp &gt; ago(180d)
+| <span class="tok-k">where</span> ActionType == <span class="tok-s">&quot;CreateRemoteThreadApiCall&quot;</span> <span class="tok-k">or</span> ActionType == <span class="tok-s">&quot;ThreadCreated&quot;</span>
+| <span class="tok-k">extend</span> Start = tostring(AdditionalFields.StartAddressModule)
+| <span class="tok-k">where</span> Start <span class="tok-k">has</span> <span class="tok-s">&quot;user32.dll&quot;</span>
+| <span class="tok-k">project</span> Timestamp, DeviceName, InitiatingProcessFileName, InitiatingProcessFolderPath, Start</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>YAML</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># Sigma — Servicio de persistencia con ruta fuera de directorios de sistema</span>
+<span class="tok-n">title</span>: Creacion de servicio con ImagePath en directorio de usuario o temporal
+<span class="tok-n">id</span>: 8f3c1a92-0d54-4c7b-b1a6-2f77c9b0e401
+<span class="tok-n">status</span>: experimental
+<span class="tok-n">description</span>: &gt;
+  Detecta la creacion de servicios de Windows cuyo ejecutable reside fuera de
+  System32 o Program Files, patron de persistencia de SparroWocky (FamousSparrow).
+  Incluye el nombre y la descripcion observados en la campana latinoamericana 2025-2026.
+<span class="tok-n">references</span>:
+  - CTI-2026-017
+<span class="tok-n">author</span>: Celula CTI
+<span class="tok-n">date</span>: 2026/09/21
+<span class="tok-n">tags</span>:
+  - attack.persistence
+  - attack.t1543.003
+  - attack.defense_evasion
+  - attack.t1036.004
+<span class="tok-n">logsource</span>:
+  <span class="tok-n">product</span>: windows
+  <span class="tok-n">service</span>: system
+<span class="tok-n">detection</span>:
+  <span class="tok-n">seleccion</span>:
+    <span class="tok-n">EventID</span>: 7045
+  <span class="tok-n">nombres_conocidos</span>:
+    <span class="tok-n">ServiceName</span>: &#x27;ProcAuditManager&#x27;
+  <span class="tok-n">ruta_anomala</span>:
+    ImagePath|contains:
+      - &#x27;\Users\&#x27;
+      - &#x27;\ProgramData\&#x27;
+      - &#x27;\Temp\&#x27;
+      - &#x27;\AppData\&#x27;
+  <span class="tok-n">condition</span>: seleccion and (nombres_conocidos or ruta_anomala)
+<span class="tok-n">falsepositives</span>:
+  - Instaladores de software empresarial mal empaquetados
+  - Agentes de gestion desplegados fuera de rutas estandar
+<span class="tok-n">level</span>: high</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>YAML</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># Sigma — Autoborrado del cargador mediante script por lotes</span>
+<span class="tok-n">title</span>: Script por lotes de autoborrado con eliminacion de si mismo
+<span class="tok-n">id</span>: c41b77e6-9a2f-4b18-8d30-5e6a1c9f2d88
+<span class="tok-n">status</span>: experimental
+<span class="tok-n">description</span>: &gt;
+  Detecta la cadena de limpieza empleada por SparroWocky al desinstalarse:
+  espera con timeout, borrado forzado de varios ficheros y borrado del propio script.
+  Indica retirada del adversario y cierre inminente de la ventana forense.
+<span class="tok-n">references</span>:
+  - CTI-2026-017
+<span class="tok-n">author</span>: Celula CTI
+<span class="tok-n">date</span>: 2026/09/21
+<span class="tok-n">tags</span>:
+  - attack.defense_evasion
+  - attack.t1070.004
+<span class="tok-n">logsource</span>:
+  <span class="tok-n">category</span>: process_creation
+  <span class="tok-n">product</span>: windows
+<span class="tok-n">detection</span>:
+  <span class="tok-n">proceso</span>:
+    Image|endswith: &#x27;\cmd.exe&#x27;
+  <span class="tok-n">espera</span>:
+    CommandLine|contains: &#x27;timeout /t&#x27;
+  <span class="tok-n">borrado</span>:
+    CommandLine|contains|all:
+      - &#x27;del &#x27;
+      - &#x27;/f&#x27;
+      - &#x27;/q&#x27;
+  <span class="tok-n">autoborrado</span>:
+    CommandLine|contains: &#x27;%0&#x27;
+  <span class="tok-n">condition</span>: proceso and espera and borrado and autoborrado
+<span class="tok-n">falsepositives</span>:
+  - Rutinas de desinstalacion legitimas de software empaquetado
+<span class="tok-n">level</span>: medium</code></pre></div>
+</section>
+<section id="x-5-mitigaciones-de-configuracion-con-efecto-directo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-5</span><div><h2>Mitigaciones de configuración con efecto directo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Control</th><th>Corta</th></tr></thead><tbody>
+<tr><td>Retirar de Internet todo Exchange e IIS que no tenga justificación vigente; publicar el resto tras proxy con autenticación previa</td><td>La Etapa 01 completa: el único vector de acceso inicial observado</td></tr>
+<tr><td>Regla WDAC/AppLocker que impida la carga de DLL no firmadas o con firma inválida en servidores</td><td>El cargador tridente, con independencia del nombre del binario abusado</td></tr>
+<tr><td>Política que restrinja la creación de servicios a cuentas de gestión y desde rutas autorizadas</td><td>La persistencia principal del implante (<code>T1543.003</code>)</td></tr>
+<tr><td>Denegar escritura en directorios de aplicación al usuario del servicio web y separar el directorio de contenido del de ejecución</td><td>La escritura de webshells <code>.ashx</code> y la colocación del trío de ficheros</td></tr>
+<tr><td>Salida a Internet desde servidores solo a través de proxy explícito con lista de permitidos por destino</td><td>La conexión TLS directa a IP literal, que es como el implante llama a casa</td></tr>
+<tr><td>Desactivar la carga de MUI innecesarios y normalizar el idioma del parque</td><td>Degrada el camuflaje de proceso anfitrión y hace visible H-8</td></tr>
+<tr><td>Retención mínima de 12 meses para EID 7045/4697, carga de módulos y conexiones salientes por proceso</td><td>No corta ningún paso, pero es el prerrequisito de que exista la caza retrospectiva de §T-4</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-nuevos-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y nuevos requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto en el juicio</th><th>Requisito propuesto</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td>G-1</td><td><strong>Vector de acceso inicial sin CVE identificado</strong>, con discrepancia explícita entre fuentes</td><td>KJ-3 y toda §T-1 quedan sin medida preventiva: solo se puede detectar, no prevenir</td><td>Solicitar al proveedor y a pares regionales el detalle del compromiso de Exchange; vigilar publicaciones de seguimiento</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-2</td><td><strong>Fuente primaria única</strong> para toda la caracterización técnica</td><td>Si el análisis es erróneo o no representativo, cae toda la sección técnica (supuesto clave de §O-6)</td><td>Buscar corroboración independiente: sandbox propio sobre muestra, o informe de un segundo proveedor</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-3</td><td><strong>Sin telemetría propia</strong></td><td>§O-4 vacía; KJ-5 no pasa de inferencia</td><td>Ejecutar §T-4 y volcar resultados en la versión 1.1 de este informe</td><td><span class="pill p-amber">Crítica</span></td></tr>
+<tr><td>G-4</td><td><strong>Ausencia de visibilidad regional chilena</strong> sobre este actor</td><td>No se puede confirmar ni descartar presencia en el país</td><td>Enlace con CSIRT Nacional / ANCI y con pares del sector; solicitar indicadores y contexto</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-5</td><td><strong>Disputa de alias con Salt Typhoon sin resolver</strong></td><td>KJ-7 con confianza moderada; riesgo de cobertura de detección nominal pero falsa</td><td>Vigilar publicación de indicadores por Microsoft; no mezclar bibliotecas de detección hasta entonces</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td>G-6</td><td><strong>Sin muestras de SparroWocky en nuestro poder</strong></td><td>No podemos validar ni ajustar D-2 ni las consultas de §X-4 contra el binario real</td><td>Solicitar muestra a proveedor bajo acuerdo; alternativamente, validar la regla YARA contra el script de extracción publicado</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td>G-7</td><td><strong>Se desconoce qué objetivos NO fueron comprometidos</strong> entre los seleccionados</td><td>Impide estimar la tasa de éxito del actor y, con ella, la eficacia real de los controles estándar</td><td>Requisito de colección a largo plazo; probablemente irresoluble con fuente abierta</td><td><span class="pill p-grey">Baja</span></td></tr></tbody></table></div>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores-de-compromiso" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores de compromiso</h2></div></div>
+<div class="note warn rv"><div class="t">⚠ Leer antes de usar</div><p>Los IOC son el nivel más perecedero y menos valioso del producto. Toda la infraestructura listada fue observada por última vez antes del 17-09-2026 y <strong>es casi seguro que haya rotado tras la publicación del análisis</strong>. Se entregan con contexto, confianza y acción permitida; <strong>no</strong> como lista suelta para cargar en un bloqueo perimetral y dar el trabajo por hecho. El valor real de esta tabla es el retrohunt de 24 meses, no el bloqueo.</p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="sha1 3209689e509205ccdb7e49062b7b407ddc23cac1 cargador sparrowocky — winfsp-x64.dll parcheada · alta bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">3209689E509205CCDB7E49062B7B407DDC23CAC1<em>Cargador SparroWocky — winfsp-x64.dll parcheada · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 52c6646759cf6037bb17466203631c4bd794532f cargador sparrowocky — winfsp-x64.dll parcheada · alta bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">52C6646759CF6037BB17466203631C4BD794532F<em>Cargador SparroWocky — winfsp-x64.dll parcheada · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 99e7070b5af24a0fe1e6febe5954b03cb385e91f cargador sparrowocky — dukeqt.dll parcheada · alta bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">99E7070B5AF24A0FE1E6FEBE5954B03CB385E91F<em>Cargador SparroWocky — DukeQt.dll parcheada · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 44f0a22b143b79fa760bf31e14c8fff714c8a2a1 sparrowocky descifrado, solo en memoria · alta retrohunt (no aparecerá en disco)"><span class="ty">sha1</span><span class="vv">44F0A22B143B79FA760BF31E14C8FFF714C8A2A1<em>SparroWocky descifrado, solo en memoria · Alta</em></span><span class="pill p-grey">Retrohunt (no aparecerá en disco)</span></div>
+<div class="ioc-row" data-s="sha1 9aa9ff61bc63ccab9074fe837f39c980ca9ddc8c sparrowocky descifrado, solo en memoria · alta retrohunt (no aparecerá en disco)"><span class="ty">sha1</span><span class="vv">9AA9FF61BC63CCAB9074FE837F39C980CA9DDC8C<em>SparroWocky descifrado, solo en memoria · Alta</em></span><span class="pill p-grey">Retrohunt (no aparecerá en disco)</span></div>
+<div class="ioc-row" data-s="ipv4 216.238.110[.]120 c2 sparrowocky · constant company/vultr · 2025-12-11 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">216.238.110[.]120<em>C2 SparroWocky · Constant Company/Vultr · 2025-12-11 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 216.238.105[.]53 c2 sparrowocky · constant company/vultr · 2026-01-22 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">216.238.105[.]53<em>C2 SparroWocky · Constant Company/Vultr · 2026-01-22 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.241[.]193 c2 sparrowocky · kaopu cloud brasil · 2026-01-22 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.241[.]193<em>C2 SparroWocky · Kaopu Cloud Brasil · 2026-01-22 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 149.104.90[.]203 c2 sparrowocky · bedge co limited · 2026-01-22 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">149.104.90[.]203<em>C2 SparroWocky · BEDGE CO LIMITED · 2026-01-22 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.224[.]235 c2 sparrowocky · kaopu cloud hk · 2026-02-24 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.224[.]235<em>C2 SparroWocky · Kaopu Cloud HK · 2026-02-24 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 149.104.87[.]228 c2 sparrowocky · lightnode méxico · 2026-02-24 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">149.104.87[.]228<em>C2 SparroWocky · LightNode México · 2026-02-24 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.54.57[.]17 c2 sparrowocky · lightnode brasil · 2026-02-25 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.54.57[.]17<em>C2 SparroWocky · LightNode Brasil · 2026-02-25 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.224[.]51 c2 sparrowocky · kaopu cloud hk · 2026-02-25 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.224[.]51<em>C2 SparroWocky · Kaopu Cloud HK · 2026-02-25 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 216.238.92[.]2 c2 sparrowocky · constant company/vultr · 2026-02-25 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">216.238.92[.]2<em>C2 SparroWocky · Constant Company/Vultr · 2026-02-25 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.209[.]106 c2 sparrowocky · kaopu cloud hk · 2026-02-26 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.209[.]106<em>C2 SparroWocky · Kaopu Cloud HK · 2026-02-26 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 130.94.101[.]82 c2 sparrowocky · ntt america · 2026-02-26 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">130.94.101[.]82<em>C2 SparroWocky · NTT America · 2026-02-26 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 140.99.164[.]199 c2 sparrowocky · cliente privado · 2026-02-26 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">140.99.164[.]199<em>C2 SparroWocky · cliente privado · 2026-02-26 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.241[.]127 c2 sparrowocky · cogent communications · 2026-03-04 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.241[.]127<em>C2 SparroWocky · Cogent Communications · 2026-03-04 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.241[.]65 c2 sparrowocky · cogent communications · 2026-03-10 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.241[.]65<em>C2 SparroWocky · Cogent Communications · 2026-03-10 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 38.60.197[.]55 c2 sparrowocky · kaopu cloud hk · 2026-03-16 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">38.60.197[.]55<em>C2 SparroWocky · Kaopu Cloud HK · 2026-03-16 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 216.238.121[.]164 c2 sparrowocky · constant company/vultr · 2026-03-16 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">216.238.121[.]164<em>C2 SparroWocky · Constant Company/Vultr · 2026-03-16 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 77.111.101[.]40 c2 sparrowocky · latitude.sh · 2026-05-20 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">77.111.101[.]40<em>C2 SparroWocky · Latitude.sh · 2026-05-20 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 91.148.134[.]115 c2 sparrowocky · charles-r paquet · 2026-06-17 · alta bloqueo + retrohunt"><span class="ty">ipv4</span><span class="vv">91.148.134[.]115<em>C2 SparroWocky · Charles-R Paquet · 2026-06-17 · Alta</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 43.254.216[.]195 campaña 2024 · servidor de entrega y c2 · hongkong wen jing network · 2024-06-27 · moderada solo retrohunt"><span class="ty">ipv4</span><span class="vv">43.254.216[.]195<em>Campaña 2024 · servidor de entrega y C2 · Hongkong Wen Jing Network · 2024-06-27 · Moderada</em></span><span class="pill p-grey">Solo retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 45.131.179[.]24 campaña 2024 · c2 de sparrowdoor · xnnet llc · 2024-07-05 · moderada solo retrohunt"><span class="ty">ipv4</span><span class="vv">45.131.179[.]24<em>Campaña 2024 · C2 de SparrowDoor · XNNET LLC · 2024-07-05 · Moderada</em></span><span class="pill p-grey">Solo retrohunt</span></div>
+<div class="ioc-row" data-s="domain amelicen[.]com campaña 2024 · dominio de c2 de sparrowdoor · moderada solo retrohunt"><span class="ty">domain</span><span class="vv">amelicen[.]com<em>Campaña 2024 · dominio de C2 de SparrowDoor · Moderada</em></span><span class="pill p-grey">Solo retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 103.85.25[.]166 campaña 2024 · c2 de sparrowdoor · starry network limited · 2024-06-06 · moderada solo retrohunt"><span class="ty">ipv4</span><span class="vv">103.85.25[.]166<em>Campaña 2024 · C2 de SparrowDoor · Starry Network Limited · 2024-06-06 · Moderada</em></span><span class="pill p-grey">Solo retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 216.238.106[.]150 campaña 2024 · c2 de shadowpad · vultr · 2024-03-11 · moderada solo retrohunt"><span class="ty">ipv4</span><span class="vv">216.238.106[.]150<em>Campaña 2024 · C2 de ShadowPad · Vultr · 2024-03-11 · Moderada</em></span><span class="pill p-grey">Solo retrohunt</span></div>
+<div class="ioc-row" data-s="ipv4 27.102.113[.]240 infraestructura compartida con ghostemperor en 2021 · baja solo retrohunt histórico"><span class="ty">ipv4</span><span class="vv">27.102.113[.]240<em>Infraestructura compartida con GhostEmperor en 2021 · Baja</em></span><span class="pill p-grey">Solo retrohunt histórico</span></div>
+<div class="ioc-row" data-s="sha1 c26f04790c6fb7950d89ab1b08207ace01efb536 campaña 2024 · webshell dotnetnuke.ashx · moderada bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">C26F04790C6FB7950D89AB1B08207ACE01EFB536<em>Campaña 2024 · webshell DotNetNuke.ashx · Moderada</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 ef189737fb7d61b110b9293e8838526dce920127 campaña 2024 · cargador de sparrowdoor libvlc.dll · moderada bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">EF189737FB7D61B110B9293E8838526DCE920127<em>Campaña 2024 · cargador de SparrowDoor libvlc.dll · Moderada</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 1b06e877c2c12d74336e7532bc0ecf761e5fa5d4 campaña 2024 · cargador de sparrowdoor k7avwscn.dll · moderada bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">1B06E877C2C12D74336E7532BC0ECF761E5FA5D4<em>Campaña 2024 · cargador de SparrowDoor K7AVWScn.dll · Moderada</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 5265e8edc9b5f7dd00fc772522511b8f3be217e3 campaña 2024 · cargador de shadowpad imjp14k.dll · moderada bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">5265E8EDC9B5F7DD00FC772522511B8F3BE217E3<em>Campaña 2024 · cargador de ShadowPad imjp14k.dll · Moderada</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 5df3c882db6be14887182b7439b72a86bd28b83f campaña 2024 · taskhosk.exe — sparrowdoor/hemigate · moderada bloqueo + retrohunt"><span class="ty">sha1</span><span class="vv">5DF3C882DB6BE14887182B7439B72A86BD28B83F<em>Campaña 2024 · taskhosk.exe — SparrowDoor/HemiGate · Moderada</em></span><span class="pill p-grey">Bloqueo + retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 baed2895c80eb6e827a6d47c3dd7b8efb61ed70b campaña 2024 · huella del certificado tls del c2 de shadowpad, con formato que suplanta a dell · moderada retrohunt en telemetría tls"><span class="ty">sha1</span><span class="vv">BAED2895C80EB6E827A6D47C3DD7B8EFB61ED70B<em>Campaña 2024 · huella del certificado TLS del C2 de ShadowPad, con formato que suplanta a Dell · Moderada</em></span><span class="pill p-grey">Retrohunt en telemetría TLS</span></div>
+<div class="ioc-row" data-s="artefacto procauditmanager nombre y nombre mostrado del servicio de persistencia · alta caza (véase d-3)"><span class="ty">artefacto</span><span class="vv">ProcAuditManager<em>Nombre y nombre mostrado del servicio de persistencia · Alta</em></span><span class="pill p-mint">Caza (véase D-3)</span></div>
+<div class="ioc-row" data-s="artefacto snapcart valor de la clave run de persistencia · alta caza (véase d-6)"><span class="ty">artefacto</span><span class="vv">SnapCart<em>Valor de la clave Run de persistencia · Alta</em></span><span class="pill p-mint">Caza (véase D-6)</span></div>
+<div class="ioc-row" data-s="artefacto mymutexname · myeventname · mysharedmemname objetos de sincronización del implante · alta caza (véase d-4)"><span class="ty">artefacto</span><span class="vv">MyMutexName · MyEventName · MySharedMemName<em>Objetos de sincronización del implante · Alta</em></span><span class="pill p-mint">Caza (véase D-4)</span></div>
+<div class="ioc-row" data-s="artefacto 0x11328712 valor mágico al inicio del payload .dat del cargador · alta caza (véase d-2)"><span class="ty">artefacto</span><span class="vv">0x11328712<em>Valor mágico al inicio del payload .dat del cargador · Alta</em></span><span class="pill p-mint">Caza (véase D-2)</span></div>
+<div class="ioc-row" data-s="artefacto acdbenus cadena de personalización del generador de bits aleatorios · moderada caza en memoria"><span class="ty">artefacto</span><span class="vv">acdbenus<em>Cadena de personalización del generador de bits aleatorios · Moderada</em></span><span class="pill p-mint">Caza en memoria</span></div></div>
+<p class="rv"><em>Nota de higiene.</em> Ninguno de los destinos listados es CDN, proxy residencial ni servicio en la nube de uso compartido: son <strong>VPS dedicados a la operación</strong>, por lo que el bloqueo no tiene impacto operativo previsible. Aun así, verificar antes de bloquear los rangos de Cogent, NTT America y Vultr, donde pueden convivir servicios legítimos en direcciones vecinas. <strong>Bloquear la IP exacta, nunca el rango.</strong></p>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="note info rv"><p>Valoración doble tipo Admiralty/OTAN: <strong>fiabilidad de la fuente (A–F)</strong> × <strong>credibilidad de la información (1–6)</strong>. Se valoran por separado.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Disciplina</th><th>Fiabilidad</th><th>Credibilidad</th><th>Notas de sesgo</th></tr></thead><tbody>
+<tr><td>ESET Research — <em>Beware the SparroWock</em> (2026-09-17)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Investigación primaria con análisis de binario y telemetría propia. <strong>Fuente única de todo el contenido técnico.</strong> Interés comercial en la visibilidad del hallazgo; telemetría sesgada por su base instalada</td></tr>
+<tr><td>ESET Research — <em>You will always remember this as the day you finally caught FamousSparrow</em> (2025-03-27)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>2</td><td>Base de la campaña 2024 y de la discusión de atribución. Mismo emisor: <strong>no constituye corroboración independiente</strong> de la fuente anterior</td></tr>
+<tr><td>ESET / GlobeNewswire — nota de prensa (2026-09-17)</td><td>Comunicación corporativa</td><td><span class="pill p-sky">B</span></td><td>3</td><td>Contiene la valoración geopolítica y las citas del investigador. Formato promocional: el marco interpretativo está más afirmado que en el análisis técnico</td></tr>
+<tr><td>The Hacker News (2026-09-17)</td><td>Prensa técnica</td><td><span class="pill p-amber">C</span></td><td>3</td><td>Reproduce el análisis primario. <strong>Discrepa sobre el vector de acceso inicial</strong> («desconocido»), lo que obliga a la salvedad de §T-1</td></tr>
+<tr><td>Infosecurity Magazine (2026-09)</td><td>Prensa técnica</td><td><span class="pill p-amber">C</span></td><td>3</td><td>Reproduce el análisis primario; aporta el detalle de la disputa portuaria panameña</td></tr>
+<tr><td>Microsoft Threat Intelligence (2024-09, vía prensa)</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>4</td><td>Origen de la fusión de alias con Salt Typhoon y GhostEmperor. <strong>Sin indicadores ni TTP publicados</strong>: la afirmación no es verificable</td></tr>
+<tr><td>Trend Micro — Earth Estries / CrowDoor</td><td>TECHINT de proveedor</td><td><span class="pill p-sky">B</span></td><td>3</td><td>Base del solapamiento de código con HemiGate. Distinto esquema de denominación, riesgo de fusión indebida</td></tr>
+<tr><td>BioBioChile / Infobae / DPL News (2026-08)</td><td>OSINT prensa nacional</td><td><span class="pill p-amber">C</span></td><td>4</td><td>Caso chileno de telecomunicaciones. Prensa generalista sin detalle técnico verificable; nombres de empresas y de actor citados a partir de un dossier no público</td></tr>
+<tr><td>CISA/NSA/FBI — aviso conjunto sobre Salt Typhoon (2025-08-27)</td><td>Autoridad gubernamental</td><td><span class="pill p-mint">A</span></td><td>2</td><td>Alta fiabilidad, pero <strong>sobre otro clúster</strong>. Se cita solo para delimitar qué NO cubre este informe</td></tr></tbody></table></div>
+<p class="rv"><strong>Escalas</strong></p><ul class="rv"><li><strong>A</strong> completamente fiable · <strong>B</strong> normalmente fiable · <strong>C</strong> bastante fiable · <strong>D</strong> normalmente no fiable · <strong>E</strong> no fiable · <strong>F</strong> no evaluable.</li><li><strong>1</strong> confirmada por otras fuentes · <strong>2</strong> probablemente cierta · <strong>3</strong> posiblemente cierta · <strong>4</strong> dudosa · <strong>5</strong> improbable · <strong>6</strong> no evaluable.</li></ul>
+<div class="note warn rv"><div class="t">⚠ Advertencia sobre la base de fuentes</div><p>Tres de las nueve fuentes son el mismo emisor y cuatro reproducen a ese emisor sin verificarlo. <strong>Este informe tiene una única fuente primaria real.</strong> La convergencia aparente entre medios no es corroboración: es difusión. Todo juicio de nivel técnico hereda esa fragilidad, y por eso G-2 está marcada como brecha crítica en §14.</p></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Probabilidad estimativa — cuán probable es que el hecho sea cierto</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">Remoto</span><span class="bt"><i data-w="5"></i></span><span class="bv">5</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy poco probable</span><span class="bt"><i data-w="20"></i></span><span class="bv">20</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Poco probable</span><span class="bt"><i data-w="45"></i></span><span class="bv">45</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Posibilidad real</span><span class="bt"><i data-w="56"></i></span><span class="bv">55</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Probable</span><span class="bt"><i data-w="81"></i></span><span class="bv">80</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy probable</span><span class="bt"><i data-w="96"></i></span><span class="bv">95</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">Casi con certeza</span><span class="bt"><i data-w="100"></i></span><span class="bv">99</span></div></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel de confianza</th><th>Criterio</th></tr></thead><tbody>
+<tr><td>Alta</td><td>Múltiples fuentes de calidad, corroboradas, sin brechas relevantes</td></tr>
+<tr><td>Moderada</td><td>Fuentes creíbles pero corroboración parcial o brechas conocidas</td></tr>
+<tr><td>Baja</td><td>Fuente única, no corroborada, fuerte dependencia de supuestos</td></tr></tbody></table></div>
+<div class="note info rv"><p>Usar siempre el término <strong>y</strong> el porcentaje. No usar «podría» ni «es posible» como juicio: son afirmaciones no falsables.</p></div>
+</section>
+<section id="anexo-d-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Marcos de referencia empleados</h2><p><code>MITRE ATT&amp;CK v17</code> · <code>MITRE D3FEND</code> · <code>Modelo del Diamante</code> · <code>Cyber Kill Chain</code> · <code>Pirámide del Dolor</code> · <code>F3EAD</code> · <code>ICD 203</code> · <code>ACH, KAC, pre-mortem</code> · <code>TLP 2.0</code> · <code>PAP</code> · <code>STIX 2.1 / TAXII 2.1</code> · <code>Admiralty Code</code> · <code>Ley 21.663 y normativa ANCI</code></p></div></div>
+</section>
+<section id="anexo-e-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Paquete legible por máquina</h2></div></div><ul class="rv"><li>Bundle STIX 2.1: pendiente de generar a partir del Anexo A</li><li>Evento MISP: pendiente — taxonomías: <code>tlp</code>, <code>admiralty-scale</code>, <code>estimative-language</code>, <code>PAP</code></li><li>Reglas: <code>D-2</code> (YARA) y los dos bloques Sigma de §X-4 quedan pendientes de commit en el repositorio de detección</li><li>Herramienta de descifrado del payload publicada por el proveedor (<code>extract_sparrowocky.py</code>): pendiente de validación interna antes de su uso sobre muestras propias</li></ul>
+</section>
+<section id="anexo-f-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-09-21</td><td>Emisión inicial</td><td>Célula CTI</td></tr>
+<tr><td>1.1</td><td>2026-11-16</td><td><strong>Reclasificación de TLP:AMBER a TLP:CLEAR</strong> por decisión del emisor, para publicación en el repositorio abierto <code>cti_daily</code>. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. <strong>Sin cambios en los juicios analíticos ni en los indicadores.</strong> Se mantiene PAP:AMBER</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<section id="anexo-g-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Realimentación del consumidor</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Pregunta</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>¿Respondió a su requisito?</td><td></td></tr>
+<tr><td>¿Qué decisión tomó o cambió con este informe?</td><td></td></tr>
+<tr><td>¿Qué faltó?</td><td></td></tr>
+<tr><td>¿Llegó a tiempo?</td><td></td></tr></tbody></table></div>
+<div class="note info rv"><p>Sin este anexo devuelto, el ciclo de inteligencia queda abierto y el próximo producto no mejora.</p></div>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-017 · v1.1 · 2026-09-21</strong> · caduca 2026-12-21</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

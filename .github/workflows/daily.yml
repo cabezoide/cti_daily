@@ -1,0 +1,84 @@
+name: Ciclo diario
+
+# La mitad determinista del ciclo: reconstruye los artefactos derivados y avisa
+# de qué informes exigen hoy una pasada de investigación.
+#
+# Lo que este flujo NO hace es investigar. Decidir si hay información nueva
+# sobre un actor requiere criterio y acceso a fuentes; aquí sólo se prepara la
+# decisión y se deja anotada en una incidencia.
+
+on:
+  schedule:
+    - cron: '0 11 * * *'   # 11:00 UTC ≈ 08:00 en Chile continental
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  ciclo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reconstruir artefactos derivados
+        run: python3 tools/cti_build.py
+
+      - name: Publicar los cambios, si los hay
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "sin cambios en los artefactos derivados."
+            exit 0
+          fi
+          git config user.name  "cti-daily-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "ciclo diario: reconstruir artefactos derivados ($(date -u +%Y-%m-%d))"
+          git push
+
+      - name: Calcular qué informes exigen revisión
+        id: vigencia
+        run: |
+          python3 tools/cti_build.py --json > /tmp/estado.json
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          e = json.load(open('/tmp/estado.json'))
+          pend = [i for i in e['informes']
+                  if i['publicable'] and i['estado'] in ('caducado', 'por caducar')]
+          lineas = []
+          for i in pend:
+              d = i['dias']
+              cuando = f"caducó hace {abs(d)} d" if d is not None and d < 0 else f"caduca en {d} d"
+              lineas.append(f"- [ ] `{i['id']}` — {i['actor']} ({cuando}, v{i['version']})")
+          print(f"pendientes={len(pend)}")
+          print("cuerpo<<FIN")
+          if lineas:
+              print("Informes que exigen hoy una pasada de investigación:\n")
+              print("\n".join(lineas))
+              print("\nPara cada uno: revisar si hay información nueva; si la hay, actualizar"
+                    " el `.md`, subir versión, anotar en el control de cambios **qué juicio"
+                    " cambió** y volver a ejecutar `python3 tools/cti_build.py`. Si no la hay,"
+                    " basta revisar la fecha de caducidad.")
+          print("FIN")
+          PY
+
+      - name: Abrir o actualizar la incidencia de seguimiento
+        if: steps.vigencia.outputs.pendientes != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CUERPO: ${{ steps.vigencia.outputs.cuerpo }}
+        run: |
+          TITULO="Revisión de vigencia · $(date -u +%Y-%m-%d)"
+          EXISTENTE=$(gh issue list --label vigencia --state open \
+                        --json number --jq '.[0].number // empty')
+          gh label create vigencia --color FFA500 \
+            --description "Informes que exigen una pasada de investigación" 2>/dev/null || true
+          if [ -n "$EXISTENTE" ]; then
+            gh issue comment "$EXISTENTE" --body "$CUERPO"
+          else
+            gh issue create --title "$TITULO" --label vigencia --body "$CUERPO"
+          fi

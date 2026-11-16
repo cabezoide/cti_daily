@@ -1,0 +1,26 @@
+#!/bin/sh
+# cti_daily — mantiene los artefactos derivados al día en cada commit.
+#
+# Regenera HTML, índice del README y agregados de IOC, y añade al commit lo que
+# haya cambiado. Si falla, el commit se detiene: es preferible un commit
+# bloqueado a un índice que miente sobre su propio contenido.
+
+set -e
+RAIZ="$(git rev-parse --show-toplevel)"
+cd "$RAIZ"
+
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "pre-commit: no encuentro python3; omito la construcción." >&2
+    exit 0
+fi
+
+python3 tools/cti_build.py
+
+for f in README.md ioc_ipv4.txt ioc_ipv6.txt ioc_url.txt; do
+    [ -f "$f" ] && git add "$f"
+done
+for f in CTI-*.html; do
+    [ -f "$f" ] && git add "$f"
+done
+
+exit 0

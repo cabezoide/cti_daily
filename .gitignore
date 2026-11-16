@@ -1,0 +1,13 @@
+# Los informes marcados TLP:AMBER o superior no se publican en este repositorio.
+# El constructor ya los excluye del índice y de los agregados de IOC
+# (TLP_PUBLICABLE en tools/cti_build.py); esto evita además que se suban por
+# descuido. Añádase aquí el fichero concreto cuando exista uno restringido.
+#
+# ejemplo:
+# CTI-2026-0NN-restringido.md
+# CTI-2026-0NN-restringido.html
+
+render.zip
+__pycache__/
+*.pyc
+.DS_Store
