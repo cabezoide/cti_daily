@@ -143,6 +143,45 @@ def frontmatter(texto):
     return datos
 
 
+def _clave_version(v):
+    """'1.10' va después de '1.9', no antes: se compara por componentes."""
+    try:
+        return tuple(int(x) for x in v.split("."))
+    except ValueError:
+        return (0,)
+
+
+def fecha_version(texto, version, fecha_fm):
+    """Fecha de la versión vigente, leída del control de cambios del informe.
+
+    El campo `fecha:` del front matter es la de emisión y no se toca: es el
+    origen del expediente. Pero la ficha de la portada anunciaba esa fecha en
+    informes que llevaban meses revisados, con lo que un lector veía «septiembre»
+    en un producto cuya versión vigente es de noviembre. La fecha que importa
+    para decidir si leerlo es la de la versión que va a leer.
+
+    Devuelve (fecha, avisos). Se busca la fila cuya versión coincide con la del
+    front matter, no la última de la tabla: las filas no están siempre en orden.
+    """
+    filas = re.findall(r"^\|\s*(\d+(?:\.\d+)*)\s*\|\s*(\d{4}-\d{2}-\d{2})\s*\|",
+                       texto, re.M)
+    if not filas:
+        return fecha_fm, ["no tiene control de cambios legible; se usa la fecha de emisión"]
+    m = dict(filas)
+    avisos = []
+    if version not in m:
+        return fecha_fm, ["declara la versión %s, que no figura en su control de "
+                          "cambios (%s); se usa la fecha de emisión"
+                          % (version, ", ".join(sorted(m, key=_clave_version)))]
+    # Si el control de cambios registra una versión posterior a la declarada,
+    # alguien añadió la fila y olvidó subir el front matter.
+    mayor = max(m, key=_clave_version)
+    if _clave_version(mayor) > _clave_version(version):
+        avisos.append("declara la versión %s pero su control de cambios llega a la %s"
+                      % (version, mayor))
+    return m[version], avisos
+
+
 def informes():
     """Devuelve los informes ordenados por identificador."""
     salida = []
@@ -162,6 +201,12 @@ def informes():
             "tlp": fm.get("tlp", "").upper(),
             "publicable": fm.get("tlp", "").upper() in TLP_PUBLICABLE,
         })
+        f_emision = fm.get("fecha", "")
+        f_act, avisos_v = fecha_version(texto, fm.get("version", ""), f_emision)
+        salida[-1]["emitido"] = f_emision
+        salida[-1]["actualizado"] = f_act
+        salida[-1]["revisado"] = bool(f_act and f_emision and f_act != f_emision)
+        salida[-1]["avisos_version"] = avisos_v
     return salida
 
 
@@ -430,7 +475,7 @@ def renderizar(lista, forzar=False, simular=False):
 
 def tabla_indice(lista, hoy):
     filas = [
-        "| Informe | Tema | Tipo | Fecha | Ver. | TLP | Vigencia | Formatos |",
+        "| Informe | Tema | Tipo | Versión de | Ver. | TLP | Vigencia | Formatos |",
         "|---|---|---|---|---|---|---|---|",
     ]
     for inf in lista:
@@ -445,7 +490,7 @@ def tabla_indice(lista, hoy):
         if not inf["publicable"]:
             filas.append(
                 "| `%s` | *no publicado — %s* | — | %s | — | `%s` | — | — |"
-                % (inf["id"], inf["tlp"] or "sin marcado", fm.get("fecha", ""), inf["tlp"])
+                % (inf["id"], inf["tlp"] or "sin marcado", inf["actualizado"], inf["tlp"])
             )
             continue
         filas.append(
@@ -454,7 +499,7 @@ def tabla_indice(lista, hoy):
                 inf["id"],
                 fm.get("actor", "—"),
                 fm.get("tipo", "—"),
-                fm.get("fecha", "—"),
+                inf["actualizado"] or "—",
                 fm.get("version", "—"),
                 inf["tlp"] or "—",
                 vig,
@@ -533,6 +578,7 @@ h2 .num{font-family:var(--mono);font-size:12px;color:var(--sky);
   transition:border-color .18s ease,transform .18s ease}
 .card:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .card .id{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--sky)}
+.card .id .rev{color:var(--amber);font-weight:600}
 .card h3{font-size:17px;line-height:1.3;letter-spacing:-.008em;font-weight:600}
 .card h3 a{color:var(--ink);text-decoration:none}
 .card h3 a:hover{color:var(--amber)}
@@ -600,6 +646,14 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
             txt_vig = "vigente · %d d" % dias
         else:
             txt_vig = "sin fecha"
+        if inf["revisado"]:
+            fecha_tarjeta = (
+                '<span title="Emitido el %s; esta es la fecha de la versión %s">'
+                '%s · <span class="rev">rev.</span></span>'
+                % (e(inf["emitido"]), e(fm.get("version", "?")), e(inf["actualizado"]))
+            )
+        else:
+            fecha_tarjeta = e(inf["actualizado"])
         tarjetas.append(
             '<article class="card">\n'
             '  <div class="id">%s · %s</div>\n'
@@ -611,7 +665,7 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
             '  <div class="links"><a class="primary" href="%s">Leer el informe</a>'
             '<a href="%s">fuente .md</a></div>\n'
             '</article>' % (
-                e(inf["id"]), e(fm.get("fecha", "")),
+                e(inf["id"]), fecha_tarjeta,
                 e(inf["html"]), e(fm.get("actor", inf["id"])),
                 e(fm.get("tipo", "")),
                 e(fm.get("version", "?")), e(inf["tlp"] or "—"),
@@ -903,6 +957,8 @@ def main():
                     "md": i["md"],
                     "actor": i["fm"].get("actor", ""),
                     "fecha": i["fm"].get("fecha", ""),
+                    "actualizado": i["actualizado"],
+                    "revisado": i["revisado"],
                     "caduca": i["fm"].get("caduca", ""),
                     "version": i["fm"].get("version", ""),
                     "tlp": i["tlp"],
@@ -944,6 +1000,9 @@ def main():
         red_n = (len(_d.get("nodos", [])), len(_d.get("aristas", [])))
         if escribir_si_cambia(os.path.join(RAIZ, RED_SALIDA), red_html, opt.check):
             cambios.append("%s (%d nodos, %d relaciones)" % (RED_SALIDA, red_n[0], red_n[1]))
+    for inf in lista:
+        for aviso in inf["avisos_version"]:
+            print("aviso: %s %s" % (inf["id"], aviso), file=sys.stderr)
     for aviso in red_avisos:
         print("aviso: " + aviso, file=sys.stderr)
 

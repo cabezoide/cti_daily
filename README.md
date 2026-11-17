@@ -14,12 +14,12 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 ### Informes
 
-| Informe | Tema | Tipo | Fecha | Ver. | TLP | Vigencia | Formatos |
+| Informe | Tema | Tipo | Versión de | Ver. | TLP | Vigencia | Formatos |
 |---|---|---|---|---|---|---|---|
-| `CTI-2026-014` | TheGentlemen (Storm-2697) | Perfil de actor + informe de campaña | 2026-09-15 | 1.2 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
-| `CTI-2026-015` | Qilin (Agenda · Storm-1934) | Perfil de actor + informe de campaña | 2026-09-16 | 1.1 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
-| `CTI-2026-016` | LockBit 5.0 (ChuongDong) | Perfil de actor + informe de campaña | 2026-09-16 | 1.1 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
-| `CTI-2026-017` | FamousSparrow (SparroWocky) · solapamiento con el ecosistema Sparrow de CopperDragon y con el clúster DarkWire (Check Point) | Perfil de actor + informe de campaña | 2026-09-21 | 1.2 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
+| `CTI-2026-014` | TheGentlemen (Storm-2697) | Perfil de actor + informe de campaña | 2026-11-16 | 1.2 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
+| `CTI-2026-015` | Qilin (Agenda · Storm-1934) | Perfil de actor + informe de campaña | 2026-11-16 | 1.1 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
+| `CTI-2026-016` | LockBit 5.0 (ChuongDong) | Perfil de actor + informe de campaña | 2026-11-16 | 1.1 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
+| `CTI-2026-017` | FamousSparrow (SparroWocky) · solapamiento con el ecosistema Sparrow de CopperDragon y con el clúster DarkWire (Check Point) | Perfil de actor + informe de campaña | 2026-11-17 | 1.2 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
 | `CTI-2026-018` | Abuso de dominios de primer nivel (ecosistema de registro DNS) | Evaluación estratégica | 2026-11-15 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
 | `CTI-2026-019` | ARTEX (framework ofensivo agéntico) y los clústeres que lo operan | Evaluación estratégica + perfil de capacidad adversaria | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
 | `CTI-2026-020` | Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98) | Perfil de actor + informe de campaña | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
