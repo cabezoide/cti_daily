@@ -11,8 +11,8 @@
   --amber:#f7a400; --mint:#4db99c; --deep:#375d9d; --sky:#5a7ebe;
   --bg:#080c18; --surface:#0f1830; --surface2:#141f3d;
   --ink:#e9eefb; --nc:#8294b8; --hc:#7d9fdd; --line:#1e2b4d;
-  --ru:#e2574c; --cn:#f7a400; --pk:#4db99c; --kp:#9b6dd6;
-  --ir:#3fb8d4; --latam:#6ee7a5; --by:#e2574c; --ps:#3fb8d4;
+  --ru:#e2574c; --by:#f08a5d; --cn:#f7a400; --pk:#4db99c;
+  --kp:#9b6dd6; --ir:#3fb8d4; --ps:#87c5e8; --latam:#6ee7a5;
   --crimen:#ef5f8c; --neutro:#8294b8;
 }
 :root:not([data-theme="dark"]){}
@@ -106,6 +106,20 @@ header a:hover{color:var(--amber); border-bottom-color:var(--amber)}
 .lg:hover{background:var(--surface2)}
 .lg.off{opacity:.35}
 .pt{width:9px; height:9px; border-radius:50%; flex:0 0 auto}
+.pt.vacia{background:transparent; border:1.5px solid currentColor}
+#pOrigen{margin:0 0 13px; padding:9px 11px; border-radius:7px; background:var(--surface2);
+         border:1px solid var(--linea); font-size:12px; line-height:1.5}
+#pOrigen b{color:var(--ink); font-weight:600}
+#pOrigen .gr{color:var(--nc)}
+#pOrigen .base{margin-top:5px; color:var(--nc); font-size:11.5px; line-height:1.45}
+.grp{display:inline-flex; gap:7px; flex-wrap:wrap; align-items:center}
+.grp + .grp{border-left:1px solid var(--linea); padding-left:12px}
+.grp.clave .lg{cursor:default}
+.grp.clave .lg:hover{background:transparent}
+.ch{font:650 9px ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.3px;
+    padding:1px 3px; border-radius:2.5px; border:1px solid var(--cn); color:var(--cn);
+    flex:0 0 auto; line-height:1.25}
+.ch.llena{background:var(--cn); color:var(--bg); border-color:var(--cn)}
 .botones{display:flex; gap:6px}
 .botones button{background:var(--surface2); border:1px solid var(--line); border-radius:6px;
   color:var(--nc); font:inherit; font-size:12px; padding:6px 10px; cursor:pointer; white-space:nowrap}
@@ -120,6 +134,8 @@ header a:hover{color:var(--amber); border-bottom-color:var(--amber)}
 #tema:hover{color:var(--ink); border-color:var(--hc)}
 #tema svg{display:block}
 body.conPanel #tema{right:370px}
+body.conPanel #ctrl{right:356px}
+#ctrl{transition:right .18s ease}
 #flota{position:fixed; z-index:15; pointer-events:none; padding:5px 9px; border-radius:6px;
   background:color-mix(in srgb,var(--surface) 95%,transparent); border:1px solid var(--line);
   font-size:12.5px; color:var(--ink); opacity:0; transition:opacity .1s; max-width:300px;
@@ -132,6 +148,7 @@ body.conPanel #tema{right:370px}
   .leyenda{max-height:52px; overflow-y:auto}
   #panel{width:100%}
   body.conPanel #tema{right:14px}
+  body.conPanel #ctrl{right:0}
 }
 </style>
 </head>
@@ -142,7 +159,8 @@ body.conPanel #tema{right:370px}
   <h1>Red de actores y <span>herramientas</span></h1>
   <p>__N_NODOS__ nodos y __N_ARISTAS__ relaciones extraídas de los informes de
      <a href="./">cti_daily</a>. Arrastra para girar, rueda para acercar, clic en un nodo para ver su ficha.
-     Las agrupaciones y los solapamientos parciales están marcados como tales: <strong>un solapamiento parcial no es una equivalencia</strong>.</p>
+     <strong>El color es el posible país de origen</strong>, y la chapa de dos letras dice con qué base se afirma:
+     rellena si un Estado o un tribunal lo ha atribuido, con sólo el contorno si es valoración de proveedor.</p>
 </header>
 
 <button id="tema" title="Cambiar tema" aria-label="Cambiar tema"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.2a6.8 6.8 0 1 0 0 13.6A6.8 6.8 0 0 0 8 1.2Zm0 1.5v10.6a5.3 5.3 0 0 1 0-10.6Z" fill="currentColor"/></svg></button>
@@ -155,6 +173,7 @@ body.conPanel #tema{right:370px}
     <h2 id="pNombre"></h2>
   </div>
   <div class="cuerpo">
+    <div id="pOrigen"></div>
     <p id="pDesc"></p>
     <a id="pInforme" href="#" target="_blank" rel="noopener"></a>
     <div id="pRel"></div>
@@ -192,14 +211,33 @@ body.conPanel #tema{right:370px}
    fotograma, holgado para 60 fps.
    ════════════════════════════════════════════════════════════════════ */
 
-const COLOR = {
-  ru:'--ru', cn:'--cn', pk:'--pk', kp:'--kp', ir:'--ir',
-  latam:'--latam', by:'--by', ps:'--ps', '-':'--neutro'
+/* País de posible origen. El código de dos letras es la «banderita»: se dibuja
+   como chapa junto a la etiqueta y, sobre todo, dice CÓMO de fundada está esa
+   atribución — chapa rellena si un Estado o un tribunal la ha hecho pública,
+   chapa sólo con contorno si es valoración de proveedor. Pintar igual a un
+   actor con acusación judicial y a uno cuyo propio informe dice que ningún
+   gobierno lo ha atribuido sería afirmar más de lo que las fuentes sostienen. */
+const PAIS = {
+  ru:    {c:'--ru',     s:'RU', n:'Rusia'},
+  by:    {c:'--by',     s:'BY', n:'Bielorrusia'},
+  cn:    {c:'--cn',     s:'CN', n:'China'},
+  pk:    {c:'--pk',     s:'PK', n:'Pakistán'},
+  kp:    {c:'--kp',     s:'KP', n:'Corea del Norte'},
+  ir:    {c:'--ir',     s:'IR', n:'Irán'},
+  ps:    {c:'--ps',     s:'PS', n:'Palestina'},
+  latam: {c:'--latam',  s:'LA', n:'Latinoamérica, sin país determinado'},
+  '-':   {c:'--neutro', s:'',   n:'Sin origen atribuible'}
 };
+const ATRIB = {
+  oficial:   'atribución oficial de un Estado o un tribunal',
+  proveedor: 'valoración de proveedor, sin atribución oficial',
+  '-':       'sin origen atribuible'
+};
+/* Sin país, el color lo da el tipo. Con país, manda el país. */
 const PALETA_TIPO = {
-  estado:'pais', subgrupo:'pais', clúster:'pais', crimen:'crimen',
-  suministrador:'amber', marco:'sky', publica:'nc', herramienta:'pais',
-  servicio:'mint', cve:'crimen', modelo:'nc'
+  crimen:'crimen', suministrador:'amber', marco:'sky', publica:'nc',
+  servicio:'mint', cve:'crimen', modelo:'nc',
+  estado:'nc', subgrupo:'nc', clúster:'nc', herramienta:'nc'
 };
 /* Relaciones: etiqueta legible, color y trazo. Las que expresan duda o
    negación se dibujan discontinuas a propósito. */
@@ -244,6 +282,13 @@ const GRUPOS = [
   {ks:['cve'],                 l:'Vulnerabilidad',       c:'--crimen'},
   {ks:['modelo'],              l:'Agrupación',           c:'--nc'}
 ];
+/* Los posibles países de origen, ordenados por peso en la cartera. */
+const ORIGENES = [
+  {k:'cn', l:'China'}, {k:'ru', l:'Rusia'}, {k:'pk', l:'Pakistán'},
+  {k:'latam', l:'Latinoamérica'}, {k:'kp', l:'Corea del Norte'},
+  {k:'ir', l:'Irán'}, {k:'by', l:'Bielorrusia'}, {k:'ps', l:'Palestina'},
+  {k:'-', l:'Sin origen'}
+];
 
 /* ───────────────── estado ───────────────── */
 const lienzo = document.getElementById('lienzo');
@@ -281,7 +326,8 @@ function areaLibre(){
   return {cx:(W - panel)/2, cy:arriba + (H - arriba - abajo)/2,
           an:(W - panel), al:(H - arriba - abajo)};
 }
-let sel = null, hover = null, filtro = new Set(), consulta = '', hayCoincidencia = false;
+let sel = null, hover = null, filtro = new Set(), filtroP = new Set(),
+    consulta = '', hayCoincidencia = false;
 let arrastre = null, energia = 1;
 
 /* ───────────────── utilidades ───────────────── */
@@ -289,8 +335,9 @@ const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).
 let cache = {};
 const col = v => (cache[v] ||= css(v));
 function colorNodo(n){
+  const pa = PAIS[n.p];
+  if (pa && n.p !== '-') return col(pa.c);        // el país manda
   const p = PALETA_TIPO[n.t] || 'nc';
-  if (p === 'pais')   return col(COLOR[n.p] || '--neutro');
   if (p === 'crimen') return col('--crimen');
   if (p === 'amber')  return col('--amber');
   if (p === 'sky')    return col('--sky');
@@ -311,7 +358,8 @@ const mezcla = (hex, a) => {
   if (f.some(Number.isNaN)) return `rgba(130,148,184,${a})`;
   return `rgba(${f[0]},${f[1]},${f[2]},${a})`;
 };
-const visible = n => (!filtro.size || !filtro.has(n.t));
+const visible = n => (!filtro.size  || !filtro.has(n.t))
+                  && (!filtroP.size || !filtroP.has(n.p));
 const coincide = n => consulta && (n.l.toLowerCase().includes(consulta) || n.id.includes(consulta));
 
 /* ───────────────── simulación ───────────────── */
@@ -418,7 +466,15 @@ function dibujar(){
     }
     cx2.beginPath(); cx2.arc(n.px,n.py,r,0,6.2832);
     cx2.fillStyle = mezcla(c, alfa); cx2.fill();
+    // Anillo exterior en los actores con atribución oficial de un Estado o un
+    // tribunal. Los demás van sin anillo: su país es una valoración, no un hecho.
+    if (n.a === 'oficial' && r > 2.2){
+      cx2.beginPath(); cx2.arc(n.px, n.py, r+2.2, 0, 6.2832);
+      cx2.strokeStyle = mezcla(c, Math.min(0.95, alfa + 0.18));
+      cx2.lineWidth = Math.max(1, 1.3*prof); cx2.stroke();
+    }
     if (esSel || i===hover || esQ){
+      cx2.beginPath(); cx2.arc(n.px,n.py,r,0,6.2832);
       cx2.strokeStyle = esQ && !esSel ? col('--amber') : col('--ink');
       cx2.lineWidth = 1.5; cx2.stroke();
     }
@@ -455,11 +511,25 @@ function dibujar(){
       const w = cx2.measureText(txt).width;
       const r = Math.max(1.6, n.rad*prof*(Math.min(W,H)/780)*vista.zoom);
 
+      // La banderita: chapa con el código de dos letras del posible país.
+      // Rellena si la atribución es oficial, con sólo contorno si es una
+      // valoración de proveedor. Es el mismo dato que el anillo, legible de cerca.
+      const pa = PAIS[n.p];
+      const sigla = pa && pa.s ? pa.s : '';
+      const fsCh = Math.max(7.5, fs*0.76);
+      let anchoCh = 0;
+      if (sigla){
+        cx2.font = `650 ${fsCh}px ui-monospace,SFMono-Regular,Menlo,monospace`;
+        anchoCh = cx2.measureText(sigla).width + 7;
+        cx2.font = `${c.esSel||c.esQ?'650':'500'} ${fs}px ui-sans-serif,system-ui,sans-serif`;
+      }
+      const wTot = w + anchoCh;
+
       // se prueba a la derecha y, si choca, a la izquierda
-      const sitios = [{x:n.px+r+5, y:n.py}, {x:n.px-r-5-w, y:n.py}];
+      const sitios = [{x:n.px+r+5, y:n.py}, {x:n.px-r-5-wTot, y:n.py}];
       let elegido = null;
       for (const s of sitios){
-        const caja = {x:s.x-3, y:s.y-fs*0.68, w:w+6, h:fs*1.36};
+        const caja = {x:s.x-3, y:s.y-fs*0.68, w:wTot+6, h:fs*1.36};
         if (!choca(caja)) { elegido = {s, caja}; break; }
       }
       if (!elegido) continue;                       // se descarta antes que solaparla
@@ -467,9 +537,33 @@ function dibujar(){
 
       cx2.fillStyle = mezcla(col('--bg'), hayFoco ? 0.78 : 0.55);
       cx2.fillRect(elegido.caja.x, elegido.caja.y, elegido.caja.w, elegido.caja.h);
+
+      let tx = elegido.s.x;
+      if (sigla){
+        const cp = col(pa.c);
+        const ch = {x:tx, y:elegido.s.y - fsCh*0.78, w:anchoCh-4, h:fsCh*1.56};
+        cx2.beginPath();
+        if (cx2.roundRect) cx2.roundRect(ch.x, ch.y, ch.w, ch.h, 2.5);
+        else cx2.rect(ch.x, ch.y, ch.w, ch.h);
+        if (n.a === 'oficial'){                 // atribución oficial: chapa rellena
+          cx2.fillStyle = mezcla(cp, 0.3 + prof*0.6); cx2.fill();
+          cx2.strokeStyle = mezcla(cp, 0.9); cx2.lineWidth = 0.9; cx2.stroke();
+        } else {                                // valoración de proveedor: sólo contorno
+          cx2.strokeStyle = mezcla(cp, 0.35 + prof*0.45);
+          cx2.lineWidth = 0.9; cx2.stroke();
+        }
+        cx2.font = `650 ${fsCh}px ui-monospace,SFMono-Regular,Menlo,monospace`;
+        cx2.textAlign = 'center';
+        cx2.fillStyle = n.a === 'oficial' ? col('--bg') : mezcla(cp, 0.55 + prof*0.45);
+        cx2.fillText(sigla, ch.x + ch.w/2, elegido.s.y);
+        cx2.textAlign = 'left';
+        cx2.font = `${c.esSel||c.esQ?'650':'500'} ${fs}px ui-sans-serif,system-ui,sans-serif`;
+        tx += anchoCh;
+      }
+
       cx2.fillStyle = c.esSel ? col('--ink') : c.esQ ? col('--amber')
                     : mezcla(col('--ink'), 0.38 + prof*0.5);
-      cx2.fillText(txt, elegido.s.x, elegido.s.y);
+      cx2.fillText(txt, tx, elegido.s.y);
     }
   }
 }
@@ -612,6 +706,19 @@ function abrir(i){
   vista.girar = false; sincronizar();
   enfocar(i);
   document.getElementById('pTipo').textContent = TIPO_ETIQ[n.t] || n.t;
+  // Origen: el país y, sobre todo, en qué se apoya decir que es ese país.
+  const pOr = document.getElementById('pOrigen');
+  const pa = PAIS[n.p] || PAIS['-'];
+  if (n.p === '-'){ pOr.style.display = 'none'; }
+  else {
+    pOr.style.display = 'block';
+    const of = n.a === 'oficial';
+    pOr.innerHTML =
+      `<i class="ch${of?' llena':''}" style="border-color:var(${pa.c});`
+      + `${of ? `background:var(${pa.c}); color:var(--bg)` : `color:var(${pa.c})`}">`
+      + `${esc(pa.s)}</i> <b>${esc(pa.n)}</b> <span class="gr">${esc(ATRIB[n.a] || '')}</span>`
+      + (n.af ? `<div class="base">${esc(n.af)}</div>` : '');
+  }
   document.getElementById('pNombre').textContent = n.l;
   document.getElementById('pDesc').textContent = n.d;
   const a = document.getElementById('pInforme');
@@ -663,17 +770,30 @@ document.addEventListener('keydown', ev => { if (ev.key==='Escape') cerrarPanel(
 
 /* ───────────────── controles ───────────────── */
 const ley = document.getElementById('leyenda');
-ley.innerHTML = '<b>Filtrar:</b>' + GRUPOS.map(g =>
-  `<span class="lg" data-k="${g.ks.join('|')}" role="checkbox" aria-checked="true" tabindex="0"
-     ><i class="pt" style="background:var(${g.c})"></i>${g.l}</span>`).join('');
+ley.innerHTML =
+  '<span class="grp"><b>Origen:</b>' + ORIGENES.map(g => {
+    const pa = PAIS[g.k];
+    return `<span class="lg" data-p="${g.k}" role="checkbox" aria-checked="true" tabindex="0"
+       title="${pa.n}"><i class="pt" style="background:var(${pa.c})"></i>${g.l}</span>`;
+  }).join('') + '</span>' +
+  '<span class="grp"><b>Tipo:</b>' + GRUPOS.map(g =>
+    `<span class="lg" data-k="${g.ks.join('|')}" role="checkbox" aria-checked="true" tabindex="0"
+       ><i class="pt vacia" style="border-color:var(${g.c})"></i>${g.l}</span>`).join('') + '</span>' +
+  '<span class="grp clave"><b>Chapa:</b>' +
+    '<span class="lg est"><i class="ch llena">CN</i>atribución oficial</span>' +
+    '<span class="lg est"><i class="ch">CN</i>valoración de proveedor</span></span>';
+
 function alternarFiltro(el){
-  const ks = el.dataset.k.split('|');
   const apagando = !el.classList.contains('off');
-  ks.forEach(k => apagando ? filtro.add(k) : filtro.delete(k));
+  if (el.dataset.p !== undefined){
+    apagando ? filtroP.add(el.dataset.p) : filtroP.delete(el.dataset.p);
+  } else {
+    el.dataset.k.split('|').forEach(k => apagando ? filtro.add(k) : filtro.delete(k));
+  }
   el.classList.toggle('off', apagando);
   el.setAttribute('aria-checked', String(!apagando));
 }
-ley.querySelectorAll('.lg').forEach(el => {
+ley.querySelectorAll('.lg:not(.est)').forEach(el => {
   el.addEventListener('click', () => alternarFiltro(el));
   el.addEventListener('keydown', ev => {
     if (ev.key===' ' || ev.key==='Enter'){ ev.preventDefault(); alternarFiltro(el); }
@@ -697,7 +817,7 @@ bE.addEventListener('click', () => { vista.etiquetas = !vista.etiquetas; sincron
 document.getElementById('bReset').addEventListener('click', () => {
   vista.rotX=-0.32; vista.rotY=0.55; vista.girar=true; vista.offXd=0; vista.offYd=0;
   consulta=''; document.getElementById('q').value='';
-  filtro.clear();
+  filtro.clear(); filtroP.clear();
   document.querySelectorAll('.lg.off').forEach(e=>{e.classList.remove('off'); e.setAttribute('aria-checked','true');});
   cerrarPanel(); encuadrar(); sincronizar();
 });

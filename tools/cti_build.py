@@ -623,7 +623,10 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
     filas_ioc_tabla = []
     desc = {
         "ipv4": "Direcciones IPv4, una por línea, ya desenmascaradas",
-        "ipv6": "Direcciones IPv6 (hoy ningún informe declara ninguna)",
+        # Escrito a mano, este paréntesis afirmaba «hoy ningún informe declara
+        # ninguna» mientras la columna de al lado contaba dos. Se deriva del dato.
+        "ipv6": ("Direcciones IPv6, una por línea" if ioc["ipv6"]
+                 else "Direcciones IPv6 (hoy ningún informe declara ninguna)"),
         "url": "Dominios y URL, una por línea",
         "hash": "Hashes de fichero, agrupados por algoritmo según su longitud",
     }
@@ -654,22 +657,15 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
             '  <div class="id">%d nodos · %d relaciones</div>\n'
             '  <h3><a href="%s">Red de actores y herramientas</a></h3>\n'
             '  <div class="meta">Actores estatales, clústeres, suministradores, herramientas propias '
-            'y públicas, servicios legítimos abusados y vulnerabilidades.</div>\n'
+            'y públicas, servicios legítimos abusados y vulnerabilidades. Cada nodo va pintado por su '
+            'posible país de origen, y la chapa de dos letras dice si esa atribución es oficial o '
+            'una valoración de proveedor.</div>\n'
             '  <div class="pills"><span class="pill">HTML autocontenido</span>'
             '<span class="pill">sin dependencias</span>'
             '<span class="pill ok">siempre al día</span></div>\n'
             '  <div class="links"><a class="primary" href="%s">Abrir el mapa</a>'
             '<a href="%s">datos .json</a></div>\n'
             '</article>\n'
-            '</div>\n'
-            '<div class="note">\n'
-            '<strong>Lo que el mapa distingue, y es su razón de ser.</strong> No todas las relaciones '
-            'valen lo mismo, y tratarlas como si lo fueran es la fuente de error más frecuente de '
-            'esta disciplina. El trazo continuo marca lo establecido —<em>usa</em>, '
-            '<em>suministra a</em>, <em>explota</em>, <em>entrega acceso a</em>—; el discontinuo, lo '
-            'que no lo está: <em>solapamiento parcial</em>, <em>vinculado a</em>, <em>identidad en '
-            'disputa</em> y <em>no es el mismo que</em>. Tres informes de esta cartera existen porque '
-            'alguien compuso un solapamiento parcial con una equivalencia.\n'
             '</div>\n\n'
         ) % (e(RED_DATOS), red_n[0], red_n[1], e(RED_SALIDA), e(RED_SALIDA), e(RED_DATOS))
 

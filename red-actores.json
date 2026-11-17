@@ -7,7 +7,9 @@
   "t": "tipo",
   "p": "alineación o país",
   "r": "informe de origen",
-  "d": "descripción de la ficha"
+  "d": "descripción de la ficha",
+  "a": "grado de atribución de origen: oficial (un Estado o un tribunal la ha hecho pública) | proveedor (valoración de proveedor) | - (sin origen atribuible)",
+  "af": "en qué se apoya ese grado, cuando conviene decirlo"
  },
  "_campos_arista": "[origen, destino, relación]",
  "nodos": [
@@ -17,7 +19,9 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "FSB, 18.º Centro, Crimea. Exclusivamente Ucrania en 2025. 1.º del ranking de prevalencia"
+   "d": "FSB, 18.º Centro, Crimea. Exclusivamente Ucrania en 2025. 1.º del ranking de prevalencia",
+   "a": "oficial",
+   "af": "El SSU la atribuye al 18.º Centro del FSB, con cinco miembros identificados nominalmente"
   },
   {
    "id": "turla",
@@ -25,7 +29,8 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "FSB. Recibe accesos de Gamaredon y selecciona dentro de ellos"
+   "d": "FSB. Recibe accesos de Gamaredon y selecciona dentro de ellos",
+   "a": "proveedor"
   },
   {
    "id": "invisimole",
@@ -33,7 +38,8 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Colaboración afirmada por ESET, sin desarrollar"
+   "d": "Colaboración afirmada por ESET, sin desarrollar",
+   "a": "proveedor"
   },
   {
    "id": "sandworm",
@@ -41,7 +47,9 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "GRU, Unidad 74455. El único actor destructivo de la cartera"
+   "d": "GRU, Unidad 74455. El único actor destructivo de la cartera",
+   "a": "oficial",
+   "af": "Acusación federal estadounidense de 2020 con miembros nombrados, GRU Unidad 74455"
   },
   {
    "id": "badpilot",
@@ -49,7 +57,8 @@
    "t": "subgrupo",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Subgrupo de acceso inicial de Sandworm. 15+ países"
+   "d": "Subgrupo de acceso inicial de Sandworm. 15+ países",
+   "a": "proveedor"
   },
   {
    "id": "uac0099",
@@ -57,7 +66,8 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Proveedor de acceso. Entregó una cerealera ucraniana a Sandworm"
+   "d": "Proveedor de acceso. Entregó una cerealera ucraniana a Sandworm",
+   "a": "proveedor"
   },
   {
    "id": "frostyneighbor",
@@ -65,7 +75,8 @@
    "t": "estado",
    "p": "by",
    "r": "ESET Q2–Q3 2026",
-   "d": "Bielorrusia. Primer ataque destructivo bielorruso en Europa"
+   "d": "Bielorrusia. Primer ataque destructivo bielorruso en Europa",
+   "a": "proveedor"
   },
   {
    "id": "famoussparrow",
@@ -73,7 +84,8 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "90 % de objetivos en Latinoamérica desde mediados de 2025"
+   "d": "90 % de objetivos en Latinoamérica desde mediados de 2025",
+   "a": "proveedor"
   },
   {
    "id": "copperdragon",
@@ -81,7 +93,8 @@
    "t": "suministrador",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "«Intendente digital»: suministra arsenal e infraestructura a varios clústeres. Hipótesis de Check Point"
+   "d": "«Intendente digital»: suministra arsenal e infraestructura a varios clústeres. Hipótesis de Check Point",
+   "a": "proveedor"
   },
   {
    "id": "darkwire",
@@ -89,7 +102,8 @@
    "t": "clúster",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Clúster latinoamericano. ≥3 grandes operadoras de telecomunicaciones. C2 en el país de la víctima"
+   "d": "Clúster latinoamericano. ≥3 grandes operadoras de telecomunicaciones. C2 en el país de la víctima",
+   "a": "proveedor"
   },
   {
    "id": "silentdelivery",
@@ -97,7 +111,8 @@
    "t": "clúster",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Europa y Asia. Watering hole con falsa advertencia de certificado"
+   "d": "Europa y Asia. Watering hole con falsa advertencia de certificado",
+   "a": "proveedor"
   },
   {
    "id": "oceangate",
@@ -105,7 +120,8 @@
    "t": "clúster",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Asia, foco India. Entrada por servidores Linux"
+   "d": "Asia, foco India. Entrada por servidores Linux",
+   "a": "proveedor"
   },
   {
    "id": "salttyphoon",
@@ -113,7 +129,9 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-030",
-   "d": "Aviso de 23 agencias de 13 países. Vive en routers de operador. Sin días cero"
+   "d": "Aviso de 23 agencias de 13 países. Vive en routers de operador. Sin días cero",
+   "a": "oficial",
+   "af": "Aviso conjunto AA25-239A de 23 agencias de 13 países; nombra tres empresas chinas"
   },
   {
    "id": "ghostemperor",
@@ -121,7 +139,9 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-030",
-   "d": "Nombre que el aviso AA25-239A lista para Salt Typhoon, y que ESET separa de FamousSparrow"
+   "d": "Nombre que el aviso AA25-239A lista para Salt Typhoon, y que ESET separa de FamousSparrow",
+   "a": "oficial",
+   "af": "Figura entre los nombres de industria del aviso conjunto AA25-239A"
   },
   {
    "id": "mustangpanda",
@@ -129,7 +149,9 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "3.º del ranking. Sobrevivió a que el FBI le borrara 4 258 equipos. Rootkit de kernel firmado"
+   "d": "3.º del ranking. Sobrevivió a que el FBI le borrara 4 258 equipos. Rootkit de kernel firmado",
+   "a": "oficial",
+   "af": "Documentos judiciales del Distrito Este de Pensilvania: el gobierno chino pagó al grupo"
   },
   {
    "id": "unc6384",
@@ -137,7 +159,8 @@
    "t": "clúster",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Vinculado a Mustang Panda por Google. Secuestro de portales cautivos de wifi"
+   "d": "Vinculado a Mustang Panda por Google. Secuestro de portales cautivos de wifi",
+   "a": "proveedor"
   },
   {
    "id": "camarodragon",
@@ -145,7 +168,8 @@
    "t": "clúster",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Coincidencia PARCIAL: clúster solapado de implantes en routers"
+   "d": "Coincidencia PARCIAL: clúster solapado de implantes en routers",
+   "a": "proveedor"
   },
   {
    "id": "unc3886",
@@ -153,7 +177,9 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-028",
-   "d": "Hipervisores, appliances y routers fuera de soporte. NO aparece en ningún ranking"
+   "d": "Hipervisores, appliances y routers fuera de soporte. NO aparece en ningún ranking",
+   "a": "proveedor",
+   "af": "Ningún gobierno la ha atribuido, incluido el que sufrió el caso mejor documentado"
   },
   {
    "id": "earthestries",
@@ -161,7 +187,8 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Solapamiento parcial con FamousSparrow vía HemiGate"
+   "d": "Solapamiento parcial con FamousSparrow vía HemiGate",
+   "a": "proveedor"
   },
   {
    "id": "lilactyphoon",
@@ -169,7 +196,8 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Clúster DISTINTO. El nombrado en el caso chileno de telecomunicaciones de 2026"
+   "d": "Clúster DISTINTO. El nombrado en el caso chileno de telecomunicaciones de 2026",
+   "a": "proveedor"
   },
   {
    "id": "unc2814",
@@ -177,7 +205,8 @@
    "t": "clúster",
    "p": "cn",
    "r": "CTI-2026-030",
-   "d": "53 intrusiones en 42 países. Google afirma NO ver solapamiento con Salt Typhoon"
+   "d": "53 intrusiones en 42 países. Google afirma NO ver solapamiento con Salt Typhoon",
+   "a": "proveedor"
   },
   {
    "id": "slippynunchucks",
@@ -185,7 +214,8 @@
    "t": "estado",
    "p": "cn",
    "r": "ESET Q2–Q3 2026",
-   "d": "Sri Lanka, contra esquemas de fraude"
+   "d": "Sri Lanka, contra esquemas de fraude",
+   "a": "proveedor"
   },
   {
    "id": "silverfox",
@@ -193,7 +223,8 @@
    "t": "estado",
    "p": "cn",
    "r": "CiberLATAM",
-   "d": "Phishing contra gobierno latinoamericano. Origen chino sin confirmación independiente"
+   "d": "Phishing contra gobierno latinoamericano. Origen chino sin confirmación independiente",
+   "a": "proveedor"
   },
   {
    "id": "apt36",
@@ -201,7 +232,9 @@
    "t": "estado",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "2.º del ranking. Produce implantes con IA («vibeware»): regresión técnica"
+   "d": "2.º del ranking. Produce implantes con IA («vibeware»): regresión técnica",
+   "a": "proveedor",
+   "af": "Ninguna atribución oficial localizada: continuidad de herramientas, señuelos y objetivos"
   },
   {
    "id": "sidecopy",
@@ -209,7 +242,8 @@
    "t": "estado",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Grupo SEPARADO (G1008). Misma victimología india: alto riesgo de fusión indebida"
+   "d": "Grupo SEPARADO (G1008). Misma victimología india: alto riesgo de fusión indebida",
+   "a": "proveedor"
   },
   {
    "id": "lazarus",
@@ -217,7 +251,9 @@
    "t": "estado",
    "p": "kp",
    "r": "ESET Q2–Q3 2026",
-   "d": "Vuelve al sector de drones con señuelos de reclutamiento"
+   "d": "Vuelve al sector de drones con señuelos de reclutamiento",
+   "a": "oficial",
+   "af": "Acusaciones federales estadounidenses contra operadores nombrados"
   },
   {
    "id": "deceptivedev",
@@ -225,7 +261,8 @@
    "t": "estado",
    "p": "kp",
    "r": "ESET Q2–Q3 2026",
-   "d": "Pasa de entrevistas falsas a compromiso de cadena de suministro de software"
+   "d": "Pasa de entrevistas falsas a compromiso de cadena de suministro de software",
+   "a": "proveedor"
   },
   {
    "id": "scarcruft",
@@ -233,7 +270,8 @@
    "t": "estado",
    "p": "kp",
    "r": "ESET Q2–Q3 2026",
-   "d": "Un país africano, probablemente vigilando trabajadores norcoreanos"
+   "d": "Un país africano, probablemente vigilando trabajadores norcoreanos",
+   "a": "proveedor"
   },
   {
    "id": "muddywater",
@@ -241,7 +279,9 @@
    "t": "estado",
    "p": "ir",
    "r": "ESET Q2–Q3 2026",
-   "d": "Reanuda operaciones, sobre todo contra Israel"
+   "d": "Reanuda operaciones, sobre todo contra Israel",
+   "a": "oficial",
+   "af": "Atribuida oficialmente al Ministerio de Inteligencia iraní en avisos conjuntos"
   },
   {
    "id": "filthyfeline",
@@ -249,7 +289,8 @@
    "t": "estado",
    "p": "ir",
    "r": "ESET Q2–Q3 2026",
-   "d": "Subgrupo de OilRig. Toma el relevo de BladedFeline en Uzbekistán"
+   "d": "Subgrupo de OilRig. Toma el relevo de BladedFeline en Uzbekistán",
+   "a": "proveedor"
   },
   {
    "id": "oilrig",
@@ -257,7 +298,8 @@
    "t": "estado",
    "p": "ir",
    "r": "ESET Q2–Q3 2026",
-   "d": "Grupo matriz de FilthyFeline y BladedFeline"
+   "d": "Grupo matriz de FilthyFeline y BladedFeline",
+   "a": "proveedor"
   },
   {
    "id": "aridviper",
@@ -265,7 +307,8 @@
    "t": "estado",
    "p": "ps",
    "r": "ESET Q2–Q3 2026",
-   "d": "Vinculado a Hamás. Ministerio de Exteriores de la Autoridad Palestina"
+   "d": "Vinculado a Hamás. Ministerio de Exteriores de la Autoridad Palestina",
+   "a": "proveedor"
   },
   {
    "id": "blindeagle",
@@ -273,7 +316,8 @@
    "t": "estado",
    "p": "latam",
    "r": "CTI-2026-020",
-   "d": "TAG-144 · AguilaCiega · APT-Q-98. Espionaje y banca en Colombia"
+   "d": "TAG-144 · AguilaCiega · APT-Q-98. Espionaje y banca en Colombia",
+   "a": "proveedor"
   },
   {
    "id": "redakodon",
@@ -281,7 +325,8 @@
    "t": "estado",
    "p": "latam",
    "r": "CTI-2026-022",
-   "d": "Perfil en disputa: solapa con Blind Eagle. La disputa de nombres como problema operativo"
+   "d": "Perfil en disputa: solapa con Blind Eagle. La disputa de nombres como problema operativo",
+   "a": "proveedor"
   },
   {
    "id": "machete",
@@ -289,7 +334,9 @@
    "t": "estado",
    "p": "latam",
    "r": "CTI-2026-023",
-   "d": "G0095. Roba cartografía y GIS militar andino. Silencio público desde 2020"
+   "d": "G0095. Roba cartografía y GIS militar andino. Silencio público desde 2020",
+   "a": "proveedor",
+   "af": "Las fuentes no determinan el país; sólo indicios de la región andina"
   },
   {
    "id": "rhysida",
@@ -297,7 +344,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-024",
-   "d": "Publicó 360 000 documentos del Ejército de Chile"
+   "d": "Publicó 360 000 documentos del Ejército de Chile",
+   "a": "-"
   },
   {
    "id": "vanillatempest",
@@ -305,7 +353,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-024",
-   "d": "Afiliado de Rhysida. Solapa con Vice Society"
+   "d": "Afiliado de Rhysida. Solapa con Vice Society",
+   "a": "-"
   },
   {
    "id": "vicesociety",
@@ -313,7 +362,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-024",
-   "d": "Solapamiento con Vanilla Tempest"
+   "d": "Solapamiento con Vanilla Tempest",
+   "a": "-"
   },
   {
    "id": "interlock",
@@ -321,7 +371,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-024",
-   "d": "Solapamiento con Rhysida"
+   "d": "Solapamiento con Rhysida",
+   "a": "-"
   },
   {
    "id": "qilin",
@@ -329,7 +380,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-015",
-   "d": "Storm-1934"
+   "d": "Storm-1934",
+   "a": "-"
   },
   {
    "id": "lockbit5",
@@ -337,7 +389,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-016",
-   "d": "ChuongDong"
+   "d": "ChuongDong",
+   "a": "-"
   },
   {
    "id": "gentlemen",
@@ -345,7 +398,8 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-014",
-   "d": "Storm-2697"
+   "d": "Storm-2697",
+   "a": "-"
   },
   {
    "id": "mythic",
@@ -353,7 +407,8 @@
    "t": "marco",
    "p": "-",
    "r": "CTI-2026-026",
-   "d": "Marco de C2 de código abierto. 352 servidores observados en el mismo puerto: su presencia NO atribuye"
+   "d": "Marco de C2 de código abierto. 352 servidores observados en el mismo puerto: su presencia NO atribuye",
+   "a": "-"
   },
   {
    "id": "sparrowfw",
@@ -361,7 +416,8 @@
    "t": "marco",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Arsenal compartido que CopperDragon suministra. Magic 0x11223344, claves RC4 comunes"
+   "d": "Arsenal compartido que CopperDragon suministra. Magic 0x11223344, claves RC4 comunes",
+   "a": "proveedor"
   },
   {
    "id": "tinyshell",
@@ -369,7 +425,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "Puerta trasera pública. UNC3886 derivó seis variantes de ella"
+   "d": "Puerta trasera pública. UNC3886 derivó seis variantes de ella",
+   "a": "-"
   },
   {
    "id": "reptile",
@@ -377,7 +434,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "Rootkit público de Linux. Usado por UNC3886 y por SparrowShell"
+   "d": "Rootkit público de Linux. Usado por UNC3886 y por SparrowShell",
+   "a": "-"
   },
   {
    "id": "medusa",
@@ -385,7 +443,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "Rootkit público de Linux. Su presencia NO atribuye"
+   "d": "Rootkit público de Linux. Su presencia NO atribuye",
+   "a": "-"
   },
   {
    "id": "artex",
@@ -393,7 +452,8 @@
    "t": "marco",
    "p": "-",
    "r": "CTI-2026-019",
-   "d": "Framework ofensivo agéntico"
+   "d": "Framework ofensivo agéntico",
+   "a": "-"
   },
   {
    "id": "softether",
@@ -401,7 +461,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-017",
-   "d": "VPN legítima renombrada a vmtoolsd.exe"
+   "d": "VPN legítima renombrada a vmtoolsd.exe",
+   "a": "-"
   },
   {
    "id": "sdelete",
@@ -409,7 +470,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-029",
-   "d": "Firmada por Microsoft. Ninguna firma la detendrá: el indicador es la simultaneidad"
+   "d": "Firmada por Microsoft. Ninguna firma la detendrá: el indicador es la simultaneidad",
+   "a": "-"
   },
   {
    "id": "rclone",
@@ -417,7 +479,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-025",
-   "d": "Utilidad legítima descargada con otro nombre por PteroBox"
+   "d": "Utilidad legítima descargada con otro nombre por PteroBox",
+   "a": "-"
   },
   {
    "id": "stowaway",
@@ -425,7 +488,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-030",
-   "d": "Proxy público"
+   "d": "Proxy público",
+   "a": "-"
   },
   {
    "id": "siet",
@@ -433,7 +497,8 @@
    "t": "publica",
    "p": "-",
    "r": "CTI-2026-030",
-   "d": "Explotación pública de Cisco Smart Install"
+   "d": "Explotación pública de Cisco Smart Install",
+   "a": "-"
   },
   {
    "id": "raas",
@@ -441,7 +506,8 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-015/016/024",
-   "d": "Modelo de negocio, no un actor: marca, afiliados y panel. Agrupa a los actores de extorsión de la cartera"
+   "d": "Modelo de negocio, no un actor: marca, afiliados y panel. Agrupa a los actores de extorsión de la cartera",
+   "a": "-"
   },
   {
    "id": "bloqrpdc",
@@ -449,7 +515,8 @@
    "t": "modelo",
    "p": "kp",
    "r": "ESET Q2–Q3 2026",
-   "d": "Agrupación por alineación, no organigrama: ESET rastrea estos grupos por separado"
+   "d": "Agrupación por alineación, no organigrama: ESET rastrea estos grupos por separado",
+   "a": "proveedor"
   },
   {
    "id": "bloqiran",
@@ -457,7 +524,8 @@
    "t": "modelo",
    "p": "ir",
    "r": "ESET Q2–Q3 2026",
-   "d": "Agrupación por alineación. Actividad al alza por el regreso de varios grupos"
+   "d": "Agrupación por alineación. Actividad al alza por el regreso de varios grupos",
+   "a": "proveedor"
   },
   {
    "id": "fraudelatam",
@@ -465,7 +533,8 @@
    "t": "modelo",
    "p": "latam",
    "r": "CTI-2026-020/021",
-   "d": "Agrupación por finalidad: robo de credenciales de banca en Latinoamérica"
+   "d": "Agrupación por finalidad: robo de credenciales de banca en Latinoamérica",
+   "a": "proveedor"
   },
   {
    "id": "iaofensiva",
@@ -473,7 +542,8 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-019/026",
-   "d": "Los dos casos opuestos de la cartera: ARTEX documenta IA que AUMENTA la capacidad; el «vibeware» de APT36, IA que la DEGRADA"
+   "d": "Los dos casos opuestos de la cartera: ARTEX documenta IA que AUMENTA la capacidad; el «vibeware» de APT36, IA que la DEGRADA",
+   "a": "-"
   },
   {
    "id": "tldbaratos",
@@ -481,7 +551,8 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-018",
-   "d": "Ecosistema de registro DNS: los TLD de bajo coste y registro laxo son el insumo común de actores sin relación entre sí. Gamaredon registró 189 dominios en un año; DarkWire y APT36 usan .xyz, .store, .shop, .space, .cv y .online"
+   "d": "Ecosistema de registro DNS: los TLD de bajo coste y registro laxo son el insumo común de actores sin relación entre sí. Gamaredon registró 189 dominios en un año; DarkWire y APT36 usan .xyz, .store, .shop, .space, .cv y .online",
+   "a": "-"
   },
   {
    "id": "pterolnk",
@@ -489,7 +560,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Envenena USB y unidades de red. LNK con doble extensión y nombres en ucraniano"
+   "d": "Envenena USB y unidades de red. LNK con doble extensión y nombres en ucraniano",
+   "a": "proveedor"
   },
   {
    "id": "pteropsdoor",
@@ -497,7 +569,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Ladrón de ficheros insignia. Exfiltra a S3 y por Tor de reserva"
+   "d": "Ladrón de ficheros insignia. Exfiltra a S3 y por Tor de reserva",
+   "a": "proveedor"
   },
   {
    "id": "pterovdoor",
@@ -505,7 +578,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Segundo ladrón de ficheros, en VBScript"
+   "d": "Segundo ladrón de ficheros, en VBScript",
+   "a": "proveedor"
   },
   {
    "id": "pterobox",
@@ -513,7 +587,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Primera herramienta del actor que exfiltra a nube comercial"
+   "d": "Primera herramienta del actor que exfiltra a nube comercial",
+   "a": "proveedor"
   },
   {
    "id": "pterographin",
@@ -521,7 +596,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Reinició la puerta trasera Kazuar de Turla el 27-02-2025"
+   "d": "Reinició la puerta trasera Kazuar de Turla el 27-02-2025",
+   "a": "proveedor"
   },
   {
    "id": "pteropaste",
@@ -529,7 +605,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Envenenador de USB que además entregó cargas de Turla"
+   "d": "Envenenador de USB que además entregó cargas de Turla",
+   "a": "proveedor"
   },
   {
    "id": "pterood",
@@ -537,7 +614,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Descarga cargas de Turla por la API de Telegra.ph"
+   "d": "Descarga cargas de Turla por la API de Telegra.ph",
+   "a": "proveedor"
   },
   {
    "id": "pterosetup",
@@ -545,7 +623,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Sustituye instaladores legítimos por autoextraíbles 7z envenenados"
+   "d": "Sustituye instaladores legítimos por autoextraíbles 7z envenenados",
+   "a": "proveedor"
   },
   {
    "id": "pterosand",
@@ -553,7 +632,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Descargador VBScript ejecutado en memoria con ExecuteGlobal"
+   "d": "Descargador VBScript ejecutado en memoria con ExecuteGlobal",
+   "a": "proveedor"
   },
   {
    "id": "kazuar",
@@ -561,7 +641,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-025",
-   "d": "Puerta trasera exclusiva de Turla, desplegada con herramientas de Gamaredon"
+   "d": "Puerta trasera exclusiva de Turla, desplegada con herramientas de Gamaredon",
+   "a": "proveedor"
   },
   {
    "id": "rezzuar",
@@ -569,7 +650,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "ESET Q2–Q3 2026",
-   "d": "VBScript de reconocimiento de Turla desplegado por PteroPSDoor"
+   "d": "VBScript de reconocimiento de Turla desplegado por PteroPSDoor",
+   "a": "proveedor"
   },
   {
    "id": "zerolot",
@@ -577,7 +659,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Borrador distribuido por directiva de grupo. Deja el sistema arrancable y vacío"
+   "d": "Borrador distribuido por directiva de grupo. Deja el sistema arrancable y vacío",
+   "a": "proveedor"
   },
   {
    "id": "sting",
@@ -585,7 +668,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Borrador ejecutado desde una tarea programada con nombre en argot ruso"
+   "d": "Borrador ejecutado desde una tarea programada con nombre en argot ruso",
+   "a": "proveedor"
   },
   {
    "id": "swiftslicer",
@@ -593,7 +677,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Borrador anterior, también distribuido por directiva de grupo"
+   "d": "Borrador anterior, también distribuido por directiva de grupo",
+   "a": "proveedor"
   },
   {
    "id": "notpetya",
@@ -601,7 +686,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "2017. El ciberataque más costoso registrado"
+   "d": "2017. El ciberataque más costoso registrado",
+   "a": "proveedor"
   },
   {
    "id": "industroyer",
@@ -609,7 +695,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Sistemas de control industrial. Dos cortes de suministro en Ucrania"
+   "d": "Sistemas de control industrial. Dos cortes de suministro en Ucrania",
+   "a": "proveedor"
   },
   {
    "id": "mythicrata",
@@ -617,7 +704,8 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-029",
-   "d": "Puerta trasera en Go del PROVEEDOR DE ACCESO, no de Sandworm"
+   "d": "Puerta trasera en Go del PROVEEDOR DE ACCESO, no de Sandworm",
+   "a": "proveedor"
   },
   {
    "id": "gpo",
@@ -625,7 +713,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-029",
-   "d": "El mecanismo de administración del parque, usado como vector de distribución masiva"
+   "d": "El mecanismo de administración del parque, usado como vector de distribución masiva",
+   "a": "-"
   },
   {
    "id": "crimsonrat",
@@ -633,7 +722,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Pieza histórica en .NET. Una muestra inflada a 34 MB"
+   "d": "Pieza histórica en .NET. Una muestra inflada a 34 MB",
+   "a": "proveedor"
   },
   {
    "id": "elizarat",
@@ -641,7 +731,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Descrita como de uso exclusivo del actor"
+   "d": "Descrita como de uso exclusivo del actor",
+   "a": "proveedor"
   },
   {
    "id": "caprarat",
@@ -649,7 +740,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Android. Fuera del alcance del informe"
+   "d": "Android. Fuera del alcance del informe",
+   "a": "proveedor"
   },
   {
    "id": "poseidon",
@@ -657,7 +749,8 @@
    "t": "herramienta",
    "p": "-",
    "r": "CTI-2026-026",
-   "d": "AGENTE DE MYTHIC: su presencia no atribuye. Naturaleza en disputa entre proveedores"
+   "d": "AGENTE DE MYTHIC: su presencia no atribuye. Naturaleza en disputa entre proveedores",
+   "a": "-"
   },
   {
    "id": "aresrat",
@@ -665,7 +758,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "ELF empaquetado con PyInstaller"
+   "d": "ELF empaquetado con PyInstaller",
+   "a": "proveedor"
   },
   {
    "id": "deskrat",
@@ -673,7 +767,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Go 1.24.3, WebSocket. El servidor saluda «Welcome to Stealth Server»"
+   "d": "Go 1.24.3, WebSocket. El servidor saluda «Welcome to Stealth Server»",
+   "a": "proveedor"
   },
   {
    "id": "crystalshell",
@@ -681,7 +776,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Crystal. C2 por canales de Discord"
+   "d": "Crystal. C2 por canales de Discord",
+   "a": "proveedor"
   },
   {
    "id": "zigshell",
@@ -689,7 +785,8 @@
    "t": "herramienta",
    "p": "pk",
    "r": "CTI-2026-026",
-   "d": "Port directo de CrystalShell a Zig. C2 por Slack"
+   "d": "Port directo de CrystalShell a Zig. C2 por Slack",
+   "a": "proveedor"
   },
   {
    "id": "desktopfile",
@@ -697,7 +794,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-026",
-   "d": "Estándar de escritorio Linux. Icon=application-pdf y X-GNOME-Autostart-enabled=true"
+   "d": "Estándar de escritorio Linux. Icon=application-pdf y X-GNOME-Autostart-enabled=true",
+   "a": "-"
   },
   {
    "id": "plugx",
@@ -705,7 +803,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "El FBI borró una variante de 4 258 ordenadores en EE. UU."
+   "d": "El FBI borró una variante de 4 258 ordenadores en EE. UU.",
+   "a": "proveedor"
   },
   {
    "id": "toneshell",
@@ -713,7 +812,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Puerta trasera principal en 2025. Cargada por un primer rootkit de kernel"
+   "d": "Puerta trasera principal en 2025. Cargada por un primer rootkit de kernel",
+   "a": "proveedor"
   },
   {
    "id": "lotuslite",
@@ -721,7 +821,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Puerta trasera del rearme posterior al desmantelamiento. Vector .msc"
+   "d": "Puerta trasera del rearme posterior al desmantelamiento. Vector .msc",
+   "a": "proveedor"
   },
   {
    "id": "coolclient",
@@ -729,7 +830,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Opera con el rootkit de kernel firmado. Víctimas en 4 gobiernos"
+   "d": "Opera con el rootkit de kernel firmado. Víctimas en 4 gobiernos",
+   "a": "proveedor"
   },
   {
    "id": "msagent",
@@ -737,7 +839,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Rootkit de kernel FIRMADO. Oculta procesos y borra el C2 de lo que el sistema informa"
+   "d": "Rootkit de kernel FIRMADO. Oculta procesos y borra el C2 de lo que el sistema informa",
+   "a": "proveedor"
   },
   {
    "id": "nanjingcert",
@@ -745,7 +848,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-027",
-   "d": "Válido ago-2013 → sep-2014. CADUCADO hace doce años y aceptado por Windows"
+   "d": "Válido ago-2013 → sep-2014. CADUCADO hace doce años y aceptado por Windows",
+   "a": "-"
   },
   {
    "id": "hiupan",
@@ -753,7 +857,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Gusano de USB. Deja visible sólo USBConfig.exe"
+   "d": "Gusano de USB. Deja visible sólo USBConfig.exe",
+   "a": "proveedor"
   },
   {
    "id": "snakedisk",
@@ -761,7 +866,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Segundo gusano de USB, septiembre de 2025"
+   "d": "Segundo gusano de USB, septiembre de 2025",
+   "a": "proveedor"
   },
   {
    "id": "pubload",
@@ -769,7 +875,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Entregada por carga lateral de DLL desde el gusano"
+   "d": "Entregada por carga lateral de DLL desde el gusano",
+   "a": "proveedor"
   },
   {
    "id": "staticplugin",
@@ -777,7 +884,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Descargador FIRMADO del secuestro de portal cautivo"
+   "d": "Descargador FIRMADO del secuestro de portal cautivo",
+   "a": "proveedor"
   },
   {
    "id": "shardloader",
@@ -785,7 +893,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-027",
-   "d": "Junio de 2026. Atribuidas por solapamiento de código y una ERRATA compartida"
+   "d": "Junio de 2026. Atribuidas por solapamiento de código y una ERRATA compartida",
+   "a": "proveedor"
   },
   {
    "id": "ts6",
@@ -793,7 +902,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-028",
-   "d": "Seis variantes de TINYSHELL, cada una con el nombre de un demonio real de Junos OS. Cuatro pasivas"
+   "d": "Seis variantes de TINYSHELL, cada una con el nombre de un demonio real de Junos OS. Cuatro pasivas",
+   "a": "proveedor"
   },
   {
    "id": "virtualpita",
@@ -801,7 +911,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-028",
-   "d": "Puertas traseras de hipervisor. Canal sobre VMCI"
+   "d": "Puertas traseras de hipervisor. Canal sobre VMCI",
+   "a": "proveedor"
   },
   {
    "id": "mopsled",
@@ -809,7 +920,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-028",
-   "d": "Modular. Complementos cifrados con ChaCha20"
+   "d": "Modular. Complementos cifrados con ChaCha20",
+   "a": "proveedor"
   },
   {
    "id": "castletap",
@@ -817,7 +929,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-028",
-   "d": "Software asociado consolidado por MITRE"
+   "d": "Software asociado consolidado por MITRE",
+   "a": "proveedor"
   },
   {
    "id": "tableflip",
@@ -825,7 +938,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-028",
-   "d": "Modifica reglas de cortafuegos; sniffer de autenticaciones TACACS+"
+   "d": "Modifica reglas de cortafuegos; sniffer de autenticaciones TACACS+",
+   "a": "proveedor"
   },
   {
    "id": "veriexec",
@@ -833,7 +947,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "Escritura en /proc/<pid>/mem sobre un proceso autorizado. La firma verifica el fichero, no el proceso"
+   "d": "Escritura en /proc/<pid>/mem sobre un proceso autorizado. La firma verifica el fichero, no el proceso",
+   "a": "-"
   },
   {
    "id": "cmd1",
@@ -841,7 +956,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-030",
-   "d": "Clientes de transferencia en Go, con rutas de compilación filtradas"
+   "d": "Clientes de transferencia en Go, con rutas de compilación filtradas",
+   "a": "proveedor"
   },
   {
    "id": "tacacs",
@@ -849,7 +965,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-030",
-   "d": "Las credenciales de administración de la red llegan al adversario por el camino previsto"
+   "d": "Las credenciales de administración de la red llegan al adversario por el camino previsto",
+   "a": "-"
   },
   {
    "id": "guestshell",
@@ -857,7 +974,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-030",
-   "d": "Contenedor Linux integrado en el equipamiento Cisco"
+   "d": "Contenedor Linux integrado en el equipamiento Cisco",
+   "a": "-"
   },
   {
    "id": "sparrowdoor",
@@ -865,7 +983,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Implante histórico de FamousSparrow. Pasivo, con WinDivert"
+   "d": "Implante histórico de FamousSparrow. Pasivo, con WinDivert",
+   "a": "proveedor"
   },
   {
    "id": "copperdoor",
@@ -873,7 +992,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "EL MISMO IMPLANTE con dos nombres. Su presencia identifica el ecosistema, NO al actor"
+   "d": "EL MISMO IMPLANTE con dos nombres. Su presencia identifica el ecosistema, NO al actor",
+   "a": "proveedor"
   },
   {
    "id": "copperdns",
@@ -881,7 +1001,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Tunela el mando en consultas DNS de tipo MX. Certificado autofirmado CN=8.8.8.8"
+   "d": "Tunela el mando en consultas DNS de tipo MX. Certificado autofirmado CN=8.8.8.8",
+   "a": "proveedor"
   },
   {
    "id": "sparrowshell",
@@ -889,7 +1010,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Componente Linux. Rootkit Reptile modificado"
+   "d": "Componente Linux. Rootkit Reptile modificado",
+   "a": "proveedor"
   },
   {
    "id": "squadc",
@@ -897,7 +1019,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Clúster SilentDelivery. Instalador CertFixer.msi"
+   "d": "Clúster SilentDelivery. Instalador CertFixer.msi",
+   "a": "proveedor"
   },
   {
    "id": "annobindoor",
@@ -905,7 +1028,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Clúster OceanGate. Entrada por servidores Linux"
+   "d": "Clúster OceanGate. Entrada por servidores Linux",
+   "a": "proveedor"
   },
   {
    "id": "copperadu",
@@ -913,7 +1037,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Crea la cuenta admin$ y la regla de cortafuegos RasiUwpApp"
+   "d": "Crea la cuenta admin$ y la regla de cortafuegos RasiUwpApp",
+   "a": "proveedor"
   },
   {
    "id": "shadowpad",
@@ -921,7 +1046,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Compartida entre actores china-nexus. El caso chileno se atribuye a Lilac Typhoon"
+   "d": "Compartida entre actores china-nexus. El caso chileno se atribuye a Lilac Typhoon",
+   "a": "proveedor"
   },
   {
    "id": "hemigate",
@@ -929,7 +1055,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Solapamiento de código con SparrowDoor"
+   "d": "Solapamiento de código con SparrowDoor",
+   "a": "proveedor"
   },
   {
    "id": "melofee",
@@ -937,7 +1064,8 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "Check Point lo evalúa como vinculado a SparrowShell"
+   "d": "Check Point lo evalúa como vinculado a SparrowShell",
+   "a": "proveedor"
   },
   {
    "id": "troyanosbr",
@@ -945,7 +1073,8 @@
    "t": "herramienta",
    "p": "latam",
    "r": "CTI-2026-021",
-   "d": "Ecosistema de troyanos bancarios brasileños con foco Chile"
+   "d": "Ecosistema de troyanos bancarios brasileños con foco Chile",
+   "a": "proveedor"
   },
   {
    "id": "remcos",
@@ -953,7 +1082,8 @@
    "t": "herramienta",
    "p": "latam",
    "r": "CTI-2026-020",
-   "d": "RAT de mercado usados por actores regionales"
+   "d": "RAT de mercado usados por actores regionales",
+   "a": "proveedor"
   },
   {
    "id": "shadowvector",
@@ -961,7 +1091,8 @@
    "t": "herramienta",
    "p": "latam",
    "r": "CTI-2026-022",
-   "d": "Campañas documentadas por Acronis"
+   "d": "Campañas documentadas por Acronis",
+   "a": "proveedor"
   },
   {
    "id": "cloudflare",
@@ -969,7 +1100,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-025",
-   "d": "NO BLOQUEAR. Un worker ejecuta código; un túnel sólo retransmite"
+   "d": "NO BLOQUEAR. Un worker ejecuta código; un túnel sólo retransmite",
+   "a": "-"
   },
   {
    "id": "devtunnels",
@@ -977,7 +1109,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-025",
-   "d": "NO BLOQUEAR: bloquear devtunnels.ms rompe Visual Studio"
+   "d": "NO BLOQUEAR: bloquear devtunnels.ms rompe Visual Studio",
+   "a": "-"
   },
   {
    "id": "deaddrops",
@@ -985,7 +1118,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-025",
-   "d": "Dead drop resolvers. El criterio es el PROCESO, nunca el destino"
+   "d": "Dead drop resolvers. El criterio es el PROCESO, nunca el destino",
+   "a": "-"
   },
   {
    "id": "s3",
@@ -993,7 +1127,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-025",
-   "d": "Exfiltración a almacenamiento S3 comercial"
+   "d": "Exfiltración a almacenamiento S3 comercial",
+   "a": "-"
   },
   {
    "id": "colab",
@@ -1001,7 +1136,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-026",
-   "d": "NO BLOQUEAR: son las herramientas con las que trabaja la organización"
+   "d": "NO BLOQUEAR: son las herramientas con las que trabaja la organización",
+   "a": "-"
   },
   {
    "id": "supabase",
@@ -1009,7 +1145,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-026",
-   "d": "PaaS abusado por DOS actores no relacionados: Gamaredon y APT36"
+   "d": "PaaS abusado por DOS actores no relacionados: Gamaredon y APT36",
+   "a": "-"
   },
   {
    "id": "captiveportal",
@@ -1017,7 +1154,8 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-027",
-   "d": "Quien controla la red controla la primera página que el usuario ve"
+   "d": "Quien controla la red controla la primera página que el usuario ve",
+   "a": "-"
   },
   {
    "id": "cve8088",
@@ -1025,7 +1163,8 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-025",
-   "d": "Recorrido de ruta por ADS. Persistencia silenciosa en la carpeta de Inicio"
+   "d": "Recorrido de ruta por ADS. Persistencia silenciosa en la carpeta de Inicio",
+   "a": "-"
   },
   {
    "id": "cve21590",
@@ -1033,7 +1172,8 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "Inyección en proceso legítimo para eludir Veriexec"
+   "d": "Inyección en proceso legítimo para eludir Veriexec",
+   "a": "-"
   },
   {
    "id": "cvevmware",
@@ -1041,7 +1181,8 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "VMware. El primero ejecuta en el huésped SIN evento de inicio de sesión"
+   "d": "VMware. El primero ejecuta en el huésped SIN evento de inicio de sesión",
+   "a": "-"
   },
   {
    "id": "cvefortinet",
@@ -1049,7 +1190,8 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-028",
-   "d": "FortiOS"
+   "d": "FortiOS",
+   "a": "-"
   },
   {
    "id": "cveciscoxe",
@@ -1057,7 +1199,8 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-030",
-   "d": "Cisco IOS XE, encadenados. Doble codificación de URL para eludir filtros"
+   "d": "Cisco IOS XE, encadenados. Doble codificación de URL para eludir filtros",
+   "a": "-"
   },
   {
    "id": "cveborde",
@@ -1065,7 +1208,8 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-030",
-   "d": "Ivanti, Palo Alto y Cisco Smart Install. El último es de 2018"
+   "d": "Ivanti, Palo Alto y Cisco Smart Install. El último es de 2018",
+   "a": "-"
   }
  ],
  "aristas": [

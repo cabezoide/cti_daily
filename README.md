@@ -69,6 +69,13 @@ legítimos abusados y vulnerabilidades. Se gira con el ratón, se filtra por tip
 nodo abre una ficha con su descripción y un enlace al informe de origen. El recuento vivo
 está en el índice de más arriba.
 
+**El color de cada nodo es su posible país de origen**, y la chapa de dos letras dice con
+qué base se afirma: **rellena** si un Estado o un tribunal lo ha atribuido públicamente
+—siete nodos de la cartera—, **sólo con el contorno** si es valoración de proveedor. La
+distinción no es decorativa: pintar igual a un actor con acusación federal y a uno cuyo
+propio informe dice que ningún gobierno lo ha atribuido afirmaría más de lo que las
+fuentes sostienen.
+
 Es HTML autocontenido, **sin dependencias externas ni red**: la disposición se calcula en
 el navegador con un algoritmo de fuerzas en tres dimensiones y semilla fija, de modo que el
 mapa sale idéntico en cada carga.
