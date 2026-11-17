@@ -2,20 +2,21 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-017"
-version: "1.1"
+version: "1.2"
 tipo: "Perfil de actor + informe de campaña"
 foco_regional: "Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "FamousSparrow (SparroWocky)"
+actor: "FamousSparrow (SparroWocky) · solapamiento con el ecosistema Sparrow de CopperDragon y con el clúster DarkWire (Check Point)"
 fecha: "2026-09-21"
-caduca: "2026-12-21"
+caduca: "2027-02-17"
 autor: "Célula CTI"
-distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
+distribucion: "Actualizado a v1.2 el 2026-11-17 con la investigación de Check Point sobre CopperDragon (10-11-2026), que obliga a revisar KJ-3, KJ-6 y el expediente de alias. Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-017
 ## FamousSparrow: el ciberespionaje chino concentra el 90 % de su esfuerzo en Latinoamérica y estrena SparroWocky, un implante construido para que la memoria y la pila de llamadas no delaten nada
 ### Ocho gobiernos de la región comprometidos entre julio de 2025 y 2026. Chile no figura en la telemetría publicada, pero sí en la alerta de agosto de 2026 sobre sus telecomunicaciones
+#### **Revisión v1.2 (17-11-2026).** Una segunda investigación, publicada el 10 de noviembre de 2026, sostiene que SparroWocky **no es exclusivo de este actor**: es una pieza de un arsenal compartido que un suministrador —`CopperDragon`— entrega a varios clústeres china-nexus. Y uno de ellos, `DarkWire`, lleva desde mediados de 2025 dentro de **al menos tres grandes operadoras de telecomunicaciones latinoamericanas**, con su infraestructura de mando alojada en el mismo país que la víctima. Eso cambia dos juicios de este informe y refuerza un tercero
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que
@@ -30,7 +31,7 @@ distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor.
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-017` |
-| Versión / fecha | `1.1` — 2026-09-21 |
+| Versión / fecha | `1.2` — 2026-11-17 (emisión original: 2026-09-21) |
 | Tipo de producto | Perfil de actor + informe de campaña |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Latinoamérica · Chile |
@@ -38,13 +39,13 @@ distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor.
 | Clasificación interna | Público — apto para difusión abierta |
 | Requisitos atendidos | `PIR-01`, `PIR-03`, `PIR-05`, `PIR-08` |
 | Solicitante / consumidor primario | CISO · Jefatura de SOC · Comité de Riesgo Operacional · Asuntos Corporativos |
-| Ventana de observación | 2024-07-01 → 2026-09-21 (con antecedentes desde 2019) |
-| Base de colección | 9 fuentes externas todo-fuente (investigación primaria de proveedor sobre binario y telemetría, prensa técnica, prensa nacional chilena, avisos de autoridad). **Sin telemetría propia incorporada** |
+| Ventana de observación | 2024-07-01 → **2026-11-10** (con antecedentes desde 2019). La ampliación de la ventana en v1.2 incorpora la investigación de Check Point sobre CopperDragon |
+| Base de colección | **10** fuentes externas todo-fuente (investigación primaria de proveedor sobre binario y telemetría, prensa técnica, prensa nacional chilena, avisos de autoridad). **Sin telemetría propia incorporada** |
 | Autor (analista) | Célula CTI |
 | Revisión por pares | Pendiente |
 | Aprobación | Pendiente |
-| Caducidad / revisión | 2026-12-21, o antes si se publica un nuevo análisis del implante, si aparece una víctima chilena atribuida o si se resuelve públicamente la disputa de alias con Salt Typhoon |
-| Productos relacionados | `CTI-2026-014` (TheGentlemen), `CTI-2026-015` (Qilin), `CTI-2026-016` (LockBit 5.0) — **no complementa: contrasta**. Los tres anteriores son actores criminales con ánimo de lucro; este es espionaje estatal y exige un modelo de amenaza distinto |
+| Caducidad / revisión | **2027-02-17** (ampliada en v1.2 desde 2026-12-21 por la incorporación de material nuevo), o antes si: se nombran los países y las operadoras de `DarkWire`; se publica un análisis que resuelva si `CopperDoor` y `SparroWocky` son el mismo binario; aparece una víctima chilena atribuida; o se resuelve públicamente la disputa de alias con Salt Typhoon |
+| Productos relacionados | `CTI-2026-014` (TheGentlemen), `CTI-2026-015` (Qilin), `CTI-2026-016` (LockBit 5.0) — **no complementa: contrasta**. Los tres anteriores son actores criminales con ánimo de lucro; este es espionaje estatal y exige un modelo de amenaza distinto. **Añadidos en v1.2:** `CTI-2026-022` (Red Akodon: el otro expediente de la cartera cuyo problema central es la disputa de nombres) · `CTI-2026-027` (Mustang Panda) y `CTI-2026-028` (UNC3886), para contraste de capacidad entre actores china-nexus · **`CTI-2026-030` (Salt Typhoon), que documenta el estado de la disputa de alias del `KJ-7` de este informe y establece que sigue sin resolverse** · `CTI-2026-018` (abuso de TLD: `DarkWire` registra dominios en `.com` que imitan marcas) |
 | Paquete legible por máquina | Pendiente de generar (véase §14) |
 
 <!-- cti:note type="warn" -->
@@ -80,6 +81,16 @@ distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor.
 ---
 
 ## 1. BLUF — Juicios clave
+
+<!-- cti:note type="warn" -->
+
+> ⚠ **Nota de revisión v1.2.** Los juicios `KJ-1` a `KJ-7` son los de la emisión
+> original de septiembre de 2026 y **se conservan sin reescribir**, para que la
+> revisión sea auditable. Dos de ellos quedan afectados por el material nuevo y
+> llevan una **enmienda marcada** inmediatamente después de su texto original:
+> `KJ-3` (sobre la exclusividad de SparroWocky) y `KJ-6` (sobre a quién
+> atribuir el compromiso de telecomunicaciones chilenas). Los juicios `KJ-8` a
+> `KJ-11` son nuevos.
 
 <!-- cti:kj -->
 
@@ -117,6 +128,17 @@ dirección de inicio del hilo, del recorrido de la pila o de la presencia del m�
 disco no verán este implante.** La oportunidad de detección está en la persistencia, en
 el trío de ficheros del cargador y en la conexión TLS saliente a un VPS.
 
+> ⚠ **ENMIENDA v1.2 a `KJ-3`.** El juicio original presenta SparroWocky como
+> «el nuevo implante» del grupo, lo que implicaba exclusividad. **Eso ya no se
+> sostiene.** La investigación de Check Point de 10-11-2026 identifica
+> `CopperDoor` como el mismo implante que ESET llama `SparroWocky`, y lo sitúa
+> dentro de un arsenal —el *framework* Sparrow— que un suministrador
+> (`CopperDragon`) entrega a **varios** clústeres china-nexus distintos. El
+> análisis técnico de `KJ-3` sigue siendo válido: las capacidades de evasión
+> descritas son las de ese implante. **Lo que deja de ser válido es usar su
+> presencia como base de atribución a este actor.** Véase `KJ-8` y la enmienda
+> de §O-1.
+
 **KJ-4.** **El patrón del cargador «tridente» es el artefacto más duradero y debe ser el
 eje de la caza.** Cada despliegue deja tres ficheros en el mismo directorio: un ejecutable
 legítimo firmado, una **DLL legítima parcheada** —conserva la firma digital, ahora inválida,
@@ -149,6 +171,17 @@ de la Pirámide del Dolor para atribuir; el clúster nombrado en el caso chileno
 *Valor del juicio:* está aquí **para impedir una fusión indebida de alias**, que es el error
 analítico más caro de este dominio.
 
+> ⚠ **ENMIENDA v1.2 a `KJ-6`.** El juicio original —no atribuir el ShadowPad
+> hallado en telecomunicaciones chilenas a este actor— **se mantiene y se
+> refuerza**: sigue sin haber base para esa atribución concreta. Pero el
+> material nuevo cambia el contexto en el que se lee. En septiembre de 2026 no
+> existía ningún clúster china-nexus con actividad documentada contra
+> **operadoras de telecomunicaciones latinoamericanas**; desde el 10 de
+> noviembre de 2026 sí existe, y se llama `DarkWire`. **La pregunta deja de ser
+> si hay actores de este ecosistema dentro de las telecomunicaciones de la
+> región —los hay— y pasa a ser cuáles y dónde**, que es lo que la fuente no
+> publica. Véase `KJ-9` y la brecha `G-5`.
+
 **KJ-7.** **La disputa de alias con Salt Typhoon sigue sin resolverse y tiene consecuencias
 operativas.** Microsoft sostiene desde septiembre de 2024 que Salt Typhoon, GhostEmperor y
 FamousSparrow son el mismo grupo; ESET los rastrea por separado y señala que Microsoft **no
@@ -161,6 +194,55 @@ SparrowDoor y HemiGate de Earth Estries) frente a arsenales propios distintos en
 *Consecuencia:* **no importar la biblioteca de detección de Salt Typhoon como si cubriera a
 FamousSparrow.** Cubre a otra cosa.
 
+**KJ-8 (nuevo en v1.2).** **SparroWocky no identifica a este actor: identifica a un
+proveedor.** Check Point publicó el 10 de noviembre de 2026 una investigación que define
+`CopperDragon` como lo que denomina literalmente un **«potencial intendente digital»**
+—*potential digital quartermaster*—, es decir, una entidad que **desarrolla o suministra
+malware e infraestructura a varios actores china-nexus** en lugar de operar ella misma. Y
+sitúa explícitamente el implante que ESET llama `SparroWocky` dentro de ese arsenal
+compartido, bajo el nombre `CopperDoor`. La fuente identifica **tres clústeres** que lo
+usan: `SilentDelivery` (Europa y Asia), `OceanGate` (Asia, con foco en India) y `DarkWire`
+(Latinoamérica), y trata a FamousSparrow **como uno de los actores que emplean el conjunto
+de herramientas, no como uno de los tres clústeres**. Valoramos **probable** *(55–80 %)*
+que la tesis del suministrador compartido sea correcta. **Confianza: moderada.** *Base:*
+investigación primaria de un proveedor con análisis de binario e infraestructura, que
+**declara su propia tesis como hipótesis** —usa «potencial» y «puede operar como»— y no
+como hecho establecido. Ninguna otra fuente la ha corroborado todavía.
+
+**KJ-9 (nuevo en v1.2).** **Hay un clúster de este ecosistema dentro de las
+telecomunicaciones latinoamericanas desde mediados de 2025, y su infraestructura está
+diseñada para parecer local.** `DarkWire` ataca, según la fuente, **al menos tres grandes
+operadoras de telecomunicaciones** de la región más entidades de gobierno, asuntos
+exteriores y justicia, con dos puertas traseras: `CopperDoor` y `CopperDNS`. El rasgo
+operativo que importa es el de la infraestructura: **la mayoría de sus direcciones de
+mando están en Latinoamérica, con frecuencia en el mismo país que la víctima**, lo que hace
+que el tráfico de mando se confunda con tráfico local y **anula la detección geográfica
+como señal**. Valoramos **muy probable** *(80–95 %)* que esto sea así. **Confianza:
+moderada.** *Base:* afirmación explícita de la fuente primaria, con treinta y seis
+direcciones publicadas; **pero la fuente no nombra ni los países ni las operadoras**, de
+modo que no se puede verificar si Chile está entre ellos. Es la brecha `G-5`.
+
+**KJ-10 (nuevo en v1.2).** El vínculo entre `DarkWire` y este actor **no es una conjetura
+de nomenclatura: es un dominio compartido.** La fuente señala el dominio `amelicen[.]com`
+como punto de contacto, reportado previamente como servidor de mando de `SparrowDoor` —el
+implante anterior de este grupo— y presente también en la infraestructura de `CopperDNS`.
+Valoramos **probable** *(55–80 %)* que el solapamiento de infraestructura sea real y no
+coincidencia de alojamiento. **Confianza: moderada.** *Base:* un solo indicador compartido,
+señalado por una sola fuente. **Un dominio común es un indicio, no una identidad**: es el
+mismo grado de evidencia que en 2021 vinculó a este grupo con GhostEmperor por una
+dirección IP, y que §O-1 califica desde la emisión original como solapamiento parcial
+acotado.
+
+**KJ-11 (nuevo en v1.2).** La consecuencia metodológica es la que esta cartera ya ha
+encontrado dos veces y conviene no volver a aprender: **cuando varios clústeres comparten
+arsenal porque alguien se lo suministra, el implante deja de ser un indicador de actor y
+pasa a ser un indicador de ecosistema.** `CTI-2026-022` documentó este mismo problema con
+Red Akodon y la familia TAG-144; aquí reaparece con un grado más de abstracción, porque lo
+compartido no es una técnica sino **un arsenal completo con su infraestructura**. Valoramos
+**casi con certeza** *(95–99 %)* que una detección construida sobre la presencia de
+`SparroWocky`/`CopperDoor` no permita, por sí sola, atribuir a FamousSparrow. **Confianza:
+alta.** *Base:* se sigue directamente de `KJ-8`; es una conclusión lógica, no empírica.
+
 **Qué cambiaría estos juicios:** (a) la publicación de indicadores técnicos por parte de
 Microsoft que sostengan la fusión de alias —invalidaría KJ-7 y obligaría a reescribir §O-1—;
 (b) la aparición de una víctima chilena atribuida a este actor por CSIRT Nacional o por un
@@ -169,6 +251,17 @@ de SparroWocky fuera de Latinoamérica en volumen —falsaría el carácter deli
 (d) un cambio del esquema tridente a un cargador de una sola pieza o sin fichero en disco
 —dejaría ciega toda la caza de T-4—; (e) la identificación del vector de acceso inicial con
 un CVE concreto —permitiría por fin una medida preventiva y no solo detectiva—.
+
+---
+
+**Qué cambiaría los juicios nuevos (v1.2):** (e) que Check Point o cualquier otro
+proveedor **nombre los países y las operadoras de `DarkWire`**, lo que convertiría `KJ-9`
+de amenaza regional genérica en exposición concreta — o la descartaría para Chile; (f) que
+un segundo proveedor **corrobore o refute la tesis del suministrador compartido**, lo que
+movería `KJ-8` de probable a cualquiera de los dos extremos; (g) que se publique un
+análisis comparado de `CopperDoor` y `SparroWocky` que establezca si son **el mismo binario
+o dos derivados de una misma base**, distinción que `KJ-11` deja abierta y que cambia qué
+se puede atribuir con qué.
 
 ---
 
@@ -227,6 +320,56 @@ retrospectivo**.
 
 ---
 
+### Adenda del resumen ejecutivo — revisión v1.2, 17 de noviembre de 2026
+
+Siete semanas después de emitirse este informe, una segunda investigación obliga a
+corregir una de sus premisas. El 10 de noviembre de 2026, Check Point publicó un análisis
+que sostiene que el implante que da nombre a este documento **no pertenece a este actor en
+exclusiva**.
+
+La tesis es la siguiente. Existe una entidad —la llaman `CopperDragon`— que el propio
+informe define con cautela como un **«potencial intendente digital»**: alguien que
+desarrolla o suministra malware e infraestructura **a otros**, en lugar de operar. Su
+arsenal, el *framework* Sparrow, lo usan al menos tres clústeres distintos, con victimología
+separada: uno en Europa y Asia, otro en Asia con foco en India, y un tercero en
+Latinoamérica. Y el implante que ESET analizó como `SparroWocky` es, en esa taxonomía,
+`CopperDoor`: una pieza del arsenal compartido.
+
+**Lo que esto cambia no es el análisis técnico, que sigue en pie, sino lo que se puede
+concluir de encontrarlo.** El §T-4 y el §X-3 de este informe siguen siendo correctos:
+describen cómo detectar ese implante y ese cargador. Lo que deja de ser correcto es la
+inferencia siguiente, que ninguna sección enuncia pero que el lector haría de forma
+natural: **si encuentro esto, es FamousSparrow.** Ya no. Puede ser cualquiera de los que
+compran en la misma tienda.
+
+**Y hay una segunda cosa, que es la que debería leerse con más atención en Chile.** El
+clúster latinoamericano de ese ecosistema se llama `DarkWire`, lleva activo desde mediados
+de 2025, y sus objetivos son **al menos tres grandes operadoras de telecomunicaciones** de
+la región, además de entidades de gobierno, asuntos exteriores y justicia. La fuente no
+nombra ni los países ni las operadoras.
+
+El detalle operativo de `DarkWire` que importa es el de su infraestructura: **la mayoría de
+sus direcciones de mando y control están alojadas en Latinoamérica, con frecuencia en el
+mismo país que la víctima.** No es una elección estética. Significa que el tráfico de
+mando sale hacia una dirección nacional, indistinguible del tráfico legítimo a un
+proveedor local, y que **cualquier detección que dependa de que el C2 esté «fuera» no lo
+verá**. Es el mismo principio que `CTI-2026-025` documenta para los túneles de terceros,
+llevado a la geografía.
+
+La versión original de este informe sostenía, en `KJ-6`, que el ShadowPad hallado en
+telecomunicaciones chilenas no debía atribuirse a este actor. **Ese juicio se mantiene y se
+refuerza.** Pero su contexto cambió: en septiembre de 2026 no había ningún clúster
+china-nexus con actividad documentada contra operadoras de telecomunicaciones
+latinoamericanas, y ahora hay uno. La pregunta ya no es si están ahí: es cuáles y dónde, y
+eso es precisamente lo que no se publica.
+
+Las dos decisiones nuevas que este material pide son pequeñas y concretas: **buscar el
+dominio que vincula los dos expedientes** (`amelicen[.]com`, §X-3 y Anexo A.2), y **revisar
+si nuestras detecciones de mando y control asumen que el servidor del adversario está en el
+extranjero** — porque en este caso no lo está.
+
+---
+
 ## 3. Alcance, requisitos y limitaciones
 
 **3.1 Requisitos de inteligencia atendidos**
@@ -260,6 +403,34 @@ permiten validar indicadores.
 en §O-6, pre-mortem, y valoración doble Admiralty en el Anexo B. Lenguaje estimativo según
 ICD 203, con la escala del Anexo C. Mapeo a MITRE ATT&CK y priorización por Pirámide del
 Dolor.
+
+---
+
+**3.5 Limitaciones añadidas en la revisión v1.2.** (i) **La investigación de Check Point
+declara su propia tesis como hipótesis, no como hallazgo.** Los términos literales son
+«potencial intendente digital» y «puede operar como»; `KJ-8` respeta ese grado y no lo
+eleva. (ii) **El informe no nombra los países ni las operadoras de `DarkWire`**, ni cuántas
+víctimas hay en cada uno. Dice «al menos tres grandes operadoras de telecomunicaciones» y
+«varias decenas» de víctimas en el conjunto de los tres clústeres, repartidas en **21
+países** que tampoco enumera individualmente. **No se puede determinar si Chile está entre
+ellos**, y por tanto `KJ-9` no se puede convertir en exposición concreta. Es la brecha
+`G-5`. (iii) **El artículo no se pudo leer íntegro en una sola pasada**: se leyó en dos
+tramos, y los indicadores proceden del segundo. No hay indicios de inconsistencia entre
+ambos. (iv) **El informe no publica mapeo MITRE ATT&CK**: describe las técnicas en prosa.
+El §T-2 de este informe **no se ha ampliado** con el material nuevo, para no atribuir a la
+fuente un mapeo que no hizo. (v) **No publica ningún mutex ni nombre de servicio malicioso
+propio**, sólo nombres de servicio legítimos de Windows que uno de los componentes
+reconfigura. (vi) **La asignación de cada dirección IP a un clúster proviene de los
+encabezados de las tablas de la fuente, no de un dato por dirección.** Se conserva esa
+atribución con la salvedad anotada en el Anexo A.2. (vii) **Varias claves criptográficas se
+mencionan sin publicar su valor** (la clave RC4 de los módulos, el cifrado basado en el
+nombre del equipo). (viii) **No se han leído la publicación de ESET sobre el reemplazo de
+SparrowDoor por CopperDoor ni el análisis de Positive Technologies** que la fuente cita
+para uno de los otros clústeres; ambos son requisitos de colección (`G-6`). (ix) **La
+correspondencia entre `CopperDoor` y `SparroWocky` la afirma Check Point**; no se ha
+localizado una comparación de binarios publicada que establezca si son el mismo fichero o
+dos derivados de una base común, y la distinción importa para lo que se puede atribuir
+(`KJ-11`).
 
 ---
 
@@ -309,6 +480,23 @@ precisión inexistente.
 | Puerto Rico | Gubernamental | Territorio estadounidense: eleva el componente de contrainteligencia del caso |
 | Venezuela | Gubernamental | — |
 | Chile | **No observado** | Sin ningún indicador que sitúe al actor en el país. Véase KJ-5 y la advertencia de sesgo en §0 |
+| **(v1.2) Al menos 3 operadoras de telecomunicaciones de la región** | **Telecomunicaciones** | **Clúster `DarkWire`, activo desde mediados de 2025.** La fuente no nombra las operadoras ni los países. Añade además gobierno, asuntos exteriores y justicia |
+
+<!-- cti:note type="warn" -->
+
+> ⚠ **Adenda v1.2 a la victimología.** La tabla anterior es la de la emisión original y
+> describe **objetivos gubernamentales**. El material nuevo añade un sector que no estaba:
+> **telecomunicaciones**. El clúster `DarkWire` del mismo ecosistema lleva desde mediados
+> de 2025 dentro de al menos tres grandes operadoras de la región, y la fuente **no publica
+> ni los países ni los nombres**. En el conjunto de los tres clústeres habla de «varias
+> decenas» de víctimas repartidas en **21 países**, sin enumerarlos.
+>
+> La consecuencia para la lectura de este informe es directa: **el párrafo siguiente, que
+> argumentaba que la exposición chilena era indirecta —por socios, concesiones y cadena de
+> suministro—, ya no describe el único camino.** Si una operadora chilena estuviera entre
+> las tres, la exposición sería de primer orden y afectaría a cualquier organización que
+> curse tráfico por ella. **No se puede afirmar ni descartar**, y eso es exactamente la
+> brecha `G-5`.
 
 > **Lectura clave.** La distribución no describe un sector: describe un mapa de intereses.
 > Energía, minería, telecomunicaciones y logística portuaria son exactamente los cuatro
@@ -368,6 +556,12 @@ precisión inexistente.
 | Earth Estries | Trend Micro | **Solapamiento parcial.** TTP comunes y solapamiento de código entre SparrowDoor y HemiGate; la naturaleza y extensión del vínculo no está establecida |
 | CrowDoor | Trend Micro | Nombre de una familia de implante, no del actor. Una de las variantes de SparrowDoor de 2024 se le parece |
 | Lilac Typhoon | Microsoft | **Clúster distinto.** Es el nombrado en el caso chileno de telecomunicaciones de agosto de 2026. No confundir |
+| **`CopperDragon`** *(v1.2)* | Check Point | **No es un alias de este actor: es un presunto suministrador.** La fuente lo define como «potencial intendente digital» que entrega malware e infraestructura a varios clústeres china-nexus. FamousSparrow sería **uno de los que usan su arsenal**, no el arsenal mismo |
+| **`DarkWire`** *(v1.2)* | Check Point | **Clúster distinto y vinculado.** Es el clúster **latinoamericano** del mismo ecosistema: telecomunicaciones, gobierno, exteriores y justicia, desde mediados de 2025. Vinculado a este actor por el dominio compartido `amelicen[.]com`. **No fundir** |
+| **`SilentDelivery`** *(v1.2)* | Check Point | **Clúster distinto** del mismo ecosistema: Europa y Asia, entrada por *watering hole* con falsa advertencia de certificado de Chrome |
+| **`OceanGate`** *(v1.2)* | Check Point | **Clúster distinto** del mismo ecosistema: Asia, con foco en India, entrada por servidores Linux. La fuente dice que sus tácticas son «consistentes con» FamousSparrow — y *consistente con* no es *igual a* |
+| **`CopperDoor`** *(v1.2)* | Check Point | **Es el nombre que Check Point da al implante que ESET llama `SparroWocky`.** No es un actor. Véase la enmienda de la nota de tradecraft |
+| **`Melofee`** *(v1.2)* | Diversos | La fuente lo evalúa como **vinculado a `SparrowShell`**, el componente Linux del arsenal. Relación no establecida con este actor |
 
 > ⚠ **Nota de tradecraft — el error caro de este dominio.** Fusionar FamousSparrow con Salt
 > Typhoon parece un detalle de nomenclatura y no lo es. Salt Typhoon es un actor con
@@ -376,6 +570,35 @@ precisión inexistente.
 > servidores expuestos. Si se importan las detecciones de uno creyendo que cubren al otro,
 > se obtiene una cobertura nominal alta y una cobertura real nula. **Hasta que Microsoft
 > publique indicadores, se tratan como clústeres separados y se documenta la decisión.**
+
+<!-- cti:note type="warn" -->
+
+> ⚠ **ENMIENDA v1.2 a la nota de tradecraft — y el error se ha vuelto más caro.** La nota
+> anterior advertía contra **fundir dos actores**. El material nuevo añade un error distinto
+> y de sentido contrario: **tomar un implante por un actor.**
+>
+> La emisión original de este informe se construyó, legítimamente, alrededor de
+> `SparroWocky` como implante característico del grupo. La investigación de Check Point de
+> 10-11-2026 sostiene que ese mismo implante —al que llama `CopperDoor`— es una pieza de un
+> arsenal que **un suministrador entrega a varios clústeres distintos**, con victimologías
+> separadas en Europa, Asia y Latinoamérica.
+>
+> **La regla operativa que se deriva, y que vale para toda esta cartera:** encontrar
+> `SparroWocky`/`CopperDoor` en una red establece que estamos ante **el ecosistema
+> Sparrow**. No establece **cuál de sus usuarios** está dentro. Son dos afirmaciones de
+> valor muy distinto, y la segunda requiere algo más: infraestructura, victimología o
+> secuencia de operación.
+>
+> Hay dos matices que conviene no perder. El primero: la propia fuente llama a su tesis
+> «potencial» y «puede operar como», de modo que **la existencia del suministrador es una
+> hipótesis bien argumentada y no un hecho establecido** (`KJ-8`). El segundo: nadie ha
+> publicado una comparación de binarios que determine si `CopperDoor` y `SparroWocky` son
+> **el mismo fichero o dos derivados de una base común** — y de eso depende exactamente
+> cuánto se puede atribuir con cuánta confianza (§3.5-ix, `KJ-11`).
+>
+> Esto es, en el fondo, el mismo problema que `CTI-2026-022` documentó con Red Akodon, un
+> grado más arriba: allí lo compartido era el método; aquí es **el arsenal entero con su
+> infraestructura**.
 
 ## O-2. Estructura y atribución
 
@@ -464,6 +687,10 @@ desarrollo y **hace que sus técnicas sean conocidas y, por tanto, detectables e
 | 2026-08-10 | **Se hace pública la alerta de EE. UU. sobre ShadowPad y Lilac Typhoon en Entel, Movistar y Telmex; la Fiscalía Metropolitana Centro Norte abre investigación por sabotaje informático** | Chile |
 | 2026-09-17 | **Publicación del análisis de SparroWocky y de la campaña latinoamericana** | LATAM |
 | 2026-09-21 | Emisión de este informe | Chile |
+| `2025-med` | **(v1.2) Inicio de la actividad del clúster `DarkWire` contra operadoras de telecomunicaciones y entidades de gobierno, exteriores y justicia en Latinoamérica**, según Check Point | LATAM |
+| `2026-ini` | **(v1.2)** Inicio de la actividad del clúster `SilentDelivery` en Europa y Asia, con *watering hole* y falsa advertencia de certificado de Chrome | Global |
+| `2026-11-10` | **(v1.2) Publicación de la investigación sobre `CopperDragon`: el implante SparroWocky se identifica como `CopperDoor`, pieza de un arsenal compartido entre tres clústeres. 21 países, varias decenas de víctimas, al menos tres grandes operadoras de telecomunicaciones latinoamericanas** | LATAM |
+| `2026-11-17` | **(v1.2) Revisión de este informe**: enmienda de `KJ-3` y `KJ-6`, cuatro juicios nuevos, enmienda del expediente de alias y Anexo A.2 | Chile |
 
 ## O-6. Hipótesis alternativas consideradas
 
@@ -500,6 +727,18 @@ regional con la que tenemos federación de identidad y que nadie incluyó en el 
 | I-4 | Anuncio de participación de la organización en proyecto, licitación o concesión con contraparte china en energía, minería, puertos o telecomunicaciones | Cambio material de exposición según el criterio de KJ-2; requiere revisión de superficie | Interna / corporativa | Asuntos Corporativos |
 | I-5 | Compromiso público de una entidad gubernamental chilena o de un operador regional con el que tengamos conectividad | Riesgo de compromiso indirecto por tercero de confianza | OSINT / enlace | Célula CTI |
 | I-6 | Aviso de ANCI o CSIRT Nacional sobre actividad de actores con nexo chino en sectores regulados | Posible obligación de notificación bajo Ley 21.663 según el efecto | Autoridad | Cumplimiento |
+
+---
+
+**Indicadores añadidos en la revisión v1.2**
+
+| # | Indicador observable | Qué señalaría | Disciplina | Responsable |
+|---|---|---|---|---|
+| I-8 | **Publicación de los países y las operadoras del clúster `DarkWire`** | Convierte `KJ-9` de amenaza regional genérica en exposición concreta, o la descarta para Chile. **Es el indicador de mayor valor de la revisión** | OSINT | Célula CTI |
+| I-9 | Corroboración o refutación de la tesis del suministrador compartido por un segundo proveedor | Mueve `KJ-8` de probable a cualquiera de los dos extremos, y con él toda la enmienda de §O-1 | OSINT | Célula CTI |
+| I-10 | **Publicación de una comparación de binarios entre `CopperDoor` y `SparroWocky`** | Determina si son el mismo fichero o dos derivados. De ello depende cuánto se puede atribuir (`KJ-11`, §3.5-ix) | OSINT | Célula CTI |
+| I-11 | Aparición de infraestructura de mando **alojada en Chile** asociada a este ecosistema | Es el rasgo operativo distintivo de `DarkWire`. Un C2 nacional anula la detección geográfica y exige revisar las reglas de egreso | OSINT / telemetría | Célula CTI / SOC |
+| I-12 | Nueva publicación de ESET que confirme o matice el reemplazo de `SparrowDoor` por `CopperDoor` | Es la fuente que la investigación nueva cita y que no se ha leído (`G-6`) | OSINT | Célula CTI |
 
 ---
 
@@ -840,6 +1079,88 @@ AND file.created > application_deployment_date
 > el falso negativo cuesta dos años de exfiltración continua que nadie va a notar porque
 > **no habrá ningún otro síntoma**.
 
+**D-7 · ALTO — (v1.2) Resolución o conexión al dominio que vincula los dos expedientes**
+
+```
+destination.domain ENDS_WITH_ANY (
+      "amelicen.com", "seosnskorea.com", "jamvybez.com",
+      "artfingo.com", "faceorkut.com", "aauctioneer.com" )
+```
+
+→ Investigación prioritaria con plazo de una hora, y **retrohunt de 24 meses**. El primero
+de la lista es el dominio que la fuente señala como punto de contacto entre `DarkWire` y
+este actor: fue servidor de mando de `SparrowDoor` y aparece en la infraestructura de
+`CopperDNS`. Los otros cinco son los dominios publicados de `DarkWire`.
+
+**D-8 · ALTO — (v1.2) Tráfico TCP crudo encapsulado en TLS hacia el puerto 443 sin negociación coherente**
+
+```
+network.direction == "outbound" AND destination.port == 443
+AND tls.established == true
+AND NOT ( tls.client.ja4 IN ( <huellas de navegadores y clientes conocidos> ) )
+AND destination.as.number IN ( 20473, 138915, 396356, 6134, 212238, 136258 )
+```
+
+→ Investigación prioritaria. `CopperDoor` encapsula TCP crudo dentro de TLS sobre el puerto
+443, y los seis sistemas autónomos son los que la fuente documenta para esa familia. **La
+condición del sistema autónomo es la que caduca; la de la huella del cliente TLS no.**
+
+**D-9 · CRÍTICO — (v1.2) Tunelado de mando sobre consultas DNS de tipo MX**
+
+```
+dns.question.type == "MX"
+AND ( dns.question.name_length > 50
+      OR dns.question.name MATCHES_REGEX "^[A-Za-z0-9+/=_-]{30,}\." )
+AND source NOT IN ( <servidores de correo propios> )
+```
+
+→ Contención automática. `CopperDNS` tunela su canal de mando en consultas DNS de tipo
+`MX`. **Un equipo que no es un servidor de correo no tiene ninguna razón para emitir
+consultas MX**, y menos con etiquetas largas y codificadas. Es una detección conductual que
+no depende de ningún indicador.
+
+**D-10 · ALTO — (v1.2) Certificado TLS autofirmado que se hace pasar por un resolutor público**
+
+```
+tls.server.certificate.subject.common_name IN ( "8.8.8.8", "1.1.1.1", "9.9.9.9" )
+AND tls.server.certificate.self_signed == true
+```
+
+```
+// Variante por huella, de fidelidad máxima mientras el actor no rote el certificado:
+tls.server.certificate.fingerprint.sha256 ==
+  "ee4a8b81fe3864582efc27a77f806990e2602dcc36447ddda4b3a230a473d575"
+OR tls.server.certificate.fingerprint.sha1 ==
+  "de32c58a8087cc4f24b9eb65c8ff4516f0f65f13"
+```
+
+→ Contención automática. El certificado de los nodos de `CopperDNS` tiene **sujeto y emisor
+`CN=8.8.8.8`**, es autofirmado y está reutilizado en varios nodos. La primera variante es la
+conductual y la que perdura: **ningún servidor legítimo presenta un certificado autofirmado
+cuyo nombre común sea la dirección de un resolutor DNS público.**
+
+**D-11 · MEDIO — (v1.2) Artefactos de host del ecosistema Sparrow**
+
+```
+( process.command_line CONTAINS "RasiUwpApp" )                      // regla de cortafuegos
+OR ( process.command_line MATCHES_REGEX "(?i)net\s+user\s+admin\$" )  // cuenta creada
+OR ( registry.path CONTAINS "LocalAccountTokenFilterPolicy"
+     AND registry.data.strings == "1" )
+OR ( file.directory IN ( "C:\\Program Files\\7-Zip\\Lang",
+                         "C:\\Windows\\debug",
+                         "C:\\ProgramData\\vmware\\logs",
+                         "C:\\ProgramData\\Oracle\\Java",
+                         "C:\\ProgramData\\USOShared",
+                         "C:\\ProgramData\\Waves" )
+     AND file.extension IN ( "dll", "dat", "png" ) )
+```
+
+→ Investigación prioritaria para las tres primeras condiciones; en el día para la cuarta.
+La cuenta `admin$` con contraseña fija, la regla de cortafuegos `RasiUwpApp` que abre el
+puerto 445 y la política que desactiva el filtrado de token para cuentas locales son
+**artefactos de configuración, no binarios**: perduran entre compilaciones. Las seis rutas
+son directorios legítimos existentes que el cargador usa para alojarse.
+
 ## X-4. Consultas de caza
 
 ```kql
@@ -1009,6 +1330,18 @@ level: medium
 
 ---
 
+**Brechas añadidas en la revisión v1.2**
+
+| # | Brecha | Impacto en el juicio | Requisito propuesto | Prioridad |
+|---|---|---|---|---|
+| G-5 | **La fuente no nombra los países ni las operadoras del clúster `DarkWire`** | **Es la brecha que determina si esta revisión describe una amenaza o un contexto.** `KJ-9` no se puede convertir en exposición concreta: no se sabe si Chile está entre los países ni si alguna operadora nacional está entre las tres | Vigilar publicaciones de seguimiento de Check Point y de otros proveedores; **y considerar una consulta directa al equipo nacional de respuesta a incidentes**, que es quien podría saberlo y quien tendría motivo para avisar. Indicador `I-8` | **Crítica** |
+| G-6 | **Sin corroboración independiente de la tesis del suministrador compartido** | `KJ-8` queda en probable con confianza moderada, y de él dependen la enmienda de `KJ-3` y toda la enmienda del expediente de alias | Leer la publicación de ESET sobre el reemplazo de `SparrowDoor` por `CopperDoor` y el análisis de Positive Technologies que la fuente cita. Indicadores `I-9` e `I-12` | Alta |
+| G-7 | **Sin comparación publicada de binarios entre `CopperDoor` y `SparroWocky`** | `KJ-11` deja abierto si son el mismo fichero o dos derivados de una base común, y de eso depende cuánto se puede atribuir con cuánta confianza | Localizar o solicitar un análisis comparado. Indicador `I-10` | Alta |
+| G-8 | Ausencia de mapeo MITRE ATT&CK en la fuente nueva | El §T-2 no se ha ampliado, para no atribuir a la fuente un mapeo que no hizo. **La consecuencia es que las técnicas del material nuevo no están en la matriz navegable** del informe | Construir el mapeo propio a partir de la prosa de la fuente, marcándolo como inferencia nuestra | Media |
+| G-9 | **País de cada dirección del clúster `DarkWire`** | La afirmación de que el mando está en el país de la víctima es la más consecuente de la revisión —anula la detección geográfica— y no se puede verificar dirección por dirección | Resolución propia de geolocalización y de titularidad del rango sobre las 36 direcciones del Anexo A.2.2, **antes de bloquear ninguna** | Alta |
+
+---
+
 # ANEXOS
 
 ## Anexo A — Indicadores de compromiso
@@ -1019,6 +1352,8 @@ level: medium
 > entregan con contexto, confianza y acción permitida; **no** como lista suelta para cargar
 > en un bloqueo perimetral y dar el trabajo por hecho. El valor real de esta tabla es el
 > retrohunt de 24 meses, no el bloqueo.
+
+### A.1 — Indicadores de la emisión original (septiembre de 2026)
 
 <!-- cti:ioc -->
 
@@ -1071,6 +1406,161 @@ tiene impacto operativo previsible. Aun así, verificar antes de bloquear los ra
 Cogent, NTT America y Vultr, donde pueden convivir servicios legítimos en direcciones
 vecinas. **Bloquear la IP exacta, nunca el rango.**
 
+### A.2 — Indicadores del ecosistema Sparrow y del clúster `DarkWire` *(añadido en v1.2)*
+
+> ⚠ **Tres advertencias propias de esta sección.**
+>
+> **Primera, de atribución.** Estos indicadores **no son de FamousSparrow**: son del
+> ecosistema que la investigación nueva describe. Encontrar uno establece contacto con el
+> ecosistema Sparrow, **no identifica a este actor** (`KJ-11`, enmienda de §O-1). Se
+> publican aquí porque el expediente está vinculado por un dominio compartido, no porque
+> sean del mismo operador.
+>
+> **Segunda, de geografía.** La fuente afirma que **la mayoría de las direcciones de
+> `DarkWire` están alojadas en Latinoamérica, con frecuencia en el mismo país que la
+> víctima**, pero **no publica el país de cada dirección**. Eso significa dos cosas: que
+> parte de estas direcciones puede estar en infraestructura de proveedores regionales con
+> clientes legítimos, y que **bloquearlas sin verificación puede cortar tráfico propio**.
+> Verificar cada una antes de actuar.
+>
+> **Tercera, de clasificación.** La asignación de cada dirección a un clúster proviene de
+> los **encabezados de las tablas de la fuente**, no de un dato por dirección. Dos
+> direcciones aparecen en más de un clúster en el original (`91.210.164[.]5` y
+> `109.205.195[.]131`), lo que sugiere infraestructura compartida entre clústeres y debilita
+> el valor de la etiqueta.
+
+#### A.2.1 — Dominios
+
+<!-- cti:ioc -->
+
+| Tipo | Valor | Contexto | Confianza | Acción permitida |
+|---|---|---|---|---|
+| domain | `amelicen[.]com` | **El dominio que vincula los dos expedientes.** Reportado previamente como C2 de `SparrowDoor` —el implante anterior de este actor— y presente en la infraestructura de `CopperDNS` del clúster `DarkWire`. Es la base de `KJ-10` | Alta | Bloqueo + **retrohunt de 24 meses** |
+| domain | `seosnskorea[.]com` | Infraestructura del clúster `DarkWire` (Latinoamérica) | Alta | Bloqueo |
+| domain | `jamvybez[.]com` | Infraestructura del clúster `DarkWire` | Alta | Bloqueo |
+| domain | `artfingo[.]com` | Infraestructura del clúster `DarkWire` | Alta | Bloqueo |
+| domain | `faceorkut[.]com` | Infraestructura del clúster `DarkWire`. **El nombre imita dos marcas de redes sociales**; véase `CTI-2026-018` | Alta | Bloqueo |
+| domain | `aauctioneer[.]com` | Infraestructura del clúster `DarkWire` | Alta | Bloqueo |
+| domain | `microsfot[.]vip` | Infraestructura del clúster `SilentDelivery` (Europa y Asia). **Error tipográfico deliberado de una marca conocida** | Alta | Bloqueo |
+| domain | `microscoft[.]vip` | Infraestructura del clúster `SilentDelivery`. Misma técnica de suplantación | Alta | Bloqueo |
+| domain | `aistei[.]com` | Infraestructura del clúster `SilentDelivery` | Alta | Bloqueo |
+| domain | `astorialaza[.]com` | Infraestructura del clúster `SilentDelivery` | Alta | Bloqueo |
+| domain | `windowsupdates[.]us` | Infraestructura del clúster `OceanGate` (Asia). Suplanta el servicio de actualización del sistema | Alta | Bloqueo |
+| domain | `microupdate[.]me` | Infraestructura del clúster `OceanGate` | Alta | Bloqueo |
+| domain | `windefender[.]net` | Infraestructura del clúster `OceanGate`. Suplanta el producto de seguridad del sistema | Alta | Bloqueo |
+| domain | `windowsdefender[.]it[.]com` | Infraestructura del clúster `OceanGate`. *Nota: en la fuente aparece como `windowsdefender.it[.]com`; se normaliza el ofuscado y se consigna la discrepancia* | Media | Bloqueo tras verificación |
+
+#### A.2.2 — Direcciones del clúster `DarkWire` (Latinoamérica)
+
+> ⚠ **Mayoritariamente alojadas en Latinoamérica, con frecuencia en el país de la víctima.
+> VERIFICAR CADA UNA antes de bloquear**: el riesgo de cortar tráfico propio es real.
+
+<!-- cti:ioc -->
+
+| Tipo | Valor | Contexto | Confianza | Acción permitida |
+|---|---|---|---|---|
+| ipv4 | `38.54.57[.]12` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.54.45[.]155` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.60.206[.]85` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.60.209[.]65` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.60.242[.]182` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.60.241[.]65` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.60.241[.]193` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `38.60.214[.]237` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `149.104.87[.]222` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `149.104.87[.]228` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `149.104.12[.]128` | C2 del clúster `DarkWire`. *Aparece duplicada en la fuente* | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `156.244.2[.]26` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `181.41.201[.]244` | C2 del clúster `DarkWire`. **Rango asignado a Latinoamérica: candidato a C2 en el país de la víctima** | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `77.111.101[.]153` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `77.111.101[.]227` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `77.111.101[.]11` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.110[.]120` | C2 del clúster `DarkWire`. **Coincide con el primer servidor de SparroWocky documentado en la emisión original de este informe (§O-5, 2025-12-11): es un segundo punto de solapamiento entre ambos expedientes** | Alta | Bloqueo |
+| ipv4 | `216.238.71[.]215` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.73[.]14` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.111[.]30` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.119[.]130` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.90[.]160` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.85[.]243` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.107[.]140` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.115[.]152` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.106[.]177` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.113[.]122` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.121[.]254` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `216.238.120[.]8` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `64.176.10[.]7` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `64.176.6[.]27` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `45.76.215[.]17` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `185.93.173[.]30` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `188.214.157[.]51` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `108.61.161[.]250` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+| ipv4 | `167.179.109[.]141` | C2 del clúster `DarkWire` | Media | Bloqueo tras verificar reasignación |
+
+#### A.2.3 — Hashes del clúster `DarkWire` (SHA-256)
+
+<!-- cti:ioc -->
+
+| Tipo | Valor | Contexto | Confianza | Acción permitida |
+|---|---|---|---|---|
+| sha256 | `de6a3140797f7c00a48b2068127965c3994f92867466259e69c861880e6ec2d8` | **`CopperDoor`, solo en memoria. Es el implante que ESET analiza como `SparroWocky`** | Alta | Retrohunt (no aparecerá en disco) |
+| sha256 | `d08e09a17df22fb39838dcc9e99756830ef5175bc9e03d615adf979dc85ed052` | `CopperDoor`, segunda muestra, solo en memoria | Alta | Retrohunt |
+| sha256 | `417664cc34360d8519adc7a019408cf8f37f59c95a44e50092d73e38b7889a21` | **`CopperDNS`, solo en memoria.** Tunela el mando sobre consultas DNS de tipo `MX` | Alta | Retrohunt |
+| sha256 | `4cafda69af3179ceb4a1f5ed864c501279796254709c86ca236be1cf74a8643f` | `CopperLoader` — `ncpmif32.dll`, cargada lateralmente por `ncptrcw.exe` | Alta | Bloqueo + retrohunt |
+| sha256 | `48dcc07d9f87129e937f5ca2ad5ba56975600efb8a7280a170b2aeeff503f595` | `CopperLoader` — `ncpmif32.dll`, segunda muestra | Alta | Bloqueo + retrohunt |
+| sha256 | `a47279e4ee703092263e7030c43c61533146c00689e7cb8f2080f18e57d5cf7f` | `CopperLoader` — `libjpeg-62.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `d4e4a3f55b875673cfdb6d0687cc3f8890585210806b03082d11fb4fa40b57de` | `CopperLoader` — `libvlccore.dll`, cargada lateralmente por `vlc.exe` | Alta | Bloqueo + retrohunt |
+| sha256 | `3317789219e9b3e48fbb8f7af23359a37539597fc4d84649086aec71a21553ee` | `CopperLoader` — `libvlc.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `c049e5e03a04cf54f8aa089c65861342d3fb4aa8d6a2b1c9484637c46ddc3882` | `CopperLoader` — `winfsp.dll`, cargada lateralmente por `fsptool.exe` | Alta | Bloqueo + retrohunt |
+| sha256 | `f01a73f651f8113bf9672dbe4c50c63ed365a41e4187aaf0a5ab34cd21154046` | `CopperLoader` — `winfsp.dll`, segunda muestra | Alta | Bloqueo + retrohunt |
+| sha256 | `9332f9cd283d69e9a2a2bb71575054cc71c14b6496ac55f7ff43efdcb6d97a01` | `CopperLoader` — `winfsp-x64.dll`. **Mismo nombre de fichero que los cargadores de SparroWocky del Anexo A.1**: es un tercer punto de solapamiento | Alta | Bloqueo + retrohunt |
+| sha256 | `12b6d5ca7aca7134032721b6feb8e4d5ad75c886fbf8a5889d3d36971a083681` | `CopperLoader` — `libeay32.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `125525a38abc45e855f848d499582a8100f1428938d4bd3d3eba957072e64e7a` | `CopperLoader` — `libeay32.dll`, segunda muestra | Alta | Bloqueo + retrohunt |
+| sha256 | `4b1fea3265492ad1d272428447fb5919bbe3184131b12a0ae84caf3bc442718e` | `CopperLoader` — `zCrashReport64.dll`, cargada lateralmente por `zCrashReport64.exe` | Alta | Bloqueo + retrohunt |
+| sha256 | `4e50f53b5294a6dbd601fc20a607ae85725162b596119f4867311ef0b3f75a6a` | Cargador de código shell, variante de `CopperLoader` — `DukeQt.dll`, cargada por `gethwid.exe`. **`DukeQt.dll` aparece también en el Anexo A.1 como cargador de SparroWocky** | Alta | Bloqueo + retrohunt |
+| sha256 | `f42461c386834d61780da13760a130ed2ea620627b5eebf97b56237058ea380d` | `CopperSplity` — `zCrashReport64.dll`. *El nombre de familia aparece así en la fuente* | Alta | Bloqueo + retrohunt |
+| sha256 | `b7060cf7955a1f1caac2bc3d0918c9b1d9daa315c5d82b329acd3bbddb413948` | `CopperSplity` — `tempdir.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `cb714decdcabe30008546e6fb71bb28e390c9bd186bf2549aaa8fe5b999200a5` | Auxiliar de `CopperSplity` — `asinteg.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `fd0861a8269f2bb2fe0adfb4b4610d9675e68474503598f83e87c29b88906f99` | `CopperLsass` — inyector en el proceso de autoridad de seguridad local por RPC, solo en memoria | Alta | Retrohunt |
+| sha256 | `916a16a4a1eb7393b17574835312725e5cb146995a3cbcdf42fa8b9bebaa51b1` | `CopperLsass` — volcado de memoria del proceso de autoridad de seguridad local, `slave.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `675a44c679dea8d40b3885c37168929f976e3a0ecacc7e02c6b07936ac58a9fc` | `CopperLsass` — auxiliar, `dep.dll` | Alta | Bloqueo + retrohunt |
+| sha256 | `3a1b7ec461d656524e612b228ce969bfa612c799fb7117bb066352ff776d88da` | `CopperProxy`, solo en memoria. Hasta 300 clientes; abre la regla de cortafuegos `ss1` | Alta | Retrohunt |
+| sha256 | `ee8c148518c5a416fc7d9b33246e9c98d955f2379aa9c82225e045322c97a043` | `PyProxy` — **distribuido con el nombre `sqlmap.exe`**, que es el de una herramienta legítima de pruebas de intrusión | Alta | Bloqueo + retrohunt |
+| sha256 | `4f9d9a6cba88832fcb7cfb845472b63ff15cb9b417f4f02cb8086552c19ceffc` | **SoftEther VPN renombrado a `vmtoolsd.exe`**, el nombre del proceso de las herramientas de VMware. Túnel de red con nombre de componente legítimo | Alta | Bloqueo + retrohunt |
+
+#### A.2.4 — Certificados TLS
+
+<!-- cti:ioc -->
+
+| Tipo | Valor | Contexto | Confianza | Acción permitida |
+|---|---|---|---|---|
+| sha256 | `ee4a8b81fe3864582efc27a77f806990e2602dcc36447ddda4b3a230a473d575` | **Huella del certificado TLS de los nodos de `CopperDNS`**, reutilizado en varios. **Sujeto y emisor `CN=8.8.8.8`**, autofirmado, válido del 2025-07-16 al 2026-07-16, número de serie `0x20a61422b0352cfc9ef688dc800bcdf810f1fe7d`. Es el mejor indicador de esta sección | Alta | Bloqueo + retrohunt (`D-10`) |
+| sha1 | `de32c58a8087cc4f24b9eb65c8ff4516f0f65f13` | El mismo certificado, huella SHA-1 | Alta | Bloqueo + retrohunt |
+| sha1 | `760be920fad07881b8ce9d94e074a35b4f806717` | **Certificado reutilizado entre la infraestructura de `SilentDelivery` y de `OceanGate`.** Sujeto y emisor suplantan a dos empresas de seguridad conocidas, con validez del 2023-04-28 al 2024-04-27: **caducado y reutilizado**, mismo patrón que `CTI-2026-027` | Alta | Bloqueo + retrohunt |
+
+#### A.2.5 — Artefactos de host y de protocolo
+
+<!-- cti:ioc -->
+
+| Tipo | Valor | Contexto | Confianza | Acción permitida |
+|---|---|---|---|---|
+| artefacto | `RasiUwpApp` | **Nombre de la regla de cortafuegos que crea `CopperAdu`** para abrir el puerto TCP 445. Comando literal: `netsh advfirewall firewall add rule name="RasiUwpApp" dir=in action=allow protocol=TCP localport=445 profile=any` | Alta | Detección (`D-11`) |
+| artefacto | `admin$` | **Cuenta local que crea `CopperAdu`** con `net user admin$ "Admin@123456" /add /expires:never /passwordchg:no`, la añade a administradores y le desactiva la caducidad de contraseña. **Oculta además la cuenta de la pantalla de inicio de sesión** | Alta | Detección (`D-11`) |
+| clave | `Admin@123456` | Contraseña codificada de la cuenta anterior | Alta | Detección |
+| clave | `LocalAccountTokenFilterPolicy` = `1` | Valor de registro que `CopperAdu` establece para permitir el uso remoto de credenciales de cuenta local | Alta | Detección (`D-11`) |
+| artefacto | `ss1` | Nombre de la regla de cortafuegos que crea `CopperProxy` | Alta | Detección |
+| artefacto | `kbl` | Nombre de la ventana oculta de `CopperLogger`, que registra la entrada de teclado por la interfaz de entrada en bruto | Alta | Detección |
+| artefacto | `WindowsUpdateAssist` | Clave de arranque automático que usa `SquadC` (clúster `SilentDelivery`) para persistir | Alta | Detección |
+| path | `C:\Program Files\7-Zip\Lang` · `C:\Windows\debug` · `C:\Windows\System32` · `C:\ProgramData\vmware\logs` · `C:\ProgramData\Oracle\Java` · `C:\ProgramData\USOShared` · `C:\ProgramData\Waves` | **Directorios legítimos y existentes** donde el cargador se aloja para no crear rutas nuevas. **El indicador no es el directorio: es un fichero `.dll`, `.dat` o `.png` nuevo dentro de él** | Alta | Caza (`D-11`) |
+| filename | `ncpmif32.dll` ← `ncptrcw.exe` · `winfsp.dll` ← `fsptool.exe` · `libvlccore.dll` ← `vlc.exe` · `DukeQt.dll` ← `gethwid.exe` · `zCrashReport64.dll` ← `zCrashReport64.exe` | **Pares de carga lateral de DLL documentados.** El ejecutable es legítimo y firmado; la biblioteca que carga del mismo directorio, no | Alta | Detección por discordancia de firmante |
+| filename | `1.png` | Nombre al que se renombra el volcado cifrado de memoria del proceso de autoridad de seguridad local antes de exfiltrarlo. **Un `.png` que no es una imagen** | Alta | Caza |
+| puerto | `6532` | Puerto más frecuente de los nodos de `CopperDNS`, sobre hosts Windows en el sistema autónomo `AS20473` | Alta | Caza |
+| puerto | `445` | Puerto que abre la regla de cortafuegos `RasiUwpApp` | Alta | Detección |
+| asn | `AS20473` · `AS138915` · `AS396356` · `AS6134` · `AS212238` · `AS136258` | **Sistemas autónomos del mando y control de `CopperDoor`**, puerto 443 con TCP crudo encapsulado en TLS. Son proveedores con clientes legítimos: **no bloquear el sistema autónomo completo** | Media | Caza (`D-8`) — **no bloquear el ASN** |
+| pattern | `0x11223344` | **Valor mágico que valida el tráfico** en `SparrowDoor` y `SparrowShell`. Es el indicador de protocolo más duradero del ecosistema | Alta | Detección |
+| pattern | `0x0e0e0e0e` | Interfaz de control del rootkit Reptile modificado que usa `SparrowShell` en Linux | Alta | Detección |
+| pattern | `consultas DNS de tipo MX con etiquetas largas y codificadas desde un equipo que no es servidor de correo` | **Canal de mando de `CopperDNS`.** Patrón conductual, no indicador: no caduca | Alta | Detección (`D-9`) |
+| herramienta | `SoftEther VPN` · `FRPC` · `Chisel` · `sqlmap` | Herramientas legítimas de red y de pruebas de intrusión, **renombradas y reutilizadas** por los clústeres del ecosistema. Detectar por ubicación y por nombre discordante, nunca por presencia | Alta | **No bloquear por presencia** |
+
 ## Anexo B — Fuentes y valoración
 
 > Valoración doble tipo Admiralty/OTAN: **fiabilidad de la fuente (A–F)** ×
@@ -1097,6 +1587,12 @@ vecinas. **Bloquear la IP exacta, nunca el rango.**
 > primaria real.** La convergencia aparente entre medios no es corroboración: es difusión.
 > Todo juicio de nivel técnico hereda esa fragilidad, y por eso G-2 está marcada como brecha
 > crítica en §14.
+
+**Fuente añadida en la revisión v1.2**
+
+| Fuente | Disciplina | Fiabilidad | Credibilidad | Notas de sesgo |
+|---|---|---|---|---|
+| Check Point Research, «Not All That Glitters Is Gold: Tracking CopperDragon's Sparrow Framework Around the Globe», **2026-11-10**, y la nota de blog asociada del mismo día | OSINT comercial de primera mano | **B** | **3** | **Fuente única de todo el material de la revisión v1.2.** Análisis de binario e infraestructura, con 50 hashes, 14 dominios, cerca de 100 direcciones y dos certificados publicados. Leída íntegra en dos tramos; los indicadores proceden del segundo. **Credibilidad 3 y no 2 por tres razones**, todas ellas declaradas por la propia fuente o verificables: (a) **su tesis central es explícitamente una hipótesis** —«potencial intendente digital», «puede operar como»— y no un hallazgo; (b) **no está corroborada por ningún otro proveedor** en el momento de esta revisión, y en particular ESET no se ha pronunciado sobre la taxonomía de los tres clústeres; (c) **no nombra los países ni las operadoras del clúster latinoamericano**, que es precisamente el dato que convertiría `KJ-9` en exposición verificable. A su favor: distingue con cuidado lo que afirma de lo que evalúa, publica el conjunto de indicadores completo y señala por sí misma el solapamiento con el trabajo de ESET en lugar de reclamar el hallazgo |
 
 ## Anexo C — Léxico de probabilidad y confianza
 
@@ -1139,6 +1635,7 @@ vecinas. **Bloquear la IP exacta, nunca el rango.**
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
 | 1.0 | 2026-09-21 | Emisión inicial | Célula CTI |
+| 1.2 | 2026-11-17 | **Revisión por material nuevo: la investigación de Check Point sobre `CopperDragon` (10-11-2026).** Cambios: (a) **enmienda de `KJ-3`** — SparroWocky deja de ser exclusivo de este actor y pasa a ser pieza de un arsenal compartido, de modo que su presencia ya no atribuye; (b) **enmienda de `KJ-6`** — el juicio se mantiene y se refuerza, pero cambia su contexto al existir ya un clúster china-nexus documentado contra telecomunicaciones latinoamericanas; (c) **cuatro juicios nuevos** `KJ-8` a `KJ-11`; (d) adenda al resumen ejecutivo; (e) §3.5 con nueve limitaciones nuevas; (f) fila de telecomunicaciones y adenda en §E-2; (g) **seis designaciones nuevas en §O-1 y enmienda de la nota de tradecraft**, que pasa de advertir contra fundir actores a advertir contra tomar un implante por un actor; (h) cuatro entradas de cronología en §O-5; (i) cinco indicadores de alerta `I-8` a `I-12`; (j) **cinco detecciones nuevas `D-7` a `D-11`** en §X-3, incluidas las del tunelado DNS sobre registros MX y del certificado que suplanta un resolutor público; (k) **Anexo A.2 con 14 dominios, 36 direcciones, 24 hashes, 3 certificados y 22 artefactos**, con tres advertencias propias; (l) fuente añadida en el Anexo B con credibilidad 3 y el motivo; (m) cinco brechas nuevas `G-5` a `G-9`; (n) caducidad ampliada de 2026-12-21 a 2027-02-17. **Los juicios `KJ-1` a `KJ-7` se conservan sin reescribir para que la revisión sea auditable** | Célula CTI |
 | 1.1 | 2026-11-16 | **Reclasificación de TLP:AMBER a TLP:CLEAR** por decisión del emisor, para publicación en el repositorio abierto `cti_daily`. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. **Sin cambios en los juicios analíticos ni en los indicadores.** Se mantiene PAP:AMBER | Célula CTI |
 
 ## Anexo G — Realimentación del consumidor

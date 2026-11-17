@@ -16,40 +16,68 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 | Informe | Tema | Tipo | Fecha | Ver. | TLP | Vigencia | Formatos |
 |---|---|---|---|---|---|---|---|
-| `CTI-2026-014` | TheGentlemen (Storm-2697) | Perfil de actor + informe de campaña | 2026-09-15 | 1.2 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
-| `CTI-2026-015` | Qilin (Agenda · Storm-1934) | Perfil de actor + informe de campaña | 2026-09-16 | 1.1 | `TLP:CLEAR` | vigente · 30 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
-| `CTI-2026-016` | LockBit 5.0 (ChuongDong) | Perfil de actor + informe de campaña | 2026-09-16 | 1.1 | `TLP:CLEAR` | vigente · 30 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
-| `CTI-2026-017` | FamousSparrow (SparroWocky) | Perfil de actor + informe de campaña | 2026-09-21 | 1.1 | `TLP:CLEAR` | vigente · 35 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
-| `CTI-2026-018` | Abuso de dominios de primer nivel (ecosistema de registro DNS) | Evaluación estratégica | 2026-11-15 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
-| `CTI-2026-019` | ARTEX (framework ofensivo agéntico) y los clústeres que lo operan | Evaluación estratégica + perfil de capacidad adversaria | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
-| `CTI-2026-020` | Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98) | Perfil de actor + informe de campaña | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
-| `CTI-2026-021` | Ecosistema de troyanos bancarios brasileños (Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON) | Perfil de ecosistema de malware + evaluación regional | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-021-troyanos-br.md) · [html](CTI-2026-021-troyanos-br.html) |
-| `CTI-2026-022` | Red Akodon (SCILabs) · solapamiento con TAG-144 / Blind Eagle / APT-C-36 / AguilaCiega / APT-Q-98 · campañas «Shadow Vector» (Acronis) | Perfil de actor en disputa + evaluación de transferibilidad del método | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-022-redakodon.md) · [html](CTI-2026-022-redakodon.html) |
-| `CTI-2026-023` | Machete · El Machete · APT-C-43 · Grupo G0095 (MITRE ATT&CK) | Perfil de actor de espionaje + evaluación de vigencia y requisito de colección | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 181 d | [md](CTI-2026-023-machete.md) · [html](CTI-2026-023-machete.html) |
-| `CTI-2026-024` | Rhysida (RaaS) · afiliados y actores de acceso asociados: Vanilla Tempest · solapamientos con Vice Society / DEV-0832 e Interlock | Perfil de operación de extorsión + estudio de caso nacional | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-024-rhysida.md) · [html](CTI-2026-024-rhysida.html) |
+| `CTI-2026-014` | TheGentlemen (Storm-2697) | Perfil de actor + informe de campaña | 2026-09-15 | 1.2 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
+| `CTI-2026-015` | Qilin (Agenda · Storm-1934) | Perfil de actor + informe de campaña | 2026-09-16 | 1.1 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
+| `CTI-2026-016` | LockBit 5.0 (ChuongDong) | Perfil de actor + informe de campaña | 2026-09-16 | 1.1 | `TLP:CLEAR` | vigente · 29 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
+| `CTI-2026-017` | FamousSparrow (SparroWocky) · solapamiento con el ecosistema Sparrow de CopperDragon y con el clúster DarkWire (Check Point) | Perfil de actor + informe de campaña | 2026-09-21 | 1.2 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
+| `CTI-2026-018` | Abuso de dominios de primer nivel (ecosistema de registro DNS) | Evaluación estratégica | 2026-11-15 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
+| `CTI-2026-019` | ARTEX (framework ofensivo agéntico) y los clústeres que lo operan | Evaluación estratégica + perfil de capacidad adversaria | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
+| `CTI-2026-020` | Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98) | Perfil de actor + informe de campaña | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
+| `CTI-2026-021` | Ecosistema de troyanos bancarios brasileños (Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON) | Perfil de ecosistema de malware + evaluación regional | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-021-troyanos-br.md) · [html](CTI-2026-021-troyanos-br.html) |
+| `CTI-2026-022` | Red Akodon (SCILabs) · solapamiento con TAG-144 / Blind Eagle / APT-C-36 / AguilaCiega / APT-Q-98 · campañas «Shadow Vector» (Acronis) | Perfil de actor en disputa + evaluación de transferibilidad del método | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-022-redakodon.md) · [html](CTI-2026-022-redakodon.html) |
+| `CTI-2026-023` | Machete · El Machete · APT-C-43 · Grupo G0095 (MITRE ATT&CK) | Perfil de actor de espionaje + evaluación de vigencia y requisito de colección | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 180 d | [md](CTI-2026-023-machete.md) · [html](CTI-2026-023-machete.html) |
+| `CTI-2026-024` | Rhysida (RaaS) · afiliados y actores de acceso asociados: Vanilla Tempest · solapamientos con Vice Society / DEV-0832 e Interlock | Perfil de operación de extorsión + estudio de caso nacional | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-024-rhysida.md) · [html](CTI-2026-024-rhysida.html) |
+| `CTI-2026-025` | Gamaredon (Armageddon · Primitive Bear · ACTINIUM · Shuckworm · Aqua Blizzard · IRON TILDEN · DEV-0157 · NastyShrew · G0047) | Perfil de actor + evaluación de pertinencia regional | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 60 d | [md](CTI-2026-025-gamaredon.md) · [html](CTI-2026-025-gamaredon.html) |
+| `CTI-2026-026` | APT36 · Transparent Tribe · Mythic Leopard · COPPER FIELDSTONE · ProjectM · G0134 | Perfil de actor + evaluación de calidad de la evidencia + transferencia de método a Linux | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-026-apt36.md) · [html](CTI-2026-026-apt36.html) |
+| `CTI-2026-027` | Mustang Panda · Earth Preta · TA416 · RedDelta · BRONZE PRESIDENT · Stately Taurus · Twill Typhoon · HoneyMyte · TEMP.Hex · TANTALUM · G0129 · (vinculado) UNC6384 | Perfil de actor + evaluación de capacidad y de resiliencia a la acción policial | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-027-mustangpanda.md) · [html](CTI-2026-027-mustangpanda.html) |
+| `CTI-2026-028` | UNC3886 · Grupo G1048 (MITRE ATT&CK) · campaña C0056 «RedPenguin» | Perfil de actor + evaluación de capacidad adversaria + estudio de caso nacional (Singapur) | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-028-unc3886.md) · [html](CTI-2026-028-unc3886.html) |
+| `CTI-2026-029` | Sandworm · APT44 · Seashell Blizzard · IRIDIUM · Voodoo Bear · TeleBots · BlackEnergy Group · ELECTRUM · FROZENBARENTS · UAC-0002 · G0034 · (subgrupo) BadPilot | Perfil de actor destructivo + evaluación de recuperabilidad | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-029-sandworm.md) · [html](CTI-2026-029-sandworm.html) |
+| `CTI-2026-030` | Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A) | Perfil de actor + resolución de una disputa de alias + evaluación de exposición en infraestructura de red | 2026-11-17 | 1.0.2 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-030-salttyphoon.md) · [html](CTI-2026-030-salttyphoon.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 160 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023` |
-| [`ioc_ipv6.txt`](ioc_ipv6.txt) | 0 | `ipv6` | — |
-| [`ioc_url.txt`](ioc_url.txt) | 149 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024` |
-| [`ioc_hash.txt`](ioc_hash.txt) | 244 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024` |
-| [`ioc_index.csv`](ioc_index.csv) | 759 | todos: `appid`, `artefacto`, `asn`, `asunto`, `clave`, `cve`, `domain`, `email`, `filename`, `filepath`, `herramienta`, `ipv4`, `ipv4:puerto`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 302 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030` |
+| [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
+| [`ioc_url.txt`](ioc_url.txt) | 242 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 343 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030` |
+| [`ioc_index.csv`](ioc_index.csv) | 1646 | todos: `appid`, `artefacto`, `asn`, `asunto`, `clave`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 11 |
-| Indicadores en listas planas | 553 |
-| Indicadores en el índice con contexto | 759 |
+| Informes publicados | 17 |
+| Indicadores en listas planas | 889 |
+| Indicadores en el índice con contexto | 1646 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
-| Informe más reciente | 2026-11-16 |
+| Informe más reciente | 2026-11-17 |
 
 <!-- FIN AUTO-ÍNDICE -->
+
+---
+
+## Mapa de relaciones
+
+**[`red-actores-3d.html`](red-actores-3d.html)** — mapa tridimensional navegable de los
+**131 nodos y 152 relaciones** que se extraen de los informes de esta cartera: actores
+estatales, clústeres, suministradores, herramientas propias, herramientas públicas,
+servicios legítimos abusados y vulnerabilidades. Se gira con el ratón, se filtra por tipo
+y cada nodo abre una ficha con su descripción y un enlace al informe de origen.
+
+Es HTML autocontenido, **sin dependencias externas ni red**: la disposición se calcula en
+el navegador con un algoritmo de fuerzas en tres dimensiones y semilla fija, de modo que el
+mapa sale idéntico en cada carga.
+
+> **Lo que el mapa distingue, y es su razón de ser.** Las relaciones no son todas iguales,
+> y tratarlas como si lo fueran es la fuente de error más frecuente de esta disciplina. El
+> mapa dibuja con **trazo continuo** lo que está establecido —*usa*, *suministra a*,
+> *explota*, *entrega acceso a*— y con **trazo discontinuo** lo que no: *solapamiento
+> parcial*, *vinculado a*, *identidad en disputa* y *NO es el mismo que*. Tres informes de
+> esta cartera existen porque alguien compuso un solapamiento parcial con una equivalencia:
+> `CTI-2026-017`, `CTI-2026-022` y `CTI-2026-030`.
 
 ---
 
