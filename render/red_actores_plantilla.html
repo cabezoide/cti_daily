@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red de actores y herramientas</title>
+<meta name="description" content="Mapa tridimensional de relaciones entre los actores y las herramientas documentados en los informes del repositorio cti_daily.">
+<meta name="robots" content="index, follow">
+<style>
+:root{
+  --amber:#f7a400; --mint:#4db99c; --deep:#375d9d; --sky:#5a7ebe;
+  --bg:#080c18; --surface:#0f1830; --surface2:#141f3d;
+  --ink:#e9eefb; --nc:#8294b8; --hc:#7d9fdd; --line:#1e2b4d;
+  --ru:#e2574c; --cn:#f7a400; --pk:#4db99c; --kp:#9b6dd6;
+  --ir:#3fb8d4; --latam:#6ee7a5; --by:#e2574c; --ps:#3fb8d4;
+  --crimen:#ef5f8c; --neutro:#8294b8;
+}
+:root:not([data-theme="dark"]){}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f4f6fc; --surface:#ffffff; --surface2:#eef1f9;
+    --ink:#101934; --nc:#5b6b8e; --line:#d6ddee; --hc:#375d9d;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f4f6fc; --surface:#ffffff; --surface2:#eef1f9;
+  --ink:#101934; --nc:#5b6b8e; --line:#d6ddee; --hc:#375d9d;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+canvas{display:block; width:100%; height:100%; cursor:grab; touch-action:none}
+canvas.arrastrando{cursor:grabbing}
+#lienzo{position:fixed; inset:0}
+
+/* ───────── cabecera ───────── */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  padding:14px 18px 12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 92%,transparent),transparent);
+  pointer-events:none;
+}
+header h1{
+  margin:0; font-size:17px; font-weight:650; letter-spacing:-.01em;
+  pointer-events:auto; display:inline-block;
+}
+header h1 span{color:var(--amber)}
+header p{margin:3px 0 0; font-size:12.5px; color:var(--nc); max-width:62ch; pointer-events:auto}
+header a{color:var(--hc); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--hc) 35%,transparent)}
+header a:hover{color:var(--amber); border-bottom-color:var(--amber)}
+
+/* ───────── panel lateral ───────── */
+#panel{
+  position:fixed; top:0; right:0; bottom:0; width:356px; max-width:88vw; z-index:30;
+  background:color-mix(in srgb,var(--surface) 96%,transparent);
+  border-left:1px solid var(--line);
+  transform:translateX(100%); transition:transform .22s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column;
+  backdrop-filter:blur(10px);
+}
+#panel.abierto{transform:translateX(0)}
+#panel .cab{padding:16px 18px 12px; border-bottom:1px solid var(--line); flex:0 0 auto}
+#panel .cuerpo{padding:14px 18px 22px; overflow-y:auto; flex:1 1 auto}
+#pTipo{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--nc); margin:0 0 5px}
+#pNombre{margin:0; font-size:18px; font-weight:650; line-height:1.25}
+#pDesc{margin:0 0 16px; font-size:13.5px; color:color-mix(in srgb,var(--ink) 88%,var(--nc))}
+#pInforme{display:inline-block; margin:0 0 18px; font-size:12px; padding:4px 9px; border-radius:5px;
+  background:var(--surface2); border:1px solid var(--line); color:var(--hc); text-decoration:none}
+#pInforme:hover{border-color:var(--amber); color:var(--amber)}
+#panel h3{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--nc);
+  margin:18px 0 8px; font-weight:600}
+#panel ul{list-style:none; margin:0; padding:0}
+#panel li{padding:5px 0; border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent); font-size:13px}
+#panel li:last-child{border-bottom:0}
+#panel li button{background:none; border:0; color:var(--ink); font:inherit; cursor:pointer;
+  text-align:left; padding:0; text-decoration:underline; text-decoration-color:color-mix(in srgb,var(--hc) 45%,transparent);
+  text-underline-offset:3px}
+#panel li button:hover{color:var(--amber)}
+#panel li .rel{color:var(--nc); font-size:11.5px; display:block; margin-top:1px}
+#cerrar{position:absolute; top:12px; right:12px; width:28px; height:28px; border-radius:6px;
+  background:var(--surface2); border:1px solid var(--line); color:var(--nc); cursor:pointer;
+  font-size:16px; line-height:1; display:grid; place-items:center}
+#cerrar:hover{color:var(--ink); border-color:var(--hc)}
+
+/* ───────── controles ───────── */
+#ctrl{
+  position:fixed; bottom:0; left:0; right:0; z-index:20; padding:12px 16px 14px;
+  background:linear-gradient(0deg,color-mix(in srgb,var(--bg) 94%,transparent),transparent);
+  display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;
+}
+.caja{background:color-mix(in srgb,var(--surface) 88%,transparent); border:1px solid var(--line);
+  border-radius:8px; padding:8px 10px; backdrop-filter:blur(8px)}
+#busca{width:200px}
+#busca input{width:100%; background:var(--surface2); border:1px solid var(--line); border-radius:6px;
+  color:var(--ink); font:inherit; font-size:13px; padding:6px 9px; outline:none}
+#busca input:focus{border-color:var(--hc)}
+#busca input::placeholder{color:var(--nc)}
+.leyenda{display:flex; gap:12px; flex-wrap:wrap; align-items:center; font-size:11.5px; color:var(--nc)}
+.leyenda b{color:var(--ink); font-weight:600; margin-right:2px}
+.lg{display:inline-flex; gap:5px; align-items:center; cursor:pointer; user-select:none;
+  padding:2px 5px; border-radius:4px}
+.lg:hover{background:var(--surface2)}
+.lg.off{opacity:.35}
+.pt{width:9px; height:9px; border-radius:50%; flex:0 0 auto}
+.botones{display:flex; gap:6px}
+.botones button{background:var(--surface2); border:1px solid var(--line); border-radius:6px;
+  color:var(--nc); font:inherit; font-size:12px; padding:6px 10px; cursor:pointer; white-space:nowrap}
+.botones button:hover{color:var(--ink); border-color:var(--hc)}
+.botones button.on{color:var(--amber); border-color:var(--amber)}
+#ayuda{font-size:11.5px; color:var(--nc)}
+#ayuda kbd{background:var(--surface2); border:1px solid var(--line); border-radius:4px;
+  padding:1px 5px; font:inherit; font-size:11px; color:var(--ink)}
+#tema{position:fixed; top:14px; right:14px; z-index:25; width:32px; height:32px; border-radius:7px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent); border:1px solid var(--line);
+  color:var(--nc); cursor:pointer; display:grid; place-items:center; font-size:14px; backdrop-filter:blur(8px)}
+#tema:hover{color:var(--ink); border-color:var(--hc)}
+#tema svg{display:block}
+body.conPanel #tema{right:370px}
+#flota{position:fixed; z-index:15; pointer-events:none; padding:5px 9px; border-radius:6px;
+  background:color-mix(in srgb,var(--surface) 95%,transparent); border:1px solid var(--line);
+  font-size:12.5px; color:var(--ink); opacity:0; transition:opacity .1s; max-width:300px;
+  box-shadow:0 4px 18px rgba(0,0,0,.35)}
+#flota.ver{opacity:1}
+@media (max-width:860px){
+  header p{display:none}
+  #busca{width:140px}
+  #ayuda{display:none}
+  .leyenda{max-height:52px; overflow-y:auto}
+  #panel{width:100%}
+  body.conPanel #tema{right:14px}
+}
+</style>
+</head>
+<body>
+<canvas id="lienzo"></canvas>
+
+<header>
+  <h1>Red de actores y <span>herramientas</span></h1>
+  <p>__N_NODOS__ nodos y __N_ARISTAS__ relaciones extraídas de los informes de
+     <a href="./">cti_daily</a>. Arrastra para girar, rueda para acercar, clic en un nodo para ver su ficha.
+     Las agrupaciones y los solapamientos parciales están marcados como tales: <strong>un solapamiento parcial no es una equivalencia</strong>.</p>
+</header>
+
+<button id="tema" title="Cambiar tema" aria-label="Cambiar tema"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.2a6.8 6.8 0 1 0 0 13.6A6.8 6.8 0 0 0 8 1.2Zm0 1.5v10.6a5.3 5.3 0 0 1 0-10.6Z" fill="currentColor"/></svg></button>
+<div id="flota"></div>
+
+<aside id="panel" aria-live="polite">
+  <button id="cerrar" aria-label="Cerrar ficha">×</button>
+  <div class="cab">
+    <p id="pTipo"></p>
+    <h2 id="pNombre"></h2>
+  </div>
+  <div class="cuerpo">
+    <p id="pDesc"></p>
+    <a id="pInforme" href="#" target="_blank" rel="noopener"></a>
+    <div id="pRel"></div>
+  </div>
+</aside>
+
+<div id="ctrl">
+  <div class="caja" id="busca">
+    <input id="q" type="search" placeholder="Buscar actor o herramienta…" autocomplete="off" spellcheck="false">
+  </div>
+  <div class="caja">
+    <div class="leyenda" id="leyenda"></div>
+  </div>
+  <div class="caja botones">
+    <button id="bGirar" class="on" title="Rotación automática">Girar</button>
+    <button id="bEtiq" class="on" title="Mostrar etiquetas">Etiquetas</button>
+    <button id="bReset" title="Volver a la vista inicial">Reencuadrar</button>
+  </div>
+  <div class="caja" id="ayuda">
+    <kbd>arrastrar</kbd> girar · <kbd>rueda</kbd> zoom · <kbd>clic</kbd> ficha · <kbd>Esc</kbd> cerrar
+  </div>
+</div>
+
+<script>
+/*__DATOS__*/
+
+/*__ARCHIVOS__*/
+
+'use strict';
+
+/* ════════════════════════════════════════════════════════════════════
+   Motor 3D sin dependencias: disposición por fuerzas en tres
+   dimensiones, proyección en perspectiva sobre lienzo 2D y órbita con
+   el ratón. 131 nodos: la repulsión O(n²) son ~17 000 pares por
+   fotograma, holgado para 60 fps.
+   ════════════════════════════════════════════════════════════════════ */
+
+const COLOR = {
+  ru:'--ru', cn:'--cn', pk:'--pk', kp:'--kp', ir:'--ir',
+  latam:'--latam', by:'--by', ps:'--ps', '-':'--neutro'
+};
+const PALETA_TIPO = {
+  estado:'pais', subgrupo:'pais', clúster:'pais', crimen:'crimen',
+  suministrador:'amber', marco:'sky', publica:'nc', herramienta:'pais',
+  servicio:'mint', cve:'crimen', modelo:'nc'
+};
+/* Relaciones: etiqueta legible, color y trazo. Las que expresan duda o
+   negación se dibujan discontinuas a propósito. */
+const REL = {
+  usa:            {t:'usa',                     c:'linea',  d:0},
+  contiene:       {t:'contiene',                c:'amber',  d:0},
+  suministra:     {t:'suministra a',            c:'amber',  d:0},
+  entrega:        {t:'entrega acceso a',        c:'crimen', d:0},
+  despliega:      {t:'despliega',               c:'crimen', d:0},
+  explota:        {t:'explota',                 c:'crimen', d:0},
+  abusa:          {t:'abusa de',                c:'mint',   d:0},
+  sedistribuyepor:{t:'se distribuye por',       c:'crimen', d:0},
+  firmadocon:     {t:'firmado con',             c:'amber',  d:0},
+  deriva:         {t:'deriva de',               c:'sky',    d:0},
+  solapa:         {t:'solapa en código con',    c:'sky',    d:5},
+  parcial:        {t:'SOLAPAMIENTO PARCIAL con',c:'sky',    d:5},
+  vinculado:      {t:'vinculado a',             c:'sky',    d:5},
+  colabora:       {t:'colabora con',            c:'sky',    d:5},
+  alias:          {t:'alias según el aviso',    c:'nc',     d:5},
+  disputado:      {t:'IDENTIDAD EN DISPUTA con',c:'crimen', d:5},
+  noesalias:      {t:'NO es el mismo que',      c:'crimen', d:3},
+  subgrupode:     {t:'subgrupo de',             c:'pais',   d:0},
+  alineadocon:    {t:'alineado con',            c:'sky',    d:5},
+  afiliado:       {t:'afiliado de',             c:'crimen', d:0},
+  agrupadoen:     {t:'agrupado en',             c:'nc',     d:2}
+};
+const TIPO_ETIQ = {
+  estado:'Actor estatal', subgrupo:'Subgrupo', clúster:'Clúster de actividad',
+  crimen:'Actor de extorsión', suministrador:'Suministrador', marco:'Marco de C2',
+  publica:'Herramienta pública', herramienta:'Herramienta propia',
+  servicio:'Servicio o mecanismo abusado', cve:'Vulnerabilidad', modelo:'Agrupación del producto'
+};
+const GRUPOS = [
+  {ks:['estado'],              l:'Actor estatal',        c:'--cn'},
+  {ks:['clúster','subgrupo'],  l:'Clúster y subgrupo',   c:'--sky'},
+  {ks:['crimen'],              l:'Extorsión',            c:'--crimen'},
+  {ks:['suministrador'],       l:'Suministrador',        c:'--amber'},
+  {ks:['marco'],               l:'Marco de C2',          c:'--sky'},
+  {ks:['herramienta'],         l:'Herramienta propia',   c:'--mint'},
+  {ks:['publica'],             l:'Herramienta pública',  c:'--nc'},
+  {ks:['servicio'],            l:'Servicio abusado',     c:'--mint'},
+  {ks:['cve'],                 l:'Vulnerabilidad',       c:'--crimen'},
+  {ks:['modelo'],              l:'Agrupación',           c:'--nc'}
+];
+
+/* ───────────────── estado ───────────────── */
+const lienzo = document.getElementById('lienzo');
+const cx2 = lienzo.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+
+const N = DATOS.nodos.map(n => ({...n, x:0,y:0,z:0, vx:0,vy:0,vz:0, g:0, px:0,py:0,pz:0,pe:1}));
+const idx = new Map(N.map((n,i)=>[n.id,i]));
+const E = DATOS.aristas.map(([a,b,r]) => ({a:idx.get(a), b:idx.get(b), r}));
+E.forEach(e => { N[e.a].g++; N[e.b].g++; });
+
+/* radio por grado y tipo */
+N.forEach(n => {
+  const base = (n.t==='estado'||n.t==='suministrador') ? 5.4
+             : (n.t==='clúster'||n.t==='marco'||n.t==='crimen'||n.t==='modelo') ? 4.4 : 3.2;
+  n.rad = base + Math.min(5.2, Math.sqrt(n.g) * 1.35);
+});
+
+/* semilla determinista: el mapa sale igual en cada carga */
+let semilla = 20261117;
+const rnd = () => (semilla = (semilla * 1664525 + 1013904223) % 4294967296) / 4294967296;
+N.forEach(n => {
+  const th = rnd()*Math.PI*2, ph = Math.acos(2*rnd()-1), r = 230 + rnd()*110;
+  n.x = r*Math.sin(ph)*Math.cos(th); n.y = r*Math.sin(ph)*Math.sin(th); n.z = r*Math.cos(ph);
+});
+
+const vista = {rotX:-0.32, rotY:0.55, zoom:1, dist:900, girar:true, etiquetas:true,
+               offX:0, offY:0, offXd:0, offYd:0, zoomd:1};
+
+/* Área de lienzo que no tapan la cabecera, la barra inferior ni el panel. */
+function areaLibre(){
+  const panel = document.body.classList.contains('conPanel') && W > 860 ? 356 : 0;
+  const arriba = W > 860 ? 112 : 64;
+  const abajo  = W > 860 ? 104 : 128;
+  return {cx:(W - panel)/2, cy:arriba + (H - arriba - abajo)/2,
+          an:(W - panel), al:(H - arriba - abajo)};
+}
+let sel = null, hover = null, filtro = new Set(), consulta = '', hayCoincidencia = false;
+let arrastre = null, energia = 1;
+
+/* ───────────────── utilidades ───────────────── */
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+let cache = {};
+const col = v => (cache[v] ||= css(v));
+function colorNodo(n){
+  const p = PALETA_TIPO[n.t] || 'nc';
+  if (p === 'pais')   return col(COLOR[n.p] || '--neutro');
+  if (p === 'crimen') return col('--crimen');
+  if (p === 'amber')  return col('--amber');
+  if (p === 'sky')    return col('--sky');
+  if (p === 'mint')   return col('--mint');
+  return col('--nc');
+}
+function colorRel(r){
+  const c = (REL[r]||{}).c || 'linea';
+  if (c === 'linea')  return col('--line');
+  if (c === 'pais')   return col('--sky');
+  return col('--' + c);
+}
+const mezcla = (hex, a) => {
+  const h = (hex||'').replace('#','');
+  if (h.length !== 3 && h.length !== 6) return `rgba(130,148,184,${a})`;  // respaldo
+  const f = h.length===3 ? [0,1,2].map(i=>parseInt(h[i]+h[i],16))
+                         : [0,2,4].map(i=>parseInt(h.slice(i,i+2),16));
+  if (f.some(Number.isNaN)) return `rgba(130,148,184,${a})`;
+  return `rgba(${f[0]},${f[1]},${f[2]},${a})`;
+};
+const visible = n => (!filtro.size || !filtro.has(n.t));
+const coincide = n => consulta && (n.l.toLowerCase().includes(consulta) || n.id.includes(consulta));
+
+/* ───────────────── simulación ───────────────── */
+function paso(){
+  if (energia < 0.0015) return;
+  const K_REP = 5400, K_RES = 0.0118, L = 112, CENTRO = 0.0038, AMORT = 0.86;
+
+  for (let i=0;i<N.length;i++){
+    const a = N[i];
+    for (let j=i+1;j<N.length;j++){
+      const b = N[j];
+      let dx=a.x-b.x, dy=a.y-b.y, dz=a.z-b.z;
+      let d2 = dx*dx+dy*dy+dz*dz;
+      if (d2 < 1) { d2 = 1; dx = (rnd()-0.5); dy = (rnd()-0.5); dz = (rnd()-0.5); }
+      const d = Math.sqrt(d2);
+      const f = K_REP / d2 / d;
+      a.vx += dx*f; a.vy += dy*f; a.vz += dz*f;
+      b.vx -= dx*f; b.vy -= dy*f; b.vz -= dz*f;
+    }
+  }
+  for (const e of E){
+    const a = N[e.a], b = N[e.b];
+    const dx=b.x-a.x, dy=b.y-a.y, dz=b.z-a.z;
+    const d = Math.hypot(dx,dy,dz) || 1;
+    // las relaciones de duda o negación se tensan menos: separan en vez de juntar
+    const laxa = (REL[e.r]||{}).d > 0 ? 1.55 : 1;
+    const f = (d - L*laxa) * K_RES / d;
+    a.vx += dx*f; a.vy += dy*f; a.vz += dz*f;
+    b.vx -= dx*f; b.vy -= dy*f; b.vz -= dz*f;
+  }
+  let max = 0;
+  for (const n of N){
+    n.vx -= n.x*CENTRO; n.vy -= n.y*CENTRO; n.vz -= n.z*CENTRO;
+    n.vx *= AMORT; n.vy *= AMORT; n.vz *= AMORT;
+    n.x += n.vx; n.y += n.vy; n.z += n.vz;
+    const v = Math.abs(n.vx)+Math.abs(n.vy)+Math.abs(n.vz);
+    if (v > max) max = v;
+  }
+  energia = max;
+}
+
+/* ───────────────── proyección ───────────────── */
+function proyectar(){
+  const cy=Math.cos(vista.rotY), sy=Math.sin(vista.rotY);
+  const cp=Math.cos(vista.rotX), sp=Math.sin(vista.rotX);
+  const esc = Math.min(W,H)/780 * vista.zoom;
+  for (const n of N){
+    const x1 =  n.x*cy + n.z*sy;
+    const z1 = -n.x*sy + n.z*cy;
+    const y1 =  n.y*cp - z1*sp;
+    const z2 =  n.y*sp + z1*cp;
+    const pe = vista.dist / (vista.dist + z2);
+    n.px = W/2 + x1*pe*esc + vista.offX;
+    n.py = H/2 + y1*pe*esc + vista.offY;
+    n.pz = z2;
+    n.pe = pe;
+  }
+}
+
+/* ───────────────── dibujo ───────────────── */
+function dibujar(){
+  cx2.setTransform(DPR,0,0,DPR,0,0);
+  cx2.clearRect(0,0,W,H);
+
+  const relacionados = new Set();
+  if (sel !== null){
+    relacionados.add(sel);
+    for (const e of E){ if (e.a===sel) relacionados.add(e.b); if (e.b===sel) relacionados.add(e.a); }
+  }
+  const hayFoco = sel !== null || hayCoincidencia;   // sin coincidencias no se atenúa nada
+
+  // aristas, de atrás hacia delante
+  const ord = E.slice().sort((p,q) => (N[p.a].pz+N[p.b].pz) - (N[q.a].pz+N[q.b].pz));
+  cx2.lineCap = 'round';
+  for (const e of ord){
+    const a = N[e.a], b = N[e.b];
+    if (!visible(a) || !visible(b)) continue;
+    const enFoco = sel!==null && (e.a===sel || e.b===sel);
+    const prof = Math.max(0.1, Math.min(1, (a.pe+b.pe)/2));
+    let alfa = 0.1 + prof*0.2;
+    if (enFoco) alfa = 0.95;
+    else if (hayFoco) alfa *= 0.22;
+    const info = REL[e.r] || {};
+    cx2.strokeStyle = mezcla(colorRel(e.r), alfa);
+    cx2.lineWidth = (enFoco ? 1.9 : 0.75) * prof;
+    cx2.setLineDash(info.d ? [info.d, info.d+2] : []);
+    cx2.beginPath(); cx2.moveTo(a.px,a.py); cx2.lineTo(b.px,b.py); cx2.stroke();
+  }
+  cx2.setLineDash([]);
+
+  // nodos
+  const nod = N.map((n,i)=>({n,i})).filter(o=>visible(o.n)).sort((p,q)=>p.n.pz-q.n.pz);
+  for (const {n,i} of nod){
+    const c = colorNodo(n);
+    const prof = Math.max(0.12, Math.min(1.15, n.pe));
+    const r = Math.max(1.6, n.rad * prof * (Math.min(W,H)/780) * vista.zoom);
+    const esSel = i===sel, esRel = relacionados.has(i), esQ = coincide(n);
+    let alfa = 0.3 + prof*0.62;
+    if (hayFoco && !esSel && !esRel && !esQ) alfa *= 0.2;
+
+    if (esSel || esQ){
+      cx2.beginPath(); cx2.arc(n.px,n.py,r*2.5,0,6.2832);
+      cx2.fillStyle = mezcla(esQ && !esSel ? col('--amber') : c, 0.16); cx2.fill();
+    }
+    cx2.beginPath(); cx2.arc(n.px,n.py,r,0,6.2832);
+    cx2.fillStyle = mezcla(c, alfa); cx2.fill();
+    if (esSel || i===hover || esQ){
+      cx2.strokeStyle = esQ && !esSel ? col('--amber') : col('--ink');
+      cx2.lineWidth = 1.5; cx2.stroke();
+    }
+  }
+
+  // Etiquetas. Se eligen por prioridad y se descartan las que chocarían con
+  // otra ya dibujada: sin esto se superponen y no se lee ninguna de las dos.
+  if (vista.etiquetas){
+    cx2.textBaseline = 'middle';
+    const cands = [];
+    for (const {n,i} of nod){
+      const esSel = i===sel, esRel = relacionados.has(i), esQ = coincide(n);
+      const grande = n.t==='estado'||n.t==='suministrador'||n.t==='marco'||n.t==='clúster'||n.t==='modelo';
+      const cerca = n.pe > 0.92;
+      if (!(esSel || esRel || esQ || i===hover || (grande && cerca && !hayFoco))) continue;
+      const pri = esSel ? 0 : i===hover ? 1 : esQ ? 2 : esRel ? 3 : 4;
+      cands.push({n, i, esSel, esQ, grande, pri});
+    }
+    // primero lo importante; a igual importancia, lo que está más cerca
+    cands.sort((a,b) => a.pri - b.pri || b.n.pe - a.n.pe);
+
+    const puestas = [];
+    const choca = (a) => puestas.some(b =>
+      a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y);
+
+    for (const c of cands){
+      const n = c.n;
+      const prof = Math.max(0.3, Math.min(1.1, n.pe));
+      const fs = Math.max(9.5, (c.esSel?13.5 : c.grande?11.8 : 10.6) * prof);
+      cx2.font = `${c.esSel||c.esQ?'650':'500'} ${fs}px ui-sans-serif,system-ui,sans-serif`;
+      let txt = n.l;
+      const tope = c.esSel ? 60 : c.pri <= 3 ? 44 : 34;
+      if (txt.length > tope) txt = txt.slice(0, tope-2)+'…';
+      const w = cx2.measureText(txt).width;
+      const r = Math.max(1.6, n.rad*prof*(Math.min(W,H)/780)*vista.zoom);
+
+      // se prueba a la derecha y, si choca, a la izquierda
+      const sitios = [{x:n.px+r+5, y:n.py}, {x:n.px-r-5-w, y:n.py}];
+      let elegido = null;
+      for (const s of sitios){
+        const caja = {x:s.x-3, y:s.y-fs*0.68, w:w+6, h:fs*1.36};
+        if (!choca(caja)) { elegido = {s, caja}; break; }
+      }
+      if (!elegido) continue;                       // se descarta antes que solaparla
+      puestas.push(elegido.caja);
+
+      cx2.fillStyle = mezcla(col('--bg'), hayFoco ? 0.78 : 0.55);
+      cx2.fillRect(elegido.caja.x, elegido.caja.y, elegido.caja.w, elegido.caja.h);
+      cx2.fillStyle = c.esSel ? col('--ink') : c.esQ ? col('--amber')
+                    : mezcla(col('--ink'), 0.38 + prof*0.5);
+      cx2.fillText(txt, elegido.s.x, elegido.s.y);
+    }
+  }
+}
+
+function suavizar(){
+  const k = 0.16;
+  vista.offX += (vista.offXd - vista.offX) * k;
+  vista.offY += (vista.offYd - vista.offY) * k;
+  vista.zoom += (vista.zoomd - vista.zoom) * k;
+}
+function bucle(){ paso(); suavizar(); proyectar(); dibujar(); requestAnimationFrame(bucle); }
+
+/* ───────────────── interacción ───────────────── */
+function medir(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  W = lienzo.clientWidth; H = lienzo.clientHeight;
+  lienzo.width = Math.round(W*DPR); lienzo.height = Math.round(H*DPR);
+}
+function nodoEn(mx,my){
+  let mejor=null, dmin=Infinity;
+  for (let i=0;i<N.length;i++){
+    const n=N[i]; if(!visible(n)) continue;
+    const r = Math.max(5, n.rad*Math.max(0.3,n.pe)*(Math.min(W,H)/780)*vista.zoom + 5);
+    const d = Math.hypot(n.px-mx, n.py-my);
+    if (d < r && d < dmin){ dmin=d; mejor=i; }
+  }
+  return mejor;
+}
+
+lienzo.addEventListener('pointerdown', ev => {
+  lienzo.setPointerCapture(ev.pointerId);
+  arrastre = {x:ev.clientX, y:ev.clientY, rx:vista.rotX, ry:vista.rotY, movido:false};
+  lienzo.classList.add('arrastrando');
+});
+lienzo.addEventListener('pointermove', ev => {
+  const rc = lienzo.getBoundingClientRect();
+  const mx = ev.clientX-rc.left, my = ev.clientY-rc.top;
+  if (arrastre){
+    const dx = ev.clientX-arrastre.x, dy = ev.clientY-arrastre.y;
+    if (Math.abs(dx)+Math.abs(dy) > 4) arrastre.movido = true;
+    vista.rotY = arrastre.ry + dx*0.0062;
+    vista.rotX = Math.max(-1.45, Math.min(1.45, arrastre.rx + dy*0.0062));
+    vista.girar = false; sincronizar();
+    return;
+  }
+  const h = nodoEn(mx,my);
+  if (h !== hover){
+    hover = h;
+    const f = document.getElementById('flota');
+    if (h !== null){
+      f.textContent = N[h].l;
+      f.style.left = Math.min(W-260, mx+14)+'px';
+      f.style.top  = (my+16)+'px';
+      f.classList.add('ver');
+      lienzo.style.cursor = 'pointer';
+    } else { f.classList.remove('ver'); lienzo.style.cursor = ''; }
+  }
+});
+lienzo.addEventListener('pointerup', ev => {
+  const movido = arrastre && arrastre.movido;
+  arrastre = null; lienzo.classList.remove('arrastrando');
+  if (movido) return;
+  const rc = lienzo.getBoundingClientRect();
+  const h = nodoEn(ev.clientX-rc.left, ev.clientY-rc.top);
+  if (h !== null) abrir(h); else cerrarPanel();
+});
+lienzo.addEventListener('pointercancel', ()=>{arrastre=null; lienzo.classList.remove('arrastrando')});
+lienzo.addEventListener('wheel', ev => {
+  ev.preventDefault();
+  vista.zoomd = Math.max(0.34, Math.min(5.2, vista.zoomd * (ev.deltaY<0 ? 1.11 : 0.9)));
+}, {passive:false});
+
+/* táctil: pinza para zoom */
+let pinza = null;
+lienzo.addEventListener('touchstart', ev => {
+  if (ev.touches.length===2){
+    pinza = Math.hypot(ev.touches[0].clientX-ev.touches[1].clientX,
+                       ev.touches[0].clientY-ev.touches[1].clientY);
+    arrastre = null;
+  }
+}, {passive:true});
+lienzo.addEventListener('touchmove', ev => {
+  if (pinza && ev.touches.length===2){
+    const d = Math.hypot(ev.touches[0].clientX-ev.touches[1].clientX,
+                         ev.touches[0].clientY-ev.touches[1].clientY);
+    vista.zoomd = Math.max(0.34, Math.min(5.2, vista.zoomd * (d/pinza)));
+    pinza = d; ev.preventDefault();
+  }
+}, {passive:false});
+lienzo.addEventListener('touchend', ()=>{pinza=null}, {passive:true});
+
+/* ───────────────── panel ───────────────── */
+const panel = document.getElementById('panel');
+/* Proyecta un nodo con la rotación actual, sin el zoom ni el desplazamiento.
+   Hace falta para centrar con exactitud: partir de n.px usa la posición del
+   fotograma anterior, que ya ha cambiado si el grafo está girando. */
+function proyectarUno(n){
+  const cy=Math.cos(vista.rotY), sy=Math.sin(vista.rotY);
+  const cp=Math.cos(vista.rotX), sp=Math.sin(vista.rotX);
+  const x1 =  n.x*cy + n.z*sy;
+  const z1 = -n.x*sy + n.z*cy;
+  const y1 =  n.y*cp - z1*sp;
+  const z2 =  n.y*sp + z1*cp;
+  const pe = vista.dist / (vista.dist + z2);
+  const b  = Math.min(W,H)/780;
+  return {ux: x1*pe*b, uy: y1*pe*b};
+}
+
+/* Centra el nodo elegido en el área libre y ajusta el zoom para que su
+   vecindario quepa con holgura: sin esto, la selección acaba en una esquina
+   y las etiquetas se amontonan. */
+function enfocar(i){
+  const vecinos = new Set([i]);
+  for (const e of E){ if (e.a===i) vecinos.add(e.b); if (e.b===i) vecinos.add(e.a); }
+  const n = N[i];
+  let r = 0;
+  for (const j of vecinos){
+    const m = N[j];
+    const d = Math.hypot(m.x-n.x, m.y-n.y, m.z-n.z);
+    if (d > r) r = d;
+  }
+  const a = areaLibre();
+  const esc = Math.min(W,H)/780;
+  const holgura = 0.42;                       // deja sitio a las etiquetas
+  if (r > 1) vista.zoomd = Math.max(0.34, Math.min(2.6, (Math.min(a.an,a.al) * holgura) / (r*esc)));
+
+  /* Centrado exacto: proyectar() calcula px = W/2 + u*zoom + offX, así que
+     basta obtener u con la rotación actual y despejar el desplazamiento. */
+  const {ux, uy} = proyectarUno(n);
+  vista.offXd = a.cx - W/2 - ux * vista.zoomd;
+  vista.offYd = a.cy - H/2 - uy * vista.zoomd;
+}
+
+function abrir(i){
+  sel = i; const n = N[i];
+  // El panel debe constar como abierto antes de calcular el área libre, y la
+  // rotación debe parar: si sigue girando, el nodo se sale del centro.
+  panel.classList.add('abierto');
+  document.body.classList.add('conPanel');
+  vista.girar = false; sincronizar();
+  enfocar(i);
+  document.getElementById('pTipo').textContent = TIPO_ETIQ[n.t] || n.t;
+  document.getElementById('pNombre').textContent = n.l;
+  document.getElementById('pDesc').textContent = n.d;
+  const a = document.getElementById('pInforme');
+  if (/^CTI-\d{4}-\d{3}$/.test(n.r)){
+    const f = ARCHIVOS[n.r];
+    a.textContent = n.r + (f ? ' ↗' : '');
+    a.href = f ? f : './';
+    a.style.display = 'inline-block';
+  } else { a.textContent = n.r; a.href = './'; a.style.display='inline-block'; }
+
+  const salida = [], entrada = [];
+  for (const e of E){
+    if (e.a===i) salida.push({o:e.b, r:e.r});
+    if (e.b===i) entrada.push({o:e.a, r:e.r});
+  }
+  const bloque = (titulo, lista, inv) => {
+    if (!lista.length) return '';
+    const li = lista.map(({o,r}) => {
+      const info = REL[r] || {t:r};
+      const et = inv ? invertir(info.t) : info.t;
+      return `<li><button data-ir="${o}">${esc(N[o].l)}</button>
+              <span class="rel">${esc(et)}</span></li>`;
+    }).join('');
+    return `<h3>${titulo}</h3><ul>${li}</ul>`;
+  };
+  document.getElementById('pRel').innerHTML =
+    bloque('Este nodo…', salida, false) + bloque('…y es objeto de', entrada, true);
+  document.getElementById('pRel').querySelectorAll('[data-ir]').forEach(b =>
+    b.addEventListener('click', () => abrir(+b.dataset.ir)));
+}
+function invertir(t){
+  const m = {
+    'usa':'usado por', 'contiene':'contenido en', 'suministra a':'recibe de',
+    'entrega acceso a':'recibe acceso de', 'despliega':'desplegado por',
+    'explota':'explotada por', 'abusa de':'abusado por',
+    'se distribuye por':'distribuye a', 'firmado con':'firma a',
+    'deriva de':'origen de', 'subgrupo de':'tiene como subgrupo',
+    'afiliado de':'tiene como afiliado', 'agrupado en':'agrupa a'
+  };
+  return m[t] || t;
+}
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function cerrarPanel(){
+  sel=null; panel.classList.remove('abierto'); document.body.classList.remove('conPanel');
+  encuadrar();
+}
+document.getElementById('cerrar').addEventListener('click', cerrarPanel);
+document.addEventListener('keydown', ev => { if (ev.key==='Escape') cerrarPanel(); });
+
+/* ───────────────── controles ───────────────── */
+const ley = document.getElementById('leyenda');
+ley.innerHTML = '<b>Filtrar:</b>' + GRUPOS.map(g =>
+  `<span class="lg" data-k="${g.ks.join('|')}" role="checkbox" aria-checked="true" tabindex="0"
+     ><i class="pt" style="background:var(${g.c})"></i>${g.l}</span>`).join('');
+function alternarFiltro(el){
+  const ks = el.dataset.k.split('|');
+  const apagando = !el.classList.contains('off');
+  ks.forEach(k => apagando ? filtro.add(k) : filtro.delete(k));
+  el.classList.toggle('off', apagando);
+  el.setAttribute('aria-checked', String(!apagando));
+}
+ley.querySelectorAll('.lg').forEach(el => {
+  el.addEventListener('click', () => alternarFiltro(el));
+  el.addEventListener('keydown', ev => {
+    if (ev.key===' ' || ev.key==='Enter'){ ev.preventDefault(); alternarFiltro(el); }
+  });
+});
+
+document.getElementById('q').addEventListener('input', ev => {
+  consulta = ev.target.value.trim().toLowerCase();
+  hayCoincidencia = !!consulta && N.some(coincide);
+});
+document.getElementById('q').addEventListener('keydown', ev => {
+  if (ev.key !== 'Enter' || !consulta) return;
+  const h = N.findIndex(n => coincide(n));
+  if (h >= 0) abrir(h);
+});
+
+const bG = document.getElementById('bGirar');
+bG.addEventListener('click', () => { vista.girar = !vista.girar; sincronizar(); });
+const bE = document.getElementById('bEtiq');
+bE.addEventListener('click', () => { vista.etiquetas = !vista.etiquetas; sincronizar(); });
+document.getElementById('bReset').addEventListener('click', () => {
+  vista.rotX=-0.32; vista.rotY=0.55; vista.girar=true; vista.offXd=0; vista.offYd=0;
+  consulta=''; document.getElementById('q').value='';
+  filtro.clear();
+  document.querySelectorAll('.lg.off').forEach(e=>{e.classList.remove('off'); e.setAttribute('aria-checked','true');});
+  cerrarPanel(); encuadrar(); sincronizar();
+});
+function sincronizar(){
+  bG.classList.toggle('on', vista.girar);
+  bE.classList.toggle('on', vista.etiquetas);
+}
+
+/* tema */
+const bT = document.getElementById('tema');
+function aplicarTema(t){
+  if (t) document.documentElement.setAttribute('data-theme', t);
+  else document.documentElement.removeAttribute('data-theme');
+  cache = {};
+  try { t ? localStorage.setItem('tema-red', t) : localStorage.removeItem('tema-red'); } catch(e){}
+}
+try { const g = localStorage.getItem('tema-red'); if (g) aplicarTema(g); } catch(e){}
+bT.addEventListener('click', () => {
+  const a = document.documentElement.getAttribute('data-theme');
+  const claroAhora = a === 'light' ||
+    (!a && !matchMedia('(prefers-color-scheme: dark)').matches);
+  aplicarTema(claroAhora ? 'dark' : 'light');
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { cache = {}; });
+
+/* rotación automática */
+setInterval(() => { if (vista.girar && !arrastre) vista.rotY += 0.0022; }, 16);
+
+/* ───────────────── encuadre automático ─────────────────
+   Tras asentar la disposición, el radio del grafo no se conoce de
+   antemano: se calcula y se ajusta el zoom para que entre con holgura.
+   Sin esto, parte del grafo nace fuera de pantalla. */
+function encuadrar(){
+  let r = 0;
+  for (const n of N){
+    if (!visible(n)) continue;
+    const d = Math.hypot(n.x, n.y, n.z);
+    if (d > r) r = d;
+  }
+  if (!r || !isFinite(r)) return;
+  const a = areaLibre();
+  const esc = Math.min(W,H)/780;
+  const margen = 0.86;                       // deja aire para las etiquetas
+  vista.zoomd = Math.max(0.34, Math.min(5.2, (Math.min(a.an, a.al)/2 * margen) / (r*esc)));
+  vista.offXd = a.cx - W/2;
+  vista.offYd = a.cy - H/2;
+}
+
+/* arranque */
+addEventListener('resize', () => { medir(); encuadrar(); });
+medir(); sincronizar();
+for (let i=0;i<380;i++) paso();   // preasentar la disposición antes del primer fotograma
+encuadrar();
+vista.zoom = vista.zoomd; vista.offX = vista.offXd; vista.offY = vista.offYd;  // sin animación inicial
+bucle();
+</script>
+</body>
+</html>

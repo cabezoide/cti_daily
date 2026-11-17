@@ -100,8 +100,8 @@ es el documento canónico y se versiona.</p>
 <article class="card">
   <div class="id">CTI-2026-030 · 2026-11-17</div>
   <h3><a href="CTI-2026-030-salttyphoon.html">Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A)</a></h3>
-  <div class="meta">Perfil de actor + resolución de una disputa de alias + evaluación de exposición en infraestructura de red</div>
-  <div class="pills"><span class="pill">v1.0.2</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <div class="meta">Perfil de actor + estado de una disputa de alias no resuelta + evaluación de exposición en infraestructura de red</div>
+  <div class="pills"><span class="pill">v1.0.3</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-030-salttyphoon.html">Leer el informe</a><a href="CTI-2026-030-salttyphoon.md">fuente .md</a></div>
 </article>
 <article class="card">
@@ -218,7 +218,22 @@ es el documento canónico y se versiona.</p>
 </article>
 </div>
 
-<h2><span class="num">02 · indicadores</span>Agregados de IOC</h2>
+<h2><span class="num">02 · relaciones</span>Mapa de actores y herramientas</h2>
+<p class="sub">Las relaciones entre los actores y las herramientas de esta cartera, en un grafo tridimensional navegable. Se gira con el ratón, se filtra por tipo y cada nodo abre su ficha con enlace al informe de origen. Se regenera en cada construcción desde <code>red-actores.json</code>.</p>
+<div class="grid">
+<article class="card">
+  <div class="id">132 nodos · 156 relaciones</div>
+  <h3><a href="red-actores-3d.html">Red de actores y herramientas</a></h3>
+  <div class="meta">Actores estatales, clústeres, suministradores, herramientas propias y públicas, servicios legítimos abusados y vulnerabilidades.</div>
+  <div class="pills"><span class="pill">HTML autocontenido</span><span class="pill">sin dependencias</span><span class="pill ok">siempre al día</span></div>
+  <div class="links"><a class="primary" href="red-actores-3d.html">Abrir el mapa</a><a href="red-actores.json">datos .json</a></div>
+</article>
+</div>
+<div class="note">
+<strong>Lo que el mapa distingue, y es su razón de ser.</strong> No todas las relaciones valen lo mismo, y tratarlas como si lo fueran es la fuente de error más frecuente de esta disciplina. El trazo continuo marca lo establecido —<em>usa</em>, <em>suministra a</em>, <em>explota</em>, <em>entrega acceso a</em>—; el discontinuo, lo que no lo está: <em>solapamiento parcial</em>, <em>vinculado a</em>, <em>identidad en disputa</em> y <em>no es el mismo que</em>. Tres informes de esta cartera existen porque alguien compuso un solapamiento parcial con una equivalencia.
+</div>
+
+<h2><span class="num">03 · indicadores</span>Agregados de IOC</h2>
 <p class="sub">Reconstruidos en cada construcción desde las tablas del Anexo A de cada
 informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier proceso de ingesta.</p>
 <table>
@@ -241,7 +256,7 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 <code>accion_permitida</code>, escrita por quien analizó cada indicador.
 </div>
 
-<h2><span class="num">03 · estado</span>Estado del ciclo</h2>
+<h2><span class="num">04 · estado</span>Estado del ciclo</h2>
 <div class="stats">
   <div class="stat"><div class="n">17</div><div class="l">informes publicados</div></div>
   <div class="stat"><div class="n">1646</div><div class="l">indicadores con contexto</div></div>

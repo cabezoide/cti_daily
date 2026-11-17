@@ -69,6 +69,16 @@ FICHEROS_IOC = {
 # usuario, identificadores de aplicación, ASN, CVE y cuanto declare el Anexo A.
 FICHERO_INDICE = "ioc_index.csv"
 
+# El mapa de relaciones. Se genera igual que la portada y por la misma razón:
+# un diagrama con los datos incrustados a mano queda obsoleto en silencio en
+# cuanto se publica un informe nuevo, y nadie se entera. Aquí la fuente de
+# verdad es `red-actores.json`; la plantilla sólo pone el motor alrededor, y la
+# construcción comprueba que cada nodo apunte a un informe que existe y avisa
+# de los informes que todavía no están en el grafo.
+RED_DATOS = "red-actores.json"
+RED_PLANTILLA = os.path.join("render", "red_actores_plantilla.html")
+RED_SALIDA = "red-actores-3d.html"
+
 COLUMNAS_INDICE = [
     "informe", "fecha_informe", "tlp", "pap", "tipo", "valor", "puerto",
     "confianza", "caducidad", "accion_permitida", "agregado", "contexto",
@@ -564,7 +574,7 @@ footer a{color:var(--sky)}
 """
 
 
-def pagina_portada(lista, ioc, indice, hoy):
+def pagina_portada(lista, ioc, indice, hoy, red_n=None):
     """Genera la portada de GitHub Pages.
 
     Se escribe aquí, y no a mano, por la misma razón que el índice del README:
@@ -629,6 +639,40 @@ def pagina_portada(lista, ioc, indice, hoy):
         % (FICHERO_INDICE, FICHERO_INDICE, len(indice))
     )
 
+    # El mapa sólo se anuncia si existe: la portada no debe enlazar un fichero
+    # que la construcción no ha generado.
+    bloque_red = ""
+    if red_n:
+        bloque_red = (
+            '<h2><span class="num">02 · relaciones</span>Mapa de actores y herramientas</h2>\n'
+            '<p class="sub">Las relaciones entre los actores y las herramientas de esta cartera, '
+            'en un grafo tridimensional navegable. Se gira con el ratón, se filtra por tipo y cada '
+            'nodo abre su ficha con enlace al informe de origen. Se regenera en cada construcción '
+            'desde <code>%s</code>.</p>\n'
+            '<div class="grid">\n'
+            '<article class="card">\n'
+            '  <div class="id">%d nodos · %d relaciones</div>\n'
+            '  <h3><a href="%s">Red de actores y herramientas</a></h3>\n'
+            '  <div class="meta">Actores estatales, clústeres, suministradores, herramientas propias '
+            'y públicas, servicios legítimos abusados y vulnerabilidades.</div>\n'
+            '  <div class="pills"><span class="pill">HTML autocontenido</span>'
+            '<span class="pill">sin dependencias</span>'
+            '<span class="pill ok">siempre al día</span></div>\n'
+            '  <div class="links"><a class="primary" href="%s">Abrir el mapa</a>'
+            '<a href="%s">datos .json</a></div>\n'
+            '</article>\n'
+            '</div>\n'
+            '<div class="note">\n'
+            '<strong>Lo que el mapa distingue, y es su razón de ser.</strong> No todas las relaciones '
+            'valen lo mismo, y tratarlas como si lo fueran es la fuente de error más frecuente de '
+            'esta disciplina. El trazo continuo marca lo establecido —<em>usa</em>, '
+            '<em>suministra a</em>, <em>explota</em>, <em>entrega acceso a</em>—; el discontinuo, lo '
+            'que no lo está: <em>solapamiento parcial</em>, <em>vinculado a</em>, <em>identidad en '
+            'disputa</em> y <em>no es el mismo que</em>. Tres informes de esta cartera existen porque '
+            'alguien compuso un solapamiento parcial con una equivalencia.\n'
+            '</div>\n\n'
+        ) % (e(RED_DATOS), red_n[0], red_n[1], e(RED_SALIDA), e(RED_SALIDA), e(RED_DATOS))
+
     retro = sum(1 for f in indice
                 if f["agregado"] and "retrohunt" in f["accion_permitida"].lower()
                 and "bloqueo" not in f["accion_permitida"].lower())
@@ -663,7 +707,7 @@ es el documento canónico y se versiona.</p>
 %(tarjetas)s
 </div>
 
-<h2><span class="num">02 · indicadores</span>Agregados de IOC</h2>
+%(bloque_red)s<h2><span class="num">%(num_ioc)s · indicadores</span>Agregados de IOC</h2>
 <p class="sub">Reconstruidos en cada construcción desde las tablas del Anexo A de cada
 informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier proceso de ingesta.</p>
 <table>
@@ -682,7 +726,7 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 <code>accion_permitida</code>, escrita por quien analizó cada indicador.
 </div>
 
-<h2><span class="num">03 · estado</span>Estado del ciclo</h2>
+<h2><span class="num">%(num_estado)s · estado</span>Estado del ciclo</h2>
 <div class="stats">
   <div class="stat"><div class="n">%(n)d</div><div class="l">informes publicados</div></div>
   <div class="stat"><div class="n">%(n_ioc)d</div><div class="l">indicadores con contexto</div></div>
@@ -708,13 +752,77 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
         "n_ioc": len(indice),
         "tarjetas": "\n".join(tarjetas),
         "filas_ioc": "\n".join(filas_ioc_tabla),
+        "bloque_red": bloque_red,
+        "num_ioc": "03" if red_n else "02",
+        "num_estado": "04" if red_n else "03",
         "retro": retro,
         "caducados": caducados,
         "reciente": e(reciente or "—"),
     }
 
 
-def bloque_indice(lista, ioc, procedencia, indice, hoy):
+def construir_red(lista):
+    """Genera el mapa de relaciones desde `red-actores.json` y la plantilla.
+
+    Devuelve (html, avisos). El html es None si falta algún insumo: el mapa es
+    opcional y su ausencia no debe romper la construcción del resto.
+
+    Las dos comprobaciones que justifican que esto viva en el constructor:
+
+    - **Referencias rotas.** Cada nodo declara en `r` el informe del que sale.
+      Si apunta a un informe que no existe, el enlace de su ficha llevaría a
+      ninguna parte y nadie lo notaría hasta pulsarlo.
+    - **Informes ausentes del grafo.** Al publicar un informe nuevo, el mapa no
+      lo incorpora solo —las relaciones son juicios del analista, no algo
+      extraíble de la prosa—, así que lo que hace la construcción es avisar.
+      Es deliberado que avise y no falle: un informe sin nodo es una tarea
+      pendiente, no un error de integridad.
+    """
+    avisos = []
+    ruta_datos = os.path.join(RAIZ, RED_DATOS)
+    ruta_plant = os.path.join(RAIZ, RED_PLANTILLA)
+    if not (os.path.exists(ruta_datos) and os.path.exists(ruta_plant)):
+        return None, avisos
+
+    with open(ruta_datos, encoding="utf-8") as fh:
+        datos = json.load(fh)
+    nodos = datos.get("nodos", [])
+    aristas = datos.get("aristas", [])
+
+    ids = {n["id"] for n in nodos}
+    for a, b, _r in aristas:
+        if a not in ids or b not in ids:
+            avisos.append("red: arista hacia un nodo inexistente: %s → %s" % (a, b))
+
+    publicables = {i["id"]: i for i in lista if i["publicable"]}
+    archivos = {i["id"]: i["html"] for i in publicables.values()}
+
+    citados = set()
+    for n in nodos:
+        ref = (n.get("r") or "").strip()
+        if re.fullmatch(r"CTI-\d{4}-\d{3}", ref):
+            citados.add(ref)
+            if ref not in archivos:
+                avisos.append("red: el nodo %r cita %s, que no existe o no es publicable"
+                              % (n.get("l", n["id"]), ref))
+    for ident in sorted(set(publicables) - citados):
+        avisos.append("red: %s no aparece en ningún nodo de %s" % (ident, RED_DATOS))
+
+    plantilla = open(ruta_plant, encoding="utf-8").read()
+    html = (plantilla
+            .replace("/*__DATOS__*/",
+                     "const DATOS = " + json.dumps(
+                         {"nodos": nodos, "aristas": aristas},
+                         ensure_ascii=False, separators=(",", ":")) + ";")
+            .replace("/*__ARCHIVOS__*/",
+                     "const ARCHIVOS = " + json.dumps(
+                         archivos, ensure_ascii=False, indent=2) + ";")
+            .replace("__N_NODOS__", str(len(nodos)))
+            .replace("__N_ARISTAS__", str(len(aristas))))
+    return html, avisos
+
+
+def bloque_indice(lista, ioc, procedencia, indice, hoy, red_n=None):
     publicables = [i for i in lista if i["publicable"]]
     total_ioc = sum(len(v) for v in ioc.values())
     caducados = [i for i in publicables if vigencia(i["fm"], hoy)[0] == "caducado"]
@@ -748,6 +856,13 @@ def bloque_indice(lista, ioc, procedencia, indice, hoy):
             " — " + ", ".join("`%s`" % i["id"] for i in por_caducar) if por_caducar else "",
         ),
         "| Informe más reciente | %s |" % (reciente or "—"),
+    ]
+    if red_n:
+        partes += [
+            "| Nodos del mapa de relaciones | %d, con %d relaciones — "
+            "[`%s`](%s) |" % (red_n[0], red_n[1], RED_SALIDA, RED_SALIDA),
+        ]
+    partes += [
         "",
         MARCA_FIN,
     ]
@@ -825,14 +940,25 @@ def main():
     if escribir_si_cambia(os.path.join(RAIZ, FICHERO_INDICE), buf.getvalue(), opt.check):
         cambios.append("%s (%d indicadores con contexto)" % (FICHERO_INDICE, len(indice)))
 
-    portada = pagina_portada(lista, ioc, indice, hoy)
+    red_html, red_avisos = construir_red(lista)
+    red_n = None
+    if red_html is not None:
+        with open(os.path.join(RAIZ, RED_DATOS), encoding="utf-8") as fh:
+            _d = json.load(fh)
+        red_n = (len(_d.get("nodos", [])), len(_d.get("aristas", [])))
+        if escribir_si_cambia(os.path.join(RAIZ, RED_SALIDA), red_html, opt.check):
+            cambios.append("%s (%d nodos, %d relaciones)" % (RED_SALIDA, red_n[0], red_n[1]))
+    for aviso in red_avisos:
+        print("aviso: " + aviso, file=sys.stderr)
+
+    portada = pagina_portada(lista, ioc, indice, hoy, red_n)
     if escribir_si_cambia(os.path.join(RAIZ, PORTADA), portada, opt.check):
         cambios.append("%s (portada de GitHub Pages)" % PORTADA)
 
     ruta_readme = os.path.join(RAIZ, "README.md")
     if os.path.exists(ruta_readme):
         readme = open(ruta_readme, encoding="utf-8").read()
-        nuevo = bloque_indice(lista, ioc, procedencia, indice, hoy)
+        nuevo = bloque_indice(lista, ioc, procedencia, indice, hoy, red_n)
         if MARCA_INI in readme and MARCA_FIN in readme:
             ini = readme.index(MARCA_INI)
             fin = readme.index(MARCA_FIN) + len(MARCA_FIN)

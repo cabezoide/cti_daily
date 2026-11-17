@@ -2,8 +2,8 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-030"
-version: "1.0.2"
-tipo: "Perfil de actor + resolución de una disputa de alias + evaluación de exposición en infraestructura de red"
+version: "1.0.3"
+tipo: "Perfil de actor + estado de una disputa de alias no resuelta + evaluación de exposición en infraestructura de red"
 foco_regional: "Global (EE. UU., Australia, Canadá, Nueva Zelanda y Reino Unido documentados) · Chile y Latinoamérica: exposición directa por tecnología de operador, y una atribución regional errónea que este informe desmonta"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
 actor: "Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A)"
@@ -33,8 +33,8 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, con el av
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-030` |
-| Versión / fecha | `1.0.2` — 2026-11-17 (dos correcciones de verificación previa a la publicación, una de ellas de fondo: véase Anexo G) |
-| Tipo de producto | Perfil de actor, más **resolución de una disputa de alias** que esta cartera dejó abierta en `CTI-2026-017` y que un año después produjo una atribución pública errónea, más **evaluación de exposición en infraestructura de red de operador** |
+| Versión / fecha | `1.0.3` — 2026-11-17 (tres correcciones de verificación, una de ellas de fondo y otra por aplicación incompleta de la anterior: véase Anexo G) |
+| Tipo de producto | Perfil de actor, más **documentación del estado de una disputa de alias que sigue sin resolverse** y que `CTI-2026-017` dejó abierta, más **evaluación de exposición en infraestructura de red de operador**. **No resuelve la disputa: establece que nadie la ha resuelto y quién afirma qué** |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | **Doble, y conviene distinguirlo.** (a) **Exposición real**: el actor ataca el equipamiento de red que operan las telecomunicaciones, el Estado y el transporte de cualquier país, y el aviso lo sitúa en «otras áreas a nivel global». (b) **Atribución regional en disputa**: varias coberturas de septiembre de 2026 publicaron con su nombre la campaña latinoamericana que ESET atribuye al actor de `CTI-2026-017`. **Este informe no decide quién tiene razón: documenta que nadie lo ha decidido y quién afirma qué** |
 | Marcado de difusión | `TLP:CLEAR` · `PAP:AMBER` |
@@ -197,9 +197,13 @@ Hay dos hallazgos en este informe y conviene no mezclarlos.
 
 **El primero es sobre nuestro oficio.** En septiembre de 2026, `CTI-2026-017` dejó por escrito que fusionar FamousSparrow con Salt Typhoon produciría «una cobertura nominal alta y una cobertura real nula», y lo consignó como juicio pendiente. Ese mismo mes, varias coberturas de prensa especializada atribuyeron a Salt Typhoon la campaña latinoamericana de FamousSparrow. **El informe acertó en el pronóstico y no sirvió para evitar nada**, porque la predicción estaba en nuestro producto y el error lo cometieron otros.
 
-Lo que este informe añade es el **mecanismo**, y el mecanismo es generalizable. El aviso oficial enumera `GhostEmperor` entre los nombres de industria de este actor. `CTI-2026-017` recoge que `GhostEmperor` se solapa **parcialmente** con FamousSparrow: compartieron una vulnerabilidad y **una dirección IP en 2021**. Componer las dos afirmaciones da «FamousSparrow = Salt Typhoon», y la composición es inválida.
+Lo que este informe añade es **el estado real de la cuestión**, y no es el que la primera redacción pensó. No hubo un error de razonamiento de la prensa: hubo **una afirmación sin respaldo publicado que se consumió como hecho.**
 
-Enunciado como regla: **un solapamiento parcial no es transitivo.** Si A se solapa parcialmente con B, y B es un alias de C, no se sigue que A sea C. Esta es la tercera forma del mismo error que la cartera documenta —`CTI-2026-022` con nombres de un actor regional, `CTI-2026-017` v1.2 con un implante tomado por actor, y ahora ésta—. El Anexo D la convierte en lista de comprobación.
+Microsoft sostiene que `Salt Typhoon`, `FamousSparrow` y `GhostEmperor` son el mismo grupo, y **no ha publicado ni un indicador, ni una táctica, ni una explicación**. ESET sostiene lo contrario y **sí publica su razonamiento**. Check Point y una cobertura técnica, en noviembre de 2026, dicen que la relación «no está clara». Y el aviso oficial **no menciona a FamousSparrow en absoluto**.
+
+Enunciado como regla: **una atribución sin base publicada no es utilizable, por autorizada que sea su fuente.** No porque sea falsa —puede ser cierta, y quien la hace tiene telemetría que nadie más tiene— sino porque **no se puede verificar, refutar ni convertir en una regla de detección**. La asimetría entre las dos posiciones no está en quién tiene razón: está en quién permite comprobarlo.
+
+Hay una regla secundaria, que la primera redacción de este informe tomó por principal: **un solapamiento parcial no es transitivo.** El aviso enumera `GhostEmperor` entre los nombres de este actor y `CTI-2026-017` lo solapa parcialmente con FamousSparrow —una vulnerabilidad y una dirección IP en 2021—; componer las dos cosas da la equivalencia y la composición es inválida. **Pero dado que Microsoft la afirma directamente, esa cadena no era necesaria para explicar nada.** Se conserva como advertencia. Es la tercera forma del problema de nomenclatura que esta cartera documenta —`CTI-2026-022`, `CTI-2026-017` v1.2 y ésta— y el Anexo D las convierte en lista de comprobación, **con `D-0` por delante**.
 
 **El segundo hallazgo es sobre el actor**, y es que su problema es mayor que el que se le atribuyó por error.
 
@@ -260,11 +264,14 @@ La columna que importa es la segunda fila. **UNC3886 exige capacidad defensiva q
 
 <!-- cti:note type="warn" -->
 
-> ⚠ **Lo que NO es victimología de este actor, y se le atribuyó.** La campaña de
-> `SparroWocky` con el 90 % de objetivos latinoamericanos y entidades
+> ⚠ **La victimología que se le atribuyó y que no está establecida.** La campaña
+> de `SparroWocky` con el 90 % de objetivos latinoamericanos y entidades
 > gubernamentales en Argentina, Ecuador, Guatemala, Honduras, Panamá, Perú,
-> Puerto Rico y Venezuela **pertenece al actor de `CTI-2026-017`**, que es quien
-> la analizó la atribuye, y que rastrea a los dos actores por separado.
+> Puerto Rico y Venezuela **la analizó ESET y la atribuye a FamousSparrow**, al
+> que rastrea por separado de este actor. **Microsoft sostiene que son el mismo
+> grupo y no publica base técnica**; dos fuentes de noviembre de 2026 dicen que
+> la relación no está clara. **Por tanto esa victimología no se puede incorporar
+> a este expediente, ni descartarla: no está decidida** (§O-1, `KJ-4`).
 >
 > La diferencia no es de etiqueta: es de modelo de amenaza. Uno es un actor de
 > **implante de punto final sobre servidores expuestos**; el otro vive **dentro
@@ -1434,6 +1441,7 @@ parcial no es transitivo.**
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| 1.0.3 | 2026-11-17 | **Corrección de una aplicación incompleta de la revisión 1.0.2.** Cuatro ediciones de aquella corrección no llegaron a escribirse —el lote abortó antes de guardar el fichero— y el informe se publicó internamente inconsistente: los juicios, el expediente de alias y el Anexo D llevaban la versión corregida, mientras que el campo `tipo`, la cabecera de control, el §E-1 y la nota de victimología de §E-2 conservaban la redacción anterior, que afirmaba haber **resuelto** la disputa y que la campaña de `SparroWocky` **pertenece** a otro actor. Las cuatro se han aplicado y verificado una a una. **Sin cambios en los juicios**: sólo alinea con ellos las secciones que se habían quedado atrás | Célula CTI |
 | 1.0.2 | 2026-11-17 | **Segunda corrección previa a la publicación, y es de fondo: afectaba a los juicios, no a los datos.** La verificación de `KJ-3` y `KJ-4` contra las fuentes encontró **una explicación documentada y mucho más simple del origen de la fusión de alias que la que este informe sostenía**: Microsoft afirmó directamente —según coberturas— que `Salt Typhoon`, `FamousSparrow` y `GhostEmperor` son el mismo grupo, **sin publicar base técnica**. La primera redacción presentaba como hallazgo central una cadena transitiva vía `GhostEmperor` en el aviso oficial, **que no era necesaria para explicar el resultado**. Cambios: (a) **`KJ-3` reponderado** — la afirmación de Microsoft pasa a vía principal (muy probable) y la composición transitiva a vía de refuerzo (posibilidad real, confianza baja); (b) **`KJ-4` degradado** — de «casi con certeza que la atribución de prensa es incorrecta» a «probable que la equivalencia no esté establecida en ninguna de las dos direcciones», porque **si Microsoft afirma la identidad, usar su nombre no es un error de la prensa sino la adopción de una taxonomía en disputa**; (c) titular, subtitular, resumen ejecutivo, §E-1, §E-2, tarjetas y cifras rehechos en consecuencia; (d) **§O-1 bloque 3 reescrito como tabla de quién afirma qué y con qué base**, en lugar de cadena de inferencia; (e) nota de tradecraft de §O-1 con dos reglas, la principal nueva; (f) **§O-6 cuestión 1 reordenada**, con hipótesis `H5` nueva y `H3` degradada; (g) supuesto clave y pre-mortem rehechos; (h) **Anexo D con comprobación `D-0` nueva**, que es la que se omitió; (i) decisión `E-h` ajustada: la corrección a emitir no es «es falso» sino «no se sabe»; (j) limitaciones §3.3-xi y xii y brecha `G-11`. **La corrección se consigna y no se oculta el razonamiento anterior, porque el error es instructivo y el Anexo D lo recoge como advertencia de uso** | Célula CTI |
 | 1.0.1 | 2026-11-17 | **Corrección previa a la publicación, tras verificación programática del Anexo A.4 contra la lista del aviso.** Se retiran dos direcciones que no están en el aviso y que entraron por contaminación entre expedientes durante la redacción: `37.221.64.202` (procede de `CTI-2026-026`) y `45.80.208.66` (procede de la lista del clúster `OceanGate` del expediente de `CTI-2026-017`). Se rectifica además la nota de recuento, que afirmaba incorrectamente haber omitido dos direcciones de proveedores de nube: no se omitió ninguna, y la tabla recoge las 86 entradas del aviso. **Sin cambios en los juicios analíticos.** El recuento queda verificado: 84 IPv4 y 2 IPv6, coincidencia exacta con la fuente | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. **Resuelve el `KJ-7` de `CTI-2026-017`** identificando el eslabón —`GhostEmperor` en la lista de nombres de industria del aviso oficial— por el que se produjo la fusión con FamousSparrow, y desmonta la atribución errónea de septiembre de 2026. Primer informe de la cartera con una fuente de fiabilidad **A** y credibilidad **1**. Establece en el Anexo D la regla de no transitividad de los solapamientos parciales | Célula CTI |

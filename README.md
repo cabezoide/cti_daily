@@ -32,7 +32,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-027` | Mustang Panda · Earth Preta · TA416 · RedDelta · BRONZE PRESIDENT · Stately Taurus · Twill Typhoon · HoneyMyte · TEMP.Hex · TANTALUM · G0129 · (vinculado) UNC6384 | Perfil de actor + evaluación de capacidad y de resiliencia a la acción policial | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-027-mustangpanda.md) · [html](CTI-2026-027-mustangpanda.html) |
 | `CTI-2026-028` | UNC3886 · Grupo G1048 (MITRE ATT&CK) · campaña C0056 «RedPenguin» | Perfil de actor + evaluación de capacidad adversaria + estudio de caso nacional (Singapur) | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-028-unc3886.md) · [html](CTI-2026-028-unc3886.html) |
 | `CTI-2026-029` | Sandworm · APT44 · Seashell Blizzard · IRIDIUM · Voodoo Bear · TeleBots · BlackEnergy Group · ELECTRUM · FROZENBARENTS · UAC-0002 · G0034 · (subgrupo) BadPilot | Perfil de actor destructivo + evaluación de recuperabilidad | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-029-sandworm.md) · [html](CTI-2026-029-sandworm.html) |
-| `CTI-2026-030` | Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A) | Perfil de actor + resolución de una disputa de alias + evaluación de exposición en infraestructura de red | 2026-11-17 | 1.0.2 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-030-salttyphoon.md) · [html](CTI-2026-030-salttyphoon.html) |
+| `CTI-2026-030` | Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A) | Perfil de actor + estado de una disputa de alias no resuelta + evaluación de exposición en infraestructura de red | 2026-11-17 | 1.0.3 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-030-salttyphoon.md) · [html](CTI-2026-030-salttyphoon.html) |
 
 ### Agregados de indicadores
 
@@ -54,6 +54,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-17 |
+| Nodos del mapa de relaciones | 132, con 156 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 
@@ -61,15 +62,23 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 ## Mapa de relaciones
 
-**[`red-actores-3d.html`](red-actores-3d.html)** — mapa tridimensional navegable de los
-**131 nodos y 152 relaciones** que se extraen de los informes de esta cartera: actores
-estatales, clústeres, suministradores, herramientas propias, herramientas públicas,
-servicios legítimos abusados y vulnerabilidades. Se gira con el ratón, se filtra por tipo
-y cada nodo abre una ficha con su descripción y un enlace al informe de origen.
+**[`red-actores-3d.html`](red-actores-3d.html)** — mapa tridimensional navegable de las
+relaciones entre los actores y las herramientas de esta cartera: actores estatales,
+clústeres, suministradores, herramientas propias, herramientas públicas, servicios
+legítimos abusados y vulnerabilidades. Se gira con el ratón, se filtra por tipo y cada
+nodo abre una ficha con su descripción y un enlace al informe de origen. El recuento vivo
+está en el índice de más arriba.
 
 Es HTML autocontenido, **sin dependencias externas ni red**: la disposición se calcula en
 el navegador con un algoritmo de fuerzas en tres dimensiones y semilla fija, de modo que el
 mapa sale idéntico en cada carga.
+
+**No se edita a mano.** La fuente es [`red-actores.json`](red-actores.json) —nodos,
+relaciones y la descripción de cada ficha— y `tools/cti_build.py` lo regenera en cada
+construcción junto con la portada y los agregados. La construcción comprueba además que
+cada nodo apunte a un informe que existe, y **avisa de los informes que todavía no están
+en el grafo**: las relaciones son juicios del analista y no se extraen solas de la prosa,
+así que lo que el constructor puede hacer es no dejar que el hueco pase inadvertido.
 
 > **Lo que el mapa distingue, y es su razón de ser.** Las relaciones no son todas iguales,
 > y tratarlas como si lo fueran es la fuente de error más frecuente de esta disciplina. El
