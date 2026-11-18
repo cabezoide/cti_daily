@@ -36,8 +36,10 @@ beroniw.com
 blogwhereyou.com
 bossmaya.xyz
 brasilmotorsvs14.com
+buildersemp.sharepoint.com
 camarasdeseguridad202420242024.duckdns.org
 carlosmendoza504070.duckdns.org
+cathaypacifice.com
 ceofanb18.mipropia.com
 ch47f6gl-80.euw.devtunnels.ms
 cheese-metals-gourmet-interviews.trycloudflare.com
@@ -49,8 +51,10 @@ comina998.ddns-ip.net
 connect-microsoft.com
 contabilidad.icu
 cort.as
+cskautogo.sharepoint.com
 d16ss6sn-80.euw.devtunnels.ms
 dayenter.shop
+dc.cathaypacifice.com
 dcfast.duckdns.org
 de-fra.i3storage.com
 deadpoolstart2025.duckdns.org
@@ -67,10 +71,12 @@ docsmoonstudioclayworks.online
 documentodigital.cloud
 dominioseternosgraciasadios20230230230.duckdns.org
 donato.con-ip.com
+dpworldto.com
 drdo.gov.in.nominationdrdo.report
 dushun.ru
 earlysilence.ru
 ebccarpentrydublin.com
+ekmt.tw
 ekrn.ydns.eu
 elyeso.ip-ddns.com
 email.gov.in.briefcases.email
@@ -193,7 +199,9 @@ moscovatech.com
 ms-record.com
 ms-record.top
 ms-tray.top
+ms.twnic.top
 natcloudservice.com
+net.dpworldto.com
 newremco.duckdns.org
 newstaticfreepoint24.ddns-ip.net
 nginxmysql.com
@@ -243,6 +251,7 @@ tobabean.expert
 tokeiss.ddns.net
 trilivok.com
 twimg.co.uk
+twnic.top
 u154611594.hostingerapp.com
 u929489355.hostingerapp.com
 unum.report

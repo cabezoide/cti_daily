@@ -84,7 +84,7 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-017",
-   "d": "90 % de objetivos en Latinoamérica desde mediados de 2025",
+   "d": "90 % de objetivos en Latinoamérica desde mediados de 2025. TENSIÓN (CTI-2026-043): Kaspersky sitúa un implante suyo en marzo de 2026 en una víctima de una campaña cuyo conjunto declarado es Asia y África, sin decir el país de ese sistema",
    "a": "proveedor"
   },
   {
@@ -1606,6 +1606,134 @@
    "r": "CTI-2026-035",
    "d": "Infraestructura PROPIA de la víctima, usada para distribuir el encriptador a todo el parque. Es la vía por la que se cifran diez mil equipos en diez minutos: exige doble aprobación para crear paquetes",
    "a": "-"
+  },
+  {
+   "id": "shadowcloud",
+   "l": "Operation ShadowCloud",
+   "t": "clúster",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "Canal de C2 ENTERO sobre nube corporativa: GitHub para órdenes, SharePoint para datos, Ably para el túnel. Gobiernos de Asia y África. Ninguna víctima americana. Cero días cero: entra por un MeshAgent que ya estaba",
+   "a": "proveedor",
+   "af": "Kaspersky NO atribuye: dice «grupo de habla china» sin probar vínculo directo. Sophos dice «con base en China» como SOSPECHA, apoyada en horario UTC+8 y solapamiento geográfico. Aportación propia: los campos `dhj_exe` (iniciales de pinyin de «DLL 劫持») e `is_need_lock` (calco de «是否需要锁») sitúan el desarrollo en habla china por una vía independiente"
+  },
+  {
+   "id": "bronzesandcastle",
+   "l": "BRONZE SANDCASTLE",
+   "t": "clúster",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "Designación de Sophos CTU, 20-10-2026. Víctimas en Filipinas, Taiwán, Afganistán, Namibia y probablemente Corea del Sur. CTI-2026-043 sostiene que ES la misma operación que ShadowCloud: comparten la cuenta de GitHub LatonyCharnleyaW y las versiones se intercalan (1.1.5 · 1.1.6 · 1.1.7 · 1.2.7)",
+   "a": "proveedor",
+   "af": "Sophos no pudo vincularla a BRONZE PRESIDENT ni a BRONZE ATLAS, pese al solapamiento geográfico de objetivos, y por eso creó designación propia"
+  },
+  {
+   "id": "gitdoor",
+   "l": "GitDoor",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "26 órdenes. C2 en DOS repositorios de GitHub: uno público para las órdenes, otro privado para los resultados. El número de issue hace de identificador de sesión. `client_version` 1.1.6",
+   "a": "proveedor"
+  },
+  {
+   "id": "graphdoor",
+   "l": "GraphDoor",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "C2 en SharePoint vía Microsoft Graph, autenticándose COMO APLICACIÓN contra un inquilino ajeno de Entra ID. SIN dominio de C2 embebido: la infraestructura llega en tiempo de ejecución. `client_version` 1.2.7",
+   "a": "proveedor"
+  },
+  {
+   "id": "erfrp",
+   "l": "Erfrp (frp modificado)",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "Cliente de proxy inverso derivado del proyecto libre frp, en Go. Modificado para NO leer fichero de configuración: la toma de memoria compartida. Ruta de compilación con el directorio `pythonrat`",
+   "a": "proveedor"
+  },
+  {
+   "id": "meshcentral",
+   "l": "MeshCentral Agent",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "Software libre LEGÍTIMO de administración remota. Vector inicial documentado, no por vulnerabilidad sino por reutilización de una infección anterior. NO es un indicador de compromiso: es un indicador de inventario",
+   "a": "-"
+  },
+  {
+   "id": "githubc2",
+   "l": "GitHub (api.github.com)",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "NO BLOQUEAR: lo necesita cualquiera que desarrolle. La mitad descendente del canal es anónima; sólo la ascendente lleva token, y es la única distinguible",
+   "a": "-"
+  },
+  {
+   "id": "sharepointc2",
+   "l": "SharePoint · Microsoft Graph",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "NO BLOQUEAR: es el plano de datos de Microsoft 365. Se controla por inquilino, no por destino. El GUID del inquilino del adversario quedó publicado por descuido y no figura en ninguna lista de indicadores",
+   "a": "-"
+  },
+  {
+   "id": "ably",
+   "l": "Ably (mensajería en tiempo real)",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "EL ESLABÓN FLOJO del modelo de sigilo del adversario. A diferencia de GitHub y Graph, no tiene uso corporativo plausible en un puesto de trabajo. Es el control de mejor relación coste-beneficio del expediente",
+   "a": "-"
+  },
+  {
+   "id": "gofile",
+   "l": "gofile.io · file.io",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "Intercambio anónimo de ficheros. Único punto de exfiltración masiva documentado. Bloqueo salvo excepción documentada",
+   "a": "-"
+  },
+  {
+   "id": "copperturtle",
+   "l": "CopperTurtle · BlackTech",
+   "t": "estado",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "Actor DISTINTO y coexistente: su implante apareció en C:\\Program Files\\PDF24\\ un día antes que GitDoor, en el mismo directorio. Coexistencia, NO identidad",
+   "a": "proveedor"
+  },
+  {
+   "id": "plead",
+   "l": "PLEAD RAT",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-043",
+   "d": "RAT modular histórico de CopperTurtle/BlackTech, inyectado en memoria por pdfset.exe",
+   "a": "proveedor"
+  },
+  {
+   "id": "cookiekatz",
+   "l": "CookieKatz",
+   "t": "publica",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "Herramienta pública. Volca cookies de Chrome, Edge y Msedgewebview2 DE LA MEMORIA del proceso: no toca la base de datos en disco ni necesita la clave de DPAPI",
+   "a": "-"
+  },
+  {
+   "id": "petitpotam",
+   "l": "PetitPotam",
+   "t": "publica",
+   "p": "-",
+   "r": "CTI-2026-043",
+   "d": "Herramienta pública. Fuerza autenticación NTLM por EFSRPC. Su tubería con nombre indica movimiento lateral EN CURSO, no presencia",
+   "a": "-"
   }
  ],
  "aristas": [
@@ -2663,6 +2791,101 @@
    "medusaransom",
    "medusa",
    "noesalias"
+  ],
+  [
+   "shadowcloud",
+   "gitdoor",
+   "usa"
+  ],
+  [
+   "shadowcloud",
+   "graphdoor",
+   "usa"
+  ],
+  [
+   "shadowcloud",
+   "meshcentral",
+   "abusa"
+  ],
+  [
+   "shadowcloud",
+   "erfrp",
+   "usa"
+  ],
+  [
+   "shadowcloud",
+   "cobaltstrike",
+   "despliega"
+  ],
+  [
+   "shadowcloud",
+   "mimikatz",
+   "usa"
+  ],
+  [
+   "shadowcloud",
+   "cookiekatz",
+   "usa"
+  ],
+  [
+   "shadowcloud",
+   "petitpotam",
+   "usa"
+  ],
+  [
+   "shadowcloud",
+   "gofile",
+   "abusa"
+  ],
+  [
+   "shadowcloud",
+   "bronzesandcastle",
+   "solapa"
+  ],
+  [
+   "shadowcloud",
+   "famoussparrow",
+   "vinculado"
+  ],
+  [
+   "shadowcloud",
+   "copperturtle",
+   "vinculado"
+  ],
+  [
+   "copperturtle",
+   "plead",
+   "usa"
+  ],
+  [
+   "gitdoor",
+   "githubc2",
+   "abusa"
+  ],
+  [
+   "gitdoor",
+   "ably",
+   "abusa"
+  ],
+  [
+   "graphdoor",
+   "sharepointc2",
+   "abusa"
+  ],
+  [
+   "graphdoor",
+   "ably",
+   "abusa"
+  ],
+  [
+   "bronzesandcastle",
+   "githubc2",
+   "abusa"
+  ],
+  [
+   "bronzesandcastle",
+   "ably",
+   "abusa"
   ]
  ]
 }
