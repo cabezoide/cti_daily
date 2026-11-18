@@ -33,28 +33,33 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-028` | UNC3886 · Grupo G1048 (MITRE ATT&CK) · campaña C0056 «RedPenguin» | Perfil de actor + evaluación de capacidad adversaria + estudio de caso nacional (Singapur) | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-028-unc3886.md) · [html](CTI-2026-028-unc3886.html) |
 | `CTI-2026-029` | Sandworm · APT44 · Seashell Blizzard · IRIDIUM · Voodoo Bear · TeleBots · BlackEnergy Group · ELECTRUM · FROZENBARENTS · UAC-0002 · G0034 · (subgrupo) BadPilot | Perfil de actor destructivo + evaluación de recuperabilidad | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-029-sandworm.md) · [html](CTI-2026-029-sandworm.html) |
 | `CTI-2026-030` | Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A) | Perfil de actor + estado de una disputa de alias no resuelta + evaluación de exposición en infraestructura de red | 2026-11-17 | 1.0.3 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-030-salttyphoon.md) · [html](CTI-2026-030-salttyphoon.html) |
+| `CTI-2026-031` | Dark Caracal · G0070 (MITRE ATT&CK) · nexo con la Dirección General de Seguridad General (GDGS) del Líbano · familias Bandook, CrossRAT, Pallas, Poco RAT, AsioGate y (2026) GoCaracal | Perfil de actor estatal mercenario + evaluación de un canal de mando y control que no se puede dar de baja | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-031-darkcaracal.md) · [html](CTI-2026-031-darkcaracal.html) |
+| `CTI-2026-032` | APT38 (G0082) · BlueNoroff · TraderTraitor · Sapphire Sleet · Contagious Interview / DeceptiveDevelopment · todos bajo el paraguas Lazarus Group (G0032) y el Buró General de Reconocimiento de la RPDC | Perfil de bloque de actores + separación de tres modelos operativos que comparten nombre + evaluación de exposición regional | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-032-apt38-bluenoroff.md) · [html](CTI-2026-032-apt38-bluenoroff.html) |
+| `CTI-2026-033` | StrikeShark (clúster de intrusión sin atribuir, designación de Kaspersky GReAT) · cargador SharkLoader · carga final Cobalt Strike Beacon | Perfil de clúster sin atribuir + análisis de un cargador diseñado contra los sensores del EDR + evaluación de exposición por aplicaciones expuestas a Internet | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-033-strikeshark.md) · [html](CTI-2026-033-strikeshark.html) |
+| `CTI-2026-034` | Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919 · habilitados por el Integrity Technology Group (Yongxin Zhicheng), designado por la OFAC, el Reino Unido y la Unión Europea | Perfil de actor estatal por contrato + evaluación de un modelo de negocio con ánimo de lucro + identificación de un eje de exposición regional que atraviesa tres informes de esta cartera | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-034-flaxtyphoon.md) · [html](CTI-2026-034-flaxtyphoon.html) |
+| `CTI-2026-035` | Medusa (RaaS) · encriptador `gaze.exe` / `gaze.py` · **NO es MedusaLocker, NO es el malware móvil Medusa, y NO es el rootkit MEDUSA de `CTI-2026-028`** | Perfil de operación de extorsión + evaluación de un adversario con acceso a exploits antes de su divulgación + desambiguación de cuatro cosas distintas llamadas «Medusa» | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-035-medusa.md) · [html](CTI-2026-035-medusa.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 302 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 352 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
-| [`ioc_url.txt`](ioc_url.txt) | 242 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026` |
-| [`ioc_hash.txt`](ioc_hash.txt) | 343 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030` |
-| [`ioc_index.csv`](ioc_index.csv) | 1646 | todos: `appid`, `artefacto`, `asn`, `asunto`, `clave`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030` |
+| [`ioc_url.txt`](ioc_url.txt) | 270 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 358 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033` |
+| [`ioc_index.csv`](ioc_index.csv) | 2081 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 17 |
-| Indicadores en listas planas | 889 |
-| Indicadores en el índice con contexto | 1646 |
+| Informes publicados | 22 |
+| Indicadores en listas planas | 982 |
+| Indicadores en el índice con contexto | 2081 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-17 |
-| Nodos del mapa de relaciones | 132, con 156 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Nodos del mapa de relaciones | 175, con 211 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 
