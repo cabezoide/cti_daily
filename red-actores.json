@@ -1734,6 +1734,127 @@
    "r": "CTI-2026-043",
    "d": "Herramienta pública. Fuerza autenticación NTLM por EFSRPC. Su tubería con nombre indica movimiento lateral EN CURSO, no presencia",
    "a": "-"
+  },
+  {
+   "id": "volttyphoon",
+   "l": "Volt Typhoon · VOLTZITE",
+   "t": "estado",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Preposicionamiento, NO espionaje: entra, roba NTDS.dit y se queda quieto. Hasta CINCO AÑOS dentro, con reextracción periódica de credenciales. Sin malware en la víctima. Y en 2026: cuatro días cero contra planos de control. Cero víctimas latinoamericanas documentadas",
+   "a": "oficial",
+   "af": "CISA, NSA y FBI valoran CON CONFIANZA ALTA que se preposiciona para habilitar perturbación de funciones físicas, y declaran que su conducta NO es consistente con espionaje. AA24-038A lo firman siete organizaciones estadounidenses y cuatro aliadas"
+  },
+  {
+   "id": "silenttrain",
+   "l": "Silent Train",
+   "t": "servicio",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "NO es una red de bots: son cadenas DESECHABLES que se montan en menos de 2 min, duran 4 h de media y se limpian al salir. >27 clases de dispositivo CON PAPEL FIJO que no rota: los módems Intelbras (fabricante brasileño) sólo como relé extranjero. Es el motivo de que la región aparezca como TRAYECTO",
+   "a": "proveedor"
+  },
+  {
+   "id": "kvbotnet",
+   "l": "KV Botnet",
+   "t": "servicio",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Routers Cisco y NETGEAR FUERA DE SOPORTE como red de transferencia encubierta. ES HISTORIA: desarticulada en enero de 2024 — y la red de retransmisión desechable que la sustituyó YA ESTABA EN MARCHA desde noviembre de 2023",
+   "a": "oficial",
+   "af": "Desarticulada por operación judicial estadounidense en enero de 2024, anunciada por el Departamento de Justicia"
+  },
+  {
+   "id": "jdy",
+   "l": "JDY (red de reconocimiento)",
+   "t": "servicio",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Escaneo y huella de servicios a escala, con binarios MIPS en equipos de borde. Pasó de ~650 nodos tras la desarticulación de enero de 2024 a MÁS DE 1.500: la intervención policial no la degradó, la duplicó. Concentración sudamericana entre sus nodos",
+   "a": "proveedor"
+  },
+  {
+   "id": "keydrift",
+   "l": "KeyDrift (PolyFlame · LittleFilch)",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Implantes del orquestador de SD-WAN. Viven DENTRO del proceso legítimo del plano de control, SIN dominio, puerto ni intervalo fijos: el mando llega en banda, por el propio tráfico de la plataforma. Extraen material de clave simétrica del plano de datos. Su analista no publicó ni un hash",
+   "a": "proveedor"
+  },
+  {
+   "id": "uat11473",
+   "l": "UAT-11473",
+   "t": "clúster",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Clúster que explotó el día cero de SD-WAN e instaló KeyDrift. SOLAPAMIENTO, NO IDENTIDAD: la relación con Volt Typhoon es de infraestructura compartida, y la infraestructura encubierta se comparte entre actores",
+   "a": "proveedor",
+   "af": "Talos valora CON CONFIANZA ALTA que su infraestructura solapa considerablemente con Silent Train, y NO afirma que sean el mismo actor"
+  },
+  {
+   "id": "uat8616",
+   "l": "UAT-8616",
+   "t": "clúster",
+   "p": "-",
+   "r": "CTI-2026-036",
+   "d": "Otro clúster de Talos sobre EL MISMO día cero y la misma plataforma, febrero de 2026, con actividad que se remonta a 2023. Su relación con UAT-11473 y con Volt Typhoon NO está declarada por su autor: brecha de colección abierta, y no se compone",
+   "a": "proveedor"
+  },
+  {
+   "id": "sylvanite",
+   "l": "SYLVANITE",
+   "t": "suministrador",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Grupo de ETAPA 1: compromete sistemas expuestos a escala y ENTREGA puntos de apoyo ya establecidos a grupos con capacidad en entornos de control, en cuestión de días. Observado dentro de una eléctrica estadounidense. Ese reparto de trabajo comprime el plazo entre la brecha y el impacto operativo",
+   "a": "proveedor"
+  },
+  {
+   "id": "azurite",
+   "l": "AZURITE",
+   "t": "clúster",
+   "p": "cn",
+   "r": "CTI-2026-036",
+   "d": "Solapa con Flax Typhoon, Ethereal Panda y Raptor Train. Y la línea que reordena esta cartera: según Dragos, PROBABLEMENTE TIENE EL MISMO CLIENTE que Volt Typhoon. Dos proveedores de un comprador — uno industrial y barato, uno artesanal y caro",
+   "a": "proveedor",
+   "af": "Valoración de Dragos declarada por él mismo como probable, no como hecho establecido"
+  },
+  {
+   "id": "cveplanos",
+   "l": "CVE-2024-39717 · CVE-2025-8875/8876 · CVE-2026-20127 · CVE-2026-16812 · CVE-2022-20775",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-036",
+   "d": "Versa Director, N-able N-central, Cisco Catalyst SD-WAN y VeloCloud Orchestrator: TODAS contra planos de control, y CUATRO ERAN DÍA CERO. Es la inversión exacta de CTI-2026-034: aquí el parcheo llega tarde por construcción",
+   "a": "-"
+  },
+  {
+   "id": "cvecityworks",
+   "l": "CVE-2025-0994 (Trimble Cityworks)",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-036",
+   "d": "Gestión de activos GEOESPACIALES: deserialización insegura en IIS, ejecución remota SIN autenticación. Cuarto caso del eje geoespacial de esta cartera — y el primero en el que el dato geoespacial de infraestructura es el objetivo declarado y no una plataforma descuidada",
+   "a": "-"
+  },
+  {
+   "id": "planocontrol",
+   "l": "Plataformas de gestión centralizada",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-036",
+   "d": "Orquestadores de SD-WAN, gestores unificados de puestos, consolas de administración remota. Comprometer una equivale a una intrusión completa SIN movimiento lateral: ya tiene visibilidad del inventario, acceso administrativo a miles de equipos y confianza con las redes de los clientes",
+   "a": "-"
+  },
+  {
+   "id": "pasarelacelular",
+   "l": "Pasarelas celulares industriales",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-036",
+   "d": "Crean un camino hacia la red de operación que SALTA el perímetro sin pasar por él, y a menudo no están en el inventario de nadie porque las puso Operaciones. Entrada documentada en 2025 por su interfaz web, en puertos 9191 y 9443, hacia oleoductos y gasoductos",
+   "a": "-"
   }
  ],
  "aristas": [
@@ -2886,6 +3007,106 @@
    "bronzesandcastle",
    "ably",
    "abusa"
+  ],
+  [
+   "volttyphoon",
+   "silenttrain",
+   "usa"
+  ],
+  [
+   "volttyphoon",
+   "kvbotnet",
+   "usa"
+  ],
+  [
+   "volttyphoon",
+   "jdy",
+   "usa"
+  ],
+  [
+   "volttyphoon",
+   "cveplanos",
+   "explota"
+  ],
+  [
+   "volttyphoon",
+   "cvefortinet",
+   "explota"
+  ],
+  [
+   "volttyphoon",
+   "planocontrol",
+   "abusa"
+  ],
+  [
+   "volttyphoon",
+   "arcgis",
+   "abusa"
+  ],
+  [
+   "volttyphoon",
+   "pasarelacelular",
+   "abusa"
+  ],
+  [
+   "volttyphoon",
+   "mimikatz",
+   "usa"
+  ],
+  [
+   "volttyphoon",
+   "cvecityworks",
+   "vinculado"
+  ],
+  [
+   "volttyphoon",
+   "salttyphoon",
+   "noesalias"
+  ],
+  [
+   "uat11473",
+   "silenttrain",
+   "solapa"
+  ],
+  [
+   "uat11473",
+   "keydrift",
+   "despliega"
+  ],
+  [
+   "uat11473",
+   "cveplanos",
+   "explota"
+  ],
+  [
+   "uat8616",
+   "cveplanos",
+   "explota"
+  ],
+  [
+   "uat8616",
+   "uat11473",
+   "vinculado"
+  ],
+  [
+   "sylvanite",
+   "volttyphoon",
+   "entrega"
+  ],
+  [
+   "azurite",
+   "flaxtyphoon",
+   "solapa"
+  ],
+  [
+   "azurite",
+   "volttyphoon",
+   "vinculado"
+  ],
+  [
+   "azurite",
+   "raptortrain",
+   "vinculado"
   ]
  ]
 }

@@ -38,29 +38,30 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-033` | StrikeShark (clúster de intrusión sin atribuir, designación de Kaspersky GReAT) · cargador SharkLoader · carga final Cobalt Strike Beacon | Perfil de clúster sin atribuir + análisis de un cargador diseñado contra los sensores del EDR + evaluación de exposición por aplicaciones expuestas a Internet | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-033-strikeshark.md) · [html](CTI-2026-033-strikeshark.html) |
 | `CTI-2026-034` | Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919 · habilitados por el Integrity Technology Group (Yongxin Zhicheng), designado por la OFAC, el Reino Unido y la Unión Europea | Perfil de actor estatal por contrato + evaluación de un modelo de negocio con ánimo de lucro + identificación de un eje de exposición regional que atraviesa tres informes de esta cartera | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-034-flaxtyphoon.md) · [html](CTI-2026-034-flaxtyphoon.html) |
 | `CTI-2026-035` | Medusa (RaaS) · encriptador `gaze.exe` / `gaze.py` · **NO es MedusaLocker, NO es el malware móvil Medusa, y NO es el rootkit MEDUSA de `CTI-2026-028`** | Perfil de operación de extorsión + evaluación de un adversario con acceso a exploits antes de su divulgación + desambiguación de cuatro cosas distintas llamadas «Medusa» | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-035-medusa.md) · [html](CTI-2026-035-medusa.html) |
+| `CTI-2026-036` | Volt Typhoon · Vanguard Panda · BRONZE SILHOUETTE · DEV-0391 · UNC3236 · VOLTZITE · Insidious Taurus — y los marcos de infraestructura que no son el actor: KV Botnet, JDY y Silent Train | Perfil de actor estatal de preposicionamiento + evaluación de un adversario que usa la región como infraestructura y no como objetivo + confirmación de un eje de exposición que esta cartera venía siguiendo desde tres informes | 2026-11-18 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-036-volttyphoon.md) · [html](CTI-2026-036-volttyphoon.html) |
 | `CTI-2026-043` | Operation ShadowCloud (designación de Kaspersky GReAT, sin atribuir) · puertas traseras GitDoor y GraphDoor · **y BRONZE SANDCASTLE (designación de Sophos CTU), que este informe sostiene que es la misma operación** | Perfil de operación sin atribuir + reconciliación de dos expedientes de proveedor que describen la misma operación sin saberlo + evaluación de la nube corporativa como canal de mando y control | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 91 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 374 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-043` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 375 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-043` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
 | [`ioc_url.txt`](ioc_url.txt) | 279 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-043` |
-| [`ioc_hash.txt`](ioc_hash.txt) | 377 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-043` |
-| [`ioc_index.csv`](ioc_index.csv) | 2237 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-043` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 410 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-043` |
+| [`ioc_index.csv`](ioc_index.csv) | 2403 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-043` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 23 |
-| Indicadores en listas planas | 1032 |
-| Indicadores en el índice con contexto | 2237 |
+| Informes publicados | 24 |
+| Indicadores en listas planas | 1066 |
+| Indicadores en el índice con contexto | 2403 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
-| Informe más reciente | 2026-11-17 |
-| Nodos del mapa de relaciones | 189, con 230 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Informe más reciente | 2026-11-18 |
+| Nodos del mapa de relaciones | 202, con 250 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 
