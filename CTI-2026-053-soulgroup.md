@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-053"
-version: "1.0"
+version: "1.2"
 tipo: "Perfil de operación de extorsión"
 foco_regional: "EE. UU. · España · Argentina"
 niveles: ["Estratégico", "Operacional"]
@@ -10,7 +10,7 @@ autor: "Célula CTI"
 actor: "SoulGroup · Soulgroup"
 fecha: "2026-11-19"
 caduca: "2026-12-19"
-distribucion: "Elaborado con fuentes abiertas el mismo día en que el objeto fue observado por primera vez. ADVERTENCIA: no existe ninguna fuente independiente sobre este actor; todo lo que aquí se afirma procede de un único rastreador, y su propia API no tenía registro del actor cuando se escribió este informe. No se reproduce ningún nombre de víctima. Difusión libre, conservando la atribución y las salvedades de §3."
+distribucion: "Elaborado con fuentes abiertas el mismo día en que el objeto fue observado por primera vez. ADVERTENCIA, MODIFICADA EN v1.1: la versión 1.0 se emitió sin ninguna fuente independiente. La v1.1 incorpora una segunda fuente que resuelve la pregunta central: el 59 % del catálogo de este actor estaba ya publicado por otro grupo noventa y cuatro días antes. No se reproduce ningún nombre de víctima. Difusión libre, conservando la atribución y las salvedades de §3."
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-053
@@ -73,6 +73,9 @@ distribucion: "Elaborado con fuentes abiertas el mismo día en que el objeto fue
 **KJ-5.** **No hay concentración sectorial: seis sectores distintos en las primeras diez entradas legibles.** Sanidad, energía y servicios públicos, tecnología, servicios profesionales, manufactura y comercio minorista. Valoramos **moderada** la confianza, sobre una base de diez entradas. *Lectura:* **la dispersión sectorial en una tanda inicial es, en sí misma, un indicio débil a favor del sitio sembrado**, porque una operación con capacidad suele mostrar algún sesgo de sector o de geografía derivado de cómo obtiene el acceso. **Es débil y se marca como tal.**
 
 **KJ-6.** **Y el juicio honesto sobre el conjunto: este objeto no se puede evaluar todavía, y decirlo es la conclusión.** Aplicando el método de triaje del `Anexo D` de `CTI-2026-042`, cumple **un criterio de siete** —tiene sitio de filtración con víctimas nombradas— y falla los seis restantes: sin análisis primario, sin aviso de autoridad, sin familia identificable, sin linaje conocido, sin víctima verificable por tercero, y **sin que sepamos ni cómo se contacta con él**. Valoramos **muy probable** *(80–95 %)* que no exista base suficiente para un perfil de actor. **Confianza: alta.** *Clasificación provisional:* **reclamación sin respaldo, pendiente de evidencia** — la clase más baja del método, y la que merece **una línea en una lista de vigilancia y un disparador de reevaluación**, no un expediente.
+
+**KJ-7.** **Y en v1.1 la pregunta central queda respondida, con una segunda fuente y en contra de las dos hipótesis que `KJ-1` ofrecía: el catálogo no se acumuló ni se sembró, se copió.** De las veintisiete entradas que este actor tiene en la ventana de seis meses, **dieciséis (59 %) corresponden a víctimas publicadas por `insomnia` entre el 9 de agosto y el 15 de septiembre de 2026**. La dirección es unánime —**dieciséis casos de dieciséis** con este actor en segundo lugar— y la separación es consistente: mediana de **94 días**, con todos los casos entre 57 y 94. Valoramos **muy probable** *(80–95 %)* que se trate de republicación del catálogo de otro actor, y **muy improbable** *(5–20 %)* que las dieciséis coincidencias sean accesos propios. **Confianza: alta para el solapamiento, moderada para la interpretación.** *Consecuencia:* **esto explica la tanda de `KJ-1`** —un catálogo que llega hecho porque no se construyó— y **reclasifica el expediente**: de «reclamación sin respaldo, pendiente de evidencia» a **marca republicadora** (`E-5`). El método está en `CTI-2026-055` `Anexo D`; el disparador que se cumplió es el `I-3` de `§14`.
+
 
 ---
 
@@ -321,18 +324,102 @@ Fichas de terceros que reproducen la misma fuente añaden otras cinco, entre ell
 
 ---
 
+## E-5. Lo que v1.1 descubrió: el catálogo venía de otro sitio
+
+**Añadido el 19 de noviembre de 2026, horas después de la emisión inicial.** La
+incorporación de una segunda fuente a la cartera —`CTI-2026-054`— permitió
+someter este actor a la comprobación que `G-3` y el disparador `I-3` pedían, y
+el resultado responde la pregunta que `KJ-1` había dejado abierta entre dos
+hipótesis. **No era ninguna de las dos.**
+
+| Medición | Resultado |
+|---|---|
+| Entradas de este actor en la ventana de seis meses | 27 |
+| De ellas, víctimas ya publicadas por `insomnia` | **16 (59 %)** |
+| Casos en que este actor publica después | **16 de 16 (100 %)** |
+| Separación mediana | **94,0 días** |
+| Separación mínima / máxima | 57 / 94 días |
+| `insomnia` sigue publicando | **Sí**, 23 entradas en el semestre, la última el 14-11-2026 |
+
+Las dieciséis son organizaciones estadounidenses de sanidad, servicios
+jurídicos y administración local, más una española y una alemana, publicadas
+por `insomnia` entre el 9 de agosto y el 15 de septiembre y reaparecidas aquí
+**el 11 de noviembre**.
+
+### E-5.1 Dos correcciones a la versión 1.0
+
+**Primera, y es una corrección a una medición propia.** `KJ-1` midió una ventana
+de «aproximadamente trece minutos» para la publicación de las veintiséis
+entradas. En la segunda fuente, **veinticinco de las veintisiete llevan la misma
+marca de observación exacta**. Lo que medimos no fue la duración de la
+publicación: fue **el intervalo entre dos sondeos del rastreador**. Es la lección
+de `CTI-2026-045` `§O-5.2` —las marcas de tiempo son horas de observación—
+aplicada ahora contra nuestro propio informe. La tanda sigue siendo un hecho;
+su duración de trece minutos, no.
+
+**Segunda, sobre la clasificación.** `O-4` clasificó el expediente como
+**«reclamación sin respaldo, pendiente de evidencia»**, la clase más baja del
+método de `CTI-2026-042`. Con `KJ-7` la clasificación cambia a **marca
+republicadora**: hay respaldo para dieciséis de sus veintisiete entradas, pero
+**el respaldo es de otro actor**. El triaje pasa de **uno** a **tres criterios
+de siete** cumplidos: tiene sitio con víctimas nombradas, tiene ahora una
+víctima verificable por tercero —las dieciséis lo son, en el catálogo de
+insomnia—, y tiene un linaje identificable, aunque sea de procedencia y no de
+código.
+
+### E-5.2 Qué cambia para una víctima
+
+**Si una organización aparece en este catálogo, lo primero que debe comprobar es
+si ya apareció en `insomnia` entre agosto y septiembre de 2026.** En dieciséis
+de veintisiete casos la respuesta es sí, y entonces **no hubo un segundo acceso**:
+los datos son los de agosto, y el incidente que hay que revisar es aquél.
+
+Para las once entradas restantes la pregunta sigue abierta y es la de `G-3` en su
+forma nueva: **o son accesos propios de este actor, o proceden de un tercer
+catálogo que no hemos contrastado.**
+
+### E-5.3 Y una tercera fuente da una tercera fecha
+
+**Añadido en v1.2.** Consultada una tercera fuente el mismo día, la tanda
+inicial de este actor queda fechada así:
+
+| Fuente | Fecha que atribuye | Entradas que cuenta |
+|---|---|---|
+| El rastreador de v1.0 | **2026-11-19** | 26 |
+| cti.fyi (`E-5`) | **2026-11-11** | 27 |
+| CTIWatch | **2026-11-04** | 25 |
+
+**Quince días entre los extremos.** Las tres cifras de entradas son casi
+iguales —26, 27, 25—, señal de que las tres miran el mismo catálogo; lo que
+difiere es cuándo lo vio cada una. **Ninguna de las tres es la fecha del
+adversario.**
+
+Esto obliga a una corrección más de v1.0, y afecta al título del informe: la
+afirmación de que este actor «apareció hoy» era cierta **para nuestro
+observador**, no para el actor. Según CTIWatch llevaba quince días publicado
+cuando lo vimos. El hecho —una tanda que llega hecha— se mantiene; **su fecha,
+no**.
+
+El análisis completo está en `CTI-2026-054` `§O-9`. La ficha de CTIWatch sobre
+este actor tiene además un defecto que conviene consignar aquí: **mezcla una
+familia de malware de Malpedia actualizada en octubre de 2025 con esta
+operación de noviembre de 2026**. Si se hubiera tomado por corroboración de
+linaje, el error habría sido grave (`CTI-2026-054` `§O-8.3`).
+
+
 ## 14. Brechas de inteligencia y requisitos de colección
 
 | # | Brecha | Impacto | Cómo se cierra | Prioridad |
 |---|---|---|---|---|
 | **G-1** | **No se pudo enumerar su catálogo completo** | Las cifras de este informe son de lectura de portada, no de datos estructurados | **Reintentar la API en 24–48 horas**, cuando haya ingerido los registros | **1** |
 | **G-2** | **No se conoce el canal de contacto con la víctima** | Es el criterio 1 del triaje y **el más discriminante**: impide clasificar entre operación y herramienta | Lectura del sitio de filtración. Requiere acceso a la red oscura | **1** |
-| **G-3** | **Cero fuentes independientes** | Nada es corroborable | Tiempo: en días aparecerán fichas de proveedor si el actor persiste | **1** |
-| **G-4** | **No sabemos si el catálogo crecerá, se detendrá o desaparecerá** | **Es la pregunta que decide todo**, y sólo el tiempo la responde | **La reevaluación a dos semanas del `Anexo D`** | **1** |
+| **G-3** | ~~**Cero fuentes independientes**~~ → **RESUELTA PARCIALMENTE en v1.1.** Una segunda fuente corrobora 16 de las 27 entradas, **como catálogo de otro actor** (`E-5`) | Ya no es cierto que nada sea corroborable | Hecho. Queda la forma nueva en `G-7` | — |
+| **G-4** | **No sabemos si el catálogo crecerá, se detendrá o desaparecerá** | Sigue abierta, pero **ya no decide todo**: `E-5` responde de dónde vino lo publicado | **La reevaluación a dos semanas del `Anexo D`** | 2 |
+| **G-7** | **No sabemos el origen de las once entradas que NO están en `insomnia`** | **Es la pregunta central de v1.1.** O son accesos propios, o vienen de un tercer catálogo | Contrastarlas contra los demás actores del semestre con el método de `CTI-2026-055` `Anexo D` | **1** |
 | **G-5** | **La composición por país es de segunda mano** | Afecta a `KJ-4`, que es el único juicio con relevancia regional | Reintento de la API (`G-1`) | **1** |
 | **G-6** | **No hay TTP, herramientas, muestras ni indicadores** | Ninguna detección posible | Informe de incidente de una víctima | 2 |
 
-**Disparadores de reevaluación.** `I-1`: **que el catálogo crezca a ritmo en los próximos catorce días** —apoyaría `H-2`—. `I-2`: **que no publique nada más en catorce días** —apoyaría `H-1` y `H-4`—. `I-3`: **solapamiento de víctimas con otro actor conocido** —apoyaría `H-3`—. `I-4`: aparición de la primera ficha de proveedor o de prensa. `I-5`: confirmación o negación de una víctima. `I-6`: que una víctima identifique el material como de una brecha anterior ya divulgada, lo que confirmaría la siembra.
+**Disparadores de reevaluación.** `I-1`: **que el catálogo crezca a ritmo en los próximos catorce días** —apoyaría `H-2`—. `I-2`: **que no publique nada más en catorce días** —apoyaría `H-1` y `H-4`—. `I-3`: **solapamiento de víctimas con otro actor conocido** —apoyaría `H-3`—. **CUMPLIDO el 19-11-2026: dieciséis víctimas comunes con `insomnia`, dirección unánime, 94 días de separación** (`E-5`, `KJ-7`). `I-4`: aparición de la primera ficha de proveedor o de prensa. `I-5`: confirmación o negación de una víctima. `I-6`: que una víctima identifique el material como de una brecha anterior ya divulgada, lo que confirmaría la siembra.
 
 ---
 
@@ -365,6 +452,7 @@ Fichas de terceros que reproducen la misma fuente añaden otras cinco, entre ell
 | **`B-1` — Captura de la portada del rastreador** (2026-11-19) y su ficha de grupos | OSINT técnico · **medición propia** | **B** | **3** | **Medición propia, sobre lectura de portada** | **La única fuente real del informe.** Credibilidad degradada a 3 respecto de los informes anteriores de la serie porque **no son datos estructurados**: son texto extraído de una página, y su API no los servía (`KJ-2`) |
 | **`B-2` — Fichas de víctima de terceros que reproducen la misma fuente** | OSINT · compilación | **C** | **4** | Compilación derivada | Añaden cinco nombres y los campos de país de `KJ-4`. **No son una segunda fuente: reproducen `B-1`**, y por eso no corroboran nada |
 | **`B-3` — Datos comparativos del mismo rastreador para los otros actores del lote** | OSINT técnico · medición propia | **B** | **2** | Medición propia | Lo que permite situar la tanda inicial de este actor junto a las de `Vortex` y `Curious Worm` (`E-2`) |
+| **`B-4` — API de cti.fyi**, endpoints de reclamaciones cruzadas y de entradas (2026-11-19). **Añadida en v1.1** | OSINT técnico · **medición propia** sobre datos de proveedor | **B** | **2** | **Medición propia** | **La segunda fuente que v1.0 no tenía, y la que resuelve el informe:** corrobora 16 de las 27 entradas **como catálogo de `insomnia`** (`E-5`, `KJ-7`). Evaluada en `CTI-2026-054` con seis defectos documentados; **ninguno afecta a esta medición**, que no emplea su campo de separación horaria |
 
 > **Esta es la estructura de fuentes más débil de toda la cartera, y conviene
 > enunciarlo sin matizarlo: hay una fuente, de lectura de portada, y una
@@ -455,6 +543,8 @@ Las tablas `cti:ioc` alimentan `ioc_index.csv`. **Cuatro advertencias:**
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
 | 1.0 | 2026-11-19 | Emisión inicial, **octava y última de la serie `046`–`053`**, y la más corta de la cartera. Incluye: la **tanda de veintiséis entradas en trece minutos** con marcas de tiempo (`KJ-1`); el **hallazgo de método de la discrepancia entre el front-end y la API de un mismo rastreador**, verificado con cuatro consultas, dos de ellas servidas desde caché (`KJ-2`, `O-2`); la constatación de **cero fuentes independientes** (`KJ-3`); la **única posible víctima argentina de los seis actores nuevos del lote**, con la salvedad de que el dato es de segunda mano (`KJ-4`); la **clasificación provisional honesta: un criterio de siete, clase «reclamación sin respaldo»** (`KJ-6`, `O-4`); la **omisión completa de los niveles táctico y técnico**, primera vez en la cartera; la adición de la categoría **`NO EVALUABLE`** al léxico (`Anexo C`); el **registro de línea base** del `Anexo A`, que es el contenido principal; y el **protocolo de las primeras veinticuatro horas** del `Anexo D` | Célula CTI |
+| 1.2 | 2026-11-19 | **Añade `§E-5.3`: una tercera fuente fecha la tanda el 4 de noviembre**, frente al 11 de cti.fyi y el 19 de v1.0 — **quince días entre los extremos**, con las tres contando 25, 27 y 26 entradas. **Corrige el supuesto de v1.0 de que el actor «apareció hoy»**: apareció hoy para nuestro observador. Consigna la colisión de nombres de la ficha de CTIWatch con una familia de Malpedia de 2025 | La fecha de `KJ-1` deja de ser un hecho del actor |
+| 1.1 | 2026-11-19 | **Se responde la pregunta central del informe, y en contra de las dos hipótesis de `KJ-1`.** Incorpora `KJ-7` y `§E-5`: **el 59 % del catálogo de este actor (16 de 27 entradas) estaba ya publicado por `insomnia` entre agosto y septiembre de 2026**, con dirección unánime en 16 de 16 casos y separación mediana de **94 días**. **Cambia la clasificación** de «reclamación sin respaldo» a **marca republicadora**, y el triaje de **uno a tres criterios de siete**. **Corrige una medición propia de v1.0:** la ventana de «trece minutos» de `KJ-1` era el intervalo entre dos sondeos del rastreador, no la duración de la publicación. Cierra `G-3` parcialmente, degrada `G-4` a prioridad 2 y abre **`G-7`** sobre las once entradas sin contrastar. **El disparador `I-3` se cumplió.** La caducidad **no se extiende**: ningún juicio sobre capacidad del actor se ha revalidado | Célula CTI |
 
 > **Nota sobre esta emisión, y cierra la serie.** Este informe es
 > deliberadamente el más corto y el más pobre de la cartera, porque su objeto

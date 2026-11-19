@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-060 · Storm</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-060<small>Storm</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-el-volcado-del-primer-dia">E-1. El volcado del primer día</a><a href="#e-2-la-inflacion-del-recuento">E-2. La inflación del recuento</a><a href="#e-3-relevancia-regional-ninguna">E-3. Relevancia regional: ninguna</a><a href="#e-4-decisiones-que-este-informe-pide">E-4. Decisiones que este informe pide</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion">O-1. Identificación</a><a href="#o-2-el-catalogo">O-2. El catálogo</a><a href="#o-3-la-infraestructura-mas-simple-del-lote">O-3. La infraestructura más simple del lote</a><a href="#o-4-despues-del-volcado-trece-entradas">O-4. Después del volcado: trece entradas</a><a href="#o-5-el-perfil-y-el-acierto-que-hay-que-reconocerle">O-5. El perfil, y el acierto que hay que reconocerle</a><a href="#o-6-clasificacion">O-6. Clasificación</a><a href="#o-7-hipotesis-y-pre-mortem">O-7. Hipótesis y pre-mortem</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-detectar-que-un-catalogo-cuenta-la-misma-victima-varias-veces">Anexo D — Cómo detectar que un catálogo cuenta la misma víctima varias veces</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de operación de extorsión</span><span class="pill p-mint">Estados Unidos 50 % · sin relevancia latinoamericana</span><span class="pill p-sky">v1.0 · 2026-11-19</span></div><h1>Storm</h1><p class="sub">Setenta y tres de sus ochenta y seis víctimas aparecieron el primer día, con fechas de un mes antes</p><p class="sub2">Y un grupo bancario figura tres veces —matriz y dos filiales— en el catálogo de un actor cuyo propio perfil de proveedor declara que infla recuentos</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-060</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-19</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-060</code></dd></div><div><dt>Versión</dt><dd class="m">1.0</dd></div><div><dt>Tipo</dt><dd class="m">Perfil de operación de extorsión</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Fecha de emisión</dt><dd class="m">2026-11-19</dd></div><div><dt>Caducidad</dt><dd class="m">2026-12-19</dd></div><div><dt>Niveles</dt><dd>Estratégico · Operacional</dd></div><div><dt>Actor</dt><dd class="m">Storm</dd></div><div><dt>Entradas en la ventana</dt><dd>86 · <strong>73 el primer día (85 %)</strong></dd></div><div><dt>Clasificación de novedad</dt><dd><strong>Dudoso</strong> — retraso mediano 27,8 d</dd></div><div><dt>Inflación medida</dt><dd><strong>3 entradas = 1 grupo bancario</strong></dd></div><div><dt>Infraestructura</dt><dd><strong>1 sitio, activo</strong></dd></div><div><dt>Autor</dt><dd class="m">Célula CTI</dd></div></dl>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>Setenta y tres de sus ochenta y seis entradas aparecieron el 30 de septiembre de 2026, su primer día, y declaran fechas de publicación de casi un mes antes. El retraso mediano entre la fecha que el propio sitio declara y la fecha en que fue descubierto es de 27,8 días</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> las mediciones. <em>Consecuencia:</em> el sitio de filtración es nuevo pero <strong>el catálogo no lo es</strong>; este actor no arrancó el 30 de septiembre, ese fue el día en que abrió escaparate con material acumulado. Por el método de <code>CTI-2026-054</code> queda clasificado como <strong>dudoso</strong>: no es un sitio preexistente incorporado por el rastreador, pero tampoco una operación que empezara entonces (<code>E-1</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>Y el hallazgo propio del expediente: un grupo bancario estadounidense figura tres veces en el catálogo —como matriz y como dos filiales— con dos dominios distintos. Las tres entradas tienen títulos diferentes y el enriquecedor las resolvió como tres organizaciones separadas</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que correspondan a un único compromiso. , porque un grupo bancario puede tener sistemas segregados por filial. <em>Consecuencia:</em> <strong>el recuento de 86 es un techo, no una medida</strong>, y basta un caso como éste para que cualquier comparación de volumen con otros actores pierda precisión (<code>E-2</code>).</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta para la observación, moderada para la unicidad del compromiso.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-3</div>
+<h4>Lo notable es que el propio perfil del proveedor lo anticipa: declara que el actor emplea «tácticas de inflación de víctimas». Es la primera vez en esta cartera que una ficha de proveedor no corroborada predice un comportamiento que después se confirma en los datos propios</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que la afirmación figura en la ficha, y <strong>probable</strong> <em>(55–80 %)</em> que la inflación medida en <code>KJ-2</code> sea una instancia de lo que describe. <em>Consecuencia:</em> eleva marginalmente la credibilidad del resto de ese perfil —no a «cierto», sino de «sin apoyo» a «con un acierto comprobado»—, y es la única vez en los seis expedientes del lote en que algo así ocurre (<code>O-5</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Casi con certeza</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>Toda su infraestructura es un único sitio, y está activo. Una sola dirección de servicio oculto, titulada «Storm Blog», que sirvió las 86 entradas y responde al 19 de noviembre de 2026</h4><p>Es la infraestructura más simple de los seis actores del lote: <code>BrainCipher</code> tiene cincuenta y cuatro direcciones y <code>dragonforce</code> veinte. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> la observación. <em>Consecuencia:</em> <strong>no hay portal de negociación observable</strong>, lo que deja sin responder el criterio más discriminante del triaje de <code>CTI-2026-042</code> —cómo contacta la víctima— y limita la clasificación (<code>O-3</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-5</div>
+<h4>Después del volcado inicial casi se detuvo: trece entradas en los cuarenta y tres días siguientes, y nada desde el 12 de noviembre. El reparto posterior al primer día es de tres, una, una, una, dos, tres y dos entradas en siete días dispersos</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> la medición. <em>Consecuencia:</em> el patrón —volcado grande y goteo mínimo— es compatible con una operación cuyo catálogo era <strong>el trabajo acumulado antes de abrir el sitio</strong> y cuya capacidad de generar víctimas nuevas es muy inferior a lo que su cifra total sugiere (<code>O-4</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-6</div>
+<h4>No tiene relevancia regional: cero entradas latinoamericanas de 86, y sólo siete países. Estados Unidos concentra 43 (50 %), con Alemania, Canadá, Reino Unido, Australia, India y Rumanía completando el resto</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la ausencia sea real, con 66 % de cobertura de país. <em>Consecuencia:</em> <strong>para la cartera es vigilancia de línea base y nada más</strong> (<code>E-3</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-lo rv"><div class="id">KJ-7</div>
+<h4>El perfil declara una antigüedad de 2021 que ningún dato propio apoya, y es la contradicción central del expediente. Si el actor opera desde 2021, un catálogo visible de 86 entradas que empieza en septiembre de 2026 es incompatible con cinco años de actividad — a menos que el sitio de filtración sea una reapertura, lo que el perfil no afirma</h4><p>Valoramos <strong>improbable</strong> <em>(20–45 %)</em> que la antigüedad declarada se refiera a la misma operación que publica en este sitio. <em>Consecuencia:</em> <strong>o el nombre designa dos cosas distintas, o la ficha mezcla expedientes</strong> — y la cartera ya ha visto las dos cosas en este mismo lote (<code>O-5.1</code>).</p><div class="gauge" data-p="32"><div class="lab"><span>Probable</span><b>20–45 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: baja.</b> </p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">Storm publicó <strong>86 entradas</strong> y setenta y tres de ellas, el <strong>85 %</strong>, aparecieron el 30 de septiembre de 2026, su primer día de existencia observable. Las fechas que esas entradas declaran son de casi un mes antes: el retraso mediano entre la fecha del sitio y la del descubrimiento es de <strong>27,8 días</strong>.</p>
+<p class="rv">Eso coloca al actor en una categoría intermedia que el método de <code>CTI-2026-054</code> identifica y la mayoría de los recuentos no: <strong>el sitio de filtración es nuevo, pero el catálogo no lo es</strong>. No es un sitio preexistente que el rastreador empezara a mirar —esos tienen retrasos de cientos de días—, pero tampoco una operación que empezara el 30 de septiembre. Es un actor que <strong>abrió escaparate con material acumulado</strong>.</p>
+<p class="rv">El hallazgo propio del expediente es otro, y es el que más dice. <strong>Un grupo bancario estadounidense figura tres veces en el catálogo</strong>: una entrada para la matriz y dos para sendas filiales, con dos dominios distintos. El enriquecedor de la fuente las resolvió como tres organizaciones separadas, y el actor las publicó como tres víctimas. Con casi total seguridad corresponden a un único compromiso.</p>
+<p class="rv">Lo llamativo es que el perfil que el proveedor publica sobre este actor <strong>lo anticipa</strong>: declara expresamente que emplea «tácticas de inflación de víctimas». Es la primera vez en los cuarenta informes de esta cartera que una ficha de proveedor no corroborada predice un comportamiento que luego se confirma en los datos propios. No convierte el resto de esa ficha en cierto, pero la mueve de «sin ningún apoyo» a «con un acierto comprobable», y eso merece consignarse.</p>
+<p class="rv">Después del volcado inicial, el actor casi se detuvo: <strong>trece entradas en los cuarenta y tres días siguientes</strong>, repartidas en siete días dispersos, y nada desde el 12 de noviembre. El patrón —un volcado grande seguido de goteo— es el de una operación cuyo catálogo era el trabajo previo y cuya capacidad de generar víctimas nuevas es muy inferior a lo que su cifra total sugiere.</p>
+<p class="rv">Su infraestructura es la más simple del lote: <strong>un único sitio</strong>, titulado «Storm Blog», activo. Frente a las cincuenta y cuatro direcciones de <code>BrainCipher</code> o las veinte de <code>dragonforce</code>. Y eso tiene una consecuencia para la clasificación: <strong>no hay portal de negociación observable</strong>, de modo que el criterio más discriminante del triaje de la cartera —cómo contacta la víctima— queda sin responder.</p>
+<p class="rv">No tiene relevancia regional alguna: cero entradas latinoamericanas, siete países, la mitad del catálogo en Estados Unidos.</p>
+<p class="rv">Y queda una contradicción sin resolver. El perfil declara que el actor opera <strong>desde 2021</strong>, lo que no encaja con un catálogo visible que empieza en septiembre de 2026. O el nombre designa dos cosas distintas, o la ficha mezcla expedientes — y la cartera ha encontrado ambos errores en este mismo lote.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Base de la medición</h3>
+<p class="rv">Las 86 entradas y el sitio único proceden de la API de cti.fyi consultada el 19 de noviembre de 2026. La detección de la inflación de <code>KJ-2</code> se hizo por comparación de similitud textual entre los 86 títulos y verificación de los dominios asociados. Reproducible con <code>Anexo F</code>.</p>
+<h3 class="rv">3.2 Límites</h3><ul class="rv"><li><strong>El país y el sector son enriquecimiento derivado</strong>, con 66 % de cobertura de país — la segunda más baja del lote tras <code>BrainCipher</code>.</li><li><strong>Sólo el 45 % de las entradas lleva dominio</strong> (39 de 86), la proporción más baja del lote entre los actores con catálogo legible. Eso limita la verificabilidad por la víctima y es lo que hace que <code>KJ-2</code> requiriera comparación textual en lugar de comparación de dominios.</li><li><strong>No se leyó el sitio de filtración.</strong> Sin acceso a Tor en este entorno.</li><li><strong>Ninguna víctima ha confirmado nada.</strong></li><li><strong>El perfil del actor no está corroborado</strong>, con la excepción parcial de <code>KJ-3</code>.</li><li><strong>Una segunda fuente da 89 víctimas</strong> sin más detalle utilizable (CTIWatch), cifra compatible con las 86 medidas pero procedente de una ficha cuyos defectos están documentados en <code>CTI-2026-054</code> <code>§O-8.2</code>.</li></ul>
+<h3 class="rv">3.3 Higiene</h3>
+<p class="rv">No se reproduce ningún nombre de víctima, incluidos los tres del grupo bancario de <code>KJ-2</code>. Es una renuncia con coste: el hallazgo sería más convincente con los nombres a la vista. Se describe la estructura —matriz y dos filiales, dos dominios— y el <code>Anexo F</code> da el procedimiento para que cualquiera con acceso a la fuente lo reproduzca. La regla es la de <code>CTI-2026-048</code>: no amplificar reclamaciones nominales que ninguna víctima ha confirmado.</p>
+<h3 class="rv">3.4 Veredicto por nivel</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel</th><th>Veredicto</th><th>Motivo</th></tr></thead><tbody>
+<tr><td>Estratégico</td><td><strong>Utilizable con la salvedad del recuento</strong></td><td><code>KJ-2</code> hace de 86 un techo</td></tr>
+<tr><td>Operacional</td><td><strong>Parcial</strong></td><td>Cadencia sí; canal de contacto no observado</td></tr>
+<tr><td>Táctico</td><td><strong>No evaluable</strong></td><td>Sin TTP observados</td></tr>
+<tr><td>Técnico</td><td><strong>No se emite</strong></td><td>Sin indicadores de ejecución</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2></div>
+<section id="e-1-el-volcado-del-primer-dia" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>El volcado del primer día</h2></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="86">0</div><div class="l">Entradas en la ventana</div><div class="s"><strong>Techo, no medida</strong> (<code>KJ-2</code>)</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="73">0</div><div class="l"><strong>Entradas el 2026-09-30, su primer día</strong></div><div class="s"><strong>85 % del catálogo</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n">27,8 d</div><div class="l"><strong>Retraso mediano declarado→visto</strong></div><div class="s">Clasificación: <strong>dudoso</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="13">0</div><div class="l">Entradas en los 43 días siguientes</div><div class="s">Repartidas en 7 días</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="0">0</div><div class="l">Entradas desde el 2026-11-12</div><div class="s">7 días de silencio al cierre</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="86">0<small>/</small></div><div class="l">Entradas con fecha declarada</div><div class="s"><strong>100 %, único del lote con krybit</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="39">0<small>/</small></div><div class="l">Entradas con dominio (45 %)</div><div class="s"><strong>La más baja del lote con catálogo legible</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="43">0<small>/</small></div><div class="l">Entradas estadounidenses (50 %)</div><div class="s"><strong>Sólo 7 países</strong></div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="0">0</div><div class="l">Entradas latinoamericanas</div><div class="s"><code>KJ-6</code></div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="3">0</div><div class="l"><strong>Entradas que son un solo grupo bancario</strong></div><div class="s"><code>KJ-2</code></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="1">0</div><div class="l">Sitio de infraestructura, <strong>activo</strong></div><div class="s">La más simple del lote</div></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fecha</th><th>Entradas</th></tr></thead><tbody>
+<tr><td><strong>2026-09-30</strong></td><td><strong>73</strong></td></tr>
+<tr><td>2026-10-02</td><td>3</td></tr>
+<tr><td>2026-10-04 · 10-06 · 10-07</td><td>1 cada uno</td></tr>
+<tr><td>2026-10-12</td><td>2</td></tr>
+<tr><td>2026-10-19</td><td>3</td></tr>
+<tr><td>2026-11-12</td><td>2</td></tr></tbody></table></div>
+<h3 class="rv">E-1.1 Por qué «dudoso» y no «nuevo»</h3>
+<p class="rv">El método del correctivo 1 de <code>CTI-2026-054</code> <code>Anexo D</code> clasifica a un grupo que se estrena en la ventana según el retraso mediano entre la fecha que sus entradas declaran y la fecha en que fueron descubiertas:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Retraso mediano</th><th>Clase</th><th>Lectura</th></tr></thead><tbody>
+<tr><td>≤ 3 días</td><td>Nuevo contemporáneo</td><td>Apareció mientras la fuente ya vigilaba</td></tr>
+<tr><td>3 a 30 días</td><td><strong>Dudoso</strong></td><td><strong>Este actor: 27,8 días</strong></td></tr>
+<tr><td>&gt; 30 días</td><td>Preexistente incorporado</td><td>La fuente empezó a mirar un sitio que ya existía</td></tr></tbody></table></div>
+<p class="rv">Veintisiete días no son ni una cosa ni la otra, y la lectura correcta es específica: <strong>el sitio es nuevo y el contenido tiene un mes</strong>. Un rastreador que descubre un sitio recién publicado ve entradas de horas; uno que incorpora un sitio antiguo ve entradas de meses o años. Aquí las entradas tienen semanas, lo que encaja con <strong>un actor que trabajó durante septiembre y publicó todo a la vez el día 30</strong>.</p>
+<p class="rv">Y el 100 % de cobertura de fecha declarada —86 de 86, compartido en el lote sólo con la práctica de <code>krybit</code>— es lo que hace esta medición posible. Sin ese campo, el 85 % de entradas en un día se habría leído como actividad frenética en lugar de como volcado.</p>
+</section>
+<section id="e-2-la-inflacion-del-recuento" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>La inflación del recuento</h2></div></div>
+<p class="rv">Entre los 86 títulos, tres corresponden a <strong>un mismo grupo bancario estadounidense</strong>: uno nombra al grupo, otro a un banco con la denominación «and Trust», y el tercero a un banco con la denominación «Community». Los dos últimos llevan dominios distintos; el primero no lleva dominio.</p>
+<p class="rv"><strong>Qué apoya que sean un solo compromiso:</strong></p><ul class="rv"><li>Los tres nombres comparten los dos primeros términos de la razón social.</li><li>Los dos dominios corresponden al mismo grupo bancario, con marcas distintas para líneas de negocio diferentes.</li><li>Las tres entradas aparecieron <strong>el mismo día</strong>, el 30 de septiembre, dentro del volcado inicial.</li><li>El enriquecedor de la fuente las resolvió como tres organizaciones separadas y asignó sector financiero a las tres.</li></ul>
+<p class="rv"><strong>Qué podría refutarlo:</strong> un grupo bancario puede tener sistemas segregados por filial, con lo que tres compromisos distintos son posibles. Por eso <code>KJ-2</code> lleva confianza moderada para la unicidad y alta sólo para la observación.</p>
+<h3 class="rv">E-2.1 Y por qué un solo caso ya cambia la cifra</h3>
+<p class="rv">Tres entradas de ochenta y seis son el 3,5 %. Parece poco. Pero el hallazgo no es «el recuento está inflado un 3,5 %»: es que <strong>el recuento es un techo cuya distancia al suelo no se puede medir desde fuera</strong>.</p>
+<p class="rv">La búsqueda por similitud textual encontró otros pares sospechosos que <strong>no se pudieron resolver</strong>: dos entradas de construcción con razones sociales distintas, dos «grupos de compañías» con nombres diferentes, dos entidades bancarias más sin dominio. Ninguno es concluyente, y precisamente por eso el 86 no es una medida.</p>
+<p class="rv">Esto conecta con dos hallazgos previos de la cartera y los completa:</p><ul class="rv"><li><code>CTI-2026-050</code> documentó un actor con <strong>35 entradas y sólo 26 descripciones distintas</strong>, con al menos cuatro víctimas listadas dos veces bajo dos nombres.</li><li><code>CTI-2026-056</code>, en este mismo lote, documentó el caso extremo opuesto: <strong>429 de 432 entradas eran nombres de fichero</strong>, de modo que decenas de entradas correspondían a una sola víctima.</li></ul>
+<p class="rv"><strong>Los tres juntos dicen lo mismo con intensidades distintas: una entrada de sitio de filtración no es una víctima.</strong> Y esa es la lección transferible de los tres expedientes.</p>
+</section>
+<section id="e-3-relevancia-regional-ninguna" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Relevancia regional: ninguna</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>País</th><th>Entradas</th></tr></thead><tbody>
+<tr><td>Estados Unidos</td><td>43</td></tr>
+<tr><td>Alemania</td><td>4</td></tr>
+<tr><td>Canadá</td><td>3</td></tr>
+<tr><td>Reino Unido</td><td>3</td></tr>
+<tr><td>Australia</td><td>2</td></tr>
+<tr><td>India · Rumanía</td><td>1 cada uno</td></tr>
+<tr><td>Sin país</td><td>29</td></tr></tbody></table></div>
+<p class="rv">Siete países, cero entradas latinoamericanas, cero chilenas. Con un 34 % del catálogo sin país, la ausencia no es demostrable con la fuerza con que lo sería en <code>krybit</code> —donde la cobertura es del 83 %—, pero el catálogo visible es inequívocamente norteamericano y europeo.</p>
+<p class="rv">Sectores: Manufactura 14, Sanidad 13, <strong>Servicios financieros 12</strong>, Construcción 8, Tecnología 7. Ninguno por encima del 16 %, de modo que tampoco hay concentración sectorial — con la salvedad de que doce entradas financieras incluyen las tres de <code>KJ-2</code>, lo que reduce ese sector a diez organizaciones como máximo.</p>
+<p class="rv"><strong>Para la cartera: vigilancia de línea base.</strong> No desplaza ninguna prioridad, y en particular no afecta a Chile, donde <code>CTI-2026-015</code> sitúa a Qilin con veinte de las treinta víctimas medidas.</p>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide</h2></div></div><ol class="rv"><li><strong>No usar la cifra de 86 en comparaciones de volumen sin la salvedad de <code>KJ-2</code>.</strong> Es un techo.</li><li><strong>Aplicar la comprobación de similitud del <code>Anexo D</code> a los demás catálogos de la cartera.</strong> Cuesta minutos y ya ha encontrado algo en tres actores distintos.</li><li><strong>Reevaluar en catorce días.</strong> Siete días de silencio tras un goteo de trece entradas no permiten concluir cese, pero el patrón merece vigilancia (<code>I-1</code>).</li><li><strong>Resolver la contradicción de antigüedad de <code>KJ-7</code></strong> antes de aceptar cualquier parte del perfil de este actor.</li></ol>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2></div>
+<section id="o-1-identificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Valor</th><th>Procedencia</th></tr></thead><tbody>
+<tr><td>Nombre</td><td>Storm</td><td>Título de su propio sitio, «Storm Blog»</td></tr>
+<tr><td>Primera entrada observada</td><td><strong>2026-09-30</strong></td><td>Medición propia</td></tr>
+<tr><td>Última entrada observada</td><td><strong>2026-11-12</strong></td><td>Medición propia</td></tr>
+<tr><td>Clasificación de novedad</td><td><strong>Dudoso</strong>, retraso mediano 27,8 d</td><td>Método de <code>CTI-2026-054</code></td></tr>
+<tr><td>Antigüedad declarada</td><td><strong>2021</strong></td><td><strong>Perfil de proveedor — contradictoria</strong> (<code>KJ-7</code>)</td></tr>
+<tr><td>Modelo declarado</td><td>RaaS con red de afiliados</td><td><strong>Perfil de proveedor</strong></td></tr>
+<tr><td>Táctica declarada</td><td><strong>«Inflación de víctimas»</strong></td><td><strong>Perfil de proveedor — confirmada</strong> (<code>KJ-3</code>)</td></tr>
+<tr><td>Sitios</td><td><strong>1, activo</strong></td><td>Medición propia</td></tr></tbody></table></div>
+<p class="rv"><strong>Advertencia sobre el nombre.</strong> «Storm» es también el prefijo que un fabricante de sistemas operativos emplea en su nomenclatura de actores no atribuidos —del tipo <code>Storm-NNNN</code>—, y el agregador CTIWatch lista una entidad <code>Storm-3358</code> distinta de ésta. <strong>No deben confundirse.</strong> Este expediente se refiere exclusivamente al actor cuyo sitio se titula «Storm Blog» y cuyas 86 entradas se midieron. Es la clase de colisión de nombres que <code>CTI-2026-054</code> <code>§O-8.3</code> documentó y que el correctivo 8 de su <code>Anexo D</code> exige comprobar.</p>
+</section>
+<section id="o-2-el-catalogo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>El catálogo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th>Valor</th><th>Lectura</th></tr></thead><tbody>
+<tr><td>Con fecha declarada</td><td><strong>86 / 86 (100 %)</strong></td><td><strong>Lo que hace posible <code>KJ-1</code></strong></td></tr>
+<tr><td>Con captura</td><td>86 / 86 (100 %)</td><td>Nivel 3 de la escala de prueba</td></tr>
+<tr><td><strong>Con dominio</strong></td><td><strong>39 / 86 (45 %)</strong></td><td><strong>La más baja del lote con catálogo legible</strong></td></tr>
+<tr><td>Con país</td><td>57 / 86 (66 %)</td><td>Base débil para <code>KJ-6</code></td></tr>
+<tr><td>Con sector</td><td>57 / 86 (66 %)</td><td>—</td></tr>
+<tr><td>Con revisión posterior</td><td>9 / 86 (10 %)</td><td>Por debajo de la media del semestre</td></tr>
+<tr><td>Con historial de título</td><td>0</td><td>No desenmascara progresivamente</td></tr></tbody></table></div>
+<p class="rv"><strong>La cobertura de dominio del 45 % es el límite práctico de este expediente</strong>, y conviene decir por qué importa. Un catálogo cuyos títulos son dominios —como <code>krybit</code> al 96 % o <code>safepay</code> al 99 %— permite dos cosas: que la víctima se reconozca en minutos, y que el analista detecte duplicados comparando dominios. Aquí los títulos son razones sociales, de modo que <strong>ambas cosas se vuelven difusas</strong>: una organización puede no reconocer su propia razón social abreviada, y la detección de duplicados exigió comparación textual con un umbral arbitrario.</p>
+<p class="rv"><strong>Eso significa que <code>KJ-2</code> es el resultado del método más débil del expediente</strong>, y que probablemente haya más duplicados que no se detectaron. Es coherente con que sea un techo.</p>
+</section>
+<section id="o-3-la-infraestructura-mas-simple-del-lote" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>La infraestructura más simple del lote</h2><p>Una sola dirección:</p></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>yqhecvqtdvq6p7duqcgw2qca77spbgakxcoibtx6zpvfshltsbbbhfqd.onion</code></pre></div>
+<p class="rv">Titulada «Storm Blog», activa al 19 de noviembre de 2026, y origen de las 86 entradas.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Actor del lote</th><th>Direcciones registradas</th><th>Activas</th></tr></thead><tbody>
+<tr><td>BrainCipher</td><td><strong>54</strong></td><td>6</td></tr>
+<tr><td>dragonforce</td><td>20</td><td><strong>0</strong></td></tr>
+<tr><td>apt73 (retirado del lote)</td><td>11</td><td>2</td></tr>
+<tr><td>krybit</td><td>6</td><td>4</td></tr>
+<tr><td>safepay</td><td>5</td><td><strong>0</strong></td></tr>
+<tr><td>Booba Project</td><td>4</td><td>2</td></tr>
+<tr><td><strong>Storm</strong></td><td><strong>1</strong></td><td><strong>1</strong></td></tr></tbody></table></div>
+<p class="rv">Dos lecturas, y la segunda es la que afecta a la clasificación.</p>
+<p class="rv"><strong>Primera: la simplicidad no es debilidad.</strong> Un solo sitio activo y sin rotación es una operación que no ha perdido infraestructura ni ha necesitado cambiarla. <code>safepay</code> y <code>dragonforce</code> tienen cinco y veinte direcciones registradas <strong>y ninguna activa</strong>; este actor tiene una y funciona.</p>
+<p class="rv"><strong>Segunda, y es la limitación: no hay portal de negociación observable.</strong> <code>Booba Project</code> etiqueta su sala de conversación y su almacén; <code>BrainCipher</code> tuvo un «Client Area». Aquí sólo hay blog. El criterio más discriminante del triaje de <code>CTI-2026-042</code> <code>Anexo D</code> es <em>cómo contacta la víctima</em> —portal significa operación, correo electrónico puede significar herramienta usada por cualquiera—, y <strong>este expediente no puede responderlo</strong>. Es <code>G-3</code>.</p>
+</section>
+<section id="o-4-despues-del-volcado-trece-entradas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Después del volcado: trece entradas</h2><p>Trece entradas en los cuarenta y tres días posteriores al 30 de septiembre, repartidas en siete días, con un máximo de tres. Y nada desde el 12 de noviembre.</p></div></div>
+<p class="rv"><strong>La lectura más económica</strong> es que el catálogo del primer día era el trabajo acumulado antes de abrir el sitio, y que la capacidad de generar víctimas nuevas del actor está en el orden de <strong>una cada tres días</strong>, no de setenta y tres en un día. Si eso es correcto, su cifra total engaña por partida doble: por la inflación de <code>KJ-2</code> y por el volcado de <code>KJ-1</code>.</p>
+<p class="rv"><strong>Siete días de silencio no permiten concluir cese</strong>, y menos en un actor cuyo intervalo típico tras el volcado es de seis días. Aplicando el paso 2 del <code>Anexo D</code> de <code>CTI-2026-058</code> —medir el silencio en unidades de la cadencia propia—, siete días es poco más de un intervalo. No es una señal.</p>
+</section>
+<section id="o-5-el-perfil-y-el-acierto-que-hay-que-reconocerle" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>El perfil, y el acierto que hay que reconocerle</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Elemento declarado</th><th>Estado</th></tr></thead><tbody>
+<tr><td><strong>«Tácticas de inflación de víctimas»</strong></td><td><strong>CONFIRMADO en los datos propios</strong> (<code>KJ-2</code>)</td></tr>
+<tr><td>Antigüedad desde 2021</td><td><strong>CONTRADICE</strong> el catálogo observado (<code>O-5.1</code>)</td></tr>
+<tr><td>RaaS con red de afiliados</td><td>Sin apoyo. <strong>Contradicho débilmente</strong> por el goteo de <code>O-4</code>: una red de afiliados produce flujo, no un volcado y silencio</td></tr>
+<tr><td>«Muertes de espejo» para complicar la atribución</td><td>Sin apoyo. <strong>Contradicho</strong> por tener un solo sitio</td></tr>
+<tr><td>Explotación de exposiciones recientes o de día cero</td><td>Sin apoyo, sin ninguna CVE citada</td></tr>
+<tr><td>Cronómetros de filtración de alta presión</td><td>Sin apoyo; no se observó plazo en ninguna entrada</td></tr>
+<tr><td>Pivotes a la nube y puertas traseras en la nube</td><td>Sin apoyo, sin indicadores</td></tr>
+<tr><td>Umbrales de pago variables por sector</td><td>Sin apoyo; no se observó ninguna cifra</td></tr></tbody></table></div>
+<p class="rv"><strong>Uno confirmado de ocho, y es el que importa.</strong> La ficha declaró que el actor infla recuentos, y los datos propios encontraron un grupo bancario contado tres veces. Es la primera vez en los cuarenta informes de esta cartera que una ficha de proveedor sin referencias <strong>predice un comportamiento que la medición independiente confirma</strong>.</p>
+<p class="rv"><strong>Qué hace y qué no hace eso.</strong> No convierte las otras siete afirmaciones en ciertas: tres de ellas están débilmente contradichas por los propios datos. Lo que hace es mover la ficha de «sin ningún apoyo» a «con un acierto comprobable», lo que en la escala de prueba de <code>CTI-2026-048</code> <code>Anexo D</code> es un cambio real aunque pequeño. <strong>Y obliga a una corrección de postura general:</strong> la cartera ha tratado estas fichas como no corroboradas y debe seguir haciéndolo, pero «no corroborado» no es lo mismo que «falso», y este caso lo demuestra.</p>
+<h3 class="rv">O-5.1 La contradicción de antigüedad</h3>
+<p class="rv">La ficha afirma que el actor «surgió por primera vez en el submundo en 2021». El catálogo observable empieza el 30 de septiembre de 2026 con 86 entradas cuyas fechas declaradas no van más allá de agosto de 2026.</p>
+<p class="rv">Cinco años de operación no caben en 86 entradas. Las tres explicaciones:</p><ol class="rv"><li><strong>El nombre designa dos cosas distintas</strong> y la ficha mezcla un actor de 2021 con el sitio de 2026. Es exactamente el error que <code>CTI-2026-054</code> <code>§O-8.3</code> documentó en otra fuente con el nombre <code>soul</code>, y el que el correctivo 8 obliga a comprobar.</li><li><strong>El sitio es una reapertura</strong> de una operación anterior cuyo catálogo previo se perdió o se abandonó. La ficha no lo afirma.</li><li><strong>La antigüedad declarada es errónea</strong>, lo que en una ficha con indicio de redacción automática es perfectamente posible.</li></ol>
+<p class="rv"><strong>No se puede decidir</strong>, y por eso <code>KJ-7</code> lleva confianza baja. Pero la consecuencia práctica es clara: <strong>ninguna parte de ese perfil debe usarse sin resolver primero si habla de este actor</strong> (<code>I-4</code>).</p>
+</section>
+<section id="o-6-clasificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Clasificación</h2></div></div>
+<p class="rv">Triaje de <code>CTI-2026-042</code> <code>Anexo D</code>: cumple <strong>tres criterios de siete</strong>. Tiene sitio de filtración con víctimas nombradas, tiene infraestructura propia activa, y tiene continuidad temporal de mes y medio. Falla en análisis primario con muestra, en víctima confirmada por tercero, en linaje verificable, y <strong>en canal de contacto observable</strong> — que es el criterio decisivo y queda sin responder.</p>
+<p class="rv"><strong>Clase: marca con operación, con recuento inflado y canal de contacto sin determinar.</strong></p>
+</section>
+<section id="o-7-hipotesis-y-pre-mortem" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>Hipótesis y pre-mortem</h2><p><strong>H-1.</strong> <em>Las tres entradas bancarias son un solo compromiso.</em> <strong>Muy probable</strong> <em>(80–95 %)</em>. Apoyo: nombres compartidos, dominios del mismo grupo, mismo día de publicación.</p></div></div>
+<p class="rv"><strong>H-2.</strong> <em>Hay más duplicados sin detectar.</em> <strong>Probable</strong> <em>(55–80 %)</em>. Apoyo: la cobertura de dominio del 45 % hace la detección difusa, y la búsqueda textual dejó varios pares sin resolver.</p>
+<p class="rv"><strong>H-3.</strong> <em>El catálogo del primer día era trabajo acumulado antes de abrir el sitio.</em> <strong>Muy probable</strong> <em>(80–95 %)</em>. Apoyo: retraso mediano de 27,8 días con 100 % de cobertura de fecha.</p>
+<p class="rv"><strong>H-4.</strong> <em>No hay red de afiliados, pese a lo declarado.</em> <strong>Posible</strong> <em>(40–60 %)</em>. Apoyo: un volcado y goteo es lo contrario del flujo irregular que produce una red de afiliados — el mismo razonamiento de consistencia que <code>CTI-2026-058</code> <code>§O-4.1</code> y <code>CTI-2026-059</code> <code>§O-6</code>.</p>
+<p class="rv"><strong>H-5.</strong> <em>La ficha mezcla dos actores con el mismo nombre.</em> <strong>Posible</strong> <em>(40–60 %)</em>. Es <code>KJ-7</code>.</p>
+<h3 class="rv">Pre-mortem</h3>
+<p class="rv"><em>Si este informe se equivoca, será en <code>KJ-2</code>.</em> La detección de la inflación se hizo por similitud textual de razones sociales, que es el método más débil del expediente, y la unicidad del compromiso es una inferencia: un grupo bancario con filiales puede tener sistemas segregados y sufrir tres incidentes. <strong>Si las tres entradas son tres compromisos reales, el hallazgo propio del informe desaparece</strong> — aunque <code>KJ-3</code> se mantendría, porque la declaración del proveedor seguiría ahí sin confirmar. Es <code>I-2</code>.</p>
+<p class="rv"><em>El segundo modo de fallo es <code>KJ-6</code>.</em> Con el 34 % del catálogo sin país, la ausencia de víctimas latinoamericanas está peor apoyada que en otros expedientes del lote. Veintinueve entradas sin país podrían incluir alguna.</p>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<p class="rv"><strong>G-1. No sabemos si el actor sigue operando.</strong> Siete días de silencio no son concluyentes con su cadencia. → <strong>I-1.</strong> Reevaluar a catorce días, aplicando el paso 2 del <code>Anexo D</code> de <code>CTI-2026-058</code>: medir el silencio en unidades de su propia cadencia. <strong>Disparador: 3 de diciembre de 2026.</strong></p>
+<p class="rv"><strong>G-2. Las tres entradas bancarias no están verificadas como un solo compromiso.</strong> Es el hallazgo propio del informe. → <strong>I-2.</strong> Comprobar la titularidad de los dos dominios y si el grupo notificó uno o varios incidentes. <strong>Disparador:</strong> inmediato; sostiene <code>KJ-2</code>.</p>
+<p class="rv"><strong>G-3. No se ha observado el canal de contacto con la víctima</strong>, que es el criterio decisivo del triaje. → <strong>I-3.</strong> Lectura del sitio de filtración. Requiere acceso a Tor. <strong>Disparador:</strong> antes de elevar la clasificación.</p>
+<p class="rv"><strong>G-4. La contradicción de antigüedad de <code>KJ-7</code> está sin resolver</strong>, e invalida el uso de todo el perfil. → <strong>I-4.</strong> Buscar si existe un actor distinto con este nombre activo desde 2021, y comprobar si la ficha mezcla expedientes. <strong>Disparador:</strong> antes de citar cualquier elemento del perfil.</p>
+<p class="rv"><strong>G-5. No sabemos cuántos duplicados más hay</strong> (<code>H-2</code>), y la cobertura de dominio del 45 % lo impide. → <strong>I-5.</strong> Contrastar los 86 títulos contra el otro rastreador de la cartera, que puebla el dominio con más frecuencia.</p>
+<p class="rv"><strong>G-6. No hay ni un indicador técnico</strong>, razón por la que no se emite nivel técnico. → <strong>I-6.</strong> Informe de incidente de una víctima, o muestra en repositorio público.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — Infraestructura</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="domain yqhecvqtdvq6p7duqcgw2qca77spbgakxcoibtx6zpvfshltsbbbhfqd.onion único sitio del actor, «storm blog», activo al 2026-11-19. sirvió las 86 entradas · alta · 90 días vigilancia"><span class="ty">domain</span><span class="vv">yqhecvqtdvq6p7duqcgw2qca77spbgakxcoibtx6zpvfshltsbbbhfqd.onion<em>Único sitio del actor, «Storm Blog», activo al 2026-11-19. Sirvió las 86 entradas · Alta · 90 días</em></span><span class="pill p-mint">Vigilancia</span></div>
+<div class="ioc-row" data-s="artefacto 1 sola dirección, sin rotación, activa la infraestructura más simple del lote frente a las 54 de braincipher (o-3) · alta · 90 días análisis"><span class="ty">artefacto</span><span class="vv">1 sola dirección, sin rotación, activa<em>La infraestructura más simple del lote frente a las 54 de BrainCipher (O-3) · Alta · 90 días</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="artefacto sin portal de negociación observable deja sin responder el criterio decisivo del triaje de cti-2026-042 (g-3) · alta como ausencia · 90 días no elevar la clasificación hasta resolverlo"><span class="ty">artefacto</span><span class="vv">Sin portal de negociación observable<em>Deja sin responder el criterio decisivo del triaje de CTI-2026-042 (G-3) · Alta como ausencia · 90 días</em></span><span class="pill p-mint">No elevar la clasificación hasta resolverlo</span></div>
+<div class="ioc-row" data-s="artefacto dirección sin prefijo legible a diferencia de krybit y safepay: no cazable por patrón · alta · sin caducidad análisis"><span class="ty">artefacto</span><span class="vv">Dirección sin prefijo legible<em>A diferencia de krybit y safepay: no cazable por patrón · Alta · Sin caducidad</em></span><span class="pill p-mint">Análisis</span></div></div>
+<h3 class="rv">A.2 — Patrones del catálogo</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern tres entradas correspondientes a un solo grupo empresarial: matriz y dos filiales con dominios distintos el hallazgo propio (kj-2). detectado por similitud textual; los nombres no se reproducen (§3.3) · alta para la observación, moderada para la unicidad · 90 días tratar el recuento como techo"><span class="ty">pattern</span><span class="vv">Tres entradas correspondientes a un solo grupo empresarial: matriz y dos filiales con dominios distintos<em>El hallazgo propio (KJ-2). Detectado por similitud textual; los nombres no se reproducen (§3.3) · Alta para la observación, moderada para la unicidad · 90 días</em></span><span class="pill p-mint">Tratar el recuento como techo</span></div>
+<div class="ioc-row" data-s="pattern 85 % del catálogo publicado el primer día con retraso mediano de 27,8 días kj-1. sitio nuevo, catálogo de un mes. clasificación «dudoso» · alta · histórico clasificación"><span class="ty">pattern</span><span class="vv">85 % del catálogo publicado el primer día con retraso mediano de 27,8 días<em>KJ-1. Sitio nuevo, catálogo de un mes. Clasificación «dudoso» · Alta · Histórico</em></span><span class="pill p-mint">Clasificación</span></div>
+<div class="ioc-row" data-s="pattern 100 % de cobertura de fecha declarada es lo que hace posible distinguir volcado de actividad. único del lote con krybit · alta · 90 días exigirlo antes de leer una curva de actividad"><span class="ty">pattern</span><span class="vv">100 % de cobertura de fecha declarada<em>Es lo que hace posible distinguir volcado de actividad. Único del lote con krybit · Alta · 90 días</em></span><span class="pill p-mint">Exigirlo antes de leer una curva de actividad</span></div>
+<div class="ioc-row" data-s="pattern catálogo con razones sociales y sólo 45 % de dominios dificulta la detección de duplicados y el reconocimiento por la víctima (o-2) · alta · 90 días análisis"><span class="ty">pattern</span><span class="vv">Catálogo con razones sociales y sólo 45 % de dominios<em>Dificulta la detección de duplicados y el reconocimiento por la víctima (O-2) · Alta · 90 días</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="pattern volcado grande seguido de goteo de una entrada cada tres días o-4. la capacidad real es muy inferior a la cifra total · moderada · 90 días dimensionar la amenaza por el goteo, no por el total"><span class="ty">pattern</span><span class="vv">Volcado grande seguido de goteo de una entrada cada tres días<em>O-4. La capacidad real es muy inferior a la cifra total · Moderada · 90 días</em></span><span class="pill p-mint">Dimensionar la amenaza por el goteo, no por el total</span></div>
+<div class="ioc-row" data-s="artefacto el perfil del proveedor declara «inflación de víctimas» y los datos lo confirman kj-3. primera vez en la cartera que una ficha no corroborada acierta de forma comprobable · moderada · sin caducidad matizar la postura sobre fichas de proveedor"><span class="ty">artefacto</span><span class="vv">El perfil del proveedor declara «inflación de víctimas» y los datos lo confirman<em>KJ-3. Primera vez en la cartera que una ficha no corroborada acierta de forma comprobable · Moderada · Sin caducidad</em></span><span class="pill p-mint">Matizar la postura sobre fichas de proveedor</span></div>
+<div class="ioc-row" data-s="artefacto el perfil declara antigüedad de 2021, incompatible con el catálogo kj-7, o-5.1. o el nombre designa dos cosas, o la ficha mezcla expedientes · baja · hasta resolver i-4 no citar el perfil"><span class="ty">artefacto</span><span class="vv">El perfil declara antigüedad de 2021, incompatible con el catálogo<em>KJ-7, O-5.1. O el nombre designa dos cosas, o la ficha mezcla expedientes · Baja · Hasta resolver I-4</em></span><span class="pill p-mint">No citar el perfil</span></div>
+<div class="ioc-row" data-s="artefacto colisión de nombre con la nomenclatura storm-nnnn de un fabricante o-1. otro agregador lista un storm-3358 distinto · alta · sin caducidad comprobar identidad antes de corroborar"><span class="ty">artefacto</span><span class="vv">Colisión de nombre con la nomenclatura Storm-NNNN de un fabricante<em>O-1. Otro agregador lista un Storm-3358 distinto · Alta · Sin caducidad</em></span><span class="pill p-mint">Comprobar identidad antes de corroborar</span></div></div>
+<h3 class="rv">A.3 — Victimología</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 86 entradas, de las que 3 son una organización techo, no medida (e-2.1) · alta como recuento de entradas · 90 días medición con salvedad"><span class="ty">cartera</span><span class="vv">86 entradas, de las que 3 son una organización<em>Techo, no medida (E-2.1) · Alta como recuento de entradas · 90 días</em></span><span class="pill p-mint">Medición con salvedad</span></div>
+<div class="ioc-row" data-s="cartera 43 estadounidenses (50 %) · 7 países · 29 sin país la dispersión más estrecha del lote · alta como recuento · 90 días medición"><span class="ty">cartera</span><span class="vv">43 estadounidenses (50 %) · 7 países · 29 sin país<em>La dispersión más estrecha del lote · Alta como recuento · 90 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 0 entradas latinoamericanas · 0 chilenas kj-6. con 34 % sin país: ausencia no demostrable · moderada · 90 días no concluir ausencia"><span class="ty">cartera</span><span class="vv">0 entradas latinoamericanas · 0 chilenas<em>KJ-6. Con 34 % sin país: ausencia no demostrable · Moderada · 90 días</em></span><span class="pill p-mint">No concluir ausencia</span></div>
+<div class="ioc-row" data-s="cartera 12 entradas financieras, reducibles a 10 organizaciones el sector afectado por kj-2 · moderada · 90 días análisis"><span class="ty">cartera</span><span class="vv">12 entradas financieras, reducibles a 10 organizaciones<em>El sector afectado por KJ-2 · Moderada · 90 días</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera sin concentración sectorial: máximo 16 % manufactura 14, sanidad 13, financiero 12 · alta como recuento · 90 días medición"><span class="ty">cartera</span><span class="vv">Sin concentración sectorial: máximo 16 %<em>Manufactura 14, Sanidad 13, Financiero 12 · Alta como recuento · 90 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 7 días sin publicar al cierre poco más de un intervalo típico: no es señal (o-4) · alta · reevaluar el 2026-12-03 vigilancia"><span class="ty">cartera</span><span class="vv">7 días sin publicar al cierre<em>Poco más de un intervalo típico: no es señal (O-4) · Alta · Reevaluar el 2026-12-03</em></span><span class="pill p-mint">Vigilancia</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Fuente</th><th>Grado</th><th>Qué aportó</th><th>Salvedad</th></tr></thead><tbody>
+<tr><td>1</td><td>API de cti.fyi, entradas y ficha de grupo, 2026-11-19</td><td><strong>Medición propia</strong> sobre datos de proveedor</td><td>Las 86 entradas, el sitio único, la cadencia, la detección de <code>KJ-2</code></td><td>Evaluada en <code>CTI-2026-054</code>. <strong>Cobertura de dominio del 45 %</strong>, lo que limita <code>KJ-2</code></td></tr>
+<tr><td>2</td><td>Ficha de perfil del grupo, misma fuente</td><td><strong>Proveedor, con indicio de redacción sintética.</strong> Elevada parcialmente por <code>KJ-3</code></td><td>La declaración de inflación de víctimas —<strong>confirmada</strong>— y la antigüedad de 2021 —<strong>contradictoria</strong>—</td><td><strong>Una de ocho afirmaciones confirmada, tres débilmente contradichas.</strong> Véase <code>O-5</code></td></tr>
+<tr><td>3</td><td>CTIWatch, ficha pública, 2026-11-19</td><td>Proveedor, prosa generada automáticamente</td><td>89 víctimas, cifra compatible con las 86 medidas. <strong>Lista además un <code>Storm-3358</code> distinto</strong> (<code>O-1</code>)</td><td>Defectos en <code>CTI-2026-054</code> <code>§O-8.2</code></td></tr>
+<tr><td>4</td><td><code>CTI-2026-054</code> Anexo D</td><td>Propio</td><td>El correctivo 1 que clasifica <code>KJ-1</code>, y el correctivo 8 que obliga la advertencia de <code>O-1</code></td><td>Emitido el mismo día</td></tr>
+<tr><td>5</td><td><code>CTI-2026-050</code> · <code>CTI-2026-056</code></td><td>Propio</td><td>Los otros dos casos de «una entrada no es una víctima» que <code>E-2.1</code> reúne</td><td>—</td></tr>
+<tr><td>6</td><td><code>CTI-2026-058</code> Anexo D · <code>CTI-2026-048</code> Anexo D · <code>CTI-2026-042</code> Anexo D</td><td>Propio</td><td>El método del silencio de <code>O-4</code>, la escala de prueba y el triaje de <code>O-6</code></td><td>—</td></tr></tbody></table></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<p class="rv">ICD 203. <strong>Casi con certeza</strong> ≥99 % · <strong>muy probable</strong> 80–95 % · <strong>probable</strong> 55–80 % · <strong>posible</strong> 40–60 % · <strong>improbable</strong> 20–45 % · <strong>muy improbable</strong> 5–20 %. La <strong>confianza</strong> califica la base de prueba. Aquí: alta para los recuentos y la cadencia; <strong>moderada para <code>KJ-2</code></strong> en cuanto a la unicidad del compromiso; <strong>moderada para <code>KJ-6</code></strong> por la cobertura de país del 66 %; <strong>baja para <code>KJ-7</code></strong> y para todo el perfil salvo el elemento confirmado.</p>
+</section>
+<section id="anexo-d-como-detectar-que-un-catalogo-cuenta-la-misma-victima-varias-veces" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo detectar que un catálogo cuenta la misma víctima varias veces</h2><p>Procedimiento, diez minutos. Es el caso simétrico del <code>Anexo D</code> de <code>CTI-2026-056</code> —que detectaba catálogos contando <strong>ficheros</strong>— y aquí se trata de catálogos contando <strong>filiales, marcas o divisiones</strong>.</p></div></div>
+<p class="rv"><strong>Paso 1 — Si hay dominios, comparar dominios.</strong> Es la vía limpia y la que no exige criterio: dos entradas con el mismo dominio son la misma organización. Sólo funciona si la cobertura de dominio es alta; aquí era del 45 % y por eso hubo que ir al paso 2.</p>
+<p class="rv"><strong>Paso 2 — Comparar razones sociales por similitud textual.</strong> Un umbral en torno al 0,6 de similitud de secuencias devuelve candidatos manejables. <strong>Produce falsos positivos</strong> —dos empresas de construcción con apellidos distintos salen emparejadas— y hay que resolverlos a mano.</p>
+<p class="rv"><strong>Paso 3 — Buscar los términos compartidos iniciales, no la similitud global.</strong> Es el refinamiento que encontró el caso de este informe: tres entradas que comparten <strong>los dos primeros términos</strong> de la razón social y difieren en el resto son candidatas a matriz y filiales, aunque su similitud global sea baja. Un grupo empresarial nombra así a sus marcas.</p>
+<p class="rv"><strong>Paso 4 — Comprobar la fecha.</strong> Varias entradas de la misma organización <strong>publicadas el mismo día</strong> apuntan a un compromiso contado varias veces. Publicadas con meses de diferencia, pueden ser compromisos distintos — o republicación, que es el caso de <code>CTI-2026-055</code>.</p>
+<p class="rv"><strong>Paso 5 — Resolver la titularidad de los dominios.</strong> Es lo único que convierte la sospecha en hallazgo, y es la parte que este informe dejó en <code>I-2</code> por no poder completarla.</p>
+<div class="note info rv"><div class="t">El paso más productivo es el tercero y casi nadie lo hace</div><p>, porque la intuición lleva a buscar nombres parecidos y los nombres de un grupo empresarial <strong>no se parecen: comparten prefijo</strong>. «Banco X Group», «Banco X and Trust» y «Banco X Community» tienen similitud global baja entre sí y comparten los dos primeros términos.</p><p>Y la conclusión que une este anexo con el de <code>CTI-2026-056</code>: <strong>el recuento de entradas de un sitio de filtración es un techo en los dos sentidos</strong> — infla cuando cuenta ficheros o filiales por separado, y nunca deshincha. Toda comparación de volumen entre actores que no haya pasado por estos dos filtros compara cosas distintas.</p></div>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div>
+<p class="rv">ICD 203. Escala de Almirantazgo con los grados propios de la cartera. TLP 2.0 y PAP. Triaje de actor nuevo de <code>CTI-2026-042</code> <code>Anexo D</code>, con el criterio de contacto como discriminante — aquí <strong>sin responder</strong>. Correctivos 1 y 8 de <code>CTI-2026-054</code> <code>Anexo D</code>. Escala de prueba de ocho niveles de <code>CTI-2026-048</code> <code>Anexo D</code>. Método del silencio de <code>CTI-2026-058</code> <code>Anexo D</code>, paso 2. <strong>No se emite mapa ATT&amp;CK ni nivel técnico</strong>: no hay ni una técnica observada, y el perfil está bajo la contradicción de <code>KJ-7</code>.</p>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th>Procedimiento</th></tr></thead><tbody>
+<tr><td>Entradas</td><td><code>GET /api/v1/posts?group=Storm&amp;since=2026-05-19&amp;limit=500</code></td></tr>
+<tr><td>Infraestructura</td><td><code>GET /api/v1/groups/Storm</code> → <code>locations[]</code></td></tr>
+<tr><td>Volcado inicial</td><td>Agrupar <code>discovered[:10]</code> → 73 el 2026-09-30 de 86</td></tr>
+<tr><td>Retraso</td><td>Mediana de <code>discovered − published</code> sobre las 86 → <strong>27,8 días</strong></td></tr>
+<tr><td><strong>Detección de duplicados</strong></td><td>Similitud de secuencias entre pares de <code>post_title</code> con umbral 0,62, <strong>más comparación de los dos primeros términos de cada razón social</strong> (paso 3 del <code>Anexo D</code>)</td></tr>
+<tr><td>Verificación</td><td>Titularidad de los dominios de las entradas emparejadas</td></tr></tbody></table></div>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Qué cambió</th><th>Qué juicio se movió</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-19</td><td>Emisión inicial. Incluye el volcado del primer día con retraso de 27,8 días y la clasificación «dudoso» (<code>KJ-1</code>), <strong>la inflación del recuento con un grupo bancario contado tres veces</strong> (<code>KJ-2</code>), <strong>la primera vez en la cartera que una ficha de proveedor no corroborada acierta de forma comprobable</strong> (<code>KJ-3</code>), la infraestructura más simple del lote (<code>KJ-4</code>), y la contradicción de antigüedad sin resolver (<code>KJ-7</code>)</td><td>—</td></tr></tbody></table></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div>
+<p class="rv">Este informe se corrige si se recibe: confirmación de que las tres entradas bancarias son un solo compromiso, que elevaría <code>KJ-2</code> a confianza alta, o de que son tres, que lo retiraría (<code>I-2</code>); la lectura del sitio de filtración, que resolvería el canal de contacto y permitiría elevar la clasificación (<code>I-3</code>); evidencia sobre la antigüedad declarada, que resolvería <code>KJ-7</code> (<code>I-4</code>); una víctima latinoamericana, que invalidaría <code>KJ-6</code>; o una entrada nueva posterior al 12 de noviembre, que cerraría <code>G-1</code>.</p>
+<p class="rv">El requisito más importante es <strong><code>I-2</code></strong>, porque <code>KJ-2</code> es el hallazgo propio del expediente, descansa en el método más débil que aquí se empleó, y es el que sostiene la recomendación general de <code>E-4</code>: que el recuento de entradas de cualquier sitio de filtración se trate como un techo.</p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-060 · v1.0 · 2026-11-19</strong> · caduca 2026-12-19</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">El actor cuyo propio perfil de proveedor declara que infla el recuento de víctimas, y cuyo catálogo lo confirma: un grupo bancario estadounidense aparece tres veces, como matriz y dos filiales. No se reproduce ningún nombre de víctima; el procedimiento del Anexo F permite reproducir el hallazgo. Difusión libre conservando la atribución y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

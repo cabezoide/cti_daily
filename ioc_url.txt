@@ -1,9 +1,12 @@
 17dic.ydns.eu
 21ene.ip-ddns.com
 2637596418.softether.net
+3pktcrcbmssvrnwe5skburdwe2h3v6ibdnn5kbjqihsg6eu6s6b7ryqd.onion
 4273twd6-80.euw.devtunnels.ms
 6e24a5fb.ngrok.io
+6ft2dfh26wm3w44orpjcgviutvfp25ez2iyh5ego5egvfmifrws7vvqd.onion
 776c5589.schedule.newhomessection.com
+7t3zi3e7ki6iseun77ofqtr6wmbpgnpc2ada6gstcxp54lw6q2zb7jad.onion
 7tnzsgp4-80.use.devtunnels.ms
 8b82933574e0112129f7062a41689f7a.loophole.site
 98aiblog.com
@@ -35,6 +38,8 @@ astorialaza.com
 asynk02.duckdns.org
 asynpro.duckdns.org
 bakenhof.com
+basherq53eniermxovo3bkduw5qqq5bkqcml3qictfmamgvmzovykyqd.onion
+basherykagbxoaiaxkgqhmhd5gbmedwb3di4ig3ouovziagosv4n77qd.onion
 beroniw.com
 blogwhereyou.com
 bossmaya.xyz
@@ -58,7 +63,9 @@ connect-microsoft.com
 contabilidad.icu
 cort.as
 cskautogo.sharepoint.com
+culappkcuogv2omb37253e236mvmsfzvl4yw3p3incyzeoixhc6ocxqd.onion
 d16ss6sn-80.euw.devtunnels.ms
+d77tnb4bkmj3e366msrzllnwsi2t5e54e4yqh7zm7y5hlfwugnwzswad.onion
 dayenter.shop
 dc.cathaypacifice.com
 dcfast.duckdns.org
@@ -71,6 +78,7 @@ digitalmoineyp.com
 digitalmukesh.info
 discounttire-retail.report
 djcaps.gotdns.ch
+dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion
 dmsupport.live
 dns.studiocloud.xyz
 docs.goog1e.com.spreadsheets.d.1ipevana4hglaeksstshboujdk.zhblz.com
@@ -79,9 +87,12 @@ documentodigital.cloud
 dominioseternosgraciasadios20230230230.duckdns.org
 donato.con-ip.com
 dpworldto.com
+dragonforxxbp3awc7mzs5dkswrua3znqyx5roefmi4smjrsdi22xwqd.onion
+dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion
 drdo.gov.in.nominationdrdo.report
 dushun.ru
 earlysilence.ru
+eazk7las3xsvsyxgww3jgzammqjevso2ydnmlopdhl3u2muyrmmilrqd.onion
 ebccarpentrydublin.com
 ekmt.tw
 ekrn.ydns.eu
@@ -96,6 +107,7 @@ email.gov.in.indiandefence.work
 email.gov.in.indiangov.download
 email.gov.in.ministryofdefenceindia.org
 email.gov.in.modindia.link
+emdnfl2fv32jhssxcbxlo6dzg2at4d7qbw2md6inz63qzdfgyln5cwyd.onion
 envio01.ddns.net
 envio07.duckdns.org
 envio1010.duckdns.org
@@ -105,6 +117,7 @@ envio19-05.duckdns.org
 envio2020.duckdns.org
 envio21-05.duckdns.org
 enviroecobusiness.ro
+eraleignews.com
 erc.report
 eset.ydns.eu
 estaca.ru
@@ -192,12 +205,18 @@ jiaw.shop
 jkpolice.gov.in.kashmirattack.exposed
 jvyuwatt.ssuworker.workers.dev
 koliast.com
+krybieodq754vlwufrsuxaswxb5zpxyibaawmed2jaduoz2e5m56hmid.onion
+krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.onion
+krybitx3fh5krdnhegyp2ob3lhizsaiadturtio3ginf7it5gsdgu2yd.onion
+krybitxdpxohsmjooeb3gbgpmdddreh6mnflzac6bnezz74b7yje67yd.onion
 lalapoc.kozow.com
 lawyersofficial.mipropia.com
 lazybearpottery.net
 lettinggo.ru
+lhsxojxowgtwdqlryl72d2v5cpgqv3sll4d47yyqdisersigvfbl5uid.onion
 litanq.ru
 lsjb.digital
+ltxnzpfvmr3c3rcbw5x4q2ejy6fmbp7kc35oql3gooyydg7belfmnyad.onion
 lucky-king-96d6.mopig92456.workers.dev
 lyrahealth.report
 m365-owa.com
@@ -208,6 +227,7 @@ maybefallout.online
 maybefallout.ru
 mcsi.gotdns.ch
 mea.gov.in.indiandefence.services
+mejouwrwja4iou7myj34rqi7cixyhn7vsa42e2n2dhxzc5mmkiaki3yd.onion
 meridianeyecare.com
 microscoft.vip
 microsfot.vip
@@ -228,12 +248,14 @@ ms.twnic.top
 ms365-device.com
 ms365-live.com
 mumucnc.kozow.com
+mybmtbgd7aprdnw2ekxht5qap5daam2wch25coqerrq2zdioanob34ad.onion
 natcloudservice.com
 net.dpworldto.com
 network-privacy.com
 newremco.duckdns.org
 newstaticfreepoint24.ddns-ip.net
 nginxmysql.com
+nxetaioe4eelwhdwagi3ikv6ee6tttwvnqikalgkrslz7bwvuwqzdeqd.onion
 oast.fun
 oast.pro
 oast.site
@@ -263,6 +285,8 @@ respaldomax3.duckdns.org
 respaldomx1.duckdns.org
 rnl.world
 romanovas.duckdns.org
+rpoeu7zimfpwxbwmjmjyprqaprtvkj3ykfczhbc4x3voydopffn337id.onion
+safepaypfxntwixwjrlcscft433ggemlhgkkdupi2ynhtcmvdgubmoyd.onion
 sebastiancorrea905040.duckdns.org
 securestore.cv
 seemysitelive.store
@@ -301,6 +325,7 @@ vayusena.store
 velvet-otter-glagceis.life
 veryinappropriate.ru
 visualizarpdf.online
+vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion
 wage.zpwyi71185.workers.dev
 webhook.site
 wellnessmedcare.org
@@ -317,5 +342,7 @@ xalticainvest.com
 xcai.pro
 xmailliwx.com
 your-combination-percent-gibson.trycloudflare.com
+yqhecvqtdvq6p7duqcgw2qca77spbgakxcoibtx6zpvfshltsbbbhfqd.onion
+z3wqggtxft7id3ibr7srivv5gjof5fwg76slewnzwwakjuf3nlhukdid.onion
 zalupka.net
 zhblz.com

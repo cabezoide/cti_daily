@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-055 · Multiactor · 237 grupos en reclamaciones cruzadas</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-055<small>Multiactor · 237 grupos en reclamaciones cruzadas</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-los-cuatro-fenomenos-y-cuanto-pesa-cada-uno">E-1. Los cuatro fenómenos, y cuánto pesa cada uno</a><a href="#e-2-la-pregunta-de-inc-y-lynx-respondida-con-una-prueba-nueva">E-2. La pregunta de INC y Lynx, respondida con una prueba nueva</a><a href="#e-3-soulgroup-y-la-pregunta-que-cti-2026-053-dejo-abierta-a-proposito">E-3. SoulGroup, y la pregunta que CTI-2026-053 dejó abierta a propósito</a><a href="#e-4-lo-que-de-verdad-ocurre-y-lo-que-se-teme-que-ocurra">E-4. Lo que de verdad ocurre, y lo que se teme que ocurra</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-los-tres-ejes">O-1. Los tres ejes</a><a href="#o-2-los-once-pares-de-alias">O-2. Los once pares de alias</a><a href="#o-3-las-44-agrupaciones-del-semestre">O-3. Las 44 agrupaciones del semestre</a><a href="#o-4-qilin-y-thegentlemen-la-quinta-clase">O-4. Qilin y TheGentlemen: la quinta clase</a><a href="#o-7-la-quinta-clase-dos-marcas-de-una-misma-operacion-por-diseno">O-7. La quinta clase: dos marcas de una misma operación por diseño</a><a href="#o-5-que-hacer-si-un-segundo-grupo-publica-su-nombre">O-5. Qué hacer si un segundo grupo publica su nombre</a><a href="#o-6-hipotesis-y-pre-mortem">O-6. Hipótesis y pre-mortem</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-clasificar-una-reclamacion-cruzada-en-veinte-minutos">Anexo D — Cómo clasificar una reclamación cruzada en veinte minutos</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Método analítico</span><span class="pill p-mint">Global · España y Chile como casos</span><span class="pill p-sky">v1.1 · 2026-11-19</span></div><h1>Multiactor · 237 grupos en reclamaciones cruzadas</h1><p class="sub">Dos grupos reclamando la misma víctima significa cinco cosas distintas, y cuatro de ellas no son multi-extorsión</p><p class="sub2">Método de tres ejes, y lo que responde: Lynx no heredó el expediente de INC, y SoulGroup republicó el de insomnia noventa y cuatro días después</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-055</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2027-02-19</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-055</code></dd></div><div><dt>Versión</dt><dd class="m">1.0</dd></div><div><dt>Tipo</dt><dd class="m">Método analítico</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Fecha de emisión</dt><dd class="m">2026-11-19</dd></div><div><dt>Caducidad</dt><dd class="m">2027-02-19</dd></div><div><dt>Niveles</dt><dd>Estratégico · Operacional</dd></div><div><dt>Objeto</dt><dd class="m">1.895 agrupaciones de víctima con dos o más grupos reclamantes</dd></div><div><dt>Grupos implicados</dt><dd class="m">237</dd></div><div><dt>Ventana de validación</dt><dd class="m">2026-05-19 a 2026-11-19</dd></div><div><dt>Dependencia</dt><dd class="m"><code>CTI-2026-054</code> §O-2 para los defectos de la fuente</dd></div><div><dt>Autor</dt><dd class="m">Célula CTI</dd></div></dl>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>«Dos grupos reclamaron la misma víctima» agrupa cuatro fenómenos que exigen respuestas opuestas, y el agregado de 1.895 casos los suma como si fueran uno. Son el alias de expediente —el mismo sitio indexado dos veces—, el rebranding sucesivo —un actor que hereda el catálogo de otro—, la reventa o republicación parcial, y la colisión genuina de dos operaciones sobre una misma víctima</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que los cuatro están presentes en el conjunto. <em>Consecuencia:</em> la cifra agregada <strong>no es interpretable</strong>, y la mayor parte de lo que contiene no es multi-extorsión (<code>E-1</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>Los tres ejes que los separan son el solapamiento de catálogo, la separación temporal y la unanimidad de la dirección, y con ellos la clasificación es inequívoca. Un alias de expediente comparte el 90 % o más del catálogo con separación mediana de cero días y dirección repartida al azar: hive/hiveleak comparten 193 de 194 víctimas con separación de 0,0 días en los percentiles 10 y 90</h4><p>Un rebranding comparte catálogo igual de alto pero con separación <strong>consistente y dirección unánime</strong>: <code>eldorado</code> precede a <code>blacklock</code> en 179 días en el <strong>100 %</strong> de los 47 casos. Una reventa comparte sólo una fracción: <code>lockbit3</code> precede a <code>dispossessor</code> en 338 días pero comparten el <strong>39 %</strong>. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> la capacidad discriminante de los tres ejes sobre este conjunto. <em>Consecuencia:</em> once pares de alias quedan identificados, cuatro de ellos <strong>con nombres sin ningún parecido léxico</strong> (<code>O-2</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>Aplicado a la pregunta que CTI-2026-047 dejó abierta, el método la responde con una prueba más fuerte que la que entonces tuvimos: Lynx no es el rebranding de INC Ransom, y la razón es que no comparten ni una víctima. De las 72 víctimas contestadas en que participa uno de los dos, las comunes son cero</h4><p>Un rebranding hereda el catálogo —<code>eldorado</code>/<code>blacklock</code> comparten el 96 %, <code>hive</code>/<code>hiveleak</code> el 99 %—; estos dos comparten el 0 %, y ambos publican dentro del semestre. Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que la hipótesis del rebranding sea falsa. , y es una <strong>segunda prueba independiente</strong>: en <code>CTI-2026-047</code> el argumento fue la simultaneidad de publicación, y éste es el de los catálogos disjuntos (<code>E-2</code>).</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>Y responde otra que CTI-2026-053 dejó explícitamente abierta: SoulGroup no es una operación nueva, es el catálogo de insomnia republicado noventa y cuatro días después. Dieciséis de las veintisiete entradas de SoulGroup (59 %) corresponden a víctimas ya publicadas por insomnia entre agosto y septiembre de 2026</h4><p>La dirección es unánime —<strong>16 casos de 16</strong> con SoulGroup posterior— y la separación es consistente: mediana de <strong>94 días</strong>, con el 100 % de los casos entre 57 y 94. Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que SoulGroup sea marca sucesora o republicadora de insomnia y <strong>no</strong> una operación con capacidad propia. <em>Consecuencia:</em> explica lo que aquel informe no pudo explicar —veinticinco entradas en un solo ciclo de observación— y <strong>cambia el juicio central de <code>CTI-2026-053</code></strong> (<code>E-3</code>).</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta para el solapamiento, moderada para la interpretación.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-5</div>
+<h4>La multi-extorsión genuina y simultánea es rarísima: ninguna colisión por debajo de una hora en todo el semestre, y una sola por debajo de veinticuatro. De las 44 agrupaciones con dos grupos distintos reclamando dentro de la ventana, el 68 % tiene separaciones superiores a treinta días</h4><p>El único caso por debajo de un día es una empresa italiana de servicios profesionales reclamada por <code>cmdorganization</code> y <code>imnotavillain</code> con <strong>0,3 días</strong> de separación. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> la escasez. <em>Consecuencia:</em> el escenario que los equipos temen —dos operaciones extorsionando a la vez— es el menos frecuente de los cuatro, y <strong>lo que de verdad ocurre es la reaparición meses después</strong> (<code>E-4</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-6</div>
+<h4>El par más relevante para esta cartera no es ni alias ni rebranding: Qilin y TheGentlemen comparten nueve víctimas con dirección aleatoria y dispersión de ±170 días, que es la firma del acceso compartido. Comparten el 7 % del catálogo contestado, la separación mediana es de −0,6 días pero con percentil 10 en −172 y percentil 90 en +158, y la dirección se reparte 56 % / 44 %</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que el patrón se explique por corredor de acceso común o afiliados operando en ambas marcas, y <strong>muy improbable</strong> <em>(5–20 %)</em> que sea alias o sucesión. , con nueve casos. <em>Consecuencia:</em> los dos actores de mayor relevancia regional de la cartera <strong>tocan el mismo conjunto de víctimas sin ser el mismo actor</strong>, y eso es un requisito de colección, no una conclusión (<code>O-4</code>, <code>G-2</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-7</div>
+<h4>Para una organización, la consecuencia práctica invierte la intuición: ser reclamada por un segundo grupo es, casi siempre, el mismo robo reapareciendo, no un robo nuevo. De los cuatro fenómenos, tres implican que no hubo segundo acceso: el alias es un artefacto del observador, el rebranding es el mismo operador con otro nombre, y la reventa es un tercero que compró o recicló datos ya exfiltrados</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que ante una segunda reclamación la hipótesis inicial correcta sea la reaparición. <em>Consecuencia:</em> la respuesta primera no es activar la gestión de un incidente nuevo sino <strong>comparar la muestra publicada con la del primero</strong> (<code>O-5</code>, <code>Anexo D</code>).</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-8</div>
+<h4>Añadido en v1.1: hay una quinta clase, y la descubrió un expediente de actor del mismo lote. CTI-2026-061 documenta un actor cuyo modelo declarado permite a los afiliados publicar bajo sus propias marcas, y verifica que uno de esos afiliados coaparece con la marca matriz sobre una misma víctima</h4><p>Eso no es alias de expediente —son dos marcas reales y deliberadas—, ni rebranding —coexisten—, ni reventa —hay un acceso y dos publicadores—, ni colisión —no son independientes—. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la clase exista como fenómeno distinto. , con una sola coaparición verificada. <em>Consecuencia incómoda:</em> <strong>su firma es casi indistinguible de la del acceso de origen común</strong> de <code>O-4</code>, y lo único que las separa es una declaración de modelo procedente de una ficha de proveedor no corroborada. Si no se pueden distinguir sin ella, <strong>las dos clases deben fundirse</strong> (<code>O-7</code>, <code>G-6</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">La fuente evaluada en <code>CTI-2026-054</code> ofrece una capacidad que ninguna otra de la cartera tiene: localizar víctimas reclamadas por más de un grupo de extorsión, con la promesa de identificar corredores de acceso compartidos, afiliados operando en varias marcas a la vez y reventa de datos. Devuelve <strong>1.895 agrupaciones</strong> y destaca <strong>706 colisiones en menos de veinticuatro horas</strong>.</p>
+<p class="rv">Este informe sostiene que la cifra agregada no es interpretable, y no porque la fuente mienta, sino porque <strong>la pregunta está mal planteada</strong>. «Dos grupos reclamaron la misma víctima» describe cuatro situaciones que exigen respuestas distintas y que, mezcladas, se anulan.</p>
+<p class="rv">La primera es la más abundante y la menos interesante: <strong>el mismo sitio de filtración está indexado dos veces</strong> bajo nombres distintos. <code>hive</code> y <code>hiveleak</code> aparecen juntos en 193 víctimas; <code>killsec</code> y <code>killsecurity</code> en 141. No hay dos grupos: hay un expediente duplicado. La segunda es el <strong>rebranding sucesivo</strong>, donde un actor se renombra y arrastra su catálogo: <code>eldorado</code> se convierte en <code>blacklock</code>. La tercera es la <strong>reventa o republicación</strong>, donde un tercero publica parte de lo que otro ya había publicado: <code>dispossessor</code> lleva años haciéndolo con material de <code>lockbit3</code>. Y la cuarta, la única que corresponde a la promesa del endpoint, es la <strong>colisión genuina</strong>: dos operaciones independientes extorsionando a la misma organización.</p>
+<p class="rv">El método que aquí se propone las separa con tres mediciones. <strong>Cuánto catálogo comparten</strong> —el índice de Jaccard sobre el conjunto de víctimas—, <strong>cuánto tiempo las separa</strong>, y <strong>si la dirección es unánime</strong>. Las tres juntas bastan: el alias comparte casi todo con separación cero y dirección aleatoria; el rebranding comparte casi todo con separación consistente y dirección unánime; la reventa comparte una fracción; y la colisión genuina comparte poco y ocurre en horas.</p>
+<p class="rv">Aplicado al conjunto, el método identifica <strong>once pares de alias</strong>, cuatro de ellos con nombres que no se parecen en nada —el más notable es <code>j</code> y <code>l group</code>, que comparten <strong>catorce víctimas de catorce</strong>—. Y deja la cifra de multi-extorsión genuina del semestre en <strong>un caso</strong>: una empresa italiana reclamada por dos actores con 0,3 días de diferencia.</p>
+<p class="rv">El valor del método, sin embargo, está en que responde tres preguntas que la cartera tenía abiertas. A la primera, planteada en <code>CTI-2026-047</code>, responde que <strong>Lynx no es el rebranding de INC Ransom</strong>, porque de las setenta y dos víctimas contestadas en que participa alguno de los dos no comparten ninguna, y un rebranding hereda el catálogo. A la segunda, planteada en <code>CTI-2026-053</code> y dejada expresamente sin resolver, responde que <strong>SoulGroup republicó el catálogo de insomnia con noventa y cuatro días de retraso</strong>, en dieciséis de sus veintisiete entradas, con dirección unánime. Y sobre la tercera —la relación entre Qilin y TheGentlemen, los dos actores de mayor relevancia regional de la cartera— responde que <strong>comparten nueve víctimas sin ser el mismo actor</strong>, con un patrón compatible con acceso de origen común.</p>
+<p class="rv">La consecuencia práctica para una organización invierte la intuición. Si un segundo grupo publica su nombre, lo más probable <strong>no</strong> es que la hayan vuelto a atacar: es que el mismo robo esté reapareciendo con otra etiqueta. La primera acción no es abrir un incidente nuevo, sino comparar lo publicado con lo publicado la vez anterior.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Base de datos y su procedencia</h3>
+<p class="rv">Las 1.895 agrupaciones proceden de cuatro consultas paginadas al endpoint de reclamaciones cruzadas de cti.fyi el 19 de noviembre de 2026. Cada agrupación trae la víctima, los grupos, el recuento de reclamaciones y, por cada reclamación, el grupo, el título, las dos fechas, la dirección y el estado.</p>
+<h3 class="rv">3.2 El defecto de la fuente que este informe no usa</h3>
+<p class="rv">El campo de separación horaria que la propia fuente calcula <strong>discrepa de su definición en el 41 % de los casos</strong> y es el origen de la cifra de 706 colisiones. Está documentado en <code>CTI-2026-054</code> <code>§O-2</code>. <strong>Este informe no lo emplea en ningún punto</strong>: todas las separaciones temporales que aquí aparecen están recalculadas tomando la primera reclamación de cada grupo distinto.</p>
+<h3 class="rv">3.3 Qué no se puede concluir</h3><ul class="rv"><li><strong>El método clasifica relaciones entre expedientes, no identidades.</strong> Decir que dos nombres son alias del mismo sitio es una afirmación sobre el catálogo observable. <strong>No</strong> establece quién lo opera.</li><li><strong>La distinción entre rebranding y republicación no es firme.</strong> Ambos producen catálogo compartido con dirección unánime. Lo que los separa es si el actor anterior sigue publicando, y eso exige observación posterior. En el caso de SoulGroup, <code>insomnia</code> <strong>sigue activo</strong> en el semestre, lo que inclina hacia republicación; pero no lo decide.</li><li><strong>El solapamiento se calcula sobre víctimas contestadas, no sobre catálogos completos.</strong> Un par de actores que comparta víctimas que la fuente no haya agrupado no aparece. El método detecta, no descarta.</li><li><strong>Ninguna víctima ha confirmado nada.</strong> Todo procede de reclamaciones de adversario.</li></ul>
+<h3 class="rv">3.4 Higiene</h3>
+<p class="rv">Se nombran organizaciones sólo cuando el propio actor las publicó con nombre completo y lo mantiene. Las entradas con nombre enmascarado, y el caso documentado en <code>CTI-2026-054</code> <code>§E-3</code> de un nombre revelado y vuelto a ocultar, <strong>no se reproducen</strong>.</p>
+<h3 class="rv">3.5 Veredicto por nivel</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel</th><th>Veredicto</th><th>Motivo</th></tr></thead><tbody>
+<tr><td>Estratégico</td><td><strong>Utilizable</strong></td><td>Los cuatro fenómenos y su proporción relativa están medidos</td></tr>
+<tr><td>Operacional</td><td><strong>Utilizable</strong></td><td>El método de <code>Anexo D</code> es reproducible con los datos del <code>Anexo F</code></td></tr>
+<tr><td>Táctico</td><td><strong>No aplica</strong></td><td>El método no produce TTP</td></tr>
+<tr><td>Técnico</td><td><strong>No aplica</strong></td><td>No produce indicadores de ejecución</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2></div>
+<section id="e-1-los-cuatro-fenomenos-y-cuanto-pesa-cada-uno" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Los cuatro fenómenos, y cuánto pesa cada uno</h2></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="1895">0</div><div class="l">Agrupaciones que la fuente declara</div><div class="s">Toda su historia, desde 2022</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="237">0</div><div class="l">Grupos distintos implicados</div><div class="s">De 425 del catálogo</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="1759">0</div><div class="l">Agrupaciones con exactamente dos grupos</div><div class="s"><strong>93 % del total</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="44">0</div><div class="l"><strong>Con dos grupos distintos dentro del semestre</strong></div><div class="s"><code>KJ-5</code></div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="0">0</div><div class="l"><strong>Por debajo de una hora de separación</strong></div><div class="s">En el semestre</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="1">0</div><div class="l">Por debajo de veinticuatro horas</div><div class="s">0,3 días</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="68">0<small>%</small></div><div class="l">De las 44, con más de treinta días de separación</div><div class="s"><strong>El fenómeno dominante es la reaparición</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="11">0</div><div class="l">Pares de alias identificados</div><div class="s">Cuatro sin parecido léxico</div></div></div>
+<p class="rv">El conjunto completo tiene una estructura muy sesgada: el 93 % de las agrupaciones tiene exactamente dos grupos, y los participantes más frecuentes son precisamente los pares de alias.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Grupo</th><th>Víctimas contestadas</th><th>Su par</th></tr></thead><tbody>
+<tr><td><code>lockbit3</code></td><td>283</td><td>—</td></tr>
+<tr><td><code>dispossessor</code></td><td>263</td><td>—</td></tr>
+<tr><td><code>hiveleak</code></td><td>194</td><td><strong><code>hive</code> (193)</strong></td></tr>
+<tr><td><code>hive</code></td><td>193</td><td><strong><code>hiveleak</code> (194)</strong></td></tr>
+<tr><td><code>clop</code></td><td>164</td><td>—</td></tr>
+<tr><td><code>killsec</code></td><td>143</td><td><strong><code>killsecurity</code> (141)</strong></td></tr>
+<tr><td><code>killsecurity</code></td><td>141</td><td><strong><code>killsec</code> (143)</strong></td></tr>
+<tr><td><code>qilin</code></td><td>112</td><td>—</td></tr>
+<tr><td><code>raworld</code></td><td>95</td><td><strong><code>ragroup</code> (95)</strong></td></tr>
+<tr><td><code>ragroup</code></td><td>95</td><td><strong><code>raworld</code> (95)</strong></td></tr>
+<tr><td><code>apt73</code></td><td>85</td><td><strong><code>bashe</code> (83)</strong></td></tr>
+<tr><td><code>bashe</code></td><td>83</td><td><strong><code>apt73</code> (85)</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>La simetría de los recuentos es la primera señal, y se ve a simple vista.</strong> Cuando dos expedientes son el mismo sitio, cada víctima del uno es víctima del otro, y los totales quedan casi idénticos: 193 y 194, 143 y 141, 95 y 95, 85 y 83. Es el indicio más barato de todo el método.</p>
+</section>
+<section id="e-2-la-pregunta-de-inc-y-lynx-respondida-con-una-prueba-nueva" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>La pregunta de INC y Lynx, respondida con una prueba nueva</h2></div></div>
+<p class="rv"><code>CTI-2026-047</code> abordó una afirmación muy repetida en la literatura de proveedor: que <strong>Lynx es el rebranding de INC Ransom</strong>. Aquel informe la calificó de falsa con un argumento temporal —ambas marcas publican simultáneamente a lo largo de 2026, y un rebranding implica sucesión, no coexistencia— y propuso tratarlas como <strong>marcas hermanas</strong>.</p>
+<p class="rv">El método de este informe aporta una segunda prueba, independiente de la primera y más difícil de explicar de otro modo.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th><code>incransom</code> / <code>lynx</code></th><th>Un rebranding real: <code>eldorado</code> / <code>blacklock</code></th><th>Un alias real: <code>hive</code> / <code>hiveleak</code></th></tr></thead><tbody>
+<tr><td>Víctimas contestadas de A</td><td>44</td><td>48</td><td>193</td></tr>
+<tr><td>Víctimas contestadas de B</td><td>28</td><td>48</td><td>194</td></tr>
+<tr><td><strong>Víctimas comunes</strong></td><td><strong>0</strong></td><td><strong>47</strong></td><td><strong>193</strong></td></tr>
+<tr><td>Solapamiento (Jaccard)</td><td><strong>0 %</strong></td><td><strong>96 %</strong></td><td><strong>99 %</strong></td></tr>
+<tr><td>Dirección unánime</td><td>—</td><td><strong>100 %</strong></td><td>No (10 %)</td></tr></tbody></table></div>
+<p class="rv"><strong>De las setenta y dos víctimas contestadas en que participa uno de los dos, ninguna aparece en los dos catálogos.</strong> Un actor que se renombra arrastra su expediente: eso es lo que significa heredar una marca. Aquí no hay herencia de ninguna clase.</p>
+<p class="rv">Y la coexistencia que <code>CTI-2026-047</code> observó se confirma en la ventana de este informe: <code>incransom</code> publica <strong>248 entradas</strong> entre el 19 de mayo y el 17 de noviembre, y <code>lynx</code> publica <strong>7</strong> entre el 11 de junio y el 29 de agosto. Ambos activos, catálogos disjuntos.</p>
+<div class="note info rv"><div class="t">Lo que no se puede concluir</div><p>Que no haya rebranding no significa que no haya relación. Dos marcas pueden compartir operadores, código o afiliados y mantener catálogos separados deliberadamente. El método descarta la sucesión, <strong>no el parentesco</strong>.</p></div>
+</section>
+<section id="e-3-soulgroup-y-la-pregunta-que-cti-2026-053-dejo-abierta-a-proposito" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>SoulGroup, y la pregunta que <code>CTI-2026-053</code> dejó abierta a propósito</h2></div></div>
+<p class="rv"><code>CTI-2026-053</code> se emitió el mismo día en que SoulGroup fue observado por primera vez. Documentó veintiséis entradas publicadas en un intervalo muy corto, cero fuentes independientes, un criterio de triaje cumplido de siete, y se clasificó como <strong>reclamación sin respaldo, pendiente de evidencia</strong>. Su juicio <code>KJ-1</code> planteaba dos posibilidades sin poder elegir: víctimas acumuladas antes de abrir escaparate, o sitio sembrado.</p>
+<p class="rv"><strong>Era ninguna de las dos.</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th>Resultado</th></tr></thead><tbody>
+<tr><td>Entradas de SoulGroup en el semestre</td><td>27</td></tr>
+<tr><td>De ellas, víctimas ya publicadas por <code>insomnia</code></td><td><strong>16 (59 %)</strong></td></tr>
+<tr><td>Casos en que SoulGroup es posterior</td><td><strong>16 de 16 (100 %)</strong></td></tr>
+<tr><td>Separación mediana</td><td><strong>94,0 días</strong></td></tr>
+<tr><td>Separación mínima / máxima</td><td>57 / 94 días</td></tr>
+<tr><td><code>insomnia</code> activo en el semestre</td><td><strong>Sí, 23 entradas</strong></td></tr></tbody></table></div>
+<p class="rv">Las dieciséis víctimas comunes son organizaciones estadounidenses de sanidad, servicios jurídicos y administración local, más una española y una alemana, publicadas por <code>insomnia</code> entre el 9 de agosto y el 15 de septiembre de 2026 y reaparecidas en SoulGroup <strong>el 11 de noviembre</strong>.</p>
+<p class="rv">Esto explica lo que aquel informe no pudo explicar: <strong>veinticinco de las veintisiete entradas aparecen con la misma marca de observación</strong> —un único ciclo de sondeo— porque el catálogo no se construyó, <strong>se copió</strong>. Y permite precisar una medición propia de entonces: la ventana de «trece minutos» que <code>CTI-2026-053</code> midió era el intervalo entre dos sondeos del rastreador, no la duración real de la publicación. Es la misma lección de <code>CTI-2026-045</code> <code>§O-5.2</code> —las marcas de tiempo son horas de observación—, aplicada ahora contra nuestra propia medición.</p>
+<h3 class="rv">E-3.1 Republicación o sucesión, y por qué importa la diferencia</h3>
+<p class="rv">El método no distingue por sí solo entre un actor que hereda una marca y uno que republica el material de otro. Lo que inclina la balanza es que <strong><code>insomnia</code> sigue publicando</strong>: 23 entradas en el semestre, la última el 14 de noviembre, tres días después de la aparición de SoulGroup. Si fuera sucesión, el predecesor habría callado.</p>
+<p class="rv">Valoramos <strong>probable</strong> <em>(55–80 %)</em> que se trate de republicación —SoulGroup usando material ajeno, comprado o reciclado— y <strong>posible</strong> <em>(40–60 %)</em> que haya relación operativa entre ambos. <strong>La diferencia importa a la víctima:</strong> si es republicación, no hubo segundo acceso y los datos son los de agosto; si hay relación operativa, el acceso original pudo no haberse cerrado.</p>
+</section>
+<section id="e-4-lo-que-de-verdad-ocurre-y-lo-que-se-teme-que-ocurra" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Lo que de verdad ocurre, y lo que se teme que ocurra</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fenómeno</th><th>Qué implica para la víctima</th><th>Frecuencia en el semestre</th></tr></thead><tbody>
+<tr><td><strong>Alias de expediente</strong></td><td><strong>Nada.</strong> Artefacto del observador</td><td>Dominante en el histórico</td></tr>
+<tr><td><strong>Rebranding sucesivo</strong></td><td>El mismo operador con otro nombre. <strong>No hubo segundo acceso</strong></td><td>4 pares identificados</td></tr>
+<tr><td><strong>Reventa / republicación</strong></td><td>Un tercero publica datos ya exfiltrados. <strong>No hubo segundo acceso</strong></td><td><strong>68 % de las 44</strong></td></tr>
+<tr><td><strong>Colisión genuina</strong></td><td>Dos operaciones distintas. <strong>Pudo haber dos accesos</strong></td><td><strong>1 caso de 44</strong></td></tr></tbody></table></div>
+<p class="rv">El escenario que los equipos de respuesta temen —dos grupos extorsionando a la vez— es el más raro de los cuatro. Lo que de verdad pasa, en más de dos tercios de los casos recientes, es que <strong>el material reaparece meses después</strong>.</p>
+<p class="rv">Eso cambia la prioridad. Un programa que vigile su propio nombre en sitios de filtración debería estar preparado no para la colisión simultánea, sino para <strong>la reaparición a los tres meses</strong>, que es el caso modal y para el que la respuesta es distinta: no contención, sino verificación de que lo publicado es el mismo conjunto de datos.</p>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2></div>
+<section id="o-1-los-tres-ejes" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Los tres ejes</h2><p><strong>Eje 1 — Solapamiento de catálogo.</strong> Índice de Jaccard sobre el conjunto de víctimas contestadas de cada grupo: víctimas comunes dividido por víctimas de la unión. Mide si los dos expedientes describen el mismo conjunto de hechos.</p></div></div>
+<p class="rv"><strong>Eje 2 — Separación temporal.</strong> Para cada víctima común, la diferencia entre la primera reclamación de cada grupo. Se reportan mediana, percentil 10 y percentil 90: <strong>la dispersión importa tanto como el centro</strong>.</p>
+<p class="rv"><strong>Eje 3 — Unanimidad de la dirección.</strong> Proporción de casos en que el mismo grupo reclama primero. Es el eje que <code>CTI-2026-045</code> <code>Anexo D</code> enseñó a buscar: <strong>el parámetro que no se alinea</strong>. Un alias no tiene dirección; una sucesión la tiene al 100 %.</p>
+<h3 class="rv">O-1.1 La tabla de decisión</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Eje 1 (Jaccard)</th><th>Eje 2 (separación)</th><th>Eje 3 (dirección)</th><th>Clase</th></tr></thead><tbody>
+<tr><td>≥ 90 %</td><td><strong>≈ 0 días</strong>, p10 y p90 estrechos en torno a 0</td><td>30–70 %</td><td><strong>Alias de expediente</strong></td></tr>
+<tr><td>≥ 85 %</td><td>Consistente, p10 y p90 del mismo signo</td><td><strong>≥ 95 %</strong></td><td><strong>Rebranding o republicación</strong></td></tr>
+<tr><td>20–50 %</td><td>Grande</td><td>≥ 95 %</td><td><strong>Reventa parcial</strong></td></tr>
+<tr><td>&lt; 20 %</td><td><strong>&lt; 24 horas</strong></td><td>—</td><td><strong>Colisión genuina</strong></td></tr>
+<tr><td>&lt; 20 %</td><td>Grande, p10 y p90 de signo opuesto</td><td>~50 %</td><td><strong>Acceso de origen común</strong> (<code>O-4</code>)</td></tr>
+<tr><td><strong>&lt; 20 %</strong></td><td><strong>Pequeña, días</strong></td><td><strong>~50 %</strong>, + <strong>declaración de modelo de afiliados</strong></td><td><strong>Dos marcas de una operación</strong> (<code>O-7</code>, añadido en v1.1)</td></tr></tbody></table></div>
+</section>
+<section id="o-2-los-once-pares-de-alias" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>Los once pares de alias</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>A</th><th>B</th><th>n(A)</th><th>n(B)</th><th>Comunes</th><th>Jaccard</th><th>Separación mediana</th><th>A primero</th></tr></thead><tbody>
+<tr><td><code>ragroup</code></td><td><code>raworld</code></td><td>95</td><td>95</td><td>95</td><td><strong>100 %</strong></td><td>0,0 d</td><td>47 %</td></tr>
+<tr><td><code>j</code></td><td><code>l group</code></td><td>14</td><td>14</td><td>14</td><td><strong>100 %</strong></td><td>452,0 d</td><td>0 %</td></tr>
+<tr><td><code>hive</code></td><td><code>hiveleak</code></td><td>193</td><td>194</td><td>193</td><td>99 %</td><td><strong>0,0 d</strong></td><td>10 %</td></tr>
+<tr><td><code>killsec</code></td><td><code>killsecurity</code></td><td>143</td><td>141</td><td>141</td><td>99 %</td><td>−0,0 d</td><td>65 %</td></tr>
+<tr><td><code>ransomed</code></td><td><code>ransomedvc</code></td><td>52</td><td>53</td><td>52</td><td>98 %</td><td>−0,4 d</td><td>58 %</td></tr>
+<tr><td><code>apt73</code></td><td><code>bashe</code></td><td>85</td><td>83</td><td>83</td><td>98 %</td><td>20,1 d</td><td>19 %</td></tr>
+<tr><td><code>blacklock</code></td><td><code>eldorado</code></td><td>48</td><td>48</td><td>47</td><td>96 %</td><td><strong>−178,7 d</strong></td><td><strong>100 %</strong></td></tr>
+<tr><td><code>dunghill</code></td><td><code>dunghill_leak</code></td><td>13</td><td>14</td><td>13</td><td>93 %</td><td>−0,0 d</td><td>54 %</td></tr>
+<tr><td><code>unsafe</code></td><td><code>unsafeleak</code></td><td>11</td><td>10</td><td>10</td><td>91 %</td><td>4,8 d</td><td>10 %</td></tr>
+<tr><td><code>medusalocker</code></td><td><code>ransomblog_noname</code></td><td>51</td><td>46</td><td>46</td><td>90 %</td><td>0,0 d</td><td>35 %</td></tr>
+<tr><td><code>insomnia</code></td><td><code>soul</code></td><td>17</td><td>17</td><td>16</td><td>89 %</td><td><strong>94,0 d</strong></td><td><strong>0 %</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>Leída con los tres ejes, la tabla se parte en dos mitades.</strong> Los que tienen separación en torno a cero y dirección repartida —<code>ragroup</code>/<code>raworld</code>, <code>hive</code>/<code>hiveleak</code>, <code>killsec</code>/<code>killsecurity</code>, <code>ransomed</code>/<code>ransomedvc</code>, <code>dunghill</code>/<code>dunghill_leak</code>, <code>medusalocker</code>/<code>ransomblog_noname</code>— son <strong>expedientes duplicados</strong>: el mismo sitio visto dos veces. Los que tienen dirección unánime y separación consistente —<code>blacklock</code>/<code>eldorado</code> a 179 días, <code>j</code>/<code>l group</code> a 452, <code>insomnia</code>/<code>soul</code> a 94, y <code>nova</code>/<code>ralord</code> a 13— son <strong>sucesión o republicación</strong>.</p>
+<h3 class="rv">O-2.1 Los cuatro que el parecido de nombres no detecta</h3>
+<p class="rv">Un filtro léxico —uno de los nombres contenido en el otro— encuentra <code>hive</code>/<code>hiveleak</code>, <code>killsec</code>/<code>killsecurity</code>, <code>ransomed</code>/<code>ransomedvc</code>, <code>dunghill</code>/<code>dunghill_leak</code> y <code>unsafe</code>/<code>unsafeleak</code>. <strong>No encuentra estos:</strong></p><ul class="rv"><li><strong><code>j</code> y <code>l group</code></strong>: catorce víctimas de catorce. Sin una letra en común.</li><li><strong><code>blacklock</code> y <code>eldorado</code></strong>: 96 % del catálogo, con <code>eldorado</code> precediendo siempre.</li><li><strong><code>medusalocker</code> y <code>ransomblog_noname</code></strong>: 90 %, separación cero.</li><li><strong><code>nova</code> y <code>ralord</code></strong>: 88 %, <code>ralord</code> precediendo en el 100 % de los casos por 13 días.</li></ul>
+<p class="rv"><strong>La lección es que el nombre no es un buen detector de identidad y el catálogo sí.</strong> Es la misma conclusión a la que llegó <code>CTI-2026-047</code> por otra vía al rechazar la hipótesis del rebranding de Lynx: lo que decide es el expediente, no la etiqueta.</p>
+</section>
+<section id="o-3-las-44-agrupaciones-del-semestre" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Las 44 agrupaciones del semestre</h2></div></div>
+<p class="rv">Dieciséis de las cuarenta y cuatro son el par <code>insomnia</code>/<code>soul</code> de <code>E-3</code>. Las otras veintiocho implican a veintiséis pares distintos, casi todos con una única víctima en común, lo que impide clasificarlas con los tres ejes: <strong>con n=1 no hay dispersión ni dirección que medir</strong>.</p>
+<p class="rv">Las que sí admiten lectura:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Víctima</th><th>País / Sector</th><th>Grupos</th><th>Separación</th><th>Lectura</th></tr></thead><tbody>
+<tr><td>Contact Srl</td><td>IT / Servicios profesionales</td><td><code>cmdorganization</code>, <code>imnotavillain</code></td><td><strong>0,3 d</strong></td><td><strong>Única candidata a colisión genuina</strong></td></tr>
+<tr><td>Interim HealthCare</td><td>— / Sanidad</td><td><code>anubis</code>, <code>genesis</code></td><td>4,3 d</td><td>Candidata, separación corta</td></tr>
+<tr><td>The Excalibur Group</td><td>— / Servicios profesionales</td><td><code>dark project</code>, <code>qilin</code></td><td>4,9 d</td><td>Candidata</td></tr>
+<tr><td>StrucSure Home Warranty</td><td>US / Servicios profesionales</td><td><code>incransom</code>, <code>play</code></td><td>8,4 d</td><td>Dudosa</td></tr>
+<tr><td>eTeam</td><td>US / Servicios profesionales</td><td><code>byod</code>, <code>endzone</code></td><td>9,6 d</td><td>Dudosa</td></tr>
+<tr><td>MPA Pharma</td><td>US / Sanidad</td><td><code>metaencryptor</code>, <code>rhysida</code></td><td>11,9 d</td><td>Dudosa</td></tr>
+<tr><td>La Sevillanita</td><td><strong>ES / Sanidad</strong></td><td><code>global secret group</code>, <code>krybit</code></td><td>105,0 d</td><td>Reaparición</td></tr>
+<tr><td>Dolrad</td><td>—</td><td><code>bavacai</code>, <code>medusalocker</code></td><td>125,0 d</td><td>Reaparición</td></tr></tbody></table></div>
+<p class="rv">Hay además una entrada cuyo nombre de víctima es literalmente <strong><code>WARNING</code></strong>, reclamada por <code>endzone</code> e <code>imnotavillain</code>. No es una organización: es un mensaje publicado en un sitio de filtración que el agrupador trató como víctima. <strong>Artefacto, y se consigna como tal.</strong></p>
+</section>
+<section id="o-4-qilin-y-thegentlemen-la-quinta-clase" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Qilin y TheGentlemen: la quinta clase</h2><p>Los dos actores de mayor relevancia regional de la cartera —<code>CTI-2026-015</code> y <code>CTI-2026-014</code>— comparten nueve víctimas contestadas. El patrón no encaja en ninguna de las cuatro clases anteriores.</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Eje</th><th>Valor</th><th>Qué descarta</th></tr></thead><tbody>
+<tr><td>Jaccard</td><td><strong>7 %</strong></td><td>Descarta alias y rebranding, que exigen ≥85 %</td></tr>
+<tr><td>Separación mediana</td><td>−0,6 días</td><td>—</td></tr>
+<tr><td>Percentil 10 / 90</td><td><strong>−172,2 / +158,1 días</strong></td><td><strong>Descarta colisión simultánea</strong></td></tr>
+<tr><td>Dirección</td><td><strong>56 % / 44 %</strong></td><td><strong>Descarta sucesión</strong>, que exige unanimidad</td></tr></tbody></table></div>
+<p class="rv">Lo característico es la combinación de <strong>dispersión enorme con dirección aleatoria</strong>. No es que uno siga al otro: unas veces va primero Qilin y otras TheGentlemen, con meses de diferencia en ambos sentidos. Eso es incompatible con que uno herede del otro, y también con que se encuentren por casualidad nueve veces.</p>
+<p class="rv">La explicación más económica es que <strong>ambos obtienen acceso de la misma fuente</strong> —un corredor de acceso inicial, o afiliados que trabajan para las dos marcas— y lo exploten en momentos distintos. Es exactamente lo que el endpoint promete detectar, y es el único caso del conjunto donde la promesa se cumple.</p>
+<p class="rv"><strong>Esto no es una conclusión, es un requisito de colección.</strong> Nueve casos son pocos, y la hipótesis alternativa —que ambos ataquen de forma independiente a un mismo segmento de víctimas— no está descartada. Va a <code>G-2</code>.</p>
+<p class="rv">Un patrón de la misma forma aparece, con muestras aún menores, en <code>qilin</code>/<code>lynx</code> (4 comunes, 75 % de dirección) y en los tres pares de <code>krybit</code> con <code>incransom</code>, <code>global secret group</code> y <code>netrunner</code>, cada uno con una sola víctima común.</p>
+</section>
+<section id="o-7-la-quinta-clase-dos-marcas-de-una-misma-operacion-por-diseno" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>La quinta clase: dos marcas de una misma operación por diseño</h2><p><strong>Añadido en v1.1.</strong> La emisión de <code>CTI-2026-061</code> el mismo día que este informe obligó a ampliar la tabla de <code>O-1.1</code>.</p></div></div>
+<p class="rv">Aquel expediente documenta un actor cuyo perfil declara un <strong>mercado de marca blanca</strong>: los afiliados despliegan la carga de la plataforma y <strong>publican las víctimas bajo sus propios nombres comerciales</strong>. El perfil nombra dos afiliados, y se verificó que uno de ellos existe como expediente separado con 111 entradas propias <strong>y coaparece con la marca matriz en una víctima contestada</strong>.</p>
+<p class="rv">Esa coaparición no encaja en ninguna de las cuatro clases:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Clase de <code>O-1.1</code></th><th>Por qué no encaja</th></tr></thead><tbody>
+<tr><td>Alias de expediente</td><td><strong>No</strong>: son dos marcas reales y deliberadas del adversario, no un error de indexación del rastreador</td></tr>
+<tr><td>Rebranding o republicación</td><td><strong>No</strong>: coexisten en el tiempo, y el solapamiento de catálogo es mínimo en lugar del 85 % que la clase exige</td></tr>
+<tr><td>Reventa parcial</td><td><strong>No</strong>: no hay transferencia de datos entre dos actores; hay <strong>un acceso y dos publicadores</strong></td></tr>
+<tr><td>Colisión genuina</td><td><strong>No</strong>: no son operaciones independientes</td></tr></tbody></table></div>
+<p class="rv"><strong>La quinta clase, y su firma:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Eje</th><th>Valor esperado</th></tr></thead><tbody>
+<tr><td>1. Solapamiento de catálogo</td><td><strong>Muy bajo</strong>: cada afiliado publica lo suyo, y sólo coinciden cuando ambos publican el mismo caso</td></tr>
+<tr><td>2. Separación temporal</td><td><strong>Pequeña</strong>, del orden de días</td></tr>
+<tr><td>3. Dirección</td><td><strong>Sin unanimidad</strong></td></tr>
+<tr><td><strong>4. Requisito añadido</strong></td><td><strong>Existencia de una declaración de modelo</strong> que vincule las marcas</td></tr></tbody></table></div>
+<h3 class="rv">O-7.1 El problema, y es serio</h3>
+<p class="rv"><strong>Los tres primeros ejes de esta clase son los mismos que los del acceso de origen común</strong> de <code>O-4</code>, el patrón que atribuimos al par Qilin/TheGentlemen: solapamiento bajo, separación variable, dirección repartida. Las dos situaciones producen la misma huella.</p>
+<p class="rv">Lo único que las distingue es el cuarto requisito — y ese requisito <strong>no es una medición</strong>: es una afirmación de una ficha de proveedor sin referencias y con indicio de redacción automática, de la clase que <code>CTI-2026-054</code> <code>§O-8.2</code> demostró capaz de contradecirse consigo misma en seis de seis casos.</p>
+<p class="rv">Hay tres salidas posibles y conviene decir cuál se toma:</p><ol class="rv"><li><strong>Mantener las dos clases y aceptar que la asignación depende de una fuente débil.</strong> Es lo que hace este informe, marcando <code>KJ-8</code> con confianza moderada.</li><li><strong>Fundirlas en una sola clase</strong> —«víctimas compartidas sin sucesión ni duplicación»— y renunciar a distinguir el mecanismo. Es más honesto y menos útil.</li><li><strong>Buscar un cuarto eje que las separe sin depender de declaraciones.</strong> La candidata es la <strong>coincidencia de formato de entrada</strong>: dos marcas que usan la misma plantilla de publicación, los mismos campos y el mismo estilo de título son más probablemente la misma plataforma que dos operaciones que compran al mismo corredor. <strong>No se ha probado</strong>, y es <code>I-6</code>.</li></ol>
+<p class="rv"><strong>Se adopta la primera salida provisionalmente, con <code>I-6</code> abierto.</strong> Fundir las clases ahora perdería una distinción que tiene consecuencias defensivas distintas: si son dos marcas de una plataforma, la víctima sufrió <strong>un</strong> acceso; si comparten corredor, pudo sufrir <strong>dos</strong>.</p>
+<h3 class="rv">O-7.2 Y una consecuencia sobre el conjunto de 44</h3>
+<p class="rv">Si la quinta clase es real y frecuente, parte de las veintiocho agrupaciones de <code>O-3</code> que quedaron sin clasificar por tener una sola víctima común podrían ser instancias suyas. Los pares de <code>krybit</code> con <code>netrunner</code>, de <code>genesis</code> con <code>n0n</code>, de <code>byod</code> con <code>endzone</code> o de <code>endzone</code> con <code>imnotavillain</code> —todos con una sola coincidencia y marcas pequeñas— tienen exactamente la forma que <code>O-7</code> predice.</p>
+<p class="rv"><strong>No se reclasifican</strong>, porque con n=1 no hay dispersión ni dirección que medir y porque no hay declaración de modelo para ninguno. Pero se consigna como la hipótesis más probable para esa cola, y refuerza <code>KJ-5</code>: <strong>cuanto más de las 44 se explique por mecanismos estructurales, menos queda para la multi-extorsión genuina.</strong></p>
+</section>
+<section id="o-5-que-hacer-si-un-segundo-grupo-publica-su-nombre" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Qué hacer si un segundo grupo publica su nombre</h2><p>Procedimiento para la organización afectada, en orden de coste creciente. El primer paso resuelve la mayoría de los casos.</p></div></div><ol class="rv"><li><strong>Comparar la muestra publicada con la anterior.</strong> Si los ficheros, las rutas, los nombres de usuario y las marcas de tiempo coinciden, es el mismo robo reapareciendo y <strong>no hubo segundo acceso</strong>. Coste: minutos, y sólo requiere lo que ya se conserva del primer incidente.</li><li><strong>Comprobar si el primer grupo sigue publicando.</strong> Si calló cuando apareció el segundo, es sucesión de marca. Si sigue activo, es republicación por un tercero.</li><li><strong>Fechar la separación.</strong> Por debajo de veinticuatro horas, es el caso raro y hay que tratarlo como dos accesos posibles. Por encima de treinta días, es reaparición en el 68 % de los casos recientes.</li><li><strong>Sólo si 1 a 3 no resuelven, abrir incidente nuevo.</strong> Y entonces la pregunta es si el acceso original se cerró de verdad.</li></ol>
+</section>
+<section id="o-6-hipotesis-y-pre-mortem" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Hipótesis y pre-mortem</h2><p><strong>H-1.</strong> <em>El agregado de 1.895 está dominado por alias de expediente.</em> <strong>Probable</strong> <em>(55–80 %)</em>. Apoyo: los seis participantes más frecuentes forman tres pares de alias. En contra: no se midió el conjunto completo por pares, sólo los cuarenta más frecuentes.</p></div></div>
+<p class="rv"><strong>H-2.</strong> <em>SoulGroup republica material de insomnia sin acceso propio.</em> <strong>Probable</strong> <em>(55–80 %)</em>. Apoyo: dirección unánime, separación consistente, insomnia sigue activo. En contra: once de sus veintisiete entradas no aparecen en insomnia y podrían ser propias.</p>
+<p class="rv"><strong>H-3.</strong> <em>Qilin y TheGentlemen comparten origen de acceso.</em> <strong>Probable</strong> <em>(55–80 %)</em>, con nueve casos.</p>
+<p class="rv"><strong>H-4.</strong> <em>La escasez de colisiones simultáneas es real y no un artefacto de la fuente.</em> <strong>Posible</strong> <em>(40–60 %)</em>. <strong>Es la hipótesis más débil de este informe.</strong> Si la fuente agrupa por nombre canónico de víctima, dos grupos que nombren a la misma organización de forma distinta no se agruparían, y las colisiones simultáneas estarían infracontadas. No se pudo comprobar.</p>
+<h3 class="rv">Pre-mortem</h3>
+<p class="rv"><em>Si este informe está equivocado, ¿cómo lo sabremos?</em> <strong>Por <code>H-4</code>.</strong> Si el agrupador falla al unificar nombres de víctima, el conjunto de 44 está sesgado hacia los casos fáciles —organizaciones con nombre estable y dominio— y la conclusión de <code>KJ-5</code> caería. La comprobación está en <code>I-1</code>.</p>
+<p class="rv"><em>El segundo modo de fallo es la clase de <code>O-4</code>.</em> Nueve víctimas comunes entre dos actores con 112 y 19 víctimas contestadas podría ser coincidencia si ambos atacan el mismo segmento. No lo hemos descartado, y <code>KJ-6</code> está calificado en consecuencia.</p>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<p class="rv"><strong>G-1. No sabemos cómo agrupa la fuente los nombres de víctima.</strong> Es el sostén de <code>H-4</code> y la mayor amenaza a <code>KJ-5</code>. → <strong>I-1.</strong> Buscar en el conjunto dos reclamaciones de la misma organización bajo nombres distintos que <strong>no</strong> estén agrupadas. <strong>Disparador:</strong> inmediato; condiciona <code>KJ-5</code>.</p>
+<p class="rv"><strong>G-2. Nueve víctimas comunes entre Qilin y TheGentlemen no bastan para afirmar acceso compartido.</strong> → <strong>I-2.</strong> Comparar los vectores declarados de las nueve y comprobar si hay un proveedor, un producto expuesto o un intervalo de compromiso común. <strong>Disparador:</strong> décima víctima común.</p>
+<p class="rv"><strong>G-3. No sabemos si las once entradas de SoulGroup que no están en insomnia son propias o de otro origen.</strong> → <strong>I-3.</strong> Someterlas al mismo contraste frente a los demás actores del semestre. <strong>Disparador:</strong> antes de cerrar <code>CTI-2026-053</code> v1.1.</p>
+<p class="rv"><strong>G-4. El método no se ha validado contra un caso de rebranding documentado por una fuente judicial u oficial.</strong> Todos los pares de <code>O-2</code> se clasificaron con los datos del propio rastreador. → <strong>I-4.</strong> Aplicarlo a un rebranding establecido en una acusación formal y comprobar que la clasificación coincide. <strong>Es la validación externa que falta.</strong></p>
+<p class="rv"><strong>G-5. Sólo se midieron los cuarenta pares más frecuentes.</strong> Puede haber alias en la cola larga. → <strong>I-5.</strong> Calcular los tres ejes para todos los pares con al menos tres víctimas comunes.</p>
+<p class="rv"><strong>G-6. Añadida en v1.1. La quinta clase de <code>O-7</code> no se distingue del acceso de origen común sin recurrir a una declaración de modelo no corroborada.</strong> Es el problema de <code>O-7.1</code>. → <strong>I-6.</strong> Probar el <strong>cuarto eje candidato</strong>: coincidencia de plantilla de publicación, campos y estilo de título entre las dos marcas. <strong>Si funciona, las clases quedan separadas por medición y no por declaración; si no, deben fundirse.</strong> Disparador: inmediato, porque de él depende si <code>KJ-8</code> sobrevive.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — Pares de expediente a unificar antes de contar</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern hive ≡ hiveleak 193 de 194 víctimas comunes, separación 0,0 d. mismo sitio, dos expedientes · alta · sin caducidad unificar antes de cualquier recuento"><span class="ty">pattern</span><span class="vv">hive ≡ hiveleak<em>193 de 194 víctimas comunes, separación 0,0 d. Mismo sitio, dos expedientes · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar antes de cualquier recuento</span></div>
+<div class="ioc-row" data-s="pattern killsec ≡ killsecurity 141 comunes, separación −0,0 d · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">killsec ≡ killsecurity<em>141 comunes, separación −0,0 d · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern ragroup ≡ raworld 95 de 95, jaccard 100 % · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">ragroup ≡ raworld<em>95 de 95, Jaccard 100 % · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern apt73 ≡ bashe 83 comunes. la propia ficha del proveedor lo declara (cti-2026-054 o-3) · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">apt73 ≡ bashe<em>83 comunes. La propia ficha del proveedor lo declara (CTI-2026-054 O-3) · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern ransomed ≡ ransomedvc 52 de 53 · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">ransomed ≡ ransomedvc<em>52 de 53 · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern medusalocker ≡ ransomblog_noname 46 comunes, separación 0,0 d. sin parecido léxico · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">medusalocker ≡ ransomblog_noname<em>46 comunes, separación 0,0 d. Sin parecido léxico · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern j ≡ l group 14 de 14. sin una letra en común · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">j ≡ l group<em>14 de 14. Sin una letra en común · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern dunghill ≡ dunghill_leak 13 de 14 · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">dunghill ≡ dunghill_leak<em>13 de 14 · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern unsafe ≡ unsafeleak 10 de 11 · alta · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">unsafe ≡ unsafeleak<em>10 de 11 · Alta · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern eldorado → blacklock 47 de 48, dirección 100 %, 179 días. sucesión, no alias · alta · sin caducidad tratar como un actor en el tiempo"><span class="ty">pattern</span><span class="vv">eldorado → blacklock<em>47 de 48, dirección 100 %, 179 días. Sucesión, no alias · Alta · Sin caducidad</em></span><span class="pill p-mint">Tratar como un actor en el tiempo</span></div>
+<div class="ioc-row" data-s="pattern ralord → nova 14 comunes, dirección 100 %, 13 días · alta · sin caducidad tratar como sucesión"><span class="ty">pattern</span><span class="vv">ralord → nova<em>14 comunes, dirección 100 %, 13 días · Alta · Sin caducidad</em></span><span class="pill p-mint">Tratar como sucesión</span></div>
+<div class="ioc-row" data-s="pattern insomnia → soul 16 de 27 entradas de soul, dirección 100 %, 94 días (e-3) · alta para el solapamiento · reevaluar en 30 días actualizar cti-2026-053"><span class="ty">pattern</span><span class="vv">insomnia → soul<em>16 de 27 entradas de soul, dirección 100 %, 94 días (E-3) · Alta para el solapamiento · Reevaluar en 30 días</em></span><span class="pill p-mint">Actualizar CTI-2026-053</span></div></div>
+<h3 class="rv">A.2 — Patrones de detección del método</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern dos expedientes con recuentos de víctimas contestadas casi idénticos 193/194, 143/141, 95/95, 85/83. el indicio más barato de alias (e-1) · alta como método · sin caducidad primera comprobación"><span class="ty">pattern</span><span class="vv">Dos expedientes con recuentos de víctimas contestadas casi idénticos<em>193/194, 143/141, 95/95, 85/83. El indicio más barato de alias (E-1) · Alta como método · Sin caducidad</em></span><span class="pill p-mint">Primera comprobación</span></div>
+<div class="ioc-row" data-s="pattern jaccard ≥ 90 % con separación mediana ≈ 0 y dirección 30–70 % firma del expediente duplicado · alta como método · sin caducidad unificar"><span class="ty">pattern</span><span class="vv">Jaccard ≥ 90 % con separación mediana ≈ 0 y dirección 30–70 %<em>Firma del expediente duplicado · Alta como método · Sin caducidad</em></span><span class="pill p-mint">Unificar</span></div>
+<div class="ioc-row" data-s="pattern jaccard ≥ 85 % con dirección ≥ 95 % y separación consistente firma de sucesión o republicación · alta como método · sin caducidad tratar como un actor"><span class="ty">pattern</span><span class="vv">Jaccard ≥ 85 % con dirección ≥ 95 % y separación consistente<em>Firma de sucesión o republicación · Alta como método · Sin caducidad</em></span><span class="pill p-mint">Tratar como un actor</span></div>
+<div class="ioc-row" data-s="pattern jaccard 20–50 % con dirección unánime firma de reventa parcial: lockbit3→dispossessor, 39 % · alta como método · sin caducidad análisis"><span class="ty">pattern</span><span class="vv">Jaccard 20–50 % con dirección unánime<em>Firma de reventa parcial: lockbit3→dispossessor, 39 % · Alta como método · Sin caducidad</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="pattern jaccard &lt; 20 % con dirección ~50 % y dispersión de meses en ambos signos firma de acceso de origen común. el caso qilin/thegentlemen (o-4) · moderada, n=9 · reevaluar con n≥10 requisito de colección"><span class="ty">pattern</span><span class="vv">Jaccard &lt; 20 % con dirección ~50 % y dispersión de meses en ambos signos<em>Firma de acceso de origen común. El caso Qilin/TheGentlemen (O-4) · Moderada, n=9 · Reevaluar con n≥10</em></span><span class="pill p-mint">Requisito de colección</span></div>
+<div class="ioc-row" data-s="pattern separación entre reclamaciones &lt; 24 h con jaccard bajo la única colisión genuina del semestre · alta como criterio · sin caducidad tratar como dos accesos posibles"><span class="ty">pattern</span><span class="vv">Separación entre reclamaciones &lt; 24 h con Jaccard bajo<em>La única colisión genuina del semestre · Alta como criterio · Sin caducidad</em></span><span class="pill p-mint">Tratar como dos accesos posibles</span></div>
+<div class="ioc-row" data-s="artefacto agrupación cuyo nombre de víctima es un mensaje, p. ej. warning el agrupador trata texto del sitio como organización (o-3) · alta · sin caducidad descartar"><span class="ty">artefacto</span><span class="vv">Agrupación cuyo nombre de víctima es un mensaje, p. ej. WARNING<em>El agrupador trata texto del sitio como organización (O-3) · Alta · Sin caducidad</em></span><span class="pill p-mint">Descartar</span></div>
+<div class="ioc-row" data-s="pattern jaccard &lt; 20 % con separación de días, sin dirección, y una de las marcas declarando afiliados con nombre propio la quinta clase (o-7, v1.1). una operación, dos marcas: la víctima sufrió un acceso, no dos · moderada, n=1 · hasta resolver i-6 clasificación provisional"><span class="ty">pattern</span><span class="vv">Jaccard &lt; 20 % con separación de días, sin dirección, y una de las marcas declarando afiliados con nombre propio<em>La quinta clase (O-7, v1.1). Una operación, dos marcas: la víctima sufrió un acceso, no dos · Moderada, n=1 · Hasta resolver I-6</em></span><span class="pill p-mint">Clasificación provisional</span></div></div>
+<h3 class="rv">A.3 — Victimología de las 44</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 44 agrupaciones en el semestre · 0 bajo 1 h · 1 bajo 24 h · 68 % sobre 30 días la anatomía de kj-5 · alta como recuento · 90 días medición"><span class="ty">cartera</span><span class="vv">44 agrupaciones en el semestre · 0 bajo 1 h · 1 bajo 24 h · 68 % sobre 30 días<em>La anatomía de KJ-5 · Alta como recuento · 90 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 16 de las 44 son un solo par, insomnia/soul el 36 % del conjunto reciente es un único fenómeno · alta · 90 días análisis"><span class="ty">cartera</span><span class="vv">16 de las 44 son un solo par, insomnia/soul<em>El 36 % del conjunto reciente es un único fenómeno · Alta · 90 días</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera 1 víctima española, sanidad, reclamada por global secret group y krybit a 105 días el único caso de relevancia hispanohablante del conjunto · moderada · 90 días comprobación si opera en el sector"><span class="ty">cartera</span><span class="vv">1 víctima española, sanidad, reclamada por global secret group y krybit a 105 días<em>El único caso de relevancia hispanohablante del conjunto · Moderada · 90 días</em></span><span class="pill p-mint">Comprobación si opera en el sector</span></div>
+<div class="ioc-row" data-s="cartera ninguna víctima chilena entre las 44 contrasta con la concentración de qilin de cti-2026-015 · alta como ausencia · 90 días —"><span class="ty">cartera</span><span class="vv">Ninguna víctima chilena entre las 44<em>Contrasta con la concentración de Qilin de CTI-2026-015 · Alta como ausencia · 90 días</em></span><span class="pill p-mint">—</span></div>
+<div class="ioc-row" data-s="cartera sanidad y servicios jurídicos dominan las víctimas comunes 7 de 16 del par insomnia/soul son sanidad · moderada · 90 días análisis"><span class="ty">cartera</span><span class="vv">Sanidad y servicios jurídicos dominan las víctimas comunes<em>7 de 16 del par insomnia/soul son sanidad · Moderada · 90 días</em></span><span class="pill p-mint">Análisis</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Fuente</th><th>Grado</th><th>Qué aportó</th><th>Salvedad</th></tr></thead><tbody>
+<tr><td>1</td><td>Endpoint de reclamaciones cruzadas de cti.fyi, 2026-11-19, cuatro páginas</td><td><strong>Medición propia</strong> sobre datos de proveedor</td><td>Las 1.895 agrupaciones</td><td><strong>Su campo de separación horaria no se usa</strong>: está mal en el 41 % (<code>CTI-2026-054</code> <code>O-2</code>)</td></tr>
+<tr><td>2</td><td>Endpoint de entradas, ventana de 184 días</td><td>Medición propia sobre datos de proveedor</td><td>La actividad de cada grupo en el semestre, para <code>E-2</code> y <code>E-3</code></td><td>Enriquecimiento derivado</td></tr>
+<tr><td>3</td><td><code>CTI-2026-047</code></td><td>Propio</td><td>La hipótesis de marcas hermanas que <code>E-2</code> corrobora por segunda vía</td><td>—</td></tr>
+<tr><td>4</td><td><code>CTI-2026-053</code></td><td>Propio</td><td>La pregunta abierta que <code>E-3</code> responde</td><td>Su <code>KJ-1</code> queda superado</td></tr>
+<tr><td>5</td><td><code>CTI-2026-045</code> <code>Anexo D</code></td><td>Propio</td><td>El eje de la dirección: buscar el parámetro que no se alinea</td><td>—</td></tr>
+<tr><td>6</td><td><code>CTI-2026-014</code> y <code>CTI-2026-015</code></td><td>Propio</td><td>Los dos actores de <code>O-4</code></td><td>—</td></tr></tbody></table></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<p class="rv">ICD 203. <strong>Casi con certeza</strong> ≥99 % · <strong>muy probable</strong> 80–95 % · <strong>probable</strong> 55–80 % · <strong>posible</strong> 40–60 % · <strong>improbable</strong> 20–45 % · <strong>muy improbable</strong> 5–20 %. La <strong>confianza</strong> califica la base de prueba con independencia de la probabilidad. En este informe, las mediciones de solapamiento y dirección tienen confianza alta por ser reproducibles; las interpretaciones de <code>O-4</code> y <code>E-3.1</code> tienen confianza moderada por tamaño de muestra.</p>
+</section>
+<section id="anexo-d-como-clasificar-una-reclamacion-cruzada-en-veinte-minutos" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo clasificar una reclamación cruzada en veinte minutos</h2><p><strong>Paso 1 — Comparar los recuentos totales (dos minutos).</strong> Contar en cuántas víctimas contestadas participa cada uno de los dos grupos. <strong>Si los dos números son casi iguales, sospechar alias de inmediato.</strong> Es el paso más barato y resuelve los casos más abundantes.</p></div></div>
+<p class="rv"><strong>Paso 2 — Calcular el solapamiento (cinco minutos).</strong> Víctimas comunes dividido por víctimas de la unión. Por encima del 85 % no son dos actores independientes: son el mismo expediente duplicado o una sucesión. Por debajo del 20 %, son distintos.</p>
+<p class="rv"><strong>Paso 3 — Medir la separación y su dispersión (cinco minutos).</strong> Mediana, percentil 10 y percentil 90. <strong>La dispersión importa tanto como la mediana:</strong> una mediana de cero con percentiles de ±170 días no significa simultaneidad, significa dirección aleatoria.</p>
+<p class="rv"><strong>Paso 4 — Mirar la dirección (tres minutos).</strong> Proporción de casos en que el mismo grupo va primero. Unanimidad significa sucesión. Reparto significa alias, o acceso compartido si el solapamiento es bajo.</p>
+<p class="rv"><strong>Paso 5 — Comprobar si el primer grupo sigue activo (cinco minutos).</strong> Es lo único que separa sucesión de republicación, y la fuente lo da directamente.</p>
+<div class="note info rv"><div class="t">El paso más discriminante es el cuarto</div><p>, y es el que casi nadie hace. El solapamiento dice si dos catálogos describen los mismos hechos; <strong>la dirección dice si uno viene del otro</strong>. Sin el cuarto eje, <code>insomnia</code>/<code>soul</code> es indistinguible de <code>hive</code>/<code>hiveleak</code>: ambos tienen solapamiento alto. Con él, uno es una sucesión de noventa y cuatro días y el otro un duplicado de cero.</p><p>Y el paso que hay que hacer <strong>antes</strong> de los cinco: comprobar que el campo de separación que la fuente ofrezca calculado no esté mal. En este caso lo estaba, en el 41 % de los registros.</p></div>
+<p class="rv"><strong>Paso 6 — Añadido en v1.1: antes de concluir «colisión» o «acceso compartido» por un solapamiento bajo, comprobar si alguna de las dos marcas declara un programa de afiliados que publiquen con nombre propio.</strong> Si lo declara, el caso es la quinta clase de <code>O-7</code> —una operación, dos marcas— y <strong>la víctima sufrió un acceso, no dos</strong>. La señal más barata está en el perfil del propio proveedor: las expresiones «marca blanca», «marca local» o «afiliados con su propia marca». Es el paso que separa un error de diagnóstico con consecuencias para la respuesta.</p>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div>
+<p class="rv">ICD 203 para el lenguaje estimativo. Escala de Almirantazgo con los grados propios de la cartera. TLP 2.0 y PAP. Índice de Jaccard para el eje 1. El método de separación de campañas de <code>CTI-2026-045</code> <code>Anexo D</code>, del que este informe es la aplicación al caso simétrico: allí se trataba de decidir si una familia eran dos campañas, y aquí si dos expedientes son un actor. <strong>El principio es el mismo —buscar el parámetro que no se alinea— y en este informe ese parámetro es la dirección.</strong> Los cinco criterios para evaluar una afirmación de rebranding de <code>CTI-2026-047</code> <code>Anexo D</code>, que este método cuantifica: el solapamiento de catálogo es la medida de su criterio de herencia.</p>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th>Procedimiento</th></tr></thead><tbody>
+<tr><td>Conjunto base</td><td><code>GET /api/v1/cross-claims?limit=500&amp;offset=N</code>, N ∈ {0, 500, 1000, 1500}</td></tr>
+<tr><td>Eje 1</td><td>Jaccard sobre <code>victim_key</code> por grupo, en minúsculas</td></tr>
+<tr><td>Eje 2</td><td>Para cada víctima común, <code>min(discovered)</code> de B menos <code>min(discovered)</code> de A</td></tr>
+<tr><td>Eje 3</td><td>Proporción de diferencias negativas</td></tr>
+<tr><td>Actividad en ventana</td><td><code>GET /api/v1/posts?since=2026-05-19&amp;limit=500&amp;offset=N&amp;sort=discovered</code></td></tr>
+<tr><td>Verificación del par insomnia/soul</td><td>Filtrar agrupaciones cuyos <code>groups</code> contengan ambos; 16 resultados</td></tr></tbody></table></div>
+<p class="rv"><strong>Advertencia de reproducción.</strong> El campo <code>delta_hours</code> de la fuente <strong>no</strong> se usó. Quien reproduzca estas cifras con él obtendrá resultados distintos y equivocados.</p>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Qué cambió</th><th>Qué juicio se movió</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-19</td><td>Emisión inicial. El método de tres ejes, los once pares de alias, y las respuestas a las preguntas abiertas de <code>CTI-2026-047</code> y <code>CTI-2026-053</code></td><td>—</td></tr>
+<tr><td>1.1</td><td>2026-11-19</td><td><strong>Amplía el método de cuatro clases a cinco</strong>, por el hallazgo de <code>CTI-2026-061</code>: un actor cuyo modelo de marca blanca permite a los afiliados publicar bajo nombre propio, verificado por una coaparición entre la matriz y un afiliado declarado. Incorpora <code>KJ-8</code>, <code>§O-7</code>, la quinta fila de la tabla de decisión, el <strong>paso 6</strong> del <code>Anexo D</code> y la brecha <code>G-6</code>. <strong>Consigna el problema abierto de <code>O-7.1</code>:</strong> la firma de la quinta clase es casi idéntica a la del acceso de origen común, y las separa una declaración de proveedor no corroborada; se propone un cuarto eje —coincidencia de plantilla de publicación— como salida por medición. <strong>Ningún juicio de v1.0 se retira</strong></td><td><code>KJ-5</code> se refuerza: más de las 44 se explica por mecanismos estructurales</td></tr></tbody></table></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div>
+<p class="rv">Este informe se corrige si se recibe: un caso de dos reclamaciones de la misma organización bajo nombres distintos que la fuente <strong>no</strong> haya agrupado, lo que confirmaría <code>H-4</code> y debilitaría <code>KJ-5</code>; la validación del método contra un rebranding establecido por fuente judicial, que cerraría <code>G-4</code>; una décima víctima común entre Qilin y TheGentlemen, que permitiría elevar <code>KJ-6</code>; o la confirmación de que las once entradas restantes de SoulGroup tienen otro origen, que cerraría <code>G-3</code>.</p>
+<p class="rv">El disparador más inmediato es <strong><code>I-1</code></strong>, porque de él depende el juicio <code>KJ-5</code>, que es el más contraintuitivo de este informe y el que más probablemente se citará.</p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-055 · v1.1 · 2026-11-19</strong> · caduca 2027-02-19</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Método para separar los cuatro fenómenos que se esconden detrás de 'dos grupos reclamaron la misma víctima'. Aplicado a 1.895 agrupaciones de un rastreador de terceros y a tres preguntas que la cartera tenía abiertas. No se reproduce ningún nombre de víctima que no esté ya publicado por el propio actor. Difusión libre conservando la atribución y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

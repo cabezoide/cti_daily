@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-061 · DragonForce · dragonforce</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-061<small>DragonForce · dragonforce</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-cifras">E-1. Cifras</a><a href="#e-2-el-recuento-como-suelo">E-2. El recuento como suelo</a><a href="#e-3-veinte-sitios-caidos-y-por-que-significa-menos-aqui">E-3. Veinte sitios caídos, y por qué significa menos aquí</a><a href="#e-4-relevancia-regional-baja-con-una-salvedad-que-importa">E-4. Relevancia regional: baja, con una salvedad que importa</a><a href="#e-5-decisiones-que-este-informe-pide">E-5. Decisiones que este informe pide</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion">O-1. Identificación</a><a href="#o-2-el-catalogo">O-2. El catálogo</a><a href="#o-3-cadencia-el-mas-distribuido-del-lote">O-3. Cadencia: el más distribuido del lote</a><a href="#o-4-infraestructura-veinte-sitios-practica-mixta">O-4. Infraestructura: veinte sitios, práctica mixta</a><a href="#o-5-la-quinta-clase-de-reclamacion-cruzada">O-5. La quinta clase de reclamación cruzada</a><a href="#o-6-clasificacion">O-6. Clasificación</a><a href="#o-7-hipotesis-y-pre-mortem">O-7. Hipótesis y pre-mortem</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-saber-si-el-recuento-de-un-actor-es-un-techo-o-un-suelo">Anexo D — Cómo saber si el recuento de un actor es un techo o un suelo</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de operación de extorsión</span><span class="pill p-mint">Estados Unidos 33 % · 27 países · sin relevancia chilena</span><span class="pill p-sky">v1.0 · 2026-11-19</span></div><h1>DragonForce · dragonforce</h1><p class="sub">Sus veinte sitios están caídos, y su recuento de víctimas es un suelo y no un techo</p><p class="sub2">El modelo de marca blanca permite que los afiliados publiquen bajo sus propios nombres, y se verificó que uno lo hace sobre una víctima compartida con la marca matriz</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-061</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-19</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-061</code></dd></div><div><dt>Versión</dt><dd class="m">1.0</dd></div><div><dt>Tipo</dt><dd class="m">Perfil de operación de extorsión</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Fecha de emisión</dt><dd class="m">2026-11-19</dd></div><div><dt>Caducidad</dt><dd class="m">2026-12-19</dd></div><div><dt>Niveles</dt><dd>Estratégico · Operacional</dd></div><div><dt>Actor</dt><dd>DragonForce · dragonforce</dd></div><div><dt>Entradas en la ventana</dt><dd>144 · <strong>50 días de actividad</strong></dd></div><div><dt>Infraestructura</dt><dd><strong>20 sitios · 0 activos</strong> · sin publicar desde 2026-10-30</dd></div><div><dt>Hallazgo principal</dt><dd class="m"><strong>El recuento es un suelo</strong>: afiliados publican bajo marca propia</dd></div><div><dt>Relevancia regional</dt><dd>3 LATAM (2,1 %) · <strong>0 Chile</strong></dd></div><div><dt>Autor</dt><dd class="m">Célula CTI</dd></div></dl>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-md rv"><div class="id">KJ-1</div>
+<h4>Su recuento de víctimas es un suelo y no un techo, al revés que el de todos los demás actores de este lote. El perfil declara un mercado de marca blanca que permite a los afiliados desplegar la carga de este actor publicando bajo sus propios nombres comerciales, y nombra dos de esos afiliados</h4><p>Verificamos que <strong>uno de ellos existe como expediente separado con 111 entradas y coaparece con la marca matriz en una víctima contestada</strong>. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que el modelo funcione como se declara, apoyados en esa verificación. <em>Consecuencia:</em> <strong>las 144 entradas son las que la marca matriz publicó, no las que la operación produjo</strong>, y la diferencia no es acotable desde fuera (<code>E-2</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>Y eso completa el par con CTI-2026-060: un actor infla su recuento y éste lo oculta, de modo que una cifra de víctimas de sitio de filtración no es una medida en ninguna de las dos direcciones. Storm contó un grupo bancario tres veces —techo—; éste tiene víctimas que no aparecen en su catálogo porque las publica otra marca —suelo—</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que ambos mecanismos están presentes en el conjunto. <em>Consecuencia:</em> <strong>toda comparación de volumen entre actores de extorsión está mal planteada si no se ha controlado por los dos efectos</strong>, y es la conclusión transferible de los seis expedientes de este lote (<code>E-2.2</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-3</div>
+<h4>Sus veinte direcciones de infraestructura están caídas y lleva veinte días sin publicar. Ninguna de las veinte responde al 19 de noviembre de 2026, y la última entrada es del 30 de octubre</h4><p>Es el segundo actor del lote en esa situación, junto a <code>safepay</code>. Valoramos <strong>posible</strong> <em>(40–60 %)</em> que la operación haya cesado o esté en transición, y <strong>posible</strong> <em>(40–60 %)</em> que la actividad continúe bajo las marcas de sus afiliados <strong>sin que la marca matriz publique nada</strong> — una posibilidad que sólo existe por <code>KJ-1</code> y que ningún otro actor del lote tiene. <em>Consecuencia:</em> <strong>el silencio de esta marca no implica el cese de la operación</strong> (<code>E-3</code>).</p><div class="gauge" data-p="50"><div class="lab"><span>Probabilidad estimada</span><b>40–60 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: baja para la interpretación, alta para la observación.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>Es el actor más distribuido en el tiempo de los seis: cincuenta días de actividad, mediana de una entrada por día, y un solo pico de veinticuatro. Frente a los ocho días de Storm y BrainCipher o los catorce de krybit</h4><p>Y su retraso mediano entre la fecha declarada y la de descubrimiento es de <strong>cero días</strong>, con el 93 % de cobertura de fecha. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> las mediciones. <em>Consecuencia:</em> el patrón es el de <strong>flujo continuo de víctimas</strong>, lo que es exactamente lo que un programa de afiliados produce y refuerza <code>KJ-1</code> por consistencia (<code>O-3</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-5</div>
+<h4>Su práctica de nomenclatura de infraestructura es mixta, y eso lo hace sólo parcialmente cazable: dos de veinte direcciones llevan prefijo legible. Las dieciocho restantes son aleatorias</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> la observación. <em>Consecuencia:</em> el patrón de caza por prefijo que funciona con <code>krybit</code> —cuatro de cuatro con prefijo— <strong>aquí encontraría una décima parte de su infraestructura</strong>, y usarlo como única vigilancia daría falsa tranquilidad (<code>O-4</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-6</div>
+<h4>No tiene relevancia chilena y muy poca regional: tres entradas latinoamericanas de 144 (2,1 %), ninguna chilena, en veintisiete países. Estados Unidos concentra 48 (33 %), la proporción estadounidense más baja del lote después de krybit</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la ausencia chilena sea real, con 75 % de cobertura de país. <em>Consecuencia:</em> <strong>vigilancia, no prioridad</strong> — con la salvedad importante de que <code>KJ-1</code> significa que <strong>podría haber víctimas chilenas publicadas bajo otra marca</strong> (<code>E-4</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-7</div>
+<h4>Participa en veinticuatro víctimas contestadas, el tercer actor con más de todo el conjunto medido, y el patrón es el que su modelo predice. Coaparece con qilin (3), play (3), incransom (2), clop (2) y con once marcas más, incluida devman, su afiliado declarado</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que una parte de esas coapariciones sea estructural —marca matriz y marca de afiliado sobre la misma víctima— y no colisión entre operaciones rivales. <em>Consecuencia:</em> obliga a añadir una <strong>quinta clase</strong> al método de <code>CTI-2026-055</code>: dos marcas de la misma operación por diseño del modelo de negocio, que no es alias de expediente ni rebranding (<code>O-5</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">DragonForce publicó <strong>144 entradas</strong> entre el 19 de mayo —primer día de la ventana, de modo que el actor es anterior— y el 30 de octubre de 2026. Es el actor más distribuido en el tiempo de los seis que la cartera incorpora en este lote: <strong>cincuenta días de actividad</strong>, con mediana de una entrada diaria y un solo pico de veinticuatro. Para comparar, <code>Storm</code> concentró el 85 % de su catálogo en un día y <code>BrainCipher</code> publicó en ocho días.</p>
+<p class="rv">Pero el hallazgo de este expediente no es la cadencia: es que <strong>su recuento de víctimas significa lo contrario de lo que parece</strong>.</p>
+<p class="rv">El perfil que el proveedor publica describe un mercado de marca blanca que permite a los afiliados desplegar la carga de este actor <strong>y publicar las víctimas bajo sus propios nombres comerciales</strong>, nombrando dos de esos afiliados. Normalmente la cartera trata esas fichas como no corroboradas y las deja ahí. Aquí se pudo comprobar: <strong>uno de los afiliados nombrados existe como expediente separado, con 111 entradas propias, y aparece junto a la marca matriz reclamando una misma víctima</strong>.</p>
+<p class="rv">Eso cambia la interpretación de la cifra. Las 144 entradas no son las víctimas que la operación produjo: son las que <strong>esta marca</strong> publicó. Las que publicaron sus afiliados bajo otros nombres están contadas en otra parte, o no están contadas. <strong>El 144 es un suelo</strong>, y la distancia hasta el total real no se puede acotar desde fuera.</p>
+<p class="rv">Y eso cierra un par con el informe inmediatamente anterior de este lote. <code>CTI-2026-060</code> documentó un actor que <strong>infla</strong> su recuento: un grupo bancario estadounidense contado tres veces, como matriz y dos filiales. Éste lo <strong>oculta</strong>. Los dos juntos establecen algo que vale para toda la cartera: <strong>una cifra de víctimas tomada de un sitio de filtración no es una medida en ninguna de las dos direcciones</strong>, y toda comparación de volumen entre actores que no controle los dos efectos compara cosas distintas.</p>
+<p class="rv">La tercera observación es la más perecedera: <strong>sus veinte direcciones de infraestructura están caídas</strong> y lleva veinte días sin publicar. Es el segundo actor del lote en esa situación, con <code>safepay</code>. Pero aquí el silencio significa menos que allí, precisamente por <code>KJ-1</code>: <strong>la operación puede seguir viva bajo las marcas de sus afiliados sin que esta marca publique nada</strong>. Ningún otro actor del lote tiene esa salida.</p>
+<p class="rv">No tiene relevancia chilena —cero de 144, con veintisiete países y el 75 % de cobertura— y muy poca regional, con tres entradas latinoamericanas. Con la salvedad, otra vez, de que podría haber víctimas regionales publicadas bajo otro nombre.</p>
+<p class="rv">Y participa en <strong>veinticuatro víctimas contestadas</strong>, el tercer actor con más de todo el conjunto que <code>CTI-2026-055</code> midió. Ese informe separó cuatro fenómenos detrás de «dos grupos reclamaron la misma víctima»; este expediente obliga a añadir un quinto: <strong>dos marcas de la misma operación, por diseño del modelo de negocio</strong>.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Base de la medición</h3>
+<p class="rv">Las 144 entradas, los 20 sitios y las 24 víctimas contestadas proceden de la API de cti.fyi consultada el 19 de noviembre de 2026. Reproducible con <code>Anexo F</code>.</p>
+<h3 class="rv">3.2 Límites</h3><ul class="rv"><li><strong>El modelo de marca blanca está declarado por el proveedor, no observado.</strong> Lo que se verificó es que un afiliado nombrado existe como expediente y coaparece una vez con la marca matriz. <strong>Eso es consistencia, no prueba del modelo</strong>: una sola coaparición admite otras explicaciones. <code>KJ-1</code> lleva confianza moderada por esto.</li><li><strong>El país y el sector son enriquecimiento derivado</strong>, con 75 % de cobertura.</li><li><strong>Sólo el 70 % de las entradas lleva dominio</strong> (101 de 144).</li><li><strong>No se leyó el sitio de filtración</strong>, que además está caído.</li><li><strong>Ninguna víctima ha confirmado nada.</strong></li><li><strong>Una segunda fuente da cifras incompatibles y no se usa:</strong> CTIWatch atribuye 673 víctimas en su cabecera y 628 en la prosa de la misma página, y declara última actividad en marzo de 2026 — <strong>la misma fecha que asigna a otros tres actores</strong> (<code>CTI-2026-054</code> <code>§O-8.2</code>).</li><li><strong>La primera entrada observada cae en el borde de la ventana</strong>, de modo que este expediente no mide el inicio del actor. El perfil lo sitúa en 2024.</li></ul>
+<h3 class="rv">3.3 Higiene</h3>
+<p class="rv">No se reproduce ningún nombre ni dominio de víctima. Sí se nombran las <strong>marcas de afiliado</strong> que el perfil del proveedor cita y que existen como expedientes públicos en la fuente, porque son el objeto del hallazgo de <code>KJ-1</code> y no son víctimas.</p>
+<h3 class="rv">3.4 Veredicto por nivel</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel</th><th>Veredicto</th><th>Motivo</th></tr></thead><tbody>
+<tr><td>Estratégico</td><td><strong>Utilizable con la salvedad del recuento</strong></td><td><code>KJ-1</code> hace de 144 un suelo</td></tr>
+<tr><td>Operacional</td><td><strong>Parcial</strong></td><td>Cadencia e infraestructura sí; el alcance real del modelo no</td></tr>
+<tr><td>Táctico</td><td><strong>No evaluable</strong></td><td>Sin TTP observados</td></tr>
+<tr><td>Técnico</td><td><strong>No se emite</strong></td><td>Sin indicadores de ejecución</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2></div>
+<section id="e-1-cifras" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Cifras</h2></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="144">0</div><div class="l">Entradas publicadas por <strong>esta marca</strong></div><div class="s"><strong>Suelo, no techo</strong> (<code>KJ-1</code>)</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="50">0</div><div class="l"><strong>Días con actividad en 164</strong></div><div class="s"><strong>El más distribuido del lote</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="1">0</div><div class="l">Mediana de entradas por día</div><div class="s">Máximo: 24, el 2026-07-18</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="0">0<small>d</small></div><div class="l">Retraso mediano declarado→visto</div><div class="s">Con 93 % de cobertura</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="20">0<small>/</small></div><div class="l"><strong>Sitios registrados / activos</strong></div><div class="s"><code>KJ-3</code></div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="20">0</div><div class="l">Días sin publicar al cierre</div><div class="s">Último: 2026-10-30</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="27">0</div><div class="l">Países</div><div class="s"><strong>Estados Unidos sólo 33 %</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="3">0</div><div class="l">Entradas latinoamericanas (2,1 %)</div><div class="s"><strong>0 chilenas</strong></div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="101">0<small>/</small></div><div class="l">Entradas con dominio (70 %)</div><div class="s">—</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="24">0</div><div class="l"><strong>Víctimas contestadas en que participa</strong></div><div class="s"><strong>Tercer actor del conjunto</strong> (<code>KJ-7</code>)</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="2">0<small>/</small></div><div class="l">Sitios con prefijo legible</div><div class="s"><strong>Práctica mixta</strong> (<code>KJ-5</code>)</div></div></div>
+</section>
+<section id="e-2-el-recuento-como-suelo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>El recuento como suelo</h2><p>El perfil del proveedor describe el modelo así: un <strong>mercado de marca blanca</strong> que permite a afiliados independientes desplegar la carga de este actor <strong>bajo marcas locales propias</strong>, compartiendo ingresos. Nombra dos afiliados concretos.</p></div></div>
+<p class="rv"><strong>Lo que se pudo verificar sobre esa afirmación:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Comprobación</th><th>Resultado</th></tr></thead><tbody>
+<tr><td>El primer afiliado nombrado existe como expediente en la fuente</td><td><strong>Sí, con 111 entradas</strong> en el catálogo histórico</td></tr>
+<tr><td>¿Tiene actividad en la ventana de seis meses?</td><td><strong>No, cero entradas</strong></td></tr>
+<tr><td>¿Coaparece con la marca matriz en alguna víctima contestada?</td><td><strong>Sí, en una</strong></td></tr>
+<tr><td>El segundo afiliado nombrado existe como expediente</td><td>No con ese nombre exacto; existe una marca de nombre similar con 35 entradas</td></tr></tbody></table></div>
+<p class="rv"><strong>La coaparición es el dato que importa.</strong> Si la marca matriz y la marca de un afiliado declarado reclaman la misma víctima, lo más económico es que <strong>sea el mismo acceso publicado dos veces</strong>: una por el afiliado que lo ejecutó y otra por la plataforma que le proporcionó la carga.</p>
+<h3 class="rv">E-2.1 Qué significa para la cifra</h3>
+<p class="rv">Si el modelo funciona como se declara, <strong>las víctimas de esta operación se reparten entre la marca matriz y un número desconocido de marcas de afiliado</strong>. Las 144 entradas son la parte que la matriz publicó.</p>
+<p class="rv"><strong>Y la distancia hasta el total no se puede acotar desde fuera</strong>, por tres razones:</p><ol class="rv"><li><strong>No se sabe cuántos afiliados hay.</strong> El perfil nombra dos; no afirma que sean todos.</li><li><strong>Las marcas de afiliado no se distinguen de operaciones independientes</strong> sin un dato que las vincule. Las decenas de marcas pequeñas que aparecieron en el semestre —<code>CTI-2026-054</code> <code>§E-1.2</code> cuenta sesenta y ocho candidatas a nuevas— podrían incluir afiliados de ésta o de otras plataformas, y <strong>nada en sus catálogos lo diría</strong>.</li><li><strong>Un afiliado puede publicar en los dos sitios o en uno solo</strong>, y sólo el caso de los dos es detectable.</li></ol>
+<h3 class="rv">E-2.2 El par con el informe anterior, que es la lección del lote</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Actor</th><th>Mecanismo</th><th>Efecto sobre la cifra</th></tr></thead><tbody>
+<tr><td><code>Storm</code> (<code>CTI-2026-060</code>)</td><td>Cuenta matriz y filiales como víctimas separadas</td><td><strong>Infla</strong>: 86 es un techo</td></tr>
+<tr><td><code>BrainCipher</code> (<code>CTI-2026-056</code>)</td><td>Cuenta ficheros como víctimas</td><td><strong>Infla por cien</strong>: 432 son 429 ficheros</td></tr>
+<tr><td><code>Vortex</code> (<code>CTI-2026-050</code>)</td><td>Lista la misma víctima dos veces con nombres distintos</td><td><strong>Infla</strong>: 35 entradas, 26 descripciones</td></tr>
+<tr><td><strong><code>dragonforce</code></strong></td><td><strong>Los afiliados publican bajo marca propia</strong></td><td><strong>Oculta</strong>: 144 es un suelo</td></tr></tbody></table></div>
+<p class="rv"><strong>Los cuatro juntos dicen lo mismo con signos opuestos: el número de entradas de un sitio de filtración no es el número de víctimas.</strong> Infla cuando el sitio desagrega —ficheros, filiales, duplicados— y deshincha cuando el modelo de negocio distribuye la publicación.</p>
+<p class="rv">La consecuencia práctica es incómoda y conviene escribirla sin rodeos: <strong>los rankings de actores por volumen que esta cartera y toda la literatura del sector utilizan no comparan lo que dicen comparar.</strong> <code>CTI-2026-046</code> <code>Anexo D</code> ya había establecido que un ranking de siete días sufre cuatro distorsiones de fecha; éstas son distorsiones de <strong>conteo</strong>, y son independientes de aquéllas.</p>
+<p class="rv">No se sigue de ahí que los rankings sean inútiles. Se sigue que <strong>una diferencia de menos de un factor de dos entre dos actores no es informativa</strong>, y que una comparación sólo es defendible después de aplicar los filtros de <code>CTI-2026-056</code> <code>Anexo D</code> y <code>CTI-2026-060</code> <code>Anexo D</code>.</p>
+</section>
+<section id="e-3-veinte-sitios-caidos-y-por-que-significa-menos-aqui" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Veinte sitios caídos, y por qué significa menos aquí</h2><p>Veinte direcciones registradas, <strong>ninguna activa</strong> al 19 de noviembre de 2026. Los títulos declarados incluyen «DragonForce | Blog», «DragonForce | Leaks» y «DragonForce | Recovery» —este último, el portal de negociación—. La última entrada es del 30 de octubre.</p></div></div>
+<p class="rv">En <code>CTI-2026-058</code> la misma situación —cinco sitios caídos, doce días de silencio— llevó a un juicio de cese o migración con reevaluación a catorce días. <strong>Aquí hay una tercera posibilidad que allí no existía:</strong></p>
+<p class="rv"><strong>Que la operación siga funcionando y la marca matriz no publique.</strong> Si los afiliados publican bajo sus propios nombres, el cierre del sitio de la plataforma <strong>no detiene la operación</strong>: detiene una de sus caras públicas. Las víctimas seguirían apareciendo, en catálogos de otras marcas, sin que nada las conecte con esta.</p>
+<p class="rv">Eso convierte el silencio de este actor en un dato mucho más débil que el de <code>safepay</code>. <strong>No se puede inferir cese</strong> de la caída de la infraestructura de una plataforma cuyo modelo distribuye la publicación.</p>
+<div class="note info rv"><div class="t">Y una consecuencia de método para el recolector diario de la cartera</div><p>Una vigilancia que mida «actividad de DragonForce» contando entradas de su expediente <strong>leerá cero y concluirá inactividad</strong>, cuando lo único que se puede concluir es que esa marca no publica. Es la misma clase de error que la trampa del valor por omisión de <code>CTI-2026-044</code> <code>§O-2.2</code>: una consulta que devuelve vacío porque está mirando el sitio equivocado.</p></div>
+</section>
+<section id="e-4-relevancia-regional-baja-con-una-salvedad-que-importa" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Relevancia regional: baja, con una salvedad que importa</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>País</th><th>Entradas</th></tr></thead><tbody>
+<tr><td>Estados Unidos</td><td>48 (33 %)</td></tr>
+<tr><td>Reino Unido</td><td>10</td></tr>
+<tr><td>India</td><td>7</td></tr>
+<tr><td>China · Alemania</td><td>4 cada uno</td></tr>
+<tr><td>Emiratos Árabes Unidos · Canadá · Países Bajos</td><td>3 cada uno</td></tr>
+<tr><td>Otros 19 países</td><td>26</td></tr>
+<tr><td>Sin país</td><td>36</td></tr></tbody></table></div>
+<p class="rv">Veintisiete países, tres entradas latinoamericanas (2,1 %), <strong>ninguna chilena</strong>. La proporción estadounidense del 33 % es la segunda más baja del lote tras <code>krybit</code>, lo que indica un alcance más internacional que el de <code>Booba Project</code> (56 %) o <code>Storm</code> (50 %).</p>
+<p class="rv">Sectores: Manufactura 24, Servicios profesionales 21, Tecnología 16, Otros 9, Sanidad 9. Ninguno por encima del 17 %: sin concentración.</p>
+<p class="rv"><strong>Para la cartera: vigilancia, no prioridad.</strong> <code>CTI-2026-015</code> mantiene a Qilin como el actor relevante en Chile con veinte de treinta víctimas medidas.</p>
+<p class="rv"><strong>Y la salvedad, que es consecuencia directa de <code>KJ-1</code>:</strong> la ausencia de víctimas chilenas <strong>en el catálogo de esta marca</strong> no es la ausencia de víctimas chilenas de esta operación. Si un afiliado con foco regional publica bajo marca propia, sus víctimas aparecerían en otro expediente. Es la razón por la que <code>G-2</code> existe y por la que este expediente no puede cerrar la pregunta regional como sí la cierran <code>krybit</code> o <code>safepay</code>.</p>
+</section>
+<section id="e-5-decisiones-que-este-informe-pide" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-5</span><div><h2>Decisiones que este informe pide</h2></div></div><ol class="rv"><li><strong>No usar la cifra de 144 en comparaciones de volumen sin la salvedad de <code>KJ-1</code>.</strong> Es un suelo.</li><li><strong>Y no usar ninguna cifra de volumen de sitio de filtración sin los dos filtros</strong> de <code>CTI-2026-056</code> y <code>CTI-2026-060</code>. Es la conclusión del lote (<code>E-2.2</code>).</li><li><strong>No interpretar el silencio de esta marca como cese de la operación</strong> (<code>E-3</code>). Afecta al recolector diario.</li><li><strong>Añadir la quinta clase al método de <code>CTI-2026-055</code></strong> (<code>O-5</code>).</li><li><strong>Perseguir <code>G-2</code>:</strong> identificar qué marcas pequeñas del semestre son afiliadas de esta plataforma. Es la pregunta que convertiría el suelo en una estimación.</li></ol>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2></div>
+<section id="o-1-identificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Valor</th><th>Procedencia</th></tr></thead><tbody>
+<tr><td>Nombre</td><td>DragonForce · dragonforce</td><td>Títulos de sus propios sitios</td></tr>
+<tr><td>Primera entrada observada</td><td>2026-05-19</td><td><strong>Borde de la ventana</strong>: el actor es anterior</td></tr>
+<tr><td>Última entrada observada</td><td><strong>2026-10-30</strong></td><td>Medición propia</td></tr>
+<tr><td>Aparición declarada</td><td>Principios de 2024</td><td><strong>Perfil de proveedor, no corroborado</strong></td></tr>
+<tr><td>Linaje declarado</td><td><strong>LockBit 3.0 (Black) + Conti V3</strong></td><td><strong>Perfil de proveedor</strong></td></tr>
+<tr><td>Modelo declarado</td><td><strong>Mercado de marca blanca con afiliados bajo marca propia</strong></td><td><strong>Perfil de proveedor — parcialmente verificado</strong> (<code>E-2</code>)</td></tr>
+<tr><td>Afiliados nombrados</td><td>Dos marcas, una de ellas con expediente propio de 111 entradas</td><td><strong>Perfil de proveedor + verificación propia</strong></td></tr>
+<tr><td>Utillaje declarado</td><td>Exfiltración en Go; cifrador en Rust y C++</td><td><strong>Perfil de proveedor</strong></td></tr>
+<tr><td>Sitios</td><td><strong>20 registrados · 0 activos</strong></td><td>Medición propia</td></tr></tbody></table></div>
+<p class="rv"><strong>Sobre el linaje declarado.</strong> La atribución a un cruce de dos familias —LockBit 3.0 y Conti V3— es la clase de afirmación que exige análisis de muestra y que esta cartera no puede verificar. Se consigna porque, si fuera cierta, <strong>explicaría el modelo</strong>: ambas familias tuvieron constructores filtrados, y un constructor filtrado es precisamente lo que hace viable un mercado de marca blanca —se puede entregar a un afiliado sin ceder código propio—. Es una consistencia interna, no una corroboración.</p>
+</section>
+<section id="o-2-el-catalogo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>El catálogo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th>Valor</th><th>Lectura</th></tr></thead><tbody>
+<tr><td>Con captura</td><td><strong>144 / 144 (100 %)</strong></td><td>Nivel 3 de la escala de prueba</td></tr>
+<tr><td>Con dominio</td><td>101 / 144 (70 %)</td><td>Intermedio en el lote</td></tr>
+<tr><td>Con país</td><td>108 / 144 (75 %)</td><td>Base de <code>KJ-6</code></td></tr>
+<tr><td>Con fecha declarada</td><td><strong>134 / 144 (93 %)</strong></td><td>Lo que hace fiable el retraso de <code>KJ-4</code></td></tr>
+<tr><td>Con revisión posterior</td><td>3 / 144 (2 %)</td><td><strong>Apenas edita</strong>, como <code>safepay</code></td></tr>
+<tr><td>Con historial de título</td><td>0</td><td>No desenmascara progresivamente</td></tr></tbody></table></div>
+</section>
+<section id="o-3-cadencia-el-mas-distribuido-del-lote" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Cadencia: el más distribuido del lote</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Actor</th><th>Días con actividad</th><th>Mediana/día</th><th>Máximo</th></tr></thead><tbody>
+<tr><td><strong>dragonforce</strong></td><td><strong>50</strong></td><td><strong>1</strong></td><td>24</td></tr>
+<tr><td>safepay</td><td>29</td><td>3</td><td>10</td></tr>
+<tr><td>Booba Project</td><td>19</td><td>6</td><td>36</td></tr>
+<tr><td>krybit</td><td>14</td><td>6</td><td>45</td></tr>
+<tr><td>Storm</td><td>8</td><td>2</td><td>73</td></tr>
+<tr><td>BrainCipher</td><td>8</td><td>31</td><td>142</td></tr></tbody></table></div>
+<p class="rv">Cincuenta días de actividad en ciento sesenta y cuatro, con mediana de una entrada diaria. Y retraso mediano de <strong>cero días</strong> con 93 % de cobertura de fecha: publica cuando ocurre.</p>
+<p class="rv"><strong>Esto refuerza <code>KJ-1</code> por consistencia.</strong> Un flujo continuo y fino de víctimas, repartido en cincuenta días, es lo que produce una plataforma con varios operadores trabajando en paralelo, cada uno a su ritmo. Un equipo cerrado produce el patrón de <code>safepay</code> —regular pero concentrado en menos días—; un actor que acumula produce el de <code>Storm</code> o <code>krybit</code> —tandas—. Es el mismo razonamiento de consistencia que <code>CTI-2026-058</code> <code>§O-4.1</code> y <code>CTI-2026-059</code> <code>§O-6</code>, aplicado aquí <strong>a favor</strong> del programa de afiliados en lugar de en contra.</p>
+<p class="rv">Y el único pico —veinticuatro entradas el 18 de julio— es moderado comparado con los de los demás: <strong>1,7 veces su propio percentil 90</strong>, frente a las nueve veces de <code>krybit</code> o las treinta y seis de <code>Storm</code>.</p>
+</section>
+<section id="o-4-infraestructura-veinte-sitios-practica-mixta" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Infraestructura: veinte sitios, práctica mixta</h2><p>Veinte direcciones registradas, <strong>ninguna activa</strong>. Títulos declarados: «DragonForce | Blog» (dos direcciones), «DragonForce | Leaks» (dos), «DragonForce | Recovery» (una, el portal de negociación), y quince sin título.</p></div></div>
+<p class="rv"><strong>Dos de las veinte llevan prefijo legible</strong>, con las cadenas <code>dragonfor</code> y <code>dragongo</code>. Las dieciocho restantes son aleatorias.</p>
+<p class="rv">Aplicando el <code>Anexo D</code> de <code>CTI-2026-057</code>:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Paso</th><th>Resultado</th></tr></thead><tbody>
+<tr><td>1. Prefijo compartido de 4+ caracteres</td><td><strong>Sí</strong>, <code>dragon</code> en dos direcciones</td></tr>
+<tr><td>2. Descartar coincidencia</td><td>Confirmado: generación dirigida</td></tr>
+<tr><td>3. Longitud útil</td><td>Seis caracteres, dentro del intervalo aprovechable</td></tr>
+<tr><td>4. ¿En toda la infraestructura o sólo en la cara pública?</td><td><strong>Sólo en 2 de 20 (10 %)</strong></td></tr>
+<tr><td>5. Condición de caducidad</td><td>No aplica: ya está en minoría</td></tr></tbody></table></div>
+<p class="rv"><strong>El paso 4 es el que decide, y aquí el resultado es negativo.</strong> Un patrón de prefijo que cubre el 10 % de la infraestructura conocida no es una vigilancia: es un atajo que encontraría una de cada diez direcciones nuevas. Usarlo como único método daría <strong>falsa tranquilidad</strong>, que es exactamente el riesgo contra el que advierte el paso 5 de aquel método.</p>
+<p class="rv">Es el contraste limpio con <code>krybit</code>, donde cuatro de cuatro sitios activos llevan prefijo. <strong>La misma técnica, el mismo método de evaluación, y conclusiones opuestas</strong> — y eso es lo que hace útil al método.</p>
+</section>
+<section id="o-5-la-quinta-clase-de-reclamacion-cruzada" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>La quinta clase de reclamación cruzada</h2><p>Este actor participa en <strong>veinticuatro víctimas contestadas</strong>, lo que lo sitúa como tercer actor del conjunto completo medido en <code>CTI-2026-055</code>, tras <code>lockbit3</code> (283) y <code>dispossessor</code> (263) si se descuentan los pares de alias.</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Coaparece con</th><th>Veces</th></tr></thead><tbody>
+<tr><td><code>qilin</code></td><td>3</td></tr>
+<tr><td><code>play</code></td><td>3</td></tr>
+<tr><td><code>incransom</code></td><td>2</td></tr>
+<tr><td><code>clop</code></td><td>2</td></tr>
+<tr><td><strong><code>devman</code></strong></td><td><strong>1</strong></td></tr>
+<tr><td><code>ransomhub</code>, <code>bianlian</code>, <code>cactus</code>, <code>conti</code>, <code>lynx</code>, <code>darkleakmarket</code>, <code>leakbazaar</code></td><td>1 cada uno</td></tr></tbody></table></div>
+<p class="rv"><code>CTI-2026-055</code> separó cuatro fenómenos detrás de «dos grupos reclamaron la misma víctima»: alias de expediente, rebranding sucesivo, reventa parcial y colisión genuina. <strong>La coaparición con su propio afiliado declarado no encaja en ninguno.</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Clase</th><th>Por qué no encaja</th></tr></thead><tbody>
+<tr><td>Alias de expediente</td><td><strong>No</strong>: son dos marcas reales y deliberadas, no un error de indexación del rastreador</td></tr>
+<tr><td>Rebranding sucesivo</td><td><strong>No</strong>: coexisten, no se suceden; y el solapamiento de catálogo es mínimo, no del 85 %</td></tr>
+<tr><td>Reventa parcial</td><td><strong>No</strong>: no hay transferencia de datos entre dos actores; hay un acceso y dos publicadores</td></tr>
+<tr><td>Colisión genuina</td><td><strong>No</strong>: no son operaciones independientes</td></tr></tbody></table></div>
+<p class="rv"><strong>La quinta clase: dos marcas de la misma operación por diseño del modelo de negocio.</strong> Su firma es solapamiento de catálogo <strong>muy bajo</strong> —porque cada afiliado publica lo suyo y sólo coinciden cuando ambos publican el mismo caso—, separación temporal <strong>pequeña</strong> y sin dirección sistemática, y <strong>la existencia de una declaración de modelo</strong> que lo explique.</p>
+<p class="rv">Y tiene una consecuencia incómoda: <strong>esa firma es casi indistinguible de la del acceso de origen común</strong> que <code>CTI-2026-055</code> <code>§O-4</code> atribuyó al par Qilin/TheGentlemen. Las dos producen solapamiento bajo con dirección aleatoria. Lo único que las separa es si existe una declaración de modelo que las vincule — y esa declaración viene de una ficha de proveedor no corroborada.</p>
+<p class="rv"><strong>Por eso <code>KJ-7</code> lleva confianza moderada</strong>, y por eso este expediente abre <code>G-3</code> en lugar de cerrar la pregunta.</p>
+</section>
+<section id="o-6-clasificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Clasificación</h2></div></div>
+<p class="rv">Triaje de <code>CTI-2026-042</code> <code>Anexo D</code>: cumple <strong>cinco criterios de siete</strong>. Sitio de filtración con víctimas nombradas, infraestructura propia extensa, continuidad temporal superior a la ventana, <strong>portal de negociación declarado y etiquetado</strong> —criterio decisivo: operación y no herramienta—, y modelo de negocio declarado y parcialmente verificado. Falla en análisis primario con muestra y en víctima confirmada por tercero.</p>
+<p class="rv"><strong>Clase: plataforma con operación distribuida</strong>, en estado indeterminado. Es la primera vez que este expediente necesita una denominación distinta de «marca con operación», y es por <code>KJ-1</code>: <strong>no es una marca que ataca, es una plataforma que habilita marcas</strong>.</p>
+</section>
+<section id="o-7-hipotesis-y-pre-mortem" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-7</span><div><h2>Hipótesis y pre-mortem</h2></div></div>
+<p class="rv"><strong>H-1.</strong> <em>El modelo de marca blanca funciona como se declara.</em> <strong>Probable</strong> <em>(55–80 %)</em>. Apoyo: el afiliado nombrado existe con expediente propio, coaparece una vez con la matriz, y la cadencia distribuida de <code>O-3</code> es la que un programa de afiliados produce. En contra: <strong>una sola coaparición</strong>, y todo el resto es una ficha no corroborada.</p>
+<p class="rv"><strong>H-2.</strong> <em>La operación sigue activa bajo marcas de afiliado pese al silencio de la matriz.</em> <strong>Posible</strong> <em>(40–60 %)</em>. Es la tercera lectura de <code>E-3</code> y sólo existe si <code>H-1</code> es cierta.</p>
+<p class="rv"><strong>H-3.</strong> <em>La operación ha cesado o está en transición.</em> <strong>Posible</strong> <em>(40–60 %)</em>. Apoyo: veinte sitios caídos a la vez, que es lo que hace quien abandona o migra en bloque.</p>
+<p class="rv"><strong>H-4.</strong> <em>Algunas de las marcas nuevas del semestre son afiliadas de esta plataforma.</em> <strong>Posible</strong> <em>(40–60 %)</em>. Es <code>G-2</code>, y <strong>la hipótesis cuya verificación cambiaría más cosas</strong>: convertiría el suelo de <code>KJ-1</code> en una estimación y reclasificaría varios expedientes del lote.</p>
+<h3 class="rv">Pre-mortem</h3>
+<p class="rv"><em>Si este informe se equivoca, será en <code>KJ-1</code>, y el modo de fallo es concreto.</em> Toda la interpretación del recuento como suelo descansa en una ficha de proveedor no corroborada más <strong>una sola coaparición verificada</strong>. Una coaparición entre dos marcas admite al menos tres explicaciones además del modelo declarado: reventa, acceso compartido por un corredor, o simple error de agrupación del rastreador. <strong>Si la ficha miente o se equivoca sobre el modelo, <code>KJ-1</code>, <code>KJ-2</code>, <code>E-3</code> y <code>O-5</code> caen juntos</strong> — y <code>KJ-2</code>, que es la conclusión transferible del lote, perdería la mitad de su apoyo, aunque la otra mitad —los tres casos de inflación— se mantendría intacta.</p>
+<p class="rv"><em>El segundo modo de fallo es más sutil, y afecta a <code>O-5</code>.</em> La quinta clase que este informe propone tiene una firma casi idéntica a la del acceso de origen común. <strong>Si no se puede distinguir sin la declaración de modelo, entonces no es una clase operativa sino una etiqueta</strong>, y habría que fundirla con la anterior. Está consignado en <code>G-3</code>.</p>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<p class="rv"><strong>G-1. El modelo de marca blanca está verificado por una sola coaparición.</strong> Es el sostén de <code>KJ-1</code> y de todo lo que se deriva de él. → <strong>I-1.</strong> Buscar más coapariciones entre la matriz y marcas pequeñas, y análisis primario que documente el mercado nombrado. <strong>Disparador:</strong> inmediato; es el requisito principal.</p>
+<p class="rv"><strong>G-2. No sabemos qué marcas del semestre son afiliadas de esta plataforma.</strong> Es <code>H-4</code>, y lo que convertiría el suelo en estimación. → <strong>I-2.</strong> Aplicar el método de tres ejes de <code>CTI-2026-055</code> <code>Anexo D</code> entre esta marca y las sesenta y ocho candidatas a nuevas del semestre, buscando <strong>solapamiento bajo con coincidencia de carga o de formato de entrada</strong>. <strong>Disparador:</strong> antes de la próxima revisión del lote.</p>
+<p class="rv"><strong>G-3. No sabemos si la quinta clase de <code>O-5</code> se distingue del acceso de origen común</strong> sin recurrir a una declaración de modelo no corroborada. → <strong>I-3.</strong> Comparar las firmas de los dos fenómenos sobre casos conocidos. <strong>Si no se distinguen, fundir las clases</strong> en <code>CTI-2026-055</code>.</p>
+<p class="rv"><strong>G-4. No sabemos si la operación cesó o continúa bajo otras marcas.</strong> Es <code>H-2</code> frente a <code>H-3</code>. → <strong>I-4.</strong> Reevaluar a catorce días, <strong>y no concluir cese por el silencio de esta marca</strong> (<code>E-3</code>). <strong>Disparador: 3 de diciembre de 2026.</strong></p>
+<p class="rv"><strong>G-5. El linaje declarado no está corroborado</strong>, y si lo estuviera explicaría el modelo (<code>O-1</code>). → <strong>I-5.</strong> Buscar análisis de muestra que confirme el cruce de familias.</p>
+<p class="rv"><strong>G-6. La ausencia de víctimas chilenas no es concluyente</strong> por <code>KJ-1</code>. → <strong>I-6.</strong> Queda cubierta por <code>I-2</code>: identificar afiliados permitiría buscar víctimas regionales en sus catálogos.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — Infraestructura</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="domain dragonforxxbp3awc7mzs5dkswrua3znqyx5roefmi4smjrsdi22xwqd.onion «dragonforce \| leaks», con prefijo legible. inactivo al 2026-11-19 · alta como registro · 90 días vigilancia"><span class="ty">domain</span><span class="vv">dragonforxxbp3awc7mzs5dkswrua3znqyx5roefmi4smjrsdi22xwqd.onion<em>«DragonForce \| Leaks», con prefijo legible. Inactivo al 2026-11-19 · Alta como registro · 90 días</em></span><span class="pill p-mint">Vigilancia</span></div>
+<div class="ioc-row" data-s="domain dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion segunda dirección con prefijo. inactiva · alta como registro · 90 días vigilancia"><span class="ty">domain</span><span class="vv">dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion<em>Segunda dirección con prefijo. Inactiva · Alta como registro · 90 días</em></span><span class="pill p-mint">Vigilancia</span></div>
+<div class="ioc-row" data-s="domain z3wqggtxft7id3ibr7srivv5gjof5fwg76slewnzwwakjuf3nlhukdid.onion «dragonforce \| blog». inactivo · alta como registro · 90 días vigilancia"><span class="ty">domain</span><span class="vv">z3wqggtxft7id3ibr7srivv5gjof5fwg76slewnzwwakjuf3nlhukdid.onion<em>«DragonForce \| Blog». Inactivo · Alta como registro · 90 días</em></span><span class="pill p-mint">Vigilancia</span></div>
+<div class="ioc-row" data-s="domain 3pktcrcbmssvrnwe5skburdwe2h3v6ibdnn5kbjqihsg6eu6s6b7ryqd.onion «dragonforce \| recovery»: el portal de negociación. inactivo · alta como registro · 90 días vigilancia"><span class="ty">domain</span><span class="vv">3pktcrcbmssvrnwe5skburdwe2h3v6ibdnn5kbjqihsg6eu6s6b7ryqd.onion<em>«DragonForce \| Recovery»: el portal de negociación. Inactivo · Alta como registro · 90 días</em></span><span class="pill p-mint">Vigilancia</span></div>
+<div class="ioc-row" data-s="artefacto 20 de 20 sitios inactivos al 2026-11-19, último publicado el 2026-10-30 kj-3. pero el silencio no implica cese por el modelo de kj-1 (e-3) · baja para la interpretación · reevaluar el 2026-12-03 vigilancia"><span class="ty">artefacto</span><span class="vv">20 de 20 sitios inactivos al 2026-11-19, último publicado el 2026-10-30<em>KJ-3. Pero el silencio no implica cese por el modelo de KJ-1 (E-3) · Baja para la interpretación · Reevaluar el 2026-12-03</em></span><span class="pill p-mint">Vigilancia</span></div>
+<div class="ioc-row" data-s="pattern prefijo dragon en 2 de 20 direcciones (10 %) patrón de caza insuficiente. falla el paso 4 del método de cti-2026-057 anexo d (o-4) · alta como observación · sin caducidad no usar como única vigilancia"><span class="ty">pattern</span><span class="vv">Prefijo dragon en 2 de 20 direcciones (10 %)<em>Patrón de caza insuficiente. Falla el paso 4 del método de CTI-2026-057 Anexo D (O-4) · Alta como observación · Sin caducidad</em></span><span class="pill p-amber">No usar como única vigilancia</span></div></div>
+<h3 class="rv">A.2 — El modelo, y sus consecuencias de medición</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="artefacto el recuento de entradas de esta marca es un suelo, no un techo kj-1. los afiliados publican bajo marca propia; verificado por una coaparición con un afiliado declarado · moderada · 90 días no comparar volumen sin la salvedad"><span class="ty">artefacto</span><span class="vv">El recuento de entradas de esta marca es un SUELO, no un techo<em>KJ-1. Los afiliados publican bajo marca propia; verificado por una coaparición con un afiliado declarado · Moderada · 90 días</em></span><span class="pill p-mint">No comparar volumen sin la salvedad</span></div>
+<div class="ioc-row" data-s="artefacto un afiliado declarado existe como expediente separado con 111 entradas y coaparece una vez con la matriz la única verificación del modelo (e-2) · moderada, n=1 · 90 días análisis"><span class="ty">artefacto</span><span class="vv">Un afiliado declarado existe como expediente separado con 111 entradas y coaparece una vez con la matriz<em>La única verificación del modelo (E-2) · Moderada, n=1 · 90 días</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="pattern dos marcas de la misma operación por diseño del modelo: solapamiento bajo, separación corta, sin dirección la quinta clase que cti-2026-055 no tenía (o-5). casi indistinguible del acceso de origen común · moderada · hasta resolver i-3 clasificación provisional"><span class="ty">pattern</span><span class="vv">Dos marcas de la misma operación por diseño del modelo: solapamiento bajo, separación corta, sin dirección<em>La quinta clase que CTI-2026-055 no tenía (O-5). Casi indistinguible del acceso de origen común · Moderada · Hasta resolver I-3</em></span><span class="pill p-mint">Clasificación provisional</span></div>
+<div class="ioc-row" data-s="artefacto una consulta de actividad de esta marca que devuelva cero no significa inactividad de la operación e-3. afecta al recolector diario de la cartera. misma clase de error que la trampa del valor por omisión de cti-2026-044 · alta como juicio · sin caducidad corregir la vigilancia automática"><span class="ty">artefacto</span><span class="vv">Una consulta de actividad de esta marca que devuelva cero NO significa inactividad de la operación<em>E-3. Afecta al recolector diario de la cartera. Misma clase de error que la trampa del valor por omisión de CTI-2026-044 · Alta como juicio · Sin caducidad</em></span><span class="pill p-mint">Corregir la vigilancia automática</span></div>
+<div class="ioc-row" data-s="artefacto cadencia distribuida: 50 días de actividad, mediana 1/día, pico de sólo 1,7× su p90 consistente con varios operadores en paralelo (o-3) · alta como medición · 90 días análisis"><span class="ty">artefacto</span><span class="vv">Cadencia distribuida: 50 días de actividad, mediana 1/día, pico de sólo 1,7× su p90<em>Consistente con varios operadores en paralelo (O-3) · Alta como medición · 90 días</em></span><span class="pill p-mint">Análisis</span></div></div>
+<h3 class="rv">A.3 — Victimología</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 144 entradas · 100 % captura · 70 % dominio · 93 % fecha declarada suelo, no medida (kj-1) · alta como recuento de entradas · 90 días medición con salvedad"><span class="ty">cartera</span><span class="vv">144 entradas · 100 % captura · 70 % dominio · 93 % fecha declarada<em>Suelo, no medida (KJ-1) · Alta como recuento de entradas · 90 días</em></span><span class="pill p-mint">Medición con salvedad</span></div>
+<div class="ioc-row" data-s="cartera 48 estadounidenses (33 %) · 27 países la segunda proporción estadounidense más baja del lote · alta como recuento · 90 días medición"><span class="ty">cartera</span><span class="vv">48 estadounidenses (33 %) · 27 países<em>La segunda proporción estadounidense más baja del lote · Alta como recuento · 90 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 3 entradas latinoamericanas (2,1 %) · 0 chilenas kj-6. y la ausencia no es concluyente por kj-1 (e-4) · baja como ausencia · 90 días no concluir ausencia regional"><span class="ty">cartera</span><span class="vv">3 entradas latinoamericanas (2,1 %) · 0 chilenas<em>KJ-6. Y la ausencia NO es concluyente por KJ-1 (E-4) · Baja como ausencia · 90 días</em></span><span class="pill p-mint">No concluir ausencia regional</span></div>
+<div class="ioc-row" data-s="cartera sin concentración sectorial: máximo 17 % manufactura 24, servicios profesionales 21, tecnología 16 · alta como recuento · 90 días medición"><span class="ty">cartera</span><span class="vv">Sin concentración sectorial: máximo 17 %<em>Manufactura 24, Servicios profesionales 21, Tecnología 16 · Alta como recuento · 90 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 24 víctimas contestadas, tercer actor del conjunto kj-7, con devman entre los coapariciones · alta como recuento · 90 días análisis"><span class="ty">cartera</span><span class="vv">24 víctimas contestadas, tercer actor del conjunto<em>KJ-7, con devman entre los coapariciones · Alta como recuento · 90 días</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera retraso mediano 0,0 días publica cuando ocurre: sin margen, como safepay · alta · 90 días medición"><span class="ty">cartera</span><span class="vv">Retraso mediano 0,0 días<em>Publica cuando ocurre: sin margen, como safepay · Alta · 90 días</em></span><span class="pill p-mint">Medición</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Fuente</th><th>Grado</th><th>Qué aportó</th><th>Salvedad</th></tr></thead><tbody>
+<tr><td>1</td><td>API de cti.fyi, entradas, ficha de grupo y reclamaciones cruzadas, 2026-11-19</td><td><strong>Medición propia</strong> sobre datos de proveedor</td><td>Las 144 entradas, los 20 sitios, la cadencia, las 24 víctimas contestadas y <strong>la coaparición con el afiliado</strong></td><td>Evaluada en <code>CTI-2026-054</code>. <strong>El campo de separación horaria no se usa</strong>: está mal en el 41 %</td></tr>
+<tr><td>2</td><td>Ficha de perfil del grupo, misma fuente</td><td><strong>Proveedor, con indicio de redacción sintética</strong></td><td><strong>El modelo de marca blanca y los nombres de afiliado</strong>, que son el objeto de <code>KJ-1</code>; el linaje y el utillaje</td><td><strong>No corroborada.</strong> Lo verificado es la existencia de un afiliado y una coaparición, <strong>no el modelo</strong></td></tr>
+<tr><td>3</td><td>CTIWatch, ficha pública, 2026-11-19</td><td>Proveedor, prosa generada automáticamente</td><td><strong>Nada utilizable</strong></td><td>673 frente a 628 víctimas en la misma página; última actividad en marzo, <strong>idéntica a la de otros tres actores</strong></td></tr>
+<tr><td>4</td><td><code>CTI-2026-055</code></td><td>Propio</td><td>El método de tres ejes y las cuatro clases que <code>O-5</code> amplía a cinco</td><td>Emitido el mismo día</td></tr>
+<tr><td>5</td><td><code>CTI-2026-060</code> · <code>CTI-2026-056</code> · <code>CTI-2026-050</code></td><td>Propio</td><td><strong>Los tres casos de inflación que <code>E-2.2</code> empareja con este caso de ocultación</strong></td><td>—</td></tr>
+<tr><td>6</td><td><code>CTI-2026-057</code> Anexo D · <code>CTI-2026-042</code> Anexo D · <code>CTI-2026-015</code></td><td>Propio</td><td>El método de prefijo de <code>O-4</code>, el triaje de <code>O-6</code>, el contexto chileno de <code>E-4</code></td><td>—</td></tr></tbody></table></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<p class="rv">ICD 203. <strong>Casi con certeza</strong> ≥99 % · <strong>muy probable</strong> 80–95 % · <strong>probable</strong> 55–80 % · <strong>posible</strong> 40–60 % · <strong>improbable</strong> 20–45 % · <strong>muy improbable</strong> 5–20 %. La <strong>confianza</strong> califica la base de prueba. Aquí: alta para los recuentos, la cadencia y el estado de la infraestructura; <strong>moderada para <code>KJ-1</code>, <code>KJ-7</code> y toda la interpretación del modelo</strong>, que descansan en una ficha no corroborada más una sola coaparición; <strong>baja para la lectura del silencio</strong> y para la ausencia regional.</p>
+</section>
+<section id="anexo-d-como-saber-si-el-recuento-de-un-actor-es-un-techo-o-un-suelo" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo saber si el recuento de un actor es un techo o un suelo</h2><p>Procedimiento que cierra los de <code>CTI-2026-056</code> y <code>CTI-2026-060</code>. Quince minutos, y debe aplicarse <strong>antes</strong> de cualquier comparación de volumen entre actores.</p></div></div>
+<p class="rv"><strong>Paso 1 — Buscar los dos efectos de inflación.</strong> ¿Los títulos son nombres de fichero? (<code>CTI-2026-056</code> <code>Anexo D</code>). ¿Hay varias entradas que comparten los primeros términos de una razón social? (<code>CTI-2026-060</code> <code>Anexo D</code>). Si alguno aparece, <strong>el recuento es un techo</strong> y hay que descontar.</p>
+<p class="rv"><strong>Paso 2 — Buscar el efecto de ocultación, que casi nadie busca.</strong> ¿Declara el actor, o declara la literatura, un programa de afiliados que publiquen bajo marca propia? Si sí, <strong>el recuento es un suelo</strong>. La señal más barata está en el propio perfil del proveedor: las palabras «marca blanca», «marca local» o «afiliados con su propia marca».</p>
+<p class="rv"><strong>Paso 3 — Comprobar la cadencia, que discrimina sin depender de declaraciones.</strong> Un flujo fino y distribuido en muchos días —mediana baja, pico moderado— es compatible con varios operadores en paralelo. Un volcado o unas pocas tandas grandes es compatible con un equipo cerrado acumulando. <strong>Es el único indicio independiente del perfil del proveedor</strong>, y por eso es el paso que más vale.</p>
+<p class="rv"><strong>Paso 4 — Mirar las coapariciones con marcas pequeñas.</strong> Si una marca grande coaparece en reclamaciones cruzadas con marcas de muy bajo volumen y sin dirección sistemática, <strong>esas marcas son candidatas a afiliadas</strong>. Es lo que verificó <code>E-2</code> con una sola coincidencia.</p>
+<p class="rv"><strong>Paso 5 — Y declarar en qué dirección está el sesgo, aunque no se pueda cuantificar.</strong> «144 es un suelo de magnitud desconocida» es una afirmación útil. «144 víctimas» no lo es, porque induce a comparar.</p>
+<div class="note info rv"><p><strong>El paso que cambia la práctica es el segundo, y su conclusión es que los dos sesgos no se compensan.</strong> Un actor que desagrega ficheros infla por cien; uno que distribuye la publicación deshincha en una proporción que no se puede medir. <strong>Promediar sobre muchos actores no cancela nada</strong>, porque los dos mecanismos no están repartidos al azar: dependen del modelo de negocio y del formato del sitio, que son propiedades estables de cada actor.</p><p>La consecuencia para los rankings por volumen —los de esta cartera incluidos— es que <strong>una diferencia inferior a un factor de dos entre dos actores no es informativa</strong>, y que las comparaciones defendibles exigen los tres filtros: los dos de inflación y el de ocultación.</p></div>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div>
+<p class="rv">ICD 203. Escala de Almirantazgo con los grados propios de la cartera. TLP 2.0 y PAP. Triaje de actor nuevo de <code>CTI-2026-042</code> <code>Anexo D</code>, con el criterio de contacto como discriminante. Método de tres ejes de <code>CTI-2026-055</code> <code>Anexo D</code>, ampliado a cinco clases en <code>O-5</code>. Método de evaluación de prefijo legible de <code>CTI-2026-057</code> <code>Anexo D</code>, con resultado negativo en <code>O-4</code>. Métodos de detección de inflación de <code>CTI-2026-056</code> y <code>CTI-2026-060</code>, cerrados en el <code>Anexo D</code> de este informe. <strong>No se emite mapa ATT&amp;CK ni nivel técnico</strong>: no hay técnica observada, y el utillaje declarado —exfiltración en Go, cifrador en Rust y C++— no lleva ni un indicador asociado.</p>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Medición</th><th>Procedimiento</th></tr></thead><tbody>
+<tr><td>Entradas</td><td><code>GET /api/v1/posts?group=dragonforce&amp;since=2026-05-19&amp;limit=500</code></td></tr>
+<tr><td>Infraestructura</td><td><code>GET /api/v1/groups/dragonforce</code> → <code>locations[]</code> con <code>title</code> y <code>site_status</code></td></tr>
+<tr><td>Cadencia</td><td>Agrupar <code>discovered[:10]</code> → 50 claves, mediana 1, máximo 24</td></tr>
+<tr><td>Retraso</td><td>Mediana de <code>discovered − published</code> sobre las 134 con ambas fechas → 0,0 días</td></tr>
+<tr><td>Reclamaciones cruzadas</td><td><code>GET /api/v1/cross-claims?group=dragonforce&amp;limit=500</code> → 24 agrupaciones</td></tr>
+<tr><td><strong>Verificación del afiliado</strong></td><td>Filtrar las 24 agrupaciones por <code>groups</code> que contengan la marca del afiliado → <strong>1 resultado</strong>; después <code>GET /api/v1/groups/{afiliado}</code> para su catálogo propio</td></tr>
+<tr><td>Prefijos</td><td>Contar direcciones cuyos primeros 6 caracteres sean <code>dragon</code> → <strong>2 de 20</strong></td></tr></tbody></table></div>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Qué cambió</th><th>Qué juicio se movió</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-19</td><td>Emisión inicial. Incluye <strong>el recuento como suelo por el modelo de marca blanca, verificado con una coaparición</strong> (<code>KJ-1</code>, <code>E-2</code>), <strong>el par con <code>CTI-2026-060</code> que establece que una cifra de sitio de filtración no es una medida en ninguna dirección</strong> (<code>KJ-2</code>, <code>E-2.2</code>), los veinte sitios caídos y por qué el silencio significa menos aquí (<code>KJ-3</code>, <code>E-3</code>), la cadencia más distribuida del lote (<code>KJ-4</code>), el fallo del patrón de prefijo en el paso 4 (<code>KJ-5</code>, <code>O-4</code>), y <strong>la quinta clase de reclamación cruzada</strong> (<code>KJ-7</code>, <code>O-5</code>)</td><td>—</td></tr></tbody></table></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div>
+<p class="rv">Este informe se corrige si se recibe: más coapariciones entre esta marca y marcas pequeñas, o análisis primario del mercado de afiliados, lo que elevaría <code>KJ-1</code> a confianza alta (<code>I-1</code>); la identificación de marcas afiliadas concretas, que convertiría el suelo en estimación y reclasificaría varios expedientes de este lote (<code>I-2</code>); evidencia de que la quinta clase de <code>O-5</code> no se distingue del acceso de origen común, lo que obligaría a fundirlas (<code>I-3</code>); una entrada nueva posterior al 30 de octubre, que cerraría <code>G-4</code>; o una víctima chilena, aquí o en el catálogo de un afiliado identificado.</p>
+<p class="rv">El requisito principal es <strong><code>I-1</code></strong>, porque <code>KJ-1</code> sostiene cuatro juicios más y descansa sobre una ficha no corroborada y <strong>una sola coaparición verificada</strong>. Y el de más alcance es <strong><code>I-2</code></strong>, porque identificar a los afiliados de esta plataforma cambiaría el recuento de varios de los sesenta y ocho actores que el semestre presentó como nuevos.</p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-061 · v1.0 · 2026-11-19</strong> · caduca 2026-12-19</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">El actor cuyo recuento es un suelo y no un techo: su modelo declarado permite que los afiliados publiquen bajo sus propias marcas, y se verificó que uno de ellos reclama una víctima junto a la marca matriz. Sus veinte sitios están caídos y lleva veinte días sin publicar. No se reproduce ningún nombre de víctima. Difusión libre conservando la atribución y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>
