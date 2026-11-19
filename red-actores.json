@@ -2456,6 +2456,191 @@
    "r": "CTI-2026-042",
    "d": "La única víctima regional nombrada de los tres actores, y el SEGUNDO caso chileno de este lote por acceso remoto — cinco semanas antes del de CTI-2026-041, en otro sector y de otro grupo. Entrada reportada por VPN CON USUARIO Y CONTRASEÑA IDÉNTICOS. El atacante reclama más de 250 GB de registros de pacientes y publicó parte al no cobrar; la institución reconoció «un incidente de un tercero» sin confirmar extorsión ni afectación de pacientes. Y marca el límite exacto de la regla ética del programa: prohíbe la salud INFANTIL, no la salud",
    "a": "-"
+  },
+  {
+   "id": "ecosistemabots",
+   "l": "Ecosistema de 33 familias de bots",
+   "t": "clúster",
+   "p": "latam",
+   "r": "CTI-2026-044",
+   "d": "NO son 33 cosas del mismo tipo: se parten en dos negocios con economías opuestas. 26 familias venden interrupción y concentran el 90,2 % de su actividad en TRES de ellas; 7 venden ancho de banda residencial ajeno y no lanzan un solo ataque. Dieciséis familias no superan los 200 eventos en toda su historia registrada. Un programa que las trate por igual gasta el 90 % del esfuerzo en el 10 % del problema",
+   "a": "-"
+  },
+  {
+   "id": "asimetriabots",
+   "l": "Los objetivos están aquí, el C2 no",
+   "t": "modelo",
+   "p": "latam",
+   "r": "CTI-2026-044",
+   "d": "Medición propia del 19-11-2026. El 80,2 % de los ataques de una ventana en vivo tuvo objetivo en Brasil, pero de las 573 direcciones de mando y control sólo DOCE están en Latinoamérica: el 2,1 %, frente al 56,4 % en EE. UU. y el 13,6 % en Singapur. Consecuencia: el bloqueo por geografía no detiene un solo paquete, porque el nodo que inunda no está donde está el C2 ni donde está la víctima. El punto de intervención es el canal de control",
+   "a": "-"
+  },
+  {
+   "id": "proxyresidencial",
+   "l": "El 85 % del C2 no ataca a nadie",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "EL HALLAZGO. De 572 direcciones atribuidas, 487 pertenecen a siete familias de proxy residencial —CXFJ 215, Aigogo 134, LinkFog 46, SZJL 46, Hotota 24, Aisuru-Proxy 13, Titan 9— que NO registran un solo evento de ataque. Las ruidosas apenas tienen infraestructura: Cereal2 cero, Liso diecisiete. El recuento de C2 no mide agresividad, mide MODELO DE NEGOCIO: un proxy vende disponibilidad y necesita infraestructura estable; una red de DDoS necesita un punto de mando desechable",
+   "a": "-",
+   "af": "Y las dos clases NO comparten ni un bloque /24 de 206, ni más de 4 ASN de 57: un sesgo de etiquetado no produce huellas de alojamiento disjuntas, porque el clasificador no mira el bloque"
+  },
+  {
+   "id": "ispregionalbr",
+   "l": "La víctima es el ISP regional, no el nacional",
+   "t": "modelo",
+   "p": "latam",
+   "r": "CTI-2026-044",
+   "d": "Diecisiete operadores regionales brasileños de fibra entre los veinte ASN más golpeados, y NINGÚN operador nacional. Halver LTDA (AS274564) en cabeza en las tres ventanas medidas. La razón más probable es eficiencia y no ideología: un regional tiene objetivos valiosos, poca capacidad de absorción y a menudo ningún desvío preacordado con su tránsito, así que un ataque pequeño produce un efecto grande",
+   "a": "-",
+   "af": "CORROBORACIÓN INDEPENDIENTE: A10 Networks midió en una semana de febrero de 2026 17.527 ataques en Brasil con cerca del 99 % concentrado en cinco ISP regionales de fibra, dejando intactos a los grandes. Dos mediciones, dos métodos, nueve meses de separación, el mismo resultado"
+  },
+  {
+   "id": "pulso5s",
+   "l": "El ataque de pulso de cinco segundos",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "Mediana de duración CINCO SEGUNDOS: 1.979 de 2.500 eventos. Y el 23,2 % de los segundos observados contienen dos o más ataques simultáneos, con un máximo de ONCE contra seis prefijos distintos del mismo operador. No supera los umbrales pensados para picos sostenidos, agota la mitigación en lugar de superarla, y reparte el daño entre prefijos para diluir la señal. Toda la doctrina de «detectar, confirmar, desviar» está mal dimensionada: cinco segundos es menos que cargar un panel",
+   "a": "-"
+  },
+  {
+   "id": "botnetcl",
+   "l": "botnet.cl — la fuente y su feed BGP",
+   "t": "publica",
+   "p": "chile",
+   "r": "CTI-2026-044",
+   "d": "Servicio chileno que publica flujo de ataques en vivo, lista de C2, matriz de capacidades por familia obtenida de ingeniería inversa, y un FEED BGP DE AGUJERO NEGRO con una ruta /32 por dirección de C2, comunidad 65535:666 (RFC 7999), comunidades de familia y de antigüedad, dos puntos de presencia —Chile y São Paulo— y plantillas para MikroTik, Juniper, Huawei y Cisco. Atribuido en la agenda de NANOG 98 a Rodrigo Peña, Bitred Group SpA, donde se afirmaba «más de 100 ISP en dos meses»",
+   "a": "-",
+   "af": "VERIFICACIÓN PROPIA: la interfaz declaraba el 19-11-2026 176 pares BGP establecidos en 7 países — 71,6 % Brasil, 12,5 % Chile, 11,4 % Argentina. La cifra pública se corrobora y se supera. Brasil es a la vez el más atacado y el más defendido"
+  },
+  {
+   "id": "trampadefecto",
+   "l": "La trampa del valor por omisión",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "La consulta de eventos SIN PARÁMETROS devuelve, en silencio y sin aviso, sólo los de Cereal2 —una familia muda desde el 30-10— con su histórico congelado. Las primeras 1.400 observaciones recogidas parecían el flujo general: habrían producido la conclusión de que Cereal2 es el 100 % de la actividad y que el objetivo principal es un proveedor estadounidense. Ambas falsas. Se detectó porque la portada mostraba otra familia atacando en el mismo minuto",
+   "a": "-",
+   "af": "Un parámetro ausente NO produce un error: produce una respuesta bien formada a otra pregunta. Y el agravante: los datos falsos eran MÁS interesantes — la hipótesis cómoda venía incorporada en el valor por omisión de la herramienta"
+  },
+  {
+   "id": "zenlayerc2",
+   "l": "Concentración del alojamiento adversario",
+   "t": "suministrador",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "147 de 573 direcciones de C2 —el 25,7 %— en un solo sistema autónomo, AS62610; y 322, el 56,2 %, en cinco: Zenlayer, GoCodeIT, Alibaba US Technology, Tube-Hosting y CDS Global Cloud. Con 58 ASN en total, la mitad del problema cabe en cinco interlocutores. La palanca de mayor rendimiento no es técnica: es una notificación de abuso bien documentada. NO bloquear el ASN: son proveedores legítimos con clientes legítimos",
+   "a": "-"
+  },
+  {
+   "id": "badbox3",
+   "l": "BADBOX 3.0 (HUMAN Security, 18-11-2026)",
+   "t": "clúster",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "Corroboración del eje de proxy residencial por una vía completamente distinta —el dispositivo y el fraude publicitario, no la red—, publicada UN DÍA antes de nuestro informe. Decodificadores Android de bajo coste que generaron del orden de 40.000 millones de solicitudes publicitarias diarias en el pico, con módulos que inscriben el dispositivo en ONCE redes de proxy residencial sin consentimiento del dueño, y vínculo del catálogo a un fabricante mediante lanzador instalado de fábrica",
+   "a": "proveedor",
+   "af": "Las cifras no coinciden con las nuestras y no deben forzarse: once redes comerciales de reventa no son siete familias de código. Lo que coincide es la FORMA del hallazgo"
+  },
+  {
+   "id": "cereal2",
+   "l": "Cereal2 — la familia que enmudeció",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "395.887 eventos acumulados y último evento el 30-10-2026 a las 11:02 UTC. Hoy CERO direcciones de C2 vivas. Sus objetivos eran 71 % estadounidenses, con un solo proveedor de alojamiento recibiendo 1.136 de 1.400 eventos. La causa del silencio NO está establecida: hay correlación temporal con una acción policial del primer trimestre de 2026 contra Aisuru, KimWolf, JackSkid y Mossad, pero ninguna fuente lo afirma. Confianza baja, y se consigna así",
+   "a": "-",
+   "af": "El silencio de una familia no es su final: CTI-2026-040 y 042 documentan cuatro casos en que la marca se apaga y la capacidad sigue. Es el momento de buscar a la sucesora, no de cerrar el expediente"
+  },
+  {
+   "id": "liso",
+   "l": "Liso",
+   "t": "crimen",
+   "p": "latam",
+   "r": "CTI-2026-045",
+   "d": "La familia MÁS ACTIVA de las 33: 444.728 eventos acumulados y el 92,1 % del flujo de ataque en vivo. Capacidad declarada la MÁS ESTRECHA del ecosistema: sólo DDoS, sin proxy residencial y sin ejecución remota de código — un nodo infectado es un problema de ancho de banda, no una cabeza de puente. Sin alias, sin atribución y SIN NINGÚN ANÁLISIS PUBLICADO, lo que es llamativo: la familia con récord mediático tiene decenas de artículos y 792 eventos medidos; Liso tiene cero artículos y 444.728 eventos",
+   "a": "-",
+   "af": "El volumen de cobertura mide titulares, no actividad"
+  },
+  {
+   "id": "lisodosmodos",
+   "l": "Liso no es una campaña, son dos",
+   "t": "modelo",
+   "p": "latam",
+   "r": "CTI-2026-045",
+   "d": "EL HALLAZGO, y las celdas cruzadas están vacías. Modo A (2.440 ev., 85,1 %): puerto 65535, UDP 100 %, CINCO segundos, contra REDES —1.774 prefijos /20-/23—, Brasil 99,8 %. Modo B (326 ev., 11,4 %): puertos 80/443, TCP 97 %, SESENTA segundos, contra ANFITRIONES —326 de 326 son /32—, EE. UU. 282 y Brasil CERO. No hay un solo ataque al puerto 80 contra una red, ni uno al 65535 contra un /32. Cinco parámetros independientes alineados en dos grupos",
+   "a": "-",
+   "af": "Y las dos defensas no se parecen: endurecer servidores web no reduce un paquete del modo A, y absorber tránsito no detiene al modo B. Mezclarlos bajo «nos atacó Liso» produce una respuesta que no sirve para ninguno"
+  },
+  {
+   "id": "puerto65535",
+   "l": "Cuando el puerto es irrelevante por diseño",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "Liso usa el puerto 65535 en el 85,1 % de sus eventos, y ese puerto NO corresponde a ningún servicio: es el último del espacio y funciona como valor por omisión. Contra un prefijo /22 completo con datagramas grandes, el puerto es irrelevante porque el objetivo es LLENAR LA TUBERÍA, no agotar un demonio. La contraprueba está dentro de la misma familia: el modo B, cuando quiere denegar un servicio, SÍ apunta a 80 y 443 y SÍ mantiene sesiones un minuto. Es inferencia de intención a partir de la IRRELEVANCIA de un parámetro",
+   "a": "-",
+   "af": "Y el contraste externo lo convierte en firma: las otras cinco familias medidas apuntan a servicios reales —80, 443, 53, 22, 25565, 5100, 7000, 6672—. Liso es la única excepción. Además, de sus 1.252 eventos con campo de carga útil, los 1.252 declaran «no suministrada»: la capacidad de personalizar existe, otra familia la usa, y estos operadores no"
+  },
+  {
+   "id": "lisovietnam",
+   "l": "El bloque /24 que sobrevive a la rotación",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "Liso tiene 17 direcciones de C2 en 10 países, y OCHO murieron durante nuestra ventana de medición: una lista estática habría caducado en un día. Lo que sobrevive es el BLOQUE: 103.163.214.0/24 (AS131366, Lanit Technology, Vietnam) concentró seis direcciones en CUATRO TANDAS entre el 18 y el 19 de noviembre, todas activas al cierre, mientras ocho direcciones de cinco ASN se retiraban. Migración escalonada con relevo solapado, sin que la actividad de ataque decayera un instante",
+   "a": "-",
+   "af": "Y la única dirección de C2 del ecosistema alojada en CHILE es de esta familia: 64.176.16.182 (AS20473), provisionada el 18-11 a las 08:32 y sin responder ya a las 08:55. Menos de media hora. Caducada como bloqueo, útil como caza retrospectiva"
+  },
+  {
+   "id": "marcasdetiempo",
+   "l": "Las marcas de tiempo son horas de observación",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "Error corregido a tiempo. Varias direcciones de C2 comparten última observación AL SEGUNDO estando en ASN y países distintos —una rusa y una rumana a las 13:51:07—, y la lectura tentadora era control centralizado. Es falsa: 17 direcciones de 3 ASN comparten la marca 15:02:29, y 87 caen en ocho segundos. Comparando dos instantáneas separadas 20 min, 259 de 573 registros avanzaron: CICLO DE SONDEO DE UNOS 45 MINUTOS. Son lotes de la fuente",
+   "a": "-",
+   "af": "La señal de alarma que debería haber bastado sin medir nada: una coincidencia al segundo entre proveedores distintos es DEMASIADO BUENA. Los adversarios reales no son tan puntuales; los procesos automáticos sí"
+  },
+  {
+   "id": "separarmodos",
+   "l": "Dos campañas o una variable",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "La varianza de una población es indistinguible de la media de dos. Cuatro pasos: (1) anotar las frases «mayoritariamente X pero también Y», que son candidatas a modos y no a varianza; (2) cruzar esos parámetros dos a dos y buscar CELDAS VACÍAS; (3) contar cuántos parámetros independientes se alinean —dos pueden ser correlación técnica trivial, cinco son modos—; (4) BUSCAR EL PARÁMETRO QUE NO SE ALINEA, que es lo que distingue dos modos de un actor de dos actores confundidos",
+   "a": "-",
+   "af": "El paso 4 es el que casi nadie hace y sin él el método demuestra demasiado. Y una celda vacía vale más que una proporción: la proporción se mueve con la muestra, la ausencia se REFUERZA con ella"
+  },
+  {
+   "id": "telemetriaviva",
+   "l": "Telemetría viva como fuente",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "Un informe se lee entero y sus límites están escritos; un FLUJO responde exactamente a lo que se le pregunta y no dice lo que no se le preguntó. Cinco controles, los tres primeros cuestan diez minutos juntos: (1) comparar la consulta con la vista para humanos en el mismo minuto; (2) pedir explícitamente lo que creemos tener; (3) comparar los contadores de la fuente entre consultas; (4) validar la semántica de todo contador DENTRO del grupo correcto; (5) medir dos ventanas separadas antes de afirmar una proporción",
+   "a": "-",
+   "af": "Y la pregunta transversal: ¿esta forma está en los datos o en mi colección? Se aplicó cuatro veces con cuatro resultados distintos. Cuando se sospecha que un hallazgo es artefacto del clasificador de un tercero, la salida no es auditar su clasificador: es encontrar en los mismos datos una variable que su clasificador NO MIRA"
+  },
+  {
+   "id": "higieneinversa",
+   "l": "Los objetivos son víctimas, no indicadores",
+   "t": "modelo",
+   "p": "latam",
+   "r": "CTI-2026-044",
+   "d": "La advertencia INVERSA a la de CTI-2026-040. Esta fuente publica dos clases de direcciones con interfaces parecidas: el C2, que sí es infraestructura adversaria y entra en los agregados; y los PREFIJOS OBJETIVO —258 prefijos y 69 ASN—, que son redes de operadores brasileños legítimos bajo ataque. Una ingesta que no distinga las dos vistas bloqueará a Halver LTDA, EGR NET, Speednet, INETVIP y trece más, es decir a los atacados. Y el fallo sería SILENCIOSO: el bloqueo funcionaría, y el síntoma aparecería días después",
+   "a": "-"
+  },
+  {
+   "id": "aisuru",
+   "l": "Aisuru · Kimwolf (TurboMirai)",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "La red de bots con el récord mundial de DDoS publicado: 31,4 Tbps —las fuentes discrepan entre noviembre y diciembre de 2025—, de clase TurboMirai, con estimaciones de 1 a 4 millones de dispositivos. Kimwolf es la variante para Android que usa su funcionalidad de DDoS. Y el dato que importa para nuestro expediente: GIRÓ DE DDoS A PROXY RESIDENCIAL, con un aviso de un CSIRT nacional documentándolo, lo que explica que el feed la parta en Aisuru-DDoS y Aisuru-Proxy con etiquetas distintas",
+   "a": "proveedor",
+   "af": "CONTRASTE MEDIDO: a la red del récord mundial le medimos sólo 792 eventos acumulados, frente a los 444.728 de Liso. Hubo acción policial en el primer trimestre de 2026 contra Aisuru, KimWolf, JackSkid y Mossad, y Cloudflare asocia a ella la caída de ataques sobre 1 Tbps de 805 a 251 entre trimestres. El récord mide el pico, no la actividad"
   }
  ],
  "aristas": [
@@ -4152,6 +4337,161 @@
   [
    "devman",
    "checkmate",
+   "vinculado"
+  ],
+  [
+   "ecosistemabots",
+   "proxyresidencial",
+   "contiene"
+  ],
+  [
+   "ecosistemabots",
+   "liso",
+   "contiene"
+  ],
+  [
+   "ecosistemabots",
+   "cereal2",
+   "contiene"
+  ],
+  [
+   "ecosistemabots",
+   "asimetriabots",
+   "vinculado"
+  ],
+  [
+   "botnetcl",
+   "ecosistemabots",
+   "vinculado"
+  ],
+  [
+   "botnetcl",
+   "higieneinversa",
+   "vinculado"
+  ],
+  [
+   "botnetcl",
+   "trampadefecto",
+   "contiene"
+  ],
+  [
+   "botnetcl",
+   "marcasdetiempo",
+   "contiene"
+  ],
+  [
+   "trampadefecto",
+   "telemetriaviva",
+   "vinculado"
+  ],
+  [
+   "cereal2",
+   "trampadefecto",
+   "vinculado"
+  ],
+  [
+   "proxyresidencial",
+   "badbox3",
+   "vinculado"
+  ],
+  [
+   "proxyresidencial",
+   "zenlayerc2",
+   "usa"
+  ],
+  [
+   "proxyresidencial",
+   "covertnetwork1658",
+   "vinculado"
+  ],
+  [
+   "liso",
+   "lisodosmodos",
+   "contiene"
+  ],
+  [
+   "liso",
+   "puerto65535",
+   "contiene"
+  ],
+  [
+   "liso",
+   "lisovietnam",
+   "usa"
+  ],
+  [
+   "liso",
+   "pulso5s",
+   "usa"
+  ],
+  [
+   "liso",
+   "ispregionalbr",
+   "explota"
+  ],
+  [
+   "lisodosmodos",
+   "separarmodos",
+   "vinculado"
+  ],
+  [
+   "liso",
+   "cereal2",
+   "noesalias"
+  ],
+  [
+   "pulso5s",
+   "ispregionalbr",
+   "vinculado"
+  ],
+  [
+   "ispregionalbr",
+   "higieneinversa",
+   "vinculado"
+  ],
+  [
+   "asimetriabots",
+   "zenlayerc2",
+   "vinculado"
+  ],
+  [
+   "marcasdetiempo",
+   "telemetriaviva",
+   "vinculado"
+  ],
+  [
+   "liso",
+   "botnetcl",
+   "vinculado"
+  ],
+  [
+   "ecosistemabots",
+   "volttyphoon",
+   "noesalias"
+  ],
+  [
+   "badbox3",
+   "aisuru",
+   "vinculado"
+  ],
+  [
+   "liso",
+   "aisuru",
+   "noesalias"
+  ],
+  [
+   "ecosistemabots",
+   "aisuru",
+   "contiene"
+  ],
+  [
+   "aisuru",
+   "proxyresidencial",
+   "vinculado"
+  ],
+  [
+   "aisuru",
+   "cereal2",
    "vinculado"
   ]
  ]

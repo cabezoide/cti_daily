@@ -46,28 +46,30 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-041` | Anubis (RaaS) · desarrollado por el grupo que Symantec designa **Hawkmoth** · **reconversión de Sphinx**, con la carga prácticamente sin cambios y sólo la marca actualizada — **y NO es el troyano bancario Anubis para Android, NO es la puerta trasera Anubis en Python de Savage Ladybug, y NO es la herramienta libre homónima de protección contra rastreadores web** | Perfil de operación de extorsión con borrado + estudio de caso nacional + método para leer dos relatos compatibles del mismo incidente cuando uno lo publica el extorsionador y el otro la víctima | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-041-anubis.md) · [html](CTI-2026-041-anubis.html) |
 | `CTI-2026-042` | **Devman** · `Funky Mantis` (designación de PRODAFT) · derivado de DragonForce — **y Dire Wolf** · `DireWolf` — **y Sauron**, que este informe sostiene que **no es comparable con los dos anteriores y probablemente no es un «grupo» en el mismo sentido** | Informe de ecosistema de tres actores de extorsión emergentes + estudio de caso nacional + método de triaje para un grupo recién nombrado + evaluación de una reclamación de capacidad destructiva contra sistemas de control industrial | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-042-emergentes.md) · [html](CTI-2026-042-emergentes.html) |
 | `CTI-2026-043` | Operation ShadowCloud (designación de Kaspersky GReAT, sin atribuir) · puertas traseras GitDoor y GraphDoor · **y BRONZE SANDCASTLE (designación de Sophos CTU), que este informe sostiene que es la misma operación** | Perfil de operación sin atribuir + reconciliación de dos expedientes de proveedor que describen la misma operación sin saberlo + evaluación de la nube corporativa como canal de mando y control | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
+| `CTI-2026-044` | Ecosistema de redes de bots de DDoS y de proxy residencial — 33 familias en seguimiento activo (Liso · Cereal2 · Potassium · Aisuru-DDoS · Aisuru-Proxy · SixSayven · CXFJ · Aigogo · y 25 más) | Evaluación estratégica de ecosistema + medición propia sobre telemetría en vivo + evaluación de una fuente y de su feed BGP defensivo + método para usar un canal de telemetría continua como fuente de inteligencia | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-044-redes-bots.md) · [html](CTI-2026-044-redes-bots.html) |
+| `CTI-2026-045` | Liso — familia de red de bots de denegación de servicio, la más activa de las 33 en seguimiento | Perfil de familia de red de bots + separación de dos campañas simultáneas dentro de un mismo parque + método para distinguir modos operativos a partir de parámetros técnicos | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 404 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-040`, `CTI-2026-043` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 432 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-040`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
 | [`ioc_url.txt`](ioc_url.txt) | 321 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-043` |
 | [`ioc_hash.txt`](ioc_hash.txt) | 463 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-041`, `CTI-2026-043` |
-| [`ioc_index.csv`](ioc_index.csv) | 2961 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043` |
+| [`ioc_index.csv`](ioc_index.csv) | 3113 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 30 |
-| Indicadores en listas planas | 1190 |
-| Indicadores en el índice con contexto | 2961 |
+| Informes publicados | 32 |
+| Indicadores en listas planas | 1218 |
+| Indicadores en el índice con contexto | 3113 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-19 |
-| Nodos del mapa de relaciones | 266, con 339 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Nodos del mapa de relaciones | 285, con 370 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 

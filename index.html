@@ -95,9 +95,23 @@ footer a{color:var(--sky)}
 </header>
 
 <h2><span class="num">01 · catálogo</span>Informes publicados</h2>
-<p class="sub">30 informes. El botón abre el informe renderizado; la fuente en Markdown
+<p class="sub">32 informes. El botón abre el informe renderizado; la fuente en Markdown
 es el documento canónico y se versiona.</p>
 <div class="grid">
+<article class="card">
+  <div class="id">CTI-2026-045 · 2026-11-19</div>
+  <h3><a href="CTI-2026-045-liso.html">Liso — familia de red de bots de denegación de servicio, la más activa de las 33 en seguimiento</a></h3>
+  <div class="meta">Perfil de familia de red de bots + separación de dos campañas simultáneas dentro de un mismo parque + método para distinguir modos operativos a partir de parámetros técnicos</div>
+  <div class="pills"><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 61 d</span></div>
+  <div class="links"><a class="primary" href="CTI-2026-045-liso.html">Leer el informe</a><a href="CTI-2026-045-liso.md">fuente .md</a></div>
+</article>
+<article class="card">
+  <div class="id">CTI-2026-044 · 2026-11-19</div>
+  <h3><a href="CTI-2026-044-redes-bots.html">Ecosistema de redes de bots de DDoS y de proxy residencial — 33 familias en seguimiento activo (Liso · Cereal2 · Potassium · Aisuru-DDoS · Aisuru-Proxy · SixSayven · CXFJ · Aigogo · y 25 más)</a></h3>
+  <div class="meta">Evaluación estratégica de ecosistema + medición propia sobre telemetría en vivo + evaluación de una fuente y de su feed BGP defensivo + método para usar un canal de telemetría continua como fuente de inteligencia</div>
+  <div class="pills"><span class="pill">v1.2</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 61 d</span></div>
+  <div class="links"><a class="primary" href="CTI-2026-044-redes-bots.html">Leer el informe</a><a href="CTI-2026-044-redes-bots.md">fuente .md</a></div>
+</article>
 <article class="card">
   <div class="id">CTI-2026-043 · 2026-11-17</div>
   <h3><a href="CTI-2026-043-shadowcloud.html">Operation ShadowCloud (designación de Kaspersky GReAT, sin atribuir) · puertas traseras GitDoor y GraphDoor · **y BRONZE SANDCASTLE (designación de Sophos CTU), que este informe sostiene que es la misma operación**</a></h3>
@@ -314,7 +328,7 @@ es el documento canónico y se versiona.</p>
 <p class="sub">Las relaciones entre los actores y las herramientas de esta cartera, en un grafo tridimensional navegable. Se gira con el ratón, se filtra por tipo y cada nodo abre su ficha con enlace al informe de origen. Se regenera en cada construcción desde <code>red-actores.json</code>.</p>
 <div class="grid">
 <article class="card">
-  <div class="id">266 nodos · 339 relaciones</div>
+  <div class="id">285 nodos · 370 relaciones</div>
   <h3><a href="red-actores-3d.html">Red de actores y herramientas</a></h3>
   <div class="meta">Actores estatales, clústeres, suministradores, herramientas propias y públicas, servicios legítimos abusados y vulnerabilidades. Cada nodo va pintado por su posible país de origen, y la chapa de dos letras dice si esa atribución es oficial o una valoración de proveedor.</div>
   <div class="pills"><span class="pill">HTML autocontenido</span><span class="pill">sin dependencias</span><span class="pill ok">siempre al día</span></div>
@@ -328,11 +342,11 @@ informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier pro
 <table>
 <thead><tr><th>Fichero</th><th>Núm.</th><th>Qué contiene</th></tr></thead>
 <tbody>
-<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">404</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
+<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">432</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
 <tr><td><a href="ioc_ipv6.txt"><code>ioc_ipv6.txt</code></a></td><td class="mono">2</td><td>Direcciones IPv6, una por línea</td></tr>
 <tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">321</td><td>Dominios y URL, una por línea</td></tr>
 <tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">463</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
-<tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">2961</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
+<tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">3113</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
 </tbody>
 </table>
 
@@ -347,8 +361,8 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 
 <h2><span class="num">04 · estado</span>Estado del ciclo</h2>
 <div class="stats">
-  <div class="stat"><div class="n">30</div><div class="l">informes publicados</div></div>
-  <div class="stat"><div class="n">2961</div><div class="l">indicadores con contexto</div></div>
+  <div class="stat"><div class="n">32</div><div class="l">informes publicados</div></div>
+  <div class="stat"><div class="n">3113</div><div class="l">indicadores con contexto</div></div>
   <div class="stat"><div class="n">0</div><div class="l">caducados, exigen revisión</div></div>
   <div class="stat"><div class="n">2026-11-19</div><div class="l">informe más reciente</div></div>
 </div>
