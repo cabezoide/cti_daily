@@ -2672,6 +2672,211 @@
    "r": "CTI-2026-046",
    "d": "Vulnerabilidad de SonicWall cuya explotación por Akira CONFIRMA el aviso conjunto del FBI, CISA y socios, con alcance a un entorno de virtualización Nutanix. Es el único indicador de CTI-2026-046 con respaldo gubernamental y el único con una acción inequívoca: parchear.",
    "a": "oficial"
+  },
+  {
+   "id": "braincipher",
+   "l": "BrainCipher",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-056",
+   "d": "Publica el inventario de ficheros exfiltrados, no sólo el nombre de la víctima. 54 direcciones registradas, 6 activas, rotación por bloques.",
+   "a": "-"
+  },
+  {
+   "id": "krybitactor",
+   "l": "krybit",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-057",
+   "d": "154 víctimas en 46 países, ninguna geografía por encima del 9 %. La proporción latinoamericana más alta del lote de noviembre: 14,9 %, con ocho víctimas mexicanas y ninguna chilena.",
+   "a": "-"
+  },
+  {
+   "id": "safepayactor",
+   "l": "SafePay",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-058",
+   "d": "29 % de víctimas alemanas, con Estados Unidos desplazado al noveno puesto. Única víctima chilena de los seis actores del lote. Cinco sitios caídos al 19 de noviembre de 2026.",
+   "a": "-"
+  },
+  {
+   "id": "boobaproject",
+   "l": "Booba Project",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-059",
+   "d": "48 % del catálogo en sanidad y administración pública. Publica títulos que son nombres de documentos de identidad de personas físicas, no sólo de organizaciones.",
+   "a": "-"
+  },
+  {
+   "id": "stormblog",
+   "l": "Storm (sitio «Storm Blog»)",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-060",
+   "d": "73 de sus 86 entradas aparecieron el primer día con fechas de un mes antes. Un grupo bancario figura tres veces: matriz y dos filiales. No confundir con la nomenclatura Storm-NNNN de fabricante.",
+   "a": "-"
+  },
+  {
+   "id": "dragonforceactor",
+   "l": "DragonForce",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-061",
+   "d": "Plataforma cuyo recuento de víctimas es un suelo: los afiliados publican bajo marca propia. Veinte sitios registrados, ninguno activo, sin publicar desde el 30 de octubre de 2026.",
+   "a": "proveedor",
+   "af": "El mercado de marca blanca y los nombres de afiliado proceden de una ficha de proveedor. Lo verificado de forma independiente es que un afiliado nombrado tiene expediente propio y coaparece con la matriz en una víctima."
+  },
+  {
+   "id": "insomniaactor",
+   "l": "insomnia",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-055",
+   "d": "Publicó entre agosto y septiembre de 2026 el catálogo que SoulGroup republicó 94 días después. Sigue activo tras la aparición de aquél, lo que inclina el caso hacia republicación y no sucesión.",
+   "a": "-"
+  },
+  {
+   "id": "lynxactor",
+   "l": "Lynx",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-055",
+   "d": "No heredó el catálogo de INC Ransom: de las 72 víctimas contestadas en que participa uno de los dos, comparten cero. Un rebranding hereda el expediente; estos dos coexisten con catálogos disjuntos.",
+   "a": "-"
+  },
+  {
+   "id": "prefijovanidoso",
+   "l": "Prefijo legible en servicio oculto",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-057",
+   "d": "Dirección de servicio oculto generada por fuerza bruta hasta que empieza por el nombre del actor. Cuesta cómputo y da reconocimiento de marca, pero hace la infraestructura futura localizable por patrón antes de que publique víctimas.",
+   "a": "-"
+  },
+  {
+   "id": "marcablanca",
+   "l": "Mercado de marca blanca con afiliados",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-061",
+   "d": "La plataforma entrega la carga y el afiliado publica las víctimas bajo su propio nombre comercial. Convierte el recuento de la marca matriz en un suelo de magnitud desconocida.",
+   "a": "proveedor",
+   "af": "Declarado en una ficha de proveedor sin referencias. La verificación propia alcanza a una coaparición entre la matriz y un afiliado nombrado."
+  },
+  {
+   "id": "desenmascarado",
+   "l": "Desenmascaramiento progresivo de la víctima",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-054",
+   "d": "El sitio publica primero el nombre parcialmente oculto y lo completa después. Un actor reveló cuatro identidades en veintisiete segundos; otro reveló una y repuso la máscara siete segundos más tarde.",
+   "a": "-"
+  },
+  {
+   "id": "inflacionvictimas",
+   "l": "Inflación del recuento de víctimas",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-060",
+   "d": "Publicar matriz y filiales de un mismo grupo como entradas separadas. Hace del total un techo. El propio perfil de proveedor del actor lo declaraba antes de que la medición lo confirmara.",
+   "a": "proveedor",
+   "af": "La táctica figura declarada en la ficha del proveedor; la instancia concreta —un grupo bancario con tres entradas— es medición propia sobre los títulos y los dominios."
+  },
+  {
+   "id": "republicacion",
+   "l": "Republicación de catálogo ajeno",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-055",
+   "d": "Una marca nueva publica víctimas que otra ya había publicado meses antes. Dirección unánime y separación consistente la distinguen del alias de expediente, que tiene separación nula y dirección repartida.",
+   "a": "-"
+  },
+  {
+   "id": "interruptoridioma",
+   "l": "Interruptor de configuración regional",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-058",
+   "d": "El cifrador aborta en sistemas configurados en idiomas de Europa del Este. No sirve como contramedida: alcance de un solo actor y revocable por el adversario en una recompilación.",
+   "a": "proveedor",
+   "af": "Declarado en una ficha de proveedor sin muestra ni referencias. La cartera lo recoge para recomendar expresamente que no se convierta en contramedida."
+  },
+  {
+   "id": "almacenseparado",
+   "l": "Almacenamiento separado del sitio de filtración",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-059",
+   "d": "Servicio oculto dedicado a servir los datos, distinto del blog y de la sala de negociación. Sostiene volúmenes de decenas de gigabytes por caso y es la pieza que el actor sustituye cuando cae.",
+   "a": "-"
+  },
+  {
+   "id": "inventariofichero",
+   "l": "Publicación del inventario de ficheros",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-056",
+   "d": "El sitio lista cada archivo exfiltrado en lugar de una ficha por organización. La reclamación se vuelve comprobable por la víctima, y el recuento de entradas deja de medir víctimas.",
+   "a": "-"
+  },
+  {
+   "id": "concentraciongeo",
+   "l": "Concentración geográfica del catálogo",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-058",
+   "d": "Un actor acumula el 29 % de sus víctimas en un solo país y desplaza a Estados Unidos del primer puesto. No se puede decidir desde fuera si es selección de objetivo o concentración de la vía de acceso.",
+   "a": "-"
+  },
+  {
+   "id": "sharefinder",
+   "l": "ShareFinder.ps1",
+   "t": "herramienta",
+   "p": "-",
+   "r": "CTI-2026-058",
+   "d": "Guion público de enumeración de recursos compartidos. El nombre es débil como indicador por estar reutilizado; lo detectable es el comportamiento desde una cuenta que no suele enumerar.",
+   "a": "proveedor",
+   "af": "Atribuido al actor por una ficha de proveedor sin muestra."
+  },
+  {
+   "id": "winrarexfil",
+   "l": "WinRAR como empaquetador de exfiltración",
+   "t": "herramienta",
+   "p": "-",
+   "r": "CTI-2026-058",
+   "d": "Compresión del material robado antes de la salida. Binario legítimo: lo detectable es el volumen y el destino, no la herramienta.",
+   "a": "proveedor",
+   "af": "Atribuido por ficha de proveedor sin muestra."
+  },
+  {
+   "id": "cve202328252",
+   "l": "CVE-2023-28252",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-056",
+   "d": "Elevación de privilegios en el controlador CLFS de Windows, con parche desde abril de 2023. Se traslada como hipótesis de caza y no como atribución.",
+   "a": "proveedor",
+   "af": "Atribuida al actor por una ficha de proveedor sin referencias ni muestra. Acción permitida: verificar el parche. No permitida: atribuir una explotación observada."
+  },
+  {
+   "id": "ctifyi",
+   "l": "cti.fyi",
+   "t": "publica",
+   "p": "-",
+   "r": "CTI-2026-054",
+   "d": "Rastreador de sitios de filtración con 425 grupos y 35 879 entradas. Expone separadas las tres bases de fecha y registra el historial de títulos, dato que ninguna otra fuente de la cartera da.",
+   "a": "-"
+  },
+  {
+   "id": "ctiwatch",
+   "l": "CTIWatch",
+   "t": "publica",
+   "p": "-",
+   "r": "CTI-2026-054",
+   "d": "Agregador con 409 830 CVE con EPSS y estado de explotación, y 2,3 millones de indicadores de señuelos propios. Sus fichas de actor se contradicen consigo mismas en seis de seis casos comprobados.",
+   "a": "-"
   }
  ],
  "aristas": [
@@ -4569,6 +4774,131 @@
    "n0nactor",
    "gentlemen",
    "noesalias"
+  ],
+  [
+   "krybitactor",
+   "prefijovanidoso",
+   "usa"
+  ],
+  [
+   "safepayactor",
+   "prefijovanidoso",
+   "usa"
+  ],
+  [
+   "dragonforceactor",
+   "prefijovanidoso",
+   "parcial"
+  ],
+  [
+   "dragonforceactor",
+   "marcablanca",
+   "usa"
+  ],
+  [
+   "dragonforceactor",
+   "devman",
+   "afiliado"
+  ],
+  [
+   "dragonforceactor",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "krybitactor",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "stormblog",
+   "inflacionvictimas",
+   "usa"
+  ],
+  [
+   "braincipher",
+   "inventariofichero",
+   "usa"
+  ],
+  [
+   "braincipher",
+   "cve202328252",
+   "explota"
+  ],
+  [
+   "soulgroupactor",
+   "republicacion",
+   "usa"
+  ],
+  [
+   "soulgroupactor",
+   "insomniaactor",
+   "solapa"
+  ],
+  [
+   "safepayactor",
+   "interruptoridioma",
+   "usa"
+  ],
+  [
+   "safepayactor",
+   "sharefinder",
+   "usa"
+  ],
+  [
+   "safepayactor",
+   "winrarexfil",
+   "usa"
+  ],
+  [
+   "safepayactor",
+   "rclone",
+   "usa"
+  ],
+  [
+   "safepayactor",
+   "concentraciongeo",
+   "usa"
+  ],
+  [
+   "boobaproject",
+   "almacenseparado",
+   "usa"
+  ],
+  [
+   "vortexactor",
+   "desenmascarado",
+   "usa"
+  ],
+  [
+   "incransom",
+   "lynxactor",
+   "noesalias"
+  ],
+  [
+   "dragonforceactor",
+   "qilin",
+   "disputado"
+  ],
+  [
+   "dragonforceactor",
+   "incransom",
+   "disputado"
+  ],
+  [
+   "krybitactor",
+   "incransom",
+   "disputado"
+  ],
+  [
+   "ctifyi",
+   "desenmascarado",
+   "suministra"
+  ],
+  [
+   "ctiwatch",
+   "cve202328252",
+   "suministra"
   ]
  ]
 }

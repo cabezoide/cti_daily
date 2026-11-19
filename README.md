@@ -85,7 +85,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-19 |
-| Nodos del mapa de relaciones | 288, con 379 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Nodos del mapa de relaciones | 310, con 404 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 
