@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-014"
-version: "1.2"
+version: "1.3"
 tipo: "Perfil de actor + informe de campaña"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -10,7 +10,7 @@ actor: "TheGentlemen (Storm-2697)"
 fecha: "2026-09-15"
 caduca: "2026-12-15"
 autor: "Célula CTI"
-distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
+distribucion: "Actualizado el 2026-11-19 con las dos reivindicaciones de alto perfil de noviembre de 2026 (§E-2.2): la de NVIDIA, listada sin prueba y negada por la compañía, y la de DirecTV, que no aparece en ninguna fuente. Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-014
@@ -105,6 +105,8 @@ infraestructura confirmada por autoridades; (b) la aparición de un cifrador con
 un esquema criptográfico distinto bajo la misma marca —indicaría cambio de
 desarrollador—; (c) observación de acceso inicial por phishing masivo, que
 contradiría el modelo actual centrado en borde de red.
+
+**KJ-8.** **Las dos reivindicaciones de alto perfil de noviembre de 2026 no están al mismo nivel, y ninguna de las dos es una brecha confirmada.** El **18 de noviembre de 2026** el grupo añadió a **NVIDIA** a su sitio de filtración con una cuenta atrás de unas 234 horas —vencimiento el 28 de noviembre— **sin publicar ni un fichero de muestra, ni un documento, ni una cifra de rescate**; y la compañía declaró que **no ha encontrado indicio de que sus sistemas o redes se vieran afectados**, añadiendo que investiga **un incidente separado que podría haber afectado a uno de sus proveedores de servicios**. De **DirecTV**, en cambio, **no hay ninguna fuente**: no aparece en el sitio de filtración según la cobertura localizada, ni en los rastreadores, ni en prensa especializada. Valoramos **casi con certeza** *(≥99 %)* que el listado de NVIDIA exista, **poco probable** *(20–45 %)* que corresponda a un compromiso directo de esa compañía, y **muy poco probable** *(5–20 %)* que la reivindicación sobre DirecTV exista como tal. **Confianza: alta para los hechos del listado; moderada para la lectura del alcance.** *Base:* fuentes 23 a 26, más la declaración de la propia compañía. **Y el dato que más pesa en el juicio es del historial del propio actor**: una de las fuentes señala que **el grupo ha exagerado reivindicaciones y ha identificado mal a organizaciones objetivo con anterioridad**. §E-2.2 desarrolla la lectura y qué hacer con ella.
 
 ---
 
@@ -223,6 +225,71 @@ criterio de selección es tener un FortiGate sin parchear accesible desde Intern
 **Ataca sanidad sin restricción.** El grupo no aplica las limitaciones
 autoimpuestas que algunos programas de RaaS declararon históricamente. Sanidad es
 su cuarto sector.
+
+## E-2.2 Actualización de noviembre de 2026: dos reivindicaciones de alto perfil, y lo que sostiene cada una
+
+Esta sección se añade en la versión 1.3 y es la aplicación directa de dos métodos que esta cartera desarrolló después de la emisión original de este informe: el del `Anexo D` de `CTI-2026-041` —**cómo leer lo que publica un extorsionador cuando es la única fuente**— y el criterio 7 del `Anexo D` de `CTI-2026-042` —**¿hay víctimas verificables por un tercero?**—.
+
+### El listado de NVIDIA
+
+**Los hechos observables.** El **18 de noviembre de 2026**, el grupo añadió a **NVIDIA** a su sitio de filtración, con una **cuenta atrás de unas 234 horas** que vence el **28 de noviembre**. El listado **no incluye ficheros de muestra, ni documentos robados, ni una cifra de rescate**.
+
+**La respuesta de la compañía.** NVIDIA declaró que **no ha encontrado indicación de que sus sistemas o redes se vieran afectados**, que continúa vigilando la situación, y que **investiga un incidente separado que podría haber afectado a uno de sus proveedores de servicios**.
+
+**Y el contexto que la propia cobertura aporta y que es el dato más informativo:** el mismo sitio de filtración lista a **Jentech**, proveedor de NVIDIA, el **6 de octubre**, y a **FPT Software** el **27 de octubre**.
+
+**La lectura, aplicando el marco de `CTI-2026-041`:**
+
+| Afirmación | Quién lo dice | Incentivo | Credibilidad |
+|---|---|---|---|
+| El listado existe, con cuenta atrás al 28 de noviembre | **Hecho observable** por terceros | — | **Alta** |
+| NVIDIA fue comprometida | **El atacante**, sin publicar ni un fichero | **Máximo para exagerar**: es la marca de mayor valor reputacional que podría reclamar | **Baja** |
+| Los sistemas y redes de NVIDIA no se vieron afectados | **La compañía** | Minimizar | **Media-alta**, y es una afirmación **negativa y verificable a posteriori**, que es costosa de hacer en falso |
+| Un **proveedor de servicios** puede haber sido afectado | **La compañía**, voluntariamente | **Ninguno para admitirlo.** Es una admisión que le resta | **Alta.** Lo que una víctima admite sin necesidad es lo más creíble que dice |
+| Dos proveedores de NVIDIA figuran listados semanas antes | **Hecho observable** | — | **Alta** |
+
+**Las dos últimas filas, juntas, dan la hipótesis más económica y es la que este informe sostiene:** **el grupo probablemente tiene material de un proveedor y ha listado la marca del cliente final.** Es un patrón conocido en este mercado —listar el nombre con más valor reputacional de la cadena— y encaja con los tres datos a la vez: la ausencia de muestras, la negativa específica de la compañía sobre *sus* sistemas, y los dos proveedores previamente listados. Valorado en `KJ-8` como *poco probable* que haya compromiso directo.
+
+**Y el factor que inclina el juicio, que es de historial y no de este caso:** una de las fuentes señala que **este grupo ha exagerado reivindicaciones y ha identificado mal a organizaciones objetivo con anterioridad**. Un actor con ese historial que publica una marca de primer nivel **sin una sola muestra** está haciendo lo que ya se le ha visto hacer.
+
+### El listado de DirecTV
+
+**No se localizó ninguna fuente.** La reivindicación sobre **DirecTV** no aparece en la cobertura especializada localizada, ni en los rastreadores de sitios de filtración consultados, ni en prensa. Se buscó expresamente junto al nombre del grupo.
+
+**Y conviene enunciar con precisión qué significa este «no», porque hay tres explicaciones y conducen a decisiones distintas:**
+
+| Explicación | Qué implicaría |
+|---|---|
+| **El listado no existe** | La afirmación es un error de atribución o una confusión con otro grupo o con otro incidente |
+| **El listado existe y es demasiado reciente** para haber sido recogido | Reaparecería en días. **Es el disparador `I-a` de abajo** |
+| **El listado existió y se retiró** | Suele indicar **pago**, y en ese caso no habrá fuente pública nunca |
+
+Valoramos **muy poco probable** *(5–20 %)* que la reivindicación exista en la forma afirmada, y **se consigna como no corroborada en lugar de omitirse**, que es la regla de esta cartera: una afirmación que no se sostiene se documenta con lo que se buscó, para que nadie repita el trabajo ni la dé por buena.
+
+### El volumen acumulado, y por qué las cifras no concuerdan
+
+La emisión original de este informe situaba ~868 víctimas acumuladas a septiembre de 2026. Los recuentos de noviembre difieren entre rastreadores, y la discrepancia es informativa:
+
+| Recuento | Cifra | Fecha |
+|---|---|---|
+| Un rastreador de sitios de filtración | **1.123 víctimas en 95 países** | 2026-11-18 |
+| Un informe de proveedor | **1.012 reivindicaciones** entre enero y el 27 de octubre | 2026-10-27 |
+| Otro análisis | **1.002 víctimas**, con **135 en los últimos 30 días** | 2026-10-19 |
+
+**Las tres son recuentos de reivindicaciones y no de brechas verificadas**, y conviene no promediarlas: miden cosas ligeramente distintas con criterios de deduplicación distintos. Lo que las tres sostienen a la vez es el orden de magnitud —**más de mil**— y la tendencia: **el grupo sigue siendo uno de los de mayor volumen del mercado**, y Microsoft lo sitúa entre los de mayor número de víctimas reclamadas de los últimos tres meses.
+
+**Y una observación que `KJ-6` ya anticipaba y que esta actualización refuerza en sentido contrario al esperado:** aquel juicio sostenía que las cifras públicas *subestiman* el volumen real. El caso de NVIDIA muestra el error opuesto —**una reivindicación que probablemente sobreestima el alcance de un compromiso concreto**— y las dos cosas son compatibles: **un sitio de filtración puede tener menos víctimas de las que hubo y, a la vez, atribuirse más de lo que consiguió en un caso concreto.** La primera distorsión viene de quien paga y no aparece; la segunda, de quien lista una marca que no comprometió.
+
+### Lo que esta actualización pide hacer
+
+| # | Acción | Quién | Coste |
+|---|---|---|---|
+| 1 | **No tratar el listado de NVIDIA como una brecha confirmada** en ningún material interno o externo. Es un listado sin prueba, con negativa específica de la compañía | CTI | Cero |
+| 2 | **Vigilar el vencimiento del 28 de noviembre.** Si publica datos, el juicio de `KJ-8` se puede cerrar en un sentido o en otro mirando **de quién son los documentos**: si son de un proveedor, confirma la hipótesis de este informe | CTI | Bajo |
+| 3 | **Revisar si alguno de los dos proveedores listados —o cualquier otro de la cadena— es también proveedor nuestro.** Es la única acción de esta actualización con efecto defensivo directo, y aplica a cualquier organización, no sólo a las del sector | Riesgo de terceros | Bajo |
+| 4 | **Devolver la corrección sobre DirecTV** a quien aportó la afirmación, con lo que se buscó | CTI | Cero |
+
+**Disparadores de reevaluación añadidos en esta versión.** `I-a`: aparición de un listado de **DirecTV** en el sitio de filtración del grupo o en un rastreador, que refutaría la parte negativa de `KJ-8`. `I-b`: publicación de datos tras el vencimiento del 28 de noviembre, **con identificación de a quién pertenecen**. `I-c`: confirmación por NVIDIA o por el proveedor afectado del alcance real del incidente de cadena de suministro. `I-d`: retirada del listado sin publicación, que sugeriría pago y cerraría la vía pública.
 
 ## E-2.1 Foco regional: Chile y Latinoamérica
 
@@ -467,6 +534,10 @@ criminal. No puede descartarse contaminación deliberada. Se tratan con credibil
 | 2026-06 | 117 víctimas en el mes |
 | 2026-07 | **Pico: 169 víctimas**; total acumulado ~683 |
 | 2026-09-15 | ~868 víctimas acumuladas; actividad sostenida |
+| 2026-10-06 | Listado de **Jentech**, proveedor de NVIDIA |
+| 2026-10-19 | ~1.002 víctimas según un análisis, con **135 en los 30 días previos** |
+| 2026-10-27 | Listado de **FPT Software**. Y 1.012 reivindicaciones acumuladas en el año según otro recuento |
+| 2026-11-18 | **Listado de NVIDIA**, con cuenta atrás de ~234 h al 28 de noviembre, **sin ficheros de muestra, sin documentos y sin cifra de rescate**. ~1.123 víctimas en 95 países según un rastreador. **La compañía declara no haber encontrado indicio de afectación de sus sistemas, e investiga un incidente separado en un proveedor de servicios** (§E-2.2) |
 
 ## O-6.1 Actividad confirmada en Chile y Latinoamérica
 
@@ -1168,6 +1239,7 @@ de A.3.
 |---|---|---|
 | 1.0 | 2026-09-15 | Emisión inicial. Todo-fuente externa; §O-4 pendiente de telemetría propia |
 | 1.1 | 2026-09-15 | **Incorporación del eje regional Chile/LATAM** (fuentes 13–17): nuevo KJ-7; §E-2.1 con contexto chileno y obligación regulatoria; §O-6.1 con cronología regional y contraste con la alerta `AIA26-00012` del CSIRT Nacional; hipótesis de caza H-10 a H-12; detecciones D-13 y D-14; decisiones E-f a E-h; brechas G-8 a G-11. **Cambio de juicio:** el acceso inicial deja de considerarse exclusivamente por explotación de CVE — se añade la vía de cuenta válida con credenciales de infostealer como concurrente y no cubierta por el parcheo |
+| 1.3 | 2026-11-19 | **Actualización de victimología con las dos reivindicaciones de alto perfil de noviembre de 2026** (§E-2.2, nuevo `KJ-8`, cuatro filas nuevas en §O-6, fuentes 23–26). **La de NVIDIA está listada y no está confirmada**: sin ficheros de muestra, sin documentos y sin cifra de rescate, con negativa específica de la compañía sobre sus propios sistemas y con dos proveedores suyos listados semanas antes — de donde sale la hipótesis de que el grupo tenga material de un proveedor y haya listado la marca del cliente. **La de DirecTV no aparece en ninguna fuente** y se consigna como no corroborada con lo que se buscó, en lugar de omitirse. Se añaden los disparadores `I-a` a `I-d`. **La caducidad NO se extiende**: sigue en 2026-12-15, porque esta versión añade victimología y no revalida los juicios técnicos del documento, que son de septiembre de 2026 y necesitan revisión propia. **Sin cambios en los indicadores del Anexo A** |
 | 1.2 | 2026-11-16 | **Reclasificación de TLP:AMBER a TLP:CLEAR** por decisión del emisor, para publicación en el repositorio abierto `cti_daily`. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. **Sin cambios en los juicios analíticos ni en los indicadores.** Se mantiene PAP:AMBER |
 
 ## Anexo G — Realimentación del consumidor
@@ -1208,3 +1280,10 @@ de A.3.
 20. [ESET WeLiveSecurity — The Gentlemen: la nueva generación de ransomware que ataca a medida](https://www.welivesecurity.com/es/ransomware/the-gentlemen-la-nueva-generacion-de-ransomware-que-ataca-a-medida/) (2026-03-26)
 21. [a3sec — «The Gentlemen»: la creciente operación de RaaS constituye una grave amenaza en América Latina](https://a3sec.com/alertas/the-gentlemen-ransomware-as-a-service-amenaza-en-america-latina) (2026-04-07)
 22. [NetProvider — Ransomware en Chile y Latinoamérica 2026: ataques que cambiaron el escenario](https://www.netprovider.com/post/ransomware-en-chile-2026-ataques-que-cambiaron-el-escenario) (2026-03-10) — *fuente derivada, cita a CronUp*
+
+### Fuentes de la actualización de noviembre de 2026 (versión 1.3)
+
+23. [BleepingComputer — NVIDIA investigating Gentlemen ransomware breach claims](https://www.bleepingcomputer.com/news/security/nvidia-investigating-gentlemen-ransomware-breach-claims/) (2026-11) — **fuente de la declaración de la compañía**: no ha encontrado indicio de afectación de sus sistemas o redes, e investiga un incidente separado en un proveedor de servicios
+24. [SecurityWeek — Nvidia Responds to Gentlemen Ransomware Claim](https://www.securityweek.com/nvidia-responds-to-gentlemen-ransomware-claim/) (2026-11) — corrobora la respuesta de la compañía y la ausencia de muestras en el listado
+25. [Check Point Research — Thus Spoke…The Gentlemen](https://research.checkpoint.com/2026/thus-spoke-the-gentlemen/) (2026) — sitúa al grupo entre los de mayor volumen del mercado
+26. [Ransomware.live — Thegentlemen](https://www.ransomware.live/group/thegentlemen) (2026-11-18) — recuento de 1.123 reivindicaciones en 95 países. **Recuento de reivindicaciones, no de brechas verificadas**

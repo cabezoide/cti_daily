@@ -2242,6 +2242,220 @@
    "r": "CTI-2026-039",
    "d": "Cuando el mismo operador hace espionaje y extorsión, un cifrado puede ser la monetización de un acceso que el espionaje ya agotó, y una puerta trasera puede ser el preludio de un cifrado. La asimetría es lo peligroso: tratar un espionaje como extorsión cuesta restaurar con el adversario dentro y ESE ERROR NO SE DESCUBRE; tratar una extorsión como espionaje cuesta semanas de analista y sí se descubre. El sesgo organizativo empuja al primero. Seis artefactos discriminan, y el umbral es dos",
    "a": "-"
+  },
+  {
+   "id": "blacksuit",
+   "l": "BlackSuit",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-040",
+   "d": "Tercera generación del linaje Conti → Royal → BlackSuit. Más de 500 millones de dólares exigidos en total, con demandas de 1 a 10 millones y un máximo individual de 60. DESARTICULADA el 24-07-2025 en Operation Checkmate: cuatro servidores, nueve dominios y más de un millón en criptomoneda, con dieciséis agencias de nueve países. CERO DETENCIONES. Su enfoque de cifrado parcial con porcentaje elegible por el actor —que el aviso oficial llama «único»— es el mecanismo que hace auditable su vínculo con el sucesor",
+   "a": "oficial",
+   "af": "Aviso conjunto del FBI y CISA AA23-061A, publicado el 02-03-2023 y revisado cuatro veces. La revisión del 07-08-2024 documenta el cambio de nombre de Royal a BlackSuit y declara que comparte numerosas similitudes de código"
+  },
+  {
+   "id": "royal",
+   "l": "Royal",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-040",
+   "d": "Generación anterior, de septiembre de 2022 a junio de 2023. El aviso oficial declara que BlackSuit es su evolución. Su procedencia de Conti la sostienen la prensa especializada y los perfiles de actor, NO el aviso oficial: el primer eslabón del linaje es más débil que el segundo y conviene no citar los dos con el mismo peso",
+   "a": "oficial",
+   "af": "AA23-061A mantiene el nombre Royal sólo cuando se refiere a actividad heredada"
+  },
+  {
+   "id": "chaos",
+   "l": "Chaos (RaaS)",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-040",
+   "d": "EL SUCESOR, Y YA ESTABA FUNCIONANDO: surgió en febrero de 2025, cinco meses ANTES de que se incautaran los servidores de BlackSuit. No hubo reaparición porque no hizo falta aparecer. Extorsión como servicio en el foro de habla rusa RAMP, con cuota de entrada reembolsable con el primer cobro. Vector inicial: una LLAMADA DE TELÉFONO suplantando a soporte informático, pidiendo a la víctima que lance Quick Assist. Declara excluir países BRICS y CEI, hospitales y gobierno — lo que cubre a Brasil y a ningún otro país de la región",
+   "a": "proveedor",
+   "af": "Cisco Talos lo valora con CONFIANZA MODERADA como reconversión de BlackSuit o como obra de antiguos miembros, por metodología de cifrado, estructura de la nota y conjunto de herramientas. Este informe identifica el mecanismo concreto de la primera: el porcentaje de cifrado como parámetro del operador"
+  },
+  {
+   "id": "chaosbuilder",
+   "l": "Constructor «Chaos» (NO es el grupo)",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-040",
+   "d": "Herramienta constructora homónima, SIN RELACIÓN con el grupo. Talos declara que el grupo usa el mismo nombre PARA CREAR CONFUSIÓN, explotando la que ya había en la comunidad de seguridad. Es la primera colisión de nombres INTENCIONADA que documenta esta cartera: CTI-2026-035 desambiguó cuatro cosas llamadas «Medusa» que coincidían por accidente. Una búsqueda de «Chaos ransomware» devuelve material de otra cosa",
+   "a": "-"
+  },
+  {
+   "id": "checkmate",
+   "l": "Lo que una desarticulación consigue",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-040",
+   "d": "Una desarticulación no actúa sobre «una operación»: actúa sobre activos con tiempos de reemplazo muy distintos. Aquí se incautó lo reemplazable en días —servidores, dominios, portales—, algo que cuesta meses —la reputación del sitio de filtración— y lo único irrecuperable —los fondos ya cobrados—; y NO se tocó lo no reemplazable: operadores, accesos vigentes y código. TRES CASOS de esta cartera muestran además que el reemplazo PRECEDE a la intervención: −2 meses en CTI-2026-036, −5 meses aquí. No hay ventana de respiro porque no hay reconstrucción: hay mudanza",
+   "a": "-"
+  },
+  {
+   "id": "vishinghelpdesk",
+   "l": "La mesa de ayuda como vector",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-040",
+   "d": "Inundación de correo basura → la víctima llama → el operador suplanta a seguridad informática → le pide lanzar Quick Assist → le pide conectarse a su sesión. Los pasos 1 a 4 NO dejan ningún artefacto distinguible, y el primero técnico aparece cuando el adversario ya está dentro. El único control que corta la cadena es organizativo y no tiene dueño en Seguridad: cómo verifica la mesa de ayuda quién llama. Y la pieza que se omite es la tercera: PERMISO EXPLÍCITO PARA COLGAR",
+   "a": "-"
+  },
+  {
+   "id": "ipsbandaancha",
+   "l": "Seis direcciones que NO hay que bloquear",
+   "t": "servicio",
+   "p": "latam",
+   "r": "CTI-2026-040",
+   "d": "De las 71 direcciones del aviso oficial AA23-061A, SEIS están registradas a entidades latinoamericanas y CINCO son banda ancha: UNE EPM y Telmex en Colombia, Telecom Argentina y NODOSUD en Argentina — verificado por RDAP el 19-11-2026. Son terceros comprometidos usados como tránsito, no infraestructura del adversario: la región aparece como TRAYECTO, igual que en CTI-2026-036. El propio aviso pide investigarlas antes de bloquear. Van con tipo artefacto para que no entren en los agregados planos",
+   "a": "-"
+  },
+  {
+   "id": "anubisransom",
+   "l": "Anubis (RaaS)",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "Reconversión de Sphinx desde diciembre de 2024: binarios «altamente idénticos» con una sola diferencia, la función que genera la nota. ~96 víctimas en doce meses, 52 % en EE. UU. — y DOS PAÍSES DE LA REGIÓN: Chile, con Empresas Copec S.A. publicada en enero de 2026, y Perú, ya documentado en junio de 2025 cuando el sitio de fugas tenía SIETE entradas. NO declara ninguna lista de exclusión, al contrario que Chaos. Y en los dos ataques documentados con detalle el CIFRADO FUE BLOQUEADO y la extorsión siguió sobre los datos ya robados",
+   "a": "proveedor",
+   "af": "Trend Micro y Symantec establecen la reconversión desde Sphinx por COMPARACIÓN DE BINARIOS, por separado y sin citarse. Es la reconversión mejor establecida de esta cartera, frente a la de BlackSuit → Chaos, que es de confianza moderada e inferida de conducta"
+  },
+  {
+   "id": "hawkmoth",
+   "l": "Hawkmoth (grupo desarrollador)",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "Designación de Symantec para el grupo que DESARROLLA el cifrador y opera el programa de afiliados — distinto de los afiliados que ejecutan cada ataque. Tres programas con repartos NEGOCIABLES: extorsión como servicio, extorsión por datos SIN CIFRADO, y monetización de accesos para atraer corredores. El segundo es la explicación estructural de por qué bloquear el cifrador no le quita el negocio",
+   "a": "proveedor"
+  },
+  {
+   "id": "sphinxransom",
+   "l": "Sphinx",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "Generación anterior. La muestra identificada en diciembre de 2024 estaba EN DESARROLLO: su nota de rescate carecía de sitio Tor y de identificador único. Entre esa muestra y las noventa y seis víctimas reclamadas hay menos de dos años",
+   "a": "proveedor"
+  },
+  {
+   "id": "wipemode",
+   "l": "/WIPEMODE",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "Rompe la lógica económica de la extorsión: vacía el CONTENIDO de los ficheros, que quedan listados a 0 KB, sin recuperación. En un cifrado, pagar compra una probabilidad de recuperación; frente a un borrado NO HAY NADA QUE COMPRAR, y la copia inmutable deja de ser el plan B y pasa a ser el único instrumento de negociación que la víctima tiene. PERO NO HAY NINGÚN USO DOCUMENTADO contra una víctima real: la capacidad está probada en laboratorio y el empleo es hipotético. Citarlo sin esa salvedad es el riesgo 1 del pre-mortem",
+   "a": "-"
+  },
+  {
+   "id": "lindnor",
+   "l": "Backdoor.Lindnor",
+   "t": "herramienta",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "Puerta trasera PROPIA, inusual entre operadores de extorsión, que suelen tirar de herramientas públicas y del propio sistema. Instalada como servicio, disfrazada de componente de Chrome y de fichero de VMware, en los DOS ÚNICOS servidores de base de datos del conjunto. C2 primario y de reserva, los dos por el 443. Y apareció en DOS ORGANIZACIONES MÁS sin ninguna actividad de cifrado: para aquéllas, el hash fue el único indicio",
+   "a": "proveedor"
+  },
+  {
+   "id": "byovd",
+   "l": "BYOVD: el controlador firmado y vulnerable",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "NO SE BLOQUEA POR HASH: son controladores legítimos con FIRMA VÁLIDA, y un control basado en reputación de firma no ve nada. Se bloquean con la lista de controladores vulnerables del fabricante del sistema. Trece ejecutables y cinco controladores en una hora, dos de ellos suplantando a un producto de seguridad y con conmutadores para LISTAR Y ELIMINAR las retrollamadas del núcleo. Y la técnica llega ya empaquetada con las ofertas de extorsión como servicio",
+   "a": "-"
+  },
+  {
+   "id": "bloqueoesalerta",
+   "l": "El bloqueo es la alerta",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "La única medida de este lote que convierte un control YA EXISTENTE en una detección que no existía. Trece ejecutables desplegados en una hora, DOCE BLOQUEADOS: es fuerza bruta de evasión —probar una herramienta tras otra hasta que algo funcione— y una fuerza bruta es ruidosa por definición. Doce bloqueos consecutivos en sesenta minutos no es un falso positivo. Y casi nadie tiene la regla porque las organizaciones alertan sobre lo que pasó, no sobre lo que se intentó y se bloqueó",
+   "a": "-"
+  },
+  {
+   "id": "relatoextorsion",
+   "l": "Leer el relato del extorsionador",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-041",
+   "d": "La victimología de la extorsión la publica el extorsionista, y un sitio de fugas es antes que nada PUBLICIDAD. En el caso chileno los tres relatos —comunicado de la víctima, cifras del atacante y su admisión de que el cifrado fue mitigado— parecen contradecirse y son COMPATIBLES: responden a preguntas distintas, la víctima sobre disponibilidad y datos de clientes, el atacante sobre confidencialidad de datos internos. Regla de oro: lo que un extorsionador admite EN SU PROPIO PERJUICIO es la parte más creíble de su relato",
+   "a": "-"
+  },
+  {
+   "id": "copec",
+   "l": "Caso Copec (Chile, enero de 2026)",
+   "t": "modelo",
+   "p": "latam",
+   "r": "CTI-2026-041",
+   "d": "El único caso de este lote con víctima regional nombrada, comunicado público de la compañía Y entrevista del atacante. El atacante declara 6 TB, acceso por la VPN corporativa, exfiltración de casi una semana A BAJA VELOCIDAD por puertas traseras, y que la defensa SÍ mitigó el cifrado. La compañía declara acceso no autorizado a un sistema de almacenamiento interno, datos de clientes no comprometidos y operación no afectada. Lo publicado incluía expedientes de personal y una hoja con 1.969 registros: la casilla que el comunicado dejó vacía",
+   "a": "-"
+  },
+  {
+   "id": "devman",
+   "l": "Devman · Funky Mantis",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-042",
+   "d": "RaaS INDUSTRIALIZADO con portal de afiliados: generación de cargas, finanzas, chat con la víctima, expedientes, equipos y nómina. Cinco roles identificados, tutor asignado a cada afiliado, y expulsión si pasa un mes sin una víctima nueva. 184 víctimas reclamadas y NINGUNA desde el 04-02-2026, sin que nadie la desarticulara: hubo un desenmascaramiento en junio de 2025 y después silencio. Su víctima regional es la Clínica Dávila de Santiago, diciembre de 2025, por VPN",
+   "a": "proveedor",
+   "af": "PRODAFT lo rastrea como Funky Mantis y valora con CONFIANZA MODERADA que la persona tras el alias sigue activa, ya no dirigiendo un programa sino trabajando como afiliado de otros grupos. El informe original NO fue accesible: brecha G-1"
+  },
+  {
+   "id": "direwolf",
+   "l": "Dire Wolf",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-042",
+   "d": "El único de los tres que está ACTIVO Y ACELERANDO: de once países en junio de 2025 a cien víctimas en treinta y dos países en agosto de 2026, con 43 nuevas en un solo mes. Binario en Go empaquetado con UPX, cifrador CONSTRUIDO A MEDIDA PARA CADA VÍCTIMA —lo que hace estructuralmente inútil el nivel de los hashes— y notas con identificador de sala y credenciales propias de cada víctima. Plazo de UN MES, frente a las ventanas de dos a tres días de Devman",
+   "a": "proveedor",
+   "af": "Dos NEGATIVOS declarados, que valen más que una lista de alias: equipo nuclear reducido SIN programa amplio de afiliados, y sin solapamiento de infraestructura con Akira, Fog, Qilin ni SafePay. Alerta crítica del centro nacional de ciberseguridad de Singapur"
+  },
+  {
+   "id": "sauronransom",
+   "l": "Sauron (¿grupo?)",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-042",
+   "d": "Este informe sostiene que NO es comparable con los otros dos y probablemente NO es un grupo. Lo que hay: extensión .Sauron con identificador de víctima y CORREO DEL ATACANTE, nota #HowToRecover.txt, primera observación el 01-10-2024. Lo que NO hay, en dos años: sitio de filtración, análisis primario, aviso de autoridad, víctima nombrada. Y las herramientas públicas no identifican la familia, así que no hay descifrador. El contacto por CORREO en lugar de por portal es el rasgo que separa una herramienta de una marca",
+   "a": "proveedor",
+   "af": "Juicio de confianza BAJA, y el límite es de nuestra colección tanto como del objeto: la ausencia de análisis primario puede ser un hueco propio"
+  },
+  {
+   "id": "accesoporpais",
+   "l": "El programa reparte el acceso",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-042",
+   "d": "El hallazgo del informe. Los administradores ofrecían «REDES» POR PAÍS, preguntaban al afiliado si usaría acceso propio o suministrado, e imponían ventanas de ejecución de DOS A TRES DÍAS. Si el programa distribuye accesos por país, la victimología regional es función de QUÉ ACCESOS TIENE EL PROGRAMA y no de qué elige el afiliado — lo que convierte al mercado de corredores en el determinante real, y hace que la defensa sea que NO EXISTA UN ACCESO VENDIBLE a nuestra red",
+   "a": "-"
+  },
+  {
+   "id": "scadaclaim",
+   "l": "La reclamación del cifrador para SCADA",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-042",
+   "d": "RECLAMACIÓN DEL ADVERSARIO EN UNA ENTREVISTA, SIN VERIFICAR. Devman afirmó un cifrador que empuja los sistemas de control «más allá de sus parámetros de operación, procesadores, memoria y límites térmicos... hasta que el hardware falle». Lo que SÍ está documentado es su política: anima a atacar infraestructura crítica e instruye a pedir cifrador aparte para SCADA. La política corrobora que el producto se ofrece; NO que haga lo que el actor dice. Un actor CRIMINAL con capacidad de daño físico sería un cruce de categoría: un Estado la usa cuando lo ordena una decisión política; un afiliado, cuando mejore su posición negociadora",
+   "a": "-"
+  },
+  {
+   "id": "triajenombres",
+   "l": "Triar un nombre nuevo",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-042",
+   "d": "Casi todo el crecimiento de publicaciones en sitios de filtración del tercer trimestre de 2026 vino de grupos RECIÉN OBSERVADOS, y esas listas mezclan ataques nuevos, cambios de marca, datos reciclados y reclamaciones sin respaldo. Siete criterios, y el más discriminante es también el más barato: CÓMO CONTACTA LA VÍCTIMA. Un portal de negociación por víctima exige infraestructura, mantenimiento y personal: es una operación. Una dirección de correo no exige nada: es una herramienta, y puede estar en manos de cualquiera",
+   "a": "-"
+  },
+  {
+   "id": "davila",
+   "l": "Caso Clínica Dávila (Chile, dic. 2025)",
+   "t": "modelo",
+   "p": "latam",
+   "r": "CTI-2026-042",
+   "d": "La única víctima regional nombrada de los tres actores, y el SEGUNDO caso chileno de este lote por acceso remoto — cinco semanas antes del de CTI-2026-041, en otro sector y de otro grupo. Entrada reportada por VPN CON USUARIO Y CONTRASEÑA IDÉNTICOS. El atacante reclama más de 250 GB de registros de pacientes y publicó parte al no cobrar; la institución reconoció «un incidente de un tercero» sin confirmar extorsión ni afectación de pacientes. Y marca el límite exacto de la regla ética del programa: prohíbe la salud INFANTIL, no la salud",
+   "a": "-"
   }
  ],
  "aristas": [
@@ -3749,6 +3963,196 @@
    "winntielf",
    "dusttrap",
    "deriva"
+  ],
+  [
+   "royal",
+   "blacksuit",
+   "deriva"
+  ],
+  [
+   "blacksuit",
+   "chaos",
+   "deriva"
+  ],
+  [
+   "chaos",
+   "chaosbuilder",
+   "noesalias"
+  ],
+  [
+   "chaos",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "blacksuit",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "royal",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "chaos",
+   "vishinghelpdesk",
+   "abusa"
+  ],
+  [
+   "blacksuit",
+   "checkmate",
+   "contiene"
+  ],
+  [
+   "blacksuit",
+   "ipsbandaancha",
+   "abusa"
+  ],
+  [
+   "chaos",
+   "iab",
+   "usa"
+  ],
+  [
+   "blacksuit",
+   "iab",
+   "usa"
+  ],
+  [
+   "sphinxransom",
+   "anubisransom",
+   "deriva"
+  ],
+  [
+   "hawkmoth",
+   "anubisransom",
+   "suministra"
+  ],
+  [
+   "anubisransom",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "sphinxransom",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "anubisransom",
+   "wipemode",
+   "contiene"
+  ],
+  [
+   "anubisransom",
+   "lindnor",
+   "usa"
+  ],
+  [
+   "anubisransom",
+   "byovd",
+   "abusa"
+  ],
+  [
+   "anubisransom",
+   "copec",
+   "explota"
+  ],
+  [
+   "anubisransom",
+   "relatoextorsion",
+   "contiene"
+  ],
+  [
+   "lindnor",
+   "bloqueoesalerta",
+   "vinculado"
+  ],
+  [
+   "byovd",
+   "bloqueoesalerta",
+   "vinculado"
+  ],
+  [
+   "anubisransom",
+   "iab",
+   "usa"
+  ],
+  [
+   "anubisransom",
+   "chaos",
+   "noesalias"
+  ],
+  [
+   "anubisransom",
+   "medusaransom",
+   "noesalias"
+  ],
+  [
+   "devman",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "direwolf",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "devman",
+   "accesoporpais",
+   "contiene"
+  ],
+  [
+   "devman",
+   "scadaclaim",
+   "contiene"
+  ],
+  [
+   "devman",
+   "davila",
+   "explota"
+  ],
+  [
+   "devman",
+   "iab",
+   "usa"
+  ],
+  [
+   "accesoporpais",
+   "iab",
+   "vinculado"
+  ],
+  [
+   "devman",
+   "sauronransom",
+   "noesalias"
+  ],
+  [
+   "direwolf",
+   "sauronransom",
+   "noesalias"
+  ],
+  [
+   "devman",
+   "direwolf",
+   "noesalias"
+  ],
+  [
+   "sauronransom",
+   "triajenombres",
+   "vinculado"
+  ],
+  [
+   "devman",
+   "relatoextorsion",
+   "vinculado"
+  ],
+  [
+   "devman",
+   "checkmate",
+   "vinculado"
   ]
  ]
 }
