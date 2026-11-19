@@ -178,6 +178,21 @@ python3 tools/cti_build.py --json     # estado de vigencia en JSON
 
 Ese cuarto punto es el que mueve el ciclo: un informe caducado o a menos de catorce días de caducar es un informe que hay que volver a investigar hoy.
 
+**La pieza intermedia** la hace `tools/cti_vigilancia.py`. Sí toca la red, y es lo único de este repositorio que lo hace:
+
+```bash
+python3 tools/cti_vigilancia.py                # recoge, compara y escribe el parte del día
+python3 tools/cti_vigilancia.py --inicializar  # crea la línea base (primera ejecución)
+python3 tools/cti_vigilancia.py --sin-red      # sólo lo local: vigencia y disparadores
+python3 tools/cti_vigilancia.py --silencio 21  # días sin víctimas para declarar mudo a un actor
+```
+
+Consulta las dos fuentes que esta cartera tiene verificadas, empareja cada informe con el actor que le corresponde por sus alias, y **compara contra la línea base de ayer**: víctimas nuevas —con las dos fechas, publicación y ataque declarado—, víctimas nuevas **en países prioritarios**, países nuevos alcanzados, sitios de filtración que aparecen o caen, cambios de inventario de herramientas y TTP, direcciones de mando y control nuevas **descontando las que ya están en `ioc_index.csv`**, actores de las fuentes que no tienen informe, y actores que han enmudecido. El resultado va a `vigilancia/parte-<fecha>.md`, que se versiona, y a un `.json` del mismo día, que no.
+
+Lleva **seis reglas de higiene codificadas** —cada una aprendida equivocándose, con el informe que lo documenta citado en el propio script—: las dos fechas de una víctima, los parámetros explícitos que evitan la respuesta silenciosa a otra pregunta, que los prefijos objetivo son víctimas y no indicadores, que la línea base no guarda nombres de víctima sino hashes, que nada se da por nuevo sin comprobarlo contra el índice, y que el *front-end* y la API de una fuente pueden no coincidir. Y **nunca degrada la línea base**: si una fuente no responde, arrastra la anterior y marca el parte como colección parcial, porque un día sin colección no es un día sin cambios.
+
+Lo que este script **no** hace es decidir. Prepara la decisión y la pone delante.
+
 **La mitad que exige criterio** es la investigación. Ningún script puede decidir si hay información nueva sobre un actor, si una fuente nueva corrobora o contradice un juicio, o si un indicador sigue vivo. Eso lo hace un analista —o un agente con acceso a fuentes— leyendo el informe, revisando sus fuentes y, si hay algo nuevo:
 
 - actualiza el `.md`, que es la fuente única;
@@ -186,6 +201,8 @@ Ese cuarto punto es el que mueve el ciclo: un informe caducado o a menos de cato
 - y vuelve a ejecutar el constructor.
 
 Un informe que se reemite sin que ningún juicio haya cambiado no necesita versión nueva: necesita que se revise su fecha de caducidad.
+
+Esa mitad está empaquetada como skill invocable: **`/vigilancia-cti`** ejecuta el recolector, tría el parte por prioridad, investiga sólo lo que el triaje promovió —con la contramedida de la búsqueda ingenua antes de cerrar cualquier veredicto negativo—, aplica las actualizaciones con las convenciones de la casa y verifica la higiene empíricamente. **No confirma ni empuja a git**: eso se pide aparte.
 
 ---
 

@@ -11,3 +11,8 @@ render.zip
 __pycache__/
 *.pyc
 .DS_Store
+
+# Vigilancia diaria: el parte en Markdown SÍ se versiona —es el historial de lo
+# que se vio cada día— pero el JSON no: pesa ~55 KB por jornada, sólo lo consume
+# la skill el mismo día, y un año de ellos serían 20 MB sin valor histórico.
+vigilancia/parte-*.json
