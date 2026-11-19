@@ -1615,7 +1615,7 @@
    "r": "CTI-2026-043",
    "d": "Canal de C2 ENTERO sobre nube corporativa: GitHub para órdenes, SharePoint para datos, Ably para el túnel. Gobiernos de Asia y África. Ninguna víctima americana. Cero días cero: entra por un MeshAgent que ya estaba",
    "a": "proveedor",
-   "af": "Kaspersky NO atribuye: dice «grupo de habla china» sin probar vínculo directo. Sophos dice «con base en China» como SOSPECHA, apoyada en horario UTC+8 y solapamiento geográfico. Aportación propia: los campos `dhj_exe` (iniciales de pinyin de «DLL 劫持») e `is_need_lock` (calco de «是否需要锁») sitúan el desarrollo en habla china por una vía independiente"
+   "af": "Kaspersky NO atribuye: dice «grupo de habla china» sin probar vínculo directo. Sophos dice «con base en China» como SOSPECHA, apoyada en horario UTC+8 y solapamiento geográfico."
   },
   {
    "id": "bronzesandcastle",
@@ -1862,9 +1862,9 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-037",
-   "d": "Unidad militar 26165 del 85.º GTsSS de la GRU, más su subgrupo Storm-2754. Espionaje, NO destrucción. Opera TRES doctrinas de infraestructura a la vez —relé selectivo en proximidad al objetivo, recolección oportunista a escala planetaria y abuso de red en tránsito—, y por eso nos pone en tres casillas distintas a la vez: ése era el error de esta cartera, suponer que un actor tiene UNA doctrina. Dos datos regionales: organizaciones de gobierno en CENTROAMÉRICA (Lumen) y un objetivo militar de ECUADOR en julio de 2024 (ESET)",
+   "d": "Unidad militar 26165 del 85.º GTsSS de la GRU, más su subgrupo Storm-2754. Espionaje, NO destrucción. Opera TRES doctrinas de infraestructura a la vez, y por eso cae en tres casillas distintas: el error de esta cartera fue suponer que un actor tiene UNA. Datos regionales: Centroamérica y Ecuador",
    "a": "oficial",
-   "af": "JCSA-20240227-001 lo firman el FBI, la NSA, el Mando Ciberespacial de EE. UU. y diez socios internacionales, BRASIL entre ellos. AA25-141A lo firman veintiuna organizaciones. El Reino Unido sancionó la unidad 26165 y dieciocho oficiales nominalmente el 18-07-2025"
+   "af": "JCSA-20240227-001 lo firman el FBI, la NSA, el Mando Ciberespacial de EE. UU. y diez socios internacionales, BRASIL entre ellos. AA25-141A lo firman veintiuna organizaciones."
   },
   {
    "id": "spypress",
@@ -1872,7 +1872,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-037",
-   "d": "Cuatro cargas de JavaScript —HORDE, MDAEMON, ROUNDCUBE, ZIMBRA— que viven en el cuerpo de un correo y se ejecutan en la sesión autenticada del portal. SIN fichero, SIN proceso, SIN persistencia en el puesto. Ofuscador que aleatoriza por muestra: cada carga tiene un hash distinto, así que ingerir hashes es una formalidad. La de MDaemon roba el secreto TOTP y crea una contraseña de aplicación",
+   "d": "Cuatro cargas de JavaScript —HORDE, MDAEMON, ROUNDCUBE, ZIMBRA— que viven en el cuerpo de un correo y se ejecutan en la sesión autenticada del portal. SIN fichero, SIN proceso, SIN persistencia. El ofuscador aleatoriza por muestra: ingerir hashes es una formalidad",
    "a": "proveedor",
    "af": "ESET atribuye Operation RoundPress a este actor con CONFIANZA MEDIA, por similitud de remitentes y una configuración singular de servidor compartida con un dominio atribuido por Qianxin"
   },
@@ -1882,7 +1882,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-037",
-   "d": "Recuperado de un directorio abierto en enero de 2026: 61 ficheros, 36 subdirectorios, versión de desarrollo JUNTO a la de producción e historial de órdenes del operador. SEIS operaciones simultáneas al abrirse el correo. Añade un canal lateral por CSS, robo de credenciales del navegador y un implante Go — cuatro capacidades no documentadas antes en este actor",
+   "d": "Directorio abierto recuperado en enero de 2026: 61 ficheros, versión de desarrollo JUNTO a la de producción e historial de órdenes del operador. SEIS operaciones simultáneas al abrirse el correo. Añade canal lateral por CSS, robo de credenciales del navegador e implante Go",
    "a": "proveedor",
    "af": "Hunt.io lo atribuye con confianza media-alta por catorce solapamientos con RoundPress, siete exactos. Es atribución APOYADA EN OTRA atribución de confianza media: no se debe colapsar"
   },
@@ -1892,7 +1892,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-037",
-   "d": "ELF Go estático y despojado, 5,2 MB, con TRES persistencias: cron a /.img cada minuto como root, linux.service instalado desde /boot, y generación de una política propia de SELinux con audit2allow para autorizarse a sí mismo. Las tres comprobaciones bastan para abrir incidente sin necesidad del hash",
+   "d": "ELF Go estático y despojado, 5,2 MB, con TRES persistencias: cron a /.img cada minuto como root, linux.service instalado desde /boot, y política propia de SELinux generada con audit2allow para autorizarse a sí mismo. Las tres comprobaciones abren incidente sin el hash",
    "a": "proveedor"
   },
   {
@@ -1901,7 +1901,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "NO ES SUYA: red de bots DELICTIVA preexistente, basada en Mirai, que la GRU se limitó a aprovechar. Entrada por CREDENCIAL POR OMISIÓN y OpenSSH troyanizado — cero CVE, nada que parchear. Desarticulada por orden judicial estadounidense en febrero de 2024 (operación Dying Ember). Escribe un resolutor PÚBLICO de OpenDNS en /etc/resolv.conf: es el único elemento de DNS del expediente, y NO es intermediación",
+   "d": "NO ES SUYA: red de bots delictiva preexistente, basada en Mirai, que la GRU se limitó a aprovechar. Entrada por CREDENCIAL POR OMISIÓN y OpenSSH troyanizado — cero CVE. Desarticulada por orden judicial en febrero de 2024. Su único elemento de DNS NO es intermediación",
    "a": "oficial",
    "af": "Desarticulada por orden judicial estadounidense en febrero de 2024; el aviso conjunto publica indicadores identificados por el FBI"
   },
@@ -1931,7 +1931,7 @@
    "t": "servicio",
    "p": "cn",
    "r": "CTI-2026-037",
-   "d": "EL DUEÑO REAL DE CVE-2023-50224, y está en este grafo para que no se confunda con APT28. Unos 8.000 enrutadores domésticos TP-Link simultáneos, de los que ~20 % pulveriza contraseñas contra Microsoft 365 SIN selección de objetivo. Doctrina opuesta a la de APT28 en todo: escala, indiferencia al relé y ruido",
+   "d": "EL DUEÑO REAL DE CVE-2023-50224, y está aquí para que no se confunda con APT28. Unos 8.000 enrutadores TP-Link domésticos simultáneos, de los que ~20 % pulveriza contraseñas contra Microsoft 365 SIN selección de objetivo. Doctrina opuesta en todo: escala, indiferencia y ruido",
    "a": "proveedor",
    "af": "Microsoft la describe como establecida y mantenida por un actor situado en CHINA. El propio fabricante del equipo afectado la atribuye a actores de amenaza chinos en su nota pública"
   },
@@ -1950,7 +1950,7 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "EL ELEMENTO EN DISPUTA. Con certeza es el primer eslabón de la cadena de Quad7, que es china. Y, según un agregador comercial y NINGUNA fuente primaria, también el acceso inicial de FrostArmada. Microsoft no nombra vulnerabilidad ni marca; el Departamento de Justicia dice «vulnerabilidades conocidas» sin identificarlas. PARCHEAR SÍ; no usar para atribuir: si aparece un equipo comprometido por este fallo, no dice quién está detrás",
+   "d": "EL ELEMENTO EN DISPUTA. Con certeza es el primer eslabón de Quad7, que es china; y según un agregador comercial —ninguna fuente primaria— también el acceso de FrostArmada. PARCHEAR SÍ; no usar para atribuir: un equipo comprometido por este fallo no dice quién está detrás",
    "a": "-"
   },
   {
@@ -1959,7 +1959,7 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "CVE-2020-35730 y CVE-2023-43770 (Roundcube), CVE-2024-11182 (MDaemon, DÍA CERO del propio actor), CVE-2024-27443 (Zimbra) y un fallo de Horde de 2007 cuyo exploit NO funcionaba. Más CVE-2020-12641 y CVE-2021-44026, que permiten EJECUCIÓN DE ÓRDENES. Y CVE-2023-23397 en Outlook, explotado como día cero desde 2022 y SEGUIDO EXPLOTANDO después del parche",
+   "d": "Roundcube (CVE-2020-35730, CVE-2023-43770), MDaemon (CVE-2024-11182, DÍA CERO del propio actor), Zimbra (CVE-2024-27443) y un fallo de Horde de 2007 cuyo exploit NO funcionaba. Más CVE-2023-23397 en Outlook, explotado como día cero y SEGUIDO EXPLOTANDO tras el parche",
    "a": "-"
   },
   {
@@ -1968,7 +1968,7 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "Hueco en la lista de permitidos de objetos OLE de Office: Shell.Explorer y .2 llevan años bloqueados, .1 nunca entró. El RTF no lleva carga: sólo instancia el objeto, que navega a un .lnk remoto por el motor HEREDADO de Internet Explorer, sin SmartScreen ni Smart App Control. oleid NO lo ve. Tres días entre el parche fuera de ciclo y la explotación observada",
+   "d": "Hueco en la lista de permitidos de objetos OLE de Office: Shell.Explorer y .2 llevan años bloqueados, .1 nunca entró. El RTF no lleva carga: instancia el objeto, que navega a un .lnk remoto por el motor HEREDADO de Internet Explorer. oleid NO lo ve. Tres días entre parche y explotación",
    "a": "-"
   },
   {
@@ -1977,7 +1977,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "NO BLOQUEAR: ngrok, webhook.site, mocky.io y pipedream son herramientas de desarrollo en uso corriente, y el resto son proveedores de DNS dinámico doméstico. El aviso conjunto recomienda ALERTAR con excepciones, no bloquear. Incluye *.000.pe, alojamiento gratuito bajo el dominio de primer nivel de PERÚ: material directo de CTI-2026-018",
+   "d": "NO BLOQUEAR: ngrok, webhook.site, mocky.io y pipedream son herramientas de desarrollo en uso corriente, y el resto proveedores de DNS dinámico doméstico. El aviso conjunto recomienda ALERTAR con excepciones. Incluye *.000.pe, alojamiento gratuito bajo el TLD de PERÚ",
    "a": "-"
   },
   {
@@ -1986,7 +1986,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "Más de 10.000 cámaras seleccionadas por RTSP desde marzo de 2022, 81 % en Ucrania, para seguir el movimiento de material de ayuda — incluidas CÁMARAS DE TRÁFICO MUNICIPALES. Quinto caso del hueco organizativo de CTI-2026-034 sobre otra clase de plataforma: la compra Tránsito, la administra Tránsito, no está en el inventario de nadie y su credencial es la de fábrica. Y el dato que produce —la geometría del territorio y el calendario de lo que pasa por él— no se puede cambiar después",
+   "d": "Más de 10.000 cámaras seleccionadas por RTSP desde marzo de 2022, 81 % en Ucrania, para seguir el movimiento de material de ayuda — incluidas CÁMARAS DE TRÁFICO MUNICIPALES. Quinto caso del hueco de CTI-2026-034: la compra Tránsito, la administra Tránsito, no está en ningún inventario",
    "a": "-"
   },
   {
@@ -1995,9 +1995,9 @@
    "t": "clúster",
    "p": "ru",
    "r": "CTI-2026-037",
-   "d": "Generación 3 del mismo mecanismo: secuestro de DNS en el enrutador ajeno para montar intermediación sobre TLS contra Outlook en la web. Resolutores sustituidos, propagación SOLA por DHCP, dnsmasq del adversario en el puerto 53. 18.000 direcciones en más de 120 países en el pico de diciembre de 2025; más de 200 organizaciones y 5.000 equipos domésticos. SIETE DE OCHO FASES ocurren fuera de nuestro alcance, y lo único observable es un aviso de certificado que el usuario descartó",
+   "d": "Generación 3 del mismo mecanismo: secuestro de DNS en el enrutador ajeno para montar intermediación sobre TLS contra Outlook en la web. Propagación SOLA por DHCP, dnsmasq del adversario en el puerto 53. 18.000 direcciones en 120 países en el pico de diciembre de 2025",
    "a": "oficial",
-   "af": "Análisis de Microsoft Threat Intelligence del 07-04-2026 más desarticulación judicial del Departamento de Justicia, el FBI, la NSA, el gobierno polaco y el NCSC británico el mismo día. El FBI restableció los resolutores de los equipos por orden judicial"
+   "af": "Análisis de Microsoft Threat Intelligence del 07-04-2026 más desarticulación judicial del Departamento de Justicia, el FBI, la NSA, el gobierno polaco y el NCSC británico el mismo día."
   },
   {
    "id": "storm2754",
@@ -2015,7 +2015,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "EL ÚNICO EVENTO OBSERVABLE de toda la cadena de FrostArmada, y por tanto el indicador de mayor valor del informe — que no es una dirección ni un hash. Microsoft es explícito: la interceptación del tráfico en claro SÓLO ocurre si el usuario desoye el aviso. El anclaje de certificado por gestión de dispositivos lo convierte en un error irrecuperable, es configuración y no compra, y protege al portátil FUERA de nuestra red, que es donde ocurre el ataque",
+   "d": "EL ÚNICO EVENTO OBSERVABLE de toda la cadena de FrostArmada, y el indicador de mayor valor del informe — que no es una dirección ni un hash. Microsoft es explícito: la interceptación SÓLO ocurre si el usuario desoye el aviso. El anclaje de certificado lo vuelve irrecuperable",
    "a": "-"
   },
   {
@@ -2024,7 +2024,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-037",
-   "d": "El hueco organizativo de CTI-2026-034 llevado a su extremo: no lo compró ningún área, no lo administra nadie de la organización, no está en ningún inventario y su credencial es la de fábrica. Y aun así decide qué dirección IP resuelve outlook.office.com para el portátil de la empresa cuando el empleado trabaja desde casa. No hay a quién pedirle que lo parchee",
+   "d": "El hueco organizativo de CTI-2026-034 en su extremo: no lo compró ningún área, no lo administra nadie, no está en ningún inventario y su credencial es la de fábrica. Y aun así decide qué dirección resuelve outlook.office.com para el portátil de la empresa",
    "a": "-"
   },
   {
@@ -2033,7 +2033,7 @@
    "t": "estado",
    "p": "ru",
    "r": "CTI-2026-038",
-   "d": "Servicio de Inteligencia Exterior ruso (SVR). Recoge INTENCIONES de política exterior, no capacidades: por eso «sus objetivos casi nunca cambian», y por eso la búsqueda retrospectiva contra él tiene retorno. NINGUNA víctima latinoamericana nombrada en diez fuentes. Pero dos conjuntos de exposición sí nos incluyen por construcción: las embajadas de países NO europeos situadas en Europa, y el viajero corporativo en cualquier hotel del mundo",
+   "d": "Servicio de Inteligencia Exterior ruso (SVR). Recoge INTENCIONES de política exterior, no capacidades: por eso sus objetivos casi nunca cambian. Ninguna víctima latinoamericana nombrada, pero dos conjuntos nos incluyen: las embajadas de países no europeos en Europa, y el viajero en hotel",
    "a": "oficial",
    "af": "Atribuido por los gobiernos de Estados Unidos y del Reino Unido al Servicio de Inteligencia Exterior de la Federación Rusa"
   },
@@ -2062,7 +2062,7 @@
    "t": "clúster",
    "p": "ru",
    "r": "CTI-2026-038",
-   "d": "Desde mayo de 2026: manipulación de DNS y HTTP en redes de hostelería servidas por portales cautivos EN TODO EL MUNDO. El primer paso lo da NUESTRO sistema operativo, al lanzar su comprobación de conectividad; el adversario responde con una falsa actualización. Hoteles, centros de congresos y recintos compartidos. Objetivo: la cuenta del viajero corporativo. Reanudada el 29-09-2026, dos meses después de ser divulgada",
+   "d": "Desde mayo de 2026: manipulación de DNS y HTTP en redes de hostelería servidas por portales cautivos EN TODO EL MUNDO. El primer paso lo da NUESTRO sistema operativo al lanzar su comprobación de conectividad; el adversario responde con una falsa actualización",
    "a": "proveedor",
    "af": "Microsoft la atribuye a Storm-2945 con telemetría propia. Black Lotus Labs apunta a varios proveedores de servicios gestionados de hostelería como acceso aguas arriba, que es lo que explica el rearme rápido"
   },
@@ -2072,7 +2072,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-038",
-   "d": "Cargador entregado en wine.zip con un PowerPoint LEGÍTIMO. Entra por la exportación PPMain y no por DllEntryPoint, así que no opera bajo el cerrojo del cargador. Y SÓLO establece persistencia si el directorio de trabajo no es System32: es decir, no persiste cuando lo está analizando alguien. Su evasión de escaneo de memoria es un reloj: PAGE_NOACCESS, diez segundos de espera para que el escáner llegue y no pueda leer, y después ejecución",
+   "d": "Cargador entregado en wine.zip con un PowerPoint legítimo. Entra por la exportación PPMain, no bajo el cerrojo del cargador. Y SÓLO persiste si el directorio de trabajo no es System32: no persiste cuando lo analizan. Su evasión de escaneo de memoria es un reloj de diez segundos",
    "a": "proveedor"
   },
   {
@@ -2091,7 +2091,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-038",
-   "d": "Troyano en Go con persistencia CUÁDRUPLE y una rutina de vigilancia que restaura lo que el defensor borre. Micrófono, cámara, pulsaciones, portapapeles, galletas desde la memoria del navegador, y un barrido de 18 categorías que incluye las EXCLUSIONES de Defender. Su C2 usa clave efímera por sesión: el tráfico capturado NO se puede descifrar después. Variante en Rust desde octubre de 2026",
+   "d": "Troyano en Go con persistencia CUÁDRUPLE y vigilancia que restaura lo que el defensor borre. Micrófono, cámara, pulsaciones, portapapeles, galletas de memoria, y un barrido que incluye las EXCLUSIONES de Defender. Clave efímera por sesión: lo capturado no se descifra después",
    "a": "proveedor"
   },
   {
@@ -2100,7 +2100,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-038",
-   "d": "Ladrón en PowerShell íntegramente en memoria. Tres elusiones silenciosas del control de cuentas en cascada. Elude POR COMPLETO el cifrado de galletas de Chrome lanzando el navegador con --remote-debugging-port y pidiéndole las galletas en claro. Roba vales de Microsoft 365 de los ficheros .tbres: un cambio de contraseña NO los revoca. Y su código llevaba comentarios con referencias explícitas a NOMBRES DE FIRMAS DE DETECCIÓN de Microsoft",
+   "d": "Ladrón en PowerShell íntegramente en memoria, con tres elusiones del control de cuentas en cascada. Elude el cifrado de galletas de Chrome lanzándolo con --remote-debugging-port. Roba vales de Microsoft 365 de los .tbres: un cambio de contraseña NO los revoca",
    "a": "proveedor",
    "af": "Microsoft valora que el estándar de codificación consistente y el comentario descriptivo SUGIEREN que el autor PODRÍA haber recurrido a generación de código asistida. Está formulado con doble condicional y conviene no ascenderlo"
   },
@@ -2110,7 +2110,7 @@
    "t": "herramienta",
    "p": "ru",
    "r": "CTI-2026-038",
-   "d": "Panel de mando branded como «CloudSync Console — Acuity Systems, Inc.». Lo que dice de la operación vale más que lo que hace: constructor de campañas CON PESTAÑAS —el nombre del ejecutable y la aleatorización de símbolos son casillas de un formulario, así que los nombres y los hashes no son indicadores de clase—, víctimas agrupadas por país en un mapa, y a cada operador se le muestran las sesiones activas de los demás: contravigilancia interna",
+   "d": "Panel de mando con marca falsa de producto comercial. Dice más de la operación que de su función: constructor de campañas CON PESTAÑAS —el nombre del ejecutable es una casilla, así que hashes y nombres no son indicadores— y cada operador ve las sesiones de los demás",
    "a": "proveedor"
   },
   {
@@ -2119,7 +2119,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-038",
-   "d": "Flujo LEGÍTIMO de OAuth convertido en vector: el adversario inicia la petición y convence al usuario de escribir SU código en una página AUTÉNTICA de Microsoft. La víctima autentica la sesión del atacante. NINGUNA formación de usuarios lo cierra, porque no hay nada falso que reconocer. Se desactiva por política de identidad o no se cierra. En uso desde agosto de 2024, e integrado en los portales cautivos desde el 16-07-2026",
+   "d": "Flujo LEGÍTIMO de OAuth convertido en vector: el adversario inicia la petición y convence al usuario de escribir SU código en una página AUTÉNTICA de Microsoft. La víctima autentica la sesión del atacante. Ninguna formación lo cierra: o se desactiva por política o no se cierra",
    "a": "-"
   },
   {
@@ -2128,7 +2128,7 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-038",
-   "d": "Los tres exploits móviles del pozo de agua en los sitios del Gabinete y el Ministerio de Exteriores de Mongolia. TODOS DE N DÍAS: tenían parche cuando el actor los usó. Eso es inusual en un actor de este nivel y tiene una consecuencia que conviene aprovechar: actualizar el dispositivo los derrota POR COMPLETO. Aquí parchear el parque móvil no es higiene, es la contramedida",
+   "d": "Los tres exploits móviles del pozo de agua en sitios gubernamentales de Mongolia. TODOS DE N DÍAS: tenían parche cuando el actor los usó, lo que es inusual a este nivel y tiene una consecuencia aprovechable — actualizar el dispositivo los derrota por completo",
    "a": "-"
   },
   {
@@ -2137,7 +2137,7 @@
    "t": "suministrador",
    "p": "-",
    "r": "CTI-2026-038",
-   "d": "Proveedor comercial de vigilancia. Su exploit de iOS de septiembre de 2023 reaparece DOS MESES después en el pozo de agua, con EL MISMO DISPARADOR exacto — lo que, según el analista, sugiere con fuerza que los autores o los proveedores son los mismos. Y su escape del aislamiento de Chrome se parece al de la muestra llamada `chopin`",
+   "d": "Proveedor comercial de vigilancia. Su exploit de iOS de septiembre de 2023 reaparece DOS MESES después en el pozo de agua, con EL MISMO DISPARADOR exacto, lo que según el analista sugiere con fuerza autores o proveedores comunes",
    "a": "-"
   },
   {
@@ -2146,7 +2146,7 @@
    "t": "suministrador",
    "p": "-",
    "r": "CTI-2026-038",
-   "d": "Proveedor comercial de vigilancia. Su día cero de Chrome de mayo de 2024 reaparece DOS MESES después, ADAPTADO: disparador parecido pero conceptualmente distinto, y re-apuntado de un rango de versiones 107-124 a sólo 121-123. Estrechar un rango no es lo que hace quien recibe un binario: es lo que hace quien entiende el código. Es el dato más informativo del Anexo D",
+   "d": "Proveedor comercial de vigilancia. Su día cero de Chrome de mayo de 2024 reaparece dos meses después, ADAPTADO: re-apuntado de un rango de versiones 107-124 a sólo 121-123. Estrechar un rango no es lo que hace quien recibe un binario: es quien entiende el código",
    "a": "-"
   },
   {
@@ -2155,7 +2155,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-038",
-   "d": "El activo regional que SÍ está en el conjunto declarado: Check Point documenta que la campaña de 2025 atacó «embajadas de países NO europeos situadas en Europa». Una legación en Bruselas está en el conjunto sin que su país aparezca en ningún mapa. Y reúne el hueco organizativo completo: conexión a Internet propia contratada en destino, administrador local o ninguno, fuera del inventario de la cancillería que la financia — y su cadena de mando pasa por una dirección general que no tiene a la seguridad informática entre sus indicadores",
+   "d": "El activo regional que SÍ está en el conjunto declarado: la campaña de 2025 atacó «embajadas de países NO europeos situadas en Europa». Una legación en Bruselas entra sin que su país salga en ningún mapa. Conexión contratada en destino y fuera del inventario de su cancillería",
    "a": "-"
   },
   {
@@ -2164,9 +2164,9 @@
    "t": "estado",
    "p": "cn",
    "r": "CTI-2026-039",
-   "d": "DOBLE MISIÓN establecida en el mismo pliego de cargos: espionaje estatal Y secuestro de datos con exigencia de pago. Eso significa que el artefacto que encuentres NO te dirá en cuál de las dos misiones estás, y el coste de equivocarse es asimétrico: tratar un espionaje como extorsión lleva a restaurar con el adversario dentro, y ese error no se descubre. Dos datos regionales JUDICIALES: proveedores de telecomunicaciones en CHILE, y víctimas de cadena de suministro en BRASIL. El sector minero NO aparece en ninguna de las ocho fuentes",
+   "d": "DOBLE MISIÓN en el mismo pliego de cargos: espionaje estatal Y secuestro de datos. El artefacto que se encuentre NO dirá en cuál de las dos se está, y el error es asimétrico: tratar un espionaje como extorsión lleva a restaurar con el adversario dentro. Judicial: CHILE y BRASIL",
    "a": "oficial",
-   "af": "Cinco nacionales chinos acusados nominalmente por dos grandes jurados del Distrito de Columbia, el 15-08-2019 y el 11-08-2020, con cargos que incluyen asociación ilícita. Es el grado de establecimiento más alto de esta cartera: no es atribución de un Estado, es un pliego con nombres y con un empleador"
+   "af": "Cinco nacionales chinos acusados nominalmente por dos grandes jurados del Distrito de Columbia, el 15-08-2019 y el 11-08-2020, con cargos que incluyen asociación ilícita."
   },
   {
    "id": "chengdu404",
@@ -2174,7 +2174,7 @@
    "t": "suministrador",
    "p": "cn",
    "r": "CTI-2026-039",
-   "d": "NO es un alias: es el EMPLEADOR de tres de los cinco acusados, y consta así en la acusación de 2020. Es el caso espejo de CTI-2026-034: allí una empresa HABILITA al actor y está sancionada por tres jurisdicciones; aquí los operadores ERAN ASALARIADOS de una empresa. Y la cara lucrativa del expediente —secuestro de datos por los propios empleados— sugiere que la doble misión puede ser una consecuencia del modelo de contratación y no una política del patrocinador",
+   "d": "NO es un alias: es el EMPLEADOR de tres de los cinco acusados, y consta así en la acusación de 2020. Es el caso espejo de CTI-2026-034: allí una empresa HABILITA al actor y está sancionada por tres jurisdicciones; aquí los operadores ERAN ASALARIADOS de una empresa.",
    "a": "oficial",
    "af": "La acusación del 11-08-2020 imputa a QIAN Chuan, FU Qiang y JIANG Lizhi por intrusiones cometidas mientras estaban empleados por esta empresa"
   },
@@ -2184,7 +2184,7 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-039",
-   "d": "Cadena de tres módulos: PLUSDROP descifra y carga en memoria, PLUSINJECT vacía un svchost.exe legítimo, TOUGHPROGRESS ejecuta. Entregada desde el sitio web de UN GOBIERNO ya comprometido, de modo que mirar el dominio del enlace CONFIRMA la legitimidad en lugar de desmentirla. Señuelo: siete ficheros con nombre de imagen de artrópodos, de los que 6.jpg y 7.jpg no son imágenes",
+   "d": "Cadena de tres módulos: PLUSDROP descifra y carga en memoria, PLUSINJECT vacía un svchost.exe legítimo, TOUGHPROGRESS ejecuta. Entregada desde el sitio web de UN GOBIERNO ya comprometido, de modo que mirar el dominio del enlace CONFIRMA la legitimidad en lugar de desmentirla.",
    "a": "proveedor"
   },
   {
@@ -2193,7 +2193,7 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-039",
-   "d": "Marco de complementos multietapa diseñado para dejar MÍNIMA HUELLA FORENSE tras la actividad manual sobre el teclado — es decir, el adversario invirtió en que la fase más ruidosa de cualquier intrusión no deje rastro. Campaña contra transporte marítimo, logística, tecnología y automoción en Reino Unido, Italia, España, Turquía, Taiwán y Tailandia desde al menos 2023. Ningún país americano",
+   "d": "Marco de complementos multietapa diseñado para dejar MÍNIMA HUELLA FORENSE tras la actividad manual sobre el teclado — es decir, el adversario invirtió en que la fase más ruidosa de cualquier intrusión no deje rastro.",
    "a": "proveedor",
    "af": "Mandiant, julio de 2024. NO LEÍDO EN ORIGINAL: su página se sirve íntegramente por JavaScript y devuelve cero contenido. Es la brecha G-1 del informe, y por eso sus indicadores no entran en el Anexo A"
   },
@@ -2203,7 +2203,7 @@
    "t": "herramienta",
    "p": "cn",
    "r": "CTI-2026-039",
-   "d": "Estático, despojado, CERO DETECCIONES. Oculta las órdenes dentro de RESPUESTAS DE SMTP en el puerto 25, y su servidor PERMANECE MUDO salvo ante un saludo válido: a un escáner le presenta un servidor de correo normal y lo desconecta. Eso lo saca del conjunto de infraestructura que el escaneo de Internet sabe encontrar — y buena parte de la inteligencia de esta cartera viene de ahí. Linaje de seis años desde PWNLNX (2020)",
+   "d": "Estático, despojado, CERO DETECCIONES. Oculta las órdenes dentro de RESPUESTAS DE SMTP en el puerto 25, y su servidor PERMANECE MUDO salvo ante un saludo válido: a un escáner le presenta un servidor de correo normal y lo desconecta.",
    "a": "proveedor",
    "af": "Breakglass Intelligence, abril de 2026. NO LOCALIZADO: usado a través de cobertura consistente de al menos cinco medios. Sus indicadores no entran en el Anexo A"
   },
@@ -2213,7 +2213,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-039",
-   "d": "NO BLOQUEAR: lo usa toda la organización. El implante crea un evento con FECHA FALSA Y ANTIGUA —mayo de 2023— y mete los datos exfiltrados cifrados en su descripción; lee las órdenes de otros eventos de julio de 2023. El tráfico de mando queda enterrado EN EL PASADO DEL CALENDARIO, donde nadie mira. Y en algunos casos el C2 era una cuenta de Workspace COMPROMETIDA de un tercero legítimo, así que ni el inquilino de destino es un indicador fiable",
+   "d": "NO BLOQUEAR: lo usa toda la organización. El implante crea un evento con FECHA FALSA Y ANTIGUA —mayo de 2023— y mete los datos exfiltrados cifrados en su descripción; lee las órdenes de otros eventos de julio de 2023.",
    "a": "-"
   },
   {
@@ -2222,7 +2222,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-039",
-   "d": "La regla más robusta de este expediente, y cabe en una frase: una carga de trabajo que no es servidor de correo NO TIENE NINGUNA RAZÓN para iniciar una conexión saliente por el puerto 25. No hace falta reconocer el protocolo, ni descifrar nada, ni tener una firma: hace falta saber qué cargas son de correo, que es un dato de inventario. Y el adversario no la puede evadir sin abandonar el canal, porque EL CANAL ES EL PUERTO 25",
+   "d": "La regla más robusta de este expediente, y cabe en una frase: una carga de trabajo que no es servidor de correo NO TIENE NINGUNA RAZÓN para iniciar una conexión saliente por el puerto 25.",
    "a": "-"
   },
   {
@@ -2231,7 +2231,7 @@
    "t": "servicio",
    "p": "-",
    "r": "CTI-2026-039",
-   "d": "NO SE PUEDE BLOQUEAR, y es el caso límite INVERSO del hueco organizativo: no es una plataforma que compró un área y nadie inventarió, es un componente de la nube al que TODA carga accede por diseño para obtener sus propias credenciales. Lo que entrega —credencial de rol, vale de cuenta de servicio— no tiene segundo factor, no caduca por política de contraseñas y NO APARECE EN NINGÚN INVENTARIO DE IDENTIDADES. Se endurece el CÓMO (versión 2 del servicio, con vale y límite de saltos), nunca el SI",
+   "d": "NO SE PUEDE BLOQUEAR, y es el caso límite INVERSO del hueco organizativo: no es una plataforma que compró un área y nadie inventarió, es un componente de la nube al que TODA carga accede por diseño para obtener sus propias credenciales.",
    "a": "-"
   },
   {
@@ -2240,7 +2240,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-039",
-   "d": "Cuando el mismo operador hace espionaje y extorsión, un cifrado puede ser la monetización de un acceso que el espionaje ya agotó, y una puerta trasera puede ser el preludio de un cifrado. La asimetría es lo peligroso: tratar un espionaje como extorsión cuesta restaurar con el adversario dentro y ESE ERROR NO SE DESCUBRE; tratar una extorsión como espionaje cuesta semanas de analista y sí se descubre. El sesgo organizativo empuja al primero. Seis artefactos discriminan, y el umbral es dos",
+   "d": "Cuando el mismo operador hace espionaje y extorsión, un cifrado puede ser la monetización de un acceso que el espionaje ya agotó, y una puerta trasera puede ser el preludio de un cifrado.",
    "a": "-"
   },
   {
@@ -2249,7 +2249,7 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-040",
-   "d": "Tercera generación del linaje Conti → Royal → BlackSuit. Más de 500 millones de dólares exigidos en total, con demandas de 1 a 10 millones y un máximo individual de 60. DESARTICULADA el 24-07-2025 en Operation Checkmate: cuatro servidores, nueve dominios y más de un millón en criptomoneda, con dieciséis agencias de nueve países. CERO DETENCIONES. Su enfoque de cifrado parcial con porcentaje elegible por el actor —que el aviso oficial llama «único»— es el mecanismo que hace auditable su vínculo con el sucesor",
+   "d": "Tercera generación del linaje Conti → Royal → BlackSuit. Más de 500 millones de dólares exigidos en total, con demandas de 1 a 10 millones y un máximo individual de 60.",
    "a": "oficial",
    "af": "Aviso conjunto del FBI y CISA AA23-061A, publicado el 02-03-2023 y revisado cuatro veces. La revisión del 07-08-2024 documenta el cambio de nombre de Royal a BlackSuit y declara que comparte numerosas similitudes de código"
   },
@@ -2259,7 +2259,7 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-040",
-   "d": "Generación anterior, de septiembre de 2022 a junio de 2023. El aviso oficial declara que BlackSuit es su evolución. Su procedencia de Conti la sostienen la prensa especializada y los perfiles de actor, NO el aviso oficial: el primer eslabón del linaje es más débil que el segundo y conviene no citar los dos con el mismo peso",
+   "d": "Generación anterior, de septiembre de 2022 a junio de 2023. El aviso oficial declara que BlackSuit es su evolución.",
    "a": "oficial",
    "af": "AA23-061A mantiene el nombre Royal sólo cuando se refiere a actividad heredada"
   },
@@ -2269,9 +2269,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-040",
-   "d": "EL SUCESOR, Y YA ESTABA FUNCIONANDO: surgió en febrero de 2025, cinco meses ANTES de que se incautaran los servidores de BlackSuit. No hubo reaparición porque no hizo falta aparecer. Extorsión como servicio en el foro de habla rusa RAMP, con cuota de entrada reembolsable con el primer cobro. Vector inicial: una LLAMADA DE TELÉFONO suplantando a soporte informático, pidiendo a la víctima que lance Quick Assist. Declara excluir países BRICS y CEI, hospitales y gobierno — lo que cubre a Brasil y a ningún otro país de la región",
+   "d": "EL SUCESOR, Y YA ESTABA FUNCIONANDO: surgió en febrero de 2025, cinco meses ANTES de que se incautaran los servidores de BlackSuit. No hubo reaparición porque no hizo falta aparecer. Extorsión como servicio en el foro de habla rusa RAMP, con cuota de entrada reembolsable con el primer cobro.",
    "a": "proveedor",
-   "af": "Cisco Talos lo valora con CONFIANZA MODERADA como reconversión de BlackSuit o como obra de antiguos miembros, por metodología de cifrado, estructura de la nota y conjunto de herramientas. Este informe identifica el mecanismo concreto de la primera: el porcentaje de cifrado como parámetro del operador"
+   "af": "Cisco Talos lo valora con CONFIANZA MODERADA como reconversión de BlackSuit o como obra de antiguos miembros, por metodología de cifrado, estructura de la nota y conjunto de herramientas."
   },
   {
    "id": "chaosbuilder",
@@ -2279,7 +2279,7 @@
    "t": "marco",
    "p": "-",
    "r": "CTI-2026-040",
-   "d": "Herramienta constructora homónima, SIN RELACIÓN con el grupo. Talos declara que el grupo usa el mismo nombre PARA CREAR CONFUSIÓN, explotando la que ya había en la comunidad de seguridad. Es la primera colisión de nombres INTENCIONADA que documenta esta cartera: CTI-2026-035 desambiguó cuatro cosas llamadas «Medusa» que coincidían por accidente. Una búsqueda de «Chaos ransomware» devuelve material de otra cosa",
+   "d": "Herramienta constructora homónima, SIN RELACIÓN con el grupo. Talos declara que el grupo usa el mismo nombre PARA CREAR CONFUSIÓN, explotando la que ya había en la comunidad de seguridad.",
    "a": "-"
   },
   {
@@ -2288,7 +2288,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-040",
-   "d": "Una desarticulación no actúa sobre «una operación»: actúa sobre activos con tiempos de reemplazo muy distintos. Aquí se incautó lo reemplazable en días —servidores, dominios, portales—, algo que cuesta meses —la reputación del sitio de filtración— y lo único irrecuperable —los fondos ya cobrados—; y NO se tocó lo no reemplazable: operadores, accesos vigentes y código. TRES CASOS de esta cartera muestran además que el reemplazo PRECEDE a la intervención: −2 meses en CTI-2026-036, −5 meses aquí. No hay ventana de respiro porque no hay reconstrucción: hay mudanza",
+   "d": "Una desarticulación no actúa sobre «una operación»: actúa sobre activos con tiempos de reemplazo muy distintos.",
    "a": "-"
   },
   {
@@ -2297,7 +2297,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-040",
-   "d": "Inundación de correo basura → la víctima llama → el operador suplanta a seguridad informática → le pide lanzar Quick Assist → le pide conectarse a su sesión. Los pasos 1 a 4 NO dejan ningún artefacto distinguible, y el primero técnico aparece cuando el adversario ya está dentro. El único control que corta la cadena es organizativo y no tiene dueño en Seguridad: cómo verifica la mesa de ayuda quién llama. Y la pieza que se omite es la tercera: PERMISO EXPLÍCITO PARA COLGAR",
+   "d": "Inundación de correo basura → la víctima llama → el operador suplanta a seguridad informática → le pide lanzar Quick Assist → le pide conectarse a su sesión. Los pasos 1 a 4 NO dejan ningún artefacto distinguible, y el primero técnico aparece cuando el adversario ya está dentro.",
    "a": "-"
   },
   {
@@ -2306,7 +2306,7 @@
    "t": "servicio",
    "p": "latam",
    "r": "CTI-2026-040",
-   "d": "De las 71 direcciones del aviso oficial AA23-061A, SEIS están registradas a entidades latinoamericanas y CINCO son banda ancha: UNE EPM y Telmex en Colombia, Telecom Argentina y NODOSUD en Argentina — verificado por RDAP el 19-11-2026. Son terceros comprometidos usados como tránsito, no infraestructura del adversario: la región aparece como TRAYECTO, igual que en CTI-2026-036. El propio aviso pide investigarlas antes de bloquear. Van con tipo artefacto para que no entren en los agregados planos",
+   "d": "De las 71 direcciones del aviso oficial AA23-061A, SEIS están registradas a entidades latinoamericanas y CINCO son banda ancha: UNE EPM y Telmex en Colombia, Telecom Argentina y NODOSUD en Argentina — verificado por RDAP el 19-11-2026.",
    "a": "-"
   },
   {
@@ -2315,9 +2315,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "Reconversión de Sphinx desde diciembre de 2024: binarios «altamente idénticos» con una sola diferencia, la función que genera la nota. ~96 víctimas en doce meses, 52 % en EE. UU. — y DOS PAÍSES DE LA REGIÓN: Chile, con Empresas Copec S.A. publicada en enero de 2026, y Perú, ya documentado en junio de 2025 cuando el sitio de fugas tenía SIETE entradas. NO declara ninguna lista de exclusión, al contrario que Chaos. Y en los dos ataques documentados con detalle el CIFRADO FUE BLOQUEADO y la extorsión siguió sobre los datos ya robados",
+   "d": "Reconversión de Sphinx desde diciembre de 2024: binarios «altamente idénticos» con una sola diferencia, la función que genera la nota. ~96 víctimas en doce meses, 52 % en EE.",
    "a": "proveedor",
-   "af": "Trend Micro y Symantec establecen la reconversión desde Sphinx por COMPARACIÓN DE BINARIOS, por separado y sin citarse. Es la reconversión mejor establecida de esta cartera, frente a la de BlackSuit → Chaos, que es de confianza moderada e inferida de conducta"
+   "af": "Trend Micro y Symantec establecen la reconversión desde Sphinx por COMPARACIÓN DE BINARIOS, por separado y sin citarse."
   },
   {
    "id": "hawkmoth",
@@ -2325,7 +2325,7 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "Designación de Symantec para el grupo que DESARROLLA el cifrador y opera el programa de afiliados — distinto de los afiliados que ejecutan cada ataque. Tres programas con repartos NEGOCIABLES: extorsión como servicio, extorsión por datos SIN CIFRADO, y monetización de accesos para atraer corredores. El segundo es la explicación estructural de por qué bloquear el cifrador no le quita el negocio",
+   "d": "Designación de Symantec para el grupo que DESARROLLA el cifrador y opera el programa de afiliados — distinto de los afiliados que ejecutan cada ataque.",
    "a": "proveedor"
   },
   {
@@ -2343,7 +2343,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "Rompe la lógica económica de la extorsión: vacía el CONTENIDO de los ficheros, que quedan listados a 0 KB, sin recuperación. En un cifrado, pagar compra una probabilidad de recuperación; frente a un borrado NO HAY NADA QUE COMPRAR, y la copia inmutable deja de ser el plan B y pasa a ser el único instrumento de negociación que la víctima tiene. PERO NO HAY NINGÚN USO DOCUMENTADO contra una víctima real: la capacidad está probada en laboratorio y el empleo es hipotético. Citarlo sin esa salvedad es el riesgo 1 del pre-mortem",
+   "d": "Rompe la lógica económica de la extorsión: vacía el CONTENIDO de los ficheros, que quedan listados a 0 KB, sin recuperación.",
    "a": "-"
   },
   {
@@ -2352,7 +2352,7 @@
    "t": "herramienta",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "Puerta trasera PROPIA, inusual entre operadores de extorsión, que suelen tirar de herramientas públicas y del propio sistema. Instalada como servicio, disfrazada de componente de Chrome y de fichero de VMware, en los DOS ÚNICOS servidores de base de datos del conjunto. C2 primario y de reserva, los dos por el 443. Y apareció en DOS ORGANIZACIONES MÁS sin ninguna actividad de cifrado: para aquéllas, el hash fue el único indicio",
+   "d": "Puerta trasera PROPIA, inusual entre operadores de extorsión, que suelen tirar de herramientas públicas y del propio sistema. Instalada como servicio, disfrazada de componente de Chrome y de fichero de VMware, en los DOS ÚNICOS servidores de base de datos del conjunto.",
    "a": "proveedor"
   },
   {
@@ -2361,25 +2361,25 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "NO SE BLOQUEA POR HASH: son controladores legítimos con FIRMA VÁLIDA, y un control basado en reputación de firma no ve nada. Se bloquean con la lista de controladores vulnerables del fabricante del sistema. Trece ejecutables y cinco controladores en una hora, dos de ellos suplantando a un producto de seguridad y con conmutadores para LISTAR Y ELIMINAR las retrollamadas del núcleo. Y la técnica llega ya empaquetada con las ofertas de extorsión como servicio",
+   "d": "NO SE BLOQUEA POR HASH: son controladores legítimos con FIRMA VÁLIDA, y un control basado en reputación de firma no ve nada. Se bloquean con la lista de controladores vulnerables del fabricante del sistema.",
    "a": "-"
   },
   {
    "id": "bloqueoesalerta",
-   "l": "El bloqueo es la alerta",
+   "l": "El bloqueo como alerta",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "La única medida de este lote que convierte un control YA EXISTENTE en una detección que no existía. Trece ejecutables desplegados en una hora, DOCE BLOQUEADOS: es fuerza bruta de evasión —probar una herramienta tras otra hasta que algo funcione— y una fuerza bruta es ruidosa por definición. Doce bloqueos consecutivos en sesenta minutos no es un falso positivo. Y casi nadie tiene la regla porque las organizaciones alertan sobre lo que pasó, no sobre lo que se intentó y se bloqueó",
+   "d": "La única medida de este lote que convierte un control YA EXISTENTE en una detección que no existía. Trece ejecutables desplegados en una hora, DOCE BLOQUEADOS: es fuerza bruta de evasión —probar una herramienta tras otra hasta que algo funcione— y una fuerza bruta es ruidosa por definición.",
    "a": "-"
   },
   {
    "id": "relatoextorsion",
-   "l": "Leer el relato del extorsionador",
+   "l": "El relato del extorsionador",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-041",
-   "d": "La victimología de la extorsión la publica el extorsionista, y un sitio de fugas es antes que nada PUBLICIDAD. En el caso chileno los tres relatos —comunicado de la víctima, cifras del atacante y su admisión de que el cifrado fue mitigado— parecen contradecirse y son COMPATIBLES: responden a preguntas distintas, la víctima sobre disponibilidad y datos de clientes, el atacante sobre confidencialidad de datos internos. Regla de oro: lo que un extorsionador admite EN SU PROPIO PERJUICIO es la parte más creíble de su relato",
+   "d": "La victimología de la extorsión la publica el extorsionista, y un sitio de fugas es antes que nada PUBLICIDAD.",
    "a": "-"
   },
   {
@@ -2388,7 +2388,7 @@
    "t": "modelo",
    "p": "latam",
    "r": "CTI-2026-041",
-   "d": "El único caso de este lote con víctima regional nombrada, comunicado público de la compañía Y entrevista del atacante. El atacante declara 6 TB, acceso por la VPN corporativa, exfiltración de casi una semana A BAJA VELOCIDAD por puertas traseras, y que la defensa SÍ mitigó el cifrado. La compañía declara acceso no autorizado a un sistema de almacenamiento interno, datos de clientes no comprometidos y operación no afectada. Lo publicado incluía expedientes de personal y una hoja con 1.969 registros: la casilla que el comunicado dejó vacía",
+   "d": "El único caso de este lote con víctima regional nombrada, comunicado público de la compañía Y entrevista del atacante. El atacante declara 6 TB, acceso por la VPN corporativa, exfiltración de casi una semana A BAJA VELOCIDAD por puertas traseras, y que la defensa SÍ mitigó el cifrado.",
    "a": "-"
   },
   {
@@ -2397,7 +2397,7 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-042",
-   "d": "RaaS INDUSTRIALIZADO con portal de afiliados: generación de cargas, finanzas, chat con la víctima, expedientes, equipos y nómina. Cinco roles identificados, tutor asignado a cada afiliado, y expulsión si pasa un mes sin una víctima nueva. 184 víctimas reclamadas y NINGUNA desde el 04-02-2026, sin que nadie la desarticulara: hubo un desenmascaramiento en junio de 2025 y después silencio. Su víctima regional es la Clínica Dávila de Santiago, diciembre de 2025, por VPN",
+   "d": "RaaS INDUSTRIALIZADO con portal de afiliados: generación de cargas, finanzas, chat con la víctima, expedientes, equipos y nómina.",
    "a": "proveedor",
    "af": "PRODAFT lo rastrea como Funky Mantis y valora con CONFIANZA MODERADA que la persona tras el alias sigue activa, ya no dirigiendo un programa sino trabajando como afiliado de otros grupos. El informe original NO fue accesible: brecha G-1"
   },
@@ -2407,9 +2407,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-042",
-   "d": "El único de los tres que está ACTIVO Y ACELERANDO: de once países en junio de 2025 a cien víctimas en treinta y dos países en agosto de 2026, con 43 nuevas en un solo mes. Binario en Go empaquetado con UPX, cifrador CONSTRUIDO A MEDIDA PARA CADA VÍCTIMA —lo que hace estructuralmente inútil el nivel de los hashes— y notas con identificador de sala y credenciales propias de cada víctima. Plazo de UN MES, frente a las ventanas de dos a tres días de Devman",
+   "d": "El único de los tres que está ACTIVO Y ACELERANDO: de once países en junio de 2025 a cien víctimas en treinta y dos países en agosto de 2026, con 43 nuevas en un solo mes.",
    "a": "proveedor",
-   "af": "Dos NEGATIVOS declarados, que valen más que una lista de alias: equipo nuclear reducido SIN programa amplio de afiliados, y sin solapamiento de infraestructura con Akira, Fog, Qilin ni SafePay. Alerta crítica del centro nacional de ciberseguridad de Singapur"
+   "af": "Dos NEGATIVOS declarados, que valen más que una lista de alias: equipo nuclear reducido SIN programa amplio de afiliados, y sin solapamiento de infraestructura con Akira, Fog, Qilin ni SafePay."
   },
   {
    "id": "sauronransom",
@@ -2417,35 +2417,26 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-042",
-   "d": "Este informe sostiene que NO es comparable con los otros dos y probablemente NO es un grupo. Lo que hay: extensión .Sauron con identificador de víctima y CORREO DEL ATACANTE, nota #HowToRecover.txt, primera observación el 01-10-2024. Lo que NO hay, en dos años: sitio de filtración, análisis primario, aviso de autoridad, víctima nombrada. Y las herramientas públicas no identifican la familia, así que no hay descifrador. El contacto por CORREO en lugar de por portal es el rasgo que separa una herramienta de una marca",
+   "d": "Este informe sostiene que NO es comparable con los otros dos y probablemente NO es un grupo. Lo que hay: extensión .Sauron con identificador de víctima y CORREO DEL ATACANTE, nota #HowToRecover.txt, primera observación el 01-10-2024.",
    "a": "proveedor",
    "af": "Juicio de confianza BAJA, y el límite es de nuestra colección tanto como del objeto: la ausencia de análisis primario puede ser un hueco propio"
   },
   {
    "id": "accesoporpais",
-   "l": "El programa reparte el acceso",
+   "l": "Reparto de accesos por país",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-042",
-   "d": "El hallazgo del informe. Los administradores ofrecían «REDES» POR PAÍS, preguntaban al afiliado si usaría acceso propio o suministrado, e imponían ventanas de ejecución de DOS A TRES DÍAS. Si el programa distribuye accesos por país, la victimología regional es función de QUÉ ACCESOS TIENE EL PROGRAMA y no de qué elige el afiliado — lo que convierte al mercado de corredores en el determinante real, y hace que la defensa sea que NO EXISTA UN ACCESO VENDIBLE a nuestra red",
+   "d": "El hallazgo del informe. Los administradores ofrecían «REDES» POR PAÍS, preguntaban al afiliado si usaría acceso propio o suministrado, e imponían ventanas de ejecución de DOS A TRES DÍAS.",
    "a": "-"
   },
   {
    "id": "scadaclaim",
-   "l": "La reclamación del cifrador para SCADA",
+   "l": "Cifrador para SCADA (reclamado)",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-042",
-   "d": "RECLAMACIÓN DEL ADVERSARIO EN UNA ENTREVISTA, SIN VERIFICAR. Devman afirmó un cifrador que empuja los sistemas de control «más allá de sus parámetros de operación, procesadores, memoria y límites térmicos... hasta que el hardware falle». Lo que SÍ está documentado es su política: anima a atacar infraestructura crítica e instruye a pedir cifrador aparte para SCADA. La política corrobora que el producto se ofrece; NO que haga lo que el actor dice. Un actor CRIMINAL con capacidad de daño físico sería un cruce de categoría: un Estado la usa cuando lo ordena una decisión política; un afiliado, cuando mejore su posición negociadora",
-   "a": "-"
-  },
-  {
-   "id": "triajenombres",
-   "l": "Triar un nombre nuevo",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-042",
-   "d": "Casi todo el crecimiento de publicaciones en sitios de filtración del tercer trimestre de 2026 vino de grupos RECIÉN OBSERVADOS, y esas listas mezclan ataques nuevos, cambios de marca, datos reciclados y reclamaciones sin respaldo. Siete criterios, y el más discriminante es también el más barato: CÓMO CONTACTA LA VÍCTIMA. Un portal de negociación por víctima exige infraestructura, mantenimiento y personal: es una operación. Una dirección de correo no exige nada: es una herramienta, y puede estar en manos de cualquiera",
+   "d": "RECLAMACIÓN DEL ADVERSARIO EN UNA ENTREVISTA, SIN VERIFICAR. Devman afirmó un cifrador que empuja los sistemas de control «más allá de sus parámetros de operación, procesadores, memoria y límites térmicos... hasta que el hardware falle».",
    "a": "-"
   },
   {
@@ -2454,7 +2445,7 @@
    "t": "modelo",
    "p": "latam",
    "r": "CTI-2026-042",
-   "d": "La única víctima regional nombrada de los tres actores, y el SEGUNDO caso chileno de este lote por acceso remoto — cinco semanas antes del de CTI-2026-041, en otro sector y de otro grupo. Entrada reportada por VPN CON USUARIO Y CONTRASEÑA IDÉNTICOS. El atacante reclama más de 250 GB de registros de pacientes y publicó parte al no cobrar; la institución reconoció «un incidente de un tercero» sin confirmar extorsión ni afectación de pacientes. Y marca el límite exacto de la regla ética del programa: prohíbe la salud INFANTIL, no la salud",
+   "d": "La única víctima regional nombrada de los tres actores, y el SEGUNDO caso chileno de este lote por acceso remoto — cinco semanas antes del de CTI-2026-041, en otro sector y de otro grupo. Entrada reportada por VPN CON USUARIO Y CONTRASEÑA IDÉNTICOS.",
    "a": "-"
   },
   {
@@ -2463,37 +2454,37 @@
    "t": "clúster",
    "p": "latam",
    "r": "CTI-2026-044",
-   "d": "NO son 33 cosas del mismo tipo: se parten en dos negocios con economías opuestas. 26 familias venden interrupción y concentran el 90,2 % de su actividad en TRES de ellas; 7 venden ancho de banda residencial ajeno y no lanzan un solo ataque. Dieciséis familias no superan los 200 eventos en toda su historia registrada. Un programa que las trate por igual gasta el 90 % del esfuerzo en el 10 % del problema",
+   "d": "NO son 33 cosas del mismo tipo: se parten en dos negocios con economías opuestas. 26 familias venden interrupción y concentran el 90,2 % de su actividad en TRES de ellas; 7 venden ancho de banda residencial ajeno y no lanzan un solo ataque.",
    "a": "-"
   },
   {
    "id": "asimetriabots",
-   "l": "Los objetivos están aquí, el C2 no",
+   "l": "Asimetría entre objetivo e infraestructura",
    "t": "modelo",
    "p": "latam",
    "r": "CTI-2026-044",
-   "d": "Medición propia del 19-11-2026. El 80,2 % de los ataques de una ventana en vivo tuvo objetivo en Brasil, pero de las 573 direcciones de mando y control sólo DOCE están en Latinoamérica: el 2,1 %, frente al 56,4 % en EE. UU. y el 13,6 % en Singapur. Consecuencia: el bloqueo por geografía no detiene un solo paquete, porque el nodo que inunda no está donde está el C2 ni donde está la víctima. El punto de intervención es el canal de control",
+   "d": "Medición propia del 19-11-2026. El 80,2 % de los ataques de una ventana en vivo tuvo objetivo en Brasil, pero de las 573 direcciones de mando y control sólo DOCE están en Latinoamérica: el 2,1 %, frente al 56,4 % en EE. UU. y el 13,6 % en Singapur.",
    "a": "-"
   },
   {
    "id": "proxyresidencial",
-   "l": "El 85 % del C2 no ataca a nadie",
+   "l": "Proxy residencial como negocio",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-044",
-   "d": "EL HALLAZGO. De 572 direcciones atribuidas, 487 pertenecen a siete familias de proxy residencial —CXFJ 215, Aigogo 134, LinkFog 46, SZJL 46, Hotota 24, Aisuru-Proxy 13, Titan 9— que NO registran un solo evento de ataque. Las ruidosas apenas tienen infraestructura: Cereal2 cero, Liso diecisiete. El recuento de C2 no mide agresividad, mide MODELO DE NEGOCIO: un proxy vende disponibilidad y necesita infraestructura estable; una red de DDoS necesita un punto de mando desechable",
+   "d": "EL HALLAZGO. De 572 direcciones atribuidas, 487 pertenecen a siete familias de proxy residencial —CXFJ 215, Aigogo 134, LinkFog 46, SZJL 46, Hotota 24, Aisuru-Proxy 13, Titan 9— que NO registran un solo evento de ataque. Las ruidosas apenas tienen infraestructura: Cereal2 cero, Liso diecisiete.",
    "a": "-",
    "af": "Y las dos clases NO comparten ni un bloque /24 de 206, ni más de 4 ASN de 57: un sesgo de etiquetado no produce huellas de alojamiento disjuntas, porque el clasificador no mira el bloque"
   },
   {
    "id": "ispregionalbr",
-   "l": "La víctima es el ISP regional, no el nacional",
+   "l": "El ISP regional como objetivo",
    "t": "modelo",
    "p": "latam",
    "r": "CTI-2026-044",
-   "d": "Diecisiete operadores regionales brasileños de fibra entre los veinte ASN más golpeados, y NINGÚN operador nacional. Halver LTDA (AS274564) en cabeza en las tres ventanas medidas. La razón más probable es eficiencia y no ideología: un regional tiene objetivos valiosos, poca capacidad de absorción y a menudo ningún desvío preacordado con su tránsito, así que un ataque pequeño produce un efecto grande",
+   "d": "Diecisiete operadores regionales brasileños de fibra entre los veinte ASN más golpeados, y NINGÚN operador nacional. Halver LTDA (AS274564) en cabeza en las tres ventanas medidas.",
    "a": "-",
-   "af": "CORROBORACIÓN INDEPENDIENTE: A10 Networks midió en una semana de febrero de 2026 17.527 ataques en Brasil con cerca del 99 % concentrado en cinco ISP regionales de fibra, dejando intactos a los grandes. Dos mediciones, dos métodos, nueve meses de separación, el mismo resultado"
+   "af": "CORROBORACIÓN INDEPENDIENTE: A10 Networks midió en una semana de febrero de 2026 17.527 ataques en Brasil con cerca del 99 % concentrado en cinco ISP regionales de fibra, dejando intactos a los grandes."
   },
   {
    "id": "pulso5s",
@@ -2501,7 +2492,7 @@
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-044",
-   "d": "Mediana de duración CINCO SEGUNDOS: 1.979 de 2.500 eventos. Y el 23,2 % de los segundos observados contienen dos o más ataques simultáneos, con un máximo de ONCE contra seis prefijos distintos del mismo operador. No supera los umbrales pensados para picos sostenidos, agota la mitigación en lugar de superarla, y reparte el daño entre prefijos para diluir la señal. Toda la doctrina de «detectar, confirmar, desviar» está mal dimensionada: cinco segundos es menos que cargar un panel",
+   "d": "Mediana de duración CINCO SEGUNDOS: 1.979 de 2.500 eventos. Y el 23,2 % de los segundos observados contienen dos o más ataques simultáneos, con un máximo de ONCE contra seis prefijos distintos del mismo operador.",
    "a": "-"
   },
   {
@@ -2510,19 +2501,9 @@
    "t": "publica",
    "p": "chile",
    "r": "CTI-2026-044",
-   "d": "Servicio chileno que publica flujo de ataques en vivo, lista de C2, matriz de capacidades por familia obtenida de ingeniería inversa, y un FEED BGP DE AGUJERO NEGRO con una ruta /32 por dirección de C2, comunidad 65535:666 (RFC 7999), comunidades de familia y de antigüedad, dos puntos de presencia —Chile y São Paulo— y plantillas para MikroTik, Juniper, Huawei y Cisco. Atribuido en la agenda de NANOG 98 a Rodrigo Peña, Bitred Group SpA, donde se afirmaba «más de 100 ISP en dos meses»",
+   "d": "Servicio chileno que publica flujo de ataques en vivo, lista de C2, matriz de capacidades por familia obtenida de ingeniería inversa, y un FEED BGP DE AGUJERO NEGRO con una ruta /32 por dirección de C2, comunidad 65535:666 (RFC 7999), comunidades de familia y de antigüedad",
    "a": "-",
    "af": "VERIFICACIÓN PROPIA: la interfaz declaraba el 19-11-2026 176 pares BGP establecidos en 7 países — 71,6 % Brasil, 12,5 % Chile, 11,4 % Argentina. La cifra pública se corrobora y se supera. Brasil es a la vez el más atacado y el más defendido"
-  },
-  {
-   "id": "trampadefecto",
-   "l": "La trampa del valor por omisión",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-044",
-   "d": "La consulta de eventos SIN PARÁMETROS devuelve, en silencio y sin aviso, sólo los de Cereal2 —una familia muda desde el 30-10— con su histórico congelado. Las primeras 1.400 observaciones recogidas parecían el flujo general: habrían producido la conclusión de que Cereal2 es el 100 % de la actividad y que el objetivo principal es un proveedor estadounidense. Ambas falsas. Se detectó porque la portada mostraba otra familia atacando en el mismo minuto",
-   "a": "-",
-   "af": "Un parámetro ausente NO produce un error: produce una respuesta bien formada a otra pregunta. Y el agravante: los datos falsos eran MÁS interesantes — la hipótesis cómoda venía incorporada en el valor por omisión de la herramienta"
   },
   {
    "id": "zenlayerc2",
@@ -2530,7 +2511,7 @@
    "t": "suministrador",
    "p": "-",
    "r": "CTI-2026-044",
-   "d": "147 de 573 direcciones de C2 —el 25,7 %— en un solo sistema autónomo, AS62610; y 322, el 56,2 %, en cinco: Zenlayer, GoCodeIT, Alibaba US Technology, Tube-Hosting y CDS Global Cloud. Con 58 ASN en total, la mitad del problema cabe en cinco interlocutores. La palanca de mayor rendimiento no es técnica: es una notificación de abuso bien documentada. NO bloquear el ASN: son proveedores legítimos con clientes legítimos",
+   "d": "147 de 573 direcciones de C2 —el 25,7 %— en un solo sistema autónomo, AS62610; y 322, el 56,2 %, en cinco: Zenlayer, GoCodeIT, Alibaba US Technology, Tube-Hosting y CDS Global Cloud. Con 58 ASN en total, la mitad del problema cabe en cinco interlocutores.",
    "a": "-"
   },
   {
@@ -2539,7 +2520,7 @@
    "t": "clúster",
    "p": "-",
    "r": "CTI-2026-044",
-   "d": "Corroboración del eje de proxy residencial por una vía completamente distinta —el dispositivo y el fraude publicitario, no la red—, publicada UN DÍA antes de nuestro informe. Decodificadores Android de bajo coste que generaron del orden de 40.000 millones de solicitudes publicitarias diarias en el pico, con módulos que inscriben el dispositivo en ONCE redes de proxy residencial sin consentimiento del dueño, y vínculo del catálogo a un fabricante mediante lanzador instalado de fábrica",
+   "d": "Corroboración del eje de proxy residencial por una vía completamente distinta —el dispositivo y el fraude publicitario, no la red—, publicada UN DÍA antes de nuestro informe.",
    "a": "proveedor",
    "af": "Las cifras no coinciden con las nuestras y no deben forzarse: once redes comerciales de reventa no son siete familias de código. Lo que coincide es la FORMA del hallazgo"
   },
@@ -2549,7 +2530,7 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-044",
-   "d": "395.887 eventos acumulados y último evento el 30-10-2026 a las 11:02 UTC. Hoy CERO direcciones de C2 vivas. Sus objetivos eran 71 % estadounidenses, con un solo proveedor de alojamiento recibiendo 1.136 de 1.400 eventos. La causa del silencio NO está establecida: hay correlación temporal con una acción policial del primer trimestre de 2026 contra Aisuru, KimWolf, JackSkid y Mossad, pero ninguna fuente lo afirma. Confianza baja, y se consigna así",
+   "d": "395.887 eventos acumulados y último evento el 30-10-2026 a las 11:02 UTC. Hoy CERO direcciones de C2 vivas. Sus objetivos eran 71 % estadounidenses, con un solo proveedor de alojamiento recibiendo 1.136 de 1.400 eventos.",
    "a": "-",
    "af": "El silencio de una familia no es su final: CTI-2026-040 y 042 documentan cuatro casos en que la marca se apaga y la capacidad sigue. Es el momento de buscar a la sucesora, no de cerrar el expediente"
   },
@@ -2559,78 +2540,39 @@
    "t": "crimen",
    "p": "latam",
    "r": "CTI-2026-045",
-   "d": "La familia MÁS ACTIVA de las 33: 444.728 eventos acumulados y el 92,1 % del flujo de ataque en vivo. Capacidad declarada la MÁS ESTRECHA del ecosistema: sólo DDoS, sin proxy residencial y sin ejecución remota de código — un nodo infectado es un problema de ancho de banda, no una cabeza de puente. Sin alias, sin atribución y SIN NINGÚN ANÁLISIS PUBLICADO, lo que es llamativo: la familia con récord mediático tiene decenas de artículos y 792 eventos medidos; Liso tiene cero artículos y 444.728 eventos",
+   "d": "La familia MÁS ACTIVA de las 33: 444.728 eventos acumulados y el 92,1 % del flujo de ataque en vivo. Capacidad declarada la MÁS ESTRECHA del ecosistema: sólo DDoS, sin proxy residencial y sin ejecución remota de código — un nodo infectado es un problema de ancho de banda, no una cabeza de puente.",
    "a": "-",
    "af": "El volumen de cobertura mide titulares, no actividad"
   },
   {
    "id": "lisodosmodos",
-   "l": "Liso no es una campaña, son dos",
+   "l": "Dos modos operativos en una familia",
    "t": "modelo",
    "p": "latam",
    "r": "CTI-2026-045",
-   "d": "EL HALLAZGO, y las celdas cruzadas están vacías. Modo A (2.440 ev., 85,1 %): puerto 65535, UDP 100 %, CINCO segundos, contra REDES —1.774 prefijos /20-/23—, Brasil 99,8 %. Modo B (326 ev., 11,4 %): puertos 80/443, TCP 97 %, SESENTA segundos, contra ANFITRIONES —326 de 326 son /32—, EE. UU. 282 y Brasil CERO. No hay un solo ataque al puerto 80 contra una red, ni uno al 65535 contra un /32. Cinco parámetros independientes alineados en dos grupos",
+   "d": "EL HALLAZGO, y las celdas cruzadas están vacías. Modo A (2.440 ev., 85,1 %): puerto 65535, UDP 100 %, CINCO segundos, contra REDES —1.774 prefijos /20-/23—, Brasil 99,8 %. Modo B (326 ev., 11,4 %): puertos 80/443, TCP 97 %, SESENTA segundos, contra ANFITRIONES —326 de 326 son /32—, EE.",
    "a": "-",
    "af": "Y las dos defensas no se parecen: endurecer servidores web no reduce un paquete del modo A, y absorber tránsito no detiene al modo B. Mezclarlos bajo «nos atacó Liso» produce una respuesta que no sirve para ninguno"
   },
   {
    "id": "puerto65535",
-   "l": "Cuando el puerto es irrelevante por diseño",
+   "l": "Saturación de enlace: el puerto irrelevante",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-045",
-   "d": "Liso usa el puerto 65535 en el 85,1 % de sus eventos, y ese puerto NO corresponde a ningún servicio: es el último del espacio y funciona como valor por omisión. Contra un prefijo /22 completo con datagramas grandes, el puerto es irrelevante porque el objetivo es LLENAR LA TUBERÍA, no agotar un demonio. La contraprueba está dentro de la misma familia: el modo B, cuando quiere denegar un servicio, SÍ apunta a 80 y 443 y SÍ mantiene sesiones un minuto. Es inferencia de intención a partir de la IRRELEVANCIA de un parámetro",
+   "d": "Liso usa el puerto 65535 en el 85,1 % de sus eventos, y ese puerto NO corresponde a ningún servicio: es el último del espacio y funciona como valor por omisión.",
    "a": "-",
-   "af": "Y el contraste externo lo convierte en firma: las otras cinco familias medidas apuntan a servicios reales —80, 443, 53, 22, 25565, 5100, 7000, 6672—. Liso es la única excepción. Además, de sus 1.252 eventos con campo de carga útil, los 1.252 declaran «no suministrada»: la capacidad de personalizar existe, otra familia la usa, y estos operadores no"
+   "af": "Y el contraste externo lo convierte en firma: las otras cinco familias medidas apuntan a servicios reales —80, 443, 53, 22, 25565, 5100, 7000, 6672—. Liso es la única excepción."
   },
   {
    "id": "lisovietnam",
-   "l": "El bloque /24 que sobrevive a la rotación",
+   "l": "El bloque /24 como indicador duradero",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-045",
-   "d": "Liso tiene 17 direcciones de C2 en 10 países, y OCHO murieron durante nuestra ventana de medición: una lista estática habría caducado en un día. Lo que sobrevive es el BLOQUE: 103.163.214.0/24 (AS131366, Lanit Technology, Vietnam) concentró seis direcciones en CUATRO TANDAS entre el 18 y el 19 de noviembre, todas activas al cierre, mientras ocho direcciones de cinco ASN se retiraban. Migración escalonada con relevo solapado, sin que la actividad de ataque decayera un instante",
+   "d": "Liso tiene 17 direcciones de C2 en 10 países, y OCHO murieron durante nuestra ventana de medición: una lista estática habría caducado en un día.",
    "a": "-",
    "af": "Y la única dirección de C2 del ecosistema alojada en CHILE es de esta familia: 64.176.16.182 (AS20473), provisionada el 18-11 a las 08:32 y sin responder ya a las 08:55. Menos de media hora. Caducada como bloqueo, útil como caza retrospectiva"
-  },
-  {
-   "id": "marcasdetiempo",
-   "l": "Las marcas de tiempo son horas de observación",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-045",
-   "d": "Error corregido a tiempo. Varias direcciones de C2 comparten última observación AL SEGUNDO estando en ASN y países distintos —una rusa y una rumana a las 13:51:07—, y la lectura tentadora era control centralizado. Es falsa: 17 direcciones de 3 ASN comparten la marca 15:02:29, y 87 caen en ocho segundos. Comparando dos instantáneas separadas 20 min, 259 de 573 registros avanzaron: CICLO DE SONDEO DE UNOS 45 MINUTOS. Son lotes de la fuente",
-   "a": "-",
-   "af": "La señal de alarma que debería haber bastado sin medir nada: una coincidencia al segundo entre proveedores distintos es DEMASIADO BUENA. Los adversarios reales no son tan puntuales; los procesos automáticos sí"
-  },
-  {
-   "id": "separarmodos",
-   "l": "Dos campañas o una variable",
-   "t": "marco",
-   "p": "-",
-   "r": "CTI-2026-045",
-   "d": "La varianza de una población es indistinguible de la media de dos. Cuatro pasos: (1) anotar las frases «mayoritariamente X pero también Y», que son candidatas a modos y no a varianza; (2) cruzar esos parámetros dos a dos y buscar CELDAS VACÍAS; (3) contar cuántos parámetros independientes se alinean —dos pueden ser correlación técnica trivial, cinco son modos—; (4) BUSCAR EL PARÁMETRO QUE NO SE ALINEA, que es lo que distingue dos modos de un actor de dos actores confundidos",
-   "a": "-",
-   "af": "El paso 4 es el que casi nadie hace y sin él el método demuestra demasiado. Y una celda vacía vale más que una proporción: la proporción se mueve con la muestra, la ausencia se REFUERZA con ella"
-  },
-  {
-   "id": "telemetriaviva",
-   "l": "Telemetría viva como fuente",
-   "t": "marco",
-   "p": "-",
-   "r": "CTI-2026-044",
-   "d": "Un informe se lee entero y sus límites están escritos; un FLUJO responde exactamente a lo que se le pregunta y no dice lo que no se le preguntó. Cinco controles, los tres primeros cuestan diez minutos juntos: (1) comparar la consulta con la vista para humanos en el mismo minuto; (2) pedir explícitamente lo que creemos tener; (3) comparar los contadores de la fuente entre consultas; (4) validar la semántica de todo contador DENTRO del grupo correcto; (5) medir dos ventanas separadas antes de afirmar una proporción",
-   "a": "-",
-   "af": "Y la pregunta transversal: ¿esta forma está en los datos o en mi colección? Se aplicó cuatro veces con cuatro resultados distintos. Cuando se sospecha que un hallazgo es artefacto del clasificador de un tercero, la salida no es auditar su clasificador: es encontrar en los mismos datos una variable que su clasificador NO MIRA"
-  },
-  {
-   "id": "higieneinversa",
-   "l": "Los objetivos son víctimas, no indicadores",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-044",
-   "d": "La advertencia INVERSA a la de CTI-2026-040. Esta fuente publica dos clases de direcciones con interfaces parecidas: el C2, que sí es infraestructura adversaria y entra en los agregados; y los PREFIJOS OBJETIVO —258 prefijos y 69 ASN—, que son redes de operadores brasileños legítimos bajo ataque. Una ingesta que no distinga las dos vistas bloqueará a Halver LTDA, EGR NET, Speednet, INETVIP y trece más, es decir a los atacados. Y el fallo sería SILENCIOSO: el bloqueo funcionaría, y el síntoma aparecería días después",
-   "a": "-"
   },
   {
    "id": "aisuru",
@@ -2638,9 +2580,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-044",
-   "d": "La red de bots con el récord mundial de DDoS publicado: 31,4 Tbps —las fuentes discrepan entre noviembre y diciembre de 2025—, de clase TurboMirai, con estimaciones de 1 a 4 millones de dispositivos. Kimwolf es la variante para Android que usa su funcionalidad de DDoS. Y el dato que importa para nuestro expediente: GIRÓ DE DDoS A PROXY RESIDENCIAL, con un aviso de un CSIRT nacional documentándolo, lo que explica que el feed la parta en Aisuru-DDoS y Aisuru-Proxy con etiquetas distintas",
+   "d": "La red de bots con el récord mundial de DDoS publicado: 31,4 Tbps —las fuentes discrepan entre noviembre y diciembre de 2025—, de clase TurboMirai, con estimaciones de 1 a 4 millones de dispositivos. Kimwolf es la variante para Android que usa su funcionalidad de DDoS.",
    "a": "proveedor",
-   "af": "CONTRASTE MEDIDO: a la red del récord mundial le medimos sólo 792 eventos acumulados, frente a los 444.728 de Liso. Hubo acción policial en el primer trimestre de 2026 contra Aisuru, KimWolf, JackSkid y Mossad, y Cloudflare asocia a ella la caída de ataques sobre 1 Tbps de 805 a 251 entre trimestres. El récord mide el pico, no la actividad"
+   "af": "CONTRASTE MEDIDO: a la red del récord mundial le medimos sólo 792 eventos acumulados, frente a los 444.728 de Liso."
   },
   {
    "id": "akira",
@@ -2648,9 +2590,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-046",
-   "d": "La operación con el MEJOR respaldo documental del lote de ocho y la MENOR relevancia regional: 1,7 % de víctimas latinoamericanas y NINGUNA chilena de 420 registros de 2026. Está en declive medido y corroborado por dos métodos: la media mensual cayó de ~50 (ene-jun) a ~29 (jul-oct), un 43 %, y sólo el 10 % de su año está en los últimos 30 días. Cuarta del año por volumen y DÉCIMA de la semana — un programa que la priorice por su cifra acumulada estará defendiéndose del Akira de marzo",
+   "d": "La operación con el MEJOR respaldo documental del lote de ocho y la MENOR relevancia regional: 1,7 % de víctimas latinoamericanas y NINGUNA chilena de 420 registros de 2026.",
    "a": "oficial",
-   "af": "Aviso conjunto del FBI, CISA y socios (nov. 2025): 244,17 M USD en ingresos a finales de septiembre de 2025, variante Akira_v2, y explotación de CVE-2024-40766 (SonicWall) con alcance a un entorno Nutanix. El linaje con Conti lo trata como VALORACIÓN ANALÍTICA y no como hecho, y este informe respeta ese grado"
+   "af": "Aviso conjunto del FBI, CISA y socios (nov. 2025): 244,17 M USD en ingresos a finales de septiembre de 2025, variante Akira_v2, y explotación de CVE-2024-40766 (SonicWall) con alcance a un entorno Nutanix."
   },
   {
    "id": "incransom",
@@ -2658,9 +2600,9 @@
    "t": "crimen",
    "p": "latam",
    "r": "CTI-2026-047",
-   "d": "Publicó CINCUENTA entradas en un solo día, el 12-11-2026 — el 11,5 % de su año en una jornada — de modo que su actividad semanal vale 7 o 58 según se cuente por fecha de ataque o por publicación: una divergencia de x8,3, la mayor del lote. Ha abierto OCHO sitios de filtración y sólo dos siguen en pie. 435 víctimas en 2026 y 22 latinoamericanas (5,1 %), con Brasil a la cabeza (9) y una chilena. Exfiltra con BackBlaze, Restic y s5cmd: herramientas de RESPALDO, así que su exfiltración se confunde con el respaldo del equipo de operaciones",
+   "d": "Publicó CINCUENTA entradas en un solo día, el 12-11-2026 — el 11,5 % de su año en una jornada — de modo que su actividad semanal vale 7 o 58 según se cuente por fecha de ataque o por publicación: una divergencia de x8,3, la mayor del lote.",
    "a": "proveedor",
-   "af": "«Lynx es el cambio de marca de INC» es FALSO en el punto que importa: las dos marcas publican en 2026 a la vez. Son marcas hermanas. Y a Lynx se le atribuyen reglas que excluyen sanidad y gobierno mientras INC ataca un servicio de salud público y un ayuntamiento con la misma base de código: una lista de exclusiones es marketing, y se evalúa buscando la misma capacidad operando sin ella"
+   "af": "«Lynx es el cambio de marca de INC» es FALSO en el punto que importa: las dos marcas publican en 2026 a la vez. Son marcas hermanas."
   },
   {
    "id": "n0nactor",
@@ -2668,9 +2610,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-048",
-   "d": "PRIMER puesto del ranking de siete días y el actor con la evidencia MÁS DÉBIL de los ocho. De sus 259 entradas, 59 llevan nombre anónimo tipo «Company #241» y sólo 22 traen dominio: el 8,5 % permite saber de quién habla. Las 259 traen captura de pantalla y NINGUNA declara tamaño de datos, cifra de rescate ni referencia de prensa. No está establecido que tenga cifrador: tres proveedores dicen tres cosas incompatibles. Su sitio tiene una categoría «honors» para las entradas que dice haber borrado tras el pago",
+   "d": "PRIMER puesto del ranking de siete días y el actor con la evidencia MÁS DÉBIL de los ocho. De sus 259 entradas, 59 llevan nombre anónimo tipo «Company #241» y sólo 22 traen dominio: el 8,5 % permite saber de quién habla.",
    "a": "proveedor",
-   "af": "CORROBORACIÓN INDEPENDIENTE de nuestra medición: Bitdefender contó 106 organizaciones donde el rastreador contaba 150 el mismo día, valoró «poco más de veinte» atacadas, y registró que el grupo RETIRÓ 126 de sus propias entradas. Pero no es ficticio: una fuga de su espacio de trabajo dio 23 organizaciones identificadas, 15 publicadas y 4 comprometidas sin publicar"
+   "af": "CORROBORACIÓN INDEPENDIENTE de nuestra medición: Bitdefender contó 106 organizaciones donde el rastreador contaba 150 el mismo día, valoró «poco más de veinte» atacadas, y registró que el grupo RETIRÓ 126 de sus propias entradas."
   },
   {
    "id": "settraactor",
@@ -2678,9 +2620,9 @@
    "t": "crimen",
    "p": "latam",
    "r": "CTI-2026-049",
-   "d": "HALLAZGO PROPIO NO DOCUMENTADO EN NINGUNA FUENTE: su palanca de extorsión no es la empresa sino el PROPIETARIO COMO PERSONA FÍSICA — sus entradas enumeran número de identificación fiscal, domicilio particular, teléfono y correo personales y declaraciones fiscales del dueño, además de documentos de terminación de empleados y acuerdos de confidencialidad entre compañías. Eso traslada la decisión de Seguridad a Legal: el daño no se puede restaurar y alcanza a terceros que no son parte",
+   "d": "HALLAZGO PROPIO NO DOCUMENTADO EN NINGUNA FUENTE: su palanca de extorsión no es la empresa sino el PROPIETARIO COMO PERSONA FÍSICA — sus entradas enumeran número de identificación fiscal, domicilio particular, teléfono y correo personales y declaraciones fiscales del dueño",
    "a": "-",
-   "af": "Y en el otro extremo es el catálogo MÁS VERIFICABLE de los nuevos: 116 de 116 entradas con dominio, y el ÚNICO del lote que declara fecha de ataque distinta de la de publicación en el 100 % de sus entradas. Un extorsionador que apunta al propietario necesita ser creído por él, así que la precisión del catálogo no es escrúpulo: es un instrumento de la misma presión. Once sitios de filtración en cinco meses, tres en pie"
+   "af": "Y en el otro extremo es el catálogo MÁS VERIFICABLE de los nuevos: 116 de 116 entradas con dominio, y el ÚNICO del lote que declara fecha de ataque distinta de la de publicación en el 100 % de sus entradas."
   },
   {
    "id": "vortexactor",
@@ -2688,9 +2630,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-050",
-   "d": "No cifra nada: CERO menciones al cifrado en sus 35 entradas. Reclama TENENCIA de datos y, en una cuarta parte de su catálogo, capturas completas de inquilinos de Microsoft 365 con cifras precisas de ficheros, gigabytes y cuentas de directorio. Si fuera cierto, el vector es la IDENTIDAD y no el puesto: una lista de 20.000 cuentas con sus grupos no se saca de un portátil. La defensa es acceso condicional, segundo factor y revisión de consentimientos — no EDR, y la copia de seguridad no defiende de nada",
+   "d": "No cifra nada: CERO menciones al cifrado en sus 35 entradas. Reclama TENENCIA de datos y, en una cuarta parte de su catálogo, capturas completas de inquilinos de Microsoft 365 con cifras precisas de ficheros, gigabytes y cuentas de directorio.",
    "a": "-",
-   "af": "HALLAZGO PROPIO: su catálogo se duplica y se recicla. 35 entradas para 26 descripciones distintas, con al menos cuatro víctimas listadas DOS VECES bajo dos nombres y dos grupos de tres víctimas distintas compartiendo descripción idéntica. Corrobora de forma independiente la advertencia de un tercero de que sus listados incluyen reclamaciones no verificadas o fabricadas. Nació con el 40 % del catálogo ya cargado"
+   "af": "HALLAZGO PROPIO: su catálogo se duplica y se recicla. 35 entradas para 26 descripciones distintas, con al menos cuatro víctimas listadas DOS VECES bajo dos nombres y dos grupos de tres víctimas distintas compartiendo descripción idéntica."
   },
   {
    "id": "pixelleaksactor",
@@ -2698,9 +2640,9 @@
    "t": "crimen",
    "p": "latam",
    "r": "CTI-2026-051",
-   "d": "El único del lote sin NI UNA captura de pantalla en sus 34 entradas, y a la vez el de mayor especificidad descriptiva: describe el material por tablas y con cardinalidades exactas — 818.849 transacciones de monedero, 7.630.625 detalles de transacción — lo que es difícil de inventar sin haber visto el esquema. HALLAZGO PROPIO: escribe como un REGULADOR, no como un extorsionador. «Esta divulgación se refiere a un conjunto verificado de registros de…», sin amenaza, sin precio y sin plazo en la prosa",
+   "d": "El único del lote sin NI UNA captura de pantalla en sus 34 entradas, y a la vez el de mayor especificidad descriptiva: describe el material por tablas y con cardinalidades exactas — 818.849 transacciones de monedero, 7.630.625 detalles de transacción",
    "a": "-",
-   "af": "Su audiencia probable son clientes, reguladores y prensa, no el TI de la víctima — y contra ese envoltorio el silencio parece confirmación. Tres víctimas mexicanas (8,8 %, la mayor proporción latinoamericana de los seis actores nuevos), una con plazo declarado al 22-11-2026. Y el actor que oculta la fecha del acceso la entrega sin darse cuenta: si la cardinalidad declarada es menor que la actual, la diferencia dice cuándo se tomó la copia"
+   "af": "Su audiencia probable son clientes, reguladores y prensa, no el TI de la víctima — y contra ese envoltorio el silencio parece confirmación."
   },
   {
    "id": "curiouswormactor",
@@ -2708,9 +2650,9 @@
    "t": "crimen",
    "p": "-",
    "r": "CTI-2026-052",
-   "d": "Invierte la secuencia de la extorsión: NO tiene fase de presión previa — publica primero y extorsiona después — de modo que la víctima no recibe aviso ni cuenta atrás y se entera por la publicación. No hay ventana de negociación y, lo que importa más, NO HAY VENTANA PARA DECIDIR. Nueve de sus 18 entradas se publicaron el día de apertura y las 18 tienen fecha de ataque igual a la de publicación. 44 % de su catálogo es sanidad estadounidense, con sistemas hospitalarios entre sus primeras reclamaciones",
+   "d": "Invierte la secuencia de la extorsión: NO tiene fase de presión previa — publica primero y extorsiona después — de modo que la víctima no recibe aviso ni cuenta atrás y se entera por la publicación. No hay ventana de negociación y, lo que importa más, NO HAY VENTANA PARA DECIDIR.",
    "a": "-",
-   "af": "Un proveedor sugiere que el catálogo podría estar SEMBRADO con datos reciclados, y ninguno de nuestros cuatro datos propios discrimina entre eso y una operación real: el juicio queda honestamente indeciso al 40-60 %. La vía más probable de resolverlo no es técnica: un medio especializado en notificación de brechas publicó sobre él a los dos días, y ese tipo de medio contrasta con las organizaciones afectadas"
+   "af": "Un proveedor sugiere que el catálogo podría estar SEMBRADO con datos reciclados, y ninguno de nuestros cuatro datos propios discrimina entre eso y una operación real: el juicio queda honestamente indeciso al 40-60 %."
   },
   {
    "id": "soulgroupactor",
@@ -2718,49 +2660,9 @@
    "t": "crimen",
    "p": "latam",
    "r": "CTI-2026-053",
-   "d": "Apareció el mismo día de emisión del informe con VEINTISÉIS entradas publicadas en unos TRECE MINUTOS, todas con fecha de ataque igual a la de publicación. Cero fuentes independientes, cero TTP, cero herramientas, cero descripción. Cumple UN criterio de siete del triaje de CTI-2026-042: clase «reclamación sin respaldo, pendiente de evidencia», lo que merece una línea en una lista de vigilancia y no un expediente. Es el único de los seis actores nuevos con una posible víctima ARGENTINA",
+   "d": "Apareció el mismo día de emisión del informe con VEINTISÉIS entradas publicadas en unos TRECE MINUTOS, todas con fecha de ataque igual a la de publicación. Cero fuentes independientes, cero TTP, cero herramientas, cero descripción.",
    "a": "-",
-   "af": "HALLAZGO DE MÉTODO: la portada del rastreador listaba sus víctimas mientras su propia API respondía «no se encontraron víctimas para el grupo», y la instantánea de recientes venía de caché. Un analista que consulte sólo la API concluirá que un actor con 26 reclamaciones no existe. El informe no es un perfil: es el registro de línea base que permitirá, a los 14 días, decidir si esto fue una operación o un escaparate"
-  },
-  {
-   "id": "dosfechas",
-   "l": "Las dos fechas de una víctima",
-   "t": "marco",
-   "p": "-",
-   "r": "CTI-2026-046",
-   "d": "Un registro de sitio de filtración tiene DOS fechas: la de publicación y la de ATAQUE DECLARADA por el adversario. Una ventana de siete días se puede contar sobre cualquiera de las dos y las dos son defendibles, pero divergen hasta x8,3: INC Ransom da 7 por fecha de ataque y 58 por publicación, porque publicó 50 entradas el 12-11. Y la base que usa el ranking del sitio NO es determinable desde fuera. Ninguna cifra de ventana corta se publica sin declarar sobre qué fecha se cuenta",
-   "a": "-",
-   "af": "El eje resultó además discriminante por sí mismo: settra declara fecha de ataque distinta en el 100 % de sus entradas, pixelleaks y curious worm en NINGUNA. Esa diferencia separó, en la serie, a la operación mejor evidenciada de las dos peores. Y el agregado del ecosistema es una media ponderada por una mezcla inestable: hay que medir por familia, no en agregado"
-  },
-  {
-   "id": "escalaprueba",
-   "l": "Graduar la prueba de una entrada",
-   "t": "marco",
-   "p": "-",
-   "r": "CTI-2026-048",
-   "d": "Ocho niveles, de menor a mayor: (0) anuncio anónimo con sector y país; (1) nombre sin dominio; (2) DOMINIO, que es el umbral mínimo de una reclamación utilizable; (3) captura de pantalla; (4) magnitud declarada; (5) inventario descriptivo por tablas y sistemas; (6) muestra publicada; (7) confirmación de un tercero. Lo contraintuitivo: el nivel 3 ENGAÑA más que ninguno —una captura no se puede fechar ni atribuir y es trivial de fabricar— y el 5 vale más, porque describir un esquema exige haberlo visto",
-   "a": "-",
-   "af": "Hay que publicar la DISTRIBUCIÓN del catálogo por niveles antes que su recuento total, que es la cifra menos informativa que se puede extraer de un sitio de filtración y la única que suele citarse. n0n: 59 entradas en nivel 0 y cero en nivel 7. PixelLeaks salta el 3 y llega al 5; Vortex hace lo contrario"
-  },
-  {
-   "id": "higienepersonas",
-   "l": "Datos de personas en un catálogo",
-   "t": "marco",
-   "p": "-",
-   "r": "CTI-2026-049",
-   "d": "Cinco reglas, porque un informe de inteligencia NO es un vehículo neutral: añade alcance y credibilidad. (1) El patrón se documenta, el dato no se reproduce. (2) Ni censurado: la censura parcial es reversible por correlación y no aporta nada que la descripción del patrón no diera. (3) No se nombra a la víctima cuando la entrada asocia personas concretas con ella: el daño es por identificabilidad. (4) Se identifica la fuente para que el patrón sea verificable en origen, y se asume que el lector no puede comprobarlo en el documento. (5) Se consigna el daño a terceros que no son parte",
-   "a": "-",
-   "af": "Generaliza decisiones puntuales de CTI-2026-041 (registros de empleados de una energética) y 042 (registros de pacientes de un hospital). Objeción razonable: «sin el dato el hallazgo no es verificable». Es cierto y es el coste declarado: un informe que ilustra un hallazgo con el domicilio de una persona compra verificabilidad con el daño de un tercero, y es una mala compra"
-  },
-  {
-   "id": "protocolo24h",
-   "l": "Las primeras 24 horas de un actor",
-   "t": "marco",
-   "p": "-",
-   "r": "CTI-2026-053",
-   "d": "Lo único útil que un externo puede hacer con un sitio de filtración recién aparecido no es analizarlo: es FOTOGRAFIARLO, porque las propiedades que decidirán si era una operación o un escaparate son propiedades del CAMBIO, y el cambio se mide contra una línea base que pasadas unas horas ya no se puede obtener. Seis campos en diez minutos: número de entradas con hora exacta, cadencia de la tanda inicial, proporción con fecha de ataque distinta, dispersión sectorial y geográfica, la lista de ceros, y el canal de contacto con la víctima",
-   "a": "-",
-   "af": "Regla de decisión a los 14 días, y su valor POR OMISIÓN ES CERRAR: una lista de vigilancia que sólo crece deja de ser una lista de vigilancia. El coste de cerrar una línea que luego importa es un expediente tardío; el de mantener cuarenta abiertas es no mirar ninguna"
+   "af": "HALLAZGO DE MÉTODO: la portada del rastreador listaba sus víctimas mientras su propia API respondía «no se encontraron víctimas para el grupo», y la instantánea de recientes venía de caché."
   },
   {
    "id": "cvesonicwall",
@@ -2768,7 +2670,7 @@
    "t": "cve",
    "p": "-",
    "r": "CTI-2026-046",
-   "d": "Vulnerabilidad de SonicWall cuya explotación por Akira CONFIRMA el aviso conjunto del FBI, CISA y socios, con alcance a un entorno de virtualización Nutanix. Es el único indicador de CTI-2026-046 con respaldo gubernamental y el único con una acción inequívoca: parchear. Y es la misma doctrina que CTI-2026-028 documentó para otro actor — el hipervisor no suele tener agente, y el camino hasta él suele empezar en un dispositivo de borde sin parchear",
+   "d": "Vulnerabilidad de SonicWall cuya explotación por Akira CONFIRMA el aviso conjunto del FBI, CISA y socios, con alcance a un entorno de virtualización Nutanix. Es el único indicador de CTI-2026-046 con respaldo gubernamental y el único con una acción inequívoca: parchear.",
    "a": "oficial"
   }
  ],
@@ -4454,11 +4356,6 @@
    "noesalias"
   ],
   [
-   "sauronransom",
-   "triajenombres",
-   "vinculado"
-  ],
-  [
    "devman",
    "relatoextorsion",
    "vinculado"
@@ -4491,31 +4388,6 @@
   [
    "botnetcl",
    "ecosistemabots",
-   "vinculado"
-  ],
-  [
-   "botnetcl",
-   "higieneinversa",
-   "vinculado"
-  ],
-  [
-   "botnetcl",
-   "trampadefecto",
-   "contiene"
-  ],
-  [
-   "botnetcl",
-   "marcasdetiempo",
-   "contiene"
-  ],
-  [
-   "trampadefecto",
-   "telemetriaviva",
-   "vinculado"
-  ],
-  [
-   "cereal2",
-   "trampadefecto",
    "vinculado"
   ],
   [
@@ -4559,11 +4431,6 @@
    "explota"
   ],
   [
-   "lisodosmodos",
-   "separarmodos",
-   "vinculado"
-  ],
-  [
    "liso",
    "cereal2",
    "noesalias"
@@ -4574,18 +4441,8 @@
    "vinculado"
   ],
   [
-   "ispregionalbr",
-   "higieneinversa",
-   "vinculado"
-  ],
-  [
    "asimetriabots",
    "zenlayerc2",
-   "vinculado"
-  ],
-  [
-   "marcasdetiempo",
-   "telemetriaviva",
    "vinculado"
   ],
   [
@@ -4644,56 +4501,6 @@
    "agrupadoen"
   ],
   [
-   "incransom",
-   "dosfechas",
-   "contiene"
-  ],
-  [
-   "akira",
-   "dosfechas",
-   "vinculado"
-  ],
-  [
-   "n0nactor",
-   "escalaprueba",
-   "vinculado"
-  ],
-  [
-   "settraactor",
-   "escalaprueba",
-   "vinculado"
-  ],
-  [
-   "pixelleaksactor",
-   "escalaprueba",
-   "vinculado"
-  ],
-  [
-   "vortexactor",
-   "escalaprueba",
-   "vinculado"
-  ],
-  [
-   "settraactor",
-   "higienepersonas",
-   "contiene"
-  ],
-  [
-   "soulgroupactor",
-   "protocolo24h",
-   "contiene"
-  ],
-  [
-   "soulgroupactor",
-   "triajenombres",
-   "vinculado"
-  ],
-  [
-   "curiouswormactor",
-   "triajenombres",
-   "vinculado"
-  ],
-  [
    "vortexactor",
    "curiouswormactor",
    "noesalias"
@@ -4721,11 +4528,6 @@
   [
    "settraactor",
    "relatoextorsion",
-   "vinculado"
-  ],
-  [
-   "higienepersonas",
-   "davila",
    "vinculado"
   ],
   [
