@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-024"
 version: "1.0"
-tipo: "Perfil de operación de extorsión + estudio de caso nacional"
-foco_regional: "Chile (víctima documentada: Ejército de Chile) · Latinoamérica"
+tipo: "Perfil de operación de extorsión"
+foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Rhysida (RaaS) · afiliados y actores de acceso asociados: Vanilla Tempest · solapamientos con Vice Society / DEV-0832 e Interlock"
+actor: "Rhysida · Vanilla Tempest"
 fecha: "2026-11-16"
 caduca: "2027-02-16"
 autor: "Célula CTI"
@@ -15,9 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, incluidos
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-024
 
-## El grupo que publicó 360 000 documentos del Ejército de Chile sigue operando tres años después, y en el caso chileno hay un rasgo que ninguna otra amenaza de esta cartera tiene: una detención dentro de la organización víctima
+## El grupo que publicó 360 000 documentos del Ejército de Chile sigue operando tres años después
 
-### En febrero de 2024 su cifrado fue roto y hubo descifrador gratuito. Ya no cuenta: lo que ese episodio enseña es que un fallo criptográfico del adversario es una lotería y no un plan de recuperación
+### En febrero de 2024 su cifrado fue roto y hubo descifrador gratuito, y ya no cuenta
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

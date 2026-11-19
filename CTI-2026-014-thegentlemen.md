@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-014"
 version: "1.3"
-tipo: "Perfil de actor + informe de campaña"
+tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "TheGentlemen (Storm-2697)"
+actor: "TheGentlemen · Storm-2697"
 fecha: "2026-09-15"
 caduca: "2026-12-15"
 autor: "Célula CTI"
@@ -14,7 +14,7 @@ distribucion: "Actualizado el 2026-11-19 con las dos reivindicaciones de alto pe
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-014
-## TheGentlemen (Storm-2697): RaaS de alto volumen con cifrador auto-propagante y acceso por borde de red
+## TheGentlemen: RaaS de alto volumen con cifrador auto-propagante y acceso por borde de red
 ### Con evaluación de actividad confirmada en Chile y Latinoamérica
 
 ---

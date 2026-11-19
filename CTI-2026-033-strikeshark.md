@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-033"
 version: "1.0"
-tipo: "Perfil de clúster sin atribuir + análisis de un cargador diseñado contra los sensores del EDR + evaluación de exposición por aplicaciones expuestas a Internet"
-foco_regional: "Colombia confirmada como país con víctima, **y el vector fue un servidor de datos geoespaciales GeoServer sin parchear (CVE-2024-36401)**. La víctima colombiana no es gubernamental ni diplomática: la fuente la sitúa en el grupo de «otras organizaciones», y el informe explica por qué esa precisión cambia la decisión"
+tipo: "Perfil de operación sin atribuir"
+foco_regional: "Colombia · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "StrikeShark (clúster de intrusión sin atribuir, designación de Kaspersky GReAT) · cargador SharkLoader · carga final Cobalt Strike Beacon"
+actor: "StrikeShark · cargador SharkLoader"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, con el in
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-033
 
-## Un clúster que **nadie ha atribuido**, que llegó a Colombia por un servidor de datos geoespaciales sin parchear, y cuyo cargador es un **catálogo de los sensores en los que confía su EDR**
+## Un clúster que nadie ha atribuido, entrado por un servidor geoespacial sin parchear, con un cargador que cataloga el EDR
 
-### SharkLoader ciega el registro de eventos del sistema, construye llamadas directas al núcleo en tiempo de ejecución para saltarse los ganchos del producto de seguridad, **devuelve la memoria del implante a sólo lectura mientras duerme** para que un barrido no la encuentre, y hace que todo lo que lance parezca hijo de `svchost.exe`. No es evasión improvisada: es una enumeración
-
-#### Y la atribución: Kaspersky dice **«hablante de chino, con confianza BAJA»**, apoyada en quién escribió en GitHub tres herramientas públicas. Parte de la cobertura secundaria la publicó como confianza *moderada*. Este informe documenta ese ascenso, porque es el error que esta cartera lleva tres informes corrigiendo
+### SharkLoader ciega el registro de eventos, salta los ganchos del EDR con llamadas directas al núcleo, y duerme en memoria de sólo lectura
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

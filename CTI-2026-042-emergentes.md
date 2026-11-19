@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-042"
 version: "1.0"
-tipo: "Informe de ecosistema de tres actores de extorsión emergentes + estudio de caso nacional + método de triaje para un grupo recién nombrado + evaluación de una reclamación de capacidad destructiva contra sistemas de control industrial"
-foco_regional: "**Dos afirmaciones del requisito, una corroborada con víctima nombrada y otra sin evidencia.** Devman atacó la **Clínica Dávila de Santiago** hacia el 18 de diciembre de 2025, reclamando más de 250 GB de registros de pacientes, y publicó parte del material al no cobrar. **El vector reportado es la red privada virtual con usuario y contraseña idénticos** — y es el segundo caso chileno de este lote que entra por el acceso remoto, cinco semanas antes del de `CTI-2026-041`. En cambio, **la extorsión sin cifrado en Colombia y Perú no aparece en ninguna fuente**"
+tipo: "Perfil de ecosistema"
+foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "**Devman** · `Funky Mantis` (designación de PRODAFT) · derivado de DragonForce — **y Dire Wolf** · `DireWolf` — **y Sauron**, que este informe sostiene que **no es comparable con los dos anteriores y probablemente no es un «grupo» en el mismo sentido**"
+actor: "Devman · Funky Mantis · Dire Wolf · Sauron"
 fecha: "2026-11-19"
 caduca: "2027-02-19"
 autor: "Célula CTI"
@@ -15,15 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Se leyó 
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-042
 
-## Los tres actores que el requisito agrupó como «emergentes» no son comparables entre sí, **y esa es la primera conclusión del informe**: uno es una operación industrializada con portal de afiliados y nómina, otro es un equipo reducido y cerrado, y del tercero no hay evidencia de que sea un grupo
+## Los tres actores que el requisito agrupó como «emergentes» no son comparables entre sí
 
-### Lo que el requisito afirmaba sobre Chile **se corrobora, y con nombre**: Devman atacó la **Clínica Dávila de Santiago** hacia el 18 de diciembre de 2025, reclamó **más de 250 GB** de registros de pacientes y publicó parte del material al no cobrar. El vector reportado es **la red privada virtual, con usuario y contraseña idénticos**. Lo que no aparece en ninguna fuente es la extorsión sin cifrado en Colombia y Perú
-
-#### Y hay un hallazgo que excede el requisito y obliga a tratarse con cuidado: **Devman reclamó haber desarrollado un «cifrador especializado para SCADA»** diseñado, en sus palabras, para empujar los sistemas de control «más allá de sus parámetros de operación, procesadores, memoria y límites térmicos, forzándolos a acelerar y funcionar calientes hasta que el hardware falle». **Es una afirmación del adversario en una entrevista**, no un hallazgo verificado — y su política de objetivos, que sí está documentada, **anima expresamente a atacar infraestructura crítica e instruye a los afiliados a pedir un cifrador aparte para SCADA**
-
-##### El mecanismo que explica la victimología regional no es la geografía ni el sector: **el propio programa reparte el acceso**. Los administradores ofrecían **«redes» por país**, preguntaban al afiliado si usaría acceso propio o suministrado por el programa, e imponían **ventanas de ejecución de dos a tres días**. Si el programa distribuye accesos por país, la victimología regional es función de **qué accesos tiene el programa**, no de qué elige el afiliado
-
-###### Y la operación lleva **sin publicar una víctima desde el 4 de febrero de 2026**, tras 184 reclamadas y tras un desenmascaramiento público de sus operadores en junio de 2025. PRODAFT valora **con confianza moderada** que la persona detrás del alias **sigue activa, ya no dirigiendo un programa de afiliados sino trabajando como afiliado de otros**. Es la misma lección de `CTI-2026-040` con otra forma: **la marca muere, la persona continúa**
+### Lo que el requisito afirmaba sobre Chile se corrobora y con nombre: la Clínica Dávila de Santiago
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

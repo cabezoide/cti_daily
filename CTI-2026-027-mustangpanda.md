@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-027"
 version: "1.0"
-tipo: "Perfil de actor + evaluación de capacidad y de resiliencia a la acción policial"
-foco_regional: "Global (Indo-Pacífico, Europa y EE. UU. documentados) · Chile y Latinoamérica: exposición sectorial indirecta (marítimo-portuario, hidroeléctrico, diplomático) y abuso de confianza en firma de código"
+tipo: "Perfil de actor"
+foco_regional: "Global · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Mustang Panda · Earth Preta · TA416 · RedDelta · BRONZE PRESIDENT · Stately Taurus · Twill Typhoon · HoneyMyte · TEMP.Hex · TANTALUM · G0129 · (vinculado) UNC6384"
+actor: "Mustang Panda · Earth Preta · RedDelta · Twill Typhoon · G0129"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,9 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR: el análi
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-027
 
-## El tercer actor del ranking global es, a diferencia de los dos primeros, exactamente tan peligroso como su puesto sugiere — y eso desmonta la conclusión fácil de los dos informes anteriores
+## El tercero del ranking global sí es tan peligroso como su puesto sugiere, y eso desmonta los dos informes anteriores
 
-### Sobrevivió a que el FBI le borrara el malware de 4 258 ordenadores, se rearmó en meses, y en agosto de 2026 metió un rootkit **con firma digital válida** en el núcleo de Windows. Su gusano de USB explica el puesto en el ranking; el rootkit explica por qué el puesto no importa
+### El FBI le borró el malware de 4 258 ordenadores, se rearmó en meses, y en 2026 firmó un rootkit con certificado válido
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

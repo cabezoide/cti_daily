@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-025"
 version: "1.0"
-tipo: "Perfil de actor + evaluación de pertinencia regional"
-foco_regional: "Ucrania (único teatro documentado) · Chile y Latinoamérica: exposición indirecta y transferencia de método"
+tipo: "Perfil de actor"
+foco_regional: "Ucrania · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Gamaredon (Armageddon · Primitive Bear · ACTINIUM · Shuckworm · Aqua Blizzard · IRON TILDEN · DEV-0157 · NastyShrew · G0047)"
+actor: "Gamaredon · Primitive Bear · Shuckworm · Aqua Blizzard · G0047"
 fecha: "2026-11-17"
 caduca: "2027-01-16"
 autor: "Célula CTI"
@@ -15,9 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR: el whitep
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-025
 
-## El actor número uno del ranking de telemetría global de noviembre de 2026 no tiene una sola víctima documentada fuera de Ucrania, y ese desajuste es el informe
+## El actor número uno del ranking de telemetría global no tiene una sola víctima documentada fuera de Ucrania
 
-### Trellix le atribuye el 9,03 % de toda la actividad estatal observada y el 19,88 % de las detecciones en EE. UU.; ESET, que le dedica un whitepaper anual completo, afirma que en 2025 atacó **exclusivamente** instituciones gubernamentales y militares ucranianas. Las dos cosas no pueden ser verdad del mismo modo, y de cuál sea falsa depende cómo se prioriza
+### Trellix le atribuye el 9,03 % de toda la actividad estatal observada
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

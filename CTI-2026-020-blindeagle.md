@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-020"
 version: "1.0"
-tipo: "Perfil de actor + informe de campaña"
+tipo: "Perfil de actor"
 foco_regional: "Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98)"
+actor: "Blind Eagle · APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98"
 fecha: "2026-11-16"
 caduca: "2027-02-16"
 autor: "Célula CTI"
@@ -14,8 +14,8 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. No incorp
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-020
-## Blind Eagle: ocho años atacando Latinoamérica con malware de catálogo, scripts de Visual Basic y DNS dinámico gratuito — y funcionando, porque su ventaja no es técnica sino burocrática
-### Suplanta el acto administrativo que ningún funcionario público latinoamericano puede ignorar: la citación judicial. Chile figura como objetivo en cuatro fuentes independientes y en ningún caso documentado
+## Blind Eagle: ocho años atacando Latinoamérica con malware de catálogo, porque su ventaja no es técnica sino burocrática
+### Suplanta el acto administrativo que ningún funcionario latinoamericano puede ignorar: la citación judicial
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

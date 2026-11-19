@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-015"
 version: "1.1"
-tipo: "Perfil de actor + informe de campaña"
+tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Qilin (Agenda · Storm-1934)"
+actor: "Qilin · Agenda · Storm-1934"
 fecha: "2026-09-16"
 caduca: "2026-12-16"
 autor: "Célula CTI"
@@ -14,7 +14,7 @@ autor: "Célula CTI"
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-015
-## Qilin (Agenda / Storm-1934): el RaaS dominante del ecosistema, con acceso por borde de red y neutralización de EDR a nivel de kernel
+## Qilin: el RaaS dominante del ecosistema, con acceso por borde de red y neutralización del respaldo
 ### Con evaluación de actividad confirmada en Chile bajo el régimen de la Ley 21.663
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de

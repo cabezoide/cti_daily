@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-021"
 version: "1.0"
-tipo: "Perfil de ecosistema de malware + evaluación regional"
+tipo: "Perfil de ecosistema"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Ecosistema de troyanos bancarios brasileños (Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON)"
+actor: "Troyanos bancarios brasileños · Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON"
 fecha: "2026-11-16"
 caduca: "2027-02-16"
 autor: "Célula CTI"
@@ -14,8 +14,8 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, incluidas
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-021
-## La única amenaza de esta cartera donde Chile es objetivo primario y documentado — y la que menos atención recibe, porque parece fraude bancario de consumidor y no lo es
-### El CSIRT Nacional ha alertado de Mekotio al menos cinco veces desde 2023, suplantando al SII, a la CGE y a la Tesorería General. En el último año el ecosistema cambió de canal: WhatsApp
+## La única amenaza de esta cartera donde Chile es objetivo primario, y la que menos atención recibe
+### El CSIRT Nacional ha alertado de Mekotio al menos cinco veces desde 2023
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

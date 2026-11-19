@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-036"
 version: "1.0"
-tipo: "Perfil de actor estatal de preposicionamiento + evaluación de un adversario que usa la región como infraestructura y no como objetivo + confirmación de un eje de exposición que esta cartera venía siguiendo desde tres informes"
-foco_regional: "**No hay ninguna víctima latinoamericana documentada de este actor, y la afirmación del requisito sobre Perú y Chile no la sostiene ninguna fuente pública.** Lo que sí está documentado es otra cosa, y es más incómoda: la región aparece en el expediente como **infraestructura**. Los módems de un fabricante brasileño están reservados como nodos de relé en la red de retransmisión del actor, y la red de reconocimiento asociada tiene concentración en Sudamérica. No somos el objetivo: somos el trayecto"
+tipo: "Perfil de actor estatal"
+foco_regional: "Latinoamérica · EE. UU."
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Volt Typhoon · Vanguard Panda · BRONZE SILHOUETTE · DEV-0391 · UNC3236 · VOLTZITE · Insidious Taurus — y los marcos de infraestructura que no son el actor: KV Botnet, JDY y Silent Train"
+actor: "Volt Typhoon · Vanguard Panda · VOLTZITE · Insidious Taurus"
 fecha: "2026-11-18"
 caduca: "2027-02-18"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas, con cuatro document
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-036
 
-## Cinco años dentro de una red sin dejar un fichero, y después cuatro campañas de **día cero** contra los paneles de administración: el adversario que el ciclo de parcheo no detiene
+## Cinco años en una red sin dejar un fichero, y después cuatro días cero contra los paneles de administración
 
-### El aviso conjunto de 2024 lo describía viviendo de la tierra, sin malware y sin día cero. El informe de Lumen de octubre de 2026 documenta **cuatro campañas de día cero confirmadas y una probable**, todas contra plataformas de **gestión centralizada**: un controlador de SD-WAN, un gestor de puestos, un sistema de administración remota. **Es la inversión exacta de `CTI-2026-034`** — y, según Dragos, los dos actores probablemente tienen **el mismo cliente**
-
-#### Y la única huella regional documentada de este actor **no es una víctima: es infraestructura**. Los módems de **Intelbras**, fabricante brasileño, están asignados como nodos de relé extranjeros en una cadena que **se desmonta y se limpia al terminar cada sesión de cuatro horas**; la red de reconocimiento asociada tiene concentración en Sudamérica. La pregunta de este informe no es «¿nos atacan?» —no, y así se documenta— sino **«¿somos el trayecto, y nos daríamos cuenta?»**
+### El aviso conjunto de 2024 lo describía viviendo de la tierra, sin malware y sin día cero
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

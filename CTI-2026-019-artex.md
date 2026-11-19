@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-019"
 version: "1.0"
-tipo: "Evaluación estratégica + perfil de capacidad adversaria"
+tipo: "Evaluación estratégica"
 foco_regional: "Global · Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "ARTEX (framework ofensivo agéntico) y los clústeres que lo operan"
+actor: "ARTEX · framework ofensivo agéntico"
 fecha: "2026-11-16"
 caduca: "2027-02-16"
 autor: "Célula CTI"
@@ -14,8 +14,8 @@ distribucion: "Elaborado íntegramente con fuentes abiertas, incluido el FLASH F
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-019
-## ARTEX: el adversario ya no espera a nuestro turno de decidir — intrusiones que alcanzan acceso privilegiado en menos de tres horas, el mismo plazo que la Ley 21.663 nos da solo para la alerta temprana
-### Un framework de pentesting agéntico publicado en julio de 2026 y retirado en octubre es hoy herramienta de al menos cuatro clústeres distintos, incluidos dos que comprometieron cancillerías latinoamericanas. No es malware: es velocidad. Y la velocidad no se bloquea con listas de IOC
+## ARTEX: intrusiones con acceso privilegiado en menos de tres horas, el plazo que la Ley 21.663 da sólo para la alerta
+### Un framework agéntico publicado en julio de 2026 y retirado en octubre, hoy en manos de al menos cuatro clústeres
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

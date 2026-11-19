@@ -6,7 +6,7 @@ version: "1.0"
 tipo: "Evaluación estratégica"
 foco_regional: "Global · Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Abuso de dominios de primer nivel (ecosistema de registro DNS)"
+actor: "Abuso de dominios de primer nivel"
 fecha: "2026-11-15"
 caduca: "2027-02-15"
 autor: "Célula CTI"
@@ -14,8 +14,8 @@ distribucion: "Elaborado íntegramente con fuentes abiertas y datos primarios pu
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-018
-## El abuso de TLD no se concentra donde se mide: `.com` lidera todas las listas por volumen mientras once gTLD baratos superan el 10 % de su zona completa marcada como maliciosa
-### Doce meses de datos primarios (may-2025 → abr-2026) más cuatro trimestres de seguimiento. El predictor útil no es la terminación: es la tupla TLD + registrador + edad del dominio
+## El abuso de TLD no se concentra donde se mide: `.com` lidera por volumen, y once gTLD baratos pasan del 10 % de su zona
+### Doce meses de datos primarios (may-2025 → abr-2026) y cuatro trimestres de seguimiento
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

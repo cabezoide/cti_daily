@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-031"
 version: "1.0"
-tipo: "Perfil de actor estatal mercenario + evaluación de un canal de mando y control que no se puede dar de baja"
-foco_regional: "Latinoamérica hispanohablante. **Confirmado: una organización de comunicaciones en Venezuela (junio de 2026).** Chile, Colombia, Ecuador, Brasil, El Salvador y Uruguay aparecen con **confianza moderada** y sin intrusión confirmada: la distinción es el eje de este informe"
+tipo: "Perfil de actor estatal"
+foco_regional: "Latinoamérica hispanohablante"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Dark Caracal · G0070 (MITRE ATT&CK) · nexo con la Dirección General de Seguridad General (GDGS) del Líbano · familias Bandook, CrossRAT, Pallas, Poco RAT, AsioGate y (2026) GoCaracal"
+actor: "Dark Caracal · G0070"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, con el in
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-031
 
-## Un servicio de inteligencia estatal libanés lleva cinco años operando contra el mundo hispanohablante, y en junio de 2026 puso su canal de respaldo de mando y control en la cadena de bloques de Ethereum
+## Un servicio de inteligencia libanés lleva cinco años contra el mundo hispanohablante, con mando y control en Ethereum
 
-### Es la primera pieza de infraestructura adversaria de esta cartera que **nadie puede dar de baja** — y la primera que **el adversario tampoco puede borrar**. Esas dos frases tienen la misma causa, y sólo la segunda está a nuestro favor
-
-#### Lo confirmado es **una** intrusión: una organización de comunicaciones de Venezuela, junio de 2026. Chile, Colombia y Ecuador aparecen con **confianza moderada** y sin víctima confirmada. El requisito que originó este informe los daba por confirmados y añadía «entidades gubernamentales» que ninguna fuente de 2026 sostiene
+### La primera pieza de infraestructura adversaria de esta cartera que nadie puede dar de baja, ni el propio adversario
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

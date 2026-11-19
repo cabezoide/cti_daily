@@ -34,6 +34,36 @@ h2{font-size:21px;letter-spacing:-.01em;margin:52px 0 6px;font-weight:620}
 h2 .num{font-family:var(--mono);font-size:12px;color:var(--sky);
   letter-spacing:.14em;display:block;margin-bottom:7px;font-weight:500}
 .sub{color:var(--ink-3);font-size:14.5px;margin-bottom:22px;max-width:70ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.search{margin:0 0 20px}
+.search-field{position:relative;display:flex;align-items:center}
+.search-field .ic{position:absolute;left:14px;width:16px;height:16px;fill:none;
+  stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;pointer-events:none}
+.search input{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-s);
+  padding:12px 40px 12px 40px;transition:border-color .16s ease,background .16s ease}
+.search input::placeholder{color:var(--ink-3)}
+.search input:focus{outline:none;border-color:var(--amber);background:var(--surface-2)}
+.search input:focus+.clr,.search input:not(:placeholder-shown)+.clr{color:var(--ink-2)}
+.search input::-webkit-search-cancel-button{display:none}
+.clr{position:absolute;right:8px;width:26px;height:26px;line-height:1;font-size:19px;
+  background:none;border:0;border-radius:6px;color:var(--ink-3);cursor:pointer}
+.clr:hover{color:var(--amber);background:rgba(90,126,190,.16)}
+.search-meta{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  align-items:baseline;margin-top:9px;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.06em;color:var(--ink-3)}
+.search-meta .tips{color:rgba(130,148,184,.72)}
+kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line-strong);
+  border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;padding:4px 10px;
+  border-radius:99px;background:none;border:1px solid var(--line);color:var(--ink-3);
+  cursor:pointer;transition:.16s}
+.chip:hover{border-color:var(--line-strong);color:var(--ink-2)}
+.chip.on{background:var(--amber-soft);border-color:rgba(247,164,0,.55);color:#ffd27a}
+.empty{color:var(--ink-3);font-size:14px;max-width:70ch;margin-top:4px}
+.empty strong{color:var(--amber);font-family:var(--mono);font-size:13px}
+.pill.cat{background:rgba(55,93,157,.22);border-color:rgba(90,126,190,.5);color:#c3d2ee}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(318px,1fr))}
 .card{background:linear-gradient(180deg,var(--surface),var(--surface-2));
   border:1px solid var(--line);border-radius:var(--r);padding:20px 21px;
@@ -95,234 +125,254 @@ footer a{color:var(--sky)}
 </header>
 
 <h2><span class="num">01 · catálogo</span>Informes publicados</h2>
-<p class="sub">32 informes. El botón abre el informe renderizado; la fuente en Markdown
-es el documento canónico y se versiona.</p>
-<div class="grid">
-<article class="card">
+<p class="sub">32 informes. El buscador filtra sobre el identificador, el actor y sus
+alias, la categoría y la afirmación central de cada informe; el botón abre el informe
+renderizado, y la fuente en Markdown es el documento canónico y se versiona.</p>
+
+<div class="search" id="bus" hidden>
+  <label class="sr" for="q">Buscar en el catálogo</label>
+  <div class="search-field">
+    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
+    <input id="q" type="search" autocomplete="off" spellcheck="false"
+           placeholder="Buscar por actor, alias, categoría, identificador o afirmación…">
+    <button type="button" id="x" class="clr" hidden aria-label="Limpiar la búsqueda">×</button>
+  </div>
+  <div class="search-meta">
+    <span id="cuenta"></span>
+    <span class="tips">Atajos: <kbd>/</kbd> para buscar · <kbd>Esc</kbd> para limpiar</span>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="grid" id="rejilla">
+<article class="card" data-b="cti-2026-045 · liso · perfil de red de bots · botnet ddos denegacion de servicio · liso: la familia mas activa del ecosistema no es una campana, son dos, y no comparten ni un parametro · modo a satura redes brasilenas en cinco segundos; modo b asfixia anfitriones estadounidenses durante sesenta · tlp:clear · v1.1 · vigente · 2026-11-19 · cti-2026-045-liso.md">
   <div class="id">CTI-2026-045 · 2026-11-19</div>
-  <h3><a href="CTI-2026-045-liso.html">Liso — familia de red de bots de denegación de servicio, la más activa de las 33 en seguimiento</a></h3>
-  <div class="meta">Perfil de familia de red de bots + separación de dos campañas simultáneas dentro de un mismo parque + método para distinguir modos operativos a partir de parámetros técnicos</div>
-  <div class="pills"><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 61 d</span></div>
+  <h3><a href="CTI-2026-045-liso.html">Liso</a></h3>
+  <div class="meta">Liso: la familia más activa del ecosistema no es una campaña, son dos, y no comparten ni un parámetro</div>
+  <div class="pills"><span class="pill cat">Perfil de red de bots</span><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 61 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-045-liso.html">Leer el informe</a><a href="CTI-2026-045-liso.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-044 · redes de bots de ddos y de proxy residencial · 33 familias · perfil de ecosistema · panorama · redes de bots activas: 33 familias, y el 85 % de la infraestructura pertenece a las siete que nunca lanzan un ataque · medicion propia sobre telemetria en vivo, y un feed bgp defensivo operado desde chile que ya tiene 176 pares · tlp:clear · v1.2 · vigente · 2026-11-19 · cti-2026-044-redes-bots.md">
   <div class="id">CTI-2026-044 · 2026-11-19</div>
-  <h3><a href="CTI-2026-044-redes-bots.html">Ecosistema de redes de bots de DDoS y de proxy residencial — 33 familias en seguimiento activo (Liso · Cereal2 · Potassium · Aisuru-DDoS · Aisuru-Proxy · SixSayven · CXFJ · Aigogo · y 25 más)</a></h3>
-  <div class="meta">Evaluación estratégica de ecosistema + medición propia sobre telemetría en vivo + evaluación de una fuente y de su feed BGP defensivo + método para usar un canal de telemetría continua como fuente de inteligencia</div>
-  <div class="pills"><span class="pill">v1.2</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 61 d</span></div>
+  <h3><a href="CTI-2026-044-redes-bots.html">Redes de bots de DDoS y de proxy residencial · 33 familias</a></h3>
+  <div class="meta">Redes de bots activas: 33 familias, y el 85 % de la infraestructura pertenece a las siete que nunca lanzan un ataque</div>
+  <div class="pills"><span class="pill cat">Perfil de ecosistema</span><span class="pill">v1.2</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 61 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-044-redes-bots.html">Leer el informe</a><a href="CTI-2026-044-redes-bots.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-043 · operation shadowcloud · bronze sandcastle · gitdoor · graphdoor · perfil de operacion sin atribuir · apt sin atribuir cluster · dos proveedores describieron la misma operacion con dos nombres, y ninguno vio que comparten una cuenta de github · sophos la llamo `bronze sandcastle` y kaspersky `operation shadowcloud`, con diez semanas de diferencia · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-043-shadowcloud.md">
   <div class="id">CTI-2026-043 · 2026-11-17</div>
-  <h3><a href="CTI-2026-043-shadowcloud.html">Operation ShadowCloud (designación de Kaspersky GReAT, sin atribuir) · puertas traseras GitDoor y GraphDoor · **y BRONZE SANDCASTLE (designación de Sophos CTU), que este informe sostiene que es la misma operación**</a></h3>
-  <div class="meta">Perfil de operación sin atribuir + reconciliación de dos expedientes de proveedor que describen la misma operación sin saberlo + evaluación de la nube corporativa como canal de mando y control</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-043-shadowcloud.html">Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor</a></h3>
+  <div class="meta">Dos proveedores describieron la misma operación con dos nombres, y ninguno vio que comparten una cuenta de GitHub</div>
+  <div class="pills"><span class="pill cat">Perfil de operación sin atribuir</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-043-shadowcloud.html">Leer el informe</a><a href="CTI-2026-043-shadowcloud.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-042 · devman · funky mantis · dire wolf · sauron · perfil de ecosistema · panorama · los tres actores que el requisito agrupo como «emergentes» no son comparables entre si · lo que el requisito afirmaba sobre chile se corrobora y con nombre: la clinica davila de santiago · tlp:clear · v1.0 · vigente · 2026-11-19 · cti-2026-042-emergentes.md">
   <div class="id">CTI-2026-042 · 2026-11-19</div>
-  <h3><a href="CTI-2026-042-emergentes.html">**Devman** · `Funky Mantis` (designación de PRODAFT) · derivado de DragonForce — **y Dire Wolf** · `DireWolf` — **y Sauron**, que este informe sostiene que **no es comparable con los dos anteriores y probablemente no es un «grupo» en el mismo sentido**</a></h3>
-  <div class="meta">Informe de ecosistema de tres actores de extorsión emergentes + estudio de caso nacional + método de triaje para un grupo recién nombrado + evaluación de una reclamación de capacidad destructiva contra sistemas de control industrial</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <h3><a href="CTI-2026-042-emergentes.html">Devman · Funky Mantis · Dire Wolf · Sauron</a></h3>
+  <div class="meta">Los tres actores que el requisito agrupó como «emergentes» no son comparables entre sí</div>
+  <div class="pills"><span class="pill cat">Perfil de ecosistema</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-042-emergentes.html">Leer el informe</a><a href="CTI-2026-042-emergentes.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-041 · anubis · hawkmoth · sphinx · perfil de operacion de extorsion · ransomware raas cifrado rescate · anubis publico a una energetica chilena, y los dos relatos del incidente parecen contradecirse y son compatibles · anubis afirmo 6 tb de empresas copec s.a. y publico el listado completo de ficheros con buscador · tlp:clear · v1.0 · vigente · 2026-11-19 · cti-2026-041-anubis.md">
   <div class="id">CTI-2026-041 · 2026-11-19</div>
-  <h3><a href="CTI-2026-041-anubis.html">Anubis (RaaS) · desarrollado por el grupo que Symantec designa **Hawkmoth** · **reconversión de Sphinx**, con la carga prácticamente sin cambios y sólo la marca actualizada — **y NO es el troyano bancario Anubis para Android, NO es la puerta trasera Anubis en Python de Savage Ladybug, y NO es la herramienta libre homónima de protección contra rastreadores web**</a></h3>
-  <div class="meta">Perfil de operación de extorsión con borrado + estudio de caso nacional + método para leer dos relatos compatibles del mismo incidente cuando uno lo publica el extorsionador y el otro la víctima</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <h3><a href="CTI-2026-041-anubis.html">Anubis · Hawkmoth · Sphinx</a></h3>
+  <div class="meta">Anubis publicó a una energética chilena, y los dos relatos del incidente parecen contradecirse y son compatibles</div>
+  <div class="pills"><span class="pill cat">Perfil de operación de extorsión</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-041-anubis.html">Leer el informe</a><a href="CTI-2026-041-anubis.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-040 · blacksuit · royal · chaos · perfil de operacion de extorsion · ransomware raas cifrado rescate · el sucesor llevaba cinco meses funcionando cuando se incautaron los servidores del predecesor · `operation checkmate` incauto cuatro servidores, nueve dominios y mas de un millon de dolares, sin una sola detencion · tlp:clear · v1.0 · vigente · 2026-11-19 · cti-2026-040-blacksuit.md">
   <div class="id">CTI-2026-040 · 2026-11-19</div>
-  <h3><a href="CTI-2026-040-blacksuit.html">BlackSuit · Royal · (linaje) Conti — **operación desarticulada el 2025-07-24** en la `Operation Checkmate` — **y `Chaos` (RaaS), que Cisco Talos valora con confianza moderada como su continuación o como obra de antiguos miembros suyos, y que llevaba operando desde febrero de 2025, cinco meses antes del desmantelamiento**</a></h3>
-  <div class="meta">Perfil de operación de extorsión desarticulada + evaluación de la eficacia real de una acción policial + identificación del sucesor y de su lista de exclusión declarada + verificación propia de seis direcciones de un aviso gubernamental que no deben bloquearse</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <h3><a href="CTI-2026-040-blacksuit.html">BlackSuit · Royal · Chaos</a></h3>
+  <div class="meta">El sucesor llevaba cinco meses funcionando cuando se incautaron los servidores del predecesor</div>
+  <div class="pills"><span class="pill cat">Perfil de operación de extorsión</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-040-blacksuit.html">Leer el informe</a><a href="CTI-2026-040-blacksuit.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-039 · apt41 · winnti · wicked panda · brass typhoon · g0096 · perfil de actor estatal · apt estado estatal espionaje · tres de los cuatro sectores del requisito se corroboran, uno por un gran jurado federal, y el actor tiene dos misiones · la acusacion federal de agosto de 2020 afirma que atacaron proveedores de telecomunicaciones en chile · tlp:clear · v1.0 · vigente · 2026-11-19 · cti-2026-039-apt41.md">
   <div class="id">CTI-2026-039 · 2026-11-19</div>
-  <h3><a href="CTI-2026-039-apt41.html">APT41 · Winnti · Wicked Panda · BARIUM · Brass Typhoon · Earth Baku · Bronze Atlas · Double Dragon · HOODOO · RedGolf · TA415 · G0096 — con **cinco nacionales chinos acusados nominalmente por dos grandes jurados federales**, tres de ellos empleados de **Chengdu 404 Network Technology Company**</a></h3>
-  <div class="meta">Perfil de actor estatal de doble misión + verificación sector por sector de un requisito regional contra material de acusación federal + evaluación de una infraestructura de mando y control diseñada para derrotar al escaneo de Internet</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <h3><a href="CTI-2026-039-apt41.html">APT41 · Winnti · Wicked Panda · Brass Typhoon · G0096</a></h3>
+  <div class="meta">Tres de los cuatro sectores del requisito se corroboran, uno por un gran jurado federal, y el actor tiene dos misiones</div>
+  <div class="pills"><span class="pill cat">Perfil de actor estatal</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-039-apt41.html">Leer el informe</a><a href="CTI-2026-039-apt41.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-038 · apt29 · midnight blizzard · cozy bear · nobelium · g0016 · perfil de actor estatal · apt estado estatal espionaje · el svr si ataca a la diplomacia, pero el activo expuesto de esta region es la mision en el exterior y el hotel · las dos afirmaciones tecnicas del requisito estan corroboradas; su victimologia, no · tlp:clear · v1.0 · vigente · 2026-11-19 · cti-2026-038-apt29.md">
   <div class="id">CTI-2026-038 · 2026-11-19</div>
-  <h3><a href="CTI-2026-038-apt29.html">APT29 · Midnight Blizzard · Cozy Bear · NOBELIUM · The Dukes · Cloaked Ursa · BlueBravo · UNC2452 · Dark Halo · G0016 — es decir, el **Servicio de Inteligencia Exterior de la Federación Rusa (SVR)** — y sus subgrupos operativos **Storm-2945** y **Storm-2372**</a></h3>
-  <div class="meta">Perfil de actor estatal + corroboración de dos afirmaciones del requisito y refutación de su victimología + identificación de dos activos regionales expuestos que no figuran en el inventario de nadie + razonamiento sobre exploits compartidos con la industria comercial de vigilancia</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <h3><a href="CTI-2026-038-apt29.html">APT29 · Midnight Blizzard · Cozy Bear · NOBELIUM · G0016</a></h3>
+  <div class="meta">El SVR sí ataca a la diplomacia, pero el activo expuesto de esta región es la misión en el exterior y el hotel</div>
+  <div class="pills"><span class="pill cat">Perfil de actor estatal</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-038-apt29.html">Leer el informe</a><a href="CTI-2026-038-apt29.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-037 · apt28 · fancy bear · forest blizzard · sednit · sofacy · g0007 · perfil de actor estatal · apt estado estatal espionaje · apt28 secuestra el dns de enrutadores tp-link para robar correo web de gobiernos · `operation masquerade` / `frostarmada`: secuestro de dns en el borde e intermediacion de tls desde agosto de 2025 · tlp:clear · v1.0 · vigente · 2026-11-19 · cti-2026-037-apt28.md">
   <div class="id">CTI-2026-037 · 2026-11-19</div>
-  <h3><a href="CTI-2026-037-apt28.html">APT28 · Fancy Bear · Forest Blizzard · Sednit · Sofacy · Pawn Storm · BlueDelta · STRONTIUM · UAC-0001 · Fighting Ursa · ITG05 · FROZENLAKE · Iron Twilight · G0007 — es decir, la **unidad militar 26165 del 85.º Centro Principal de Servicio Especial (GTsSS) de la Dirección Principal de Inteligencia (GRU) del Estado Mayor ruso** — y su subgrupo **Storm-2754**</a></h3>
-  <div class="meta">Perfil de actor estatal + auditoría de una afirmación compuesta en la que el único elemento no corroborado es el que parecía más duro + corrección de la taxonomía de exposición regional de esta cartera</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
+  <h3><a href="CTI-2026-037-apt28.html">APT28 · Fancy Bear · Forest Blizzard · Sednit · Sofacy · G0007</a></h3>
+  <div class="meta">APT28 secuestra el DNS de enrutadores TP-Link para robar correo web de gobiernos</div>
+  <div class="pills"><span class="pill cat">Perfil de actor estatal</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 92 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-037-apt28.html">Leer el informe</a><a href="CTI-2026-037-apt28.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-036 · volt typhoon · vanguard panda · voltzite · insidious taurus · perfil de actor estatal · apt estado estatal espionaje · cinco anos en una red sin dejar un fichero, y despues cuatro dias cero contra los paneles de administracion · el aviso conjunto de 2024 lo describia viviendo de la tierra, sin malware y sin dia cero · tlp:clear · v1.0 · vigente · 2026-11-18 · cti-2026-036-volttyphoon.md">
   <div class="id">CTI-2026-036 · 2026-11-18</div>
-  <h3><a href="CTI-2026-036-volttyphoon.html">Volt Typhoon · Vanguard Panda · BRONZE SILHOUETTE · DEV-0391 · UNC3236 · VOLTZITE · Insidious Taurus — y los marcos de infraestructura que no son el actor: KV Botnet, JDY y Silent Train</a></h3>
-  <div class="meta">Perfil de actor estatal de preposicionamiento + evaluación de un adversario que usa la región como infraestructura y no como objetivo + confirmación de un eje de exposición que esta cartera venía siguiendo desde tres informes</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 91 d</span></div>
+  <h3><a href="CTI-2026-036-volttyphoon.html">Volt Typhoon · Vanguard Panda · VOLTZITE · Insidious Taurus</a></h3>
+  <div class="meta">Cinco años en una red sin dejar un fichero, y después cuatro días cero contra los paneles de administración</div>
+  <div class="pills"><span class="pill cat">Perfil de actor estatal</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 91 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-036-volttyphoon.html">Leer el informe</a><a href="CTI-2026-036-volttyphoon.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-035 · medusa · perfil de operacion de extorsion · ransomware raas cifrado rescate · medusa no elige victimas: elige software sin parchear · el fbi documenta que usan exploits hasta una semana antes de la divulgacion, y que no desarrollan los suyos · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-035-medusa.md">
   <div class="id">CTI-2026-035 · 2026-11-17</div>
-  <h3><a href="CTI-2026-035-medusa.html">Medusa (RaaS) · encriptador `gaze.exe` / `gaze.py` · **NO es MedusaLocker, NO es el malware móvil Medusa, y NO es el rootkit MEDUSA de `CTI-2026-028`**</a></h3>
-  <div class="meta">Perfil de operación de extorsión + evaluación de un adversario con acceso a exploits antes de su divulgación + desambiguación de cuatro cosas distintas llamadas «Medusa»</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-035-medusa.html">Medusa</a></h3>
+  <div class="meta">Medusa no elige víctimas: elige software sin parchear</div>
+  <div class="pills"><span class="pill cat">Perfil de operación de extorsión</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-035-medusa.html">Leer el informe</a><a href="CTI-2026-035-medusa.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-034 · flax typhoon · ethereal panda · redjuliett · storm-0919 · perfil de actor estatal · apt estado estatal espionaje · una empresa con animo de lucro y una vulnerabilidad de 2014: el actor estatal menos sofisticado, y por eso el mas probable · las ocho vulnerabilidades que el aviso conjunto confirma como explotadas van de 2014 a 2023, todas con parche publicado · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-034-flaxtyphoon.md">
   <div class="id">CTI-2026-034 · 2026-11-17</div>
-  <h3><a href="CTI-2026-034-flaxtyphoon.html">Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919 · habilitados por el Integrity Technology Group (Yongxin Zhicheng), designado por la OFAC, el Reino Unido y la Unión Europea</a></h3>
-  <div class="meta">Perfil de actor estatal por contrato + evaluación de un modelo de negocio con ánimo de lucro + identificación de un eje de exposición regional que atraviesa tres informes de esta cartera</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-034-flaxtyphoon.html">Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919</a></h3>
+  <div class="meta">Una empresa con ánimo de lucro y una vulnerabilidad de 2014: el actor estatal menos sofisticado, y por eso el más probable</div>
+  <div class="pills"><span class="pill cat">Perfil de actor estatal</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-034-flaxtyphoon.html">Leer el informe</a><a href="CTI-2026-034-flaxtyphoon.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-033 · strikeshark · cargador sharkloader · perfil de operacion sin atribuir · apt sin atribuir cluster · un cluster que nadie ha atribuido, entrado por un servidor geoespacial sin parchear, con un cargador que cataloga el edr · sharkloader ciega el registro de eventos, salta los ganchos del edr con llamadas directas al nucleo, y duerme en memoria de solo lectura · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-033-strikeshark.md">
   <div class="id">CTI-2026-033 · 2026-11-17</div>
-  <h3><a href="CTI-2026-033-strikeshark.html">StrikeShark (clúster de intrusión sin atribuir, designación de Kaspersky GReAT) · cargador SharkLoader · carga final Cobalt Strike Beacon</a></h3>
-  <div class="meta">Perfil de clúster sin atribuir + análisis de un cargador diseñado contra los sensores del EDR + evaluación de exposición por aplicaciones expuestas a Internet</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-033-strikeshark.html">StrikeShark · cargador SharkLoader</a></h3>
+  <div class="meta">Un clúster que nadie ha atribuido, entrado por un servidor geoespacial sin parchear, con un cargador que cataloga el EDR</div>
+  <div class="pills"><span class="pill cat">Perfil de operación sin atribuir</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-033-strikeshark.html">Leer el informe</a><a href="CTI-2026-033-strikeshark.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-032 · apt38 · bluenoroff · tradertraitor · sapphire sleet · lazarus group · g0082 · perfil de bloque de actores · apt estado estatal · el bloque financiero de corea del norte no es un actor: son tres modelos operativos distintos · tres modelos operativos incompatibles comparten paraguas · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-032-apt38-bluenoroff.md">
   <div class="id">CTI-2026-032 · 2026-11-17</div>
-  <h3><a href="CTI-2026-032-apt38-bluenoroff.html">APT38 (G0082) · BlueNoroff · TraderTraitor · Sapphire Sleet · Contagious Interview / DeceptiveDevelopment · todos bajo el paraguas Lazarus Group (G0032) y el Buró General de Reconocimiento de la RPDC</a></h3>
-  <div class="meta">Perfil de bloque de actores + separación de tres modelos operativos que comparten nombre + evaluación de exposición regional</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-032-apt38-bluenoroff.html">APT38 · BlueNoroff · TraderTraitor · Sapphire Sleet · Lazarus Group · G0082</a></h3>
+  <div class="meta">El bloque financiero de Corea del Norte no es un actor: son tres modelos operativos distintos</div>
+  <div class="pills"><span class="pill cat">Perfil de bloque de actores</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-032-apt38-bluenoroff.html">Leer el informe</a><a href="CTI-2026-032-apt38-bluenoroff.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-031 · dark caracal · g0070 · perfil de actor estatal · apt estado estatal espionaje · un servicio de inteligencia libanes lleva cinco anos contra el mundo hispanohablante, con mando y control en ethereum · la primera pieza de infraestructura adversaria de esta cartera que nadie puede dar de baja, ni el propio adversario · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-031-darkcaracal.md">
   <div class="id">CTI-2026-031 · 2026-11-17</div>
-  <h3><a href="CTI-2026-031-darkcaracal.html">Dark Caracal · G0070 (MITRE ATT&amp;CK) · nexo con la Dirección General de Seguridad General (GDGS) del Líbano · familias Bandook, CrossRAT, Pallas, Poco RAT, AsioGate y (2026) GoCaracal</a></h3>
-  <div class="meta">Perfil de actor estatal mercenario + evaluación de un canal de mando y control que no se puede dar de baja</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-031-darkcaracal.html">Dark Caracal · G0070</a></h3>
+  <div class="meta">Un servicio de inteligencia libanés lleva cinco años contra el mundo hispanohablante, con mando y control en Ethereum</div>
+  <div class="pills"><span class="pill cat">Perfil de actor estatal</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-031-darkcaracal.html">Leer el informe</a><a href="CTI-2026-031-darkcaracal.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-030 · salt typhoon · operator panda · redmike · unc5807 · ghostemperor · perfil de actor · apt · si salt typhoon y famoussparrow son el mismo actor sigue abierto, y en septiembre de 2026 se publico como resuelto · microsoft afirma que son el mismo grupo y no ha publicado la base tecnica; eset los rastrea por separado y explica por que · tlp:clear · v1.0.3 · vigente · 2026-11-17 · cti-2026-030-salttyphoon.md">
   <div class="id">CTI-2026-030 · 2026-11-17</div>
-  <h3><a href="CTI-2026-030-salttyphoon.html">Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A)</a></h3>
-  <div class="meta">Perfil de actor + estado de una disputa de alias no resuelta + evaluación de exposición en infraestructura de red</div>
-  <div class="pills"><span class="pill">v1.0.3</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-030-salttyphoon.html">Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor</a></h3>
+  <div class="meta">Si Salt Typhoon y FamousSparrow son el mismo actor sigue abierto, y en septiembre de 2026 se publicó como resuelto</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0.3</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-030-salttyphoon.html">Leer el informe</a><a href="CTI-2026-030-salttyphoon.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-029 · sandworm · apt44 · seashell blizzard · telebots · g0034 · perfil de actor · apt · el actor cuya pregunta no es «¿que nos robarian?» sino «¿podriamos volver a operar?» · distribuye sus borradores de datos por directiva de grupo de active directory, el mismo mecanismo con que administramos el parque · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-029-sandworm.md">
   <div class="id">CTI-2026-029 · 2026-11-17</div>
-  <h3><a href="CTI-2026-029-sandworm.html">Sandworm · APT44 · Seashell Blizzard · IRIDIUM · Voodoo Bear · TeleBots · BlackEnergy Group · ELECTRUM · FROZENBARENTS · UAC-0002 · G0034 · (subgrupo) BadPilot</a></h3>
-  <div class="meta">Perfil de actor destructivo + evaluación de recuperabilidad</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-029-sandworm.html">Sandworm · APT44 · Seashell Blizzard · TeleBots · G0034</a></h3>
+  <div class="meta">El actor cuya pregunta no es «¿qué nos robarían?» sino «¿podríamos volver a operar?»</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-029-sandworm.html">Leer el informe</a><a href="CTI-2026-029-sandworm.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-028 · unc3886 · g1048 · campana «redpenguin» · perfil de actor · apt · el actor que no aparece en ningun ranking de prevalencia y es el mas capaz de su lote · opera en hipervisores, concentradores vpn y routers fuera de soporte: sitios donde no hay agente que lo cuente · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-028-unc3886.md">
   <div class="id">CTI-2026-028 · 2026-11-17</div>
-  <h3><a href="CTI-2026-028-unc3886.html">UNC3886 · Grupo G1048 (MITRE ATT&amp;CK) · campaña C0056 «RedPenguin»</a></h3>
-  <div class="meta">Perfil de actor + evaluación de capacidad adversaria + estudio de caso nacional (Singapur)</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-028-unc3886.html">UNC3886 · G1048 · campaña «RedPenguin»</a></h3>
+  <div class="meta">El actor que no aparece en ningún ranking de prevalencia y es el más capaz de su lote</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-028-unc3886.html">Leer el informe</a><a href="CTI-2026-028-unc3886.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-027 · mustang panda · earth preta · reddelta · twill typhoon · g0129 · perfil de actor · apt · el tercero del ranking global si es tan peligroso como su puesto sugiere, y eso desmonta los dos informes anteriores · el fbi le borro el malware de 4 258 ordenadores, se rearmo en meses, y en 2026 firmo un rootkit con certificado valido · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-027-mustangpanda.md">
   <div class="id">CTI-2026-027 · 2026-11-17</div>
-  <h3><a href="CTI-2026-027-mustangpanda.html">Mustang Panda · Earth Preta · TA416 · RedDelta · BRONZE PRESIDENT · Stately Taurus · Twill Typhoon · HoneyMyte · TEMP.Hex · TANTALUM · G0129 · (vinculado) UNC6384</a></h3>
-  <div class="meta">Perfil de actor + evaluación de capacidad y de resiliencia a la acción policial</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-027-mustangpanda.html">Mustang Panda · Earth Preta · RedDelta · Twill Typhoon · G0129</a></h3>
+  <div class="meta">El tercero del ranking global sí es tan peligroso como su puesto sugiere, y eso desmonta los dos informes anteriores</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-027-mustangpanda.html">Leer el informe</a><a href="CTI-2026-027-mustangpanda.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-026 · apt36 · transparent tribe · mythic leopard · g0134 · perfil de actor · apt · el segundo del ranking global subio de puesto porque empeoro: implantes hechos con ia, inestables y detectables · cinco proveedores publicaron sobre la misma campana contra linux y no comparten ni un solo indicador · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-026-apt36.md">
   <div class="id">CTI-2026-026 · 2026-11-17</div>
-  <h3><a href="CTI-2026-026-apt36.html">APT36 · Transparent Tribe · Mythic Leopard · COPPER FIELDSTONE · ProjectM · G0134</a></h3>
-  <div class="meta">Perfil de actor + evaluación de calidad de la evidencia + transferencia de método a Linux</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-026-apt36.html">APT36 · Transparent Tribe · Mythic Leopard · G0134</a></h3>
+  <div class="meta">El segundo del ranking global subió de puesto porque empeoró: implantes hechos con IA, inestables y detectables</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-026-apt36.html">Leer el informe</a><a href="CTI-2026-026-apt36.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-025 · gamaredon · primitive bear · shuckworm · aqua blizzard · g0047 · perfil de actor · apt · el actor numero uno del ranking de telemetria global no tiene una sola victima documentada fuera de ucrania · trellix le atribuye el 9,03 % de toda la actividad estatal observada · tlp:clear · v1.0 · vigente · 2026-11-17 · cti-2026-025-gamaredon.md">
   <div class="id">CTI-2026-025 · 2026-11-17</div>
-  <h3><a href="CTI-2026-025-gamaredon.html">Gamaredon (Armageddon · Primitive Bear · ACTINIUM · Shuckworm · Aqua Blizzard · IRON TILDEN · DEV-0157 · NastyShrew · G0047)</a></h3>
-  <div class="meta">Perfil de actor + evaluación de pertinencia regional</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 58 d</span></div>
+  <h3><a href="CTI-2026-025-gamaredon.html">Gamaredon · Primitive Bear · Shuckworm · Aqua Blizzard · G0047</a></h3>
+  <div class="meta">El actor número uno del ranking de telemetría global no tiene una sola víctima documentada fuera de Ucrania</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 58 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-025-gamaredon.html">Leer el informe</a><a href="CTI-2026-025-gamaredon.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-024 · rhysida · vanilla tempest · perfil de operacion de extorsion · ransomware raas cifrado rescate · el grupo que publico 360 000 documentos del ejercito de chile sigue operando tres anos despues · en febrero de 2024 su cifrado fue roto y hubo descifrador gratuito, y ya no cuenta · tlp:clear · v1.0 · vigente · 2026-11-16 · cti-2026-024-rhysida.md">
   <div class="id">CTI-2026-024 · 2026-11-16</div>
-  <h3><a href="CTI-2026-024-rhysida.html">Rhysida (RaaS) · afiliados y actores de acceso asociados: Vanilla Tempest · solapamientos con Vice Society / DEV-0832 e Interlock</a></h3>
-  <div class="meta">Perfil de operación de extorsión + estudio de caso nacional</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
+  <h3><a href="CTI-2026-024-rhysida.html">Rhysida · Vanilla Tempest</a></h3>
+  <div class="meta">El grupo que publicó 360 000 documentos del Ejército de Chile sigue operando tres años después</div>
+  <div class="pills"><span class="pill cat">Perfil de operación de extorsión</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-024-rhysida.html">Leer el informe</a><a href="CTI-2026-024-rhysida.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-023 · machete · el machete · apt-c-43 · g0095 · perfil de actor · apt · el unico actor de esta cartera que roba documentos y no dinero · lleva seis anos sin que nadie publique nada de primera mano · tlp:clear · v1.0 · vigente · 2026-11-16 · cti-2026-023-machete.md">
   <div class="id">CTI-2026-023 · 2026-11-16</div>
-  <h3><a href="CTI-2026-023-machete.html">Machete · El Machete · APT-C-43 · Grupo G0095 (MITRE ATT&amp;CK)</a></h3>
-  <div class="meta">Perfil de actor de espionaje + evaluación de vigencia y requisito de colección</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 178 d</span></div>
+  <h3><a href="CTI-2026-023-machete.html">Machete · El Machete · APT-C-43 · G0095</a></h3>
+  <div class="meta">El único actor de esta cartera que roba documentos y no dinero</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 178 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-023-machete.html">Leer el informe</a><a href="CTI-2026-023-machete.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-022 · red akodon · campanas «shadow vector» · perfil de actor · apt · el actor cuyo nombre esta en disputa: tres proveedores, tres nombres y una sola campana · lo que hace funcionar esta amenaza no es el troyano: es el buzon legitimo de una entidad publica comprometido · tlp:clear · v1.0 · vigente · 2026-11-16 · cti-2026-022-redakodon.md">
   <div class="id">CTI-2026-022 · 2026-11-16</div>
-  <h3><a href="CTI-2026-022-redakodon.html">Red Akodon (SCILabs) · solapamiento con TAG-144 / Blind Eagle / APT-C-36 / AguilaCiega / APT-Q-98 · campañas «Shadow Vector» (Acronis)</a></h3>
-  <div class="meta">Perfil de actor en disputa + evaluación de transferibilidad del método</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
+  <h3><a href="CTI-2026-022-redakodon.html">Red Akodon · campañas «Shadow Vector»</a></h3>
+  <div class="meta">El actor cuyo nombre está en disputa: tres proveedores, tres nombres y una sola campaña</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-022-redakodon.html">Leer el informe</a><a href="CTI-2026-022-redakodon.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-021 · troyanos bancarios brasilenos · mekotio · mispadu · grandoreiro · astaroth · coyote · venon · perfil de ecosistema · panorama · la unica amenaza de esta cartera donde chile es objetivo primario, y la que menos atencion recibe · el csirt nacional ha alertado de mekotio al menos cinco veces desde 2023 · tlp:clear · v1.0 · vigente · 2026-11-16 · cti-2026-021-troyanos-br.md">
   <div class="id">CTI-2026-021 · 2026-11-16</div>
-  <h3><a href="CTI-2026-021-troyanos-br.html">Ecosistema de troyanos bancarios brasileños (Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON)</a></h3>
-  <div class="meta">Perfil de ecosistema de malware + evaluación regional</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
+  <h3><a href="CTI-2026-021-troyanos-br.html">Troyanos bancarios brasileños · Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON</a></h3>
+  <div class="meta">La única amenaza de esta cartera donde Chile es objetivo primario, y la que menos atención recibe</div>
+  <div class="pills"><span class="pill cat">Perfil de ecosistema</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-021-troyanos-br.html">Leer el informe</a><a href="CTI-2026-021-troyanos-br.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-020 · blind eagle · apt-c-36 · tag-144 · aguilaciega · apt-q-98 · perfil de actor · apt · blind eagle: ocho anos atacando latinoamerica con malware de catalogo, porque su ventaja no es tecnica sino burocratica · suplanta el acto administrativo que ningun funcionario latinoamericano puede ignorar: la citacion judicial · tlp:clear · v1.0 · vigente · 2026-11-16 · cti-2026-020-blindeagle.md">
   <div class="id">CTI-2026-020 · 2026-11-16</div>
-  <h3><a href="CTI-2026-020-blindeagle.html">Blind Eagle (APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98)</a></h3>
-  <div class="meta">Perfil de actor + informe de campaña</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
+  <h3><a href="CTI-2026-020-blindeagle.html">Blind Eagle · APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98</a></h3>
+  <div class="meta">Blind Eagle: ocho años atacando Latinoamérica con malware de catálogo, porque su ventaja no es técnica sino burocrática</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-020-blindeagle.html">Leer el informe</a><a href="CTI-2026-020-blindeagle.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-019 · artex · framework ofensivo agentico · evaluacion estrategica · panorama tendencia · artex: intrusiones con acceso privilegiado en menos de tres horas, el plazo que la ley 21.663 da solo para la alerta · un framework agentico publicado en julio de 2026 y retirado en octubre, hoy en manos de al menos cuatro clusteres · tlp:clear · v1.0 · vigente · 2026-11-16 · cti-2026-019-artex.md">
   <div class="id">CTI-2026-019 · 2026-11-16</div>
-  <h3><a href="CTI-2026-019-artex.html">ARTEX (framework ofensivo agéntico) y los clústeres que lo operan</a></h3>
-  <div class="meta">Evaluación estratégica + perfil de capacidad adversaria</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
+  <h3><a href="CTI-2026-019-artex.html">ARTEX · framework ofensivo agéntico</a></h3>
+  <div class="meta">ARTEX: intrusiones con acceso privilegiado en menos de tres horas, el plazo que la Ley 21.663 da sólo para la alerta</div>
+  <div class="pills"><span class="pill cat">Evaluación estratégica</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 89 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-019-artex.html">Leer el informe</a><a href="CTI-2026-019-artex.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-018 · abuso de dominios de primer nivel · evaluacion estrategica · panorama tendencia · el abuso de tld no se concentra donde se mide: `.com` lidera por volumen, y once gtld baratos pasan del 10 % de su zona · doce meses de datos primarios (may-2025 → abr-2026) y cuatro trimestres de seguimiento · tlp:clear · v1.0 · vigente · 2026-11-15 · cti-2026-018-abuso-tld.md">
   <div class="id">CTI-2026-018 · 2026-11-15</div>
-  <h3><a href="CTI-2026-018-abuso-tld.html">Abuso de dominios de primer nivel (ecosistema de registro DNS)</a></h3>
-  <div class="meta">Evaluación estratégica</div>
-  <div class="pills"><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 88 d</span></div>
+  <h3><a href="CTI-2026-018-abuso-tld.html">Abuso de dominios de primer nivel</a></h3>
+  <div class="meta">El abuso de TLD no se concentra donde se mide: <code>.com</code> lidera por volumen, y once gTLD baratos pasan del 10 % de su zona</div>
+  <div class="pills"><span class="pill cat">Evaluación estratégica</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 88 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-018-abuso-tld.html">Leer el informe</a><a href="CTI-2026-018-abuso-tld.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-017 · famoussparrow · sparrowocky · perfil de actor · apt · famoussparrow: el 90 % del esfuerzo chino en latinoamerica, y un implante que no deja rastro en memoria · ocho gobiernos de la region comprometidos entre julio de 2025 y 2026 · tlp:clear · v1.2 · vigente · 2026-11-17 · cti-2026-017-famoussparrow.md">
   <div class="id">CTI-2026-017 · <span title="Emitido el 2026-09-21; esta es la fecha de la versión 1.2">2026-11-17 · <span class="rev">rev.</span></span></div>
-  <h3><a href="CTI-2026-017-famoussparrow.html">FamousSparrow (SparroWocky) · solapamiento con el ecosistema Sparrow de CopperDragon y con el clúster DarkWire (Check Point)</a></h3>
-  <div class="meta">Perfil de actor + informe de campaña</div>
-  <div class="pills"><span class="pill">v1.2</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
+  <h3><a href="CTI-2026-017-famoussparrow.html">FamousSparrow · SparroWocky</a></h3>
+  <div class="meta">FamousSparrow: el 90 % del esfuerzo chino en Latinoamérica, y un implante que no deja rastro en memoria</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.2</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 90 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-017-famoussparrow.html">Leer el informe</a><a href="CTI-2026-017-famoussparrow.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-016 · lockbit 5.0 · chuongdong · perfil de actor · apt · lockbit 5.0: una marca degradada con un cifrador mejor que nunca, y la presion desplazada a latinoamerica · con victima confirmada en chile y evaluacion bajo el regimen de la ley 21.663 · tlp:clear · v1.1 · vigente · 2026-11-16 · cti-2026-016-lockbit5.md">
   <div class="id">CTI-2026-016 · <span title="Emitido el 2026-09-16; esta es la fecha de la versión 1.1">2026-11-16 · <span class="rev">rev.</span></span></div>
-  <h3><a href="CTI-2026-016-lockbit5.html">LockBit 5.0 (ChuongDong)</a></h3>
-  <div class="meta">Perfil de actor + informe de campaña</div>
-  <div class="pills"><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 27 d</span></div>
+  <h3><a href="CTI-2026-016-lockbit5.html">LockBit 5.0 · ChuongDong</a></h3>
+  <div class="meta">LockBit 5.0: una marca degradada con un cifrador mejor que nunca, y la presión desplazada a Latinoamérica</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 27 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-016-lockbit5.html">Leer el informe</a><a href="CTI-2026-016-lockbit5.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-015 · qilin · agenda · storm-1934 · perfil de actor · apt · qilin: el raas dominante del ecosistema, con acceso por borde de red y neutralizacion del respaldo · con evaluacion de actividad confirmada en chile bajo el regimen de la ley 21.663 · tlp:clear · v1.1 · vigente · 2026-11-16 · cti-2026-015-qilin.md">
   <div class="id">CTI-2026-015 · <span title="Emitido el 2026-09-16; esta es la fecha de la versión 1.1">2026-11-16 · <span class="rev">rev.</span></span></div>
-  <h3><a href="CTI-2026-015-qilin.html">Qilin (Agenda · Storm-1934)</a></h3>
-  <div class="meta">Perfil de actor + informe de campaña</div>
-  <div class="pills"><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 27 d</span></div>
+  <h3><a href="CTI-2026-015-qilin.html">Qilin · Agenda · Storm-1934</a></h3>
+  <div class="meta">Qilin: el RaaS dominante del ecosistema, con acceso por borde de red y neutralización del respaldo</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.1</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 27 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-015-qilin.html">Leer el informe</a><a href="CTI-2026-015-qilin.md">fuente .md</a></div>
 </article>
-<article class="card">
+<article class="card" data-b="cti-2026-014 · thegentlemen · storm-2697 · perfil de actor · apt · thegentlemen: raas de alto volumen con cifrador auto-propagante y acceso por borde de red · con evaluacion de actividad confirmada en chile y latinoamerica · tlp:clear · v1.3 · vigente · 2026-11-19 · cti-2026-014-thegentlemen.md">
   <div class="id">CTI-2026-014 · <span title="Emitido el 2026-09-15; esta es la fecha de la versión 1.3">2026-11-19 · <span class="rev">rev.</span></span></div>
-  <h3><a href="CTI-2026-014-thegentlemen.html">TheGentlemen (Storm-2697)</a></h3>
-  <div class="meta">Perfil de actor + informe de campaña</div>
-  <div class="pills"><span class="pill">v1.3</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 26 d</span></div>
+  <h3><a href="CTI-2026-014-thegentlemen.html">TheGentlemen · Storm-2697</a></h3>
+  <div class="meta">TheGentlemen: RaaS de alto volumen con cifrador auto-propagante y acceso por borde de red</div>
+  <div class="pills"><span class="pill cat">Perfil de actor</span><span class="pill">v1.3</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 26 d</span></div>
   <div class="links"><a class="primary" href="CTI-2026-014-thegentlemen.html">Leer el informe</a><a href="CTI-2026-014-thegentlemen.md">fuente .md</a></div>
 </article>
 </div>
+<p class="empty" id="vacio" hidden>Ningún informe coincide con <strong id="eco"></strong>.
+Se busca sobre el identificador, el actor y sus alias, la categoría y la afirmación central
+de cada informe — no sobre el cuerpo del documento.</p>
 
 <h2><span class="num">02 · relaciones</span>Mapa de actores y herramientas</h2>
 <p class="sub">Las relaciones entre los actores y las herramientas de esta cartera, en un grafo tridimensional navegable. Se gira con el ratón, se filtra por tipo y cada nodo abre su ficha con enlace al informe de origen. Se regenera en cada construcción desde <code>red-actores.json</code>.</p>
@@ -377,5 +427,85 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 </footer>
 
 </div>
+
+<script>
+/* Buscador del catálogo. Filtra tarjetas ya presentes en el documento: no
+   descarga nada, no indexa nada y funciona sin conexión. Si este script no se
+   ejecuta, el bloque de búsqueda queda oculto y el catálogo se ve completo,
+   que es el comportamiento correcto para una página estática. */
+(function(){
+  var bus=document.getElementById('bus'), q=document.getElementById('q'),
+      x=document.getElementById('x'), rej=document.getElementById('rejilla'),
+      cuenta=document.getElementById('cuenta'), vacio=document.getElementById('vacio'),
+      eco=document.getElementById('eco'), chips=document.getElementById('chips');
+  if(!bus||!q||!rej) return;
+  var fichas=[].slice.call(rej.querySelectorAll('.card'));
+  var total=fichas.length;
+  bus.hidden=false;
+
+  function plegar(s){
+    return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  }
+  /* Las categorías salen de las propias tarjetas: si mañana se añade una, el
+     filtro la recoge sin tocar este script. */
+  var cats=[];
+  fichas.forEach(function(c){
+    var p=c.querySelector('.pill.cat'); if(!p) return;
+    var v=p.textContent.trim(); if(v && cats.indexOf(v)<0) cats.push(v);
+  });
+  cats.sort();
+  var activa='';
+  if(chips){
+    cats.forEach(function(v){
+      var b=document.createElement('button');
+      b.type='button'; b.className='chip'; b.textContent=v;
+      b.addEventListener('click',function(){
+        activa = (activa===v) ? '' : v;
+        [].slice.call(chips.children).forEach(function(o){
+          o.classList.toggle('on', o.textContent===activa);
+        });
+        filtrar();
+      });
+      chips.appendChild(b);
+    });
+  }
+
+  function filtrar(){
+    var t=plegar(q.value).trim();
+    var terminos = t ? t.split(/\s+/) : [];
+    var cat=plegar(activa);
+    var n=0;
+    fichas.forEach(function(c){
+      var b=c.getAttribute('data-b')||'';
+      var ok = terminos.every(function(w){ return b.indexOf(w)>=0; })
+               && (!cat || b.indexOf(cat)>=0);
+      c.hidden=!ok; if(ok) n++;
+    });
+    if(x) x.hidden = !q.value;
+    var filtrando = terminos.length || cat;
+    cuenta.textContent = filtrando
+      ? (n===1 ? '1 informe de ' + total : n + ' informes de ' + total)
+      : total + ' informes';
+    if(vacio){ vacio.hidden = n>0; if(eco) eco.textContent = q.value || activa; }
+  }
+
+  q.addEventListener('input', filtrar);
+  if(x) x.addEventListener('click', function(){ q.value=''; q.focus(); filtrar(); });
+  q.addEventListener('keydown', function(ev){
+    if(ev.key==='Escape'){ q.value=''; filtrar(); }
+  });
+  document.addEventListener('keydown', function(ev){
+    if(ev.key==='/' && document.activeElement!==q
+       && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){
+      ev.preventDefault(); q.focus(); q.select();
+    }
+  });
+  /* Permite llegar con una búsqueda ya hecha: index.html?q=apt28 */
+  var m=/[?&]q=([^&]*)/.exec(location.search);
+  if(m){ try{ q.value=decodeURIComponent(m[1].replace(/\+/g,' ')); }catch(_){} }
+  filtrar();
+})();
+</script>
+
 </body>
 </html>

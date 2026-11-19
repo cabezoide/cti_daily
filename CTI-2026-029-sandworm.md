@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-029"
 version: "1.0"
-tipo: "Perfil de actor destructivo + evaluación de recuperabilidad"
-foco_regional: "Ucrania y Polonia documentados · Chile y Latinoamérica: transferencia del método destructivo y exposición del sector exportador agroalimentario"
+tipo: "Perfil de actor"
+foco_regional: "Ucrania · Polonia · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Sandworm · APT44 · Seashell Blizzard · IRIDIUM · Voodoo Bear · TeleBots · BlackEnergy Group · ELECTRUM · FROZENBARENTS · UAC-0002 · G0034 · (subgrupo) BadPilot"
+actor: "Sandworm · APT44 · Seashell Blizzard · TeleBots · G0034"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,9 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR: los infor
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-029
 
-## El único actor de esta cartera cuya pregunta no es «¿qué nos robarían?» sino «¿podríamos volver a operar?»
+## El actor cuya pregunta no es «¿qué nos robarían?» sino «¿podríamos volver a operar?»
 
-### Distribuye sus borradores de datos por **directiva de grupo de Active Directory** —el mismo mecanismo con el que administramos el parque— y en septiembre de 2025 los dirigió contra el **sector cerealero** de un país en guerra. En diciembre de 2025 el objetivo fue una empresa energética de un país de la OTAN
+### Distribuye sus borradores de datos por directiva de grupo de Active Directory, el mismo mecanismo con que administramos el parque
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

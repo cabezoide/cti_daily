@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-023"
 version: "1.0"
-tipo: "Perfil de actor de espionaje + evaluación de vigencia y requisito de colección"
-foco_regional: "Venezuela · Ecuador · Colombia · Perú · Nicaragua (víctimas documentadas) · Chile (ausencia documentada)"
+tipo: "Perfil de actor"
+foco_regional: "Venezuela · Ecuador · Colombia · Perú · Nicaragua"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Machete · El Machete · APT-C-43 · Grupo G0095 (MITRE ATT&CK)"
+actor: "Machete · El Machete · APT-C-43 · G0095"
 fecha: "2026-11-16"
 caduca: "2027-05-16"
 autor: "Célula CTI"
@@ -15,9 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Difusión
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-023
 
-## El único actor de esta cartera que roba documentos y no dinero, y el único sin una sola víctima chilena en doce años de informes públicos
+## El único actor de esta cartera que roba documentos y no dinero
 
-### Lleva seis años sin que nadie publique nada de primera mano. De las dos explicaciones posibles —que se apagó, o que nadie está mirando— la segunda es la que debería preocuparnos, y es también la única sobre la que podemos hacer algo
+### Lleva seis años sin que nadie publique nada de primera mano
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

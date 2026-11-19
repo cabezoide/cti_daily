@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-043"
 version: "1.0"
-tipo: "Perfil de operación sin atribuir + reconciliación de dos expedientes de proveedor que describen la misma operación sin saberlo + evaluación de la nube corporativa como canal de mando y control"
-foco_regional: "**Ninguna víctima latinoamericana observada, y conviene decirlo en la primera línea.** Este informe no existe por exposición regional: existe porque (a) el modelo de mando y control que documenta es replicable por cualquiera y nuestros controles no lo ven, y (b) toca el juicio central de `CTI-2026-017`, que es un informe de foco latinoamericano"
+tipo: "Perfil de operación sin atribuir"
+foco_regional: "Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Operation ShadowCloud (designación de Kaspersky GReAT, sin atribuir) · puertas traseras GitDoor y GraphDoor · **y BRONZE SANDCASTLE (designación de Sophos CTU), que este informe sostiene que es la misma operación**"
+actor: "Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Las dos p
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-043
 
-## Dos proveedores describieron la misma operación con diez semanas de diferencia, le pusieron dos nombres, **y ninguno de los dos se dio cuenta de que comparten una cuenta de GitHub**
+## Dos proveedores describieron la misma operación con dos nombres, y ninguno vio que comparten una cuenta de GitHub
 
-### Sophos la llamó `BRONZE SANDCASTLE` el 20 de octubre y analizó las versiones `1.1.5` y `1.1.7` de un implante. Kaspersky la llamó `Operation ShadowCloud` el 17 de noviembre y analizó `GitDoor`, que lleva embebido `"client_version":"1.1.6"`. **Los dos citan la cuenta `LatonyCharnleyaW`.** Unir los dos expedientes multiplica por cinco el conjunto de víctimas conocido y mueve el inicio de la operación de «principios de 2026» a **finales de 2024**
-
-#### Y el indicador más accionable de todo el expediente **no está en ninguna lista de indicadores**: Kaspersky redactó el identificador de la aplicación maliciosa y su secreto, pero dejó a la vista, en la ruta de la petición de token, **el GUID del inquilino de Entra ID que la aloja**. Cualquier autenticación contra ese inquilino desde nuestra red es maligna por definición, y eso es una regla de detección de una línea que nadie ha escrito todavía
+### Sophos la llamó `BRONZE SANDCASTLE` y Kaspersky `Operation ShadowCloud`, con diez semanas de diferencia
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

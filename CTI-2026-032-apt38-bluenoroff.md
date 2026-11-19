@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-032"
 version: "1.0"
-tipo: "Perfil de bloque de actores + separación de tres modelos operativos que comparten nombre + evaluación de exposición regional"
-foco_regional: "Chile y región andina. **El único golpe confirmado a un banco del Cono Sur sigue siendo el Banco de Chile en mayo de 2018.** La afirmación de actividad en 2026 contra banca chilena, cooperativas reguladas por la SEPS en Ecuador y fintechs regionales **no está corroborada por ninguna fuente pública**, y este informe explica qué sí lo está"
+tipo: "Perfil de bloque de actores"
+foco_regional: "Chile · región andina · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "APT38 (G0082) · BlueNoroff · TraderTraitor · Sapphire Sleet · Contagious Interview / DeceptiveDevelopment · todos bajo el paraguas Lazarus Group (G0032) y el Buró General de Reconocimiento de la RPDC"
+actor: "APT38 · BlueNoroff · TraderTraitor · Sapphire Sleet · Lazarus Group · G0082"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Fuente pr
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-032
 
-## El bloque financiero de Corea del Norte **no es un actor**, y defenderse de «Lazarus» es casi siempre defenderse de la cosa equivocada
+## El bloque financiero de Corea del Norte no es un actor: son tres modelos operativos distintos
 
-### Tres modelos operativos incompatibles comparten paraguas: el que sacó diez millones de dólares del **Banco de Chile** en 2018 destruyendo nueve mil puestos de trabajo como señuelo, el que en 2026 industrializó la ingeniería social con vídeo sintético contra **677 directivos de 58 países**, y el que coloca trabajadores remotos dentro de la nómina. **Las tres defensas no se parecen en nada**
-
-#### Y la afirmación de que en 2026 operan contra banca comercial chilena, cooperativas reguladas por la SEPS en Ecuador y fintechs andinas **no la sostiene ninguna fuente pública que hayamos podido localizar, en inglés ni en español**. Lo que sí está documentado es peor en un sentido y mejor en otro, y eso cambia qué hay que hacer
+### Tres modelos operativos incompatibles comparten paraguas
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-016"
 version: "1.1"
-tipo: "Perfil de actor + informe de campaña"
+tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "LockBit 5.0 (ChuongDong)"
+actor: "LockBit 5.0 · ChuongDong"
 fecha: "2026-09-16"
 caduca: "2026-12-16"
 autor: "Célula CTI"
@@ -14,7 +14,7 @@ distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor.
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-016
-## LockBit 5.0 «ChuongDong»: una marca degradada con un cifrador mejor que nunca, que ha desplazado su presión desde Estados Unidos hacia Europa del sur y Latinoamérica
+## LockBit 5.0: una marca degradada con un cifrador mejor que nunca, y la presión desplazada a Latinoamérica
 ### Con víctima confirmada en Chile y evaluación bajo el régimen de la Ley 21.663
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de

@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-017"
 version: "1.2"
-tipo: "Perfil de actor + informe de campaña"
+tipo: "Perfil de actor"
 foco_regional: "Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "FamousSparrow (SparroWocky) · solapamiento con el ecosistema Sparrow de CopperDragon y con el clúster DarkWire (Check Point)"
+actor: "FamousSparrow · SparroWocky"
 fecha: "2026-09-21"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -14,9 +14,8 @@ distribucion: "Actualizado a v1.2 el 2026-11-17 con la investigación de Check P
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-017
-## FamousSparrow: el ciberespionaje chino concentra el 90 % de su esfuerzo en Latinoamérica y estrena SparroWocky, un implante construido para que la memoria y la pila de llamadas no delaten nada
-### Ocho gobiernos de la región comprometidos entre julio de 2025 y 2026. Chile no figura en la telemetría publicada, pero sí en la alerta de agosto de 2026 sobre sus telecomunicaciones
-#### **Revisión v1.2 (17-11-2026).** Una segunda investigación, publicada el 10 de noviembre de 2026, sostiene que SparroWocky **no es exclusivo de este actor**: es una pieza de un arsenal compartido que un suministrador —`CopperDragon`— entrega a varios clústeres china-nexus. Y uno de ellos, `DarkWire`, lleva desde mediados de 2025 dentro de **al menos tres grandes operadoras de telecomunicaciones latinoamericanas**, con su infraestructura de mando alojada en el mismo país que la víctima. Eso cambia dos juicios de este informe y refuerza un tercero
+## FamousSparrow: el 90 % del esfuerzo chino en Latinoamérica, y un implante que no deja rastro en memoria
+### Ocho gobiernos de la región comprometidos entre julio de 2025 y 2026
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

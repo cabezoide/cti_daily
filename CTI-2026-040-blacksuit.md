@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-040"
 version: "1.0"
-tipo: "Perfil de operación de extorsión desarticulada + evaluación de la eficacia real de una acción policial + identificación del sucesor y de su lista de exclusión declarada + verificación propia de seis direcciones de un aviso gubernamental que no deben bloquearse"
-foco_regional: "**Ninguna víctima latinoamericana documentada, ni del actor desarticulado ni de su sucesor. Pero la región aparece en el aviso oficial como infraestructura y no como victimología**, y eso tiene una consecuencia de higiene inmediata: de las setenta y una direcciones del aviso `AA23-061A`, **seis están registradas a operadores latinoamericanos** y cinco de las seis son banda ancha de **UNE EPM, Telmex Colombia, Telecom Argentina y NODOSUD** — verificación propia por RDAP, 2026-11-19. Bloquearlas es cortar tráfico legítimo de los países para los que se escribe este informe. **Y el sucesor declara excluir expresamente a los países BRICS, lo que cubre a Brasil y no cubre al resto de la región**"
+tipo: "Perfil de operación de extorsión"
+foco_regional: "Colombia · Argentina · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "BlackSuit · Royal · (linaje) Conti — **operación desarticulada el 2025-07-24** en la `Operation Checkmate` — **y `Chaos` (RaaS), que Cisco Talos valora con confianza moderada como su continuación o como obra de antiguos miembros suyos, y que llevaba operando desde febrero de 2025, cinco meses antes del desmantelamiento**"
+actor: "BlackSuit · Royal · Chaos"
 fecha: "2026-11-19"
 caduca: "2027-02-19"
 autor: "Célula CTI"
@@ -15,15 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Se leyero
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-040
 
-## La acción policial de julio de 2025 funcionó exactamente en lo que se propuso, y no detuvo la operación: **el sucesor llevaba cinco meses funcionando cuando se incautaron los servidores del predecesor**
+## El sucesor llevaba cinco meses funcionando cuando se incautaron los servidores del predecesor
 
-### `Operation Checkmate` incautó el 24 de julio de 2025 cuatro servidores, nueve dominios y más de un millón de dólares en criptomoneda de **BlackSuit**, con el Departamento de Justicia y dieciséis agencias más de nueve países. **No hubo detenciones.** Y ese mismo día, Cisco Talos publicó el perfil de **`Chaos`**, un grupo de extorsión como servicio que llevaba operando **desde febrero de 2025** y que su analista valora, con confianza moderada, como la continuación de BlackSuit o como obra de antiguos miembros suyos
-
-#### Este informe aporta el mecanismo concreto que hace auditable esa valoración, y que ninguna fuente enuncia: el aviso oficial describe que BlackSuit usaba **«un enfoque de cifrado parcial único que permite al actor elegir un porcentaje específico de datos de un fichero a cifrar»**, y el cifrador de `Chaos` recibe ese porcentaje **en un parámetro de línea de órdenes, `/encrypt_step`, con 30 % por omisión**. La continuidad de métodología de cifrado que Talos cita sin detallar es **esa**, y cualquiera puede comprobarla en dos documentos públicos
-
-##### Sobre nuestra exposición hay dos hallazgos, y el segundo es de higiene y es urgente. El primero: **el sucesor declara en su propio anuncio de foro que evita trabajar con países BRICS y de la Comunidad de Estados Independientes, con hospitales y con entidades de gobierno.** Eso cubre a **Brasil** por pertenencia a BRICS y **no cubre a ningún otro país de la región**, lo que es una delimitación de victimología publicada por el propio adversario
-
-###### El segundo: de las **setenta y una direcciones** del aviso conjunto `AA23-061A`, **seis están registradas a operadores latinoamericanos**, y cinco de ellas son **banda ancha de UNE EPM y Telmex en Colombia y de Telecom Argentina y NODOSUD en Argentina** — verificado por consulta propia al registro regional el día de emisión. El aviso advierte él mismo de que sus direcciones «tienen varios años» y pide investigarlas antes de bloquear. **Cargarlas en un bloqueo automático es cortar tráfico de clientes residenciales de Tigo, Claro y Telecom Argentina**, y es exactamente el corte autoinfligido contra el que advierte la portada de este repositorio
+### `Operation Checkmate` incautó cuatro servidores, nueve dominios y más de un millón de dólares, sin una sola detención
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

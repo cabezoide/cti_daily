@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-022"
 version: "1.0"
-tipo: "Perfil de actor en disputa + evaluación de transferibilidad del método"
-foco_regional: "Colombia (objetivo documentado) · Chile (exposición por transferencia)"
+tipo: "Perfil de actor"
+foco_regional: "Colombia · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Red Akodon (SCILabs) · solapamiento con TAG-144 / Blind Eagle / APT-C-36 / AguilaCiega / APT-Q-98 · campañas «Shadow Vector» (Acronis)"
+actor: "Red Akodon · campañas «Shadow Vector»"
 fecha: "2026-11-16"
 caduca: "2027-02-16"
 autor: "Célula CTI"
@@ -15,9 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Difusión
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-022
 
-## El actor cuyo nombre está en disputa, y por qué la disputa importa: tres proveedores, tres nombres y una sola postura defensiva posible
+## El actor cuyo nombre está en disputa: tres proveedores, tres nombres y una sola campaña
 
-### Lo que hace funcionar esta amenaza no es el troyano: es el buzón legítimo de una entidad pública comprometido. Ni SPF, ni DKIM, ni DMARC, ni la formación del usuario tienen nada que decir cuando el correo sale de verdad del juzgado
+### Lo que hace funcionar esta amenaza no es el troyano: es el buzón legítimo de una entidad pública comprometido
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

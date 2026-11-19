@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-044"
 version: "1.2"
-tipo: "Evaluación estratégica de ecosistema + medición propia sobre telemetría en vivo + evaluación de una fuente y de su feed BGP defensivo + método para usar un canal de telemetría continua como fuente de inteligencia"
+tipo: "Perfil de ecosistema"
 foco_regional: "Brasil · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Ecosistema de redes de bots de DDoS y de proxy residencial — 33 familias en seguimiento activo (Liso · Cereal2 · Potassium · Aisuru-DDoS · Aisuru-Proxy · SixSayven · CXFJ · Aigogo · y 25 más)"
+actor: "Redes de bots de DDoS y de proxy residencial · 33 familias"
 fecha: "2026-11-19"
 caduca: "2027-01-19"
 autor: "Célula CTI"
@@ -15,7 +15,7 @@ distribucion: "Elaborado con fuentes abiertas y con medición propia sobre una i
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-044
 ## Redes de bots activas: 33 familias, y el 85 % de la infraestructura pertenece a las siete que nunca lanzan un ataque
-### Medición propia sobre telemetría en vivo · la asimetría entre objetivos brasileños e infraestructura extrarregional · y un feed BGP defensivo operado desde Chile que ya tiene 176 pares
+### Medición propia sobre telemetría en vivo, y un feed BGP defensivo operado desde Chile que ya tiene 176 pares
 
 ---
 

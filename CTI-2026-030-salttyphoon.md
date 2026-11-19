@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-030"
 version: "1.0.3"
-tipo: "Perfil de actor + estado de una disputa de alias no resuelta + evaluación de exposición en infraestructura de red"
-foco_regional: "Global (EE. UU., Australia, Canadá, Nueva Zelanda y Reino Unido documentados) · Chile y Latinoamérica: exposición directa por tecnología de operador, y una atribución regional errónea que este informe desmonta"
+tipo: "Perfil de actor"
+foco_regional: "Global · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor (designaciones que recoge el aviso conjunto AA25-239A)"
+actor: "Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,10 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, con el av
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-030
 
-## La pregunta de si Salt Typhoon y FamousSparrow son el mismo actor **sigue abierta**, y en septiembre de 2026 se publicó como resuelta. Este informe documenta por qué no lo está, y quién afirma cada cosa
+## Si Salt Typhoon y FamousSparrow son el mismo actor sigue abierto, y en septiembre de 2026 se publicó como resuelto
 
-### Microsoft afirma que son el mismo grupo y **no ha publicado la base técnica**; ESET los rastrea por separado y explica su razonamiento; dos fuentes de noviembre de 2026 dicen que la relación «no está clara». Mientras eso siga así, **ninguna de las dos atribuciones puede usarse como establecida**
-#### Y el actor que el aviso conjunto sí describe con precisión es un problema mayor: vive **dentro de los routers de los operadores de telecomunicaciones**, redirige los servidores de autenticación para cosechar credenciales, y **no usa un solo día cero**
+### Microsoft afirma que son el mismo grupo y no ha publicado la base técnica; ESET los rastrea por separado y explica por qué
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

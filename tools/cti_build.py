@@ -37,6 +37,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import unicodedata
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -182,6 +183,68 @@ def fecha_version(texto, version, fecha_fm):
     return m[version], avisos
 
 
+def _plegar(s):
+    """Minúsculas sin diacríticos, para que el buscador de la portada
+    encuentre «extorsion» cuando el informe dice «extorsión».
+
+    El mismo plegado se aplica en el navegador sobre lo que se teclea, de modo
+    que los dos lados de la comparación se normalizan igual.
+    """
+    s = unicodedata.normalize("NFD", s or "")
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s.lower()
+
+
+def _afirmacion(texto):
+    """La afirmación central del informe: su primer subtítulo `## `.
+
+    Se lee del documento en lugar de mantenerse en el frontmatter porque ya
+    está escrita ahí y duplicarla garantizaría que las dos copias divergieran.
+    """
+    m = re.search(r"^## (.+)$", texto, re.M)
+    return m.group(1).strip() if m else ""
+
+
+def _bajada(texto):
+    """El segundo subtítulo `### `. No se muestra en la tarjeta —no cabe— pero
+    sí se indexa: es donde están los nombres de operación, las fechas y los
+    países concretos, y por tanto donde buscará quien busque «Brasil» o
+    «FrostArmada».
+    """
+    m = re.search(r"^### (.+)$", texto, re.M)
+    return m.group(1).strip() if m else ""
+
+
+# Sinónimos de la taxonomía, para que el buscador encuentre lo que la gente
+# teclea y no lo que el catálogo decidió llamarlo. Se mantiene corto a
+# propósito: cada entrada es una promesa de que esos términos devuelven ESE
+# conjunto de informes, y una lista larga de sinónimos acaba mintiendo. Va
+# indexado por la categoría canónica, que es el motivo de que la taxonomía
+# se consolidara en ocho valores.
+SINONIMOS = {
+    "Perfil de operación de extorsión": "ransomware raas cifrado rescate",
+    "Perfil de ecosistema de extorsión": "ransomware raas cifrado rescate",
+    "Perfil de red de bots": "botnet ddos denegacion de servicio",
+    "Perfil de actor estatal": "apt estado estatal espionaje",
+    "Perfil de bloque de actores": "apt estado estatal",
+    "Perfil de operación sin atribuir": "apt sin atribuir clúster",
+    "Perfil de actor": "apt",
+    "Evaluación estratégica": "panorama tendencia",
+    "Perfil de ecosistema": "panorama",
+}
+
+
+def _marcado_ligero(s, e):
+    """Escapa a HTML y convierte el marcado mínimo que llevan los subtítulos:
+    `código` y **énfasis**. No es un intérprete de Markdown y no pretende
+    serlo; sólo evita que el lector vea los asteriscos y las comillas.
+    """
+    s = e(s)
+    s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
+    s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
+    return s
+
+
 def informes():
     """Devuelve los informes ordenados por identificador."""
     salida = []
@@ -200,6 +263,8 @@ def informes():
             "id": fm.get("id", nombre[:12]),
             "tlp": fm.get("tlp", "").upper(),
             "publicable": fm.get("tlp", "").upper() in TLP_PUBLICABLE,
+            "afirmacion": _afirmacion(texto),
+            "bajada": _bajada(texto),
         })
         f_emision = fm.get("fecha", "")
         f_act, avisos_v = fecha_version(texto, fm.get("version", ""), f_emision)
@@ -571,6 +636,36 @@ h2{font-size:21px;letter-spacing:-.01em;margin:52px 0 6px;font-weight:620}
 h2 .num{font-family:var(--mono);font-size:12px;color:var(--sky);
   letter-spacing:.14em;display:block;margin-bottom:7px;font-weight:500}
 .sub{color:var(--ink-3);font-size:14.5px;margin-bottom:22px;max-width:70ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.search{margin:0 0 20px}
+.search-field{position:relative;display:flex;align-items:center}
+.search-field .ic{position:absolute;left:14px;width:16px;height:16px;fill:none;
+  stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;pointer-events:none}
+.search input{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-s);
+  padding:12px 40px 12px 40px;transition:border-color .16s ease,background .16s ease}
+.search input::placeholder{color:var(--ink-3)}
+.search input:focus{outline:none;border-color:var(--amber);background:var(--surface-2)}
+.search input:focus+.clr,.search input:not(:placeholder-shown)+.clr{color:var(--ink-2)}
+.search input::-webkit-search-cancel-button{display:none}
+.clr{position:absolute;right:8px;width:26px;height:26px;line-height:1;font-size:19px;
+  background:none;border:0;border-radius:6px;color:var(--ink-3);cursor:pointer}
+.clr:hover{color:var(--amber);background:rgba(90,126,190,.16)}
+.search-meta{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  align-items:baseline;margin-top:9px;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.06em;color:var(--ink-3)}
+.search-meta .tips{color:rgba(130,148,184,.72)}
+kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line-strong);
+  border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;padding:4px 10px;
+  border-radius:99px;background:none;border:1px solid var(--line);color:var(--ink-3);
+  cursor:pointer;transition:.16s}
+.chip:hover{border-color:var(--line-strong);color:var(--ink-2)}
+.chip.on{background:var(--amber-soft);border-color:rgba(247,164,0,.55);color:#ffd27a}
+.empty{color:var(--ink-3);font-size:14px;max-width:70ch;margin-top:4px}
+.empty strong{color:var(--amber);font-family:var(--mono);font-size:13px}
+.pill.cat{background:rgba(55,93,157,.22);border-color:rgba(90,126,190,.5);color:#c3d2ee}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(318px,1fr))}
 .card{background:linear-gradient(180deg,var(--surface),var(--surface-2));
   border:1px solid var(--line);border-radius:var(--r);padding:20px 21px;
@@ -654,19 +749,38 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
             )
         else:
             fecha_tarjeta = e(inf["actualizado"])
+        # El blob de búsqueda se construye aquí y no en el navegador: así la
+        # portada sigue siendo un fichero estático y el buscador no necesita
+        # descargar ni indexar nada. Lleva el identificador, el actor con sus
+        # alias, la categoría, la afirmación central, el TLP, la versión y el
+        # estado de vigencia — es decir, todo lo que la tarjeta muestra.
+        blob = _plegar(" · ".join(filter(None, [
+            inf["id"], fm.get("actor", ""), fm.get("tipo", ""),
+            SINONIMOS.get(fm.get("tipo", ""), ""),
+            inf["afirmacion"], inf["bajada"],
+            # `foco_regional` NO se indexa a propósito: 27 de los 32 informes
+            # lo tienen con Chile, de modo que buscar «chile» devolvería casi
+            # todo el catálogo y el término perdería su utilidad. Los países
+            # que de verdad discriminan están en los dos subtítulos.
+            inf["tlp"], "v" + str(fm.get("version", "")),
+            estado, inf["actualizado"], inf["md"],
+        ])))
         tarjetas.append(
-            '<article class="card">\n'
+            '<article class="card" data-b="%s">\n'
             '  <div class="id">%s · %s</div>\n'
             '  <h3><a href="%s">%s</a></h3>\n'
             '  <div class="meta">%s</div>\n'
-            '  <div class="pills"><span class="pill">v%s</span>'
+            '  <div class="pills"><span class="pill cat">%s</span>'
+            '<span class="pill">v%s</span>'
             '<span class="pill">%s</span>'
             '<span class="pill %s">%s</span></div>\n'
             '  <div class="links"><a class="primary" href="%s">Leer el informe</a>'
             '<a href="%s">fuente .md</a></div>\n'
             '</article>' % (
+                e(blob),
                 e(inf["id"]), fecha_tarjeta,
                 e(inf["html"]), e(fm.get("actor", inf["id"])),
+                _marcado_ligero(inf["afirmacion"] or fm.get("tipo", ""), e),
                 e(fm.get("tipo", "")),
                 e(fm.get("version", "?")), e(inf["tlp"] or "—"),
                 clase, e(txt_vig),
@@ -751,11 +865,31 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
 </header>
 
 <h2><span class="num">01 · catálogo</span>Informes publicados</h2>
-<p class="sub">%(n)d informes. El botón abre el informe renderizado; la fuente en Markdown
-es el documento canónico y se versiona.</p>
-<div class="grid">
+<p class="sub">%(n)d informes. El buscador filtra sobre el identificador, el actor y sus
+alias, la categoría y la afirmación central de cada informe; el botón abre el informe
+renderizado, y la fuente en Markdown es el documento canónico y se versiona.</p>
+
+<div class="search" id="bus" hidden>
+  <label class="sr" for="q">Buscar en el catálogo</label>
+  <div class="search-field">
+    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
+    <input id="q" type="search" autocomplete="off" spellcheck="false"
+           placeholder="Buscar por actor, alias, categoría, identificador o afirmación…">
+    <button type="button" id="x" class="clr" hidden aria-label="Limpiar la búsqueda">×</button>
+  </div>
+  <div class="search-meta">
+    <span id="cuenta"></span>
+    <span class="tips">Atajos: <kbd>/</kbd> para buscar · <kbd>Esc</kbd> para limpiar</span>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="grid" id="rejilla">
 %(tarjetas)s
 </div>
+<p class="empty" id="vacio" hidden>Ningún informe coincide con <strong id="eco"></strong>.
+Se busca sobre el identificador, el actor y sus alias, la categoría y la afirmación central
+de cada informe — no sobre el cuerpo del documento.</p>
 
 %(bloque_red)s<h2><span class="num">%(num_ioc)s · indicadores</span>Agregados de IOC</h2>
 <p class="sub">Reconstruidos en cada construcción desde las tablas del Anexo A de cada
@@ -794,6 +928,86 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 </footer>
 
 </div>
+
+<script>
+/* Buscador del catálogo. Filtra tarjetas ya presentes en el documento: no
+   descarga nada, no indexa nada y funciona sin conexión. Si este script no se
+   ejecuta, el bloque de búsqueda queda oculto y el catálogo se ve completo,
+   que es el comportamiento correcto para una página estática. */
+(function(){
+  var bus=document.getElementById('bus'), q=document.getElementById('q'),
+      x=document.getElementById('x'), rej=document.getElementById('rejilla'),
+      cuenta=document.getElementById('cuenta'), vacio=document.getElementById('vacio'),
+      eco=document.getElementById('eco'), chips=document.getElementById('chips');
+  if(!bus||!q||!rej) return;
+  var fichas=[].slice.call(rej.querySelectorAll('.card'));
+  var total=fichas.length;
+  bus.hidden=false;
+
+  function plegar(s){
+    return (s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+  }
+  /* Las categorías salen de las propias tarjetas: si mañana se añade una, el
+     filtro la recoge sin tocar este script. */
+  var cats=[];
+  fichas.forEach(function(c){
+    var p=c.querySelector('.pill.cat'); if(!p) return;
+    var v=p.textContent.trim(); if(v && cats.indexOf(v)<0) cats.push(v);
+  });
+  cats.sort();
+  var activa='';
+  if(chips){
+    cats.forEach(function(v){
+      var b=document.createElement('button');
+      b.type='button'; b.className='chip'; b.textContent=v;
+      b.addEventListener('click',function(){
+        activa = (activa===v) ? '' : v;
+        [].slice.call(chips.children).forEach(function(o){
+          o.classList.toggle('on', o.textContent===activa);
+        });
+        filtrar();
+      });
+      chips.appendChild(b);
+    });
+  }
+
+  function filtrar(){
+    var t=plegar(q.value).trim();
+    var terminos = t ? t.split(/\\s+/) : [];
+    var cat=plegar(activa);
+    var n=0;
+    fichas.forEach(function(c){
+      var b=c.getAttribute('data-b')||'';
+      var ok = terminos.every(function(w){ return b.indexOf(w)>=0; })
+               && (!cat || b.indexOf(cat)>=0);
+      c.hidden=!ok; if(ok) n++;
+    });
+    if(x) x.hidden = !q.value;
+    var filtrando = terminos.length || cat;
+    cuenta.textContent = filtrando
+      ? (n===1 ? '1 informe de ' + total : n + ' informes de ' + total)
+      : total + ' informes';
+    if(vacio){ vacio.hidden = n>0; if(eco) eco.textContent = q.value || activa; }
+  }
+
+  q.addEventListener('input', filtrar);
+  if(x) x.addEventListener('click', function(){ q.value=''; q.focus(); filtrar(); });
+  q.addEventListener('keydown', function(ev){
+    if(ev.key==='Escape'){ q.value=''; filtrar(); }
+  });
+  document.addEventListener('keydown', function(ev){
+    if(ev.key==='/' && document.activeElement!==q
+       && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){
+      ev.preventDefault(); q.focus(); q.select();
+    }
+  });
+  /* Permite llegar con una búsqueda ya hecha: index.html?q=apt28 */
+  var m=/[?&]q=([^&]*)/.exec(location.search);
+  if(m){ try{ q.value=decodeURIComponent(m[1].replace(/\\+/g,' ')); }catch(_){} }
+  filtrar();
+})();
+</script>
+
 </body>
 </html>
 """ % {

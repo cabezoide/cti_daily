@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-034"
 version: "1.0"
-tipo: "Perfil de actor estatal por contrato + evaluación de un modelo de negocio con ánimo de lucro + identificación de un eje de exposición regional que atraviesa tres informes de esta cartera"
-foco_regional: "**Paraguay es el único caso sudamericano confirmado**, anunciado por su propio Gobierno en noviembre de 2024 y ampliado en julio de 2026. Y el motivo lo dijo su presidente: es el único país de Sudamérica que reconoce a Taiwán. La afirmación de actividad en 2026 contra infraestructura portuaria, telecomunicaciones y energía en Perú y Chile **no la sostiene ninguna fuente pública**"
+tipo: "Perfil de actor estatal"
+foco_regional: "Paraguay · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919 · habilitados por el Integrity Technology Group (Yongxin Zhicheng), designado por la OFAC, el Reino Unido y la Unión Europea"
+actor: "Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, con el av
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-034
 
-## Una empresa con ánimo de lucro, mil trescientos guiones de escaneo y una vulnerabilidad de **2014**: el actor estatal menos sofisticado de esta cartera, y exactamente por eso el que tiene más probabilidades de alcanzarnos
+## Una empresa con ánimo de lucro y una vulnerabilidad de 2014: el actor estatal menos sofisticado, y por eso el más probable
 
-### Las ocho vulnerabilidades que el aviso conjunto confirma como **explotadas con éxito** van de 2014 a 2023, todas con parche publicado hace años. No hay ni un día cero. Lo que hay es **escala industrial**: escaneo masivo, pulverización de contraseñas contra el correo, y una VPN legítima para quedarse
-
-#### Y el único caso sudamericano confirmado es **Paraguay**, cuyo presidente dijo públicamente por qué: es el único país de Sudamérica que reconoce a Taiwán. **La exposición regional de este actor no sigue a los puertos ni a los calendarios electorales: sigue a la cuestión taiwanesa** — y su persistencia más duradera conocida vivió un año entero dentro de un servidor de información geográfica
+### Las ocho vulnerabilidades que el aviso conjunto confirma como explotadas van de 2014 a 2023, todas con parche publicado
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

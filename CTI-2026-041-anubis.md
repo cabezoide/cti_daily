@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-041"
 version: "1.0"
-tipo: "Perfil de operación de extorsión con borrado + estudio de caso nacional + método para leer dos relatos compatibles del mismo incidente cuando uno lo publica el extorsionador y el otro la víctima"
-foco_regional: "**El requisito se corrobora, y es el único informe de este lote cuya afirmación regional se confirma con una víctima nombrada.** Anubis publicó a **Empresas Copec S.A.**, compañía energética chilena, en su sitio de fugas en **enero de 2026**, afirmando 6 TB exfiltrados. Y la región ya estaba en su victimología antes: el análisis de Trend Micro de junio de 2025 nombra a **Perú** entre los cuatro países con víctima. **Dos países, dos sectores, dos fuentes distintas** — y un caso con comunicado de la víctima y entrevista del atacante, que es material de estudio poco frecuente"
+tipo: "Perfil de operación de extorsión"
+foco_regional: "Chile · Perú · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Anubis (RaaS) · desarrollado por el grupo que Symantec designa **Hawkmoth** · **reconversión de Sphinx**, con la carga prácticamente sin cambios y sólo la marca actualizada — **y NO es el troyano bancario Anubis para Android, NO es la puerta trasera Anubis en Python de Savage Ladybug, y NO es la herramienta libre homónima de protección contra rastreadores web**"
+actor: "Anubis · Hawkmoth · Sphinx"
 fecha: "2026-11-19"
 caduca: "2027-02-19"
 autor: "Célula CTI"
@@ -15,15 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Se leyero
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-041
 
-## El requisito se corrobora: Anubis publicó a una energética chilena en enero de 2026. **Y el caso deja algo más valioso que la confirmación — dos relatos del mismo incidente que parecen contradecirse y son compatibles**
+## Anubis publicó a una energética chilena, y los dos relatos del incidente parecen contradecirse y son compatibles
 
-### Anubis afirmó haber exfiltrado **6 TB** de **Empresas Copec S.A.** y publicó el listado completo de ficheros en un segundo servicio oculto **con buscador**. Copec declaró públicamente «un acceso no autorizado a un sistema de almacenamiento de información de uso interno», que los sistemas de datos de clientes **no** se vieron comprometidos y que **la operación no se vio afectada**. Y el grupo, en una entrevista, dijo que **la defensa de Copec sí consiguió mitigar el cifrado** pero no la exfiltración, que llevó «casi una semana» a baja velocidad por puertas traseras
-
-#### **Las tres afirmaciones pueden ser ciertas a la vez, y ése es el hallazgo metodológico de este informe.** La víctima habla de disponibilidad y de datos de clientes; el atacante habla de confidencialidad de datos internos. **No responden a la misma pregunta**, y leer una como refutación de la otra es el error que el `Anexo D` existe para evitar — en un expediente donde **la única fuente de la mayor parte de los hechos es el propio extorsionador**
-
-##### Lo que hace a este actor distinto no es el cifrado: es que **puede borrar**. El parámetro `/WIPEMODE` **vacía el contenido de los ficheros** y los deja listados a 0 KB, sin recuperación posible. Eso rompe la lógica económica de la extorsión —pagar deja de garantizar nada— y conviene verlo junto con otro dato: **en los dos ataques de este grupo documentados con detalle, el cifrado fue bloqueado y la extorsión siguió adelante sobre los datos ya robados**
-
-###### Y este informe tiene que desambiguar cuatro cosas llamadas «Anubis», igual que `CTI-2026-035` hizo con «Medusa»: **esta operación de extorsión, un troyano bancario para Android, una puerta trasera en Python de otro actor, y una herramienta libre de protección contra rastreadores web**. La última aparece en las búsquedas y no tiene nada que ver
+### Anubis afirmó 6 TB de Empresas Copec S.A. y publicó el listado completo de ficheros con buscador
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que

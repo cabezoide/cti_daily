@@ -3,10 +3,10 @@ tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-035"
 version: "1.0"
-tipo: "Perfil de operación de extorsión + evaluación de un adversario con acceso a exploits antes de su divulgación + desambiguación de cuatro cosas distintas llamadas «Medusa»"
-foco_regional: "**Global y oportunista por diseño: el criterio de selección es tener software sin parchear.** La afirmación de que Colombia es uno de los países más golpeados por este grupo **no la sostiene ninguna fuente que hayamos localizado**; los únicos datos regionales públicos son una empresa de telecomunicaciones venezolana en 2025 y nueve casos en Brasil"
+tipo: "Perfil de operación de extorsión"
+foco_regional: "Global · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
-actor: "Medusa (RaaS) · encriptador `gaze.exe` / `gaze.py` · **NO es MedusaLocker, NO es el malware móvil Medusa, y NO es el rootkit MEDUSA de `CTI-2026-028`**"
+actor: "Medusa"
 fecha: "2026-11-17"
 caduca: "2027-02-17"
 autor: "Célula CTI"
@@ -15,11 +15,9 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, con el av
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-035
 
-## Medusa no elige víctimas: **elige software sin parchear**. Y hay un dato en el aviso conjunto que invierte la premisa de todo programa de parcheo
+## Medusa no elige víctimas: elige software sin parchear
 
-### El FBI documenta que estos actores han usado exploits **hasta una semana antes de la divulgación pública de la vulnerabilidad**, y que **no desarrollan los suyos**: los obtienen con antelación de fuentes desconocidas. Parchear rápido sigue siendo necesario y **ha dejado de ser suficiente**, porque para algunas vulnerabilidades la ventana se abre antes de que exista el parche
-
-#### Más de **500 víctimas** hasta abril de 2026. Cuatro cosas distintas se llaman «Medusa» y el propio FBI tiene que aclararlo en el segundo párrafo de su aviso — una de ellas ya está en el grafo de esta cartera, y no es ésta
+### El FBI documenta que usan exploits hasta una semana antes de la divulgación, y que no desarrollan los suyos
 
 > **Regla de oro del producto:** todo párrafo debe responder a un requisito de
 > inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que
