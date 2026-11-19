@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-047 · INC Ransom · Inc Ransom · (marca hermana) Lynx</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-047<small>INC Ransom · Inc Ransom · (marca hermana) Lynx</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-que-clase-de-operacion-es">E-1. Qué clase de operación es</a><a href="#e-2-lo-que-la-tanda-del-12-de-noviembre-ensena">E-2. Lo que la tanda del 12 de noviembre enseña</a><a href="#e-3-las-dos-marcas-y-lo-que-su-contradiccion-ensena">E-3. Las dos marcas y lo que su contradicción enseña</a><a href="#e-4-exposicion-regional">E-4. Exposición regional</a><a href="#e-5-decisiones-que-este-informe-pide">E-5. Decisiones que este informe pide</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion">O-1. Identificación</a><a href="#o-2-el-inventario-de-capacidades">O-2. El inventario de capacidades</a><a href="#o-3-la-actividad-medida-sobre-las-dos-bases">O-3. La actividad medida, sobre las dos bases</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-la-relacion-con-lynx-evaluada">O-5. La relación con Lynx, evaluada</a><a href="#o-6-hipotesis-alternativas-y-pre-mortem">O-6. Hipótesis alternativas y pre-mortem</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-cadena-de-intrusion">T-1. Cadena de intrusión</a><a href="#t-2-mapa-mitre-att-ck">T-2. Mapa MITRE ATT&amp;CK</a><a href="#t-3-piramide-del-dolor">T-3. Pirámide del Dolor</a><a href="#t-4-hipotesis-de-caza">T-4. Hipótesis de caza</a><a href="#t-5-brechas-de-visibilidad">T-5. Brechas de visibilidad</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-logica-de-deteccion">X-1. Lógica de detección</a><a href="#x-2-mitigaciones">X-2. Mitigaciones</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-evaluar-la-afirmacion-b-es-el-cambio-de-marca-de-a">Anexo D — Cómo evaluar la afirmación «B es el cambio de marca de A»</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de operación de extorsión</span><span class="pill p-mint">Global · Brasil · Latinoamérica</span><span class="pill p-sky">v1.0 · 2026-11-19</span></div><h1>INC Ransom · Inc Ransom ·<br><span class="hl">marca hermana) Lynx</span></h1><p class="sub">INC Ransom publicó cincuenta víctimas en un solo día, y según la fecha con que se cuente es el actor más activo de la semana o casi inactivo</p><p class="sub2">Ocho sitios de filtración abiertos y sólo dos en pie · y «Lynx» no es su sucesor sino su marca hermana, operando a la vez</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-047</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2027-02-19</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:AMBER</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-047</code></dd></div><div><dt>Versión</dt><dd>1.0 — 2026-11-19</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:AMBER</code></dd></div><div><dt>Objeto</dt><dd><strong>INC Ransom</strong>, tercera operación del lote por volumen de 2026 y la que mejor ilustra el problema de medición que <code>CTI-2026-046</code> §O-3.1 estableció</dd></div><div><dt>Foco regional</dt><dd><strong>22 víctimas latinoamericanas de 435 (5,1 %), con Brasil a la cabeza (9) y una chilena.</strong> Tercera del lote en exposición regional, muy por detrás de Qilin y TheGentlemen</dd></div><div><dt>Horizonte</dt><dd>Estratégico 6–12 meses · táctico días</dd></div><div><dt>Origen de los datos</dt><dd><strong>Medición propia</strong> sobre 435 registros de víctimas de 2026, más cinco fuentes de proveedor y un análisis industrial</dd></div><div><dt>Lo que lo distingue en este lote</dt><dd>Es <strong>el caso extremo de divergencia de conteo</strong> —7 frente a 58 víctimas en siete días, un factor de 8,3— y el único con <strong>una marca hermana documentada que opera simultáneamente</strong></dd></div><div><dt>Caducidad</dt><dd class="m">2027-02-19</dd></div><div><dt>Autor</dt><dd class="m">Célula CTI</dd></div></dl>
+<div class="note warn rv"><div class="t">⚠ Tres advertencias, y la primera es de aritmética</div><ol><li><strong>Toda cifra de ventana corta de este informe lleva su base de conteo.</strong> <code>CTI-2026-046</code> §O-3.1 estableció que un registro tiene dos fechas —publicación y ataque declarado— y que para este actor las dos cuentas de siete días difieren en <strong>un factor de 8,3</strong>. Es el caso más extremo del lote y el motivo de que la regla exista.</li><li><strong>Los recuentos acumulados de las fuentes externas no son homogéneos y no se deben sumar</strong>: 991 víctimas reclamadas al 9 de noviembre de 2026 según un proveedor, «más de 830 desde 2023» según otro en junio, y <strong>435 en 2026</strong> según nuestra medición. Son tres métodos y tres momentos.</li><li><strong>No tenemos aviso gubernamental para este actor.</strong> A diferencia de <code>CTI-2026-046</code>, todo lo que aquí se afirma sobre capacidades y vías de acceso procede de proveedores, con el grado que <code>Anexo B</code> les asigna.</li></ol></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>El dato más importante de este informe es una tanda: INC Ransom publicó cincuenta entradas en su sitio de filtración el 12 de noviembre de 2026, y eso hace que su actividad semanal valga 7 o 58 según cómo se cuente. Contado por fecha de ataque declarada, tiene 7 víctimas en los últimos siete días; contado por fecha de publicación, tiene 58</h4><p>La divergencia es de <strong>×8,3</strong>, la mayor de los nueve actores que pudimos medir. El ranking del sitio que motiva este lote le asigna 9, y por tanto se parece a la primera base. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> la existencia de la tanda y la magnitud de la divergencia, ambas verificadas en los datos. <em>Corroboración independiente:</em> un recuento semanal de tercero registró <strong>cincuenta publicaciones de INC en la semana del 9 al 15 de noviembre, frente a una la semana anterior</strong>, lo que coincide con nuestra medición sin compartir método. <em>Consecuencia:</em> <strong>cualquier afirmación sobre «la actividad de INC esta semana» es indeterminada sin declarar la base</strong>, y ésa es la lección que el lote entero hereda.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-2</div>
+<h4>Ha abierto ocho sitios de filtración y sólo dos siguen en pie, y esa rotación es una propiedad medible de la operación. El rastreador registra ocho ubicaciones asociadas a esta marca, de las cuales seis están marcadas como no disponibles y dos como activas</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que esto refleje pérdida y reposición repetida de infraestructura de publicación —por caída, por bloqueo o por decisión propia— frente a la alternativa de ocho sitios simultáneos de los que seis se abandonaron. , porque el rastreador no fecha las bajas. <em>Consecuencia:</em> <strong>un indicador basado en la dirección de su sitio de filtración caduca con rapidez</strong>, y la vigilancia tiene que ser por marca, no por dirección.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-3</div>
+<h4>«Lynx» se describe habitualmente como el cambio de marca de INC Ransom, y esa descripción es incorrecta en el punto que importa: las dos marcas operan a la vez. El vínculo técnico está bien soportado —se le atribuye compartir una proporción grande del código, y un análisis de proveedor publicó la tesis del cambio de marca— pero los datos de actividad de 2026 muestran a las dos publicando víctimas en el mismo período, y un análisis industrial registra que las reclamaciones industriales de INC subieron de 50 a 58 entre el segundo y el tercer trimestre de 2026 mientras las de Lynx bajaban a una</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que se trate de <strong>dos marcas de una misma operación con políticas declaradas distintas</strong>, y <strong>poco probable</strong> <em>(20–45 %)</em> que sea una sucesión. <em>La evidencia más dura la aporta un tercero:</em> <strong>un operador conectado a los paneles de negociación de las dos marcas</strong>. <em>Consecuencia defensiva:</em> <strong>la detección construida contra una sirve contra la otra</strong>, y un incidente atribuido a Lynx debe tratarse con este expediente.</p><div class="gauge" data-p="68"><div class="lab"><span>Poco probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-4</div>
+<h4>Y la diferencia entre las dos marcas no es técnica sino declarativa, lo que convierte sus «reglas» en marketing. A Lynx se le atribuyen reglas de afiliación que excluyen sanidad y gobierno; la victimología documentada de INC incluye un servicio de salud público británico y un ayuntamiento, y un proveedor sitúa la sanidad en torno al 15 % de sus víctimas conocidas</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la misma base de código y plausiblemente el mismo personal estén operando bajo dos conjuntos de reglas incompatibles. <em>La lectura, que esta cartera ya hizo en <code>CTI-2026-042</code>:</em> <strong>una lista de exclusiones es un instrumento de reputación de marca, no un compromiso</strong>, y la forma de comprobarlo es exactamente ésta: buscar la misma capacidad operando sin esa lista bajo otro nombre.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>Su exposición regional es baja pero no nula, y tiene nombre de país: Brasil. De 435 registros de 2026, 22 son latinoamericanos —el 5,1 %—: Brasil 9, México 6, Argentina 3, Chile 1, y uno cada uno en Costa Rica, Panamá y Colombia</h4><p>Es la tercera exposición regional del lote, por detrás de Qilin (122) y TheGentlemen (129) y por delante de Akira (7, y ninguna chilena). Valoramos <strong>probable</strong> <em>(55–80 %)</em> que el perfil regional sea estable. — fuente única. <em>Consecuencia:</em> para una organización brasileña, INC Ransom entra en el grupo de amenazas a considerar; para una chilena, está en el límite inferior.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-6</div>
+<h4>Hay una vía de acceso inicial compartida entre marcas, y si se confirma es la medida defensiva más rentable de este informe. Un análisis industrial valora con confianza moderada que una campaña de explotación concreta funciona como conducto de acceso inicial que sirve a INC, a Lynx y posiblemente a otras marcas, y documenta además explotación de vulnerabilidades de SonicWall SMA 1000</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> la existencia de un conducto compartido de acceso, respetando la confianza moderada de la fuente y sin elevarla. <em>Consecuencia:</em> <strong>parchear el borde no defiende de una marca, defiende de un mercado</strong>, porque el acceso se compra y se revende aguas arriba de la decisión de qué marca despliega.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-7</div>
+<h4>Su cadena está construida con software legítimo, igual que la de Akira, pero con una peculiaridad: usa herramientas de respaldo para exfiltrar. El inventario publicado incluye BackBlaze, Restic y s5cmd —dos productos de copia de seguridad y un cliente de almacenamiento de objetos— además de RClone, MEGA, 7-Zip y WinRAR</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que esto haga la exfiltración especialmente difícil de distinguir del tráfico legítimo de respaldo. <em>Consecuencia operativa, y es específica de este actor:</em> <strong>el control de egreso tiene que distinguir el destino de respaldo autorizado de cualquier otro</strong>, porque aquí el adversario usa la misma clase de herramienta que el equipo de operaciones.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta como dato publicado.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-8</div>
+<h4>Los recuentos acumulados que circulan sobre este actor difieren en cientos de víctimas, y conviene no promediarlos. Un proveedor cifra en 991 las víctimas reclamadas al 9 de noviembre de 2026; otro hablaba de más de 830 desde 2023 en junio de 2026; su propia ficha en el rastreador menciona más de 200 en 2025; y nuestra medición da 435 en 2026</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que las cuatro cifras sean correctas para su método y su fecha, y <strong>muy probable</strong> <em>(80–95 %)</em> que <strong>sumarlas o promediarlas produzca un número sin significado</strong>. <em>Es el mismo problema de <code>KJ-1</code> a otra escala: el recuento no es la víctima.</em></p><div class="gauge" data-p="88"><div class="lab"><span>Casi con certeza</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2><p>INC Ransom es la tercera operación de este lote por volumen de 2026 —<strong>435 víctimas reclamadas</strong>— y la que mejor enseña por qué los rankings de actividad semanal no se pueden leer sin preguntar cómo se cuentan.</p></div></div>
+<p class="rv"><strong>El 12 de noviembre de 2026 publicó cincuenta entradas en su sitio de filtración en un solo día.</strong> Las fechas de ataque que declara para ellas están repartidas por las semanas anteriores. El resultado es que, en la ventana de siete días que motiva este lote, <strong>esta operación tiene 7 víctimas si se cuenta por fecha de ataque y 58 si se cuenta por fecha de publicación</strong>: una divergencia de <strong>8,3 veces</strong>. Un recuento semanal independiente registró lo mismo sin compartir método —cincuenta publicaciones en la semana del 9 al 15 de noviembre frente a una la semana anterior—, de modo que la tanda es un hecho y no un artefacto de nuestra medición. <strong>Las dos cifras son correctas y describen cosas distintas</strong>, y a partir de este informe la serie declara siempre la base.</p>
+<p class="rv">Dos cosas más sobre la operación en sí merecen la atención del lector.</p>
+<p class="rv">La primera es que <strong>ha abierto ocho sitios de filtración y sólo dos siguen en pie.</strong> Seis están registrados como no disponibles. No sabemos por qué cayeron, pero el patrón importa para la práctica: <strong>vigilar a este actor por la dirección de su sitio es perder el rastro cada pocos meses</strong>, y la vigilancia tiene que ser por marca.</p>
+<p class="rv">La segunda es la relación con <strong>Lynx</strong>, que se describe habitualmente como «el cambio de marca de INC Ransom». Esa descripción es cómoda y falla en lo esencial: <strong>las dos marcas publican víctimas en el mismo período de 2026</strong>. No es una sucesión, son dos marcas a la vez. La evidencia más dura la aporta un tercero —<strong>un operador conectado a los paneles de negociación de ambas</strong>— y un análisis industrial muestra sus curvas divergiendo en el mismo trimestre. Y aquí aparece lo interesante: <strong>a Lynx se le atribuyen reglas que excluyen sanidad y gobierno, mientras la victimología documentada de INC incluye un servicio de salud público británico y un ayuntamiento</strong>, con la sanidad en torno al 15 % de sus víctimas. La misma base de código, plausiblemente el mismo personal, y dos conjuntos de reglas incompatibles. <strong>Una lista de exclusiones no es un compromiso: es un argumento de venta</strong>, y este caso es la demostración limpia.</p>
+<p class="rv">Para esta región la exposición es baja pero tiene nombre: <strong>22 víctimas latinoamericanas, con Brasil a la cabeza con nueve y una sola chilena.</strong> Está por delante de Akira —que no tiene ninguna chilena— y muy por detrás de Qilin y TheGentlemen, los dos actores que esta cartera ya documentaba.</p>
+<p class="rv">Y hay una recomendación que paga más que cualquier detección: un análisis industrial valora con confianza moderada que <strong>una campaña de explotación concreta funciona como conducto de acceso inicial compartido por INC, por Lynx y posiblemente por otras marcas</strong>. Si eso es cierto —y la fuente no lo afirma con más fuerza— <strong>parchear el borde no defiende de un grupo, defiende de un mercado</strong>, porque el acceso se compra aguas arriba de la decisión de qué marca cifra.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Qué cubre</h3>
+<p class="rv">La operación INC Ransom: su curva de actividad medida sobre las dos bases de conteo, su rotación de infraestructura de publicación, su relación con la marca Lynx, su victimología global y regional, su inventario de capacidades publicado, y las vías de acceso inicial que los proveedores le atribuyen.</p>
+<h3 class="rv">3.2 Qué NO cubre</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Fuera de alcance</th><th>Por qué</th></tr></thead><tbody>
+<tr><td><strong>Análisis del cifrador</strong></td><td>Sin muestras. La afirmación de código compartido con Lynx es de proveedor (<code>O-5</code>)</td></tr>
+<tr><td><strong>La identidad del conducto de acceso</strong></td><td>El análisis industrial nombra una campaña concreta; <strong>no verificamos ni su existencia ni su alcance</strong>, y respetamos su confianza moderada (<code>KJ-6</code>)</td></tr>
+<tr><td><strong>Un expediente de Lynx</strong></td><td>Esta cartera no lo tiene. <code>KJ-3</code> sostiene que <strong>debería ser una sección de este expediente y no un documento aparte</strong>, y es <code>G-5</code></td></tr>
+<tr><td><strong>Los recuentos acumulados</strong></td><td>Cuatro cifras incompatibles de cuatro fuentes. Se citan con su método y su fecha, <strong>sin reconciliarlas</strong></td></tr>
+<tr><td><strong>Indicadores de red o de fichero</strong></td><td>El rastreador no los publica. Es <code>G-2</code> y, como en <code>CTI-2026-046</code>, significa que este informe <strong>no aporta nada ingerible salvo patrones</strong></td></tr></tbody></table></div>
+<h3 class="rv">3.3 Limitaciones de la colección</h3>
+<div class="note warn rv"><div class="t">⚠ Seis limitaciones</div><ol><li><strong>Sin fuente gubernamental.</strong> Todo lo de capacidades y acceso es de proveedor. Es la diferencia principal con <code>CTI-2026-046</code>.</li><li><strong>Las cifras son reclamaciones de un sitio de filtración</strong>, no brechas verificadas, y este actor acaba de demostrar que <strong>publica en tandas</strong>.</li><li><strong>El rastreador no fecha la baja de los seis sitios caídos</strong>, de modo que <code>KJ-2</code> describe un estado y no una cronología.</li><li><strong>El inventario de capacidades no está verificado</strong> por nosotros (<code>G-3</code>).</li><li><strong>La tesis del código compartido con Lynx la leímos por referencia</strong>, no en el análisis original. Es <code>G-4</code>.</li><li><strong>Y una limitación propia: nuestra cuenta de siete días por publicación (58) incluye la tanda del día 12, y la del ranking (9) no.</strong> No publicamos una sola cifra: publicamos las dos y la base de cada una.</li></ol></div>
+<h3 class="rv">3.4 Qué aporta</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Aporte</th><th>Dónde</th></tr></thead><tbody>
+<tr><td><strong>La tanda del 12 de noviembre medida</strong>, con la divergencia de ×8,3 y su corroboración independiente</td><td><code>KJ-1</code>, <code>O-3</code></td></tr>
+<tr><td><strong>La rotación de infraestructura cuantificada</strong>: ocho sitios abiertos, dos en pie</td><td><code>KJ-2</code></td></tr>
+<tr><td><strong>La refutación de «Lynx es el sucesor de INC»</strong>: operan a la vez</td><td><code>KJ-3</code>, <code>O-5</code></td></tr>
+<tr><td><strong>La contradicción entre las reglas declaradas de una marca y la victimología de la otra</strong></td><td><code>KJ-4</code>, <code>E-3</code></td></tr>
+<tr><td><strong>La exposición regional con nombre de país</strong>: 22, Brasil 9, Chile 1</td><td><code>KJ-5</code>, <code>E-4</code></td></tr>
+<tr><td><strong>La peculiaridad de exfiltrar con herramientas de respaldo</strong>, y la medida que se sigue</td><td><code>KJ-7</code>, <code>X-2.3</code></td></tr>
+<tr><td><strong>Las cuatro cifras acumuladas incompatibles, consignadas sin reconciliar</strong></td><td><code>KJ-8</code></td></tr></tbody></table></div>
+<h3 class="rv">3.5 Veredicto</h3>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Elemento</th><th>Veredicto</th><th>Base</th></tr></thead><tbody>
+<tr><td>1</td><td>INC Ransom es uno de los actores más activos de la semana</td><td><strong>INDETERMINADO SIN BASE DE CONTEO — y es el hallazgo</strong></td><td>7 por fecha de ataque, <strong>58 por publicación</strong> (<code>KJ-1</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>2</td><td>Es una operación de alto volumen sostenido</td><td><strong>CORROBORADO</strong></td><td>435 víctimas en 2026, tercera del lote</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>3</td><td>Su infraestructura de publicación es estable</td><td><strong>NO SOSTENIDO</strong></td><td><strong>Ocho sitios abiertos, seis caídos</strong> (<code>KJ-2</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>4</td><td>Lynx es su sucesor</td><td><strong>NO SOSTENIDO — REENCUADRADO</strong></td><td><strong>Operan simultáneamente en 2026.</strong> Son marcas hermanas (<code>KJ-3</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>5</td><td>Lynx excluye sanidad y gobierno</td><td><strong>CORROBORADO como declaración, IRRELEVANTE como garantía</strong></td><td>INC ataca sanidad (~15 %) y gobierno con la misma base de código (<code>KJ-4</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>6</td><td>Es una amenaza de primer orden para la región</td><td><strong>NO SOSTENIDO</strong></td><td>5,1 % latinoamericanas, <strong>una chilena</strong> (<code>KJ-5</code>)</td></tr>
+<tr><td>7</td><td>Hay un conducto de acceso compartido entre marcas</td><td><strong>PROBABLE, con la confianza moderada de su fuente</strong></td><td>Análisis industrial; SonicWall SMA 1000 (<code>KJ-6</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>8</td><td>Sus cifras acumuladas son comparables entre fuentes</td><td><strong>NO SOSTENIDO</strong></td><td>991 · 830+ · 200+ · 435, cuatro métodos (<code>KJ-8</code>)</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> CISO, Riesgo, Arquitectura</span><span><b>Horizonte:</b> 6–12 meses</span></div></div>
+<section id="e-1-que-clase-de-operacion-es" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Qué clase de operación es</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · ritmo</div>
+<h4 style="margin:0 0 6px"><strong>Publica en tandas, no a ritmo</strong></h4><p style="font-size:13.8px;margin:0">Cualquier métrica de «actividad reciente» sobre este actor es inestable por construcción. <strong>Hay que mirar el mes, no la semana</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · infraestructura</div>
+<h4 style="margin:0 0 6px"><strong>Ocho sitios abiertos, dos en pie</strong></h4><p style="font-size:13.8px;margin:0">La marca sobrevive a su infraestructura. Vigilancia por marca, no por dirección</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · doble marca</div>
+<h4 style="margin:0 0 6px"><strong>Dos marcas a la vez con reglas distintas</strong></h4><p style="font-size:13.8px;margin:0">Las reglas declaradas son marketing. <strong>Y la detección de una vale para la otra</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · indistinguibilidad</div>
+<h4 style="margin:0 0 6px"><strong>Cadena de software legítimo, con herramientas de respaldo</strong></h4><p style="font-size:13.8px;margin:0">La exfiltración se parece al respaldo. <strong>El control tiene que ser por destino autorizado</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">05 · mercado de acceso</div>
+<h4 style="margin:0 0 6px"><strong>Acceso plausiblemente comprado aguas arriba</strong></h4><p style="font-size:13.8px;margin:0">Parchear el borde defiende de varias marcas a la vez</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">06 · sin límites</div>
+<h4 style="margin:0 0 6px"><strong>Sanidad y gobierno sin exclusión</strong></h4><p style="font-size:13.8px;margin:0">Un servicio de salud público y un ayuntamiento entre sus víctimas documentadas</p></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="435">0</div><div class="l">Víctimas reclamadas en 2026 (medición propia)</div><div class="s">Tercera del lote, tras Qilin (1.221) y TheGentlemen (1.020)</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="50">0</div><div class="l">Entradas publicadas <strong>en un solo día</strong>, el 12-11-2026</div><div class="s"><strong>El 11,5 % de su año en una jornada</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="7">0<small>/</small></div><div class="l">Víctimas de 7 días por <strong>fecha de ataque</strong> / por <strong>publicación</strong></div><div class="s"><strong>Divergencia de ×8,3: la mayor del lote</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="8">0<small>→</small></div><div class="l">Sitios de filtración abiertos → activos</div><div class="s">Seis caídos</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="73">0</div><div class="l">Víctimas en los últimos 30 días (por publicación)</div><div class="s">El 17 % de su año</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="22">0</div><div class="l">Víctimas latinoamericanas</div><div class="s"><strong>5,1 %. Brasil 9 · México 6 · Argentina 3 · Chile 1</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="58">0</div><div class="l">Países distintos alcanzados en 2026</div><div class="s">La operación de mayor dispersión geográfica del lote tras Qilin</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="15">0<small>~%</small></div><div class="l">Proporción de sanidad entre sus víctimas, según proveedor</div><div class="s">Con un servicio de salud público y un ayuntamiento documentados</div></div></div>
+</section>
+<section id="e-2-lo-que-la-tanda-del-12-de-noviembre-ensena" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>Lo que la tanda del 12 de noviembre enseña</h2><p><strong>El hecho:</strong> cincuenta entradas publicadas en un día, con fechas de ataque declaradas repartidas por semanas anteriores.</p></div></div>
+<p class="rv"><strong>Las tres lecturas posibles, y por qué no hace falta decidir entre ellas para actuar:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Lectura</th><th>Qué implicaría</th><th>Estado</th></tr></thead><tbody>
+<tr><td><strong>Vaciado de cola de negociación</strong></td><td>Cincuenta víctimas cuyos plazos vencieron a la vez o cuyas negociaciones fracasaron en bloque</td><td><strong>Retenida como principal.</strong> Es compatible con las fechas de ataque repartidas</td></tr>
+<tr><td><strong>Decisión de visibilidad</strong></td><td>Publicar en bloque para ocupar los rankings y los titulares de la semana</td><td>Retenida como concurrente</td></tr>
+<tr><td><strong>Reciclaje o relleno</strong></td><td>Entradas antiguas, duplicadas o de terceros republicadas</td><td><strong>Poco probable aquí</strong>, porque las fechas de ataque están repartidas y son verosímiles. <strong>Es la lectura que sí aplica a otros actores de este lote</strong></td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Y la consecuencia de gestión, que es la única que importa:</div><p>si alguien construye un panel de «grupos más activos esta semana» alimentado por este rastreador, <strong>ese panel subirá y bajará a este actor en un factor de ocho según el día de la consulta y la base de conteo</strong>. La métrica estable para priorizar es <strong>el acumulado de treinta días o del año</strong>, y la semanal sirve para detectar tandas, que es otra cosa y también útil.</p></div>
+</section>
+<section id="e-3-las-dos-marcas-y-lo-que-su-contradiccion-ensena" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Las dos marcas y lo que su contradicción enseña</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Dimensión</th><th><strong>INC Ransom</strong></th><th><strong>Lynx</strong></th></tr></thead><tbody>
+<tr><td>Relación</td><td>—</td><td>Se describe como <strong>cambio de marca de INC</strong>; comparte una proporción grande del código según proveedor</td></tr>
+<tr><td>Actividad en 2026</td><td><strong>435 víctimas</strong> reclamadas; reclamaciones industriales <strong>50 → 58</strong> entre 2.º y 3.º trimestre</td><td>Reclamaciones industriales <strong>bajando a una</strong> en el 3.º trimestre</td></tr>
+<tr><td>¿Simultáneas?</td><td><strong>Sí.</strong> Las dos publican en el mismo período</td><td><strong>Sí</strong></td></tr>
+<tr><td>Reglas declaradas</td><td><strong>Ninguna exclusión conocida</strong></td><td><strong>Excluye sanidad y gobierno</strong>, según sus reglas de afiliación</td></tr>
+<tr><td>Victimología real</td><td><strong>Sanidad ~15 %</strong>, con un servicio de salud público y un ayuntamiento documentados</td><td>Reclamó un proveedor de ciclo de ingresos sanitario en abril de 2026 según un recuento</td></tr>
+<tr><td>Evidencia dura del vínculo</td><td><strong>Un operador conectado a los paneles de negociación de las dos marcas</strong>, según un proveedor</td><td></td></tr></tbody></table></div>
+<p class="rv"><strong>La conclusión que este cuadro soporta, y es <code>KJ-4</code>:</strong> cuando una operación mantiene dos marcas y sólo una declara exclusiones éticas, <strong>la lista de exclusiones no describe lo que el grupo hace: describe lo que quiere que se crea de una de sus marcas.</strong> <code>CTI-2026-042</code> llegó a la misma conclusión por otro camino —una política de afiliados que prohibía la salud infantil y autorizaba la infraestructura crítica—, y aquí el mecanismo es más limpio: <strong>la misma capacidad opera sin la lista bajo otro nombre.</strong></p>
+<p class="rv"><strong>Y la consecuencia defensiva es económica:</strong> si son dos marcas de una operación, <strong>no hacen falta dos programas de detección</strong>. Un incidente atribuido a Lynx se trata con este expediente, y al revés. Es <code>G-5</code>: la cartera no necesita un informe de Lynx, necesita una sección aquí.</p>
+</section>
+<section id="e-4-exposicion-regional" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Exposición regional</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Actor del lote</th><th>Víctimas 2026</th><th>Latinoamericanas</th><th>%</th><th>Chilenas</th><th>Brasileñas</th></tr></thead><tbody>
+<tr><td>Qilin <em>(en cartera)</em></td><td>1.221</td><td><strong>122</strong></td><td>10,0 %</td><td><strong>20</strong></td><td>10</td></tr>
+<tr><td>TheGentlemen <em>(en cartera)</em></td><td>1.020</td><td><strong>129</strong></td><td>12,6 %</td><td>9</td><td><strong>36</strong></td></tr>
+<tr><td><strong>INC Ransom</strong></td><td><strong>435</strong></td><td><strong>22</strong></td><td><strong>5,1 %</strong></td><td><strong>1</strong></td><td><strong>9</strong></td></tr>
+<tr><td>Akira</td><td>420</td><td>7</td><td>1,7 %</td><td><strong>0</strong></td><td>3</td></tr>
+<tr><td>n0n</td><td>259</td><td>11</td><td>4,2 %</td><td>0</td><td>6</td></tr>
+<tr><td>settra</td><td>116</td><td>5</td><td>4,3 %</td><td>0</td><td>3</td></tr>
+<tr><td>pixelleaks</td><td>34</td><td>3</td><td>8,8 %</td><td>0</td><td>0</td></tr>
+<tr><td>vortex</td><td>35</td><td>0</td><td>0,0 %</td><td>0</td><td>0</td></tr>
+<tr><td>curious worm</td><td>18</td><td>0</td><td>0,0 %</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p class="rv"><strong>Todas las filas, el mismo conjunto de datos, el mismo día, la misma metodología.</strong> INC Ransom es la tercera exposición regional del lote y su país regional es <strong>Brasil</strong>, con nueve víctimas. Para Chile, <strong>una sola víctima en 435 registros</strong>: presente, marginal.</p>
+<div class="note info rv"><p><strong>Y una observación sobre el conjunto de la tabla que ya apareció en <code>CTI-2026-046</code> y que este informe confirma: los dos actores que esta cartera ya tenía documentados son, con mucha diferencia, los dos de mayor exposición regional del top 10.</strong> El lote de ocho añade cobertura, no corrige una omisión.</p></div>
+</section>
+<section id="e-5-decisiones-que-este-informe-pide" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-5</span><div><h2>Decisiones que este informe pide</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>A quién</th><th>Coste</th><th>Por qué</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td><strong>No priorizar por métricas de ventana semanal de este rastreador</strong></td><td>CTI</td><td>Cero</td><td><code>KJ-1</code>: ×8,3 de divergencia. Usar treinta días o el año</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Distinguir en el control de egreso el destino de respaldo autorizado de cualquier otro</strong></td><td>Red · Operaciones</td><td>Medio</td><td><code>KJ-7</code>: exfiltra con BackBlaze, Restic y <code>s5cmd</code></td></tr>
+<tr><td><strong>3</strong></td><td><strong>Tratar Lynx e INC como un solo expediente de detección</strong></td><td>SOC · CTI</td><td><strong>Cero, y ahorra</strong></td><td><code>KJ-3</code>: dos marcas, una operación</td></tr>
+<tr><td><strong>4</strong></td><td><strong>Parchear concentradores de acceso remoto expuestos con prioridad</strong></td><td>Operaciones</td><td>Medio</td><td><code>KJ-6</code>: SonicWall SMA 1000 y un conducto de acceso compartido</td></tr>
+<tr><td><strong>5</strong></td><td><strong>No usar las listas de exclusión declaradas de ningún grupo en el análisis de riesgo</strong></td><td>Riesgo</td><td>Cero</td><td><code>KJ-4</code>: la misma operación opera sin ellas bajo otro nombre</td></tr>
+<tr><td><strong>6</strong></td><td><strong>Si somos prestador de salud o administración pública: asumir que no hay exclusión</strong></td><td>Dirección</td><td>Cero decidirlo</td><td>~15 % de sanidad, con un servicio público y un ayuntamiento documentados</td></tr>
+<tr><td><strong>7</strong></td><td><strong>Vigilar por marca y no por dirección del sitio de filtración</strong></td><td>CTI</td><td>Bajo</td><td><code>KJ-2</code>: ocho abiertos, seis caídos</td></tr></tbody></table></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> SOC, Respuesta a incidentes, Threat Hunting</span><span><b>Horizonte:</b> semanas</span></div></div>
+<section id="o-1-identificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Nombre</td><td><strong>INC Ransom</strong> · también escrito <code>Inc Ransom</code></td></tr>
+<tr><td>Marca hermana</td><td><strong>Lynx</strong> — se le atribuye compartir una proporción grande del código; <strong>opera simultáneamente</strong> (<code>KJ-3</code>)</td></tr>
+<tr><td>Primera observación</td><td><strong>Julio–agosto de 2023</strong>; en el rastreador desde <strong>2023-08-09</strong></td></tr>
+<tr><td>Sitios de filtración</td><td><strong>Ocho registrados, dos activos</strong> al 19-11-2026</td></tr>
+<tr><td>Modelo</td><td>Extorsión por datos con cifrado, afiliados. <strong>Sin exclusiones declaradas conocidas</strong></td></tr>
+<tr><td>Capacidades documentadas</td><td><strong>28 técnicas en 13 tácticas</strong> según el rastreador</td></tr>
+<tr><td>Estado</td><td><strong>Activa</strong>, con tanda de cincuenta publicaciones el 12-11-2026</td></tr>
+<tr><td>Aviso gubernamental</td><td><strong>Ninguno localizado</strong></td></tr></tbody></table></div>
+</section>
+<section id="o-2-el-inventario-de-capacidades" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>El inventario de capacidades</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Bloque</th><th>Herramientas documentadas</th><th>Qué obliga</th></tr></thead><tbody>
+<tr><td><strong>Administración remota</strong></td><td><strong>AnyDesk</strong></td><td>Inventario de autorizadas + alerta (<code>X-2.1</code>). Una sola, frente a las seis de Akira</td></tr>
+<tr><td><strong>Descubrimiento</strong></td><td>AdFind · Advanced IP Scanner · SoftPerfect NetScan</td><td>Enumeración de directorio y barrido interno</td></tr>
+<tr><td><strong>Credenciales</strong></td><td>Mimikatz</td><td><strong>La única herramienta inequívocamente ofensiva del inventario</strong></td></tr>
+<tr><td><strong>Exfiltración</strong></td><td><strong>7-Zip · BackBlaze · MEGA · RClone · Restic · WinRAR · <code>s5cmd</code></strong></td><td><strong>Siete herramientas, y tres son de respaldo o almacenamiento de objetos.</strong> Es la peculiaridad de <code>KJ-7</code></td></tr>
+<tr><td><strong>LOLBAS</strong></td><td><code>Finger</code> · PsExec</td><td><strong><code>Finger</code> es inusual y por eso es buena señal</strong>: casi ninguna organización lo usa legítimamente hoy</td></tr>
+<tr><td><strong>Red</strong></td><td>Bitvise SSH Client</td><td>Túnel o transferencia cifrada</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Dos lecturas del inventario</div><p>La primera: <strong>es notablemente más pequeño que el de Akira</strong> —28 técnicas frente a 48, una herramienta de administración remota frente a seis—. Eso no significa menos capacidad: significa <strong>menos documentada</strong>, y la diferencia puede estar en cuántos equipos de respuesta han publicado sobre cada una. <strong>No se debe leer el tamaño del inventario como medida de sofisticación</strong> (<code>H-4</code>).</p><p>La segunda, y es la aportación práctica: <strong><code>Finger</code> en una red moderna es casi siempre anómalo.</strong> Es un protocolo de 1977 que ninguna organización actual usa para administrar, y su presencia en una línea de órdenes es una señal de coste de falso positivo muy bajo. <strong>De todo el inventario, es el indicador más específico y el más barato.</strong></p></div>
+</section>
+<section id="o-3-la-actividad-medida-sobre-las-dos-bases" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>La actividad medida, sobre las dos bases</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Ventana</th><th>Por <strong>fecha de ataque</strong></th><th>Por <strong>publicación</strong></th><th>Nota</th></tr></thead><tbody>
+<tr><td>Año 2026</td><td>435</td><td>435</td><td>Coinciden por construcción</td></tr>
+<tr><td>Últimos 30 días</td><td>48</td><td><strong>73</strong></td><td>×1,5</td></tr>
+<tr><td><strong>Últimos 7 días</strong></td><td><strong>7</strong></td><td><strong>58</strong></td><td><strong>×8,3 — la mayor divergencia del lote</strong></td></tr>
+<tr><td>Ranking del sitio <em>(16:20 UTC del 19-11)</em></td><td>—</td><td>—</td><td><strong>9</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>El perfil diario de publicación en noviembre</strong>, que es lo que explica todo lo anterior:</p>
+<div class="chart rv">
+<h4>Publicaciones diarias de INC Ransom en noviembre de 2026</h4><p class="cap">La barra del día 12 son cincuenta entradas: el 11,5 % de su año en una jornada. Medición propia.</p><svg viewBox="0 0 720 250" role="img" aria-label="Publicaciones diarias de INC Ransom en noviembre de 2026"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">12</text><text x="42" y="116.0">25</text><text x="42" y="72.0">38</text><text x="42" y="28.0">50</text></g><path d="M50.0,178.9 L156.7,189.4 L263.3,196.5 L370.0,24.0 L476.7,193.0 L583.3,193.0 L690.0,193.0 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,178.9 L156.7,189.4 L263.3,196.5 L370.0,24.0 L476.7,193.0 L583.3,193.0 L690.0,193.0"/><g><circle class="pt" cx="50.0" cy="178.9" r="5" fill="#5a7ebe"><title>03-nov: 6</title></circle><circle class="pt" cx="156.7" cy="189.4" r="5" fill="#5a7ebe"><title>08-nov: 3</title></circle><circle class="pt" cx="263.3" cy="196.5" r="5" fill="#5a7ebe"><title>11-nov: 1</title></circle><circle class="pt" cx="370.0" cy="24.0" r="5" fill="#5a7ebe"><title>12-nov: 50</title></circle><circle class="pt" cx="476.7" cy="193.0" r="5" fill="#4db99c"><title>13-nov: 2</title></circle><circle class="pt" cx="583.3" cy="193.0" r="5" fill="#4db99c"><title>16-nov: 2</title></circle><circle class="pt" cx="690.0" cy="193.0" r="6.5" fill="#f7a400"><title>19-nov: 2</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="167.9">6</text><text x="156.7" y="178.4">3</text><text x="263.3" y="185.5">1</text><text x="370.0" y="13.0">50</text><text x="476.7" y="182.0">2</text><text x="583.3" y="182.0">2</text><text x="690.0" y="182.0" fill="#f7a400">2</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">03-nov</text><text x="156.7" y="222">08-nov</text><text x="263.3" y="222">11-nov</text><text x="370.0" y="222">12-nov</text><text x="476.7" y="222">13-nov</text><text x="583.3" y="222">16-nov</text><text x="690.0" y="222">19-nov</text></g></svg></div>
+<p class="rv"><strong>Y el reparto, sobre los 435 registros:</strong> sectorialmente, <strong>Servicios profesionales 113</strong>, Manufactura 60, Tecnología 43. Geográficamente, <strong>Estados Unidos 256</strong>, Canadá 15, Alemania 12, <strong>Brasil 9</strong>, India 8, Australia 8. <strong>Veinticuatro registros llevan referencia de prensa</strong>, lo que es un indicador indirecto de que esas víctimas fueron confirmadas por terceros.</p>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Si la organización…</th><th>Exposición</th><th>Medida</th></tr></thead><tbody>
+<tr><td><strong>Es brasileña</strong></td><td><strong>La más alta de la región para este actor</strong>: 9 de las 22 víctimas regionales</td><td>Parcheo de borde + control de egreso</td></tr>
+<tr><td><strong>Es chilena</strong></td><td><strong>Baja</strong>: una víctima en 435</td><td>No desatender; la vía es genérica</td></tr>
+<tr><td><strong>Es prestador de salud o administración pública</strong></td><td><strong>Alta.</strong> ~15 % de sanidad, con un servicio público y un ayuntamiento documentados. <strong>Y sin exclusión declarada</strong></td><td><code>E-5.6</code></td></tr>
+<tr><td><strong>Es de servicios profesionales</strong></td><td><strong>Alta.</strong> Su sector principal: 113 de 435</td><td>Igual</td></tr>
+<tr><td><strong>Usa BackBlaze, Restic o <code>s5cmd</code> legítimamente</strong></td><td><strong>Alta en términos de detección</strong>: su exfiltración se confunde con su respaldo</td><td><strong><code>X-2.3</code> es la medida específica</strong></td></tr>
+<tr><td><strong>Tiene concentradores de acceso remoto expuestos</strong></td><td><strong>Alta</strong></td><td><code>KJ-6</code></td></tr></tbody></table></div>
+</section>
+<section id="o-5-la-relacion-con-lynx-evaluada" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>La relación con Lynx, evaluada</h2><p><strong>Lo que sostiene el vínculo:</strong></p></div></div><ol class="rv"><li><strong>Código compartido</strong> en proporción grande, según proveedor, y un análisis titulado explícitamente como la tesis del cambio de marca. <strong>Lo leímos por referencia, no en original</strong> (<code>G-4</code>).</li><li><strong>Un operador conectado a los paneles de negociación de las dos marcas</strong>, según otro proveedor. <strong>Es la evidencia más dura del conjunto</strong>, porque es una observación de infraestructura y no una comparación de código.</li><li><strong>Curvas de actividad complementarias</strong> en el mismo trimestre según un análisis industrial: INC subiendo de 50 a 58 reclamaciones industriales mientras Lynx baja a una.</li></ol>
+<p class="rv"><strong>Lo que refuta la lectura de «sucesión»:</strong> las dos publican en 2026. Un cambio de marca implica que la anterior deja de publicar; aquí no ocurre.</p>
+<p class="rv"><strong>El juicio, en dos partes:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Afirmación</th><th>Probabilidad</th><th>Confianza</th></tr></thead><tbody>
+<tr><td>INC y Lynx comparten código y plausiblemente personal</td><td><strong>Probable</strong> <em>(55–80 %)</em></td><td><span class="pill p-sky">Moderada</span></td></tr>
+<tr><td>Lynx <strong>sucedió</strong> a INC</td><td><strong>Poco probable</strong> <em>(20–45 %)</em></td><td><span class="pill p-sky">Moderada</span></td></tr>
+<tr><td>Son dos marcas de una misma operación, con políticas declaradas distintas</td><td><strong>Probable</strong> <em>(55–80 %)</em></td><td><span class="pill p-sky">Moderada</span></td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Y por qué esto no es una discusión de taxonomía</div><p>Si son dos marcas de una operación, <strong>la detección es una y el expediente es uno</strong>. Si fueran dos operaciones distintas con código común, harían falta dos expedientes y dos seguimientos de victimología. <strong>La respuesta determina cuánto cuesta defenderse</strong>, y por eso <code>G-5</code> pide cerrar la pregunta en lugar de dejarla como curiosidad.</p></div>
+</section>
+<section id="o-6-hipotesis-alternativas-y-pre-mortem" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Hipótesis alternativas y pre-mortem</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px"><strong>H-1 — La tanda del 12-11 es un vaciado de cola de negociación</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida como principal.</strong> Las fechas de ataque están repartidas y son verosímiles</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H-2 — La tanda es relleno o reciclaje</strong></h4><p style="font-size:13.8px;margin:0"><strong>Poco probable para este actor</strong>, por las fechas repartidas y por las veinticuatro referencias de prensa del conjunto. <strong>Sí es la hipótesis principal para otros actores del lote</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px"><strong>H-3 — INC y Lynx son dos marcas de una operación</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida como principal</strong>, con la evidencia de <code>O-5</code></p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H-4 — El inventario menor que el de Akira indica menos sofisticación</strong></h4><p style="font-size:13.8px;margin:0"><strong>Descartada como inferencia.</strong> 28 técnicas frente a 48 mide <strong>documentación publicada</strong>, no capacidad. Se consigna para que nadie lo reabra</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px"><strong>H-5 — El conducto de acceso compartido existe</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida con la confianza moderada de su fuente</strong>, sin elevarla. Si se confirma, es la medida más rentable del informe</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Aprox. igual de probable · 40–60 %</div>
+<h4 style="margin:0 0 6px"><strong>H-6 — Los seis sitios caídos lo fueron por acción policial</strong></h4><p style="font-size:13.8px;margin:0"><strong>Sin evidencia.</strong> No hay ninguna fuente que lo afirme y el rastreador no fecha las bajas. Se consigna sólo para que no se asuma</p></div></div>
+<p class="rv"><strong>Pre-mortem — si este informe se equivoca, será porque:</strong></p><ol class="rv"><li><strong>Alguien citó una de las dos cifras de siete días sin su base</strong> y construyó una prioridad sobre un número que podía ser ocho veces mayor o menor.</li><li><strong>Se sumaron o promediaron los recuentos acumulados</strong> de las cuatro fuentes (<code>KJ-8</code>).</li><li><strong>Se abrió un expediente separado de Lynx</strong>, duplicando trabajo sobre la misma operación (<code>G-5</code>).</li><li><strong>Se usó la lista de exclusiones de Lynx en un análisis de riesgo</strong> y una organización de salud concluyó que no era objetivo.</li><li><strong>Se leyó el inventario menor como menor peligro</strong> (<code>H-4</code>).</li><li><strong>Se bloquearon BackBlaze, Restic o <code>s5cmd</code></strong> rompiendo el respaldo propio, en lugar de controlar el destino (<code>X-2.3</code>).</li></ol>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Analistas de SOC e ingeniería de detección</span><span><b>Horizonte:</b> días</span></div></div>
+<section id="t-1-cadena-de-intrusion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Cadena de intrusión</h2></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">De un concentrador de acceso remoto a la exfiltración disfrazada de respaldo</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">Etapa 01 · Acceso</div><h5>Borde de acceso remoto</h5><ul><li><strong>SonicWall SMA 1000</strong> según análisis industrial</li><li><strong>conducto de acceso plausiblemente compartido con otras marcas</strong></li><li><strong>primera oportunidad: parcheo de borde</strong></li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 02 · Reconocimiento</div><h5>Mapa del dominio</h5><ul><li>AdFind</li><li>Advanced IP Scanner</li><li>SoftPerfect NetScan</li><li><strong><code>Finger</code>, que es la señal más específica del expediente</strong></li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 03 · Credenciales</div><h5>Escalada</h5><ul><li>Mimikatz</li></ul></div>
+<div class="stage s-edge"><div class="st">Etapa 04 · Movimiento</div><h5>Lateral</h5><ul><li>PsExec</li><li>Bitvise SSH Client</li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 05 · Persistencia</div><h5>Administración remota</h5><ul><li>AnyDesk</li><li><strong>segunda oportunidad: herramienta no inventariada</strong></li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 06 · Exfiltración</div><h5><strong>Disfrazada de respaldo</strong></h5><ul><li>7-Zip</li><li>WinRAR para empaquetar</li><li>**BackBlaze</li><li>Restic</li><li><code>s5cmd</code></li><li>RClone</li><li>MEGA** para salir</li><li><strong>tercera oportunidad, y es la específica de este actor: destino de respaldo no autorizado</strong></li></ul></div>
+<div class="stage s-edge"><div class="st">Etapa 07 · Impacto</div><h5>Cifrado y publicación</h5><ul><li>Cifrado</li><li>y <strong>publicación en tanda</strong> semanas después (<code>E-2</code>)</li></ul></div></div><div class="dwell"><span>⏱</span><span>next</span></div></div>
+</section>
+<section id="t-2-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Acceso inicial <i>3</i></h5>
+<div class="tq" data-s="acceso inicial t1190 exploit public-facing application sonicwall sma 1000, según análisis industrial"><div class="tid">T1190</div><div class="tn">Exploit Public-Facing Application</div><div class="tp"><strong>SonicWall SMA 1000</strong>, según análisis industrial</div></div>
+<div class="tq" data-s="acceso inicial t1133 external remote services concentradores de acceso remoto"><div class="tid">T1133</div><div class="tn">External Remote Services</div><div class="tp">Concentradores de acceso remoto</div></div>
+<div class="tq" data-s="acceso inicial t1078 valid accounts conducto de acceso compartido entre marcas (kj-6), confianza moderada"><div class="tid">T1078</div><div class="tn">Valid Accounts</div><div class="tp"><strong>Conducto de acceso compartido entre marcas</strong> (<code>KJ-6</code>), confianza moderada</div></div></div>
+<div class="mcol" data-col><h5>Descubrimiento <i>3</i></h5>
+<div class="tq" data-s="descubrimiento t1087.002 account discovery: domain account adfind"><div class="tid">T1087.002</div><div class="tn">Account Discovery: Domain Account</div><div class="tp">AdFind</div></div>
+<div class="tq" data-s="descubrimiento t1046 network service discovery advanced ip scanner · softperfect netscan"><div class="tid">T1046</div><div class="tn">Network Service Discovery</div><div class="tp">Advanced IP Scanner · SoftPerfect NetScan</div></div>
+<div class="tq" data-s="descubrimiento t1087 account discovery finger — protocolo heredado, anómalo en una red moderna"><div class="tid">T1087</div><div class="tn">Account Discovery</div><div class="tp"><strong><code>Finger</code></strong> — protocolo heredado, anómalo en una red moderna</div></div></div>
+<div class="mcol" data-col><h5>Credenciales <i>1</i></h5>
+<div class="tq" data-s="credenciales t1003.001 os credential dumping: lsass memory mimikatz"><div class="tid">T1003.001</div><div class="tn">OS Credential Dumping: LSASS Memory</div><div class="tp">Mimikatz</div></div></div>
+<div class="mcol" data-col><h5>Movimiento lateral <i>2</i></h5>
+<div class="tq" data-s="movimiento lateral t1021.002 smb/windows admin shares psexec"><div class="tid">T1021.002</div><div class="tn">SMB/Windows Admin Shares</div><div class="tp">PsExec</div></div>
+<div class="tq" data-s="movimiento lateral t1021.004 remote services: ssh bitvise ssh client"><div class="tid">T1021.004</div><div class="tn">Remote Services: SSH</div><div class="tp">Bitvise SSH Client</div></div></div>
+<div class="mcol" data-col><h5>Mando y control <i>1</i></h5>
+<div class="tq" data-s="mando y control t1219 remote access software anydesk"><div class="tid">T1219</div><div class="tn">Remote Access Software</div><div class="tp">AnyDesk</div></div></div>
+<div class="mcol" data-col><h5>Recopilación <i>1</i></h5>
+<div class="tq" data-s="recopilación t1560.001 archive via utility 7-zip · winrar"><div class="tid">T1560.001</div><div class="tn">Archive via Utility</div><div class="tp">7-Zip · WinRAR</div></div></div>
+<div class="mcol" data-col><h5>Exfiltración <i>1</i></h5>
+<div class="tq" data-s="exfiltración t1567.002 exfiltration to cloud storage backblaze · restic · s5cmd · rclone · mega. tres de los cinco son herramientas de respaldo o de almacenamiento de objetos"><div class="tid">T1567.002</div><div class="tn">Exfiltration to Cloud Storage</div><div class="tp"><strong>BackBlaze · Restic · <code>s5cmd</code> · RClone · MEGA.</strong> Tres de los cinco son herramientas de respaldo o de almacenamiento de objetos</div></div></div>
+<div class="mcol" data-col><h5>Impacto <i>1</i></h5>
+<div class="tq" data-s="impacto t1486 data encrypted for impact cifrador no analizado por nosotros"><div class="tid">T1486</div><div class="tn">Data Encrypted for Impact</div><div class="tp">Cifrador no analizado por nosotros</div></div></div></div>
+</section>
+<section id="t-3-piramide-del-dolor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Pirámide del Dolor</h2></div></div>
+<div class="pyr-wrap rv">
+<div class="pyr" id="pyr">
+<div class="pyr-in" id="pyrIn"><div class="slab" data-i="0" style="--w:296px;--d:296px;--z:0px;--col:#375d9d" data-lv="Base · el nivel más barato de eludir" data-t="Trivial" data-b="&lt;strong&gt;Nulo.&lt;/strong&gt; Sin muestras" data-s="En este informe: Hash"><span>Trivial</span></div><div class="slab" data-i="1" style="--w:263px;--d:263px;--z:30px;--col:#5a7ebe" data-lv="Nivel 2 de 7" data-t="Fácil" data-b="&lt;strong&gt;Nulo.&lt;/strong&gt; No publicadas (&lt;code&gt;G-2&lt;/code&gt;)" data-s="En este informe: Direcciones IP"><span>Fácil</span></div><div class="slab" data-i="2" style="--w:230px;--d:230px;--z:60px;--col:#5a7ebe" data-lv="Nivel 3 de 7" data-t="Simple" data-b="&lt;strong&gt;Explícitamente malo aquí&lt;/strong&gt;: ocho abiertos, seis caídos (&lt;code&gt;KJ-2&lt;/code&gt;). &lt;strong&gt;Vigilar por marca&lt;/strong&gt;" data-s="En este informe: &lt;strong&gt;Dirección del sitio de filtración&lt;/strong&gt;"><span>Simple</span></div><div class="slab" data-i="3" style="--w:197px;--d:197px;--z:90px;--col:#4db99c" data-lv="Nivel 4 de 7" data-t="Molesto" data-b="&lt;strong&gt;Alto y muy específico.&lt;/strong&gt; Protocolo heredado sin uso legítimo moderno: coste de falso positivo mínimo" data-s="En este informe: &lt;strong&gt;&lt;code&gt;Finger&lt;/code&gt; en una línea de órdenes&lt;/strong&gt;"><span>Molesto</span></div><div class="slab" data-i="4" style="--w:164px;--d:164px;--z:120px;--col:#a2ae4e" data-lv="Nivel 5 de 7" data-t="Molesto" data-b="&lt;strong&gt;El indicador propio de este actor&lt;/strong&gt; (&lt;code&gt;KJ-7&lt;/code&gt;). Requiere una lista de destinos autorizados, que es trabajo de inventario" data-s="En este informe: &lt;strong&gt;Destino de egreso de respaldo no autorizado&lt;/strong&gt;"><span>Molesto</span></div><div class="slab" data-i="5" style="--w:131px;--d:131px;--z:150px;--col:#a2ae4e" data-lv="Nivel 6 de 7" data-t="Irritante" data-b="Medio. Siete de exfiltración y una de administración remota" data-s="En este informe: Inventario de herramientas"><span>Irritante</span></div><div class="slab" data-i="6" style="--w:98px;--d:98px;--z:180px;--col:#f7a400" data-lv="Cima · máximo valor defensivo" data-t="Difícil" data-b="&lt;strong&gt;Borde → descubrimiento → exfiltración por canal de respaldo → cifrado → publicación en tanda.&lt;/strong&gt; Común con el resto del lote salvo el canal de respaldo" data-s="En este informe: TTP"><span>Difícil</span></div></div></div>
+<div class="pyr-info card" id="pyrInfo" style="--pc:#f7a400"><div class="lv" id="pyrLv"></div>
+<h4 id="pyrTitle"></h4><p id="pyrBody"></p><div class="pv" id="pyrSrc"></div></div></div>
+</section>
+<section id="t-4-hipotesis-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-4</span><div><h2>Hipótesis de caza</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Hipótesis</th><th>Cómo se comprueba</th><th>Qué significa un positivo</th></tr></thead><tbody>
+<tr><td><strong>H-1</strong></td><td><strong>Hay egreso hacia un destino de respaldo o almacenamiento de objetos no autorizado</strong></td><td>Flujo de salida frente a la lista de destinos de respaldo corporativos. Buscar BackBlaze, almacenamiento S3 ajeno, Restic, <code>s5cmd</code>, RClone, MEGA</td><td><strong>La caza propia de este expediente.</strong> Exfiltración en curso, disfrazada del tráfico más aburrido que existe</td></tr>
+<tr><td><strong>H-2</strong></td><td><strong>Se ejecutó <code>finger</code> en algún equipo</strong></td><td>Líneas de órdenes de 90 días</td><td><strong>Coste de falso positivo casi nulo.</strong> Reconocimiento con una herramienta que nadie usa</td></tr>
+<tr><td><strong>H-3</strong></td><td><strong>AnyDesk presente y no inventariado</strong></td><td>Inventario frente a autorizadas</td><td>Etapa 05. <strong>Vale igual contra los ocho actores del lote</strong></td></tr>
+<tr><td><strong>H-4</strong></td><td><strong>AdFind ejecutado desde un puesto no administrativo</strong></td><td>Líneas de órdenes</td><td>Etapa 02</td></tr>
+<tr><td><strong>H-5</strong></td><td><strong>Bitvise SSH Client en un servidor Windows</strong></td><td>Inventario de software</td><td>Túnel o transferencia. Inusual en parque corporativo</td></tr>
+<tr><td><strong>H-6</strong></td><td><strong>Aparecemos en su sitio de filtración</strong></td><td>Consulta al rastreador por nuestro nombre y país</td><td>Reclamación pública. <strong>Con una víctima chilena en 435 es poco probable; la consulta es gratuita</strong></td></tr>
+<tr><td><strong>H-7</strong></td><td><strong>Concentrador de acceso remoto expuesto sin parchear</strong></td><td>Barrido del perímetro</td><td>Etapa 01, y <strong>defiende contra varias marcas a la vez</strong> (<code>KJ-6</code>)</td></tr></tbody></table></div>
+</section>
+<section id="t-5-brechas-de-visibilidad" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-5</span><div><h2>Brechas de visibilidad</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Por qué duele</th><th>Cómo se cierra</th></tr></thead><tbody>
+<tr><td><strong>V-1</strong></td><td><strong>Sin lista de destinos de respaldo autorizados</strong></td><td>Hace inejecutable <code>H-1</code>, la caza propia del expediente</td><td>Inventario de destinos + política de egreso</td></tr>
+<tr><td><strong>V-2</strong></td><td>Sin registro de líneas de órdenes 90 días</td><td><code>H-2</code> y <code>H-4</code></td><td>Auditoría de creación de procesos</td></tr>
+<tr><td><strong>V-3</strong></td><td>Sin inventario de administración remota</td><td><code>H-3</code></td><td>Inventario + política</td></tr>
+<tr><td><strong>V-4</strong></td><td>Sin visibilidad del volumen de egreso por destino</td><td>La etapa 06 pasa por un canal que parece legítimo</td><td>Métrica de bytes salientes por destino y por hora</td></tr></tbody></table></div>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span><b>Vida útil:</b> semanas</span></div></div>
+<section id="x-1-logica-de-deteccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>Lógica de detección</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># ---- 1. Exfiltración disfrazada de respaldo (la regla propia de este actor) ----
+DESTINOS_RESPALDO_OK = { ... los destinos de respaldo de la organización ... }
+HERRAMIENTAS_RESPALDO = { restic, s5cmd, rclone, backblaze, duplicati, ... }
+
+si (proceso.nombre in HERRAMIENTAS_RESPALDO or destino in PROVEEDORES_ALMACENAMIENTO)
+   y destino not in DESTINOS_RESPALDO_OK:
+    alertar &quot;EGRESO A DESTINO DE RESPALDO NO AUTORIZADO&quot;      # severidad alta
+
+# Y la variante que no depende de conocer la herramienta:
+si bytes_salientes(host, ventana=1h) &gt; umbral(host) y destino not in DESTINOS_OK:
+    alertar &quot;VOLUMEN DE EGRESO ANÓMALO A DESTINO NO AUTORIZADO&quot;
+
+# ---- 2. Finger: el indicador más específico y más barato ----
+si linea_de_ordenes coincide /\bfinger(\.exe)?\b/:
+    alertar &quot;USO DE FINGER&quot;                                   # severidad alta
+    # Protocolo de 1977. En una red moderna no tiene uso legítimo conocido.
+
+# ---- 3. AdFind desde un puesto que no es administrativo ----
+si proceso.nombre == &quot;adfind.exe&quot; y host not in PUESTOS_ADMIN:
+    alertar &quot;ENUMERACIÓN DE DIRECTORIO CON ADFIND&quot;
+
+# ---- 4. Administración remota no inventariada (común a todo el lote) ----
+si proceso.nombre in SOSPECHOSAS y proceso.nombre not in AUTORIZADAS:
+    alertar &quot;ADMINISTRACIÓN REMOTA NO AUTORIZADA&quot;</code></pre></div>
+<div class="note info rv"><div class="t">La regla 1 es la que distingue este expediente y la que cuesta trabajo</div><p>No se puede escribir sin una <strong>lista de destinos de respaldo autorizados</strong>, y esa lista no existe en la mayoría de las organizaciones porque nadie la ha necesitado nunca. <strong>Construirla es el trabajo; la regla es la parte fácil.</strong> Y conviene notar la asimetría: <strong>el adversario usa exactamente las mismas herramientas que el equipo de operaciones</strong>, de modo que la única variable discriminante es el destino.</p></div>
+</section>
+<section id="x-2-mitigaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Mitigaciones</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Medida</th><th>Dónde</th><th>Efecto</th><th>Coste</th></tr></thead><tbody>
+<tr><td><strong>X-2.1</strong></td><td><strong>Inventario de administración remota autorizada + alerta sobre el resto</strong></td><td>Puesto · SOC</td><td>Común a los ocho actores del lote</td><td>Medio una vez</td></tr>
+<tr><td><strong>X-2.2</strong></td><td><strong>Bloquear <code>finger</code> en el parque</strong></td><td>Puesto</td><td>Elimina una técnica de reconocimiento sin coste operativo</td><td><strong>Muy bajo</strong></td></tr>
+<tr><td><strong>X-2.3</strong></td><td><strong>Lista de destinos de respaldo autorizados + bloqueo del resto en egreso</strong></td><td>Perímetro</td><td><strong>La medida específica de este actor.</strong> Corta la etapa 06</td><td>Medio</td></tr>
+<tr><td><strong>X-2.4</strong></td><td><strong>Parchear concentradores de acceso remoto expuestos</strong></td><td>Perímetro</td><td>Corta la etapa 01 y <strong>defiende contra varias marcas</strong></td><td>Medio</td></tr>
+<tr><td><strong>X-2.5</strong></td><td><strong>Copias inmutables y verificadas</strong></td><td>Respaldo</td><td>Elimina la palanca del cifrado; no la de la publicación</td><td>Medio</td></tr>
+<tr><td><strong>X-2.6</strong></td><td><strong>Segundo factor resistente a suplantación en acceso remoto</strong></td><td>Identidad</td><td>Cierra la vía de cuenta válida del conducto compartido</td><td>Medio</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto</th><th>Cómo se cierra</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td><strong>G-1</strong></td><td><strong>No sabemos sobre qué fecha cuenta el ranking del sitio</strong></td><td>Heredada de <code>CTI-2026-046</code> <code>G-7</code>, y aquí es crítica: la divergencia es de ×8,3</td><td>Pregunta al operador del rastreador o su documentación</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-2</strong></td><td><strong>Sin ningún indicador de red, dominio o hash</strong></td><td>El informe no aporta nada ingerible salvo patrones</td><td>Informes de respuesta a incidentes; muestras</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-3</strong></td><td><strong>El inventario de capacidades no está verificado</strong></td><td><code>KJ-7</code> descansa en él</td><td>Muestras o análisis leído en original</td><td>2</td></tr>
+<tr><td><strong>G-4</strong></td><td><strong>La tesis del código compartido con Lynx se leyó por referencia</strong></td><td>Sostiene <code>KJ-3</code>, que es el juicio estructural del informe</td><td><strong>Leer el análisis original</strong></td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-5</strong></td><td><strong>La cartera no tiene expediente de Lynx y este informe sostiene que no debe tenerlo aparte</strong></td><td>Si la decisión es errónea, hay un actor sin cubrir</td><td>Resolver <code>O-5</code> y, si son dos marcas de una operación, <strong>añadir aquí una sección de Lynx en la versión 1.1</strong></td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-6</strong></td><td><strong>No sabemos por qué cayeron seis de sus ocho sitios</strong></td><td><code>H-6</code>. Si fue acción policial, cambia el pronóstico</td><td>Vigilar anuncios oficiales; preguntar al rastreador por las fechas de baja</td><td>2</td></tr>
+<tr><td><strong>G-7</strong></td><td><strong>Sin telemetría propia</strong></td><td>Estructural</td><td>Registros de flujo y de procesos</td><td>2</td></tr></tbody></table></div>
+<p class="rv"><strong>Disparadores de reevaluación.</strong> <code>I-1</code>: otra tanda de más de veinte publicaciones en un día, que confirmaría el patrón de <code>E-2</code>. <code>I-2</code>: que Lynx deje de publicar mientras INC sigue, lo que apoyaría la lectura de sucesión invertida. <code>I-3</code>: aparición de un aviso gubernamental, que elevaría el grado de todo el informe. <code>I-4</code>: segunda víctima chilena. <code>I-5</code>: confirmación o refutación del conducto de acceso compartido. <code>I-6</code>: caída de los dos sitios activos restantes.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — Patrones de detección · <strong>leer primero</strong></h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern egreso hacia un destino de respaldo o almacenamiento de objetos que no está en la lista de destinos autorizados el indicador propio de este expediente. su inventario incluye backblaze, restic y s5cmd además de rclone y mega: usa las mismas herramientas que el equipo de operaciones, de modo que la única variable discriminante es el destino · alta como señal; requiere la lista previa · sin caducidad alerta (x-1.1). no automatizable sin la lista de destinos autorizados"><span class="ty">pattern</span><span class="vv">Egreso hacia un destino de respaldo o almacenamiento de objetos que no está en la lista de destinos autorizados<em>El indicador propio de este expediente. Su inventario incluye BackBlaze, Restic y s5cmd además de RClone y MEGA: usa las mismas herramientas que el equipo de operaciones, de modo que la única variable discriminante es el destino · Alta como señal; requiere la lista previa · Sin caducidad</em></span><span class="pill p-mint">Alerta (X-1.1). No automatizable sin la lista de destinos autorizados</span></div>
+<div class="ioc-row" data-s="pattern ejecución de finger el indicador más específico y más barato del informe. protocolo de 1977 sin uso legítimo conocido en una red moderna. coste de falso positivo mínimo · alta · sin caducidad alerta directa, y bloqueo del binario (x-2.2)"><span class="ty">pattern</span><span class="vv">Ejecución de finger<em>El indicador más específico y más barato del informe. Protocolo de 1977 sin uso legítimo conocido en una red moderna. Coste de falso positivo mínimo · Alta · Sin caducidad</em></span><span class="pill p-mint">Alerta directa, y bloqueo del binario (X-2.2)</span></div>
+<div class="ioc-row" data-s="pattern adfind.exe ejecutado desde un equipo que no es puesto administrativo enumeración de directorio, etapa 02 · media-alta · sin caducidad alerta"><span class="ty">pattern</span><span class="vv">adfind.exe ejecutado desde un equipo que no es puesto administrativo<em>Enumeración de directorio, etapa 02 · Media-alta · Sin caducidad</em></span><span class="pill p-mint">Alerta</span></div>
+<div class="ioc-row" data-s="pattern herramienta de administración remota presente y no inventariada común a los ocho actores del lote. aquí es anydesk, una sola · alta como señal; requiere inventario · sin caducidad alerta (x-2.1)"><span class="ty">pattern</span><span class="vv">Herramienta de administración remota presente y no inventariada<em>Común a los ocho actores del lote. Aquí es AnyDesk, una sola · Alta como señal; requiere inventario · Sin caducidad</em></span><span class="pill p-mint">Alerta (X-2.1)</span></div>
+<div class="ioc-row" data-s="pattern bitvise ssh client en un servidor windows corporativo inusual en parque gestionado; túnel o transferencia cifrada · media · sin caducidad correlación"><span class="ty">pattern</span><span class="vv">Bitvise SSH Client en un servidor Windows corporativo<em>Inusual en parque gestionado; túnel o transferencia cifrada · Media · Sin caducidad</em></span><span class="pill p-mint">Correlación</span></div>
+<div class="ioc-row" data-s="pattern tanda de publicaciones en su sitio de filtración: más de veinte entradas en un día no es un indicador de compromiso: es un indicador de inteligencia. señala vencimiento de plazos en bloque, y por tanto que hubo negociaciones fracasadas semanas antes · alta · sin caducidad como método vigilancia (i-1)"><span class="ty">pattern</span><span class="vv">Tanda de publicaciones en su sitio de filtración: más de veinte entradas en un día<em>No es un indicador de compromiso: es un indicador de inteligencia. Señala vencimiento de plazos en bloque, y por tanto que hubo negociaciones fracasadas semanas antes · Alta · Sin caducidad como método</em></span><span class="pill p-mint">Vigilancia (I-1)</span></div></div>
+<h3 class="rv">A.2 — Herramientas del inventario · ⚠ <strong>NO BLOQUEAR LAS LEGÍTIMAS</strong></h3>
+<div class="note warn rv"><p>⚠ <strong>Tres de sus siete herramientas de exfiltración son productos de respaldo o de almacenamiento de objetos</strong>, y es muy probable que el equipo de operaciones use alguna. Van con tipo <code>herramienta</code> para que <strong>no entren en los agregados planos</strong>. <strong>Bloquear Restic, <code>s5cmd</code> o BackBlaze puede romper el respaldo de la propia organización</strong>, que es exactamente lo que no se quiere antes de un incidente de cifrado. La medida es <code>X-2.3</code>: controlar el <strong>destino</strong>.</p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="herramienta backblaze · restic · s5cmd productos de respaldo y almacenamiento de objetos usados para exfiltrar. la peculiaridad de kj-7 · alta como dato publicado · sin caducidad no bloquear. control por destino (x-2.3)"><span class="ty">herramienta</span><span class="vv">BackBlaze · Restic · s5cmd<em>Productos de respaldo y almacenamiento de objetos usados para exfiltrar. La peculiaridad de KJ-7 · Alta como dato publicado · Sin caducidad</em></span><span class="pill p-amber">NO bloquear. Control por destino (X-2.3)</span></div>
+<div class="ioc-row" data-s="herramienta rclone · mega · 7-zip · winrar exfiltración y empaquetado. comunes a casi todo el lote · alta como dato · sin caducidad no bloquear. control por destino"><span class="ty">herramienta</span><span class="vv">RClone · MEGA · 7-Zip · WinRAR<em>Exfiltración y empaquetado. Comunes a casi todo el lote · Alta como dato · Sin caducidad</em></span><span class="pill p-amber">NO bloquear. Control por destino</span></div>
+<div class="ioc-row" data-s="herramienta anydesk administración remota. una sola, frente a las seis de akira · alta como dato · sin caducidad inventario y alerta contextual"><span class="ty">herramienta</span><span class="vv">AnyDesk<em>Administración remota. Una sola, frente a las seis de Akira · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Inventario y alerta contextual</span></div>
+<div class="ioc-row" data-s="herramienta adfind · advanced ip scanner · softperfect netscan descubrimiento · alta como dato · sin caducidad detección por comportamiento"><span class="ty">herramienta</span><span class="vv">AdFind · Advanced IP Scanner · SoftPerfect NetScan<em>Descubrimiento · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Detección por comportamiento</span></div>
+<div class="ioc-row" data-s="herramienta bitvise ssh client túnel o transferencia · alta como dato · sin caducidad inventario"><span class="ty">herramienta</span><span class="vv">Bitvise SSH Client<em>Túnel o transferencia · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Inventario</span></div>
+<div class="ioc-row" data-s="herramienta mimikatz la única inequívocamente ofensiva del inventario. su presencia en un puesto corporativo es anómala por sí misma · alta como dato · sin caducidad alerta directa"><span class="ty">herramienta</span><span class="vv">Mimikatz<em>La única inequívocamente ofensiva del inventario. Su presencia en un puesto corporativo es anómala por sí misma · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Alerta directa</span></div>
+<div class="ioc-row" data-s="filename finger.exe protocolo heredado sin uso legítimo moderno. va como filename y sí es razonable bloquearlo: a diferencia de las demás, nada depende de él · alta · sin caducidad bloqueo (x-2.2)"><span class="ty">filename</span><span class="vv">finger.exe<em>Protocolo heredado sin uso legítimo moderno. Va como filename y sí es razonable bloquearlo: a diferencia de las demás, nada depende de él · Alta · Sin caducidad</em></span><span class="pill p-mint">Bloqueo (X-2.2)</span></div></div>
+<h3 class="rv">A.3 — Victimología</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 435 víctimas reclamadas en 2026 · 73 en 30 días (por publicación) · 7 u 58 en 7 días según la base la curva de kj-1. reclamaciones, no brechas verificadas · alta como recuento · 60 días medición, declarando siempre la base"><span class="ty">cartera</span><span class="vv">435 víctimas reclamadas en 2026 · 73 en 30 días (por publicación) · 7 u 58 en 7 días según la base<em>La curva de KJ-1. Reclamaciones, no brechas verificadas · Alta como recuento · 60 días</em></span><span class="pill p-mint">Medición, declarando siempre la base</span></div>
+<div class="ioc-row" data-s="cartera 50 entradas publicadas el 2026-11-12 el 11,5 % de su año en un día. corroborado por un recuento semanal independiente · alta · histórico análisis"><span class="ty">cartera</span><span class="vv">50 entradas publicadas el 2026-11-12<em>El 11,5 % de su año en un día. Corroborado por un recuento semanal independiente · Alta · Histórico</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera 22 víctimas latinoamericanas (5,1 %): br 9 · mx 6 · ar 3 · cl 1 · cr 1 · pa 1 · co 1 la exposición regional de kj-5. tercera del lote · moderada · 60 días priorización"><span class="ty">cartera</span><span class="vv">22 víctimas latinoamericanas (5,1 %): BR 9 · MX 6 · AR 3 · CL 1 · CR 1 · PA 1 · CO 1<em>La exposición regional de KJ-5. Tercera del lote · Moderada · 60 días</em></span><span class="pill p-mint">Priorización</span></div>
+<div class="ioc-row" data-s="cartera ocho sitios de filtración registrados, dos activos kj-2. las direcciones no se transcriben: caducan, y publicar una dirección de sitio de filtración no aporta defensa · alta · volátil vigilancia por marca"><span class="ty">cartera</span><span class="vv">Ocho sitios de filtración registrados, dos activos<em>KJ-2. Las direcciones no se transcriben: caducan, y publicar una dirección de sitio de filtración no aporta defensa · Alta · Volátil</em></span><span class="pill p-mint">Vigilancia por marca</span></div>
+<div class="ioc-row" data-s="cartera cero registros con cifra de rescate y cero con tamaño de datos declarado, de 435 el cero es informativo: a diferencia de otros actores del lote, no publica magnitudes · alta · — —"><span class="ty">cartera</span><span class="vv">Cero registros con cifra de rescate y cero con tamaño de datos declarado, de 435<em>El cero es informativo: a diferencia de otros actores del lote, no publica magnitudes · Alta · —</em></span><span class="pill p-mint">—</span></div>
+<div class="ioc-row" data-s="cartera no se transcribe ningún nombre de víctima decisión de higiene de la serie: son organizaciones atacadas, y nombrarlas amplifica la publicidad del extorsionador sin aportar defensa · — · — no ingerir"><span class="ty">cartera</span><span class="vv">No se transcribe ningún nombre de víctima<em>Decisión de higiene de la serie: son organizaciones atacadas, y nombrarlas amplifica la publicidad del extorsionador sin aportar defensa · — · —</em></span><span class="pill p-mint">No ingerir</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Disciplina</th><th>Fiab.</th><th>Cred.</th><th>Grado</th><th>Notas</th></tr></thead><tbody>
+<tr><td><strong><code>B-1</code> — Medición propia</strong> sobre la interfaz pública del rastreador: 435 registros de 2026, dos bases de conteo, perfil diario de noviembre, países y sectores</td><td>OSINT técnico · <strong>medición propia</strong></td><td><strong>B</strong></td><td><strong>2</strong></td><td><strong>Medición propia</strong></td><td>Base de <code>KJ-1</code>, <code>KJ-2</code>, <code>KJ-5</code> y <code>KJ-8</code>. Sesgos: fuente única; reclamaciones y no brechas; <strong>y este actor publica en tandas</strong>, lo que hace a toda métrica de ventana corta inestable por construcción</td></tr>
+<tr><td><strong><code>B-2</code> — Análisis industrial trimestral</strong> (Dragos, 3.º trimestre de 2026)</td><td>OSINT comercial · <strong>análisis sectorial</strong></td><td><strong>B</strong></td><td><strong>2</strong></td><td>Proveedor</td><td>Fuente de las reclamaciones industriales 50 → 58, de la explotación de <strong>SonicWall SMA 1000</strong>, y del <strong>conducto de acceso compartido con confianza moderada declarada</strong>. <strong>Respetamos ese grado y no lo elevamos</strong> (<code>KJ-6</code>). Sesgo: su foco es industrial, de modo que sus cifras no son del total</td></tr>
+<tr><td><strong><code>B-3</code> — Perfiles y recuentos de proveedor</strong> (ProvenData, The Hacker News, NHIMG, Dexpose, SecurityArsenal)</td><td>OSINT comercial y prensa</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Proveedor</td><td>Fuente de los recuentos acumulados —<strong>991 al 9 de noviembre de 2026</strong>, «más de 830 desde 2023» en junio—, del <strong>~15 % de sanidad</strong>, de las víctimas documentadas de sanidad pública y administración local, y de las <strong>reglas de exclusión atribuidas a Lynx</strong>. <strong>Las cifras no son homogéneas y no se reconcilian</strong> (<code>KJ-8</code>)</td></tr>
+<tr><td><strong><code>B-4</code> — Tesis del cambio de marca Lynx/INC</strong> (Unit 42, por referencia) y <strong>operador en los dos paneles</strong> (SOCRadar, por referencia)</td><td>OSINT comercial, <strong>leído por referencia</strong></td><td><strong>B</strong></td><td><strong>3</strong> <em>(por la vía)</em></td><td>Proveedor, por cita</td><td><strong>Sostiene <code>KJ-3</code>, que es el juicio estructural del informe, y no lo leímos en original.</strong> La observación del operador conectado a los dos paneles es la evidencia más dura del conjunto precisamente porque es de infraestructura y no de código. Es <code>G-4</code></td></tr>
+<tr><td><strong><code>B-5</code> — Recuento semanal de tercero</strong> (Scrutex, semana del 9 al 15 de noviembre)</td><td>OSINT · compilación</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Recuento</td><td><strong>Corrobora la tanda de <code>KJ-1</code> sin compartir método</strong>: cincuenta publicaciones esa semana frente a una la anterior. Es la mejor corroboración independiente del informe</td></tr>
+<tr><td><strong><code>B-6</code> — Inventario de capacidades del rastreador</strong></td><td>OSINT · compilación técnica</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Proveedor</td><td>28 técnicas en 13 tácticas y las herramientas de <code>A.2</code>. <strong>No verificado</strong> (<code>G-3</code>)</td></tr></tbody></table></div>
+<div class="note info rv"><p><strong>Lo que esta estructura de fuentes tiene de débil, dicho sin rodeos: el juicio más original del informe —que Lynx no es el sucesor de INC sino su marca hermana— descansa en una fuente leída por referencia</strong> (<code>B-4</code>) <strong>más una inferencia propia sobre datos de actividad</strong> (<code>B-1</code>). La inferencia es sólida, porque la simultaneidad de publicaciones es un hecho verificable en los datos; pero el vínculo de código no lo leímos. <strong><code>G-4</code> es por eso prioridad 1</strong>, al mismo nivel que la brecha de indicadores.</p></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Probabilidad estimativa</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn">Casi con certeza (≥99 %)</span><span class="bt"><i data-w="100"></i></span><span class="bv">99</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy probable (80–95 %)</span><span class="bt"><i data-w="89"></i></span><span class="bv">88</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Probable (55–80 %)</span><span class="bt"><i data-w="69"></i></span><span class="bv">68</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Aproximadamente igual de probable (40–60 %)</span><span class="bt"><i data-w="51"></i></span><span class="bv">50</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Poco probable (20–45 %)</span><span class="bt"><i data-w="32"></i></span><span class="bv">32</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy poco probable (5–20 %)</span><span class="bt"><i data-w="12"></i></span><span class="bv">12</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Remoto (≤5 %)</span><span class="bt"><i data-w="4"></i></span><span class="bv">4</span></div></div></div>
+<p class="rv"><strong>Confianza</strong>: <strong>alta</strong> —fuentes múltiples corroboradas, método expuesto—; <strong>moderada</strong> —fuente única de calidad, o inferencia propia sobre datos verificables—; <strong>baja</strong> —dato ausente o inferencia indirecta—.</p>
+<div class="note info rv"><p><strong>La regla que este informe añade al léxico, y es de aritmética antes que de estimación: una cifra de ventana temporal no es un dato hasta que se declara su base.</strong></p><p>«INC Ransom tuvo 58 víctimas esta semana» y «INC Ransom tuvo 7 víctimas esta semana» son <strong>las dos verdaderas</strong>, difieren en un factor de 8,3, y la diferencia no es de estimación ni de confianza: <strong>es de qué se cuenta</strong>. Una cuenta publicaciones, la otra fechas de ataque declaradas por el adversario.</p><p><strong>Por tanto, en esta serie, ninguna cifra de ventana corta se publica sola.</strong> Y cuando se cita el número del ranking original, se cita como lo que es: el valor que el sitio mostraba a una hora concreta, cuya base <strong>no conocemos</strong> (<code>G-1</code>).</p></div>
+</section>
+<section id="anexo-d-como-evaluar-la-afirmacion-b-es-el-cambio-de-marca-de-a" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo evaluar la afirmación «B es el cambio de marca de A»</h2></div></div>
+<p class="rv"><strong>El problema.</strong> «Lynx es el cambio de marca de INC Ransom» es la clase de afirmación que circula sin discusión porque es útil: resume, ahorra un expediente y suena resuelta. <strong>Y es caro equivocarse en las dos direcciones</strong>: si son la misma operación y abrimos dos expedientes, duplicamos trabajo; si son dos y abrimos uno, dejamos un actor sin cubrir.</p>
+<p class="rv"><strong>La prueba que casi nadie hace y que resuelve la mayoría de los casos en cinco minutos:</strong></p>
+<div class="note info rv"><div class="t">¿Publican las dos marcas víctimas en el mismo período?</div></div>
+<p class="rv">Si la respuesta es sí, <strong>no es un cambio de marca</strong>. Un cambio de marca implica abandono de la anterior; dos marcas publicando a la vez son dos marcas, con independencia de cuánto código compartan. En este caso la respuesta es sí, y por eso <code>KJ-3</code> reencuadra la afirmación en lugar de aceptarla.</p>
+<p class="rv"><strong>Los cinco criterios, en orden de poder discriminante:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Criterio</th><th>Qué indica</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td><strong>¿Hay solapamiento temporal de publicaciones?</strong></td><td><strong>El criterio decisivo y el más barato.</strong> Solapamiento ⇒ no es sucesión. Se comprueba con dos consultas a un rastreador</td></tr>
+<tr><td><strong>2</strong></td><td><strong>¿Hay evidencia de infraestructura compartida o de un mismo operador en los dos paneles?</strong></td><td><strong>Es la evidencia más dura posible</strong>, mejor que la comparación de código: el código se copia y se filtra, una sesión de operador no</td></tr>
+<tr><td><strong>3</strong></td><td><strong>¿Comparten base de código?</strong></td><td><strong>Necesario y no suficiente.</strong> Un cifrador filtrado produce decenas de marcas sin relación entre sí — es el error que <code>CTI-2026-035</code> documentó con cuatro cosas llamadas «Medusa»</td></tr>
+<tr><td><strong>4</strong></td><td><strong>¿Declaran políticas distintas?</strong></td><td><strong>Si sí, y comparten código, las políticas son marketing</strong> (<code>KJ-4</code>). Y es además un indicio de que la separación de marcas es deliberada y no accidental</td></tr>
+<tr><td><strong>5</strong></td><td><strong>¿Divergen sus curvas de actividad?</strong></td><td>Curvas complementarias apuntan a reparto interno; curvas independientes, a operaciones distintas</td></tr></tbody></table></div>
+<p class="rv"><strong>Las cuatro clases que resultan:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Clase</th><th>Señales</th><th>Qué merece</th></tr></thead><tbody>
+<tr><td><strong>Sucesión</strong></td><td>Sin solapamiento temporal · código compartido</td><td><strong>Un expediente</strong>, con la anterior como capítulo histórico</td></tr>
+<tr><td><strong>Marcas hermanas</strong></td><td><strong>Solapamiento</strong> · código compartido · políticas distintas</td><td><strong>Un expediente con dos secciones.</strong> Es el caso de INC y Lynx</td></tr>
+<tr><td><strong>Linaje sin relación operativa</strong></td><td>Código compartido por filtración · sin infraestructura común</td><td><strong>Dos expedientes.</strong> El código común no es un vínculo</td></tr>
+<tr><td><strong>Coincidencia de nombre</strong></td><td>Nada compartido salvo el nombre</td><td><strong>Desambiguación explícita</strong>, como la de <code>CTI-2026-035</code></td></tr></tbody></table></div>
+<p class="rv"><strong>Las tres advertencias de uso.</strong></p><ol class="rv"><li><strong>El criterio 1 sólo refuta la sucesión; no establece el vínculo.</strong> Dos marcas que publican a la vez pueden ser dos operaciones sin ninguna relación. El vínculo lo dan los criterios 2 y 3.</li><li><strong>El criterio 3 es el que más se usa y el que menos vale.</strong> La comparación de código es el instrumento favorito de los informes de proveedor porque es demostrable, y es precisamente el que produce más falsos vínculos: <strong>un cifrador filtrado genera descendencia sin parentesco operativo.</strong></li><li><strong>Y el criterio 4 tiene un uso que va más allá de la taxonomía:</strong> cuando una operación mantiene dos marcas y sólo una declara exclusiones éticas, <strong>se puede medir el valor real de esas exclusiones mirando la victimología de la otra.</strong> Es la contribución de <code>KJ-4</code> y se generaliza: <strong>la forma de evaluar una lista de exclusiones no es leerla, es buscar la misma capacidad operando sin ella.</strong></li></ol>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div><ul class="rv"><li><strong>ICD 203</strong>, con la adición del <code>Anexo C</code>: <strong>una cifra de ventana temporal no es un dato hasta que se declara su base de conteo</strong>, porque aquí las dos bases difieren en un factor de 8,3.</li><li><strong>Código Admiralty/OTAN</strong>, con el grado <strong>medición propia</strong> de <code>CTI-2026-044</code> y la degradación por vía de <code>B-4</code>, que sostiene el juicio estructural y se leyó por referencia.</li><li><strong>MITRE ATT&amp;CK v18</strong> (<code>T-2</code>), con <code>T1567.002</code> como la técnica central del expediente: <strong>tres de sus cinco herramientas de exfiltración a la nube son productos de respaldo</strong>.</li><li><strong>Pirámide del Dolor</strong> (Bianco), en <code>T-3</code>, con el nivel «simple» —la dirección del sitio de filtración— marcado <strong>explícitamente como inútil para este actor</strong>: ocho abiertos, seis caídos.</li><li><strong>ACH y pre-mortem</strong> (<code>O-6</code>), con <code>H-4</code> —que el inventario menor indique menos sofisticación— <strong>descartada como inferencia y consignada para que no se reabra</strong>.</li><li><strong>Evaluación de una afirmación de cambio de marca</strong>, propio de este informe (<code>Anexo D</code>): cinco criterios, cuatro clases, y la prueba de cinco minutos del solapamiento temporal.</li><li><strong>Lectura de listas de exclusión declaradas</strong>, desarrollado en <code>KJ-4</code> y generalizado en la advertencia 3 del <code>Anexo D</code>, continuando lo que <code>CTI-2026-042</code> estableció.</li></ul>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2><p>Las tablas <code>cti:ioc</code> alimentan <code>ioc_index.csv</code>. <strong>Seis advertencias:</strong></p></div></div><ol class="rv"><li><strong>⚠ Las herramientas de <code>A.2</code> llevan tipo <code>herramienta</code> y NO entran en los agregados planos.</strong> Y aquí la advertencia es más aguda que en <code>CTI-2026-046</code>: <strong>tres de ellas son productos de respaldo</strong>, y bloquearlas puede romper el respaldo de la propia organización justo antes de un incidente de cifrado. La medida es el control por <strong>destino</strong> (<code>X-2.3</code>).</li><li><strong><code>finger.exe</code> es la excepción y va como <code>filename</code></strong>: a diferencia de las demás, <strong>nada legítimo depende de él en una red moderna</strong>, y por eso sí es razonable bloquearlo.</li><li><strong>Toda cifra de ventana corta lleva su base de conteo.</strong> <code>7</code> y <code>58</code> describen la misma semana. Extraer una sin la base produce una afirmación indeterminada (<code>Anexo C</code>).</li><li><strong>Los recuentos acumulados de las fuentes externas no se reconcilian y no se deben sumar</strong>: 991, 830+, 200+ y 435 son cuatro métodos y cuatro fechas (<code>KJ-8</code>).</li><li><strong>Las direcciones de los sitios de filtración no se transcriben.</strong> Ocho abiertos y seis caídos: una dirección aquí sería basura en semanas, y publicarla no aporta defensa.</li><li><strong>Y este informe no aporta ni una dirección IP, ni un dominio, ni un hash.</strong> Es <code>G-2</code>, está declarado, y lo que aporta son <strong>patrones, dos reglas de detección específicas y una decisión de encuadre</strong> sobre Lynx.</li></ol>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-19</td><td>Emisión inicial, segunda de la serie <code>046</code>–<code>053</code>. Incluye: la <strong>tanda del 12 de noviembre medida</strong> —cincuenta entradas en un día, el 11,5 % de su año— y la <strong>divergencia de ×8,3 entre las dos bases de conteo</strong>, con corroboración independiente de un recuento semanal de tercero (<code>KJ-1</code>, <code>O-3</code>); la <strong>rotación de infraestructura de publicación cuantificada</strong>: ocho sitios abiertos y dos en pie (<code>KJ-2</code>); la <strong>refutación de que Lynx sea el sucesor de INC</strong> mediante el solapamiento temporal de publicaciones, y su reencuadre como marcas hermanas (<code>KJ-3</code>, <code>O-5</code>); la <strong>contradicción entre las exclusiones declaradas de una marca y la victimología de la otra</strong>, con la generalización de que una lista de exclusiones se evalúa buscando la misma capacidad operando sin ella (<code>KJ-4</code>, <code>E-3</code>); la <strong>exposición regional con nombre de país</strong> —22 latinoamericanas, Brasil 9, Chile 1— (<code>KJ-5</code>, <code>E-4</code>); la <strong>peculiaridad de exfiltrar con herramientas de respaldo</strong> y la regla de detección por destino que se sigue (<code>KJ-7</code>, <code>X-1</code>); <strong><code>finger</code> como el indicador más específico y barato del expediente</strong>; las <strong>cuatro cifras acumuladas incompatibles consignadas sin reconciliar</strong> (<code>KJ-8</code>); y el método del <code>Anexo D</code> para evaluar una afirmación de cambio de marca</td><td>Célula CTI</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota sobre esta emisión</div><p>Es el informe de la serie <strong>con la brecha más incómoda</strong>: su juicio más original —el reencuadre de Lynx— descansa en parte en una fuente que no leímos en original (<code>G-4</code>, prioridad 1). La parte que sí es nuestra, el solapamiento temporal de publicaciones, <strong>es verificable por cualquiera con dos consultas al mismo rastreador</strong>, y se publica precisamente para que se pueda atacar.</p></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div><ol class="rv"><li><strong>¿Existe una lista de destinos de respaldo autorizados?</strong> Es <code>X-2.3</code>, <code>H-1</code> y la decisión 2 de <code>E-5</code>. <strong>Es la única medida de este informe específica de este actor</strong>, y si no existe, <strong>ésa es la conclusión del informe en esa organización</strong>: su exfiltración será indistinguible de su respaldo.</li><li><strong>¿Se ha buscado <code>finger</code> en los registros de líneas de órdenes?</strong> Es <code>H-2</code>, cuesta una consulta y el coste de falso positivo es casi nulo. <strong>Es el mejor indicador por unidad de esfuerzo de los dos informes de la serie emitidos hasta ahora.</strong></li><li><strong>¿Se citó una cifra de siete días sin decir sobre qué fecha se cuenta?</strong> Es el riesgo 1 del pre-mortem. <strong>7 y 58 describen la misma semana.</strong></li><li><strong>¿Se abrió, o se piensa abrir, un expediente separado de Lynx?</strong> Es <code>G-5</code>. Si son dos marcas de una operación —y <code>O-5</code> lo valora como probable— <strong>ese expediente duplica trabajo y la detección ya está aquí</strong>.</li><li><strong>¿Alguien usó las exclusiones declaradas de Lynx en un análisis de riesgo?</strong> Es <code>KJ-4</code>. Una organización de salud que concluya que no es objetivo porque una marca excluye la sanidad <strong>estará mirando la marca equivocada de la misma operación</strong>.</li><li><strong>Si somos prestador de salud o administración pública: ¿se ha asumido que no hay exclusión?</strong> ~15 % de sanidad, con un servicio de salud público y un ayuntamiento documentados.</li><li><strong>Si somos brasileños: ¿está este actor en el plan?</strong> Nueve de sus veintidós víctimas regionales son brasileñas, y es su país regional principal.</li><li><strong>¿Puede alguien leer en original el análisis del vínculo de código con Lynx?</strong> Es <code>G-4</code> y es prioridad 1. <strong>Sostiene el juicio más original del informe y es lo único que no verificamos.</strong></li><li><strong>Y la pregunta de método:</strong> el <code>Anexo D</code> sostiene que la comparación de código es el criterio más usado y el que menos vale para establecer un vínculo entre marcas, porque un cifrador filtrado genera descendencia sin parentesco. <strong>¿Alguien tiene un caso en que el código compartido fuera el único indicio y resultara ser la misma operación?</strong> Un contraejemplo así obligaría a reordenar los cinco criterios.</li></ol>
+<p class="rv"><em>Fin del informe <code>CTI-2026-047</code> v1.0.</em></p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-047 · v1.0 · 2026-11-19</strong> · caduca 2027-02-19</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Elaborado con fuentes abiertas y con medición propia sobre la interfaz pública de consulta de un rastreador de sitios de filtración. No contiene telemetría de la organización emisora ni datos de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades de §3. Se mantiene PAP:AMBER: las herramientas del Anexo A.3 son legítimas y de uso administrativo normal, y no deben cargarse en bloqueo.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

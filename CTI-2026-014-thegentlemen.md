@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-014"
-version: "1.3"
+version: "1.4"
 tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -10,7 +10,7 @@ actor: "TheGentlemen · Storm-2697"
 fecha: "2026-09-15"
 caduca: "2026-12-15"
 autor: "Célula CTI"
-distribucion: "Actualizado el 2026-11-19 con las dos reivindicaciones de alto perfil de noviembre de 2026 (§E-2.2): la de NVIDIA, listada sin prueba y negada por la compañía, y la de DirecTV, que no aparece en ninguna fuente. Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
+distribucion: "Actualizado el 2026-11-19 con medición propia de victimología (§E-2.3: 1.020 víctimas reclamadas en 2026 y 129 latinoamericanas, 9 de ellas chilenas) y con las dos reivindicaciones de alto perfil del mes (§E-2.2): la de NVIDIA, listada sin prueba y negada por la compañía, y la de DirecTV, que no aparece en ninguna fuente. Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-014
@@ -86,9 +86,14 @@ pero no sus TTP**.
 **Confianza: moderada.** *Base:* precedente de LockBit y ALPHV; razonamiento por analogía, no por observación directa.
 
 **KJ-6.** Las cifras públicas **subestiman el volumen real de víctimas en torno a
-un 45 %**: un servidor C2 incautado apuntaba a más de 1.570 víctimas frente a las
-~868 publicadas en el sitio de filtración.
-**Confianza: baja.** *Base:* fuente única, sin corroboración. Se incluye por su relevancia para el cálculo de riesgo, marcado explícitamente como no confirmado.
+un 54 %**: un servidor C2 incautado apuntaba a más de 1.570 víctimas frente a las
+**1.020 publicadas en el sitio de filtración a 19-11-2026** —la cifra original de
+este juicio eran ~868 y un 45 %, medida en septiembre—. **Y en la versión 1.4 el
+dato gana corroboración**: la ficha del propio rastreador que medimos recoge por
+su cuenta que **un servidor de mando y control comprometido en 2026 reveló más de
+1.570 víctimas vinculadas**, lo que convierte la fuente única original en dos
+fuentes concordantes sobre la misma cifra.
+**Confianza: elevada de baja a MODERADA en la versión 1.4**, por la concordancia de dos fuentes sobre la cifra de 1.570 y porque el denominador es ahora medición propia. *Base:* la fuente original más la ficha del rastreador. **Sigue sin confirmación independiente del contenido de ese servidor**, y el juicio es sobre un recuento ajeno, no sobre brechas verificadas.
 
 **KJ-7.** **TheGentlemen opera en Latinoamérica con víctimas confirmadas en al
 menos doce países, Chile incluido**, donde reivindicó el ataque a un organismo
@@ -107,6 +112,10 @@ desarrollador—; (c) observación de acceso inicial por phishing masivo, que
 contradiría el modelo actual centrado en borde de red.
 
 **KJ-8.** **Las dos reivindicaciones de alto perfil de noviembre de 2026 no están al mismo nivel, y ninguna de las dos es una brecha confirmada.** El **18 de noviembre de 2026** el grupo añadió a **NVIDIA** a su sitio de filtración con una cuenta atrás de unas 234 horas —vencimiento el 28 de noviembre— **sin publicar ni un fichero de muestra, ni un documento, ni una cifra de rescate**; y la compañía declaró que **no ha encontrado indicio de que sus sistemas o redes se vieran afectados**, añadiendo que investiga **un incidente separado que podría haber afectado a uno de sus proveedores de servicios**. De **DirecTV**, en cambio, **no hay ninguna fuente**: no aparece en el sitio de filtración según la cobertura localizada, ni en los rastreadores, ni en prensa especializada. Valoramos **casi con certeza** *(≥99 %)* que el listado de NVIDIA exista, **poco probable** *(20–45 %)* que corresponda a un compromiso directo de esa compañía, y **muy poco probable** *(5–20 %)* que la reivindicación sobre DirecTV exista como tal. **Confianza: alta para los hechos del listado; moderada para la lectura del alcance.** *Base:* fuentes 23 a 26, más la declaración de la propia compañía. **Y el dato que más pesa en el juicio es del historial del propio actor**: una de las fuentes señala que **el grupo ha exagerado reivindicaciones y ha identificado mal a organizaciones objetivo con anterioridad**. §E-2.2 desarrolla la lectura y qué hacer con ella.
+
+**KJ-9.** **Medición propia del 19-11-2026: es el actor de mayor dispersión geográfica de toda la cartera —90 países— y el segundo de mayor exposición regional, con 129 víctimas latinoamericanas y nueve chilenas.** Sobre **1.020 víctimas reclamadas en 2026**, el reparto latinoamericano es: **Brasil 36**, México 24, Argentina 18, Colombia 11, **Chile 9**, Perú 8, Ecuador 5, Venezuela 4, Puerto Rico 4, Belice 3, Paraguay 2, y una cada uno en Bolivia, Nicaragua, Guatemala, Panamá y República Dominicana — **dieciséis países de la región**. Y **46 de sus registros llevan referencia de prensa**. Valoramos **casi con certeza** *(≥99 %)* las cifras, con la salvedad de que son reclamaciones y no brechas verificadas. **Confianza: alta para el recuento.** *Y la comparación que importa, sobre los mismos datos y el mismo día:* **Qilin tiene 20 víctimas chilenas frente a nuestras 9**, de modo que **en exposición chilena este actor es el segundo y no el primero**; pero **en número de países de la región alcanzados —dieciséis— no tiene rival**. *Consecuencia:* para una organización con operación multinacional en la región, **es el actor con más probabilidad de alcanzar alguna de sus filiales** (§E-2.3).
+
+**KJ-10.** **Su inventario de capacidades publicado tiene 55 técnicas en 13 tácticas, y añade tres elementos que el informe original no recogía y que cambian una hipótesis de caza.** El primero: **una cadena completa de relevo de NTLM** —`PetitPotam`, `ntlmrelayx`, `RelayKing`, `Responder`— que es un camino a administración de dominio **sin explotar ninguna vulnerabilidad de software**. El segundo: **`Velociraptor`, una herramienta legítima de respuesta a incidentes y análisis forense**, usada ofensivamente, lo que significa que **su presencia en un servidor puede parecer trabajo del propio equipo de seguridad**. El tercero: **`Censys` y `Shodan`** como herramientas de reconocimiento, es decir, **servicios de escaneo de Internet usados para elegir objetivo antes de tocarlos**. Valoramos **alta** la confianza en el inventario como dato publicado y **no lo verificamos**. *Consecuencia:* se añade la hipótesis de caza `H-13` (`T-4`) sobre relevo de NTLM, y una advertencia operativa: **`Velociraptor` en un servidor que no esté en el inventario de respuesta a incidentes es una anomalía, no una tranquilidad.**
 
 ---
 
@@ -290,6 +299,85 @@ La emisión original de este informe situaba ~868 víctimas acumuladas a septiem
 | 4 | **Devolver la corrección sobre DirecTV** a quien aportó la afirmación, con lo que se buscó | CTI | Cero |
 
 **Disparadores de reevaluación añadidos en esta versión.** `I-a`: aparición de un listado de **DirecTV** en el sitio de filtración del grupo o en un rastreador, que refutaría la parte negativa de `KJ-8`. `I-b`: publicación de datos tras el vencimiento del 28 de noviembre, **con identificación de a quién pertenecen**. `I-c`: confirmación por NVIDIA o por el proveedor afectado del alcance real del incidente de cadena de suministro. `I-d`: retirada del listado sin publicación, que sugeriría pago y cerraría la vía pública.
+
+## E-2.3 Medición propia del 19 de noviembre de 2026
+
+> **Esta sección se añade en la versión 1.4.** Las cifras de §E-2 son de
+> proveedor y de septiembre de 2026. Las que siguen son **medición propia**
+> sobre un rastreador público, tomadas el 19-11-2026, y permiten comparar a
+> este actor con el resto de la cartera **sobre el mismo conjunto de datos y la
+> misma metodología**.
+
+<!-- cti:stats -->
+
+| Cifra | Qué mide | Contexto |
+|---|---|---|
+| `1.020` | Víctimas reclamadas en 2026 | Frente a ~868 medidas en septiembre. **Segunda del top 10 tras Qilin (1.221)** |
+| `129` | **Víctimas latinoamericanas** | **El 12,6 %: la proporción regional más alta del top 10** |
+| `16` | **Países de la región alcanzados** | **Sin rival en la cartera.** Qilin alcanza 13 |
+| `9` | Víctimas chilenas | **Segundo tras Qilin, que tiene 20** |
+| `90` | Países alcanzados en total | **La mayor dispersión geográfica de toda la cartera** |
+| `46` | Registros con referencia de prensa | Indicio de confirmación por terceros |
+| `55` | Técnicas documentadas, en 13 tácticas | Segundo inventario del top 10 tras Qilin (71) |
+| `41 %` | Entradas con fecha de ataque igual a la de publicación | **Declara fecha anterior y distinta en el 59 %** |
+| `19 / 41` | Víctimas de 7 días por fecha de ataque / por publicación | **×2,2** (`CTI-2026-046` §O-3.1) |
+| `50` | Pico de publicaciones en un día (31-10-2026) | **Publica en tandas**, como INC Ransom |
+
+### El reparto regional: dieciséis países
+
+| País | 2026 | | País | 2026 |
+|---|---|---|---|---|
+| **Brasil** | **36** | | Puerto Rico | 4 |
+| **México** | **24** | | Belice | 3 |
+| **Argentina** | **18** | | Paraguay | 2 |
+| Colombia | 11 | | Bolivia · Nicaragua · Guatemala · Panamá · R. Dominicana | 1 cada uno |
+| **Chile** | **9** | | | |
+| Perú | 8 | | **Total** | **129** |
+| Ecuador | 5 | | | |
+| Venezuela | 4 | | | |
+
+### Lo que la comparación con Qilin establece, y corrige una impresión
+
+| Dimensión | **TheGentlemen** | **Qilin** | Quién gana |
+|---|---|---|---|
+| Víctimas 2026 | 1.020 | **1.221** | Qilin |
+| **Proporción latinoamericana** | **12,6 %** | 10,0 % | **TheGentlemen** |
+| Víctimas latinoamericanas | 129 | 122 | TheGentlemen, por poco |
+| **Víctimas chilenas** | 9 | **20** | **Qilin, con diferencia** |
+| **Países de la región alcanzados** | **16** | 13 | **TheGentlemen** |
+| Países en total | **90** | 81 | **TheGentlemen** |
+| Técnicas documentadas | 55 | **71** | Qilin |
+| Ritmo de publicación | **En tandas** (50 en un día) | **Sostenido** (máx. 19) | — |
+
+> **La corrección de impresión que esta tabla obliga a hacer, y conviene
+> decirla: en exposición CHILENA este actor es el segundo, no el primero.**
+> Veinte víctimas chilenas de Qilin frente a nueve de éste. La versión 1.1 de
+> este informe incorporó el eje chileno y lo trató como el dato regional
+> central; **con datos comparables, el dato regional central de este actor no
+> es Chile: es la amplitud.** Dieciséis países de la región y noventa en total
+> —las dos cifras más altas de la cartera— describen una operación que **no
+> elige geografía**, y por eso alcanza a dieciséis países donde Qilin alcanza
+> trece.
+>
+> **La consecuencia práctica es para una organización multinacional: contra
+> Qilin, la pregunta es si se opera en Chile o México; contra este actor, la
+> pregunta es si se opera en algún sitio.**
+
+### Lo que el inventario añade al expediente
+
+Tres elementos del inventario publicado no estaban en las versiones anteriores:
+
+| Elemento | Qué es | Qué obliga |
+|---|---|---|
+| **`PetitPotam` · `ntlmrelayx` · `RelayKing` · `Responder`** | **Una cadena completa de relevo de NTLM**: camino a administración de dominio **sin explotar ninguna vulnerabilidad de software** | **Nueva hipótesis de caza `H-13`** (`T-4`). Y las medidas son de configuración: firma de LDAP, protección extendida de la autenticación, y deshabilitar NTLM donde se pueda |
+| **`Velociraptor`** | **Herramienta legítima de respuesta a incidentes y análisis forense**, usada ofensivamente | **Su presencia en un servidor puede parecer trabajo del propio equipo de seguridad.** La medida es un **inventario de en qué equipos está autorizada**, y alerta fuera de él |
+| **`Censys` · `Shodan`** | **Servicios de escaneo de Internet**, usados para reconocimiento | **El reconocimiento ocurre sin tocar nuestra red y no deja rastro en nuestros registros.** La única contramedida es **reducir la superficie que esos servicios indexan**, que es una medida de higiene de perímetro |
+
+> **La fila de `Velociraptor` es la que más conviene retener, porque invierte
+> una intuición.** La presencia de una herramienta forense en un servidor
+> comprometido se suele leer como señal de que **alguien está investigando**.
+> Aquí puede ser señal de que **alguien está dentro**, y la única forma de
+> distinguirlo es un inventario de dónde la ha desplegado el propio equipo.
 
 ## E-2.1 Foco regional: Chile y Latinoamérica
 
@@ -814,6 +902,22 @@ cuentas creadas en el periodo del incidente anterior, herramientas de RMM no
 inventariadas, claves SSH y tokens no rotados. La re-victimización está
 documentada en el escenario chileno.
 
+### H-13 · Relevo de NTLM *(añadida en la versión 1.4)*
+
+| Campo | Contenido |
+|---|---|
+| **Hipótesis** | Un adversario ha forzado autenticación de una cuenta de equipo y la ha relevado contra un servicio que no exige firma, obteniendo privilegios sin explotar ninguna vulnerabilidad de software |
+| **Por qué** | `KJ-10`: el inventario publicado incluye **`PetitPotam`, `ntlmrelayx`, `RelayKing` y `Responder`**, que son la cadena completa |
+| **Cómo se comprueba** | Autenticaciones NTLM entrantes hacia servicios de directorio o de certificados **desde equipos que no son servidores**; conexiones a `MS-EFSRPC` no esperadas; solicitudes de certificado a nombre de cuentas de equipo |
+| **Qué significa un positivo** | **Camino abierto a administración de dominio.** Incidente de prioridad máxima |
+| **Medidas, y son de configuración y no de producto** | Firma de LDAP y de SMB obligatoria · **protección extendida de la autenticación** en los servicios de certificados y de directorio · deshabilitar NTLM donde la compatibilidad lo permita · auditoría de solicitudes de certificado por cuenta de equipo |
+
+> **Es la hipótesis de caza más rentable que esta actualización añade, y por una
+> razón concreta: la cadena de relevo de NTLM no depende de que falte un
+> parche.** Funciona contra sistemas completamente actualizados cuya
+> configuración no exija firma, de modo que **un programa de parcheo impecable
+> no la cierra**. Las cuatro medidas de la fila anterior sí.
+
 ## T-5. Brechas de visibilidad que hay que cerrar primero
 
 | Brecha | Por qué importa aquí |
@@ -1239,6 +1343,7 @@ de A.3.
 |---|---|---|
 | 1.0 | 2026-09-15 | Emisión inicial. Todo-fuente externa; §O-4 pendiente de telemetría propia |
 | 1.1 | 2026-09-15 | **Incorporación del eje regional Chile/LATAM** (fuentes 13–17): nuevo KJ-7; §E-2.1 con contexto chileno y obligación regulatoria; §O-6.1 con cronología regional y contraste con la alerta `AIA26-00012` del CSIRT Nacional; hipótesis de caza H-10 a H-12; detecciones D-13 y D-14; decisiones E-f a E-h; brechas G-8 a G-11. **Cambio de juicio:** el acceso inicial deja de considerarse exclusivamente por explotación de CVE — se añade la vía de cuenta válida con credenciales de infostealer como concurrente y no cubierta por el parcheo |
+| 1.4 | 2026-11-19 | **Medición propia de victimología** sobre un rastreador público (§E-2.3, nuevos `KJ-9` y `KJ-10`): **1.020 víctimas reclamadas en 2026, 129 latinoamericanas en dieciséis países de la región y 90 países en total** —las dos cifras de dispersión más altas de la cartera—, con nueve víctimas chilenas. **Y una corrección de impresión que la comparación obliga a hacer: en exposición chilena este actor es el SEGUNDO**, con nueve frente a las veinte de Qilin; su dato regional central no es Chile sino **la amplitud**. **Se eleva `KJ-6` de confianza baja a moderada** y se recalcula su cifra del 45 % al **54 %**, porque el denominador es ahora medición propia (1.020 en lugar de ~868) y porque **la ficha del rastreador corrobora por su cuenta la cifra de más de 1.570 víctimas reveladas por un servidor de mando y control comprometido**, convirtiendo una fuente única en dos concordantes. Se añaden además tres elementos del inventario publicado que no estaban: **la cadena completa de relevo de NTLM** —de la que sale la nueva hipótesis de caza `H-13`, que **funciona contra sistemas totalmente parcheados** y se cierra con configuración—, **`Velociraptor` usado ofensivamente**, cuya presencia puede confundirse con trabajo del propio equipo de seguridad, y **`Censys` y `Shodan`** como reconocimiento que no deja rastro en nuestros registros. **La caducidad no se extiende**: sigue en 2026-12-15 | Célula CTI |
 | 1.3 | 2026-11-19 | **Actualización de victimología con las dos reivindicaciones de alto perfil de noviembre de 2026** (§E-2.2, nuevo `KJ-8`, cuatro filas nuevas en §O-6, fuentes 23–26). **La de NVIDIA está listada y no está confirmada**: sin ficheros de muestra, sin documentos y sin cifra de rescate, con negativa específica de la compañía sobre sus propios sistemas y con dos proveedores suyos listados semanas antes — de donde sale la hipótesis de que el grupo tenga material de un proveedor y haya listado la marca del cliente. **La de DirecTV no aparece en ninguna fuente** y se consigna como no corroborada con lo que se buscó, en lugar de omitirse. Se añaden los disparadores `I-a` a `I-d`. **La caducidad NO se extiende**: sigue en 2026-12-15, porque esta versión añade victimología y no revalida los juicios técnicos del documento, que son de septiembre de 2026 y necesitan revisión propia. **Sin cambios en los indicadores del Anexo A** |
 | 1.2 | 2026-11-16 | **Reclasificación de TLP:AMBER a TLP:CLEAR** por decisión del emisor, para publicación en el repositorio abierto `cti_daily`. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. **Sin cambios en los juicios analíticos ni en los indicadores.** Se mantiene PAP:AMBER |
 

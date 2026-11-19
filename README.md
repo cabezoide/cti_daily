@@ -16,8 +16,8 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 | Informe | Tema | Tipo | Versión de | Ver. | TLP | Vigencia | Formatos |
 |---|---|---|---|---|---|---|---|
-| `CTI-2026-014` | TheGentlemen · Storm-2697 | Perfil de actor | 2026-11-19 | 1.3 | `TLP:CLEAR` | vigente · 26 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
-| `CTI-2026-015` | Qilin · Agenda · Storm-1934 | Perfil de actor | 2026-11-16 | 1.1 | `TLP:CLEAR` | vigente · 27 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
+| `CTI-2026-014` | TheGentlemen · Storm-2697 | Perfil de actor | 2026-11-19 | 1.4 | `TLP:CLEAR` | vigente · 26 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
+| `CTI-2026-015` | Qilin · Agenda · Storm-1934 | Perfil de actor | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 27 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
 | `CTI-2026-016` | LockBit 5.0 · ChuongDong | Perfil de actor | 2026-11-16 | 1.1 | `TLP:CLEAR` | vigente · 27 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
 | `CTI-2026-017` | FamousSparrow · SparroWocky | Perfil de actor | 2026-11-17 | 1.2 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
 | `CTI-2026-018` | Abuso de dominios de primer nivel | Evaluación estratégica | 2026-11-15 | 1.0 | `TLP:CLEAR` | vigente · 88 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
@@ -48,6 +48,14 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-043` | Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor | Perfil de operación sin atribuir | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
 | `CTI-2026-044` | Redes de bots de DDoS y de proxy residencial · 33 familias | Perfil de ecosistema | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-044-redes-bots.md) · [html](CTI-2026-044-redes-bots.html) |
 | `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
+| `CTI-2026-046` | Akira · Akira_v2 · Megazord · (linaje discutido) Conti | Perfil de operación de extorsión | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-046-akira.md) · [html](CTI-2026-046-akira.html) |
+| `CTI-2026-047` | INC Ransom · Inc Ransom · (marca hermana) Lynx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 92 d | [md](CTI-2026-047-incransom.md) · [html](CTI-2026-047-incransom.html) |
+| `CTI-2026-048` | n0n · N0n | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-048-n0n.md) · [html](CTI-2026-048-n0n.html) |
+| `CTI-2026-049` | settra · Settra | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-049-settra.md) · [html](CTI-2026-049-settra.html) |
+| `CTI-2026-050` | Vortex | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-050-vortex.md) · [html](CTI-2026-050-vortex.html) |
+| `CTI-2026-051` | PixelLeaks · Pixelleaks | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-051-pixelleaks.md) · [html](CTI-2026-051-pixelleaks.html) |
+| `CTI-2026-052` | Curious Worm · curiousworm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 61 d | [md](CTI-2026-052-curiousworm.md) · [html](CTI-2026-052-curiousworm.html) |
+| `CTI-2026-053` | SoulGroup · Soulgroup | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 30 d | [md](CTI-2026-053-soulgroup.md) · [html](CTI-2026-053-soulgroup.html) |
 
 ### Agregados de indicadores
 
@@ -57,19 +65,19 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
 | [`ioc_url.txt`](ioc_url.txt) | 321 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-043` |
 | [`ioc_hash.txt`](ioc_hash.txt) | 463 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-041`, `CTI-2026-043` |
-| [`ioc_index.csv`](ioc_index.csv) | 3113 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045` |
+| [`ioc_index.csv`](ioc_index.csv) | 3216 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-046`, `CTI-2026-047`, `CTI-2026-048`, `CTI-2026-049`, `CTI-2026-050`, `CTI-2026-051`, `CTI-2026-052`, `CTI-2026-053` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 32 |
+| Informes publicados | 40 |
 | Indicadores en listas planas | 1218 |
-| Indicadores en el índice con contexto | 3113 |
+| Indicadores en el índice con contexto | 3216 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-19 |
-| Nodos del mapa de relaciones | 285, con 370 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Nodos del mapa de relaciones | 298, con 399 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 

@@ -2641,6 +2641,135 @@
    "d": "La red de bots con el récord mundial de DDoS publicado: 31,4 Tbps —las fuentes discrepan entre noviembre y diciembre de 2025—, de clase TurboMirai, con estimaciones de 1 a 4 millones de dispositivos. Kimwolf es la variante para Android que usa su funcionalidad de DDoS. Y el dato que importa para nuestro expediente: GIRÓ DE DDoS A PROXY RESIDENCIAL, con un aviso de un CSIRT nacional documentándolo, lo que explica que el feed la parta en Aisuru-DDoS y Aisuru-Proxy con etiquetas distintas",
    "a": "proveedor",
    "af": "CONTRASTE MEDIDO: a la red del récord mundial le medimos sólo 792 eventos acumulados, frente a los 444.728 de Liso. Hubo acción policial en el primer trimestre de 2026 contra Aisuru, KimWolf, JackSkid y Mossad, y Cloudflare asocia a ella la caída de ataques sobre 1 Tbps de 805 a 251 entre trimestres. El récord mide el pico, no la actividad"
+  },
+  {
+   "id": "akira",
+   "l": "Akira · Akira_v2",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-046",
+   "d": "La operación con el MEJOR respaldo documental del lote de ocho y la MENOR relevancia regional: 1,7 % de víctimas latinoamericanas y NINGUNA chilena de 420 registros de 2026. Está en declive medido y corroborado por dos métodos: la media mensual cayó de ~50 (ene-jun) a ~29 (jul-oct), un 43 %, y sólo el 10 % de su año está en los últimos 30 días. Cuarta del año por volumen y DÉCIMA de la semana — un programa que la priorice por su cifra acumulada estará defendiéndose del Akira de marzo",
+   "a": "oficial",
+   "af": "Aviso conjunto del FBI, CISA y socios (nov. 2025): 244,17 M USD en ingresos a finales de septiembre de 2025, variante Akira_v2, y explotación de CVE-2024-40766 (SonicWall) con alcance a un entorno Nutanix. El linaje con Conti lo trata como VALORACIÓN ANALÍTICA y no como hecho, y este informe respeta ese grado"
+  },
+  {
+   "id": "incransom",
+   "l": "INC Ransom (y Lynx)",
+   "t": "crimen",
+   "p": "latam",
+   "r": "CTI-2026-047",
+   "d": "Publicó CINCUENTA entradas en un solo día, el 12-11-2026 — el 11,5 % de su año en una jornada — de modo que su actividad semanal vale 7 o 58 según se cuente por fecha de ataque o por publicación: una divergencia de x8,3, la mayor del lote. Ha abierto OCHO sitios de filtración y sólo dos siguen en pie. 435 víctimas en 2026 y 22 latinoamericanas (5,1 %), con Brasil a la cabeza (9) y una chilena. Exfiltra con BackBlaze, Restic y s5cmd: herramientas de RESPALDO, así que su exfiltración se confunde con el respaldo del equipo de operaciones",
+   "a": "proveedor",
+   "af": "«Lynx es el cambio de marca de INC» es FALSO en el punto que importa: las dos marcas publican en 2026 a la vez. Son marcas hermanas. Y a Lynx se le atribuyen reglas que excluyen sanidad y gobierno mientras INC ataca un servicio de salud público y un ayuntamiento con la misma base de código: una lista de exclusiones es marketing, y se evalúa buscando la misma capacidad operando sin ella"
+  },
+  {
+   "id": "n0nactor",
+   "l": "n0n",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-048",
+   "d": "PRIMER puesto del ranking de siete días y el actor con la evidencia MÁS DÉBIL de los ocho. De sus 259 entradas, 59 llevan nombre anónimo tipo «Company #241» y sólo 22 traen dominio: el 8,5 % permite saber de quién habla. Las 259 traen captura de pantalla y NINGUNA declara tamaño de datos, cifra de rescate ni referencia de prensa. No está establecido que tenga cifrador: tres proveedores dicen tres cosas incompatibles. Su sitio tiene una categoría «honors» para las entradas que dice haber borrado tras el pago",
+   "a": "proveedor",
+   "af": "CORROBORACIÓN INDEPENDIENTE de nuestra medición: Bitdefender contó 106 organizaciones donde el rastreador contaba 150 el mismo día, valoró «poco más de veinte» atacadas, y registró que el grupo RETIRÓ 126 de sus propias entradas. Pero no es ficticio: una fuga de su espacio de trabajo dio 23 organizaciones identificadas, 15 publicadas y 4 comprometidas sin publicar"
+  },
+  {
+   "id": "settraactor",
+   "l": "settra",
+   "t": "crimen",
+   "p": "latam",
+   "r": "CTI-2026-049",
+   "d": "HALLAZGO PROPIO NO DOCUMENTADO EN NINGUNA FUENTE: su palanca de extorsión no es la empresa sino el PROPIETARIO COMO PERSONA FÍSICA — sus entradas enumeran número de identificación fiscal, domicilio particular, teléfono y correo personales y declaraciones fiscales del dueño, además de documentos de terminación de empleados y acuerdos de confidencialidad entre compañías. Eso traslada la decisión de Seguridad a Legal: el daño no se puede restaurar y alcanza a terceros que no son parte",
+   "a": "-",
+   "af": "Y en el otro extremo es el catálogo MÁS VERIFICABLE de los nuevos: 116 de 116 entradas con dominio, y el ÚNICO del lote que declara fecha de ataque distinta de la de publicación en el 100 % de sus entradas. Un extorsionador que apunta al propietario necesita ser creído por él, así que la precisión del catálogo no es escrúpulo: es un instrumento de la misma presión. Once sitios de filtración en cinco meses, tres en pie"
+  },
+  {
+   "id": "vortexactor",
+   "l": "Vortex",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-050",
+   "d": "No cifra nada: CERO menciones al cifrado en sus 35 entradas. Reclama TENENCIA de datos y, en una cuarta parte de su catálogo, capturas completas de inquilinos de Microsoft 365 con cifras precisas de ficheros, gigabytes y cuentas de directorio. Si fuera cierto, el vector es la IDENTIDAD y no el puesto: una lista de 20.000 cuentas con sus grupos no se saca de un portátil. La defensa es acceso condicional, segundo factor y revisión de consentimientos — no EDR, y la copia de seguridad no defiende de nada",
+   "a": "-",
+   "af": "HALLAZGO PROPIO: su catálogo se duplica y se recicla. 35 entradas para 26 descripciones distintas, con al menos cuatro víctimas listadas DOS VECES bajo dos nombres y dos grupos de tres víctimas distintas compartiendo descripción idéntica. Corrobora de forma independiente la advertencia de un tercero de que sus listados incluyen reclamaciones no verificadas o fabricadas. Nació con el 40 % del catálogo ya cargado"
+  },
+  {
+   "id": "pixelleaksactor",
+   "l": "PixelLeaks",
+   "t": "crimen",
+   "p": "latam",
+   "r": "CTI-2026-051",
+   "d": "El único del lote sin NI UNA captura de pantalla en sus 34 entradas, y a la vez el de mayor especificidad descriptiva: describe el material por tablas y con cardinalidades exactas — 818.849 transacciones de monedero, 7.630.625 detalles de transacción — lo que es difícil de inventar sin haber visto el esquema. HALLAZGO PROPIO: escribe como un REGULADOR, no como un extorsionador. «Esta divulgación se refiere a un conjunto verificado de registros de…», sin amenaza, sin precio y sin plazo en la prosa",
+   "a": "-",
+   "af": "Su audiencia probable son clientes, reguladores y prensa, no el TI de la víctima — y contra ese envoltorio el silencio parece confirmación. Tres víctimas mexicanas (8,8 %, la mayor proporción latinoamericana de los seis actores nuevos), una con plazo declarado al 22-11-2026. Y el actor que oculta la fecha del acceso la entrega sin darse cuenta: si la cardinalidad declarada es menor que la actual, la diferencia dice cuándo se tomó la copia"
+  },
+  {
+   "id": "curiouswormactor",
+   "l": "Curious Worm",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-052",
+   "d": "Invierte la secuencia de la extorsión: NO tiene fase de presión previa — publica primero y extorsiona después — de modo que la víctima no recibe aviso ni cuenta atrás y se entera por la publicación. No hay ventana de negociación y, lo que importa más, NO HAY VENTANA PARA DECIDIR. Nueve de sus 18 entradas se publicaron el día de apertura y las 18 tienen fecha de ataque igual a la de publicación. 44 % de su catálogo es sanidad estadounidense, con sistemas hospitalarios entre sus primeras reclamaciones",
+   "a": "-",
+   "af": "Un proveedor sugiere que el catálogo podría estar SEMBRADO con datos reciclados, y ninguno de nuestros cuatro datos propios discrimina entre eso y una operación real: el juicio queda honestamente indeciso al 40-60 %. La vía más probable de resolverlo no es técnica: un medio especializado en notificación de brechas publicó sobre él a los dos días, y ese tipo de medio contrasta con las organizaciones afectadas"
+  },
+  {
+   "id": "soulgroupactor",
+   "l": "SoulGroup",
+   "t": "crimen",
+   "p": "latam",
+   "r": "CTI-2026-053",
+   "d": "Apareció el mismo día de emisión del informe con VEINTISÉIS entradas publicadas en unos TRECE MINUTOS, todas con fecha de ataque igual a la de publicación. Cero fuentes independientes, cero TTP, cero herramientas, cero descripción. Cumple UN criterio de siete del triaje de CTI-2026-042: clase «reclamación sin respaldo, pendiente de evidencia», lo que merece una línea en una lista de vigilancia y no un expediente. Es el único de los seis actores nuevos con una posible víctima ARGENTINA",
+   "a": "-",
+   "af": "HALLAZGO DE MÉTODO: la portada del rastreador listaba sus víctimas mientras su propia API respondía «no se encontraron víctimas para el grupo», y la instantánea de recientes venía de caché. Un analista que consulte sólo la API concluirá que un actor con 26 reclamaciones no existe. El informe no es un perfil: es el registro de línea base que permitirá, a los 14 días, decidir si esto fue una operación o un escaparate"
+  },
+  {
+   "id": "dosfechas",
+   "l": "Las dos fechas de una víctima",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-046",
+   "d": "Un registro de sitio de filtración tiene DOS fechas: la de publicación y la de ATAQUE DECLARADA por el adversario. Una ventana de siete días se puede contar sobre cualquiera de las dos y las dos son defendibles, pero divergen hasta x8,3: INC Ransom da 7 por fecha de ataque y 58 por publicación, porque publicó 50 entradas el 12-11. Y la base que usa el ranking del sitio NO es determinable desde fuera. Ninguna cifra de ventana corta se publica sin declarar sobre qué fecha se cuenta",
+   "a": "-",
+   "af": "El eje resultó además discriminante por sí mismo: settra declara fecha de ataque distinta en el 100 % de sus entradas, pixelleaks y curious worm en NINGUNA. Esa diferencia separó, en la serie, a la operación mejor evidenciada de las dos peores. Y el agregado del ecosistema es una media ponderada por una mezcla inestable: hay que medir por familia, no en agregado"
+  },
+  {
+   "id": "escalaprueba",
+   "l": "Graduar la prueba de una entrada",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-048",
+   "d": "Ocho niveles, de menor a mayor: (0) anuncio anónimo con sector y país; (1) nombre sin dominio; (2) DOMINIO, que es el umbral mínimo de una reclamación utilizable; (3) captura de pantalla; (4) magnitud declarada; (5) inventario descriptivo por tablas y sistemas; (6) muestra publicada; (7) confirmación de un tercero. Lo contraintuitivo: el nivel 3 ENGAÑA más que ninguno —una captura no se puede fechar ni atribuir y es trivial de fabricar— y el 5 vale más, porque describir un esquema exige haberlo visto",
+   "a": "-",
+   "af": "Hay que publicar la DISTRIBUCIÓN del catálogo por niveles antes que su recuento total, que es la cifra menos informativa que se puede extraer de un sitio de filtración y la única que suele citarse. n0n: 59 entradas en nivel 0 y cero en nivel 7. PixelLeaks salta el 3 y llega al 5; Vortex hace lo contrario"
+  },
+  {
+   "id": "higienepersonas",
+   "l": "Datos de personas en un catálogo",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-049",
+   "d": "Cinco reglas, porque un informe de inteligencia NO es un vehículo neutral: añade alcance y credibilidad. (1) El patrón se documenta, el dato no se reproduce. (2) Ni censurado: la censura parcial es reversible por correlación y no aporta nada que la descripción del patrón no diera. (3) No se nombra a la víctima cuando la entrada asocia personas concretas con ella: el daño es por identificabilidad. (4) Se identifica la fuente para que el patrón sea verificable en origen, y se asume que el lector no puede comprobarlo en el documento. (5) Se consigna el daño a terceros que no son parte",
+   "a": "-",
+   "af": "Generaliza decisiones puntuales de CTI-2026-041 (registros de empleados de una energética) y 042 (registros de pacientes de un hospital). Objeción razonable: «sin el dato el hallazgo no es verificable». Es cierto y es el coste declarado: un informe que ilustra un hallazgo con el domicilio de una persona compra verificabilidad con el daño de un tercero, y es una mala compra"
+  },
+  {
+   "id": "protocolo24h",
+   "l": "Las primeras 24 horas de un actor",
+   "t": "marco",
+   "p": "-",
+   "r": "CTI-2026-053",
+   "d": "Lo único útil que un externo puede hacer con un sitio de filtración recién aparecido no es analizarlo: es FOTOGRAFIARLO, porque las propiedades que decidirán si era una operación o un escaparate son propiedades del CAMBIO, y el cambio se mide contra una línea base que pasadas unas horas ya no se puede obtener. Seis campos en diez minutos: número de entradas con hora exacta, cadencia de la tanda inicial, proporción con fecha de ataque distinta, dispersión sectorial y geográfica, la lista de ceros, y el canal de contacto con la víctima",
+   "a": "-",
+   "af": "Regla de decisión a los 14 días, y su valor POR OMISIÓN ES CERRAR: una lista de vigilancia que sólo crece deja de ser una lista de vigilancia. El coste de cerrar una línea que luego importa es un expediente tardío; el de mantener cuarenta abiertas es no mirar ninguna"
+  },
+  {
+   "id": "cvesonicwall",
+   "l": "CVE-2024-40766 (SonicWall)",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-046",
+   "d": "Vulnerabilidad de SonicWall cuya explotación por Akira CONFIRMA el aviso conjunto del FBI, CISA y socios, con alcance a un entorno de virtualización Nutanix. Es el único indicador de CTI-2026-046 con respaldo gubernamental y el único con una acción inequívoca: parchear. Y es la misma doctrina que CTI-2026-028 documentó para otro actor — el hipervisor no suele tener agente, y el camino hasta él suele empezar en un dispositivo de borde sin parchear",
+   "a": "oficial"
   }
  ],
  "aristas": [
@@ -4493,6 +4622,151 @@
    "aisuru",
    "cereal2",
    "vinculado"
+  ],
+  [
+   "akira",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "incransom",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "n0nactor",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "settraactor",
+   "raas",
+   "agrupadoen"
+  ],
+  [
+   "incransom",
+   "dosfechas",
+   "contiene"
+  ],
+  [
+   "akira",
+   "dosfechas",
+   "vinculado"
+  ],
+  [
+   "n0nactor",
+   "escalaprueba",
+   "vinculado"
+  ],
+  [
+   "settraactor",
+   "escalaprueba",
+   "vinculado"
+  ],
+  [
+   "pixelleaksactor",
+   "escalaprueba",
+   "vinculado"
+  ],
+  [
+   "vortexactor",
+   "escalaprueba",
+   "vinculado"
+  ],
+  [
+   "settraactor",
+   "higienepersonas",
+   "contiene"
+  ],
+  [
+   "soulgroupactor",
+   "protocolo24h",
+   "contiene"
+  ],
+  [
+   "soulgroupactor",
+   "triajenombres",
+   "vinculado"
+  ],
+  [
+   "curiouswormactor",
+   "triajenombres",
+   "vinculado"
+  ],
+  [
+   "vortexactor",
+   "curiouswormactor",
+   "noesalias"
+  ],
+  [
+   "n0nactor",
+   "vortexactor",
+   "noesalias"
+  ],
+  [
+   "incransom",
+   "checkmate",
+   "vinculado"
+  ],
+  [
+   "akira",
+   "qilin",
+   "noesalias"
+  ],
+  [
+   "incransom",
+   "qilin",
+   "noesalias"
+  ],
+  [
+   "settraactor",
+   "relatoextorsion",
+   "vinculado"
+  ],
+  [
+   "higienepersonas",
+   "davila",
+   "vinculado"
+  ],
+  [
+   "curiouswormactor",
+   "soulgroupactor",
+   "noesalias"
+  ],
+  [
+   "pixelleaksactor",
+   "soulgroupactor",
+   "noesalias"
+  ],
+  [
+   "akira",
+   "cvesonicwall",
+   "explota"
+  ],
+  [
+   "akira",
+   "gentlemen",
+   "noesalias"
+  ],
+  [
+   "akira",
+   "blacksuit",
+   "noesalias"
+  ],
+  [
+   "incransom",
+   "gentlemen",
+   "noesalias"
+  ],
+  [
+   "vortexactor",
+   "accesoporpais",
+   "noesalias"
+  ],
+  [
+   "n0nactor",
+   "gentlemen",
+   "noesalias"
   ]
  ]
 }

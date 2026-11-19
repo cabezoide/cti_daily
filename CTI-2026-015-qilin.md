@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-015"
-version: "1.1"
+version: "1.2"
 tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -10,7 +10,7 @@ actor: "Qilin · Agenda · Storm-1934"
 fecha: "2026-09-16"
 caduca: "2026-12-16"
 autor: "Célula CTI"
-"Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
+distribucion: "Actualizado el 2026-11-19 con medición propia de victimología sobre un rastreador público: 1.221 víctimas reclamadas en 2026 y 122 latinoamericanas, de las cuales 20 chilenas (§E-2.1). Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor. Elaborado sin telemetría propia ni datos de cliente: no contiene información identificable de la organización emisora ni de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades metodológicas del informe. Se mantiene PAP:AMBER: los indicadores del Anexo A llevan acción permitida individual y no deben cargarse en bloqueo automático sin verificación previa contra telemetría propia."
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-015
@@ -139,6 +139,10 @@ bajo la misma marca —indicaría cambio de desarrollador—; (c) observación d
 inicial por phishing masivo o por cadena de suministro de software, que contradiría
 el modelo actual centrado en borde de red y credenciales; (d) la publicación de un
 descifrador gratuito, que colapsaría la economía del programa de afiliados.
+
+**KJ-9.** **Medición propia del 19-11-2026, y confirma el juicio central de este informe con cifras que no teníamos: Qilin es la operación de extorsión más activa del año y la de mayor exposición chilena medida de toda esta cartera.** Sobre 1.221 víctimas reclamadas en 2026 en un rastreador público —**la cifra más alta de cualquier actor que hayamos medido**—, **122 son latinoamericanas (10,0 %)** y **veinte son chilenas**. El reparto regional completo: México 34, Argentina 27, **Chile 20**, Colombia 12, Brasil 10, Perú 9, Ecuador 2, Paraguay 2, Puerto Rico 2, y una cada uno en Uruguay, Costa Rica, Venezuela y Panamá. Alcanza **81 países** y **52 de sus registros llevan referencia de prensa**. Valoramos **casi con certeza** *(≥99 %)* las cifras medidas, con la salvedad de que **son reclamaciones de sitio de filtración y no brechas verificadas**. **Confianza: alta para el recuento; moderada para su interpretación como brechas.** *Y el dato que más cambia la postura:* **veinte víctimas chilenas es el doble que las nueve de `CTI-2026-014` y dos órdenes de magnitud más que las de los ocho actores de la serie `046`–`053`** — de los cuales el de mayor exposición chilena tiene **una**. **Para una organización chilena, Qilin no es una amenaza del panorama: es la amenaza del panorama.**
+
+**KJ-10.** **Y tiene el inventario de capacidades más amplio de los 426 grupos que el rastreador sigue: 71 técnicas en 15 tácticas.** Entre lo que ese inventario añade a este informe hay tres elementos que merecen nombre propio: **Evilginx**, un marco de suplantación con intermediación que **sirve para derrotar el segundo factor**; **el actualizador del sensor en la nube de un producto de seguridad conocido, `upd.exe`, usado como herramienta**; y un **controlador de gestión de energía de un fabricante de portátiles empleado como controlador vulnerable firmado**. Valoramos **alta** la confianza en el inventario como dato publicado, y **no lo verificamos**. *Consecuencia, y es la que reordena las medidas de este expediente:* **si usa Evilginx, el segundo factor basado en códigos no protege el acceso inicial**, y la medida correcta es **segundo factor resistente a suplantación** —claves de paso o certificados de dispositivo—, no cualquier segundo factor (`E-2.1`).
 
 ---
 
@@ -313,6 +317,79 @@ Difor (23 de agosto). A ello se suma un incidente de efecto significativo contra
 entidad estratégica no identificada, notificado por el CSIRT Nacional el 29 de enero
 de 2026. Una fuente comercial adicional reporta a AGUNSA como víctima en 2026; **no
 ha sido posible corroborar la fecha ni el alcance, y se consigna con confianza baja**.
+
+## E-2.1 Medición propia del 19 de noviembre de 2026
+
+> **Esta sección se añade en la versión 1.2.** Las cifras de `E-2` son de
+> proveedor y de mediados de 2026; las que siguen son **medición propia** sobre
+> un rastreador público, tomadas el 19-11-2026, y permiten por primera vez
+> comparar a Qilin con el resto de la cartera **sobre el mismo conjunto de
+> datos y con la misma metodología**.
+
+<!-- cti:stats -->
+
+| Cifra | Qué mide | Contexto |
+|---|---|---|
+| `1.221` | Víctimas reclamadas en 2026 | **La cifra más alta de cualquier actor medido en esta cartera** |
+| `122` | **Víctimas latinoamericanas** | **El 10,0 %** |
+| `20` | **Víctimas chilenas** | **La mayor exposición chilena medida de toda la cartera** |
+| `81` | Países alcanzados | Segundo en dispersión geográfica tras TheGentlemen (90) |
+| `52` | Registros con referencia de prensa | Indicio de confirmación por terceros |
+| `71` | **Técnicas documentadas, en 15 tácticas** | **El inventario más amplio de los 426 grupos del rastreador** |
+| `4 → 1` | Sitios de filtración abiertos → activos | Rotación moderada |
+| `93 %` | Entradas con fecha de ataque igual a la de publicación | **Publica casi siempre el mismo día** |
+| `24 / 24` | Víctimas de 7 días por fecha de ataque / por publicación | **Las dos bases coinciden** (`CTI-2026-046` §O-3.1) |
+| `19` | Pico de publicaciones en un día (16-08-2026) | **Ritmo sostenido, sin tandas grandes** |
+
+### El reparto regional, con nombre de país
+
+| País | Víctimas 2026 | | País | Víctimas 2026 |
+|---|---|---|---|---|
+| **México** | **34** | | Ecuador | 2 |
+| **Argentina** | **27** | | Paraguay | 2 |
+| **Chile** | **20** | | Puerto Rico | 2 |
+| Colombia | 12 | | Uruguay · Costa Rica · Venezuela · Panamá | 1 cada uno |
+| Brasil | 10 | | | |
+| Perú | 9 | | **Total** | **122** |
+
+### La comparación que sitúa a este actor, y es la razón de esta actualización
+
+**Todas las filas salen del mismo rastreador, el mismo día, con la misma metodología**, lo que las hace comparables entre sí —y es lo que `E-2` no permitía hacer:
+
+| Actor | Víctimas 2026 | Latinoamericanas | **Chilenas** |
+|---|---|---|---|
+| **Qilin** | **1.221** | **122 (10,0 %)** | **20** |
+| TheGentlemen *(`CTI-2026-014`)* | 1.020 | 129 (12,6 %) | 9 |
+| INC Ransom *(`CTI-2026-047`)* | 435 | 22 (5,1 %) | **1** |
+| Akira *(`CTI-2026-046`)* | 420 | 7 (1,7 %) | **0** |
+| n0n *(`CTI-2026-048`)* | 259 | 11 (4,2 %) | **0** |
+| settra *(`CTI-2026-049`)* | 116 | 5 (4,3 %) | **0** |
+| Vortex · PixelLeaks · Curious Worm · SoulGroup | 34–35 cada uno | 0–3 | **0** |
+
+> **La lectura, y es la conclusión de esta versión: de los diez actores del top
+> 10 de actividad de un rastreador público, Qilin concentra veinte de las
+> treinta víctimas chilenas de todo el conjunto.** El segundo tiene nueve, el
+> tercero una, y los siete restantes ninguna. **La priorización que este
+> informe pedía en su versión 1.0 no sólo se sostiene: queda cuantificada.**
+
+### Lo que el inventario de capacidades añade, y la medida que reordena
+
+Tres elementos del inventario publicado no estaban en la versión 1.0 y cambian una recomendación:
+
+| Elemento | Qué es | Qué obliga |
+|---|---|---|
+| **Evilginx** | Marco de suplantación con **intermediación de la sesión**, diseñado para capturar la cookie de sesión **después** del segundo factor | **El segundo factor por código o por notificación NO protege el acceso inicial.** La medida es **segundo factor resistente a suplantación**: claves de paso, o certificado de dispositivo con acceso condicional |
+| **`upd.exe`, el actualizador del sensor en la nube de un producto de seguridad** | Un binario legítimo **del propio producto defensivo**, usado como herramienta | **No se puede bloquear**: forma parte del control. La detección es por **comportamiento del proceso hijo**, no por nombre |
+| **Controlador de gestión de energía de un fabricante de portátiles** | Controlador legítimo firmado, usado como vía de escalada (**BYOVD**) | **Lista de bloqueo de controladores vulnerables**, como en `CTI-2026-046` `X-2.2` |
+
+> **La primera fila es la que más vale, y conviene decirlo con claridad porque
+> contradice la recomendación por omisión de casi todo el sector: «activar el
+> segundo factor» no es suficiente contra este actor.** Un marco de
+> intermediación captura la sesión ya autenticada, de modo que el código, la
+> notificación y la llamada telefónica **se completan correctamente y el
+> adversario entra igual**. Lo único que lo detiene es un factor que **no se
+> pueda relevar**: una clave de paso ligada al dispositivo, o un certificado de
+> dispositivo exigido por acceso condicional.
 
 ## E-3. Tendencia y pronóstico
 
@@ -1165,6 +1242,7 @@ firma no confiable, tal como se expresa en D-6.
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
 | 1.0 | 2026-09-16 | Emisión inicial | Célula CTI |
+| 1.2 | 2026-11-19 | **Actualización de victimología con medición propia** sobre un rastreador público (§E-2.1, nuevos `KJ-9` y `KJ-10`): **1.221 víctimas reclamadas en 2026 —la cifra más alta de cualquier actor medido en esta cartera— y 122 latinoamericanas, de las cuales 20 chilenas**, con el reparto completo por país y la comparación con los diez actores del top 10 sobre los mismos datos. **Qilin concentra veinte de las treinta víctimas chilenas del conjunto**, lo que cuantifica la priorización que la versión 1.0 pedía. Se añade además lo que el inventario de capacidades publicado —**71 técnicas en 15 tácticas, el más amplio de los 426 grupos del rastreador**— aporta al expediente, con tres elementos nuevos: **Evilginx**, que **invalida el segundo factor por código como protección del acceso inicial** y obliga a exigir factor resistente a suplantación; **el actualizador del sensor de un producto de seguridad usado como herramienta**, que no se puede bloquear y hay que detectar por comportamiento; y un **controlador de gestión de energía usado como BYOVD**. **La caducidad NO se extiende**: sigue en 2026-12-16, porque esta versión añade victimología y capacidades publicadas, y no revalida los juicios técnicos de septiembre. **Se repara además la clave `distribucion` del frontmatter, que contenía un byte de control desde el commit inicial del repositorio** | Célula CTI |
 | 1.1 | 2026-11-16 | **Reclasificación de TLP:AMBER a TLP:CLEAR** por decisión del emisor, para publicación en el repositorio abierto `cti_daily`. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. **Sin cambios en los juicios analíticos ni en los indicadores.** Se mantiene PAP:AMBER | Célula CTI |
 
 ## Anexo G — Realimentación del consumidor

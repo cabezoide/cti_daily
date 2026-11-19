@@ -1,0 +1,1267 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-046 · Akira · Akira_v2 · Megazord · (linaje discutido) Conti</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-046<small>Akira · Akira_v2 · Megazord · (linaje discutido) Conti</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-donde-encaja-akira-en-el-lote-de-ocho-y-por-que-la-comparacion-es-el-aporte">E-1. Dónde encaja Akira en el lote de ocho, y por qué la comparación es el aporte</a><a href="#e-2-declive-de-actividad-frente-a-perdida-de-capacidad">E-2. Declive de actividad frente a pérdida de capacidad</a><a href="#e-3-exposicion-regional-el-negativo-mas-claro-de-este-lote">E-3. Exposición regional: el negativo más claro de este lote</a><a href="#e-4-decisiones-que-este-informe-pide">E-4. Decisiones que este informe pide</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion">O-1. Identificación</a><a href="#o-2-el-inventario-de-capacidades-leido-por-lo-que-implica">O-2. El inventario de capacidades, leído por lo que implica</a><a href="#o-3-la-curva-de-actividad-medida">O-3. La curva de actividad medida</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-el-linaje-y-por-que-este-informe-no-lo-resuelve">O-5. El linaje, y por qué este informe no lo resuelve</a><a href="#o-6-hipotesis-alternativas-y-pre-mortem">O-6. Hipótesis alternativas y pre-mortem</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-cadena-de-intrusion-reconstruida">T-1. Cadena de intrusión reconstruida</a><a href="#t-2-mapa-mitre-att-ck">T-2. Mapa MITRE ATT&amp;CK</a><a href="#t-3-piramide-del-dolor">T-3. Pirámide del Dolor</a><a href="#t-4-hipotesis-de-caza">T-4. Hipótesis de caza</a><a href="#t-5-brechas-de-visibilidad">T-5. Brechas de visibilidad</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-logica-de-deteccion">X-1. Lógica de detección</a><a href="#x-2-mitigaciones">X-2. Mitigaciones</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-leer-un-ranking-de-actividad-de-siete-dias">Anexo D — Cómo leer un ranking de actividad de siete días</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de operación de extorsión</span><span class="pill p-mint">Global · Latinoamérica</span><span class="pill p-sky">v1.1 · 2026-11-19</span></div><h1>Akira · Akira_v2 · Megazord ·<br><span class="hl">linaje discutido) Conti</span></h1><p class="sub">Akira recauda 245 millones de dólares y lleva cinco meses cayendo, y su exposición regional es la menor de todo este lote</p><p class="sub2">De ~50 víctimas al mes entre enero y junio de 2026 a ~29 entre julio y octubre: una caída del 43 % que el dinero acumulado no refleja</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-046</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2027-02-19</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:AMBER</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-046</code></dd></div><div><dt>Versión</dt><dd>1.0 — 2026-11-19</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:AMBER</code></dd></div><div><dt>Objeto</dt><dd><strong>Akira</strong>, cuarta operación del año por volumen acumulado y <strong>décima en la ventana de siete días</strong> que motiva este lote. El contraste entre esas dos posiciones es el informe</dd></div><div><dt>Foco regional</dt><dd><strong>La exposición regional más baja de los ocho actores de este lote: 7 víctimas latinoamericanas de 420, el 1,7 %, y ninguna chilena</strong></dd></div><div><dt>Horizonte</dt><dd>Estratégico 6–12 meses · táctico días</dd></div><div><dt>Origen de los datos</dt><dd><strong>Medición propia</strong> sobre 420 registros de víctimas de 2026 de un rastreador público, más el aviso conjunto de noviembre de 2025 y cuatro fuentes de proveedor</dd></div><div><dt>Lo que lo distingue en este lote</dt><dd>Es <strong>el único de los ocho con un aviso gubernamental conjunto</strong>, y el que tiene el inventario de herramientas más amplio: <strong>48 técnicas en 13 tácticas y seis herramientas de administración remota distintas</strong></dd></div><div><dt>Caducidad</dt><dd class="m">2027-02-19</dd></div><div><dt>Autor</dt><dd class="m">Célula CTI</dd></div></dl>
+<div class="note warn rv"><div class="t">⚠ Tres cosas antes de leer</div><ol><li><strong>Este informe pertenece a un lote de ocho</strong> —<code>CTI-2026-046</code> a <code>053</code>— construido sobre el top 10 de actividad de siete días de un rastreador público. <strong>Los ocho no son objetos comparables</strong>: Akira tiene aviso gubernamental y tres años de historia, mientras cuatro de los otros aparecieron en las últimas seis semanas y uno <strong>el día de emisión de este informe</strong>. La comparación se hace en <code>E-1</code> y el método de triaje es el del <code>Anexo D</code> de <code>CTI-2026-042</code>.</li><li><strong>El 26 % de su victimología medida no tiene país asignado</strong>: 109 de 420 registros. Cualquier proporción geográfica de este informe se calcula sobre los 311 que sí lo tienen, y se dice en cada caso.</li><li><strong>Las cifras de dinero y de víctimas acumuladas no son nuestras ni son homogéneas.</strong> Los 244,17 millones de dólares son del aviso conjunto y están fechados a finales de septiembre de <strong>2025</strong>; las de 1.400 víctimas y ~245 millones son de proveedor y de 2026. <strong>No se deben sumar ni promediar.</strong></li></ol></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>Akira está en declive medido y sostenido, y ésa es la noticia que su cifra acumulada esconde. Un proveedor sitúa su media mensual de reclamaciones en unas 50 entre enero y junio de 2026 y unas 29 entre julio y octubre: una caída del 43 %</h4><p>Nuestra medición propia es consistente y la extiende hasta la fecha de emisión: <strong>420 víctimas reclamadas en 2026, de las cuales sólo 42 en los últimos treinta días y 8 en los últimos siete</strong>. Es decir, el 10 % de su año en el último mes. <strong>Y Akira es, de los nueve actores que pudimos medir, el único en que las dos formas defendibles de contar una ventana de siete días —por fecha de publicación y por fecha de ataque declarada— dan el mismo número</strong> (§O-3.1), lo que hace de su curva la más fiable del lote. Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que el declive sea real y no un artefacto de la ventana, porque <strong>dos mediciones independientes con métodos distintos coinciden en la dirección y en el orden de magnitud</strong>. <em>La lectura que importa:</em> Akira es <strong>cuarta del año por volumen y décima en la semana</strong>, y un programa que la priorice por su cifra acumulada estará defendiéndose del Akira de marzo.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>El declive es de actividad, no de capacidad, y confundir las dos cosas es el error que este informe quiere evitar. El aviso conjunto de noviembre de 2025 le atribuía 244,17 millones de dólares en ingresos por extorsión a finales de septiembre de 2025, y fuentes de proveedor de 2026 hablan de más de 1.400 víctimas desde 2023 y unos 245 millones</h4><p>Su inventario de herramientas, tal como lo documenta el rastreador, es <strong>el más amplio de los ocho actores de este lote: 48 técnicas repartidas en 13 tácticas</strong>, con <strong>seis productos de administración remota</strong>, diez herramientas de descubrimiento y siete de evasión. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que conserva la capacidad de operar al ritmo de principios de año si decide hacerlo.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta para el inventario, que es dato publicado; moderada para la inferencia de capacidad latente.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-3</div>
+<h4>Y el hallazgo regional es un negativo, que conviene enunciar con precisión porque es útil: Akira apenas toca esta región, y en 2026 no tiene ninguna víctima chilena. De 420 registros, 7 son latinoamericanos —el 1,7 %—: tres mexicanos, tres brasileños y uno argentino</h4><p><strong>Ninguno chileno.</strong> Para contraste dentro del mismo conjunto de datos y la misma metodología: Qilin acumula <strong>122 víctimas latinoamericanas (10,0 %)</strong> y TheGentlemen <strong>129 (12,6 %)</strong>. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la baja exposición regional sea una propiedad estable de esta operación y no un hueco del rastreador, porque <strong>el mismo rastreador sí detecta victimología regional abundante en otros actores</strong>. — es una ausencia, y una ausencia medida con una sola fuente. <em>Consecuencia:</em> para una organización de la región, <strong>Akira es el menos probable de los ocho</strong>, y eso es información presupuestaria.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>Su cadena de intrusión está construida casi enteramente con software legítimo, y eso determina dónde hay que detectarla. El inventario publicado incluye seis herramientas de administración remota —AnyDesk, MeshAgent, MobaXterm, Radmin, RustDesk, TeamViewer—, diez de descubrimiento —entre ellas Advanced IP Scanner, SoftPerfect NetScan, BloodHound, SharpHound, Masscan—, y seis de exfiltración —RClone, MEGA, FileZilla, WinSCP, WinRAR y un servicio público de ficheros temporales—</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que la detección basada en firmas de malware sea estructuralmente insuficiente contra este actor. <em>Consecuencia operativa:</em> <strong>el control de mayor rendimiento no es un antivirus, es un inventario de qué herramientas de administración remota están autorizadas en la organización y una alerta sobre las que no lo están</strong> (<code>X-4.1</code>).</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-5</div>
+<h4>Usa controladores vulnerables firmados para desactivar la seguridad, y los nombres están publicados. El inventario de evasión incluye el controlador de ThrottleStop, el de Zemana Anti-Rootkit, churchill_driver.sys / fidget.sys, y además carga lateral de bibliotecas en binarios legítimos firmados: icardagt.exe con version.dll, mfpmp.exe con rtworkq.dll, y consent.exe con msimg32.dll y wmsgapi.dll</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que estos artefactos estén publicados tal como se describen. <em>Consecuencia:</em> <strong>la lista de bloqueo de controladores vulnerables de Microsoft y la prohibición de carga de controladores no firmados por la organización son medidas concretas y dirigidas</strong> (<code>X-4.3</code>), y la carga lateral se detecta por ruta, no por fichero.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta como dato; no verificamos las muestras.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-6</div>
+<h4>El aviso conjunto confirma una vía que importa a quien virtualiza: de una vulnerabilidad de concentrador de red a un hipervisor. Se documenta la explotación de CVE-2024-40766 —SonicWall— para alcanzar un entorno Nutanix</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> el hecho, por ser de fuente gubernamental. <em>Consecuencia:</em> es la misma doctrina que <code>CTI-2026-028</code> documentó para otro actor: <strong>el hipervisor no suele tener agente, y el camino hasta él suele empezar en un dispositivo de borde sin parchear.</strong></p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-7</div>
+<h4>Hay una variante posterior y declarada, Akira_v2, y el aviso la añadió sin reclasificar la operación. Valoramos probable (55–80 %) que esto indique evolución continua del cifrador bajo la misma marca, frente a la alternativa de un cambio de operador</h4><p><em>Y conviene anotar la precaución del propio aviso:</em> <strong>el vínculo con el linaje de Conti se trata como valoración analítica y no como hecho confirmado</strong>, y este informe lo mantiene así (<code>O-5</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Confirmado</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-8</div>
+<h4>Sus afiliados trabajan también para otras marcas, lo que hace de «Akira» una etiqueta de herramienta y no de equipo. Fuentes de proveedor describen afiliados de Akira operando además con otras operaciones de extorsión</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> el solapamiento de personal. — es afirmación de proveedor sin base técnica publicada. <em>Consecuencia defensiva, que es la de toda esta cartera:</em> <strong>las TTP observadas en un incidente de Akira son transferibles a incidentes de otras marcas</strong>, y por tanto la detección construida contra este actor rinde más allá de él.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2><p>Akira es la cuarta operación de extorsión del año por volumen acumulado y la décima de la última semana. <strong>Esa diferencia de seis puestos es todo el informe.</strong></p></div></div>
+<p class="rv">Los números que circulan sobre ella son los de su historia: más de <strong>1.400 víctimas desde 2023</strong> y unos <strong>245 millones de dólares</strong> recaudados, de los cuales <strong>244,17 millones</strong> están confirmados por un aviso conjunto de varias agencias fechado a finales de septiembre de 2025. Son cifras grandes y son ciertas. Pero describen un pasado.</p>
+<p class="rv">Lo que la medición de hoy dice es otra cosa: <strong>420 víctimas reclamadas en 2026, de las cuales sólo 42 en los últimos treinta días y 8 en los últimos siete</strong>. Un proveedor, con otra metodología, mide la misma curva: de unas cincuenta reclamaciones mensuales entre enero y junio a unas veintinueve entre julio y octubre, <strong>una caída del 43 %</strong>. Dos mediciones independientes coinciden en la dirección y en el orden de magnitud, de modo que <strong>el declive es un hecho y no un accidente de la ventana</strong>.</p>
+<p class="rv">Conviene separar con cuidado dos cosas que ese dato invita a confundir. <strong>Está cayendo la actividad, no la capacidad.</strong> Su inventario de herramientas, tal como lo publica el rastreador, es el más amplio de los ocho actores de este lote: cuarenta y ocho técnicas en trece tácticas, con seis productos de administración remota, diez herramientas de descubrimiento y siete de evasión defensiva, entre ellas tres controladores vulnerables firmados y tres binarios legítimos usados para carga lateral de bibliotecas. Nada de eso se ha perdido porque haya publicado menos víctimas en octubre.</p>
+<p class="rv">Para una organización de esta región hay además un dato que rara vez se puede dar con este signo: <strong>Akira apenas nos toca.</strong> De sus 420 víctimas de 2026, <strong>siete son latinoamericanas —el 1,7 %— y ninguna es chilena</strong>. El contraste, medido sobre el mismo conjunto de datos y con la misma metodología, es duro: Qilin acumula <strong>122 víctimas latinoamericanas</strong> y TheGentlemen <strong>129</strong>. Akira es, de los ocho actores de este lote, <strong>el menos probable para nosotros</strong>, y decirlo es tan útil como señalar un riesgo, porque la atención es un recurso finito.</p>
+<p class="rv">Lo que sí se transfiere es su manera de trabajar. Esta operación entra por el borde de red —el aviso conjunto documenta la explotación de una vulnerabilidad de SonicWall para alcanzar <strong>un entorno de virtualización Nutanix</strong>— y luego se mueve con software que cualquier administrador reconocería: AnyDesk, TeamViewer, RustDesk, Advanced IP Scanner, RClone. <strong>Contra eso un antivirus no sirve de mucho; un inventario de herramientas de administración remota autorizadas sí</strong>, y es la recomendación central de este informe porque rinde contra los ocho actores del lote y no sólo contra éste.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Qué cubre</h3>
+<p class="rv">La operación Akira: su curva de actividad medida, su victimología global y regional, su inventario de capacidades publicado, las vías de acceso inicial documentadas oficialmente, y el estado de la discusión sobre su linaje. Y su posición relativa dentro del lote de ocho actores que motiva esta serie.</p>
+<h3 class="rv">3.2 Qué NO cubre</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Fuera de alcance</th><th>Por qué</th></tr></thead><tbody>
+<tr><td><strong>Análisis del cifrador</strong></td><td>No tenemos muestras. <code>Akira_v2</code> se consigna como variante declarada en el aviso, sin análisis propio</td></tr>
+<tr><td><strong>Verificación de las cifras de dinero</strong></td><td>Los 244,17 millones son del aviso conjunto; los ~245 millones de 2026 son de proveedor. <strong>No verificamos ninguna de las dos y no se deben sumar</strong></td></tr>
+<tr><td><strong>La atribución del linaje a Conti</strong></td><td>El propio aviso la trata como valoración analítica. Este informe la mantiene en ese grado (<code>O-5</code>) y no la resuelve</td></tr>
+<tr><td><strong>Los indicadores de red</strong></td><td>El rastreador no los publica y no leímos el aviso original en su anexo técnico. Es <code>G-2</code></td></tr>
+<tr><td><strong>La identidad de los afiliados</strong></td><td>Ninguna fuente la ofrece</td></tr></tbody></table></div>
+<h3 class="rv">3.3 Limitaciones de la colección</h3>
+<div class="note warn rv"><div class="t">⚠ Cinco limitaciones</div><ol><li><strong>Las cifras de víctimas son reclamaciones de un sitio de filtración, no brechas verificadas.</strong> El rastreador lo advierte y conviene repetirlo: un sitio de filtración es publicidad del adversario.</li><li><strong>El 26 % de los registros no tiene país</strong> —109 de 420—, de modo que toda proporción geográfica se calcula sobre 311 y queda sujeta a que los 109 ausentes no estén sesgados. <strong>No podemos descartar que lo estén.</strong></li><li><strong>Fuente única para la medición propia.</strong> Un solo rastreador. La corroboración externa existe para la tendencia, no para nuestras cifras.</li><li><strong>El inventario de capacidades es del rastreador y no lo verificamos.</strong> Que Akira use un controlador concreto o cargue una biblioteca en un binario concreto son afirmaciones de un tercero sobre muestras que no hemos visto (<code>G-3</code>).</li><li><strong>El aviso conjunto es de noviembre de 2025 y no localizamos ninguno posterior.</strong> Todo lo de 2026 es de proveedor o de prensa, y las cifras discrepan entre fuentes.</li></ol></div>
+<h3 class="rv">3.4 Qué aporta</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Aporte</th><th>Dónde</th></tr></thead><tbody>
+<tr><td><strong>La curva de declive medida y corroborada por dos métodos</strong>: 43 % de caída, y el 10 % del año en el último mes</td><td><code>KJ-1</code>, <code>O-3</code></td></tr>
+<tr><td><strong>La separación explícita entre declive de actividad y pérdida de capacidad</strong></td><td><code>KJ-2</code>, <code>E-2</code></td></tr>
+<tr><td><strong>La exposición regional cuantificada como la más baja del lote</strong>, con cero víctimas chilenas, y el contraste con Qilin y TheGentlemen sobre los mismos datos</td><td><code>KJ-3</code>, <code>E-3</code></td></tr>
+<tr><td><strong>La lectura del inventario como cadena casi íntegramente legítima</strong>, con la consecuencia de detección que se sigue</td><td><code>KJ-4</code>, <code>X-3</code></td></tr>
+<tr><td><strong>Los artefactos concretos de evasión</strong>: tres controladores y tres binarios de carga lateral</td><td><code>KJ-5</code>, <code>A.2</code></td></tr>
+<tr><td><strong>La posición relativa dentro del lote de ocho</strong>, que es lo que permite priorizar</td><td><code>E-1</code></td></tr></tbody></table></div>
+<h3 class="rv">3.5 Veredicto</h3>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Elemento</th><th>Veredicto</th><th>Base</th></tr></thead><tbody>
+<tr style="background:rgba(247,164,0,.05)"><td>1</td><td>Akira está entre los actores de extorsión más activos</td><td><strong>CORROBORADO con matiz decisivo</strong></td><td>Cuarta del año, <strong>décima de la semana</strong> (<code>KJ-1</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>2</td><td>Su actividad crece</td><td><strong>NO SOSTENIDO</strong></td><td><strong>Cae un 43 %</strong> en media mensual, por dos mediciones independientes</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>3</td><td>Es una amenaza relevante para la región</td><td><strong>NO SOSTENIDO</strong></td><td><strong>1,7 % de víctimas latinoamericanas y ninguna chilena</strong> (<code>KJ-3</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>4</td><td>Ha perdido capacidad</td><td><strong>NO SOSTENIDO</strong></td><td>48 técnicas, 6 herramientas de administración remota, aviso conjunto (<code>KJ-2</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>5</td><td>Se detecta con firmas de malware</td><td><strong>NO SOSTENIDO</strong></td><td>La cadena es casi toda software legítimo (<code>KJ-4</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>6</td><td>Alcanza entornos de virtualización</td><td><strong>CORROBORADO oficialmente</strong></td><td><code>CVE-2024-40766</code> → entorno Nutanix, en el aviso conjunto (<code>KJ-6</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>7</td><td>Es una derivación de Conti</td><td><strong>SIN RESOLVER</strong></td><td>El propio aviso lo trata como valoración analítica, no como hecho (<code>O-5</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>8</td><td>«Akira» identifica un equipo estable</td><td><strong>NO SOSTENIDO</strong></td><td>Afiliados compartidos con otras marcas (<code>KJ-8</code>)</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> CISO, Riesgo, Arquitectura</span><span><b>Horizonte:</b> 6–12 meses</span></div></div>
+<section id="e-1-donde-encaja-akira-en-el-lote-de-ocho-y-por-que-la-comparacion-es-el-aporte" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Dónde encaja Akira en el lote de ocho, y por qué la comparación es el aporte</h2></div></div>
+<p class="rv">Este informe abre una serie de ocho construida sobre el top 10 de actividad de siete días de un rastreador público, excluidos los dos actores que esta cartera ya tenía. <strong>Los ocho no son comparables, y tratarlos como si lo fueran sería el error que <code>CTI-2026-042</code> documentó.</strong> Aplicando los criterios de su <code>Anexo D</code>:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Actor</th><th>En el rastreador desde</th><th>Técnicas documentadas</th><th>Herramientas</th><th>Aviso oficial</th><th>Clase</th></tr></thead><tbody>
+<tr style="background:rgba(247,164,0,.05)"><td><strong>Akira</strong></td><td><strong>2023-04-26</strong></td><td><strong>48 en 13 tácticas</strong></td><td><strong>Inventario completo</strong></td><td><strong>Sí, conjunto</strong></td><td><strong>Marca con operación</strong></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td><strong>INC Ransom</strong></td><td><strong>2023-08-09</strong></td><td><strong>28 en 13 tácticas</strong></td><td>Inventario completo</td><td>No localizado</td><td><strong>Marca con operación</strong></td></tr>
+<tr><td>settra</td><td>2026-06-28</td><td>Ninguna</td><td>Sólo Rclone</td><td>No</td><td>Marca en formación</td></tr>
+<tr><td>n0n</td><td>2026-09-18</td><td>11 en 8 tácticas</td><td>Ninguna</td><td>No</td><td><strong>Reclamación en volumen</strong></td></tr>
+<tr><td>pixelleaks</td><td>2026-11-03</td><td>Ninguna</td><td>Ninguna</td><td>No</td><td>Sitio reciente</td></tr>
+<tr><td>vortex</td><td>2026-11-10</td><td>Ninguna</td><td>Ninguna</td><td>No</td><td>Sitio reciente</td></tr>
+<tr><td>curious worm</td><td>2026-11-11</td><td>Ninguna</td><td>Ninguna</td><td>No</td><td>Sitio reciente</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>soulgroup</td><td><strong>2026-11-19</strong> <em>(el día de emisión)</em></td><td>Ninguna</td><td>Ninguna</td><td>No</td><td><strong>Sitio sembrado</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>La tabla dice algo que el ranking de siete días oculta: cinco de los ocho no existían hace seis semanas.</strong> Akira e INC Ransom son los dos únicos con historia, inventario y —en el caso de Akira— aviso gubernamental. <strong>El ranking mide publicaciones, no operaciones</strong>, y una tanda de veintiséis entradas publicadas en seis minutos cuenta igual que veintiséis intrusiones.</p>
+<div class="note info rv"><div class="t">Y de ahí la primera decisión que este lote pide al nivel estratégico:</div><p>la atención debe repartirse <strong>de forma desigual y explícita</strong>. Akira e INC Ransom merecen detección; los cuatro sitios de noviembre merecen vigilancia y una línea en una lista. <strong>Repartir por igual es el error más caro de los dos posibles.</strong></p></div>
+</section>
+<section id="e-2-declive-de-actividad-frente-a-perdida-de-capacidad" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>Declive de actividad frente a pérdida de capacidad</h2></div></div>
+<div class="chart rv">
+<h4>Actividad de Akira en 2026 (medición propia, 420 registros)</h4><p class="cap">La ventana de siete días que motiva este lote la sitúa décima. El año la sitúa cuarta. Fuente: medición propia sobre rastreador público, 2026-11-19.</p><svg viewBox="0 0 720 250" role="img" aria-label="Actividad de Akira en 2026 (medición propia, 420 registros)"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">105</text><text x="42" y="116.0">210</text><text x="42" y="72.0">315</text><text x="42" y="28.0">420</text></g><path d="M50.0,24.0 L370.0,182.4 L690.0,196.6 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,24.0 L370.0,182.4 L690.0,196.6"/><g><circle class="pt" cx="50.0" cy="24.0" r="5" fill="#5a7ebe"><title>Año 2026: 420</title></circle><circle class="pt" cx="370.0" cy="182.4" r="5" fill="#5a7ebe"><title>Últimos 30 d: 42</title></circle><circle class="pt" cx="690.0" cy="196.6" r="6.5" fill="#f7a400"><title>Últimos 7 d: 8</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="13.0">420</text><text x="370.0" y="171.4">42</text><text x="690.0" y="185.6" fill="#f7a400">8</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">Año 2026</text><text x="370.0" y="222">Últimos 30 d</text><text x="690.0" y="222">Últimos 7 d</text></g></svg></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="420">0</div><div class="l">Víctimas reclamadas en 2026</div><div class="s">Cuarta del lote, tras Qilin (1.221), TheGentlemen (1.020) e INC Ransom (435)</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="43">0<small>−%</small></div><div class="l">Caída de la media mensual de reclamaciones</div><div class="s">~50/mes (ene–jun) → ~29/mes (jul–oct), según proveedor</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="10">0<small>%</small></div><div class="l">Proporción de su año concentrada en los últimos 30 días</div><div class="s">Medición propia</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="8">0<small>=</small></div><div class="l">Víctimas de 7 días por publicación y por fecha de ataque</div><div class="s"><strong>Las dos bases coinciden. Es el único de los nueve medidos</strong> (§O-3.1)</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n">244,17 M$</div><div class="l">Ingresos por extorsión según el aviso conjunto</div><div class="s"><strong>Fechado a finales de septiembre de 2025</strong></div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="1400">0<small>+</small></div><div class="l">Víctimas desde 2023, según proveedor</div><div class="s"><strong>No verificado, y de otra metodología</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="48">0</div><div class="l">Técnicas documentadas en 13 tácticas</div><div class="s"><strong>El inventario más amplio de los ocho</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="6">0</div><div class="l">Productos de administración remota en su inventario</div><div class="s">AnyDesk · MeshAgent · MobaXterm · Radmin · RustDesk · TeamViewer</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n">1,7 %</div><div class="l">Víctimas latinoamericanas</div><div class="s"><strong>7 de 420. Ninguna chilena</strong></div></div></div>
+<p class="rv"><strong>La distinción, enunciada para que no se colapse.</strong> «Akira está cayendo» es un juicio sobre <strong>publicaciones observadas</strong>, y está bien soportado. «Akira es menos peligrosa» es un juicio sobre <strong>capacidad</strong>, y no se sigue del anterior. Las publicaciones de un sitio de filtración son función de tres cosas: cuántas víctimas hubo, <strong>cuántas pagaron</strong> —las que pagan no se publican— y cuánto quiere publicar el operador. Una caída del 43 % es compatible con menos intrusiones, con <strong>más pagos</strong>, o con una decisión de perfil bajo.</p>
+<div class="note info rv"><div class="t">Lo que sí se puede afirmar, y es lo accionable:</div><p>el inventario de 48 técnicas no se ha reducido, el dinero acumulado le da margen operativo, y la vía de acceso que el aviso documenta —un dispositivo de borde sin parchear— <strong>sigue abierta en cualquier organización que no haya parcheado</strong>. El declive es una ventana de respiro, no un cambio de postura defensiva.</p></div>
+</section>
+<section id="e-3-exposicion-regional-el-negativo-mas-claro-de-este-lote" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Exposición regional: el negativo más claro de este lote</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Actor del lote</th><th>Víctimas 2026</th><th>Latinoamericanas</th><th>%</th><th>Chilenas</th></tr></thead><tbody>
+<tr><td>Qilin <em>(ya en cartera)</em></td><td>1.221</td><td><strong>122</strong></td><td><strong>10,0 %</strong></td><td><strong>20</strong></td></tr>
+<tr><td>TheGentlemen <em>(ya en cartera)</em></td><td>1.020</td><td><strong>129</strong></td><td><strong>12,6 %</strong></td><td><strong>9</strong></td></tr>
+<tr><td>INC Ransom</td><td>435</td><td>22</td><td>5,1 %</td><td>1</td></tr>
+<tr><td><strong>Akira</strong></td><td><strong>420</strong></td><td><strong>7</strong></td><td><strong>1,7 %</strong></td><td><strong>0</strong></td></tr>
+<tr><td>n0n</td><td>259</td><td>11</td><td>4,2 %</td><td>0</td></tr>
+<tr><td>settra</td><td>116</td><td>5</td><td>4,3 %</td><td>0</td></tr>
+<tr><td>vortex</td><td>35</td><td>0</td><td>0,0 %</td><td>0</td></tr>
+<tr><td>pixelleaks</td><td>34</td><td>3</td><td>8,8 %</td><td>0</td></tr>
+<tr><td>curious worm</td><td>18</td><td>0</td><td>0,0 %</td><td>0</td></tr></tbody></table></div>
+<p class="rv"><strong>Todas las filas salen del mismo conjunto de datos, el mismo día y con la misma metodología</strong>, que es lo que hace la comparación utilizable. Y dice dos cosas.</p>
+<p class="rv">La primera, sobre Akira: <strong>1,7 % y cero víctimas chilenas en 420 registros.</strong> Con el 26 % de registros sin país, el intervalo real podría ser algo mayor, pero no de un orden distinto.</p>
+<p class="rv">La segunda, y es la que conviene llevarse: <strong>los dos actores que esta cartera ya tenía documentados son, con mucha diferencia, los dos de mayor exposición regional del top 10</strong>. Eso valida retrospectivamente la elección de <code>CTI-2026-014</code> y <code>CTI-2026-015</code> como expedientes, y es la razón por la que este lote cierra actualizándolos con estas cifras.</p>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>A quién</th><th>Coste</th><th>Por qué</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td><strong>Inventariar qué herramientas de administración remota están autorizadas, y alertar sobre cualquier otra</strong></td><td>TI · SOC</td><td><strong>Medio una vez, bajo después</strong></td><td><code>KJ-4</code>: seis productos distintos en su inventario. <strong>Es la medida que rinde contra los ocho actores del lote</strong></td></tr>
+<tr><td><strong>2</strong></td><td><strong>Aplicar la lista de bloqueo de controladores vulnerables y prohibir la carga de controladores no firmados por la organización</strong></td><td>Ingeniería de puesto</td><td>Medio</td><td><code>KJ-5</code>: tres controladores nombrados</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Parchear el borde de red con prioridad sobre el parcheo interno</strong></td><td>Operaciones</td><td>Medio</td><td><code>KJ-6</code>: de SonicWall a un hipervisor Nutanix, oficialmente documentado</td></tr>
+<tr><td><strong>4</strong></td><td><strong>No priorizar Akira por su cifra acumulada</strong></td><td>CTI</td><td>Cero</td><td>Cuarta del año, décima de la semana, 1,7 % regional</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Tratar las TTP de este expediente como transferibles a otras marcas</strong></td><td>SOC</td><td>Cero</td><td><code>KJ-8</code>: afiliados compartidos</td></tr>
+<tr><td><strong>6</strong></td><td><strong>Vigilar una reaceleración</strong>, no una desaparición</td><td>CTI</td><td>Bajo</td><td>El declive es de actividad; la capacidad está intacta (<code>E-2</code>)</td></tr></tbody></table></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> SOC, Respuesta a incidentes, Threat Hunting</span><span><b>Horizonte:</b> semanas</span></div></div>
+<section id="o-1-identificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Nombre</td><td><strong>Akira</strong></td></tr>
+<tr><td>Variantes declaradas</td><td><strong><code>Akira_v2</code></strong>, añadida en la actualización del aviso conjunto de noviembre de 2025 · <code>Megazord</code> se le asocia en fuentes de proveedor</td></tr>
+<tr><td>Primera observación</td><td>Marzo–abril de 2023 según fuentes; en el rastreador desde <strong>2023-04-26</strong></td></tr>
+<tr><td>Sitios de filtración</td><td><strong>Dos, los dos activos</strong> al 19-11-2026</td></tr>
+<tr><td>Linaje</td><td><strong>Discutido.</strong> Se le atribuye relación con el linaje de Conti, y el aviso conjunto <strong>lo trata como valoración analítica y no como hecho</strong> (<code>O-5</code>)</td></tr>
+<tr><td>Modelo</td><td>Doble extorsión. Afiliados que <strong>operan también con otras marcas</strong> (<code>KJ-8</code>)</td></tr>
+<tr><td>Estado</td><td><strong>Activa y en declive medido</strong>: 11 víctimas en los últimos 7 días frente a una media de ~50 mensuales en el primer semestre</td></tr></tbody></table></div>
+</section>
+<section id="o-2-el-inventario-de-capacidades-leido-por-lo-que-implica" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>El inventario de capacidades, leído por lo que implica</h2><p>Lo que el rastreador publica —y que es la base de <code>KJ-4</code> y <code>KJ-5</code>— agrupado por lo que cada bloque obliga a hacer:</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Bloque</th><th>Herramientas documentadas</th><th>Qué obliga</th></tr></thead><tbody>
+<tr><td><strong>Administración remota</strong></td><td>AnyDesk · MeshAgent · MobaXterm · Radmin · RustDesk · TeamViewer</td><td><strong>Inventario de lo autorizado + alerta sobre lo demás.</strong> Ninguna de las seis es maliciosa: la señal es <em>presencia no autorizada</em>, no <em>existencia</em></td></tr>
+<tr><td><strong>Descubrimiento</strong></td><td>Advanced IP Scanner · Advanced Port Scanner · BloodHound · SharpHound · Masscan · ReconFTW · ShareFinder · SharpShares · SoftPerfect NetScan · ldapdomaindump</td><td><strong>Detección por comportamiento</strong>: consultas LDAP masivas, barrido de puertos interno, enumeración de recursos compartidos</td></tr>
+<tr><td><strong>Robo de credenciales</strong></td><td>DonPAPI · LaZagne · Mimikatz</td><td>Protección de LSASS, y vigilancia del acceso a la bóveda de credenciales de Windows</td></tr>
+<tr><td><strong>Evasión defensiva</strong></td><td>PowerTool · controlador de ThrottleStop · controlador de Zemana Anti-Rootkit · <code>churchill_driver.sys</code> / <code>fidget.sys</code> · carga lateral en <code>consent.exe</code>, <code>icardagt.exe</code> y <code>mfpmp.exe</code></td><td><strong>Lista de bloqueo de controladores + detección de carga lateral por ruta</strong> (<code>X-4.3</code>)</td></tr>
+<tr><td><strong>Exfiltración</strong></td><td>RClone · MEGA · FileZilla · WinSCP · WinRAR · servicio público de ficheros temporales</td><td><strong>Control de egreso por destino</strong>, no por fichero</td></tr>
+<tr><td><strong>Túnel y red</strong></td><td>Cloudflared · Ngrok · OpenSSH</td><td><strong>Detección de túneles salientes</strong>, que es la señal más limpia de este bloque</td></tr>
+<tr><td><strong>Ofensiva</strong></td><td>CrackMapExec · Impacket · NetExec</td><td>Autenticación anómala entre equipos</td></tr>
+<tr><td><strong>LOLBAS</strong></td><td><code>net</code> · <code>netsh</code> · <code>nltest</code> · <code>vssadmin</code></td><td><strong><code>vssadmin</code> es la señal de oro</strong>: borrado de copias de sombra inmediatamente antes del cifrado</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">La lectura de conjunto, y es la razón de que <code>KJ-4</code> esté redactado como está:</div><p>de las ocho filas, <strong>seis están formadas íntegramente por software legítimo o de código abierto</strong>. No hay nada que un antivirus deba bloquear por sí mismo, porque bloquear AnyDesk o RClone rompería el trabajo de alguien. <strong>La detección tiene que ser contextual —quién, dónde y cuándo— y eso se construye con un inventario, no con una firma.</strong></p></div>
+</section>
+<section id="o-3-la-curva-de-actividad-medida" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>La curva de actividad medida</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Ventana</th><th>Víctimas</th><th>Lectura</th></tr></thead><tbody>
+<tr><td><strong>Año 2026</strong></td><td><strong>420</strong></td><td>Cuarta del lote</td></tr>
+<tr><td>Últimos 30 días</td><td><strong>42</strong></td><td><strong>El 10 % del año en el último mes</strong></td></tr>
+<tr><td>Últimos 7 días</td><td><strong>8</strong></td><td><strong>Décima del top 10</strong> que motiva este lote. <strong>Ocho por las dos bases de conteo</strong>: es el único actor del lote en que coinciden (§O-3.1)</td></tr>
+<tr><td>Primer registro de 2026</td><td>2026-01-05</td><td></td></tr>
+<tr><td>Último registro</td><td>2026-11-18</td><td><strong>Activa al cierre</strong></td></tr>
+<tr><td>Países distintos</td><td><strong>23</strong></td><td>Sobre los 311 registros con país asignado</td></tr>
+<tr><td>Sin país asignado</td><td><strong>109 de 420 (26 %)</strong></td><td><code>G-1</code></td></tr></tbody></table></div>
+<h3 class="rv">O-3.1 Las dos formas de contar una ventana de siete días, y por qué importa</h3>
+<p class="rv">Al medir el lote apareció un problema de método que afecta a los ocho informes de la serie y que conviene exponer aquí, porque <strong>Akira es el caso en que no se manifiesta</strong> y eso la hace útil como control.</p>
+<p class="rv">Un registro de víctima en este rastreador tiene <strong>dos fechas</strong>: la de <strong>publicación</strong> en el sitio de filtración —cuándo el rastreador lo vio— y la de <strong>ataque declarada</strong> —cuándo el adversario dice que ocurrió—. Una ventana de siete días se puede contar sobre cualquiera de las dos, y <strong>las dos son defendibles</strong>: la primera mide actividad de publicación, la segunda mide actividad de intrusión según el adversario.</p>
+<p class="rv"><strong>Para la mayoría de los actores del lote las dos cuentas difieren, y mucho:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Actor</th><th>7 días por <strong>fecha de ataque</strong></th><th>7 días por <strong>publicación</strong></th><th>Divergencia</th><th>Entradas con las dos fechas iguales</th></tr></thead><tbody>
+<tr><td><strong>Akira</strong></td><td><strong>8</strong></td><td><strong>8</strong></td><td><strong>ninguna</strong></td><td>66 %</td></tr>
+<tr><td>INC Ransom</td><td><strong>7</strong></td><td><strong>58</strong></td><td><strong>×8,3</strong></td><td>57 %</td></tr>
+<tr><td>n0n</td><td>39</td><td><strong>104</strong></td><td>×2,7</td><td>53 %</td></tr>
+<tr><td>TheGentlemen</td><td>19</td><td>41</td><td>×2,2</td><td>41 %</td></tr>
+<tr><td>vortex</td><td>19</td><td>21</td><td>×1,1</td><td>63 %</td></tr>
+<tr><td>qilin</td><td>24</td><td>24</td><td>ninguna</td><td>93 %</td></tr>
+<tr><td>pixelleaks</td><td>31</td><td>31</td><td>ninguna</td><td><strong>100 %</strong></td></tr>
+<tr><td>curious worm</td><td>9</td><td>9</td><td>ninguna</td><td><strong>100 %</strong></td></tr>
+<tr><td>settra</td><td><strong>0</strong></td><td>10</td><td>—</td><td><strong>0 %</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>Tres cosas que esta tabla establece, y una que no.</strong></p>
+<p class="rv">Establece, primero, que <strong>la divergencia puede llegar a ser de un factor de ocho</strong>: INC Ransom publicó <strong>cincuenta entradas en un solo día, el 12 de noviembre de 2026</strong>, con fechas de ataque repartidas por semanas anteriores. Contado por publicación es el actor más activo de la semana; contado por fecha de ataque es casi inactivo. <strong>Las dos lecturas son correctas y describen cosas distintas.</strong></p>
+<p class="rv">Establece, segundo, que <strong>hay dos prácticas opuestas y consistentes en el uso de la fecha de ataque</strong>. <code>settra</code> declara una fecha de ataque distinta de la de publicación en <strong>el 100 % de sus entradas</strong>; <code>pixelleaks</code> y <code>curious worm</code>, en <strong>ninguna</strong>. Una operación que fecha sus intrusiones está aportando un dato comprobable contra la víctima; una que publica todo con fecha del día no aporta ninguno —o el rastreador le asigna la fecha de publicación por omisión, que para el lector tiene el mismo efecto—.</p>
+<p class="rv">Y establece, tercero, que <strong>Akira es el control del lote</strong>: sus dos cuentas coinciden, de modo que su curva de <code>O-3</code> no depende de qué base se elija. Por eso el declive de <code>KJ-1</code> es el juicio mejor soportado de toda la serie.</p>
+<p class="rv"><strong>Lo que esta tabla NO establece es cuál de las dos bases usa el ranking del sitio.</strong> Para Akira el ranking dice 8 y las dos bases dicen 8; para INC Ransom dice 9 y las bases dicen 7 y 58; para <code>n0n</code> dice 104 y las bases dicen 39 y 104. <strong>Los números del ranking se parecen a una base para unos actores y a la otra para otros</strong>, y la diferencia puede deberse al momento exacto de captura y al corte de la ventana. <strong>No lo podemos determinar desde fuera, y por tanto este informe no afirma cuál es</strong> (<code>G-7</code>).</p>
+<div class="note info rv"><div class="t">La consecuencia de método, que se aplica a los siete informes siguientes:</div><p><strong>ninguna cifra de ventana corta de esta serie se publica sin decir sobre qué fecha se cuenta.</strong> Y cuando una cifra del ranking original se cite, se cita como lo que es —el número que el sitio mostraba a una hora concreta— y no como una medición propia.</p></div>
+<p class="rv"><strong>Reparto sectorial</strong> <em>(sobre los 420 registros)</em>: <strong>Manufactura 124</strong>, Servicios profesionales 81, Comercio minorista 38. Es el perfil habitual de la extorsión de volumen, sin exclusiones declaradas.</p>
+<p class="rv"><strong>Reparto geográfico</strong> <em>(sobre los 311 con país)</em>: Estados Unidos 207, Alemania 21, Canadá 15, Reino Unido 13, Suiza 12. <strong>Es una operación de objetivo anglosajón y europeo occidental</strong>, y eso explica por sí solo el <code>KJ-3</code>.</p>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Si la organización…</th><th>Exposición a Akira</th><th>Medida</th></tr></thead><tbody>
+<tr><td><strong>Opera sólo en Latinoamérica</strong></td><td><strong>Baja.</strong> 1,7 % de su victimología, cero víctimas chilenas</td><td>No desatender: la vía de acceso es genérica</td></tr>
+<tr><td><strong>Tiene filiales o matriz en EE. UU., Alemania, Canadá, Reino Unido o Suiza</strong></td><td><strong>Media-alta.</strong> Ahí está el 87 % de su victimología con país</td><td>Parcheo de borde (<code>E-4.3</code>)</td></tr>
+<tr><td><strong>Es de manufactura</strong></td><td><strong>Media-alta.</strong> Su sector principal, 124 de 420</td><td>Igual</td></tr>
+<tr><td><strong>Tiene concentradores de red o cortafuegos sin parchear expuestos</strong></td><td><strong>Alta, independientemente de la geografía</strong></td><td><code>CVE-2024-40766</code> y la clase entera de vulnerabilidades de borde</td></tr>
+<tr><td><strong>Virtualiza con hipervisores sin agente de seguridad</strong></td><td><strong>Alta si se alcanza la red de gestión</strong></td><td>Segmentación de la red de gestión del hipervisor</td></tr></tbody></table></div>
+</section>
+<section id="o-5-el-linaje-y-por-que-este-informe-no-lo-resuelve" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>El linaje, y por qué este informe no lo resuelve</h2><p>Lo que hay: fuentes de proveedor que relacionan a Akira con el linaje de Conti, apoyadas en que tras el cierre de Conti varios afiliados migraron a operaciones independientes. Lo que <strong>no</strong> hay: una base técnica publicada que lo establezca.</p></div></div>
+<p class="rv"><strong>Y el dato que más pesa es la cautela de la fuente con más autoridad:</strong> el aviso conjunto <strong>describe esos vínculos como valoraciones analíticas y no como hecho confirmado</strong>. Valoramos <strong>aproximadamente igual de probable</strong> <em>(40–60 %)</em> que exista continuidad de personal con el linaje de Conti, con <strong>confianza baja</strong>.</p>
+<div class="note info rv"><div class="t">Y conviene decir por qué da igual para la defensa</div><p>La pregunta del linaje importa para la atribución y para la acción policial. <strong>Para el defensor, lo que determina la respuesta es el inventario de <code>O-2</code>, y ése está documentado con independencia de quién fuera antes.</strong> Es la misma conclusión que <code>CTI-2026-030</code> sacó de una disputa de alias: <strong>saber de quién deriva un actor no cambia ni una regla de detección.</strong></p></div>
+</section>
+<section id="o-6-hipotesis-alternativas-y-pre-mortem" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>Hipótesis alternativas y pre-mortem</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Muy probable · 80–95 %</div>
+<h4 style="margin:0 0 6px"><strong>H-1 — El declive es real</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida como principal.</strong> Dos mediciones independientes, métodos distintos, misma dirección y magnitud</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Posibilidad real · 40–60 %</div>
+<h4 style="margin:0 0 6px"><strong>H-2 — El declive refleja más pagos, no menos ataques</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida y no refutable con estos datos.</strong> Un sitio de filtración publica a quien <strong>no</strong> paga: una caída es compatible con una tasa de pago mayor. <strong>Es la hipótesis más incómoda de este informe y no se puede descartar</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H-3 — La baja exposición regional es un hueco del rastreador</strong></h4><p style="font-size:13.8px;margin:0"><strong>Rebajada.</strong> El mismo rastreador detecta 122 víctimas regionales de Qilin y 129 de TheGentlemen, de modo que su cobertura regional existe</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H-4 — El 26 % sin país está sesgado hacia la región</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida como limitación.</strong> Si los 109 registros sin país fueran desproporcionadamente latinoamericanos, <code>KJ-3</code> se debilitaría. No hay forma de comprobarlo con estos datos</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H-5 — «Akira» es un equipo estable</strong></h4><p style="font-size:13.8px;margin:0"><strong>Poco probable.</strong> Afiliados compartidos con otras marcas (<code>KJ-8</code>)</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Aprox. igual de probable · 40–60 %</div>
+<h4 style="margin:0 0 6px"><strong>H-6 — Hay un sucesor ya operando bajo otro nombre</strong></h4><p style="font-size:13.8px;margin:0"><strong>Sin evidencia, y se consigna porque es el patrón de la cartera.</strong> <code>CTI-2026-040</code> y <code>042</code> documentan cuatro casos en que la marca se apaga y la capacidad sigue. <strong>Aquí no hay ningún indicio</strong>, pero es lo que habría que buscar</p></div></div>
+<p class="rv"><strong>Pre-mortem — si este informe se equivoca, será porque:</strong></p><ol class="rv"><li><strong>Se leyó «está cayendo» como «es menos peligrosa»</strong> (<code>E-2</code>). Riesgo 1.</li><li><strong>Se leyó el 1,7 % regional como «no nos puede pasar»</strong>: siete organizaciones latinoamericanas sí lo sufrieron.</li><li><strong>El declive era una tasa de pago mayor y no menos ataques</strong> (<code>H-2</code>).</li><li><strong>Los 109 registros sin país ocultaban victimología regional</strong> (<code>H-4</code>).</li><li><strong>Se esperó una desaparición</strong> en lugar de una reaceleración.</li><li><strong>Se intentó bloquear las herramientas de <code>O-2</code></strong> en lugar de inventariarlas, rompiendo operaciones legítimas.</li></ol>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Analistas de SOC e ingeniería de detección</span><span><b>Horizonte:</b> días</span></div></div>
+<section id="t-1-cadena-de-intrusion-reconstruida" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Cadena de intrusión reconstruida</h2></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">De un dispositivo de borde al hipervisor</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">Etapa 01 · Acceso</div><h5>Borde de red sin parchear</h5><ul><li><strong><code>CVE-2024-40766</code> (SonicWall), documentada oficialmente</strong></li><li>clase entera de vulnerabilidades de concentrador y cortafuegos</li><li><strong>primera oportunidad: parcheo de borde</strong></li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 02 · Reconocimiento</div><h5>Mapa del dominio</h5><ul><li>BloodHound</li><li>SharpHound</li><li><code>ldapdomaindump</code></li><li>Advanced IP Scanner</li><li>SoftPerfect NetScan</li><li><strong>segunda oportunidad: consultas LDAP masivas desde un puesto</strong></li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 03 · Credenciales</div><h5>Escalada</h5><ul><li>Mimikatz</li><li>LaZagne</li><li>DonPAPI</li><li><code>nltest</code></li></ul></div>
+<div class="stage s-edge"><div class="st">Etapa 04 · Persistencia</div><h5>Administración remota</h5><ul><li>Hasta <strong>seis productos distintos</strong></li><li><strong>tercera oportunidad: herramienta de administración remota no autorizada</strong></li></ul></div>
+<div class="stage s-dom"><div class="st">Etapa 05 · Evasión</div><h5>Desactivar la seguridad</h5><ul><li><strong>Controlador vulnerable firmado</strong></li><li><strong>carga lateral en binario legítimo</strong></li><li>PowerTool</li></ul></div>
+<div class="stage s-imp"><div class="st">Etapa 06 · Exfiltración</div><h5>Robo antes del cifrado</h5><ul><li>RClone</li><li>MEGA</li><li>WinSCP</li><li>FileZilla</li><li><strong>cuarta oportunidad: egreso a destinos de almacenamiento no corporativos</strong></li></ul></div>
+<div class="stage s-edge"><div class="st">Etapa 07 · Impacto</div><h5>Cifrado</h5><ul><li><code>vssadmin</code> para borrar copias de sombra</li><li><strong>la última señal, y llega tarde</strong></li><li>alcance a <strong>hipervisor</strong> si la red de gestión no está segmentada</li></ul></div></div><div class="dwell"><span>⏱</span><span><strong>Las cuatro oportunidades señaladas son las que esta cartera considera accionables</strong>, y están en orden de coste creciente y de valor decreciente: <strong>cuanto más temprana, más barata y más útil.</strong></span></div></div>
+</section>
+<section id="t-2-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Acceso inicial <i>2</i></h5>
+<div class="tq" data-s="acceso inicial t1190 exploit public-facing application cve-2024-40766 (sonicwall), en el aviso conjunto"><div class="tid">T1190</div><div class="tn">Exploit Public-Facing Application</div><div class="tp"><strong><code>CVE-2024-40766</code></strong> (SonicWall), en el aviso conjunto</div></div>
+<div class="tq" data-s="acceso inicial t1133 external remote services concentradores de red como punto de entrada"><div class="tid">T1133</div><div class="tn">External Remote Services</div><div class="tp">Concentradores de red como punto de entrada</div></div></div>
+<div class="mcol" data-col><h5>Descubrimiento <i>3</i></h5>
+<div class="tq" data-s="descubrimiento t1087.002 account discovery: domain account bloodhound · sharphound · ldapdomaindump"><div class="tid">T1087.002</div><div class="tn">Account Discovery: Domain Account</div><div class="tp">BloodHound · SharpHound · <code>ldapdomaindump</code></div></div>
+<div class="tq" data-s="descubrimiento t1046 network service discovery advanced ip/port scanner · masscan · softperfect netscan"><div class="tid">T1046</div><div class="tn">Network Service Discovery</div><div class="tp">Advanced IP/Port Scanner · Masscan · SoftPerfect NetScan</div></div>
+<div class="tq" data-s="descubrimiento t1135 network share discovery sharefinder · sharpshares"><div class="tid">T1135</div><div class="tn">Network Share Discovery</div><div class="tp">ShareFinder · SharpShares</div></div></div>
+<div class="mcol" data-col><h5>Credenciales <i>2</i></h5>
+<div class="tq" data-s="credenciales t1003.001 os credential dumping: lsass memory mimikatz"><div class="tid">T1003.001</div><div class="tn">OS Credential Dumping: LSASS Memory</div><div class="tp">Mimikatz</div></div>
+<div class="tq" data-s="credenciales t1555 credentials from password stores lazagne · donpapi"><div class="tid">T1555</div><div class="tn">Credentials from Password Stores</div><div class="tp">LaZagne · DonPAPI</div></div></div>
+<div class="mcol" data-col><h5>Evasión <i>3</i></h5>
+<div class="tq" data-s="evasión t1562.001 impair defenses: disable or modify tools powertool"><div class="tid">T1562.001</div><div class="tn">Impair Defenses: Disable or Modify Tools</div><div class="tp">PowerTool</div></div>
+<div class="tq" data-s="evasión t1068 exploitation for privilege escalation (byovd) controladores de throttlestop y zemana · churchill_driver.sys / fidget.sys"><div class="tid">T1068</div><div class="tn">Exploitation for Privilege Escalation (BYOVD)</div><div class="tp">Controladores de ThrottleStop y Zemana · <code>churchill_driver.sys</code> / <code>fidget.sys</code></div></div>
+<div class="tq" data-s="evasión t1574.002 hijack execution flow: dll side-loading icardagt.exe+version.dll · mfpmp.exe+rtworkq.dll · consent.exe+msimg32.dll/wmsgapi.dll"><div class="tid">T1574.002</div><div class="tn">Hijack Execution Flow: DLL Side-Loading</div><div class="tp"><code>icardagt.exe</code>+<code>version.dll</code> · <code>mfpmp.exe</code>+<code>rtworkq.dll</code> · <code>consent.exe</code>+<code>msimg32.dll</code>/<code>wmsgapi.dll</code></div></div></div>
+<div class="mcol" data-col><h5>Movimiento lateral <i>2</i></h5>
+<div class="tq" data-s="movimiento lateral t1021.001 remote services: rdp —"><div class="tid">T1021.001</div><div class="tn">Remote Services: RDP</div><div class="tp">—</div></div>
+<div class="tq" data-s="movimiento lateral t1021.002 smb/windows admin shares impacket · crackmapexec · netexec"><div class="tid">T1021.002</div><div class="tn">SMB/Windows Admin Shares</div><div class="tp">Impacket · CrackMapExec · NetExec</div></div></div>
+<div class="mcol" data-col><h5>Mando y control <i>2</i></h5>
+<div class="tq" data-s="mando y control t1572 protocol tunneling cloudflared · ngrok · openssh"><div class="tid">T1572</div><div class="tn">Protocol Tunneling</div><div class="tp"><strong>Cloudflared · Ngrok · OpenSSH</strong></div></div>
+<div class="tq" data-s="mando y control t1219 remote access software seis productos (o-2)"><div class="tid">T1219</div><div class="tn">Remote Access Software</div><div class="tp"><strong>Seis productos</strong> (<code>O-2</code>)</div></div></div>
+<div class="mcol" data-col><h5>Exfiltración <i>1</i></h5>
+<div class="tq" data-s="exfiltración t1567.002 exfiltration to cloud storage mega · rclone · servicio de ficheros temporales"><div class="tid">T1567.002</div><div class="tn">Exfiltration to Cloud Storage</div><div class="tp">MEGA · RClone · servicio de ficheros temporales</div></div></div>
+<div class="mcol" data-col><h5>Impacto <i>2</i></h5>
+<div class="tq" data-s="impacto t1490 inhibit system recovery vssadmin"><div class="tid">T1490</div><div class="tn">Inhibit System Recovery</div><div class="tp"><strong><code>vssadmin</code></strong></div></div>
+<div class="tq" data-s="impacto t1486 data encrypted for impact akira / akira_v2"><div class="tid">T1486</div><div class="tn">Data Encrypted for Impact</div><div class="tp">Akira / <code>Akira_v2</code></div></div></div></div>
+</section>
+<section id="t-3-piramide-del-dolor" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Pirámide del Dolor</h2></div></div>
+<div class="pyr-wrap rv">
+<div class="pyr" id="pyr">
+<div class="pyr-in" id="pyrIn"><div class="slab" data-i="0" style="--w:296px;--d:296px;--z:0px;--col:#375d9d" data-lv="Base · el nivel más barato de eludir" data-t="Trivial" data-b="&lt;strong&gt;Nulo para nosotros.&lt;/strong&gt; Sin muestras (&lt;code&gt;G-3&lt;/code&gt;)" data-s="En este informe: Hash"><span>Trivial</span></div><div class="slab" data-i="1" style="--w:263px;--d:263px;--z:30px;--col:#5a7ebe" data-lv="Nivel 2 de 7" data-t="Fácil" data-b="&lt;strong&gt;Nulo.&lt;/strong&gt; El rastreador no las publica (&lt;code&gt;G-2&lt;/code&gt;)" data-s="En este informe: Direcciones IP"><span>Fácil</span></div><div class="slab" data-i="2" style="--w:230px;--d:230px;--z:60px;--col:#5a7ebe" data-lv="Nivel 3 de 7" data-t="Simple" data-b="Nulo" data-s="En este informe: Dominios"><span>Simple</span></div><div class="slab" data-i="3" style="--w:197px;--d:197px;--z:90px;--col:#4db99c" data-lv="Nivel 4 de 7" data-t="Molesto" data-b="&lt;strong&gt;Alto y accionable&lt;/strong&gt;: tres nombres concretos, y la medida es una lista de bloqueo que ya existe" data-s="En este informe: &lt;strong&gt;Controladores vulnerables nombrados&lt;/strong&gt;"><span>Molesto</span></div><div class="slab" data-i="4" style="--w:164px;--d:164px;--z:120px;--col:#a2ae4e" data-lv="Nivel 5 de 7" data-t="Molesto" data-b="&lt;strong&gt;Alto&lt;/strong&gt;: tres pares binario-biblioteca. Se detecta por &lt;strong&gt;ruta de carga&lt;/strong&gt;, no por fichero" data-s="En este informe: &lt;strong&gt;Rutas de carga lateral&lt;/strong&gt;"><span>Molesto</span></div><div class="slab" data-i="5" style="--w:131px;--d:131px;--z:150px;--col:#a2ae4e" data-lv="Nivel 6 de 7" data-t="Irritante" data-b="&lt;strong&gt;El nivel donde está todo el valor de este expediente.&lt;/strong&gt; Seis productos de administración remota y diez de descubrimiento: &lt;strong&gt;se defiende con inventario, no con firmas&lt;/strong&gt;" data-s="En este informe: &lt;strong&gt;Inventario de herramientas&lt;/strong&gt;"><span>Irritante</span></div><div class="slab" data-i="6" style="--w:98px;--d:98px;--z:180px;--col:#f7a400" data-lv="Cima · máximo valor defensivo" data-t="Difícil" data-b="&lt;strong&gt;Borde sin parchear → descubrimiento → administración remota → exfiltración → cifrado.&lt;/strong&gt; No cambia por bloquear nada, y es común a casi todo el lote" data-s="En este informe: TTP"><span>Difícil</span></div></div></div>
+<div class="pyr-info card" id="pyrInfo" style="--pc:#f7a400"><div class="lv" id="pyrLv"></div>
+<h4 id="pyrTitle"></h4><p id="pyrBody"></p><div class="pv" id="pyrSrc"></div></div></div>
+</section>
+<section id="t-4-hipotesis-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-4</span><div><h2>Hipótesis de caza</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Hipótesis</th><th>Cómo se comprueba</th><th>Qué significa un positivo</th></tr></thead><tbody>
+<tr><td><strong>H-1</strong></td><td><strong>Hay una herramienta de administración remota no autorizada instalada</strong></td><td>Inventario de software frente a lista de autorizadas; y procesos de los seis nombres de <code>O-2</code></td><td><strong>La caza de mayor rendimiento del informe, y sirve contra los ocho actores del lote.</strong> Un positivo no es necesariamente Akira: es un hallazgo en cualquier caso</td></tr>
+<tr><td><strong>H-2</strong></td><td><strong>Se cargó un controlador vulnerable firmado</strong></td><td>Eventos de carga de controlador; buscar los tres nombres de <code>KJ-5</code></td><td>Evasión en curso o ya ejecutada. <strong>Incidente de prioridad máxima</strong></td></tr>
+<tr><td><strong>H-3</strong></td><td><strong>Hubo carga lateral en <code>consent.exe</code>, <code>icardagt.exe</code> o <code>mfpmp.exe</code></strong></td><td>Bibliotecas cargadas desde rutas no estándar por esos tres binarios</td><td>Igual</td></tr>
+<tr><td><strong>H-4</strong></td><td><strong>Consultas LDAP masivas desde un puesto que no es administrativo</strong></td><td>Registro del controlador de dominio</td><td>Reconocimiento de dominio en curso (etapa 02)</td></tr>
+<tr><td><strong>H-5</strong></td><td><strong>Túnel saliente por Cloudflared, Ngrok u OpenSSH desde un servidor</strong></td><td>Flujo de salida y procesos</td><td>Canal de control establecido</td></tr>
+<tr><td><strong>H-6</strong></td><td><strong>Nuestros prefijos o nuestro dominio aparecen en su sitio de filtración</strong></td><td>Consulta al rastreador filtrando por nuestro nombre y país</td><td>Reclamación pública. <strong>Con 1,7 % regional es poco probable, y la comprobación es gratuita</strong></td></tr>
+<tr><td><strong>H-7</strong></td><td><strong>Hay un dispositivo de borde sin parchear expuesto</strong></td><td>Barrido propio del perímetro</td><td>La etapa 01, y es anterior a todo lo demás</td></tr>
+<tr><td><strong>H-8</strong></td><td><strong>La red de gestión del hipervisor es alcanzable desde la red de usuarios</strong></td><td>Prueba de alcance</td><td><code>KJ-6</code>: es el camino que el aviso documenta</td></tr></tbody></table></div>
+</section>
+<section id="t-5-brechas-de-visibilidad" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-5</span><div><h2>Brechas de visibilidad</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Por qué duele</th><th>Cómo se cierra</th></tr></thead><tbody>
+<tr><td><strong>V-1</strong></td><td><strong>Sin inventario de herramientas de administración remota autorizadas</strong></td><td>Hace inejecutable <code>H-1</code>, que es la caza principal</td><td>Inventario + política</td></tr>
+<tr><td><strong>V-2</strong></td><td>Sin registro de carga de controladores</td><td><code>H-2</code> y <code>H-3</code></td><td>Auditoría de integridad de código</td></tr>
+<tr><td><strong>V-3</strong></td><td>Sin registro de consultas LDAP del controlador de dominio</td><td><code>H-4</code></td><td>Auditoría de directorio</td></tr>
+<tr><td><strong>V-4</strong></td><td>Sin control de egreso por destino</td><td>Etapa 06</td><td>Lista de destinos de almacenamiento permitidos</td></tr>
+<tr><td><strong>V-5</strong></td><td>Red de gestión del hipervisor no segmentada</td><td><code>KJ-6</code></td><td>Segmentación</td></tr></tbody></table></div>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span><b>Vida útil:</b> semanas</span></div></div>
+<section id="x-1-logica-de-deteccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>Lógica de detección</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># ---- 1. Administración remota no autorizada (la regla de mayor rendimiento) ----
+AUTORIZADAS = { ... la lista de la organización, explícita ... }
+SOSPECHOSAS = { anydesk, meshagent, mobaxterm, radmin, rustdesk, teamviewer,
+                screenconnect, netsupport, atera, splashtop, ... }
+si proceso.nombre in SOSPECHOSAS y proceso.nombre not in AUTORIZADAS:
+    alertar &quot;ADMINISTRACIÓN REMOTA NO AUTORIZADA&quot;   # severidad alta
+    # Nota: la lista de sospechosas NO es una lista de malware.
+    # La señal es la ausencia en AUTORIZADAS, no la presencia en SOSPECHOSAS.
+
+# ---- 2. Controlador vulnerable (BYOVD) ----
+si evento == carga_de_controlador y (
+       controlador.nombre in {churchill_driver.sys, fidget.sys}
+    or controlador.firmante in {ThrottleStop, Zemana}
+    or controlador in lista_bloqueo_microsoft):
+    alertar &quot;CONTROLADOR VULNERABLE CARGADO&quot;        # severidad máxima
+
+# ---- 3. Carga lateral en binario legítimo ----
+PARES = { consent.exe:  [msimg32.dll, wmsgapi.dll],
+          icardagt.exe: [version.dll],
+          mfpmp.exe:    [rtworkq.dll] }
+si proceso.nombre in PARES y biblioteca_cargada in PARES[proceso.nombre]
+   y ruta_de_carga not in {C:\Windows\System32, C:\Windows\SysWOW64}:
+    alertar &quot;CARGA LATERAL DE BIBLIOTECA&quot;           # severidad máxima
+    # La condición decisiva es la RUTA, no el nombre: las tres bibliotecas
+    # son legítimas y se cargan a diario desde System32.
+
+# ---- 4. Borrado de copias de sombra (señal tardía, pero inequívoca) ----
+si linea_de_ordenes contiene &quot;vssadmin&quot; y contiene &quot;delete shadows&quot;:
+    alertar &quot;BORRADO DE COPIAS DE SOMBRA&quot;           # severidad máxima</code></pre></div>
+<div class="note info rv"><div class="t">La primera regla es la importante y es la más incomprendida</div><p>No es una lista de malware: <strong>las seis herramientas son legítimas y se usan a diario en organizaciones sanas.</strong> La señal es <em>no estar en el inventario de autorizadas</em>, y por eso la regla <strong>no se puede desplegar sin construir antes ese inventario</strong>. Ése es el trabajo, y la regla es la parte fácil.</p></div>
+</section>
+<section id="x-2-mitigaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Mitigaciones</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Medida</th><th>Dónde</th><th>Efecto</th><th>Coste</th></tr></thead><tbody>
+<tr><td><strong>X-2.1</strong></td><td><strong>Inventario de administración remota autorizada + alerta sobre el resto</strong></td><td>Puesto · SOC</td><td>Corta la etapa 04 y vale para los ocho actores del lote</td><td>Medio una vez</td></tr>
+<tr><td><strong>X-2.2</strong></td><td><strong>Lista de bloqueo de controladores vulnerables de Microsoft, activada</strong></td><td>Puesto</td><td>Corta la etapa 05</td><td><strong>Bajo</strong></td></tr>
+<tr><td><strong>X-2.3</strong></td><td><strong>Integridad de código con firma propia de la organización para controladores</strong></td><td>Puesto</td><td>Cierra BYOVD de forma general, no por nombre</td><td>Alto</td></tr>
+<tr><td><strong>X-2.4</strong></td><td><strong>Parcheo prioritario de concentradores y cortafuegos expuestos</strong></td><td>Perímetro</td><td>Corta la etapa 01, que es la única anterior al incidente</td><td>Medio</td></tr>
+<tr><td><strong>X-2.5</strong></td><td><strong>Segmentar la red de gestión del hipervisor</strong></td><td>Red</td><td>Corta el camino de <code>KJ-6</code></td><td>Medio</td></tr>
+<tr><td><strong>X-2.6</strong></td><td><strong>Copias inmutables y verificadas de restauración</strong></td><td>Respaldo</td><td>No evita la exfiltración; <strong>sí elimina la palanca del cifrado</strong></td><td>Medio</td></tr>
+<tr><td><strong>X-2.7</strong></td><td><strong>Lista de destinos de almacenamiento permitidos en egreso</strong></td><td>Perímetro</td><td>Corta la etapa 06</td><td>Medio</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto</th><th>Cómo se cierra</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td><strong>G-1</strong></td><td><strong>El 26 % de los registros de victimología no tiene país</strong></td><td>Condiciona <code>KJ-3</code>, que es el juicio regional del informe</td><td>Segunda fuente de rastreo; o el propio sitio de filtración</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-2</strong></td><td><strong>No tenemos ningún indicador de red ni de fichero</strong></td><td>El informe no aporta nada ingerible salvo patrones</td><td><strong>Leer el anexo técnico del aviso conjunto en original</strong>, que no se consultó</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-3</strong></td><td><strong>El inventario de capacidades es de un rastreador y no está verificado</strong></td><td>Afirmaciones como los tres controladores son de tercero</td><td>Muestras; o análisis de proveedor leído en original</td><td>2</td></tr>
+<tr><td><strong>G-4</strong></td><td><strong>No sabemos si el declive es menos ataques o más pagos</strong></td><td>Es <code>H-2</code> y cambia el pronóstico por completo</td><td>Datos de pagos en cadena de bloques; o telemetría de respuesta a incidentes</td><td>2</td></tr>
+<tr><td><strong>G-5</strong></td><td><strong>No localizamos aviso oficial posterior a noviembre de 2025</strong></td><td>Todo 2026 es de proveedor, con cifras discrepantes</td><td>Vigilar publicaciones oficiales</td><td>2</td></tr>
+<tr><td><strong>G-7</strong></td><td><strong>No sabemos sobre qué fecha cuenta el ranking del sitio su ventana de siete días</strong></td><td>Es el punto de partida del requisito de toda la serie, y las dos bases defendibles divergen hasta ×8,3 (§O-3.1)</td><td><strong>Una pregunta al operador del rastreador</strong>, o leer su documentación de la API. Barato y cierra la duda para los ocho informes</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-6</strong></td><td><strong>Sin telemetría propia</strong></td><td>Limitación estructural de la cartera</td><td>Retención de registros de flujo y de puesto</td><td>2</td></tr></tbody></table></div>
+<p class="rv"><strong>Disparadores de reevaluación.</strong> <code>I-1</code>: que la media mensual vuelva por encima de 40 —fin del declive—. <code>I-2</code>: aparición de la primera víctima chilena, que refutaría la parte más concreta de <code>KJ-3</code>. <code>I-3</code>: un aviso oficial nuevo. <code>I-4</code>: una variante <code>Akira_v3</code> o un cifrador con esquema distinto, que indicaría cambio de desarrollador. <code>I-5</code>: aparición de un sucesor con inventario de herramientas solapado (<code>H-6</code>). <code>I-6</code>: que el rastreador reduzca su proporción de registros sin país y la cifra regional cambie.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — Patrones de detección · <strong>leer primero</strong></h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern herramienta de administración remota presente y no inventariada el indicador de mayor rendimiento del expediente, y el único que sirve contra los ocho actores de este lote. akira usa seis productos distintos. la señal es la ausencia en el inventario de autorizadas, no la presencia de un nombre · alta como señal; requiere inventario previo · sin caducidad alerta (x-1.1). no automatizable sin el inventario"><span class="ty">pattern</span><span class="vv">Herramienta de administración remota presente y no inventariada<em>El indicador de mayor rendimiento del expediente, y el único que sirve contra los ocho actores de este lote. Akira usa seis productos distintos. La señal es la ausencia en el inventario de autorizadas, no la presencia de un nombre · Alta como señal; requiere inventario previo · Sin caducidad</em></span><span class="pill p-mint">Alerta (X-1.1). No automatizable sin el inventario</span></div>
+<div class="ioc-row" data-s="pattern carga de controlador firmado presente en la lista de bloqueo de microsoft la etapa 05. tres nombres concretos documentados (a.2) · alta · sin caducidad como método incidente de prioridad máxima"><span class="ty">pattern</span><span class="vv">Carga de controlador firmado presente en la lista de bloqueo de Microsoft<em>La etapa 05. Tres nombres concretos documentados (A.2) · Alta · Sin caducidad como método</em></span><span class="pill p-mint">Incidente de prioridad máxima</span></div>
+<div class="ioc-row" data-s="pattern biblioteca cargada por consent.exe, icardagt.exe o mfpmp.exe desde ruta distinta de system32 la condición decisiva es la ruta. las tres bibliotecas son legítimas y se cargan a diario · alta · sin caducidad incidente de prioridad máxima"><span class="ty">pattern</span><span class="vv">Biblioteca cargada por consent.exe, icardagt.exe o mfpmp.exe desde ruta distinta de System32<em>La condición decisiva es la RUTA. Las tres bibliotecas son legítimas y se cargan a diario · Alta · Sin caducidad</em></span><span class="pill p-mint">Incidente de prioridad máxima</span></div>
+<div class="ioc-row" data-s="pattern vssadmin delete shadows señal inequívoca y tardía: el cifrado es inminente o está en curso · alta · sin caducidad incidente de prioridad máxima"><span class="ty">pattern</span><span class="vv">vssadmin delete shadows<em>Señal inequívoca y tardía: el cifrado es inminente o está en curso · Alta · Sin caducidad</em></span><span class="pill p-mint">Incidente de prioridad máxima</span></div>
+<div class="ioc-row" data-s="pattern consultas ldap masivas desde un puesto no administrativo la etapa 02, y la más temprana que deja rastro interno · media · sin caducidad correlación"><span class="ty">pattern</span><span class="vv">Consultas LDAP masivas desde un puesto no administrativo<em>La etapa 02, y la más temprana que deja rastro interno · Media · Sin caducidad</em></span><span class="pill p-mint">Correlación</span></div>
+<div class="ioc-row" data-s="pattern túnel saliente por cloudflared, ngrok u openssh desde un servidor canal de control. en un servidor es casi siempre anómalo · media-alta · sin caducidad alerta"><span class="ty">pattern</span><span class="vv">Túnel saliente por Cloudflared, Ngrok u OpenSSH desde un servidor<em>Canal de control. En un servidor es casi siempre anómalo · Media-alta · Sin caducidad</em></span><span class="pill p-mint">Alerta</span></div></div>
+<h3 class="rv">A.2 — Artefactos de evasión nombrados</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="filename churchill_driver.sys controlador usado para evasión, documentado en el inventario del rastreador · declarado por tercero, no verificado · sin caducidad bloqueo por lista de controladores"><span class="ty">filename</span><span class="vv">churchill_driver.sys<em>Controlador usado para evasión, documentado en el inventario del rastreador · Declarado por tercero, no verificado · Sin caducidad</em></span><span class="pill p-mint">Bloqueo por lista de controladores</span></div>
+<div class="ioc-row" data-s="filename fidget.sys igual · declarado por tercero · sin caducidad igual"><span class="ty">filename</span><span class="vv">fidget.sys<em>Igual · Declarado por tercero · Sin caducidad</em></span><span class="pill p-mint">Igual</span></div>
+<div class="ioc-row" data-s="herramienta controlador de throttlestop · controlador de zemana anti-rootkit controladores legítimos y firmados, abusados por su vulnerabilidad. van con tipo herramienta para que no entren en los agregados planos: bloquear el producto entero no es la medida, bloquear el controlador vulnerable sí · declarado por tercero · sin caducidad no bloquear el producto. lista de bloqueo de controladores"><span class="ty">herramienta</span><span class="vv">Controlador de ThrottleStop · controlador de Zemana Anti-Rootkit<em>Controladores LEGÍTIMOS y firmados, abusados por su vulnerabilidad. Van con tipo herramienta para que no entren en los agregados planos: bloquear el producto entero no es la medida, bloquear el controlador vulnerable sí · Declarado por tercero · Sin caducidad</em></span><span class="pill p-amber">NO bloquear el producto. Lista de bloqueo de controladores</span></div>
+<div class="ioc-row" data-s="filename consent.exe + msimg32.dll / wmsgapi.dll · icardagt.exe + version.dll · mfpmp.exe + rtworkq.dll tres pares de carga lateral. los seis ficheros son legítimos de microsoft: la anomalía es la ruta de carga · declarado por tercero · sin caducidad detección por ruta. nunca bloqueo por nombre"><span class="ty">filename</span><span class="vv">consent.exe + msimg32.dll / wmsgapi.dll · icardagt.exe + version.dll · mfpmp.exe + rtworkq.dll<em>Tres pares de carga lateral. Los seis ficheros son legítimos de Microsoft: la anomalía es la ruta de carga · Declarado por tercero · Sin caducidad</em></span><span class="pill p-mint">Detección por ruta. NUNCA bloqueo por nombre</span></div></div>
+<h3 class="rv">A.3 — Herramientas legítimas del inventario · ⚠ <strong>NO BLOQUEAR</strong></h3>
+<div class="note warn rv"><p>⚠ <strong>Las veintiocho herramientas de <code>O-2</code> son software legítimo o de código abierto de uso administrativo normal.</strong> Van con tipo <code>herramienta</code> para que <strong>no entren en los agregados planos</strong>. Bloquear AnyDesk, RClone o Advanced IP Scanner en una organización que los usa produce una interrupción propia, no una defensa. <strong>La medida es el inventario, no el bloqueo.</strong></p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="herramienta anydesk · meshagent · mobaxterm · radmin · rustdesk · teamviewer administración remota. seis productos: el inventario más amplio de los ocho actores del lote · alta como dato publicado · sin caducidad inventario y alerta contextual. nunca bloqueo ciego"><span class="ty">herramienta</span><span class="vv">AnyDesk · MeshAgent · MobaXterm · Radmin · RustDesk · TeamViewer<em>Administración remota. Seis productos: el inventario más amplio de los ocho actores del lote · Alta como dato publicado · Sin caducidad</em></span><span class="pill p-mint">Inventario y alerta contextual. NUNCA bloqueo ciego</span></div>
+<div class="ioc-row" data-s="herramienta advanced ip scanner · advanced port scanner · bloodhound · sharphound · masscan · reconftw · sharefinder · sharpshares · softperfect netscan · ldapdomaindump descubrimiento. diez herramientas · alta como dato · sin caducidad detección por comportamiento. no bloqueo"><span class="ty">herramienta</span><span class="vv">Advanced IP Scanner · Advanced Port Scanner · BloodHound · SharpHound · Masscan · ReconFTW · ShareFinder · SharpShares · SoftPerfect NetScan · ldapdomaindump<em>Descubrimiento. Diez herramientas · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Detección por comportamiento. No bloqueo</span></div>
+<div class="ioc-row" data-s="herramienta rclone · mega · filezilla · winscp · winrar · servicio público de ficheros temporales exfiltración · alta como dato · sin caducidad control de egreso por destino. no bloqueo de la herramienta"><span class="ty">herramienta</span><span class="vv">RClone · MEGA · FileZilla · WinSCP · WinRAR · servicio público de ficheros temporales<em>Exfiltración · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Control de egreso por destino. No bloqueo de la herramienta</span></div>
+<div class="ioc-row" data-s="herramienta cloudflared · ngrok · openssh túnel · alta como dato · sin caducidad detección de túnel saliente"><span class="ty">herramienta</span><span class="vv">Cloudflared · Ngrok · OpenSSH<em>Túnel · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Detección de túnel saliente</span></div>
+<div class="ioc-row" data-s="herramienta mimikatz · lazagne · donpapi · crackmapexec · impacket · netexec · powertool credenciales y ofensiva. éstas sí son ofensivas y su presencia en un puesto corporativo es anómala por sí misma · alta como dato · sin caducidad alerta directa"><span class="ty">herramienta</span><span class="vv">Mimikatz · LaZagne · DonPAPI · CrackMapExec · Impacket · NetExec · PowerTool<em>Credenciales y ofensiva. Éstas sí son ofensivas y su presencia en un puesto corporativo es anómala por sí misma · Alta como dato · Sin caducidad</em></span><span class="pill p-mint">Alerta directa</span></div>
+<div class="ioc-row" data-s="cve cve-2024-40766 sonicwall. explotación confirmada por el aviso conjunto, con alcance a un entorno nutanix. el único indicador de este informe con respaldo gubernamental · alta — fuente oficial · mientras haya dispositivos sin parchear parcheo prioritario (x-2.4)"><span class="ty">cve</span><span class="vv">CVE-2024-40766<em>SonicWall. Explotación confirmada por el aviso conjunto, con alcance a un entorno Nutanix. El único indicador de este informe con respaldo gubernamental · Alta — fuente oficial · Mientras haya dispositivos sin parchear</em></span><span class="pill p-mint">Parcheo prioritario (X-2.4)</span></div></div>
+<h3 class="rv">A.4 — Victimología y decisiones de higiene</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 420 víctimas reclamadas en 2026; 42 en 30 días; 11 en 7 días la curva de kj-1. son reclamaciones de un sitio de filtración, no brechas verificadas · alta como recuento · 60 días medición"><span class="ty">cartera</span><span class="vv">420 víctimas reclamadas en 2026; 42 en 30 días; 11 en 7 días<em>La curva de KJ-1. Son reclamaciones de un sitio de filtración, no brechas verificadas · Alta como recuento · 60 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 7 víctimas latinoamericanas (1,7 %): mx 3 · br 3 · ar 1. ninguna chilena la ausencia verificada que sostiene kj-3, con el 26 % de registros sin país como salvedad · moderada · 60 días priorización, no tranquilidad"><span class="ty">cartera</span><span class="vv">7 víctimas latinoamericanas (1,7 %): MX 3 · BR 3 · AR 1. Ninguna chilena<em>La ausencia verificada que sostiene KJ-3, con el 26 % de registros sin país como salvedad · Moderada · 60 días</em></span><span class="pill p-mint">Priorización, no tranquilidad</span></div>
+<div class="ioc-row" data-s="cartera no se transcribe ningún nombre de víctima decisión de higiene. son organizaciones atacadas; nombrarlas aquí no aporta defensa y amplifica la publicidad del extorsionador. quien necesite la lista la tiene en el rastreador · — · — no ingerir"><span class="ty">cartera</span><span class="vv">No se transcribe ningún nombre de víctima<em>Decisión de higiene. Son organizaciones atacadas; nombrarlas aquí no aporta defensa y amplifica la publicidad del extorsionador. Quien necesite la lista la tiene en el rastreador · — · —</em></span><span class="pill p-mint">No ingerir</span></div>
+<div class="ioc-row" data-s="cartera no se reproduce ninguna cifra de rescate ni tamaño de datos el rastreador no las publica para este actor: cero registros con cifra de rescate y cero con tamaño de datos en los 420. se consigna el cero porque es informativo · alta · — —"><span class="ty">cartera</span><span class="vv">No se reproduce ninguna cifra de rescate ni tamaño de datos<em>El rastreador no las publica para este actor: cero registros con cifra de rescate y cero con tamaño de datos en los 420. Se consigna el cero porque es informativo · Alta · —</em></span><span class="pill p-mint">—</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Disciplina</th><th>Fiab.</th><th>Cred.</th><th>Grado</th><th>Notas</th></tr></thead><tbody>
+<tr><td><strong><code>B-1</code> — Medición propia</strong> sobre la interfaz pública de un rastreador de sitios de filtración: 420 registros de 2026, contadores por ventana, países, sectores</td><td>OSINT técnico · <strong>medición propia</strong></td><td><strong>B</strong></td><td><strong>2</strong></td><td><strong>Medición propia</strong></td><td>Base de <code>KJ-1</code> y <code>KJ-3</code>. Sesgos: fuente única; <strong>26 % sin país</strong>; son reclamaciones y no brechas; y el recuento incluye lo que el adversario decide publicar</td></tr>
+<tr><td><strong><code>B-2</code> — Aviso conjunto del FBI, CISA y socios</strong> (actualización de noviembre de 2025)</td><td>GOVINT · <strong>oficial</strong></td><td><strong>A</strong></td><td><strong>1</strong></td><td><strong>Oficial</strong></td><td><strong>La fuente de más autoridad del informe.</strong> De aquí salen los 244,17 M$ a finales de septiembre de 2025, la variante <code>Akira_v2</code>, y <code>CVE-2024-40766</code> con alcance a un entorno Nutanix. <strong>Trata el linaje de Conti como valoración analítica, y este informe respeta ese grado.</strong> No leímos su anexo técnico en original: es <code>G-2</code></td></tr>
+<tr><td><strong><code>B-3</code> — Perfiles de proveedor</strong> (Brandefense, CybelAngel, Adaptive Security, Halcyon por referencia)</td><td>OSINT comercial</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Proveedor</td><td>Fuente del <strong>declive del 43 %</strong> —~50/mes ene–jun → ~29/mes jul–oct de 2026— y de las cifras de +1.400 víctimas y ~245 M$. <strong>Las cifras discrepan entre ellos y con el aviso</strong>, y están medidas en momentos y con métodos distintos: <strong>no se deben sumar</strong></td></tr>
+<tr><td><strong><code>B-4</code> — Inventario de capacidades del rastreador</strong></td><td>OSINT · compilación técnica</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Proveedor</td><td>48 técnicas en 13 tácticas y las veintiocho herramientas de <code>O-2</code>. <strong>Nada de esto lo verificamos</strong> (<code>G-3</code>), y es la base de <code>KJ-4</code> y <code>KJ-5</code></td></tr>
+<tr><td><strong><code>B-5</code> — Datos comparativos del mismo rastreador para los otros siete actores del lote</strong></td><td>OSINT técnico · medición propia</td><td><strong>B</strong></td><td><strong>2</strong></td><td>Medición propia</td><td>Lo que hace utilizable la tabla de <code>E-1</code> y <code>E-3</code>: <strong>todas las filas, el mismo día, la misma metodología</strong></td></tr></tbody></table></div>
+<div class="note info rv"><p><strong>La estructura de fuentes de este informe es la más sólida del lote y conviene decir por qué:</strong> es <strong>el único de los ocho con una fuente gubernamental</strong>. Los juicios que descansan en <code>B-2</code> —el CVE, el alcance al hipervisor, la cifra de 244,17 millones— tienen un grado que ningún otro informe de esta serie podrá igualar. En cambio los juicios de capacidad descansan en <code>B-4</code>, que es compilación no verificada, <strong>y eso está marcado en cada fila de <code>A.2</code> y <code>A.3</code></strong>.</p></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Probabilidad estimativa</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn">Casi con certeza (≥99 %)</span><span class="bt"><i data-w="100"></i></span><span class="bv">99</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy probable (80–95 %)</span><span class="bt"><i data-w="89"></i></span><span class="bv">88</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Probable (55–80 %)</span><span class="bt"><i data-w="69"></i></span><span class="bv">68</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Aproximadamente igual de probable (40–60 %)</span><span class="bt"><i data-w="51"></i></span><span class="bv">50</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Poco probable (20–45 %)</span><span class="bt"><i data-w="32"></i></span><span class="bv">32</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy poco probable (5–20 %)</span><span class="bt"><i data-w="12"></i></span><span class="bv">12</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Remoto (≤5 %)</span><span class="bt"><i data-w="4"></i></span><span class="bv">4</span></div></div></div>
+<p class="rv"><strong>Confianza</strong>: <strong>alta</strong> —fuentes múltiples corroboradas, método expuesto—; <strong>moderada</strong> —fuente única de calidad, o inferencia propia sobre datos verificables—; <strong>baja</strong> —dato ausente o inferencia indirecta—.</p>
+<div class="note info rv"><p><strong>La distinción que este informe necesita, y es la que más se descuida al leer un sitio de filtración: hay que separar la confianza en el RECUENTO de la confianza en lo que el recuento MIDE.</strong></p><p>«Akira reclamó 420 víctimas en 2026» es un recuento: es reproducible y la confianza es <strong>alta</strong>. «Akira atacó con éxito a 420 organizaciones en 2026» es otra afirmación, y <strong>no la medimos</strong>: no sabemos cuántas reclamaciones son falsas, recicladas o duplicadas. Y «Akira atacó a 420 organizaciones» tampoco es «Akira atacó a 420 y ésas son todas»: <strong>las que pagan no se publican</strong>.</p><p><strong>La regla:</strong> un recuento de sitio de filtración acota <strong>por abajo</strong> el número de víctimas y <strong>por arriba</strong> nada. Es un suelo con ruido, no una medida. Toda la serie de ocho informes se lee con esta advertencia, y el <code>Anexo D</code> la convierte en método.</p></div>
+</section>
+<section id="anexo-d-como-leer-un-ranking-de-actividad-de-siete-dias" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo leer un ranking de actividad de siete días</h2></div></div>
+<p class="rv"><strong>El problema.</strong> Un rastreador de sitios de filtración publica rankings por ventana corta, y esos rankings son el punto de partida habitual de un requisito de inteligencia: «dame el top 10». <strong>El ranking es un dato real que mide algo distinto de lo que parece medir.</strong></p>
+<p class="rv"><strong>Lo que un ranking de siete días mide en realidad:</strong> el número de <strong>entradas publicadas</strong> en un sitio de filtración durante siete días. No mide intrusiones, no mide víctimas confirmadas, no mide daño y no mide capacidad.</p>
+<p class="rv"><strong>Las cuatro distorsiones, con su efecto y su contramedida.</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Distorsión</th><th>Efecto en el ranking</th><th>Contramedida</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td><strong>La tanda, y la fecha con que se cuenta</strong></td><td>Un grupo que publica un lote acumulado <strong>puede</strong> aparecer arriba sin haber atacado esa semana, y si eso ocurre depende de <strong>qué fecha use el ranking</strong>. INC Ransom publicó <strong>cincuenta entradas el 12 de noviembre</strong>: contado por publicación es el más activo de la semana, por fecha de ataque es casi inactivo —<strong>una divergencia de ×8,3</strong>— (§O-3.1). Y otro actor del lote publicó <strong>veintiséis entradas en seis minutos, todas fechadas ese mismo día</strong></td><td><strong>Contar las dos bases y publicar las dos.</strong> Y <strong>comparar la ventana corta con el acumulado del año</strong>: Akira es cuarta del año y décima de la semana; el actor de las veintiséis entradas no tiene año</td></tr>
+<tr><td><strong>2</strong></td><td><strong>El que paga no aparece</strong></td><td>Un grupo eficaz cobrando publica <strong>menos</strong>. Un declive del 43 % es compatible con una tasa de pago mayor (<code>H-2</code>)</td><td><strong>No leer una caída como debilitamiento</strong> sin una segunda señal</td></tr>
+<tr><td><strong>3</strong></td><td><strong>La entrada sin víctima</strong></td><td>Entradas anónimas, recicladas o duplicadas cuentan igual. En este lote hay un actor con <strong>59 de 259 nombres anónimos</strong> y otro cuyas listas un proveedor describe como potencialmente fabricadas</td><td><strong>Comprobar que las víctimas son nombradas y verificables por un tercero</strong> — es el criterio 7 del <code>Anexo D</code> de <code>CTI-2026-042</code></td></tr>
+<tr><td><strong>4</strong></td><td><strong>La ventana premia lo nuevo</strong></td><td>Un sitio recién abierto publica su fondo de catálogo de golpe y domina la ventana; una operación madura publica a ritmo</td><td><strong>Mirar la fecha de alta del grupo en el rastreador.</strong> Cinco de los ocho de este lote son de las últimas seis semanas</td></tr></tbody></table></div>
+<p class="rv"><strong>El procedimiento, en cuatro pasos y veinte minutos:</strong></p><ol class="rv"><li><strong>Tomar el ranking de la ventana corta y, al lado, el acumulado del año del mismo rastreador.</strong> Las dos columnas juntas separan la operación de la tanda.</li><li><strong>Añadir la fecha de alta de cada grupo.</strong> Distingue «activo» de «recién abierto».</li><li><strong>Añadir si hay inventario de capacidades y si hay aviso oficial.</strong> Distingue «marca con operación» de «sitio».</li><li><strong>Sólo entonces repartir el esfuerzo</strong>, y repartirlo desigual.</li></ol>
+<p class="rv"><strong>Las dos advertencias de este método.</strong></p><ul class="rv"><li><strong>No clasifica la peligrosidad, clasifica la solidez de la evidencia.</strong> Un grupo nuevo con un solo cliente competente puede hacer más daño a una organización concreta que una marca madura que nunca la toque. <strong>El método decide dónde invertir atención analítica.</strong></li><li><strong>Y favorece lo documentado, que es un sesgo hacia lo anglosajón.</strong> Akira tiene aviso conjunto porque sus víctimas están mayoritariamente en países con agencias que publican avisos. <strong>Un actor con la misma capacidad y victimología exclusivamente latinoamericana aparecería en este método como peor documentado, no como menos peligroso.</strong> La contramedida es el dato regional propio de <code>E-3</code>, que no depende de que nadie publique un aviso.</li></ul>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div><ul class="rv"><li><strong>ICD 203</strong>, con la adición del <code>Anexo C</code>: <strong>separar la confianza en el recuento de la confianza en lo que el recuento mide</strong>, y la regla de que un recuento de sitio de filtración es un suelo con ruido.</li><li><strong>Código Admiralty/OTAN</strong>, con el grado <strong>oficial</strong> para <code>B-2</code> y <strong>medición propia</strong> para <code>B-1</code>, introducido en <code>CTI-2026-044</code>.</li><li><strong>MITRE ATT&amp;CK v18</strong> (<code>T-2</code>), con la observación de que <strong>la mayoría de las técnicas de este actor se ejecutan con software legítimo</strong>, lo que desplaza la detección del fichero al contexto.</li><li><strong>Pirámide del Dolor</strong> (Bianco), en <code>T-3</code>, con dos niveles «molestos» de valor desigual: <strong>un controlador nombrado es accionable hoy; una ruta de carga lateral es accionable siempre</strong>.</li><li><strong>ACH y pre-mortem</strong> (<code>O-6</code>), con <code>H-2</code> —que el declive sea más pagos y no menos ataques— retenida como la hipótesis más incómoda y no refutable con estos datos.</li><li><strong>Triaje de un grupo recién nombrado</strong>, <code>Anexo D</code> de <code>CTI-2026-042</code>, aplicado en <code>E-1</code> a los ocho actores del lote.</li><li><strong>Lectura de un ranking de ventana corta</strong>, propio de este informe (<code>Anexo D</code>): cuatro distorsiones, cuatro pasos y veinte minutos.</li></ul>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2><p>Las tablas <code>cti:ioc</code> alimentan <code>ioc_index.csv</code>. <strong>Cinco advertencias:</strong></p></div></div><ol class="rv"><li><strong>⚠ Las veintiocho herramientas de <code>A.3</code> llevan tipo <code>herramienta</code> y NO entran en los agregados planos.</strong> Son software legítimo de uso administrativo normal. <strong>Bloquear AnyDesk, RClone o Advanced IP Scanner produce una interrupción propia, no una defensa.</strong> La medida es el inventario (<code>X-2.1</code>).</li><li><strong>Los dos controladores de producto comercial de <code>A.2</code> tampoco se bloquean como producto</strong>: lo que se bloquea es el <strong>controlador vulnerable</strong>, por lista de bloqueo, no el fabricante.</li><li><strong>Los seis ficheros de carga lateral son binarios y bibliotecas legítimos de Microsoft.</strong> <strong>Nunca se bloquean por nombre</strong>: la señal es la <strong>ruta de carga</strong>. Un bloqueo por nombre de <code>consent.exe</code> rompe Windows.</li><li><strong><code>CVE-2024-40766</code> es el único indicador de este informe con respaldo gubernamental</strong>, y el único con una acción inequívoca: parchear.</li><li><strong>Este informe no aporta ni una dirección, ni un dominio, ni un hash</strong>, y conviene decirlo en lugar de disimularlo: es <code>G-2</code>. Lo que aporta son <strong>patrones y una decisión de priorización</strong>.</li></ol>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.1</td><td>2026-11-19</td><td><strong>Corrección de una cifra y de un razonamiento, detectados al medir el segundo informe de la serie.</strong> La cuenta de siete días de Akira pasa de 11 a <strong>8</strong>: las 11 salían de contar por fecha de publicación con un corte propio, y 8 es lo que dan <strong>las dos bases de conteo</strong>, que en este actor coinciden. Se añade §O-3.1 con el hallazgo que lo motivó: <strong>un registro tiene dos fechas —publicación y ataque declarado— y para algunos actores del lote las dos cuentas divergen hasta ×8,3</strong> (INC Ransom: 7 frente a 58, por una tanda de cincuenta entradas publicadas el 12 de noviembre). Se corrige en consecuencia la distorsión 1 del <code>Anexo D</code>, que afirmaba que una tanda infla el ranking <strong>sin señalar que eso depende de qué fecha use el ranking</strong>, algo que §O-3.1 declara <strong>no determinable desde fuera</strong> (<code>G-7</code>). Y se registra un eje nuevo: <code>settra</code> declara fecha de ataque distinta en el <strong>100 %</strong> de sus entradas, <code>pixelleaks</code> y <code>curious worm</code> en <strong>ninguna</strong></td><td>Célula CTI</td></tr>
+<tr><td>1.0</td><td>2026-11-19</td><td>Emisión inicial, primera de la serie <code>046</code>–<code>053</code> construida sobre el top 10 de actividad de siete días de un rastreador público. Incluye: el <strong>declive medido y corroborado por dos métodos</strong> —43 % de caída en media mensual, y el 10 % del año en el último mes— (<code>KJ-1</code>, <code>O-3</code>); la <strong>separación entre declive de actividad y pérdida de capacidad</strong> (<code>KJ-2</code>, <code>E-2</code>); la <strong>exposición regional como la más baja del lote: 1,7 % y cero víctimas chilenas</strong>, con el contraste medido frente a Qilin (10,0 %) y TheGentlemen (12,6 %) sobre los mismos datos (<code>KJ-3</code>, <code>E-3</code>); la lectura del <strong>inventario como cadena casi íntegramente legítima</strong> y la consecuencia de que la detección sea un inventario y no una firma (<code>KJ-4</code>, <code>X-1</code>); los <strong>artefactos nombrados de evasión</strong> —tres controladores y tres pares de carga lateral— (<code>KJ-5</code>, <code>A.2</code>); la <strong>vía oficialmente documentada de borde a hipervisor</strong> (<code>KJ-6</code>); el tratamiento del <strong>linaje como no resuelto</strong>, siguiendo la cautela del propio aviso (<code>O-5</code>); la <strong>posición relativa dentro del lote de ocho</strong> que permite priorizar (<code>E-1</code>); y el método del <code>Anexo D</code> para leer un ranking de ventana corta</td><td>Célula CTI</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota sobre esta emisión</div><p>Es el informe <strong>mejor respaldado y de menor relevancia regional</strong> de la serie, y las dos cosas van juntas: Akira tiene aviso gubernamental porque sus víctimas están donde hay agencias que publican avisos. <strong>El <code>Anexo D</code> declara ese sesgo como una propiedad del método</strong>, no como una propiedad del adversario, y es la razón de que <code>E-3</code> mida la exposición regional con datos propios en lugar de inferirla de la abundancia de literatura.</p></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div><ol class="rv"><li><strong>¿Existe el inventario de herramientas de administración remota autorizadas?</strong> Es <code>X-2.1</code>, <code>H-1</code> y la decisión 1 de <code>E-4</code>. <strong>Es la única medida de este informe que rinde contra los ocho actores del lote</strong>, y si no existe, <strong>ésa es la conclusión del informe en esa organización</strong>.</li><li><strong>¿Está activada la lista de bloqueo de controladores vulnerables?</strong> Es <code>X-2.2</code>, cuesta poco y corta la etapa 05. Tres nombres concretos en <code>A.2</code>.</li><li><strong>¿Se bloqueó alguna herramienta de <code>A.3</code>?</strong> Es la pregunta de seguridad de este informe, <strong>al revés de lo habitual</strong>: aquí el riesgo no es dejar de bloquear, es bloquear. Son veintiocho herramientas legítimas, y seis de ellas probablemente las usa el equipo de soporte.</li><li><strong>¿Se priorizó Akira por su cifra acumulada?</strong> Cuarta del año, <strong>décima de la semana</strong>, 1,7 % regional. Si entró en el plan por los 245 millones de dólares, entró por el dato equivocado.</li><li><strong>¿Se leyó el 1,7 % como «no nos puede pasar»?</strong> Siete organizaciones latinoamericanas sí lo sufrieron, y el 26 % de registros sin país deja margen. <strong>La baja exposición es una razón para priorizar menos, no para no mirar.</strong></li><li><strong>¿Hay un dispositivo de borde sin parchear expuesto?</strong> Es <code>H-7</code> y es anterior a todo lo demás. <code>CVE-2024-40766</code> tiene respaldo gubernamental y alcanzó un hipervisor.</li><li><strong>¿Es la red de gestión del hipervisor alcanzable desde la red de usuarios?</strong> Es <code>H-8</code> y <code>KJ-6</code>.</li><li><strong>Y la pregunta de método, que es la que más vale:</strong> el <code>Anexo D</code> sostiene que un ranking de siete días mide publicaciones y no operaciones. <strong>¿Alguien ha encontrado un caso en que la ventana corta acertara y el acumulado del año se equivocara?</strong> Un contraejemplo así valdría más que este informe, porque el método se aplica a los siete que siguen.</li></ol>
+<p class="rv"><em>Fin del informe <code>CTI-2026-046</code> v1.0.</em></p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-046 · v1.1 · 2026-11-19</strong> · caduca 2027-02-19</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:AMBER</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Elaborado con fuentes abiertas y con medición propia sobre la interfaz pública de consulta de un rastreador de sitios de filtración. No contiene telemetría de la organización emisora ni datos de terceros. Difusión libre, conservando la atribución de las fuentes y las salvedades de §3. Se mantiene PAP:AMBER: las herramientas del Anexo A.3 son legítimas y de uso administrativo normal, y no deben cargarse en bloqueo.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-051 · PixelLeaks · Pixelleaks</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-051<small>PixelLeaks · Pixelleaks</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-que-clase-de-objeto-es">E-1. Qué clase de objeto es</a><a href="#e-2-el-registro-retorico-y-por-que-es-un-dato-operativo">E-2. El registro retórico, y por qué es un dato operativo</a><a href="#e-3-la-prueba-que-ofrece-y-la-que-no">E-3. La prueba que ofrece, y la que no</a><a href="#e-4-decisiones-que-este-informe-pide">E-4. Decisiones que este informe pide</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion">O-1. Identificación</a><a href="#o-2-la-anatomia-de-su-catalogo">O-2. La anatomía de su catálogo</a><a href="#o-3-la-actividad-medida">O-3. La actividad medida</a><a href="#o-4-nuestra-exposicion">O-4. Nuestra exposición</a><a href="#o-5-hipotesis-alternativas-y-pre-mortem">O-5. Hipótesis alternativas y pre-mortem</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-la-comprobacion-de-cardinalidad">T-1. La comprobación de cardinalidad</a><a href="#t-2-mitigaciones">T-2. Mitigaciones</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-leer-el-registro-retorico-de-un-catalogo-de-extorsion">Anexo D — Cómo leer el registro retórico de un catálogo de extorsión</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de operación de extorsión</span><span class="pill p-mint">Global · México · Latinoamérica</span><span class="pill p-sky">v1.0 · 2026-11-19</span></div><h1>PixelLeaks · Pixelleaks</h1><p class="sub">PixelLeaks no publica ni una captura de pantalla en sus 34 entradas, y escribe como un regulador en lugar de como un extorsionador</p><p class="sub2">Hallazgo propio: cero prueba visual y la especificidad descriptiva más alta del lote — recuentos de registros tabla por tabla · y la mayor proporción de víctimas latinoamericanas de los actores nuevos</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-051</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2027-01-19</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-051</code></dd></div><div><dt>Versión</dt><dd>1.0 — 2026-11-19</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <strong><code>PAP:WHITE</code></strong> — sin indicadores accionables</dd></div><div><dt>Objeto</dt><dd><strong><code>PixelLeaks</code></strong>, segundo puesto del ranking de siete días que motiva esta serie. <strong>Dieciséis días de existencia observada</strong></dd></div><div><dt>Foco regional</dt><dd><strong>3 víctimas mexicanas de 34 (8,8 %): la mayor proporción latinoamericana de los seis actores nuevos del lote.</strong> Una de ellas con plazo declarado al 22 de noviembre de 2026</dd></div><div><dt>Lo que lo distingue en este lote</dt><dd><strong>Cero capturas de pantalla en 34 entradas</strong> —único en el lote— <strong>y a la vez la especificidad descriptiva más alta</strong>: recuentos de registros tabla por tabla, con cifras de seis y siete dígitos</dd></div><div><dt>Y su rasgo más propio</dt><dd><strong>El registro con que escribe</strong>: «esta divulgación se refiere a un conjunto verificado de registros de…». <strong>Imita una notificación de brecha, no una nota de rescate</strong></dd></div><div><dt>Horizonte</dt><dd>Estratégico 3–6 meses</dd></div><div><dt>Origen de los datos</dt><dd><strong>Medición propia</strong> sobre 34 registros, más cuatro fuentes externas</dd></div><div><dt>Caducidad</dt><dd><strong>2027-01-19 (60 días)</strong></dd></div><div><dt>Autor</dt><dd class="m">Célula CTI</dd></div></dl>
+<div class="note warn rv"><div class="t">⚠ Cuatro advertencias</div><ol><li><strong>Dieciséis días de existencia observada</strong>, desde el 3 de noviembre de</li><li>Nada de lo que sigue es un patrón establecido.</li><li><strong>Ninguna de sus víctimas ha confirmado nada</strong>, y el rastreador marca al actor como emergente con advertencia expresa de tratar sus reclamaciones con cautela.</li><li><strong>Los recuentos no concuerdan</strong>: nosotros medimos 34 entradas, un proveedor cuenta 23 víctimas nombradas, y el rastreador declara 27 en el mes. También discrepan en la fecha de su primera víctima: 3 u 9 de noviembre.</li><li><strong>Hay una reclamación activa contra una organización mexicana con plazo declarado al 22 de noviembre de 2026.</strong> Este informe <strong>no la nombra</strong> —regla de <code>CTI-2026-048</code> <code>E-4</code>— pero el dato de que existe es relevante para quien opere en ese país (<code>E-4.1</code>).</li></ol></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>Es el único actor del lote que no ofrece ninguna prueba visual: cero capturas de pantalla en sus 34 entradas. Para contraste, en el mismo conjunto de datos y el mismo día: n0n tiene 259 de 259, Vortex 35 de 35 y settra 113 de 116</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> el dato. <em>Consecuencia:</em> <strong>su catálogo descansa enteramente en la palabra escrita</strong>, y eso es inusual en un ecosistema donde la imagen de un árbol de ficheros es la moneda de credibilidad corriente.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>Y compensa esa ausencia con la especificidad descriptiva más alta del lote: describe el material por tablas y con recuentos exactos. Una de sus entradas detalla, para una plataforma de pagos de un país africano, 818.849 transacciones de monedero de cliente, 7.630.625 detalles de transacción, 428.587 registros de libro de comisiones y 343.229 registros de saldo de servicio</h4><p>Otra describe <strong>copias de seguridad completas de las veintiuna bases de datos de clientes</strong> de una plataforma de gestión de licencias. Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que ese nivel de detalle —estructura de tablas y cardinalidades— <strong>sea difícil de inventar sin haber tenido acceso al esquema</strong>. <em>En la escala de <code>CTI-2026-048</code> <code>Anexo D</code> opera en el nivel 5 —inventario descriptivo— sin pasar por el 3, que es exactamente el revés de <code>Vortex</code>.</em></p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada-alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-3</div>
+<h4>El hallazgo propio de este informe es el registro con que escribe, y no es un detalle de estilo: define a quién va dirigido. Sus entradas empiezan con fórmulas del tipo «esta divulgación se refiere a un conjunto verificado de registros de…» y describen el material como «programado para publicación»</h4><p><strong>No hay amenaza, no hay insulto, no hay precio, no hay plazo en la prosa.</strong> Es el registro de un aviso regulatorio o de una notificación de brecha. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la audiencia buscada <strong>no sea el departamento de TI de la víctima sino sus clientes, sus reguladores y la prensa</strong>, porque ése es el único público para el que ese tono funciona mejor que una amenaza. — es interpretación nuestra sobre material público, y <strong>ninguna fuente externa lo describe</strong> (<code>Anexo D</code>).</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>No es un programa de afiliados ni una operación de ransomware: no tiene malware, ni manifiesto, ni reglas, ni aviso de reclutamiento. Una fuente lo señala expresamente, y el rastreador no le registra ninguna herramienta ni ninguna TTP</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que se trate de <strong>extorsión por datos sin cifrado</strong>, operada por un equipo reducido o una persona. <em>Consecuencia:</em> como en <code>CTI-2026-048</code> y <code>050</code>, <strong>la copia de seguridad no defiende de nada</strong> y la medida que vale es el control de egreso y la identidad.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada-alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>Y su dato regional es el más relevante de los actores nuevos: tres víctimas mexicanas de 34, el 8,8 %, con una reclamación activa y plazo al 22 de noviembre de 2026. Es la proporción latinoamericana más alta de los seis actores nuevos del lote —por delante de settra (4,3 %), n0n (4,2 %) y de Vortex y curious worm (0 %)— aunque en términos absolutos sean tres casos</h4><p>Valoramos <strong>moderada</strong> la confianza, con la salvedad de que <strong>diez de sus 34 entradas no tienen país asignado</strong>, de modo que la proporción real podría ser distinta. <em>Consecuencia:</em> <strong>para una organización mexicana este actor no es ruido del ranking: hay una reclamación con fecha</strong> (<code>E-4.1</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-6</div>
+<h4>Publica todo con la fecha del día: el 100 % de sus entradas tiene la fecha de ataque igual a la de publicación. De 34 registros, los 34</h4><p>Sólo <code>curious worm</code> comparte esta propiedad en el lote, y es su opuesto exacto <code>settra</code>, con el 0 %. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> el dato. <em>Lectura, y hay que dar las dos:</em> o el actor <strong>no declara cuándo ocurrió el acceso</strong> —lo que priva a la víctima del único dato que le permitiría comprobarlo—, o <strong>el rastreador le asigna la fecha de publicación por omisión</strong> al no encontrar otra. <strong>Para el lector el efecto es el mismo: no hay ventana temporal que comprobar</strong> (<code>G-2</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-7</div>
+<h4>Los recuentos no concuerdan entre fuentes, y la discrepancia es del 48 %. Nosotros medimos 34 entradas; un proveedor cuenta 23 víctimas nombradas; el rastreador declara 27 en el mes</h4><p>Y discrepan también en la fecha de la primera víctima: <strong>3 de noviembre</strong> según el rastreador, <strong>9 de noviembre</strong> según el proveedor. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que las tres cifras sean correctas para su método y su momento. <em>Y la lectura más probable de la diferencia entre 34 y 23 es precisamente <code>KJ-1</code> y la ausencia de dominio en 21 de las 34 entradas:</em> <strong>un recuento de «víctimas nombradas» excluye lo que no se puede nombrar.</strong></p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-lo rv"><div class="id">KJ-8</div>
+<h4>Hay un indicio de vector, débil pero es el único que existe para este actor: dos de veintitrés víctimas tenían credenciales de empleado filtradas en los doce meses anteriores a su publicación. Es el 8,7 %, según un proveedor que además declara expresamente que no sabe si esas credenciales fueron la vía de acceso</h4><p>Valoramos <strong>poco probable</strong> <em>(20–45 %)</em> que esa correlación establezca el vector, y <strong>probable</strong> <em>(55–80 %)</em> que el credencial robado sea <strong>una</strong> de sus vías, por ser la más común en esta clase de operación. <em>Se consigna porque es el único indicio de acceso del expediente, y con su grado.</em></p><div class="gauge" data-p="32"><div class="lab"><span>Poco probable</span><b>20–45 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: baja.</b> </p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2><p><code>PixelLeaks</code> apareció el 3 de noviembre de 2026 y dieciséis días después ocupa el segundo puesto del ranking que motiva esta serie. Tiene dos rasgos que no comparte con ningún otro actor del lote, y los dos apuntan en la misma dirección.</p></div></div>
+<p class="rv">El primero: <strong>no ofrece ninguna prueba visual.</strong> En sus 34 entradas no hay <strong>una sola captura de pantalla</strong>, cuando <code>n0n</code> tiene 259 de 259, <code>Vortex</code> 35 de 35 y <code>settra</code> 113 de 116. En un ecosistema donde la imagen de un árbol de ficheros es la moneda corriente de la credibilidad, éste no la usa.</p>
+<p class="rv">El segundo: <strong>compensa con palabras, y con un nivel de detalle que es el más alto del lote.</strong> Describe el material por tablas y con cardinalidades exactas: para una plataforma de pagos de un país africano, 818.849 transacciones de monedero, 7.630.625 detalles de transacción, 428.587 registros de libro de comisiones; para una plataforma de gestión de licencias, las copias completas de sus veintiuna bases de datos de clientes. <strong>Describir una estructura de tablas con sus cardinalidades es difícil de inventar sin haber visto el esquema</strong>, y eso lo sitúa alto en la escala de prueba por una vía distinta de la habitual.</p>
+<p class="rv">Y hay un tercer rasgo, que es el hallazgo propio de este informe y que no aparece en ninguna fuente externa: <strong>el registro con que escribe.</strong> Sus entradas empiezan con fórmulas como «esta divulgación se refiere a un conjunto verificado de registros de…» y describen el material como «programado para publicación». <strong>No hay amenaza, no hay insulto, no hay precio y no hay plazo en la prosa.</strong> Es el tono de un aviso regulatorio. La lectura más económica es que <strong>su audiencia no es el departamento de TI de la víctima, sino sus clientes, sus reguladores y la prensa</strong> — porque es el único público para el que ese tono funciona mejor que una amenaza. Es interpretación nuestra y se marca como tal.</p>
+<p class="rv">No es un programa de afiliados ni una operación de ransomware: <strong>no tiene malware, ni manifiesto, ni reglas, ni reclutamiento</strong>, y el rastreador no le registra ninguna herramienta. Es extorsión por datos, probablemente de un equipo muy pequeño.</p>
+<p class="rv">Para esta región hay un dato que lo separa del resto de los nuevos: <strong>tres víctimas mexicanas de 34 —el 8,8 %, la proporción latinoamericana más alta de los seis actores nuevos— y una de ellas con plazo declarado al 22 de noviembre de 2026.</strong> En términos absolutos son tres casos; en términos de relevancia para una organización mexicana, es una reclamación con fecha.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Qué cubre</h3>
+<p class="rv">El objeto <code>PixelLeaks</code> en sus dieciséis días de existencia observada: la anatomía de su catálogo, la ausencia de prueba visual y la especificidad descriptiva que la sustituye, el registro retórico de sus publicaciones y a quién apunta, su victimología y su exposición regional.</p>
+<h3 class="rv">3.2 Qué NO cubre</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Fuera de alcance</th><th>Por qué</th></tr></thead><tbody>
+<tr><td><strong>Una cadena de intrusión</strong></td><td>Ninguna TTP, ninguna herramienta, ninguna muestra. Es <code>G-1</code></td></tr>
+<tr><td><strong>La veracidad de las reclamaciones</strong></td><td>Ninguna víctima ha confirmado; el rastreador advierte de cautela</td></tr>
+<tr><td><strong>Los nombres de las víctimas, incluida la mexicana con plazo activo</strong></td><td><strong>No se reproducen</strong> (<code>CTI-2026-048</code> <code>E-4</code>). El dato de que existe la reclamación sí se da</td></tr>
+<tr><td><strong>El vector de acceso</strong></td><td>Sólo hay un indicio débil y declarado como tal (<code>KJ-8</code>)</td></tr>
+<tr><td><strong>Indicadores</strong></td><td>No hay ninguno. <code>PAP:WHITE</code></td></tr></tbody></table></div>
+<h3 class="rv">3.3 Limitaciones de la colección</h3>
+<div class="note warn rv"><div class="t">⚠ Seis limitaciones</div><ol><li><strong>Dieciséis días de observación y 34 entradas.</strong> Ninguna proporción es un patrón.</li><li><strong>Diez de las 34 entradas no tienen país</strong>, lo que afecta directamente a <code>KJ-5</code>, que es el juicio regional.</li><li><strong>Veintiuna de 34 no tienen dominio</strong>, de modo que la mayoría de su catálogo no es comprobable por un tercero.</li><li><strong>El hallazgo del registro retórico es interpretación nuestra</strong> y ninguna fuente externa lo describe (<code>Anexo D</code>).</li><li><strong>Los recuentos discrepan un 48 %</strong> entre fuentes, y también la fecha de su primera víctima (<code>KJ-7</code>).</li><li><strong>Y el 100 % de sus entradas publica con fecha del día</strong>, de modo que <strong>no hay ninguna ventana temporal que una víctima pueda comprobar</strong> (<code>KJ-6</code>).</li></ol></div>
+<h3 class="rv">3.4 Qué aporta</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Aporte</th><th>Dónde</th></tr></thead><tbody>
+<tr><td><strong>La ausencia total de prueba visual medida</strong>: 0 de 34</td><td><code>KJ-1</code></td></tr>
+<tr><td><strong>La especificidad descriptiva por tablas y cardinalidades</strong> como forma alternativa de prueba</td><td><code>KJ-2</code>, <code>O-2</code></td></tr>
+<tr><td><strong>El registro retórico como indicador de audiencia</strong> — hallazgo propio</td><td><code>KJ-3</code>, <code>Anexo D</code></td></tr>
+<tr><td><strong>El 100 % de entradas con fecha del día</strong> y su consecuencia para la víctima</td><td><code>KJ-6</code></td></tr>
+<tr><td><strong>La exposición regional más alta de los actores nuevos</strong>, con una reclamación activa fechada</td><td><code>KJ-5</code>, <code>E-4</code></td></tr>
+<tr><td><strong>Un método para leer el registro retórico de un catálogo de extorsión</strong></td><td><code>Anexo D</code></td></tr></tbody></table></div>
+<h3 class="rv">3.5 Veredicto</h3>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Elemento</th><th>Veredicto</th><th>Base</th></tr></thead><tbody>
+<tr style="background:rgba(247,164,0,.05)"><td>1</td><td>Es una operación de ransomware</td><td><strong>NO SOSTENIDO</strong></td><td><strong>Sin malware, sin manifiesto, sin reglas, sin reclutamiento</strong> (<code>KJ-4</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>2</td><td>Ofrece prueba de sus reclamaciones</td><td><strong>NO SOSTENIDO en lo visual, PARCIALMENTE en lo descriptivo</strong></td><td><strong>0 capturas de 34</strong>; pero recuentos por tabla difíciles de inventar (<code>KJ-1</code>, <code>KJ-2</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>3</td><td>Sus reclamaciones son comprobables por la víctima</td><td><strong>NO SOSTENIDO</strong></td><td><strong>100 % con fecha del día: no hay ventana temporal</strong> (<code>KJ-6</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>4</td><td>Sus entradas son verificables por terceros</td><td><strong>NO SOSTENIDO</strong></td><td><strong>13 de 34 con dominio</strong></td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>5</td><td>Es un actor irrelevante para la región</td><td><strong>NO SOSTENIDO</strong></td><td><strong>3 víctimas mexicanas (8,8 %), la mayor proporción de los nuevos, con una reclamación fechada</strong> (<code>KJ-5</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>6</td><td>Su tono es el de un extorsionador</td><td><strong>NO SOSTENIDO — y es el hallazgo</strong></td><td><strong>Es el de un aviso regulatorio</strong> (<code>KJ-3</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>7</td><td>Los recuentos públicos sobre él son consistentes</td><td><strong>NO SOSTENIDO</strong></td><td>34 · 23 · 27, y dos fechas distintas de inicio (<code>KJ-7</code>)</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td>8</td><td>Se conoce su vector de acceso</td><td><strong>NO SOSTENIDO</strong></td><td>Un indicio del 8,7 %, con el propio proveedor declarando que no sabe si fue la vía (<code>KJ-8</code>)</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> CISO, Legal, Comunicación, Riesgo</span><span><b>Horizonte:</b> 3–6 meses</span></div></div>
+<section id="e-1-que-clase-de-objeto-es" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Qué clase de objeto es</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · sin prueba visual</div>
+<h4 style="margin:0 0 6px"><strong>Cero capturas de pantalla en 34 entradas</strong></h4><p style="font-size:13.8px;margin:0">Único en el lote. <strong>Su credibilidad descansa en el texto</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · detalle estructural</div>
+<h4 style="margin:0 0 6px"><strong>Recuentos de registros tabla por tabla</strong></h4><p style="font-size:13.8px;margin:0">Difícil de inventar sin ver el esquema. <strong>Prueba de nivel 5 sin pasar por el 3</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · audiencia externa</div>
+<h4 style="margin:0 0 6px"><strong>Escribe como un regulador</strong></h4><p style="font-size:13.8px;margin:0"><strong>Su audiencia son clientes, reguladores y prensa</strong>, no el TI de la víctima</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · operación mínima</div>
+<h4 style="margin:0 0 6px"><strong>Sin malware, sin reglas, sin reclutamiento</strong></h4><p style="font-size:13.8px;margin:0">No es un programa de afiliados. Equipo muy pequeño</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">05 · sin ventana</div>
+<h4 style="margin:0 0 6px"><strong>100 % de entradas con fecha del día</strong></h4><p style="font-size:13.8px;margin:0">La víctima no tiene ventana temporal que comprobar</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">06 · relevancia regional</div>
+<h4 style="margin:0 0 6px"><strong>Mayor proporción regional de los nuevos</strong></h4><p style="font-size:13.8px;margin:0">3 de 34 mexicanas, con una reclamación fechada</p></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="34">0</div><div class="l">Entradas medidas</div><div class="s">Desde el 2026-11-03</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="0">0<small>/</small></div><div class="l"><strong>Entradas con captura de pantalla</strong></div><div class="s"><strong>Único en el lote.</strong> <code>n0n</code> 259/259, <code>Vortex</code> 35/35, <code>settra</code> 113/116</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="13">0<small>/</small></div><div class="l">Entradas con dominio</div><div class="s">El 38 %</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="100">0<small>%</small></div><div class="l">Entradas con fecha de ataque igual a la de publicación</div><div class="s">Sólo <code>curious worm</code> comparte. <code>settra</code>: 0 %</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="0">0</div><div class="l">Entradas con tamaño de datos o cifra de rescate en campo estructurado</div><div class="s">Las magnitudes van en la prosa</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="0">0</div><div class="l">Entradas con referencia de prensa</div><div class="s">Ninguna recogida por un tercero</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="3">0</div><div class="l"><strong>Víctimas mexicanas</strong></div><div class="s"><strong>8,8 %: la mayor proporción latinoamericana de los seis actores nuevos</strong></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="10">0<small>/</small></div><div class="l">Entradas sin país asignado</div><div class="s">Afecta a <code>KJ-5</code></div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="23">0</div><div class="l">Entradas publicadas en un solo día (2026-11-15)</div><div class="s"><strong>El 68 % de su catálogo en una jornada</strong></div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="34">0<small>··</small></div><div class="l">Recuentos de tres fuentes distintas</div><div class="s"><strong>Discrepancia del 48 %</strong></div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="7630625">0</div><div class="l">Detalles de transacción declarados en una sola entrada</div><div class="s">El nivel de cardinalidad que caracteriza su prosa</div></div></div>
+</section>
+<section id="e-2-el-registro-retorico-y-por-que-es-un-dato-operativo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>El registro retórico, y por qué es un dato operativo</h2><p><strong>Tres rasgos de su prosa, medidos sobre el catálogo:</strong></p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Rasgo</th><th>Lo que hace</th><th>Lo que NO hace</th></tr></thead><tbody>
+<tr><td><strong>Fórmula de apertura</strong></td><td>«Esta divulgación se refiere a un conjunto <strong>verificado</strong> de registros de…»</td><td>No dice «hemos hackeado»</td></tr>
+<tr><td><strong>Descripción del material</strong></td><td>Inventario por tablas, con cardinalidades y nombres de sistema</td><td>No ofrece capturas ni muestras</td></tr>
+<tr><td><strong>Referencia al tiempo</strong></td><td>«Material <strong>programado para publicación</strong>»</td><td><strong>No amenaza, no insulta, no pone precio y no fija plazo en la prosa</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>La lectura.</strong> Un extorsionador escribe para su víctima: el tono es amenazante porque quiere una transferencia. <strong>Este actor escribe para un lector externo</strong>: el tono es administrativo porque quiere que la publicación parezca un hecho inevitable y documentado, no una negociación.</p>
+<p class="rv"><strong>Y eso tiene tres consecuencias prácticas:</strong></p><ol class="rv"><li><strong>El daño llega por fuera.</strong> Si el material se publica con ese envoltorio, <strong>el que lo lee primero no es el TI de la víctima: es un cliente, un periodista o un regulador</strong>, y lo lee como un informe y no como un chantaje.</li><li><strong>La respuesta de comunicación tiene que anticiparse.</strong> Contra una nota de rescate, la organización puede guardar silencio. <strong>Contra una «divulgación» redactada como un aviso, el silencio parece confirmación.</strong></li><li><strong>Y la decisión se traslada otra vez a Legal y a Comunicación</strong>, igual que en <code>CTI-2026-049</code> por otra vía. <strong>Dos de los seis actores nuevos de este lote tienen su palanca fuera del alcance de Seguridad.</strong></li></ol>
+<div class="note info rv"><p><strong>La salvedad, que hay que poner junto a la lectura: esto es interpretación nuestra de un rasgo de estilo.</strong> Ninguna fuente externa lo describe, y la alternativa es trivial —que el actor use una plantilla generada automáticamente y el tono sea un subproducto— y <strong>no se puede descartar</strong>. Lo que sí es un hecho medido es el rasgo; la intención es inferencia (<code>Anexo C</code>).</p></div>
+</section>
+<section id="e-3-la-prueba-que-ofrece-y-la-que-no" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>La prueba que ofrece, y la que no</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel de prueba <em>(escala de <code>CTI-2026-048</code> <code>Anexo D</code>)</em></th><th><code>PixelLeaks</code></th><th>Comparación en el lote</th></tr></thead><tbody>
+<tr><td><strong>0 · Anuncio anónimo</strong></td><td>Algunas entradas describen «una organización del sector…» sin nombre</td><td><code>n0n</code>: 59 de 259</td></tr>
+<tr><td><strong>2 · Dominio</strong></td><td><strong>13 de 34 (38 %)</strong></td><td><code>settra</code>: 116 de 116 · <code>n0n</code>: 22 de 259</td></tr>
+<tr><td><strong>3 · Captura de pantalla</strong></td><td><strong>0 de 34 (0 %)</strong></td><td><strong>Único con cero.</strong> Todos los demás por encima del 97 %</td></tr>
+<tr><td><strong>4 · Magnitud declarada</strong></td><td><strong>Sí, y con cardinalidades de siete dígitos</strong></td><td><code>Vortex</code>: 8 de 35</td></tr>
+<tr><td><strong>5 · Inventario descriptivo</strong></td><td><strong>Sí, por tablas y sistemas. El más detallado del lote</strong></td><td><code>Vortex</code> en 9 de 35</td></tr>
+<tr><td><strong>6 · Muestra publicada</strong></td><td>No</td><td>Ninguno del lote</td></tr>
+<tr><td><strong>7 · Confirmación de tercero</strong></td><td><strong>0 de 34</strong></td><td><code>settra</code>: 4 · <code>n0n</code>: 0</td></tr></tbody></table></div>
+<p class="rv"><strong>El perfil es singular: salta el nivel 3 y llega al 5.</strong> Es el revés exacto de <code>Vortex</code>, que ofrece el 3 en el 100 % de sus entradas y el 2 sólo en el 20 %.</p>
+<div class="note info rv"><p><strong>Y conviene decir qué significa eso para un analista, porque es contraintuitivo: el nivel 5 vale más que el 3.</strong> Una captura de pantalla se fabrica, se recicla y no se puede fechar. <strong>Un inventario de tablas con cardinalidades exactas requiere haber visto el esquema</strong>, y un error en él es comprobable por la víctima en minutos. <strong>Este actor ofrece menos prueba aparente y más prueba real que varios de los que publican imágenes.</strong></p></div>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Decisión</th><th>A quién</th><th>Coste</th><th>Por qué</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td><strong>Si operamos en México: comprobar si aparecemos listados, y hacerlo esta semana</strong></td><td>CISO · CTI</td><td><strong>Bajo</strong></td><td><code>KJ-5</code>: tres víctimas mexicanas y <strong>una reclamación con plazo al 22 de noviembre de 2026</strong></td></tr>
+<tr><td><strong>2</strong></td><td><strong>Si aparecemos: comprobar las cardinalidades declaradas contra las tablas reales</strong></td><td>Datos · TI</td><td>Bajo</td><td><strong>La comprobación más discriminante de este informe.</strong> Un error de cardinalidad refuta la reclamación; una coincidencia la hace muy difícil de explicar (<code>T-1</code>)</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Preparar una respuesta de comunicación para una «divulgación» redactada como aviso</strong></td><td><strong>Comunicación · Legal</strong></td><td>Medio</td><td><code>E-2</code>: contra ese envoltorio <strong>el silencio parece confirmación</strong></td></tr>
+<tr><td><strong>4</strong></td><td><strong>Control de egreso por destino y volumen</strong></td><td>Red</td><td>Medio</td><td>Vale aquí, en <code>048</code>, <code>049</code> y <code>050</code>: <strong>es la medida común de los actores sin cifrado</strong></td></tr>
+<tr><td><strong>5</strong></td><td><strong>Rotación y vigilancia de credenciales de empleado filtradas</strong></td><td>Identidad</td><td>Medio</td><td><code>KJ-8</code>: único indicio de vector, y es barato de cerrar con independencia</td></tr>
+<tr><td><strong>6</strong></td><td><strong>No priorizarlo por su segundo puesto en el ranking</strong></td><td>CTI</td><td>Cero</td><td>Dieciséis días, 34 entradas, 68 % publicado en un solo día</td></tr></tbody></table></div>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> SOC, CTI, Comunicación</span><span><b>Horizonte:</b> semanas</span></div></div>
+<section id="o-1-identificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Nombre</td><td><strong><code>PixelLeaks</code></strong> · también <strong><code>Pixelleaks</code></strong></td></tr>
+<tr><td>Alias</td><td>Ninguno conocido</td></tr>
+<tr><td>En el rastreador desde</td><td><strong>2026-11-03</strong> <em>(un proveedor sitúa su primera víctima el 9 de noviembre)</em></td></tr>
+<tr><td>Sitios de filtración</td><td><strong>Uno, activo</strong></td></tr>
+<tr><td>TTP registradas</td><td><strong>Ninguna</strong></td></tr>
+<tr><td>Herramientas registradas</td><td><strong>Ninguna</strong></td></tr>
+<tr><td>Malware conocido</td><td><strong>Ninguno.</strong> Una fuente lo señala expresamente</td></tr>
+<tr><td>Manifiesto, reglas o reclutamiento</td><td><strong>Ninguno</strong>, según fuente</td></tr>
+<tr><td>Cifrado</td><td><strong>Sin mención</strong></td></tr>
+<tr><td>Aviso gubernamental</td><td>Ninguno</td></tr></tbody></table></div>
+</section>
+<section id="o-2-la-anatomia-de-su-catalogo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>La anatomía de su catálogo</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Presente en</th><th>Lectura</th></tr></thead><tbody>
+<tr><td><strong>Captura de pantalla</strong></td><td><strong>0 de 34</strong></td><td><strong>Único en el lote</strong> (<code>KJ-1</code>)</td></tr>
+<tr><td>Dominio</td><td>13 de 34 (38 %)</td><td>Mejor que <code>n0n</code> (8,5 %), peor que <code>settra</code> (100 %)</td></tr>
+<tr><td>País</td><td>24 de 34</td><td>Diez sin país</td></tr>
+<tr><td><strong>Descripción con inventario por tablas</strong></td><td>La mayoría</td><td><strong>Su forma característica</strong> (<code>KJ-2</code>)</td></tr>
+<tr><td><strong>Fecha de ataque distinta de la publicación</strong></td><td><strong>0 de 34</strong></td><td><code>KJ-6</code></td></tr>
+<tr><td>Tamaño de datos en campo estructurado</td><td>0 de 34</td><td>Las magnitudes van en la prosa</td></tr>
+<tr><td>Cifra de rescate</td><td>0 de 34</td><td></td></tr>
+<tr><td>Referencia de prensa</td><td><strong>0 de 34</strong></td><td>Ninguna confirmación de tercero</td></tr></tbody></table></div>
+<p class="rv"><strong>Tres ejemplos de su prosa, parafraseados y sin identificar a nadie:</strong> una plataforma estadounidense de gestión de licencias para cadenas de restauración, con «copias de seguridad completas de las veintiuna bases de datos de clientes»; una plataforma de pagos de consumo de un país africano, con el desglose de cuatro tablas y sus cardinalidades —desde 343.229 hasta 7.630.625 filas—; y «una organización del sector de servicios de seguridad privada», sin nombre, con un conjunto de registros comerciales y financieros.</p>
+<div class="note info rv"><p><strong>La tercera es la que revela el método: cuando no nombra, describe el sector con una precisión casi burocrática.</strong> No dice «una empresa»: dice el sector y el subsector. <strong>Eso es suficiente para que la víctima se reconozca y insuficiente para que un tercero la identifique</strong>, lo que es exactamente el punto óptimo para una presión sin exposición pública todavía.</p></div>
+</section>
+<section id="o-3-la-actividad-medida" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>La actividad medida</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Ventana</th><th>Por <strong>fecha de ataque</strong></th><th>Por <strong>publicación</strong></th><th>Nota</th></tr></thead><tbody>
+<tr><td>Total</td><td>34</td><td>34</td><td>Dieciséis días</td></tr>
+<tr><td>Últimos 7 días</td><td><strong>31</strong></td><td><strong>31</strong></td><td><strong>Idénticas</strong>: consecuencia directa del 100 % de <code>KJ-6</code></td></tr>
+<tr><td>Ranking del sitio <em>(16:20 UTC del 19-11)</em></td><td>—</td><td>—</td><td><strong>31</strong></td></tr>
+<tr><td>Pico en un día</td><td>—</td><td><strong>23 el 2026-11-15</strong></td><td><strong>El 68 % del catálogo en una jornada</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>Geografía</strong> <em>(sobre los 24 con país)</em>: Estados Unidos 7, <strong>México 3</strong>, India 3, Vietnam 2, China 2. <strong>Sectores</strong>: Tecnología 8, Servicios financieros 5, Sanidad 5, Servicios profesionales 3.</p>
+<div class="note info rv"><p><strong>El pico del día 15 —23 entradas, el 68 % del catálogo— es el dato que obliga a leer con cautela su segundo puesto en el ranking.</strong> Como en <code>CTI-2026-050</code>, <strong>el catálogo llegó mayoritariamente de una vez</strong>, y un ranking de siete días no distingue entre una operación que publica a ritmo y una que vacía un fondo acumulado.</p></div>
+</section>
+<section id="o-4-nuestra-exposicion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Nuestra exposición</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Si la organización…</th><th>Exposición</th><th>Medida</th></tr></thead><tbody>
+<tr><td><strong>Es mexicana</strong></td><td><strong>La más alta de la región para los actores nuevos del lote.</strong> Tres víctimas, una con plazo activo</td><td><code>E-4.1</code> <strong>esta semana</strong></td></tr>
+<tr><td><strong>Es chilena</strong></td><td><strong>Ninguna medida.</strong> Cero víctimas</td><td>Vigilancia pasiva</td></tr>
+<tr><td><strong>Es de tecnología, servicios financieros o sanidad</strong></td><td>Baja-media. Sus tres sectores principales</td><td>Control de egreso</td></tr>
+<tr><td><strong>Opera una plataforma con bases de datos de clientes</strong></td><td><strong>Media-alta en términos de daño</strong></td><td>Su material preferido son copias completas de bases de datos de clientes</td></tr>
+<tr><td><strong>Aparece listada</strong></td><td><strong>Comprobar cardinalidades</strong> (<code>T-1</code>)</td><td><code>E-4.2</code></td></tr></tbody></table></div>
+</section>
+<section id="o-5-hipotesis-alternativas-y-pre-mortem" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Hipótesis alternativas y pre-mortem</h2></div></div>
+<div class="grid g3 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px"><strong>H-1 — El registro retórico busca a clientes, reguladores y prensa</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida como principal</strong>, con la salvedad de que es interpretación nuestra</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Posibilidad real · 40–60 %</div>
+<h4 style="margin:0 0 6px"><strong>H-2 — El tono es un subproducto de una plantilla automática</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida como alternativa trivial y no descartable.</strong> Si las descripciones se generan con un modelo de lenguaje, el registro administrativo sale de serie <strong>sin ninguna intención</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">Probable · 55–80 %</div>
+<h4 style="margin:0 0 6px"><strong>H-3 — El detalle por tablas implica acceso real al esquema</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida.</strong> Las cardinalidades de siete dígitos son difíciles de inventar de forma consistente</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">Posibilidad real · 40–60 %</div>
+<h4 style="margin:0 0 6px"><strong>H-4 — La ausencia de capturas es una decisión de opsec</strong></h4><p style="font-size:13.8px;margin:0"><strong>Retenida.</strong> Una captura puede revelar nombres de usuario, rutas y marcas de tiempo del propio operador. <strong>No publicarlas protege al actor</strong></p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">Poco probable · 20–45 %</div>
+<h4 style="margin:0 0 6px"><strong>H-5 — Las credenciales filtradas fueron el vector</strong></h4><p style="font-size:13.8px;margin:0"><strong>Poco probable como establecido.</strong> 2 de 23, y el propio proveedor dice que no lo sabe</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">Aprox. igual de probable · 40–60 %</div>
+<h4 style="margin:0 0 6px"><strong>H-6 — Es una marca nueva de un actor conocido</strong></h4><p style="font-size:13.8px;margin:0"><strong>Sin evidencia.</strong> Ninguna fuente lo sugiere</p></div></div>
+<p class="rv"><strong>Pre-mortem — si este informe se equivoca, será porque:</strong></p><ol class="rv"><li><strong><code>H-2</code> es cierta</strong> y el hallazgo del registro retórico describe una plantilla y no una estrategia. <strong>Es el riesgo 1</strong>, y no cambiaría las medidas de <code>E-4</code> pero sí el encuadre.</li><li><strong>Se leyó «cero capturas» como «menos creíble»</strong>, cuando su nivel de prueba descriptivo es el más alto del lote (<code>E-3</code>).</li><li><strong>Una organización mexicana no comprobó si estaba listada</strong> porque el actor parecía menor.</li><li><strong>Se esperó una nota de rescate</strong> y llegó una «divulgación» que la prensa trató como informe.</li><li><strong>Se tomó la ausencia de víctimas chilenas como garantía</strong> con diez entradas sin país.</li><li><strong>Se priorizó por el segundo puesto</strong> de un ranking con el 68 % del catálogo publicado en un día.</li></ol>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> SOC, Datos</span><span><b>Horizonte:</b> días</span></div></div>
+<div class="note warn rv"><div class="t">⚠ Sin TTP, sin herramientas, sin muestras y sin indicadores</div><p>Como en los tres informes anteriores de la serie, <strong>no se incluye mapa ATT&amp;CK</strong>: sería una lista vacía.</p><p><strong>Lo que sigue es la comprobación específica que su forma de publicar permite, y es inusualmente buena.</strong></p></div>
+<section id="t-1-la-comprobacion-de-cardinalidad" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>La comprobación de cardinalidad</h2><p>Si una organización aparece listada con una descripción del tipo «N transacciones, M detalles, K registros de libro», <strong>esa descripción es comprobable en minutos y es el mejor regalo que un extorsionador puede hacer a su víctima</strong>:</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Comprobación</th><th>Cómo</th><th>Qué establece</th></tr></thead><tbody>
+<tr><td><strong>1</strong></td><td><strong>¿Existen esas tablas con esos nombres o esa función?</strong></td><td>Esquema de la base de datos</td><td>Un nombre de tabla inventado <strong>refuta la reclamación de inmediato</strong></td></tr>
+<tr><td><strong>2</strong></td><td><strong>¿Coinciden las cardinalidades, con el margen del crecimiento desde la fecha supuesta?</strong></td><td><code>SELECT count(*)</code></td><td><strong>La comprobación decisiva.</strong> Una coincidencia aproximada en <strong>cuatro</strong> cardinalidades distintas es casi imposible de inventar</td></tr>
+<tr><td><strong>3</strong></td><td><strong>¿El número declarado es menor que el actual?</strong></td><td>Comparación</td><td><strong>Si es menor, acota la fecha del acceso</strong>, que es el dato que el actor no da (<code>KJ-6</code>). <strong>Es la única forma de recuperar la ventana temporal</strong></td></tr>
+<tr><td><strong>4</strong></td><td><strong>¿Hay consultas de volcado masivo en los registros de la base de datos en esa ventana?</strong></td><td>Auditoría de la base de datos</td><td>La evidencia directa</td></tr>
+<tr><td><strong>5</strong></td><td><strong>¿Existe esa auditoría y se retiene?</strong></td><td>—</td><td>Si no, los pasos 3 y 4 no se pueden responder</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">El paso 3 es el hallazgo práctico de este informe y conviene subrayarlo</div><p>Este actor <strong>no declara cuándo accedió</strong> —el 100 % de sus entradas publica con fecha del día—, lo que priva a la víctima de la ventana que necesitaría para investigar. <strong>Pero las cardinalidades que sí declara llevan la fecha dentro</strong>: si una tabla que crece de forma conocida tenía 818.849 filas y hoy tiene más, <strong>la diferencia dice cuándo se tomó la copia.</strong> El actor dio por descuido el dato que ocultó por diseño.</p></div>
+</section>
+<section id="t-2-mitigaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Mitigaciones</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Medida</th><th>Dónde</th><th>Efecto</th><th>Coste</th></tr></thead><tbody>
+<tr><td><strong>X-2.1</strong></td><td><strong>Auditoría de consultas de volcado masivo en bases de datos de clientes, con retención</strong></td><td>Datos</td><td>Habilita los pasos 3 y 4 de <code>T-1</code></td><td>Medio</td></tr>
+<tr><td><strong>X-2.2</strong></td><td><strong>Control de egreso por destino y por volumen</strong></td><td>Red</td><td>La medida común a los cuatro actores sin cifrado de esta serie</td><td>Medio</td></tr>
+<tr><td><strong>X-2.3</strong></td><td><strong>Vigilancia y rotación de credenciales de empleado expuestas en filtraciones públicas</strong></td><td>Identidad</td><td>Cierra el único indicio de vector (<code>KJ-8</code>)</td><td>Bajo</td></tr>
+<tr><td><strong>X-2.4</strong></td><td><strong>Segundo factor resistente a suplantación en accesos a sistemas de datos</strong></td><td>Identidad</td><td>Limita el valor de una credencial robada</td><td>Medio</td></tr>
+<tr><td><strong>X-2.5</strong></td><td><strong>Plan de comunicación para una «divulgación» con formato de aviso</strong></td><td>Comunicación · Legal</td><td><code>E-2</code>: evita que el silencio parezca confirmación</td><td>Medio</td></tr></tbody></table></div>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Brecha</th><th>Impacto</th><th>Cómo se cierra</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td><strong>G-1</strong></td><td><strong>Ninguna TTP, herramienta, muestra ni indicador</strong></td><td>Sin detección específica posible. <code>PAP:WHITE</code></td><td>Informe de respuesta a incidentes de una víctima</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-2</strong></td><td><strong>El 100 % de entradas con fecha del día: no sabemos si el actor no la declara o el rastreador la asigna por omisión</strong></td><td>Afecta a <code>KJ-6</code>, y determina si la víctima puede recuperar la ventana</td><td><strong>Comparar una entrada del rastreador con el sitio original.</strong> Esta célula no tiene acceso a la red oscura</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-3</strong></td><td><strong>No sabemos si el registro retórico es estrategia o plantilla automática</strong></td><td>Es <code>H-2</code>, el riesgo 1 del pre-mortem</td><td>Comparar la prosa de entradas separadas en el tiempo; o un análisis externo del actor</td><td>2</td></tr>
+<tr><td><strong>G-4</strong></td><td><strong>Diez de 34 entradas sin país</strong></td><td>Afecta a <code>KJ-5</code>, el juicio regional</td><td>Segunda fuente de rastreo</td><td>2</td></tr>
+<tr><td><strong>G-5</strong></td><td><strong>No se ha comprobado ninguna cardinalidad declarada</strong></td><td><code>T-1</code> paso 2 <strong>sólo lo puede hacer una víctima</strong>, y sería la validación más fuerte posible del actor</td><td><strong>Que una víctima lo compruebe y lo publique.</strong> Es la petición más valiosa del informe</td><td><strong>1</strong></td></tr>
+<tr><td><strong>G-6</strong></td><td><strong>Discrepancia del 48 % entre recuentos</strong></td><td><code>KJ-7</code></td><td>Criterios de recuento de cada fuente</td><td>3</td></tr></tbody></table></div>
+<p class="rv"><strong>Disparadores de reevaluación.</strong> <code>I-1</code>: <strong>que una víctima confirme o refute una cardinalidad declarada</strong> —resolvería <code>G-5</code> y <code>H-3</code> de golpe—. <code>I-2</code>: publicación efectiva del material de la reclamación mexicana tras el 22 de noviembre. <code>I-3</code>: aparición de la primera captura de pantalla, que indicaría cambio de política. <code>I-4</code>: aparición de una entrada con fecha de ataque distinta de la de publicación, que refutaría <code>KJ-6</code>. <code>I-5</code>: aparición de malware o de reglas de afiliación, que cambiaría su clase. <code>I-6</code>: primera víctima chilena.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — ⚠ Sin indicadores de compromiso</h3>
+<div class="note warn rv"><div class="t">⚠ No hay ninguno</div><p>Ni direcciones, ni dominios, ni hashes, ni ficheros, ni herramientas. <strong><code>PAP:WHITE</code></strong>. Y <strong>no se reproduce ningún nombre de víctima</strong>, incluida la mexicana con plazo activo: la regla de <code>CTI-2026-048</code> <code>E-4</code> se aplica, y el dato de que la reclamación existe se da sin nombrarla.</p></div>
+<h3 class="rv">A.2 — Patrones de reconocimiento y comprobación</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern entrada de sitio de filtración con inventario de tablas y cardinalidades exactas el patrón característico de este actor y, más importante, la clase de reclamación que una víctima puede comprobar en minutos (t-1) · alta · mientras mantenga el formato comprobación por la víctima. no es indicador de compromiso"><span class="ty">pattern</span><span class="vv">Entrada de sitio de filtración con inventario de tablas y cardinalidades exactas<em>El patrón característico de este actor y, más importante, la clase de reclamación que una víctima puede comprobar en minutos (T-1) · Alta · Mientras mantenga el formato</em></span><span class="pill p-mint">Comprobación por la víctima. No es indicador de compromiso</span></div>
+<div class="ioc-row" data-s="pattern entrada con fórmula «esta divulgación se refiere a un conjunto verificado de registros de…» el registro retórico de kj-3. reconocimiento del actor · alta como observación · igual reconocimiento"><span class="ty">pattern</span><span class="vv">Entrada con fórmula «esta divulgación se refiere a un conjunto verificado de registros de…»<em>El registro retórico de KJ-3. Reconocimiento del actor · Alta como observación · Igual</em></span><span class="pill p-mint">Reconocimiento</span></div>
+<div class="ioc-row" data-s="pattern catálogo sin ninguna captura de pantalla 0 de 34, único en el lote. posible decisión de opsec del actor (h-4): una captura revela rutas, usuarios y marcas de tiempo del operador · alta · igual graduación de la prueba"><span class="ty">pattern</span><span class="vv">Catálogo sin ninguna captura de pantalla<em>0 de 34, único en el lote. Posible decisión de opsec del actor (H-4): una captura revela rutas, usuarios y marcas de tiempo del operador · Alta · Igual</em></span><span class="pill p-mint">Graduación de la prueba</span></div>
+<div class="ioc-row" data-s="pattern consulta de volcado masivo sobre tablas de clientes el único indicador de detección que el perfil de este actor permite inferir (x-2.1) · media como inferencia · sin caducidad alerta, con independencia de este actor"><span class="ty">pattern</span><span class="vv">Consulta de volcado masivo sobre tablas de clientes<em>El único indicador de detección que el perfil de este actor permite inferir (X-2.1) · Media como inferencia · Sin caducidad</em></span><span class="pill p-mint">Alerta, con independencia de este actor</span></div>
+<div class="ioc-row" data-s="pattern credencial de empleado de la organización aparecida en una filtración pública en los 12 meses previos único indicio de vector, al 8,7 % y con el proveedor declarando que no sabe si fue la vía · baja · continua rotación preventiva (x-2.3)"><span class="ty">pattern</span><span class="vv">Credencial de empleado de la organización aparecida en una filtración pública en los 12 meses previos<em>Único indicio de vector, al 8,7 % y con el proveedor declarando que no sabe si fue la vía · Baja · Continua</em></span><span class="pill p-mint">Rotación preventiva (X-2.3)</span></div></div>
+<h3 class="rv">A.3 — Victimología y decisiones de higiene</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 34 entradas · 0 con captura · 13 con dominio · 0 con prensa · 100 % con fecha del día la anatomía de o-2. el perfil de prueba más singular del lote · alta como recuento · 60 días medición"><span class="ty">cartera</span><span class="vv">34 entradas · 0 con captura · 13 con dominio · 0 con prensa · 100 % con fecha del día<em>La anatomía de O-2. El perfil de prueba más singular del lote · Alta como recuento · 60 días</em></span><span class="pill p-mint">Medición</span></div>
+<div class="ioc-row" data-s="cartera 3 víctimas mexicanas (8,8 %), una con plazo declarado al 2026-11-22. ninguna chilena el dato regional más accionable de los seis actores nuevos (kj-5), con diez entradas sin país como salvedad · moderada · 22-11-2026 para el plazo comprobación inmediata si se opera en méxico"><span class="ty">cartera</span><span class="vv">3 víctimas mexicanas (8,8 %), una con plazo declarado al 2026-11-22. Ninguna chilena<em>El dato regional más accionable de los seis actores nuevos (KJ-5), con diez entradas sin país como salvedad · Moderada · 22-11-2026 para el plazo</em></span><span class="pill p-mint">Comprobación inmediata si se opera en México</span></div>
+<div class="ioc-row" data-s="cartera 23 de 34 entradas publicadas el 2026-11-15 el 68 % del catálogo en un día (o-3) · alta · histórico análisis"><span class="ty">cartera</span><span class="vv">23 de 34 entradas publicadas el 2026-11-15<em>El 68 % del catálogo en un día (O-3) · Alta · Histórico</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera recuentos de tres fuentes: 34 · 23 · 27 kj-7. no se reconcilian · alta · — —"><span class="ty">cartera</span><span class="vv">Recuentos de tres fuentes: 34 · 23 · 27<em>KJ-7. No se reconcilian · Alta · —</em></span><span class="pill p-mint">—</span></div>
+<div class="ioc-row" data-s="cartera no se reproduce ningún nombre de víctima ninguna ha confirmado. regla de la serie · — · — no ingerir"><span class="ty">cartera</span><span class="vv">No se reproduce ningún nombre de víctima<em>Ninguna ha confirmado. Regla de la serie · — · —</em></span><span class="pill p-mint">No ingerir</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Disciplina</th><th>Fiab.</th><th>Cred.</th><th>Grado</th><th>Notas</th></tr></thead><tbody>
+<tr><td><strong><code>B-1</code> — Medición propia</strong> sobre 34 registros: campos presentes y ausentes, lectura directa de las descripciones, perfil diario</td><td>OSINT técnico · <strong>medición propia</strong></td><td><strong>B</strong></td><td><strong>2</strong></td><td><strong>Medición propia</strong></td><td><strong>Fuente de <code>KJ-1</code>, <code>KJ-2</code>, <code>KJ-3</code>, <code>KJ-5</code> y <code>KJ-6</code>.</strong> Su virtud: mide ausencias —cero capturas, cero prensa, cero fechas distintas— y lee la prosa del adversario directamente. <strong>Su límite: no verificamos contra el sitio original</strong> (<code>G-2</code>)</td></tr>
+<tr><td><strong><code>B-2</code> — Rastreador y perfiles de proveedor</strong> (WatchGuard, Breachsense, CyberXtron, DeXpose)</td><td>OSINT comercial · compilación</td><td><strong>C</strong></td><td><strong>3</strong></td><td>Proveedor</td><td>Fuente de <strong>las 23 víctimas nombradas</strong>, de la <strong>ausencia de malware, manifiesto, reglas y reclutamiento</strong>, de los <strong>temporizadores de cuenta atrás</strong>, de los nombres de tres víctimas —que <strong>no reproducimos</strong>— y del <strong>indicio del 8,7 % de credenciales filtradas</strong>, con la salvedad declarada por el propio proveedor de que <strong>no sabe si fueron el vector</strong></td></tr>
+<tr><td><strong><code>B-3</code> — Fichas de víctima de terceros</strong> (HookPhish y similares)</td><td>OSINT · compilación</td><td><strong>C</strong></td><td><strong>4</strong></td><td>Compilación</td><td>Fuente del <strong>plazo declarado al 22 de noviembre</strong> para la reclamación mexicana y de las fechas de listado. <strong>Advierten de que las reclamaciones no están verificadas</strong></td></tr>
+<tr><td><strong><code>B-4</code> — Datos comparativos del mismo rastreador para los otros actores del lote</strong></td><td>OSINT técnico · medición propia</td><td><strong>B</strong></td><td><strong>2</strong></td><td>Medición propia</td><td>Lo que hace utilizable la tabla de <code>E-3</code></td></tr></tbody></table></div>
+<div class="note info rv"><p><strong>Una observación sobre esta estructura: es la más pobre de la serie en fuentes externas y la más rica en material del propio adversario.</strong> No hay análisis técnico de nadie, pero <strong>la prosa del actor es inusualmente informativa</strong> porque describe su material con precisión estructural. <strong>El adversario es, en este expediente, la mejor fuente disponible sobre sí mismo</strong>, y eso obliga a la cautela del <code>Anexo D</code>: lo que dice de su material puede ser comprobable, pero lo dice él.</p></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Probabilidad estimativa</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--amber)"><span class="bn">Casi con certeza (≥99 %)</span><span class="bt"><i data-w="100"></i></span><span class="bv">99</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy probable (80–95 %)</span><span class="bt"><i data-w="89"></i></span><span class="bv">88</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Probable (55–80 %)</span><span class="bt"><i data-w="69"></i></span><span class="bv">68</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Aproximadamente igual de probable (40–60 %)</span><span class="bt"><i data-w="51"></i></span><span class="bv">50</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Poco probable (20–45 %)</span><span class="bt"><i data-w="32"></i></span><span class="bv">32</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Muy poco probable (5–20 %)</span><span class="bt"><i data-w="12"></i></span><span class="bv">12</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">Remoto (≤5 %)</span><span class="bt"><i data-w="4"></i></span><span class="bv">4</span></div></div></div>
+<p class="rv"><strong>Confianza</strong>: <strong>alta</strong> —fuentes múltiples corroboradas, método expuesto—; <strong>moderada</strong> —fuente única de calidad, o inferencia propia sobre datos verificables—; <strong>baja</strong> —dato ausente o inferencia indirecta—.</p>
+<div class="note info rv"><p><strong>La distinción que este informe necesita: separar la confianza en un rasgo de estilo de la confianza en lo que ese estilo busca.</strong></p><p>«Sus entradas usan un registro administrativo y no amenazante» es una observación directa y reproducible: confianza <strong>alta</strong>. «Ese registro busca a clientes, reguladores y prensa» es una <strong>atribución de propósito a una elección retórica</strong>, y tiene una alternativa trivial —que la prosa la genere una plantilla automática y el tono sea un subproducto— que no se puede descartar: confianza <strong>moderada</strong>, probabilidad <em>probable</em>.</p><p><strong>La regla, y es la hermana de la de <code>CTI-2026-049</code>:</strong> un rasgo observado en el material del adversario se afirma con la confianza de la observación; <strong>su propósito, nunca.</strong> Y en la era de los textos generados automáticamente, la inferencia de intención a partir del estilo <strong>ha perdido fuerza y conviene decirlo</strong>: lo que antes revelaba a un autor hoy puede revelar sólo una herramienta.</p></div>
+</section>
+<section id="anexo-d-como-leer-el-registro-retorico-de-un-catalogo-de-extorsion" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo leer el registro retórico de un catálogo de extorsión</h2></div></div>
+<p class="rv"><strong>El problema.</strong> Los catálogos de los sitios de filtración se leen por su contenido —a quién nombran, qué datos reclaman— y casi nunca por su <strong>forma</strong>. Y la forma lleva información: <strong>el tono en que un extorsionador escribe indica para quién escribe</strong>, y eso determina por dónde va a llegar el daño.</p>
+<p class="rv"><strong>Los cuatro registros que esta cartera ha observado, con su audiencia y su consecuencia:</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Registro</th><th>Rasgos</th><th>Audiencia implícita</th><th>Qué cambia en la respuesta</th></tr></thead><tbody>
+<tr><td><strong>Amenazante clásico</strong></td><td>Insultos, plazos, precio explícito, mayúsculas</td><td><strong>El TI y la dirección de la víctima</strong></td><td>Respuesta técnica y de negociación. <strong>El silencio público es viable</strong></td></tr>
+<tr><td><strong>Administrativo</strong> <em>(este actor)</em></td><td>«Divulgación», «conjunto verificado», «programado para publicación». Sin amenaza ni precio</td><td><strong>Clientes, reguladores, prensa</strong></td><td><strong>Respuesta de comunicación obligatoria</strong>: el silencio parece confirmación</td></tr>
+<tr><td><strong>Personal</strong> <em>(<code>CTI-2026-049</code>)</em></td><td>Inventario de datos personales del propietario</td><td><strong>Una persona física concreta</strong></td><td><strong>Respuesta de apoyo legal personal</strong>, y la decisión sale de Seguridad</td></tr>
+<tr><td><strong>Técnico-presuntuoso</strong> <em>(<code>CTI-2026-042</code>)</em></td><td>Reclamaciones de capacidad, entrevistas, alardes</td><td><strong>Afiliados y competidores del propio mercado</strong></td><td><strong>Las afirmaciones son publicidad de reclutamiento</strong>: se valoran como tales</td></tr></tbody></table></div>
+<p class="rv"><strong>Cómo se usa, en tres pasos:</strong></p><ol class="rv"><li><strong>Leer tres entradas completas antes de leer el recuento.</strong> El recuento se obtiene en un segundo y no dice nada; la forma exige cinco minutos y dice para quién escribe.</li><li><strong>Clasificar el registro y derivar la audiencia.</strong> De la audiencia sale <strong>qué función de la organización tiene que estar preparada</strong>, que es la decisión más cara de tomar durante un incidente.</li><li><strong>Y buscar la discordancia.</strong> Un actor con registro administrativo y plazos agresivos en los metadatos está hablando a dos públicos a la vez: <strong>la discordancia entre la prosa y la mecánica es informativa</strong> y suele indicar una plantilla por encima de una estrategia.</li></ol>
+<p class="rv"><strong>Las dos advertencias, y la segunda es nueva:</strong></p><ol class="rv"><li><strong>El registro se imita y se cambia.</strong> Un actor puede adoptar un tono administrativo sin que eso cambie nada de su operación. <strong>La inferencia es sobre la intención comunicativa, no sobre la capacidad.</strong></li><li><strong>Y la inferencia de intención a partir del estilo ha perdido fuerza, porque los textos se generan.</strong> Si las descripciones de un catálogo las produce un modelo de lenguaje a partir de unos campos, <strong>el registro es un ajuste por omisión y no una elección</strong>. Esta cartera ya observó descripciones marcadas explícitamente como generadas automáticamente en otro rastreador. <strong>El paso 3 —buscar la discordancia— es la contramedida</strong>: una plantilla produce tono uniforme; una estrategia produce tono coherente con la mecánica.</li></ol>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div><ul class="rv"><li><strong>ICD 203</strong>, con la adición del <code>Anexo C</code>: <strong>un rasgo de estilo se afirma con la confianza de la observación; su propósito, nunca</strong> — y con la advertencia de que la inferencia de intención a partir del estilo ha perdido fuerza desde que los textos se generan automáticamente.</li><li><strong>Código Admiralty/OTAN</strong>, con el grado <strong>medición propia</strong>, y con la observación de que aquí <strong>el adversario es la mejor fuente disponible sobre sí mismo</strong>.</li><li><strong>MITRE ATT&amp;CK: deliberadamente sin mapa.</strong> Sin TTP ni procedimientos observados.</li><li><strong>Graduación de la prueba de una entrada de sitio de filtración</strong>, <code>Anexo D</code> de <code>CTI-2026-048</code>: este actor <strong>salta el nivel 3 y llega al 5</strong>, el revés exacto de <code>CTI-2026-050</code>, y la tabla de <code>E-3</code> es la aplicación.</li><li><strong>Lectura del registro retórico de un catálogo</strong>, propio de este informe (<code>Anexo D</code>): cuatro registros, tres pasos, y la búsqueda de discordancia como contramedida frente a la prosa generada.</li></ul>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2><p>Las tablas <code>cti:ioc</code> alimentan <code>ioc_index.csv</code>. <strong>Cinco advertencias:</strong></p></div></div><ol class="rv"><li><strong>No hay indicadores de compromiso.</strong> <code>PAP:WHITE</code>. El único patrón de detección —consulta de volcado masivo— es <strong>inferencia nuestra</strong> y vale con independencia de este actor.</li><li><strong>No se reproduce ningún nombre de víctima</strong>, incluida la mexicana con plazo activo. El dato de que la reclamación existe y su fecha límite sí se dan.</li><li><strong>El recuento de 34 no concuerda con el de las otras fuentes</strong> (23 y 27), y la diferencia se explica plausiblemente por las 21 entradas sin dominio.</li><li><strong>Las cardinalidades que el actor declara no se transcriben como datos de ninguna víctima</strong>, sino como ejemplos de su formato. <strong>Una organización que las vea referidas a ella debe comprobarlas con <code>T-1</code>, y el paso 3 puede devolverle la fecha del acceso.</strong></li><li><strong>El plazo del 22 de noviembre de 2026 es el único dato con caducidad dura de este informe</strong>, y después de esa fecha el expediente necesita revisión (<code>I-2</code>).</li></ol>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-19</td><td>Emisión inicial, sexta de la serie <code>046</code>–<code>053</code>. Incluye: la <strong>ausencia total de prueba visual medida</strong> —cero capturas en 34 entradas, único en el lote— (<code>KJ-1</code>); la <strong>especificidad descriptiva por tablas y cardinalidades</strong> como forma alternativa y superior de prueba, con el perfil que <strong>salta el nivel 3 y llega al 5</strong> (<code>KJ-2</code>, <code>E-3</code>); el <strong>hallazgo propio del registro retórico administrativo</strong> y la inferencia de que su audiencia son clientes, reguladores y prensa, con la alternativa de la plantilla automática retenida como seria (<code>KJ-3</code>, <code>E-2</code>, <code>H-2</code>); la constatación de que <strong>no es un programa de afiliados</strong> —sin malware, manifiesto, reglas ni reclutamiento— (<code>KJ-4</code>); el <strong>dato regional más accionable de los actores nuevos</strong>: tres víctimas mexicanas y una reclamación con plazo al 22 de noviembre (<code>KJ-5</code>); el <strong>100 % de entradas con fecha del día</strong> y su consecuencia de privar a la víctima de ventana temporal (<code>KJ-6</code>); la <strong>discrepancia del 48 % entre recuentos</strong> (<code>KJ-7</code>); la <strong>comprobación de cardinalidad</strong> de <code>T-1</code>, cuyo paso 3 permite a la víctima <strong>recuperar la fecha del acceso que el actor oculta</strong>; y el método del <code>Anexo D</code> para leer el registro retórico de un catálogo</td><td>Célula CTI</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota sobre esta emisión</div><p>Es el informe de la serie con <strong>menos fuentes externas y más material del propio adversario</strong>, y de ahí salen sus dos aportaciones: una es que <strong>el nivel de prueba descriptivo vale más que el visual</strong> —un inventario de tablas es comprobable, una captura no—, y la otra es que <strong>el actor que oculta la fecha del acceso la entrega sin darse cuenta en las cardinalidades que publica</strong> (<code>T-1</code> paso 3).</p></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div><ol class="rv"><li><strong>Si operamos en México: ¿se comprobó esta semana si aparecemos listados?</strong> Es la decisión 1 de <code>E-4</code>. <strong>Hay tres víctimas mexicanas y una reclamación con plazo al 22 de noviembre de 2026</strong>, y es el dato más accionable de los seis actores nuevos de esta serie.</li><li><strong>Si aparecemos: ¿se compararon las cardinalidades declaradas con las tablas reales?</strong> Es <code>T-1</code> paso 2 y la comprobación más discriminante del informe. <strong>Una coincidencia aproximada en cuatro cardinalidades distintas es casi imposible de inventar.</strong></li><li><strong>¿Y se usó el paso 3?</strong> Si la cifra declarada es menor que la actual, <strong>la diferencia dice cuándo se tomó la copia</strong> — y es la ventana temporal que el actor no da.</li><li><strong>¿Existe auditoría de consultas de volcado masivo sobre las bases de datos de clientes, y se retiene?</strong> Es <code>X-2.1</code>. Sin ella, los pasos 3 y 4 de <code>T-1</code> no se pueden responder.</li><li><strong>¿Hay un plan de comunicación para una «divulgación» redactada como aviso regulatorio?</strong> Es <code>E-2</code> y <code>X-2.5</code>. Contra ese envoltorio <strong>el silencio parece confirmación</strong>, y es la segunda vez en esta serie que la palanca de un actor cae fuera de Seguridad.</li><li><strong>¿Se rotaron las credenciales de empleado aparecidas en filtraciones públicas?</strong> Es <code>X-2.3</code>: único indicio de vector, débil, y barato de cerrar de todos modos.</li><li><strong>¿Puede alguien comparar una entrada del rastreador con el sitio original?</strong> Es <code>G-2</code>: resolvería si el 100 % de fechas del día es una propiedad del actor o del rastreador.</li><li><strong>¿Alguna víctima ha comprobado y publicado si una cardinalidad declarada era correcta?</strong> Es <code>G-5</code> y <strong>la petición más valiosa del informe</strong>: validaría o destruiría <code>H-3</code>, que es el juicio sobre si este actor tuvo acceso real.</li><li><strong>Y la pregunta de método:</strong> el <code>Anexo D</code> sostiene que la inferencia de intención a partir del estilo <strong>ha perdido fuerza porque los textos se generan automáticamente</strong>, y propone buscar la discordancia entre la prosa y la mecánica como contramedida. <strong>¿Alguien ha encontrado un catálogo con tono uniforme y mecánica coherente, es decir, un caso en que la contramedida no discrimine?</strong> Eso acotaría cuándo el método sirve.</li></ol>
+<p class="rv"><em>Fin del informe <code>CTI-2026-051</code> v1.0.</em></p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-051 · v1.0 · 2026-11-19</strong> · caduca 2027-01-19</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Elaborado con fuentes abiertas y con medición propia sobre la interfaz pública de consulta de un rastreador de sitios de filtración. No se reproduce ningún nombre de víctima: sus reclamaciones no están confirmadas por ninguna de ellas. Difusión libre, conservando la atribución y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>
