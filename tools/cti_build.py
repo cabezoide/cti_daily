@@ -1054,9 +1054,19 @@ def construir_red(lista):
     aristas = datos.get("aristas", [])
 
     ids = {n["id"] for n in nodos}
-    for a, b, _r in aristas:
+    grados = set(datos.get("_evidencia", {})) - {"_"}
+    for arista in aristas:
+        a, b = arista[0], arista[1]
         if a not in ids or b not in ids:
             avisos.append("red: arista hacia un nodo inexistente: %s → %s" % (a, b))
+        # El cuarto campo es el grado de evidencia, y es lo que decide el grosor
+        # del trazo. Un grado que no esté declarado en `_evidencia` se dibujaría
+        # con el valor por omisión y nadie lo notaría, así que se avisa.
+        if len(arista) >= 4 and grados and arista[3] not in grados:
+            avisos.append("red: grado de evidencia desconocido %r en %s → %s"
+                          % (arista[3], a, b))
+        if len(arista) < 4:
+            avisos.append("red: arista sin grado de evidencia: %s → %s" % (a, b))
 
     publicables = {i["id"]: i for i in lista if i["publicable"]}
     archivos = {i["id"]: i["html"] for i in publicables.values()}

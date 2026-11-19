@@ -121,6 +121,8 @@ header a:hover{color:var(--amber); border-bottom-color:var(--amber)}
     padding:1px 3px; border-radius:2.5px; border:1px solid var(--cn); color:var(--cn);
     flex:0 0 auto; line-height:1.25}
 .ch.llena{background:var(--cn); color:var(--bg); border-color:var(--cn)}
+.tz{display:inline-block; width:17px; background:var(--hc); border-radius:2px; margin-right:4px;
+  vertical-align:middle; opacity:.85}
 .botones{display:flex; gap:6px}
 .botones button{background:var(--surface2); border:1px solid var(--line); border-radius:6px;
   color:var(--nc); font:inherit; font-size:12px; padding:6px 10px; cursor:pointer; white-space:nowrap}
@@ -191,6 +193,7 @@ body.conPanel #ctrl{right:356px}
   <div class="caja botones">
     <button id="bGirar" class="on" title="Rotación automática">Girar</button>
     <button id="bEtiq" class="on" title="Mostrar etiquetas">Etiquetas</button>
+    <button id="bConac" class="on" title="Conexión débil entre actores del mismo país">Co-nacionalidad</button>
     <button id="bReset" title="Volver a la vista inicial">Reencuadrar</button>
   </div>
   <div class="caja" id="ayuda">
@@ -228,6 +231,7 @@ const PAIS = {
   ps:    {c:'--ps',     s:'PS', n:'Palestina'},
   lb:    {c:'--lb',     s:'LB', n:'Líbano'},
   latam: {c:'--latam',  s:'LA', n:'Latinoamérica, sin país determinado'},
+  chile: {c:'--latam',  s:'CL', n:'Chile'},
   '-':   {c:'--neutro', s:'',   n:'Sin origen atribuible'}
 };
 const ATRIB = {
@@ -266,6 +270,50 @@ const REL = {
   afiliado:       {t:'afiliado de',             c:'crimen', d:0},
   agrupadoen:     {t:'agrupado en',             c:'nc',     d:2}
 };
+/* ── Grosor del trazo = GRADO DE EVIDENCIA de la relación ──────────────
+   Cuarto elemento de cada arista. La regla de asignación está escrita en
+   `_evidencia` dentro de red-actores.json y se deriva de los propios datos:
+   no se pinta más gruesa una relación porque nos guste más, sino porque
+   un Estado la ha hecho pública o porque la medimos nosotros. */
+const EVID = {
+  oficial:   {w:3.1, l:'un Estado o un tribunal la ha hecho pública'},
+  propio:    {w:2.2, l:'medición propia reproducible de la cartera'},
+  proveedor: {w:1.1, l:'valoración de proveedor'},
+  inferido:  {w:0.55,l:'duda, solapamiento parcial o inferencia sin corroborar'}
+};
+const EVID_ORDEN = ['oficial','propio','proveedor','inferido'];
+
+/* ── Sectores geográficos ──────────────────────────────────────────────
+   Los actores de un mismo país se agrupan en un sector del espacio, y los
+   países vecinos ocupan sectores contiguos: el eje ex-soviético junto, Asia
+   oriental junto, Oriente Medio junto. El ángulo no es decorativo — es lo
+   que hace que la vecindad geográfica se lea de un vistazo. Los nodos sin
+   país no reciben ancla y los coloca la red de relaciones, que es lo
+   correcto: una herramienta no tiene nacionalidad. */
+const ZONA = [
+  {l:'Eje ex-soviético', ps:['ru','by'],        ang:  0},
+  {l:'Asia oriental',    ps:['cn','kp'],        ang: 76},
+  {l:'Asia meridional',  ps:['pk'],             ang:140},
+  {l:'Oriente Medio',    ps:['ir','ps','lb'],   ang:196},
+  {l:'Latinoamérica',    ps:['latam','chile'],  ang:286}
+];
+const R_ZONA = 215, K_ANCLA = 0.0065;
+const ANCLA = {};
+for (const z of ZONA){
+  z.ps.forEach((pk, i) => {
+    /* dentro de la zona, cada país se desplaza un poco para no solaparse
+       con su vecino pero quedar contiguo a él */
+    const a = (z.ang + (i - (z.ps.length-1)/2) * 17) * Math.PI/180;
+    ANCLA[pk] = {x: Math.cos(a)*R_ZONA, y: (i%2 ? 26 : -26), z: Math.sin(a)*R_ZONA, z_: z};
+  });
+}
+/* ── Co-nacionalidad ──────────────────────────────────────────────────
+   Criterio: dos ACTORES del mismo país llevan, por omisión, una conexión
+   al menos débil. No se escriben en red-actores.json porque no son juicios
+   del analista: son derivables del campo de país, y meterlas ahí mezclaría
+   lo medido con lo automático. Se derivan aquí y se pueden apagar. */
+const T_ACTOR = new Set(['estado','crimen','clúster','subgrupo','suministrador']);
+const K_CONAC = 0.0010;
 const TIPO_ETIQ = {
   estado:'Actor estatal', subgrupo:'Subgrupo', clúster:'Clúster de actividad',
   crimen:'Actor de extorsión', suministrador:'Suministrador', marco:'Marco de C2',
@@ -300,8 +348,26 @@ let W = 0, H = 0, DPR = 1;
 
 const N = DATOS.nodos.map(n => ({...n, x:0,y:0,z:0, vx:0,vy:0,vz:0, g:0, px:0,py:0,pz:0,pe:1}));
 const idx = new Map(N.map((n,i)=>[n.id,i]));
-const E = DATOS.aristas.map(([a,b,r]) => ({a:idx.get(a), b:idx.get(b), r}));
+const E = DATOS.aristas.map(([a,b,r,ev]) => ({a:idx.get(a), b:idx.get(b), r, ev: ev || 'proveedor'}));
 E.forEach(e => { N[e.a].g++; N[e.b].g++; });
+
+/* Capa derivada: todos los pares de actores que comparten país. No cuentan
+   para el grado del nodo —inflarían el radio con algo que no es una relación
+   observada— y se dibujan con el trazo mínimo. */
+const CONAC = [];
+{
+  const porPais = new Map();
+  N.forEach((n,i) => {
+    if (!T_ACTOR.has(n.t) || !n.p || n.p === '-') return;
+    if (!porPais.has(n.p)) porPais.set(n.p, []);
+    porPais.get(n.p).push(i);
+  });
+  for (const [pk, lista] of porPais)
+    for (let i=0;i<lista.length;i++)
+      for (let j=i+1;j<lista.length;j++)
+        CONAC.push({a:lista[i], b:lista[j], p:pk});
+}
+let verConac = true;
 
 /* radio por grado y tipo */
 N.forEach(n => {
@@ -393,9 +459,27 @@ function paso(){
     a.vx += dx*f; a.vy += dy*f; a.vz += dz*f;
     b.vx -= dx*f; b.vy -= dy*f; b.vz -= dz*f;
   }
+  /* cohesión débil entre actores del mismo país: los junta sin colapsarlos */
+  for (const c of CONAC){
+    const a = N[c.a], b = N[c.b];
+    const dx=b.x-a.x, dy=b.y-a.y, dz=b.z-a.z;
+    const d = Math.hypot(dx,dy,dz) || 1;
+    const f = (d - L*1.9) * K_CONAC / d;
+    a.vx += dx*f; a.vy += dy*f; a.vz += dz*f;
+    b.vx -= dx*f; b.vy -= dy*f; b.vz -= dz*f;
+  }
   let max = 0;
   for (const n of N){
-    n.vx -= n.x*CENTRO; n.vy -= n.y*CENTRO; n.vz -= n.z*CENTRO;
+    /* ancla del sector geográfico: sustituye la atracción al centro en los
+       nodos con país, para que cada nacionalidad ocupe su propia región */
+    const an = ANCLA[n.p];
+    if (an){
+      n.vx += (an.x - n.x)*K_ANCLA;
+      n.vy += (an.y - n.y)*K_ANCLA;
+      n.vz += (an.z - n.z)*K_ANCLA;
+    } else {
+      n.vx -= n.x*CENTRO; n.vy -= n.y*CENTRO; n.vz -= n.z*CENTRO;
+    }
     n.vx *= AMORT; n.vy *= AMORT; n.vz *= AMORT;
     n.x += n.vx; n.y += n.vy; n.z += n.vz;
     const v = Math.abs(n.vx)+Math.abs(n.vy)+Math.abs(n.vz);
@@ -434,20 +518,36 @@ function dibujar(){
   }
   const hayFoco = sel !== null || hayCoincidencia;   // sin coincidencias no se atenúa nada
 
+  // co-nacionalidad primero: es el fondo, nunca debe tapar una relación real
+  cx2.lineCap = 'round';
+  if (verConac){
+    for (const c of CONAC){
+      const a = N[c.a], b = N[c.b];
+      if (!visible(a) || !visible(b)) continue;
+      if (hayFoco && !(c.a===sel || c.b===sel)) continue;
+      const prof = Math.max(0.1, Math.min(1, (a.pe+b.pe)/2));
+      cx2.strokeStyle = mezcla(col(PAIS[c.p] ? PAIS[c.p].c : '--neutro'),
+                               (sel!==null && (c.a===sel||c.b===sel)) ? 0.30 : 0.055 + prof*0.03);
+      cx2.lineWidth = 0.4 * prof;
+      cx2.beginPath(); cx2.moveTo(a.px,a.py); cx2.lineTo(b.px,b.py); cx2.stroke();
+    }
+  }
+
   // aristas, de atrás hacia delante
   const ord = E.slice().sort((p,q) => (N[p.a].pz+N[p.b].pz) - (N[q.a].pz+N[q.b].pz));
-  cx2.lineCap = 'round';
   for (const e of ord){
     const a = N[e.a], b = N[e.b];
     if (!visible(a) || !visible(b)) continue;
     const enFoco = sel!==null && (e.a===sel || e.b===sel);
     const prof = Math.max(0.1, Math.min(1, (a.pe+b.pe)/2));
+    const ev = EVID[e.ev] || EVID.proveedor;
     let alfa = 0.1 + prof*0.2;
     if (enFoco) alfa = 0.95;
     else if (hayFoco) alfa *= 0.22;
+    // el grosor lo manda la evidencia; el foco lo realza sin anular la escala
     const info = REL[e.r] || {};
     cx2.strokeStyle = mezcla(colorRel(e.r), alfa);
-    cx2.lineWidth = (enFoco ? 1.9 : 0.75) * prof;
+    cx2.lineWidth = Math.max(0.3, ev.w * (enFoco ? 1.45 : 0.72) * prof);
     cx2.setLineDash(info.d ? [info.d, info.d+2] : []);
     cx2.beginPath(); cx2.moveTo(a.px,a.py); cx2.lineTo(b.px,b.py); cx2.stroke();
   }
@@ -734,16 +834,20 @@ function abrir(i){
 
   const salida = [], entrada = [];
   for (const e of E){
-    if (e.a===i) salida.push({o:e.b, r:e.r});
-    if (e.b===i) entrada.push({o:e.a, r:e.r});
+    if (e.a===i) salida.push({o:e.b, r:e.r, ev:e.ev});
+    if (e.b===i) entrada.push({o:e.a, r:e.r, ev:e.ev});
   }
+  const pesoEv = x => EVID_ORDEN.indexOf(x.ev || 'proveedor');
+  salida.sort((x,y) => pesoEv(x) - pesoEv(y));
+  entrada.sort((x,y) => pesoEv(x) - pesoEv(y));
   const bloque = (titulo, lista, inv) => {
     if (!lista.length) return '';
-    const li = lista.map(({o,r}) => {
+    const li = lista.map(({o,r,ev}) => {
       const info = REL[r] || {t:r};
       const et = inv ? invertir(info.t) : info.t;
+      const e = EVID[ev] || EVID.proveedor;
       return `<li><button data-ir="${o}">${esc(N[o].l)}</button>
-              <span class="rel">${esc(et)}</span></li>`;
+              <span class="rel">${esc(et)} · <em title="${esc(e.l)}">${esc(ev||'proveedor')}</em></span></li>`;
     }).join('');
     return `<h3>${titulo}</h3><ul>${li}</ul>`;
   };
@@ -784,7 +888,12 @@ ley.innerHTML =
        ><i class="pt vacia" style="border-color:var(${g.c})"></i>${g.l}</span>`).join('') + '</span>' +
   '<span class="grp clave"><b>Chapa:</b>' +
     '<span class="lg est"><i class="ch llena">CN</i>atribución oficial</span>' +
-    '<span class="lg est"><i class="ch">CN</i>valoración de proveedor</span></span>';
+    '<span class="lg est"><i class="ch">CN</i>valoración de proveedor</span></span>' +
+  '<span class="grp clave"><b>Grosor:</b>' + EVID_ORDEN.map(k =>
+    `<span class="lg est" title="${EVID[k].l}"><i class="tz" style="height:${Math.max(1, Math.round(EVID[k].w))}px"></i>${k}</span>`
+  ).join('') + '</span>' +
+  '<span class="grp clave"><b>Sectores:</b>' + ZONA.map(z =>
+    `<span class="lg est" title="${z.ps.join(', ')}">${esc(z.l)}</span>`).join('') + '</span>';
 
 function alternarFiltro(el){
   const apagando = !el.classList.contains('off');
@@ -817,15 +926,18 @@ const bG = document.getElementById('bGirar');
 bG.addEventListener('click', () => { vista.girar = !vista.girar; sincronizar(); });
 const bE = document.getElementById('bEtiq');
 bE.addEventListener('click', () => { vista.etiquetas = !vista.etiquetas; sincronizar(); });
+const bC = document.getElementById('bConac');
+bC.addEventListener('click', () => { verConac = !verConac; sincronizar(); });
 document.getElementById('bReset').addEventListener('click', () => {
   vista.rotX=-0.32; vista.rotY=0.55; vista.girar=true; vista.offXd=0; vista.offYd=0;
   consulta=''; document.getElementById('q').value='';
-  filtro.clear(); filtroP.clear();
+  filtro.clear(); filtroP.clear(); verConac = true;
   document.querySelectorAll('.lg.off').forEach(e=>{e.classList.remove('off'); e.setAttribute('aria-checked','true');});
   cerrarPanel(); encuadrar(); sincronizar();
 });
 function sincronizar(){
   bG.classList.toggle('on', vista.girar);
+  bC.classList.toggle('on', verConac);
   bE.classList.toggle('on', vista.etiquetas);
 }
 

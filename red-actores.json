@@ -11,7 +11,7 @@
   "a": "grado de atribución de origen: oficial (un Estado o un tribunal la ha hecho pública) | proveedor (valoración de proveedor) | - (sin origen atribuible)",
   "af": "en qué se apoya ese grado, cuando conviene decirlo"
  },
- "_campos_arista": "[origen, destino, relación]",
+ "_campos_arista": "[origen, destino, relación, grado de evidencia]",
  "nodos": [
   {
    "id": "gamaredon",
@@ -2883,2022 +2883,2433 @@
   [
    "qilin",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "lockbit5",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "gentlemen",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "rhysida",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "interlock",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "lazarus",
    "bloqrpdc",
-   "agrupadoen"
+   "agrupadoen",
+   "oficial"
   ],
   [
    "deceptivedev",
    "bloqrpdc",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "scarcruft",
    "bloqrpdc",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "muddywater",
    "bloqiran",
-   "agrupadoen"
+   "agrupadoen",
+   "oficial"
   ],
   [
    "oilrig",
    "bloqiran",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "filthyfeline",
    "bloqiran",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "aridviper",
    "bloqiran",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "troyanosbr",
    "fraudelatam",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "blindeagle",
    "fraudelatam",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "artex",
    "iaofensiva",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "apt36",
    "iaofensiva",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "frostyneighbor",
    "sandworm",
-   "alineadocon"
+   "alineadocon",
+   "inferido"
   ],
   [
    "gamaredon",
    "pterolnk",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pteropsdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pterovdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pterobox",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pterographin",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pteropaste",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pterood",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pterosetup",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "pterosand",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "cve8088",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "gamaredon",
    "cloudflare",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "devtunnels",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "deaddrops",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "s3",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "supabase",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "pterobox",
    "rclone",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "turla",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "gamaredon",
    "invisimole",
-   "colabora"
+   "colabora",
+   "inferido"
   ],
   [
    "turla",
    "kazuar",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "turla",
    "rezzuar",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "pterographin",
    "kazuar",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "pterood",
    "kazuar",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "pteropaste",
    "kazuar",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "pteropsdoor",
    "rezzuar",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "sandworm",
    "zerolot",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "sandworm",
    "sting",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "sandworm",
    "swiftslicer",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "sandworm",
    "notpetya",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "sandworm",
    "industroyer",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "sandworm",
    "sdelete",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "sandworm",
    "gpo",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "zerolot",
    "gpo",
-   "sedistribuyepor"
+   "sedistribuyepor",
+   "proveedor"
   ],
   [
    "swiftslicer",
    "gpo",
-   "sedistribuyepor"
+   "sedistribuyepor",
+   "proveedor"
   ],
   [
    "badpilot",
    "sandworm",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "uac0099",
    "sandworm",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "uac0099",
    "mythicrata",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "crimsonrat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "elizarat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "caprarat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "poseidon",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "aresrat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "deskrat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "crystalshell",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "zigshell",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt36",
    "desktopfile",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt36",
    "colab",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt36",
    "supabase",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "mythic",
    "poseidon",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "crystalshell",
    "zigshell",
-   "deriva"
+   "deriva",
+   "proveedor"
   ],
   [
    "apt36",
    "sidecopy",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "plugx",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "toneshell",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "lotuslite",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "coolclient",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "hiupan",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "snakedisk",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "pubload",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "shardloader",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "coolclient",
    "msagent",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "msagent",
    "nanjingcert",
-   "firmadocon"
+   "firmadocon",
+   "proveedor"
   ],
   [
    "hiupan",
    "pubload",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "unc6384",
    "staticplugin",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc6384",
    "plugx",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc6384",
    "captiveportal",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "mustangpanda",
    "unc6384",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "mustangpanda",
    "camarodragon",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "toneshell",
    "shardloader",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "unc3886",
    "ts6",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc3886",
    "virtualpita",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc3886",
    "mopsled",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc3886",
    "castletap",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc3886",
    "tableflip",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc3886",
    "reptile",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "unc3886",
    "medusa",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "tinyshell",
    "ts6",
-   "deriva"
+   "deriva",
+   "proveedor"
   ],
   [
    "unc3886",
    "veriexec",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "unc3886",
    "cve21590",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "unc3886",
    "cvevmware",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "unc3886",
    "cvefortinet",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "veriexec",
    "cve21590",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "unc3886",
    "tacacs",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "cmd1",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "stowaway",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "siet",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "tacacs",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "guestshell",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "cveciscoxe",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "cveborde",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "ghostemperor",
-   "alias"
+   "alias",
+   "oficial"
   ],
   [
    "salttyphoon",
    "famoussparrow",
-   "disputado"
+   "disputado",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "unc2814",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "salttyphoon",
    "lilactyphoon",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "copperdragon",
    "sparrowfw",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "copperdoor",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "sparrowdoor",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "sparrowshell",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "copperdns",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "squadc",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "annobindoor",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "sparrowfw",
    "copperadu",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "copperdragon",
    "darkwire",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "copperdragon",
    "silentdelivery",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "copperdragon",
    "oceangate",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "copperdragon",
    "famoussparrow",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "famoussparrow",
    "sparrowdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "famoussparrow",
    "copperdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "famoussparrow",
    "shadowpad",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkwire",
    "copperdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkwire",
    "copperdns",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "silentdelivery",
    "squadc",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "oceangate",
    "annobindoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "oceangate",
    "sparrowshell",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "oceangate",
    "copperadu",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkwire",
    "softether",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "sparrowdoor",
    "copperdoor",
-   "deriva"
+   "deriva",
+   "proveedor"
   ],
   [
    "sparrowshell",
    "reptile",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "melofee",
    "sparrowshell",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "famoussparrow",
    "ghostemperor",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "famoussparrow",
    "earthestries",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "sparrowdoor",
    "hemigate",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "earthestries",
    "hemigate",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "famoussparrow",
    "darkwire",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "lilactyphoon",
    "shadowpad",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "filthyfeline",
    "oilrig",
-   "subgrupode"
+   "subgrupode",
+   "proveedor"
   ],
   [
    "slippynunchucks",
    "copperdragon",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "blindeagle",
    "remcos",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "blindeagle",
    "shadowvector",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "redakodon",
    "blindeagle",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "redakodon",
    "shadowvector",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "machete",
    "blindeagle",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "silverfox",
    "sparrowfw",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "rhysida",
    "vanillatempest",
-   "afiliado"
+   "afiliado",
+   "proveedor"
   ],
   [
    "vanillatempest",
    "vicesociety",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "rhysida",
    "interlock",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "rhysida",
    "sdelete",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gamaredon",
    "tldbaratos",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt36",
    "tldbaratos",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "darkwire",
    "tldbaratos",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "silentdelivery",
    "tldbaratos",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "gocaracal",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "bandook",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "pocorat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "asiogate",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "crossrat",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "pallas",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "svgadjunto",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gocaracal",
    "bulletproofc2",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "bulletproofc2",
    "ethereum",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "aeza",
    "darkcaracal",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "alexhost",
    "darkcaracal",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "darkcaracal",
    "manul",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "darkcaracal",
    "blindeagle",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "gocaracal",
    "asiogate",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "apt38",
    "lazarus",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "bluenoroff",
    "lazarus",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "tradertraitor",
    "lazarus",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "deceptivedev",
    "lazarus",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "apt38",
    "bluenoroff",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "tradertraitor",
    "bluenoroff",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "apt38",
    "hermes",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "hermes",
    "buhtrap",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "bluenoroff",
    "clickfix",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "bluenoroff",
    "genai",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "deceptivedev",
    "granjasportatiles",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt38",
    "bloqrpdc",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "bluenoroff",
    "bloqrpdc",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "strikeshark",
    "sharkloader",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "strikeshark",
    "cobaltstrike",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "strikeshark",
    "fscan",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "sharkloader",
    "detours",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "strikeshark",
    "cvegeoserver",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "strikeshark",
    "cveexpuestas",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "strikeshark",
    "cveciscoxe",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "integritytech",
    "flaxtyphoon",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "integritytech",
    "microscan",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "integritytech",
    "fishhub",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "integritytech",
    "raptortrain",
-   "contiene"
+   "contiene",
+   "oficial"
   ],
   [
    "flaxtyphoon",
    "microscan",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "flaxtyphoon",
    "eburst",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "flaxtyphoon",
    "fscan",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "flaxtyphoon",
    "softether",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "flaxtyphoon",
    "arcgis",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "flaxtyphoon",
    "cveexpuestas",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "flaxtyphoon",
    "salttyphoon",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "medusaransom",
    "gaze",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "medusaransom",
    "oast",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "medusaransom",
    "rmmcomercial",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "medusaransom",
    "despliegue",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "medusaransom",
    "mimikatz",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "medusaransom",
    "rclone",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "medusaransom",
    "cvemedusa",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "iab",
    "medusaransom",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "medusaransom",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "medusaransom",
    "medusa",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "gitdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "graphdoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "meshcentral",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "erfrp",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "cobaltstrike",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "mimikatz",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "cookiekatz",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "petitpotam",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "gofile",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "shadowcloud",
    "bronzesandcastle",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "shadowcloud",
    "famoussparrow",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "shadowcloud",
    "copperturtle",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "copperturtle",
    "plead",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "gitdoor",
    "githubc2",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "gitdoor",
    "ably",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "graphdoor",
    "sharepointc2",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "graphdoor",
    "ably",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "bronzesandcastle",
    "githubc2",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "bronzesandcastle",
    "ably",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "silenttrain",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "kvbotnet",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "jdy",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "cveplanos",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "cvefortinet",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "planocontrol",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "arcgis",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "pasarelacelular",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "mimikatz",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "volttyphoon",
    "cvecityworks",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "volttyphoon",
    "salttyphoon",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "uat11473",
    "silenttrain",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "uat11473",
    "keydrift",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "uat11473",
    "cveplanos",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "uat8616",
    "cveplanos",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "uat8616",
    "uat11473",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "sylvanite",
    "volttyphoon",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "azurite",
    "flaxtyphoon",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "azurite",
    "volttyphoon",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "azurite",
    "raptortrain",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "apt28",
    "spypress",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt28",
    "roundish",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt28",
    "httd",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt28",
    "moobot",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt28",
    "authenticantics",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt28",
    "minidoor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt28",
    "cvewebmail",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "apt28",
    "cveole",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "apt28",
    "ddnsgratis",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt28",
    "camarasip",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "covertnetwork1658",
    "cvetplink",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "storm0940",
    "covertnetwork1658",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt28",
    "covertnetwork1658",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "roundish",
    "spypress",
-   "deriva"
+   "deriva",
+   "proveedor"
   ],
   [
    "roundish",
    "httd",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "apt28",
    "frostarmada",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "storm2754",
    "apt28",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "storm2754",
    "frostarmada",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "frostarmada",
    "bordeajeno",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "frostarmada",
    "avisocert",
-   "contiene"
+   "contiene",
+   "oficial"
   ],
   [
    "moobot",
    "bordeajeno",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "frostarmada",
    "cvetplink",
-   "disputado"
+   "disputado",
+   "proveedor"
   ],
   [
    "apt28",
    "cvetplink",
-   "disputado"
+   "disputado",
+   "proveedor"
   ],
   [
    "storm2945",
    "apt29",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "storm2372",
    "apt29",
-   "subgrupode"
+   "subgrupode",
+   "oficial"
   ],
   [
    "storm2945",
    "captivecrunch",
-   "despliega"
+   "despliega",
+   "proveedor"
   ],
   [
    "captivecrunch",
    "cornflake",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "captivecrunch",
    "chocoshell",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "captivecrunch",
    "fruitstone",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "captivecrunch",
    "captiveportal",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "captivecrunch",
    "devicecode",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt29",
    "grapeloader",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt29",
    "wineloader",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "grapeloader",
    "wineloader",
-   "entrega"
+   "entrega",
+   "proveedor"
   ],
   [
    "apt29",
    "devicecode",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "apt29",
    "cvemobile",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "intellexa",
    "cvemobile",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "nsogroup",
    "cvemobile",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "apt29",
    "intellexa",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "apt29",
    "nsogroup",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "apt29",
    "misionexterior",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "apt29",
    "apt28",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "chengdu404",
    "apt41",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "apt41",
    "toughprogress",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt41",
    "dusttrap",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "apt41",
    "winntielf",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "toughprogress",
    "calendarc2",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "winntielf",
    "smtp25",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "winntielf",
    "metadatosnube",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "apt41",
    "doblemision",
-   "contiene"
+   "contiene",
+   "oficial"
   ],
   [
    "winntielf",
    "dusttrap",
-   "deriva"
+   "deriva",
+   "proveedor"
   ],
   [
    "royal",
    "blacksuit",
-   "deriva"
+   "deriva",
+   "propio"
   ],
   [
    "blacksuit",
    "chaos",
-   "deriva"
+   "deriva",
+   "propio"
   ],
   [
    "chaos",
    "chaosbuilder",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "chaos",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "propio"
   ],
   [
    "blacksuit",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "oficial"
   ],
   [
    "royal",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "oficial"
   ],
   [
    "chaos",
    "vishinghelpdesk",
-   "abusa"
+   "abusa",
+   "propio"
   ],
   [
    "blacksuit",
    "checkmate",
-   "contiene"
+   "contiene",
+   "oficial"
   ],
   [
    "blacksuit",
    "ipsbandaancha",
-   "abusa"
+   "abusa",
+   "propio"
   ],
   [
    "chaos",
    "iab",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "blacksuit",
    "iab",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "sphinxransom",
    "anubisransom",
-   "deriva"
+   "deriva",
+   "proveedor"
   ],
   [
    "hawkmoth",
    "anubisransom",
-   "suministra"
+   "suministra",
+   "proveedor"
   ],
   [
    "anubisransom",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "sphinxransom",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "anubisransom",
    "wipemode",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "anubisransom",
    "lindnor",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "anubisransom",
    "byovd",
-   "abusa"
+   "abusa",
+   "proveedor"
   ],
   [
    "anubisransom",
    "copec",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "anubisransom",
    "relatoextorsion",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "lindnor",
    "bloqueoesalerta",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "byovd",
    "bloqueoesalerta",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "anubisransom",
    "iab",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "anubisransom",
    "chaos",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "anubisransom",
    "medusaransom",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "devman",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "direwolf",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "proveedor"
   ],
   [
    "devman",
    "accesoporpais",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "devman",
    "scadaclaim",
-   "contiene"
+   "contiene",
+   "proveedor"
   ],
   [
    "devman",
    "davila",
-   "explota"
+   "explota",
+   "proveedor"
   ],
   [
    "devman",
    "iab",
-   "usa"
+   "usa",
+   "proveedor"
   ],
   [
    "accesoporpais",
    "iab",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "devman",
    "sauronransom",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "direwolf",
    "sauronransom",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "devman",
    "direwolf",
-   "noesalias"
+   "noesalias",
+   "proveedor"
   ],
   [
    "devman",
    "relatoextorsion",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "devman",
    "checkmate",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "ecosistemabots",
    "proxyresidencial",
-   "contiene"
+   "contiene",
+   "propio"
   ],
   [
    "ecosistemabots",
    "liso",
-   "contiene"
+   "contiene",
+   "propio"
   ],
   [
    "ecosistemabots",
    "cereal2",
-   "contiene"
+   "contiene",
+   "propio"
   ],
   [
    "ecosistemabots",
    "asimetriabots",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "botnetcl",
    "ecosistemabots",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "proxyresidencial",
    "badbox3",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "proxyresidencial",
    "zenlayerc2",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "proxyresidencial",
    "covertnetwork1658",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "liso",
    "lisodosmodos",
-   "contiene"
+   "contiene",
+   "propio"
   ],
   [
    "liso",
    "puerto65535",
-   "contiene"
+   "contiene",
+   "propio"
   ],
   [
    "liso",
    "lisovietnam",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "liso",
    "pulso5s",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "liso",
    "ispregionalbr",
-   "explota"
+   "explota",
+   "propio"
   ],
   [
    "liso",
    "cereal2",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "pulso5s",
    "ispregionalbr",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "asimetriabots",
    "zenlayerc2",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "liso",
    "botnetcl",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "ecosistemabots",
    "volttyphoon",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "badbox3",
    "aisuru",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "liso",
    "aisuru",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "ecosistemabots",
    "aisuru",
-   "contiene"
+   "contiene",
+   "propio"
   ],
   [
    "aisuru",
    "proxyresidencial",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "aisuru",
    "cereal2",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "akira",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "oficial"
   ],
   [
    "incransom",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "propio"
   ],
   [
    "n0nactor",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "propio"
   ],
   [
    "settraactor",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "propio"
   ],
   [
    "vortexactor",
    "curiouswormactor",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "n0nactor",
    "vortexactor",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "incransom",
    "checkmate",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "akira",
    "qilin",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "incransom",
    "qilin",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "settraactor",
    "relatoextorsion",
-   "vinculado"
+   "vinculado",
+   "inferido"
   ],
   [
    "curiouswormactor",
    "soulgroupactor",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "pixelleaksactor",
    "soulgroupactor",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "akira",
    "cvesonicwall",
-   "explota"
+   "explota",
+   "propio"
   ],
   [
    "akira",
    "gentlemen",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "akira",
    "blacksuit",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "incransom",
    "gentlemen",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "vortexactor",
    "accesoporpais",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "n0nactor",
    "gentlemen",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "krybitactor",
    "prefijovanidoso",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "safepayactor",
    "prefijovanidoso",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "dragonforceactor",
    "prefijovanidoso",
-   "parcial"
+   "parcial",
+   "inferido"
   ],
   [
    "dragonforceactor",
    "marcablanca",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "dragonforceactor",
    "devman",
-   "afiliado"
+   "afiliado",
+   "propio"
   ],
   [
    "dragonforceactor",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "propio"
   ],
   [
    "krybitactor",
    "raas",
-   "agrupadoen"
+   "agrupadoen",
+   "propio"
   ],
   [
    "stormblog",
    "inflacionvictimas",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "braincipher",
    "inventariofichero",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "braincipher",
    "cve202328252",
-   "explota"
+   "explota",
+   "propio"
   ],
   [
    "soulgroupactor",
    "republicacion",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "soulgroupactor",
    "insomniaactor",
-   "solapa"
+   "solapa",
+   "inferido"
   ],
   [
    "safepayactor",
    "interruptoridioma",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "safepayactor",
    "sharefinder",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "safepayactor",
    "winrarexfil",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "safepayactor",
    "rclone",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "safepayactor",
    "concentraciongeo",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "boobaproject",
    "almacenseparado",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "vortexactor",
    "desenmascarado",
-   "usa"
+   "usa",
+   "propio"
   ],
   [
    "incransom",
    "lynxactor",
-   "noesalias"
+   "noesalias",
+   "propio"
   ],
   [
    "dragonforceactor",
    "qilin",
-   "disputado"
+   "disputado",
+   "propio"
   ],
   [
    "dragonforceactor",
    "incransom",
-   "disputado"
+   "disputado",
+   "propio"
   ],
   [
    "krybitactor",
    "incransom",
-   "disputado"
+   "disputado",
+   "propio"
   ],
   [
    "ctifyi",
    "desenmascarado",
-   "suministra"
+   "suministra",
+   "propio"
   ],
   [
    "ctiwatch",
    "cve202328252",
-   "suministra"
+   "suministra",
+   "propio"
   ]
- ]
+ ],
+ "_evidencia": {
+  "_": "El GROSOR del trazo es el grado de evidencia de la relación. La regla es ésta y es reproducible desde los propios datos; no se asigna a mano.",
+  "oficial": "Relación de identidad o pertenencia en la que al menos un extremo tiene atribución oficial de un Estado o un tribunal. Trazo más grueso.",
+  "propio": "Relación establecida por medición propia reproducible en un informe de esta cartera.",
+  "proveedor": "Relación afirmada por un informe de proveedor, sin atribución oficial.",
+  "inferido": "Relación que expresa duda, solapamiento parcial o negación, o inferencia sin corroborar. Trazo más fino."
+ }
 }
