@@ -1855,6 +1855,393 @@
    "r": "CTI-2026-036",
    "d": "Crean un camino hacia la red de operación que SALTA el perímetro sin pasar por él, y a menudo no están en el inventario de nadie porque las puso Operaciones. Entrada documentada en 2025 por su interfaz web, en puertos 9191 y 9443, hacia oleoductos y gasoductos",
    "a": "-"
+  },
+  {
+   "id": "apt28",
+   "l": "APT28 · Fancy Bear · Sednit",
+   "t": "estado",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Unidad militar 26165 del 85.º GTsSS de la GRU, más su subgrupo Storm-2754. Espionaje, NO destrucción. Opera TRES doctrinas de infraestructura a la vez —relé selectivo en proximidad al objetivo, recolección oportunista a escala planetaria y abuso de red en tránsito—, y por eso nos pone en tres casillas distintas a la vez: ése era el error de esta cartera, suponer que un actor tiene UNA doctrina. Dos datos regionales: organizaciones de gobierno en CENTROAMÉRICA (Lumen) y un objetivo militar de ECUADOR en julio de 2024 (ESET)",
+   "a": "oficial",
+   "af": "JCSA-20240227-001 lo firman el FBI, la NSA, el Mando Ciberespacial de EE. UU. y diez socios internacionales, BRASIL entre ellos. AA25-141A lo firman veintiuna organizaciones. El Reino Unido sancionó la unidad 26165 y dieciocho oficiales nominalmente el 18-07-2025"
+  },
+  {
+   "id": "spypress",
+   "l": "SpyPress (×4)",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Cuatro cargas de JavaScript —HORDE, MDAEMON, ROUNDCUBE, ZIMBRA— que viven en el cuerpo de un correo y se ejecutan en la sesión autenticada del portal. SIN fichero, SIN proceso, SIN persistencia en el puesto. Ofuscador que aleatoriza por muestra: cada carga tiene un hash distinto, así que ingerir hashes es una formalidad. La de MDaemon roba el secreto TOTP y crea una contraseña de aplicación",
+   "a": "proveedor",
+   "af": "ESET atribuye Operation RoundPress a este actor con CONFIANZA MEDIA, por similitud de remitentes y una configuración singular de servidor compartida con un dominio atribuido por Qianxin"
+  },
+  {
+   "id": "roundish",
+   "l": "Juego de Operation Roundish",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Recuperado de un directorio abierto en enero de 2026: 61 ficheros, 36 subdirectorios, versión de desarrollo JUNTO a la de producción e historial de órdenes del operador. SEIS operaciones simultáneas al abrirse el correo. Añade un canal lateral por CSS, robo de credenciales del navegador y un implante Go — cuatro capacidades no documentadas antes en este actor",
+   "a": "proveedor",
+   "af": "Hunt.io lo atribuye con confianza media-alta por catorce solapamientos con RoundPress, siete exactos. Es atribución APOYADA EN OTRA atribución de confianza media: no se debe colapsar"
+  },
+  {
+   "id": "httd",
+   "l": "httd (implante Go)",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "ELF Go estático y despojado, 5,2 MB, con TRES persistencias: cron a /.img cada minuto como root, linux.service instalado desde /boot, y generación de una política propia de SELinux con audit2allow para autorizarse a sí mismo. Las tres comprobaciones bastan para abrir incidente sin necesidad del hash",
+   "a": "proveedor"
+  },
+  {
+   "id": "moobot",
+   "l": "Moobot (EdgeRouter) · generación 1",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "NO ES SUYA: red de bots DELICTIVA preexistente, basada en Mirai, que la GRU se limitó a aprovechar. Entrada por CREDENCIAL POR OMISIÓN y OpenSSH troyanizado — cero CVE, nada que parchear. Desarticulada por orden judicial estadounidense en febrero de 2024 (operación Dying Ember). Escribe un resolutor PÚBLICO de OpenDNS en /etc/resolv.conf: es el único elemento de DNS del expediente, y NO es intermediación",
+   "a": "oficial",
+   "af": "Desarticulada por orden judicial estadounidense en febrero de 2024; el aviso conjunto publica indicadores identificados por el FBI"
+  },
+  {
+   "id": "authenticantics",
+   "l": "Authentic Antics",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Ladrón de credenciales y de vales OAuth 2.0 que vive DENTRO de Outlook. NO habla con ningún C2 y NO acepta órdenes: no hay canal que detectar ni infraestructura que bloquear",
+   "a": "oficial",
+   "af": "Atribución formal del NCSC-UK el 18-07-2025, a partir de un incidente de 2023 investigado por Microsoft y NCC Group"
+  },
+  {
+   "id": "minidoor",
+   "l": "MiniDoor · PixyNetLoader",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Campaña Neusploit, enero de 2026. MiniDoor es un proyecto VBA malicioso de Outlook que baja la seguridad de macros y reenvía el correo. PixyNetLoader secuestra COM, oculta shellcode por esteganografía LSB en un PNG y carga un Covenant Grunt en memoria con C2 sobre la API de Filen",
+   "a": "proveedor",
+   "af": "Zscaler ThreatLabz lo atribuye con confianza alta. NO leído en original: brecha G-3 del informe, y por eso sus indicadores no entran en el Anexo A"
+  },
+  {
+   "id": "covertnetwork1658",
+   "l": "Quad7 · CovertNetwork-1658",
+   "t": "servicio",
+   "p": "cn",
+   "r": "CTI-2026-037",
+   "d": "EL DUEÑO REAL DE CVE-2023-50224, y está en este grafo para que no se confunda con APT28. Unos 8.000 enrutadores domésticos TP-Link simultáneos, de los que ~20 % pulveriza contraseñas contra Microsoft 365 SIN selección de objetivo. Doctrina opuesta a la de APT28 en todo: escala, indiferencia al relé y ruido",
+   "a": "proveedor",
+   "af": "Microsoft la describe como establecida y mantenida por un actor situado en CHINA. El propio fabricante del equipo afectado la atribuye a actores de amenaza chinos en su nota pública"
+  },
+  {
+   "id": "storm0940",
+   "l": "Storm-0940",
+   "t": "estado",
+   "p": "cn",
+   "r": "CTI-2026-037",
+   "d": "Consumidor de las credenciales que pulveriza CovertNetwork-1658, a veces el mismo día en que se extraen. Es el actor al que pertenece de verdad la cadena de CVE que el requisito atribuyó a la GRU",
+   "a": "proveedor"
+  },
+  {
+   "id": "cvetplink",
+   "l": "CVE-2023-50224 + CVE-2025-9377 (TP-Link)",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "EL ELEMENTO EN DISPUTA. Con certeza es el primer eslabón de la cadena de Quad7, que es china. Y, según un agregador comercial y NINGUNA fuente primaria, también el acceso inicial de FrostArmada. Microsoft no nombra vulnerabilidad ni marca; el Departamento de Justicia dice «vulnerabilidades conocidas» sin identificarlas. PARCHEAR SÍ; no usar para atribuir: si aparece un equipo comprometido por este fallo, no dice quién está detrás",
+   "a": "-"
+  },
+  {
+   "id": "cvewebmail",
+   "l": "CVE de correo web (5) · CVE-2023-23397",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "CVE-2020-35730 y CVE-2023-43770 (Roundcube), CVE-2024-11182 (MDaemon, DÍA CERO del propio actor), CVE-2024-27443 (Zimbra) y un fallo de Horde de 2007 cuyo exploit NO funcionaba. Más CVE-2020-12641 y CVE-2021-44026, que permiten EJECUCIÓN DE ÓRDENES. Y CVE-2023-23397 en Outlook, explotado como día cero desde 2022 y SEGUIDO EXPLOTANDO después del parche",
+   "a": "-"
+  },
+  {
+   "id": "cveole",
+   "l": "CVE-2026-21509 (Shell.Explorer.1)",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "Hueco en la lista de permitidos de objetos OLE de Office: Shell.Explorer y .2 llevan años bloqueados, .1 nunca entró. El RTF no lleva carga: sólo instancia el objeto, que navega a un .lnk remoto por el motor HEREDADO de Internet Explorer, sin SmartScreen ni Smart App Control. oleid NO lo ve. Tres días entre el parche fuera de ciclo y la explotación observada",
+   "a": "-"
+  },
+  {
+   "id": "ddnsgratis",
+   "l": "Alojamiento y DNS dinamico gratuito (37)",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "NO BLOQUEAR: ngrok, webhook.site, mocky.io y pipedream son herramientas de desarrollo en uso corriente, y el resto son proveedores de DNS dinámico doméstico. El aviso conjunto recomienda ALERTAR con excepciones, no bloquear. Incluye *.000.pe, alojamiento gratuito bajo el dominio de primer nivel de PERÚ: material directo de CTI-2026-018",
+   "a": "-"
+  },
+  {
+   "id": "camarasip",
+   "l": "Camaras IP y de trafico municipales",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "Más de 10.000 cámaras seleccionadas por RTSP desde marzo de 2022, 81 % en Ucrania, para seguir el movimiento de material de ayuda — incluidas CÁMARAS DE TRÁFICO MUNICIPALES. Quinto caso del hueco organizativo de CTI-2026-034 sobre otra clase de plataforma: la compra Tránsito, la administra Tránsito, no está en el inventario de nadie y su credencial es la de fábrica. Y el dato que produce —la geometría del territorio y el calendario de lo que pasa por él— no se puede cambiar después",
+   "a": "-"
+  },
+  {
+   "id": "frostarmada",
+   "l": "FrostArmada · Operation Masquerade",
+   "t": "clúster",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Generación 3 del mismo mecanismo: secuestro de DNS en el enrutador ajeno para montar intermediación sobre TLS contra Outlook en la web. Resolutores sustituidos, propagación SOLA por DHCP, dnsmasq del adversario en el puerto 53. 18.000 direcciones en más de 120 países en el pico de diciembre de 2025; más de 200 organizaciones y 5.000 equipos domésticos. SIETE DE OCHO FASES ocurren fuera de nuestro alcance, y lo único observable es un aviso de certificado que el usuario descartó",
+   "a": "oficial",
+   "af": "Análisis de Microsoft Threat Intelligence del 07-04-2026 más desarticulación judicial del Departamento de Justicia, el FBI, la NSA, el gobierno polaco y el NCSC británico el mismo día. El FBI restableció los resolutores de los equipos por orden judicial"
+  },
+  {
+   "id": "storm2754",
+   "l": "Storm-2754",
+   "t": "subgrupo",
+   "p": "ru",
+   "r": "CTI-2026-037",
+   "d": "Subgrupo de APT28 al que Microsoft atribuye la operación de secuestro de DNS. Lumen describe DOS células: una de expansión del parque de enrutadores y otra de intermediación y recolección — un reparto de trabajo que comprime el plazo entre comprometer el equipo y leer el correo",
+   "a": "proveedor",
+   "af": "Designación y valoración de Microsoft, respaldada por la acción judicial de abril de 2026"
+  },
+  {
+   "id": "avisocert",
+   "l": "El aviso de certificado descartado",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "EL ÚNICO EVENTO OBSERVABLE de toda la cadena de FrostArmada, y por tanto el indicador de mayor valor del informe — que no es una dirección ni un hash. Microsoft es explícito: la interceptación del tráfico en claro SÓLO ocurre si el usuario desoye el aviso. El anclaje de certificado por gestión de dispositivos lo convierte en un error irrecuperable, es configuración y no compra, y protege al portátil FUERA de nuestra red, que es donde ocurre el ataque",
+   "a": "-"
+  },
+  {
+   "id": "bordeajeno",
+   "l": "El equipo de borde que no es nuestro",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-037",
+   "d": "El hueco organizativo de CTI-2026-034 llevado a su extremo: no lo compró ningún área, no lo administra nadie de la organización, no está en ningún inventario y su credencial es la de fábrica. Y aun así decide qué dirección IP resuelve outlook.office.com para el portátil de la empresa cuando el empleado trabaja desde casa. No hay a quién pedirle que lo parchee",
+   "a": "-"
+  },
+  {
+   "id": "apt29",
+   "l": "APT29 · Midnight Blizzard · Cozy Bear",
+   "t": "estado",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Servicio de Inteligencia Exterior ruso (SVR). Recoge INTENCIONES de política exterior, no capacidades: por eso «sus objetivos casi nunca cambian», y por eso la búsqueda retrospectiva contra él tiene retorno. NINGUNA víctima latinoamericana nombrada en diez fuentes. Pero dos conjuntos de exposición sí nos incluyen por construcción: las embajadas de países NO europeos situadas en Europa, y el viajero corporativo en cualquier hotel del mundo",
+   "a": "oficial",
+   "af": "Atribuido por los gobiernos de Estados Unidos y del Reino Unido al Servicio de Inteligencia Exterior de la Federación Rusa"
+  },
+  {
+   "id": "storm2945",
+   "l": "Storm-2945",
+   "t": "subgrupo",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Subgrupo operativo al que Microsoft atribuye CaptiveCrunch. El parentesco se apoya en solapamientos con Storm-2372, exfiltración de correo por Microsoft Graph, ingeniería social por aplicaciones de mensajería comerciales y «parecidos significativos en victimología»",
+   "a": "proveedor",
+   "af": "Valoración de Microsoft con base declarada. Y Microsoft SEPARA EXPRESAMENTE esta campaña de la operación de secuestro de DNS de la GRU pese a reconocer parecidos de técnica: es lo contrario de componer"
+  },
+  {
+   "id": "storm2372",
+   "l": "Storm-2372",
+   "t": "subgrupo",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Subgrupo de operaciones de acceso inicial, seguido durante 2025 por sus campañas de código de dispositivo y de código OAuth. Es la base del parentesco que sostiene la atribución de Storm-2945",
+   "a": "proveedor"
+  },
+  {
+   "id": "captivecrunch",
+   "l": "CaptiveCrunch",
+   "t": "clúster",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Desde mayo de 2026: manipulación de DNS y HTTP en redes de hostelería servidas por portales cautivos EN TODO EL MUNDO. El primer paso lo da NUESTRO sistema operativo, al lanzar su comprobación de conectividad; el adversario responde con una falsa actualización. Hoteles, centros de congresos y recintos compartidos. Objetivo: la cuenta del viajero corporativo. Reanudada el 29-09-2026, dos meses después de ser divulgada",
+   "a": "proveedor",
+   "af": "Microsoft la atribuye a Storm-2945 con telemetría propia. Black Lotus Labs apunta a varios proveedores de servicios gestionados de hostelería como acceso aguas arriba, que es lo que explica el rearme rápido"
+  },
+  {
+   "id": "grapeloader",
+   "l": "GRAPELOADER",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Cargador entregado en wine.zip con un PowerPoint LEGÍTIMO. Entra por la exportación PPMain y no por DllEntryPoint, así que no opera bajo el cerrojo del cargador. Y SÓLO establece persistencia si el directorio de trabajo no es System32: es decir, no persiste cuando lo está analizando alguien. Su evasión de escaneo de memoria es un reloj: PAGE_NOACCESS, diez segundos de espera para que el escáner llegue y no pueda leer, y después ejecución",
+   "a": "proveedor"
+  },
+  {
+   "id": "wineloader",
+   "l": "WINELOADER",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Puerta trasera modular en vmtools.dll: 964 exportaciones de las que sólo 482 son únicas, y una sola funcional, Str_Wcscpy. Sección .text marcada RWX. Y el regalo: su agente de usuario declara Windows 7 con Edge 119, una combinación QUE NO PUEDE EXISTIR. Una expresión regular, cero falsos positivos",
+   "a": "proveedor",
+   "af": "Check Point lo considera bien atribuido a este actor, por continuidad con la campaña de catas de vino de marzo de 2024 y por atribuciones previas incluida la de Mandiant sobre partidos políticos alemanes"
+  },
+  {
+   "id": "cornflake",
+   "l": "CornFlake",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Troyano en Go con persistencia CUÁDRUPLE y una rutina de vigilancia que restaura lo que el defensor borre. Micrófono, cámara, pulsaciones, portapapeles, galletas desde la memoria del navegador, y un barrido de 18 categorías que incluye las EXCLUSIONES de Defender. Su C2 usa clave efímera por sesión: el tráfico capturado NO se puede descifrar después. Variante en Rust desde octubre de 2026",
+   "a": "proveedor"
+  },
+  {
+   "id": "chocoshell",
+   "l": "ChocoShell",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Ladrón en PowerShell íntegramente en memoria. Tres elusiones silenciosas del control de cuentas en cascada. Elude POR COMPLETO el cifrado de galletas de Chrome lanzando el navegador con --remote-debugging-port y pidiéndole las galletas en claro. Roba vales de Microsoft 365 de los ficheros .tbres: un cambio de contraseña NO los revoca. Y su código llevaba comentarios con referencias explícitas a NOMBRES DE FIRMAS DE DETECCIÓN de Microsoft",
+   "a": "proveedor",
+   "af": "Microsoft valora que el estándar de codificación consistente y el comentario descriptivo SUGIEREN que el autor PODRÍA haber recurrido a generación de código asistida. Está formulado con doble condicional y conviene no ascenderlo"
+  },
+  {
+   "id": "fruitstone",
+   "l": "FruitStone (panel del operador)",
+   "t": "herramienta",
+   "p": "ru",
+   "r": "CTI-2026-038",
+   "d": "Panel de mando branded como «CloudSync Console — Acuity Systems, Inc.». Lo que dice de la operación vale más que lo que hace: constructor de campañas CON PESTAÑAS —el nombre del ejecutable y la aleatorización de símbolos son casillas de un formulario, así que los nombres y los hashes no son indicadores de clase—, víctimas agrupadas por país en un mapa, y a cada operador se le muestran las sesiones activas de los demás: contravigilancia interna",
+   "a": "proveedor"
+  },
+  {
+   "id": "devicecode",
+   "l": "Flujo de código de dispositivo",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-038",
+   "d": "Flujo LEGÍTIMO de OAuth convertido en vector: el adversario inicia la petición y convence al usuario de escribir SU código en una página AUTÉNTICA de Microsoft. La víctima autentica la sesión del atacante. NINGUNA formación de usuarios lo cierra, porque no hay nada falso que reconocer. Se desactiva por política de identidad o no se cierra. En uso desde agosto de 2024, e integrado en los portales cautivos desde el 16-07-2026",
+   "a": "-"
+  },
+  {
+   "id": "cvemobile",
+   "l": "CVE-2023-41993 · CVE-2024-5274 · CVE-2024-4671",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-038",
+   "d": "Los tres exploits móviles del pozo de agua en los sitios del Gabinete y el Ministerio de Exteriores de Mongolia. TODOS DE N DÍAS: tenían parche cuando el actor los usó. Eso es inusual en un actor de este nivel y tiene una consecuencia que conviene aprovechar: actualizar el dispositivo los derrota POR COMPLETO. Aquí parchear el parque móvil no es higiene, es la contramedida",
+   "a": "-"
+  },
+  {
+   "id": "intellexa",
+   "l": "Intellexa",
+   "t": "suministrador",
+   "p": "-",
+   "r": "CTI-2026-038",
+   "d": "Proveedor comercial de vigilancia. Su exploit de iOS de septiembre de 2023 reaparece DOS MESES después en el pozo de agua, con EL MISMO DISPARADOR exacto — lo que, según el analista, sugiere con fuerza que los autores o los proveedores son los mismos. Y su escape del aislamiento de Chrome se parece al de la muestra llamada `chopin`",
+   "a": "-"
+  },
+  {
+   "id": "nsogroup",
+   "l": "NSO Group",
+   "t": "suministrador",
+   "p": "-",
+   "r": "CTI-2026-038",
+   "d": "Proveedor comercial de vigilancia. Su día cero de Chrome de mayo de 2024 reaparece DOS MESES después, ADAPTADO: disparador parecido pero conceptualmente distinto, y re-apuntado de un rango de versiones 107-124 a sólo 121-123. Estrechar un rango no es lo que hace quien recibe un binario: es lo que hace quien entiende el código. Es el dato más informativo del Anexo D",
+   "a": "-"
+  },
+  {
+   "id": "misionexterior",
+   "l": "La misión diplomática en el exterior",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-038",
+   "d": "El activo regional que SÍ está en el conjunto declarado: Check Point documenta que la campaña de 2025 atacó «embajadas de países NO europeos situadas en Europa». Una legación en Bruselas está en el conjunto sin que su país aparezca en ningún mapa. Y reúne el hueco organizativo completo: conexión a Internet propia contratada en destino, administrador local o ninguno, fuera del inventario de la cancillería que la financia — y su cadena de mando pasa por una dirección general que no tiene a la seguridad informática entre sus indicadores",
+   "a": "-"
+  },
+  {
+   "id": "apt41",
+   "l": "APT41 · Winnti · Brass Typhoon",
+   "t": "estado",
+   "p": "cn",
+   "r": "CTI-2026-039",
+   "d": "DOBLE MISIÓN establecida en el mismo pliego de cargos: espionaje estatal Y secuestro de datos con exigencia de pago. Eso significa que el artefacto que encuentres NO te dirá en cuál de las dos misiones estás, y el coste de equivocarse es asimétrico: tratar un espionaje como extorsión lleva a restaurar con el adversario dentro, y ese error no se descubre. Dos datos regionales JUDICIALES: proveedores de telecomunicaciones en CHILE, y víctimas de cadena de suministro en BRASIL. El sector minero NO aparece en ninguna de las ocho fuentes",
+   "a": "oficial",
+   "af": "Cinco nacionales chinos acusados nominalmente por dos grandes jurados del Distrito de Columbia, el 15-08-2019 y el 11-08-2020, con cargos que incluyen asociación ilícita. Es el grado de establecimiento más alto de esta cartera: no es atribución de un Estado, es un pliego con nombres y con un empleador"
+  },
+  {
+   "id": "chengdu404",
+   "l": "Chengdu 404 Network Technology",
+   "t": "suministrador",
+   "p": "cn",
+   "r": "CTI-2026-039",
+   "d": "NO es un alias: es el EMPLEADOR de tres de los cinco acusados, y consta así en la acusación de 2020. Es el caso espejo de CTI-2026-034: allí una empresa HABILITA al actor y está sancionada por tres jurisdicciones; aquí los operadores ERAN ASALARIADOS de una empresa. Y la cara lucrativa del expediente —secuestro de datos por los propios empleados— sugiere que la doble misión puede ser una consecuencia del modelo de contratación y no una política del patrocinador",
+   "a": "oficial",
+   "af": "La acusación del 11-08-2020 imputa a QIAN Chuan, FU Qiang y JIANG Lizhi por intrusiones cometidas mientras estaban empleados por esta empresa"
+  },
+  {
+   "id": "toughprogress",
+   "l": "TOUGHPROGRESS (PLUSDROP · PLUSINJECT)",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-039",
+   "d": "Cadena de tres módulos: PLUSDROP descifra y carga en memoria, PLUSINJECT vacía un svchost.exe legítimo, TOUGHPROGRESS ejecuta. Entregada desde el sitio web de UN GOBIERNO ya comprometido, de modo que mirar el dominio del enlace CONFIRMA la legitimidad en lugar de desmentirla. Señuelo: siete ficheros con nombre de imagen de artrópodos, de los que 6.jpg y 7.jpg no son imágenes",
+   "a": "proveedor"
+  },
+  {
+   "id": "dusttrap",
+   "l": "DUSTPAN · DUSTTRAP",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-039",
+   "d": "Marco de complementos multietapa diseñado para dejar MÍNIMA HUELLA FORENSE tras la actividad manual sobre el teclado — es decir, el adversario invirtió en que la fase más ruidosa de cualquier intrusión no deje rastro. Campaña contra transporte marítimo, logística, tecnología y automoción en Reino Unido, Italia, España, Turquía, Taiwán y Tailandia desde al menos 2023. Ningún país americano",
+   "a": "proveedor",
+   "af": "Mandiant, julio de 2024. NO LEÍDO EN ORIGINAL: su página se sirve íntegramente por JavaScript y devuelve cero contenido. Es la brecha G-1 del informe, y por eso sus indicadores no entran en el Anexo A"
+  },
+  {
+   "id": "winntielf",
+   "l": "Implante ELF de Winnti (2026)",
+   "t": "herramienta",
+   "p": "cn",
+   "r": "CTI-2026-039",
+   "d": "Estático, despojado, CERO DETECCIONES. Oculta las órdenes dentro de RESPUESTAS DE SMTP en el puerto 25, y su servidor PERMANECE MUDO salvo ante un saludo válido: a un escáner le presenta un servidor de correo normal y lo desconecta. Eso lo saca del conjunto de infraestructura que el escaneo de Internet sabe encontrar — y buena parte de la inteligencia de esta cartera viene de ahí. Linaje de seis años desde PWNLNX (2020)",
+   "a": "proveedor",
+   "af": "Breakglass Intelligence, abril de 2026. NO LOCALIZADO: usado a través de cobertura consistente de al menos cinco medios. Sus indicadores no entran en el Anexo A"
+  },
+  {
+   "id": "calendarc2",
+   "l": "Google Calendar como C2",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-039",
+   "d": "NO BLOQUEAR: lo usa toda la organización. El implante crea un evento con FECHA FALSA Y ANTIGUA —mayo de 2023— y mete los datos exfiltrados cifrados en su descripción; lee las órdenes de otros eventos de julio de 2023. El tráfico de mando queda enterrado EN EL PASADO DEL CALENDARIO, donde nadie mira. Y en algunos casos el C2 era una cuenta de Workspace COMPROMETIDA de un tercero legítimo, así que ni el inquilino de destino es un indicador fiable",
+   "a": "-"
+  },
+  {
+   "id": "smtp25",
+   "l": "El puerto 25 como canal de mando",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-039",
+   "d": "La regla más robusta de este expediente, y cabe en una frase: una carga de trabajo que no es servidor de correo NO TIENE NINGUNA RAZÓN para iniciar una conexión saliente por el puerto 25. No hace falta reconocer el protocolo, ni descifrar nada, ni tener una firma: hace falta saber qué cargas son de correo, que es un dato de inventario. Y el adversario no la puede evadir sin abandonar el canal, porque EL CANAL ES EL PUERTO 25",
+   "a": "-"
+  },
+  {
+   "id": "metadatosnube",
+   "l": "Punto de metadatos de instancia",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-039",
+   "d": "NO SE PUEDE BLOQUEAR, y es el caso límite INVERSO del hueco organizativo: no es una plataforma que compró un área y nadie inventarió, es un componente de la nube al que TODA carga accede por diseño para obtener sus propias credenciales. Lo que entrega —credencial de rol, vale de cuenta de servicio— no tiene segundo factor, no caduca por política de contraseñas y NO APARECE EN NINGÚN INVENTARIO DE IDENTIDADES. Se endurece el CÓMO (versión 2 del servicio, con vale y límite de saltos), nunca el SI",
+   "a": "-"
+  },
+  {
+   "id": "doblemision",
+   "l": "La doble misión como problema de triaje",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-039",
+   "d": "Cuando el mismo operador hace espionaje y extorsión, un cifrado puede ser la monetización de un acceso que el espionaje ya agotó, y una puerta trasera puede ser el preludio de un cifrado. La asimetría es lo peligroso: tratar un espionaje como extorsión cuesta restaurar con el adversario dentro y ESE ERROR NO SE DESCUBRE; tratar una extorsión como espionaje cuesta semanas de analista y sí se descubre. El sesgo organizativo empuja al primero. Seis artefactos discriminan, y el umbral es dos",
+   "a": "-"
   }
  ],
  "aristas": [
@@ -3107,6 +3494,261 @@
    "azurite",
    "raptortrain",
    "vinculado"
+  ],
+  [
+   "apt28",
+   "spypress",
+   "usa"
+  ],
+  [
+   "apt28",
+   "roundish",
+   "usa"
+  ],
+  [
+   "apt28",
+   "httd",
+   "usa"
+  ],
+  [
+   "apt28",
+   "moobot",
+   "abusa"
+  ],
+  [
+   "apt28",
+   "authenticantics",
+   "usa"
+  ],
+  [
+   "apt28",
+   "minidoor",
+   "usa"
+  ],
+  [
+   "apt28",
+   "cvewebmail",
+   "explota"
+  ],
+  [
+   "apt28",
+   "cveole",
+   "explota"
+  ],
+  [
+   "apt28",
+   "ddnsgratis",
+   "abusa"
+  ],
+  [
+   "apt28",
+   "camarasip",
+   "explota"
+  ],
+  [
+   "covertnetwork1658",
+   "cvetplink",
+   "explota"
+  ],
+  [
+   "storm0940",
+   "covertnetwork1658",
+   "usa"
+  ],
+  [
+   "apt28",
+   "covertnetwork1658",
+   "noesalias"
+  ],
+  [
+   "roundish",
+   "spypress",
+   "deriva"
+  ],
+  [
+   "roundish",
+   "httd",
+   "contiene"
+  ],
+  [
+   "apt28",
+   "frostarmada",
+   "usa"
+  ],
+  [
+   "storm2754",
+   "apt28",
+   "subgrupode"
+  ],
+  [
+   "storm2754",
+   "frostarmada",
+   "despliega"
+  ],
+  [
+   "frostarmada",
+   "bordeajeno",
+   "abusa"
+  ],
+  [
+   "frostarmada",
+   "avisocert",
+   "contiene"
+  ],
+  [
+   "moobot",
+   "bordeajeno",
+   "abusa"
+  ],
+  [
+   "frostarmada",
+   "cvetplink",
+   "disputado"
+  ],
+  [
+   "apt28",
+   "cvetplink",
+   "disputado"
+  ],
+  [
+   "storm2945",
+   "apt29",
+   "subgrupode"
+  ],
+  [
+   "storm2372",
+   "apt29",
+   "subgrupode"
+  ],
+  [
+   "storm2945",
+   "captivecrunch",
+   "despliega"
+  ],
+  [
+   "captivecrunch",
+   "cornflake",
+   "contiene"
+  ],
+  [
+   "captivecrunch",
+   "chocoshell",
+   "contiene"
+  ],
+  [
+   "captivecrunch",
+   "fruitstone",
+   "contiene"
+  ],
+  [
+   "captivecrunch",
+   "captiveportal",
+   "abusa"
+  ],
+  [
+   "captivecrunch",
+   "devicecode",
+   "abusa"
+  ],
+  [
+   "apt29",
+   "grapeloader",
+   "usa"
+  ],
+  [
+   "apt29",
+   "wineloader",
+   "usa"
+  ],
+  [
+   "grapeloader",
+   "wineloader",
+   "entrega"
+  ],
+  [
+   "apt29",
+   "devicecode",
+   "abusa"
+  ],
+  [
+   "apt29",
+   "cvemobile",
+   "explota"
+  ],
+  [
+   "intellexa",
+   "cvemobile",
+   "explota"
+  ],
+  [
+   "nsogroup",
+   "cvemobile",
+   "explota"
+  ],
+  [
+   "apt29",
+   "intellexa",
+   "parcial"
+  ],
+  [
+   "apt29",
+   "nsogroup",
+   "parcial"
+  ],
+  [
+   "apt29",
+   "misionexterior",
+   "explota"
+  ],
+  [
+   "apt29",
+   "apt28",
+   "noesalias"
+  ],
+  [
+   "chengdu404",
+   "apt41",
+   "suministra"
+  ],
+  [
+   "apt41",
+   "toughprogress",
+   "usa"
+  ],
+  [
+   "apt41",
+   "dusttrap",
+   "usa"
+  ],
+  [
+   "apt41",
+   "winntielf",
+   "usa"
+  ],
+  [
+   "toughprogress",
+   "calendarc2",
+   "abusa"
+  ],
+  [
+   "winntielf",
+   "smtp25",
+   "contiene"
+  ],
+  [
+   "winntielf",
+   "metadatosnube",
+   "explota"
+  ],
+  [
+   "apt41",
+   "doblemision",
+   "contiene"
+  ],
+  [
+   "winntielf",
+   "dusttrap",
+   "deriva"
   ]
  ]
 }
