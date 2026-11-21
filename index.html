@@ -65,6 +65,16 @@ kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line-strong)
 .empty strong{color:var(--amber);font-family:var(--mono);font-size:13px}
 .pill.cat{background:rgba(55,93,157,.22);border-color:rgba(90,126,190,.5);color:#c3d2ee}
 .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(318px,1fr))}
+/* El atributo `hidden` lo oculta todo salvo lo que declare su propio `display`:
+   la hoja del navegador trae `[hidden]{display:none}`, pero cualquier regla de
+   autor —aquí `.card{display:flex}`— la gana por precedencia. El resultado era
+   que el filtro marcaba las tarjetas como `hidden`, el contador decía «1
+   informe de 49»… y las 49 seguían en pantalla. Ni el buscador ni las píldoras
+   de categoría filtraban nada.
+   Es uno de los pocos casos en que `!important` es la respuesta correcta:
+   `hidden` es semántica del documento y debe ganar a la presentación. */
+[hidden]{display:none !important}
+
 .card{background:linear-gradient(180deg,var(--surface),var(--surface-2));
   border:1px solid var(--line);border-radius:var(--r);padding:20px 21px;
   display:flex;flex-direction:column;gap:11px;
