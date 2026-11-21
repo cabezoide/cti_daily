@@ -550,6 +550,152 @@ def g4_higiene(inf):
     return H
 
 
+# ──────────────────────────────────────────────── G6 · EL GRAFO DE ACTORES
+#
+# **Regla del usuario, corregida por él TRES veces. No volver a equivocarse.**
+#
+#   «arregla el grafico 3d es exclusivamente de herramientas y actores pero
+#    aparecen frases del informe ddos»            — 19-11-2026
+#   «en el grafo 3d anota que no deben ir textos largos solo herramientas»
+#                                                  — 19-11-2026
+#   «no debe incluir frases como "el isp regional como objetivo" recuerda solo
+#    grupos y herramientas»                        — 21-11-2026
+#
+# El grafo contiene OBJETOS DEL ADVERSARIO: grupos, herramientas, servicios que
+# abusa, mecanismos que emplea, CVE, suministradores. **Nada más.**
+#
+# Las tres clases que se han colado y hay que impedir, con el ejemplo real que
+# las destapó cada vez:
+#
+#   1. VICTIMOLOGÍA — lo atacado no es el adversario.
+#      «El ISP regional como objetivo», «La misión diplomática en el exterior»,
+#      «Cámaras IP y de tráfico municipales».
+#   2. MÉTODO O JUICIO NUESTRO — vive en los `Anexo D`, no en el grafo.
+#      «El bloqueo como alerta», «Seis direcciones que NO hay que bloquear»,
+#      «Valor por defecto como huella del operador», «Dos modos operativos en
+#      una familia».
+#   3. CASO CON NOMBRE DE VÍCTIMA — además choca con la regla de higiene R2.
+#      «Caso Copec», «Caso Clínica Dávila».
+#
+# **Y el matiz que costó un falso positivo:** una conducta del adversario SÍ va,
+# aunque su rótulo suene analítico. «Inflación del catálogo contando filiales»
+# se retiró por error y hubo que restaurarla: el perfil de proveedor del actor
+# declara que emplea tácticas de inflación, así que es lo que hace el
+# adversario, no lo que medimos nosotros. **La prueba es: ¿lo HACE el
+# adversario, o lo CONCLUIMOS nosotros?**
+
+RE_ROTULO_FRASE = re.compile(
+    "|".join([
+        # victimología explícita: lo atacado descrito por su papel
+        r"\bcomo\s+(?:objetivo|v[ií]ctima|superficie|blanco)\b",
+        # juicio o método nuestro disfrazado de nodo
+        r"\bcomo\s+(?:alerta|huella|indicador|problema|medida|prueba|se[nñ]al)\b",
+        r"^(?:Lo que|Qu[eé]\b|C[oó]mo\b|Cu[aá]ndo\b|Por qu[eé]\b)",
+        r"\bque\s+NO\b",
+        r"\bno hay que\b",
+        # un caso con nombre de víctima
+        r"^Caso\s+\S",
+    ]), re.I)
+
+# Marcadores de que el nodo es nuestro y no del adversario.
+RE_METODO_NUESTRO = re.compile(
+    "|".join([
+        r"\btriaje\b", r"\bcorrectivo", r"\bcontramedida",
+        r"\bhigiene\b", r"\blecci[oó]n\b", r"\bcautela\b",
+        r"\bbase de conteo\b", r"\bregla de la casa\b",
+        r"\bc[oó]mo (?:leer|decidir|distinguir|medir|tratar)\b",
+        r"\bno (?:se )?debe(?:n)? bloquear\b",
+    ]), re.I)
+
+# El rótulo que empieza por artículo casi siempre es una frase y no un nombre.
+# No basta para bloquear —«El relato del extorsionador» describe conducta del
+# adversario y se queda— pero sí para pedir una mirada.
+RE_ROTULO_ARTICULO = re.compile(r"^(?:El|La|Los|Las|Lo|Un|Una)\s+", re.I)
+
+
+def g6_grafo():
+    """El grafo sólo admite objetos del adversario."""
+    H = []
+    ap = lambda r, b, m, d="": H.append(Hallazgo("(grafo)", "grafo", r, b, m, d))
+    ruta = os.path.join(RAIZ, "red-actores.json")
+    if not os.path.exists(ruta):
+        return H
+    try:
+        g = json.load(open(ruta, encoding="utf-8"))
+    except Exception as ex:
+        ap("G0", True, "`red-actores.json` no se puede leer: %s" % ex)
+        return H
+
+    nodos = g.get("nodos") or []
+    aristas = g.get("aristas") or []
+    ids = {n.get("id") for n in nodos}
+
+    for n in nodos:
+        ident, rot = n.get("id", "?"), (n.get("l") or "")
+
+        # ── G6.1 · el rótulo no puede ser una frase sobre lo atacado
+        if RE_ROTULO_FRASE.search(rot):
+            ap("G6.1", True, "el nodo `%s` se rotula **«%s»**: es una frase sobre "
+                             "lo atacado o sobre un juicio, no el nombre de un "
+                             "objeto del adversario. El grafo es de **grupos y "
+                             "herramientas**." % (ident, rot), ident)
+
+        # ── G6.2 · método o juicio nuestro
+        #
+        #    Se mira SÓLO el rótulo, no la descripción. `interruptoridioma` es
+        #    una función del cifrador —el adversario aborta según el idioma del
+        #    sistema— y su descripción contiene «contramedida» porque el informe
+        #    advierte que NO se use como tal. Mirar la descripción lo bloqueaba
+        #    por una palabra que estaba en un consejo sobre el nodo, no en lo
+        #    que el nodo es.
+        if RE_METODO_NUESTRO.search(rot):
+            ap("G6.2", True, "el nodo `%s` («%s») describe **método o juicio "
+                             "nuestro**, que vive en los `Anexo D` y no en el "
+                             "grafo. Comprobación: ¿lo HACE el adversario, o lo "
+                             "CONCLUIMOS nosotros?" % (ident, rot[:46]), ident)
+
+        # ── G6.3 · caso con nombre de víctima (choca además con R2)
+        if re.match(r"^Caso\s+\S", rot):
+            ap("G6.3", True, "el nodo `%s` («%s») es un **caso con nombre de "
+                             "víctima**. No va al grafo, y además la casa no "
+                             "reproduce nombres de víctima." % (ident, rot), ident)
+
+        # ── G6.3b · rótulo que parece frase: aviso, no bloqueo
+        if RE_ROTULO_ARTICULO.match(rot):
+            ap("G6.3b", False, "el nodo `%s` se rotula **«%s»**, que empieza por "
+                               "artículo y suele indicar una frase en vez del "
+                               "nombre de una cosa. Revisar: ¿lo HACE el "
+                               "adversario?" % (ident, rot), ident)
+
+        # ── G6.4 · techos de texto, que el usuario fijó aparte
+        for campo, techo in (("d", 299), ("af", 246), ("l", 86)):
+            v = n.get(campo) or ""
+            if len(v) > techo:
+                ap("G6.4", True, "`%s.%s` tiene %d caracteres y el techo es %d. "
+                                 "La ficha de un nodo es un puntero, no un "
+                                 "resumen." % (ident, campo, len(v), techo), ident)
+
+    # ── G6.5 · integridad: sin aislados ni extremos inexistentes
+    import collections as _c
+    grado = _c.Counter()
+    for a in aristas:
+        if len(a) != 4:
+            ap("G6.5", True, "arista sin los cuatro elementos: %r" % (a,))
+            continue
+        for x in a[:2]:
+            if x not in ids:
+                ap("G6.5", True, "la arista %r apunta a `%s`, que no existe"
+                   % (a, x))
+        grado[a[0]] += 1
+        grado[a[1]] += 1
+    for n in nodos:
+        if grado[n.get("id")] == 0:
+            ap("G6.5", True, "el nodo `%s` quedó **aislado**: sin una sola "
+                             "relación no aporta nada al grafo." % n.get("id"),
+               n.get("id"))
+    return H
+
+
 # ─────────────────────────────────────── compuerta transversal del repositorio
 
 def g5_agregados():
@@ -628,6 +774,7 @@ def ejecutar(patrones=None, hoy=None, todo=False):
         H += g3_atribucion(inf)
         H += g4_higiene(inf)
     H += g5_agregados()
+    H += g6_grafo()
     return lista, H
 
 

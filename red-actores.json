@@ -1839,24 +1839,6 @@
    "a": "-"
   },
   {
-   "id": "planocontrol",
-   "l": "Plataformas de gestión centralizada",
-   "t": "servicio",
-   "p": "-",
-   "r": "CTI-2026-036",
-   "d": "Orquestadores de SD-WAN, gestores unificados de puestos, consolas de administración remota. Comprometer una equivale a una intrusión completa SIN movimiento lateral: ya tiene visibilidad del inventario, acceso administrativo a miles de equipos y confianza con las redes de los clientes",
-   "a": "-"
-  },
-  {
-   "id": "pasarelacelular",
-   "l": "Pasarelas celulares industriales",
-   "t": "servicio",
-   "p": "-",
-   "r": "CTI-2026-036",
-   "d": "Crean un camino hacia la red de operación que SALTA el perímetro sin pasar por él, y a menudo no están en el inventario de nadie porque las puso Operaciones. Entrada documentada en 2025 por su interfaz web, en puertos 9191 y 9443, hacia oleoductos y gasoductos",
-   "a": "-"
-  },
-  {
    "id": "apt28",
    "l": "APT28 · Fancy Bear · Sednit",
    "t": "estado",
@@ -1981,15 +1963,6 @@
    "a": "-"
   },
   {
-   "id": "camarasip",
-   "l": "Camaras IP y de trafico municipales",
-   "t": "servicio",
-   "p": "-",
-   "r": "CTI-2026-037",
-   "d": "Más de 10.000 cámaras seleccionadas por RTSP desde marzo de 2022, 81 % en Ucrania, para seguir el movimiento de material de ayuda — incluidas CÁMARAS DE TRÁFICO MUNICIPALES. Quinto caso del hueco de CTI-2026-034: la compra Tránsito, la administra Tránsito, no está en ningún inventario",
-   "a": "-"
-  },
-  {
    "id": "frostarmada",
    "l": "FrostArmada · Operation Masquerade",
    "t": "clúster",
@@ -2008,24 +1981,6 @@
    "d": "Subgrupo de APT28 al que Microsoft atribuye la operación de secuestro de DNS. Lumen describe DOS células: una de expansión del parque de enrutadores y otra de intermediación y recolección — un reparto de trabajo que comprime el plazo entre comprometer el equipo y leer el correo",
    "a": "proveedor",
    "af": "Designación y valoración de Microsoft, respaldada por la acción judicial de abril de 2026"
-  },
-  {
-   "id": "avisocert",
-   "l": "El aviso de certificado descartado",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-037",
-   "d": "EL ÚNICO EVENTO OBSERVABLE de toda la cadena de FrostArmada, y el indicador de mayor valor del informe — que no es una dirección ni un hash. Microsoft es explícito: la interceptación SÓLO ocurre si el usuario desoye el aviso. El anclaje de certificado lo vuelve irrecuperable",
-   "a": "-"
-  },
-  {
-   "id": "bordeajeno",
-   "l": "El equipo de borde que no es nuestro",
-   "t": "servicio",
-   "p": "-",
-   "r": "CTI-2026-037",
-   "d": "El hueco organizativo de CTI-2026-034 en su extremo: no lo compró ningún área, no lo administra nadie, no está en ningún inventario y su credencial es la de fábrica. Y aun así decide qué dirección resuelve outlook.office.com para el portátil de la empresa",
-   "a": "-"
   },
   {
    "id": "apt29",
@@ -2150,15 +2105,6 @@
    "a": "-"
   },
   {
-   "id": "misionexterior",
-   "l": "La misión diplomática en el exterior",
-   "t": "servicio",
-   "p": "-",
-   "r": "CTI-2026-038",
-   "d": "El activo regional que SÍ está en el conjunto declarado: la campaña de 2025 atacó «embajadas de países NO europeos situadas en Europa». Una legación en Bruselas entra sin que su país salga en ningún mapa. Conexión contratada en destino y fuera del inventario de su cancillería",
-   "a": "-"
-  },
-  {
    "id": "apt41",
    "l": "APT41 · Winnti · Brass Typhoon",
    "t": "estado",
@@ -2218,7 +2164,7 @@
   },
   {
    "id": "smtp25",
-   "l": "El puerto 25 como canal de mando",
+   "l": "Puerto 25 como canal de mando",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-039",
@@ -2232,15 +2178,6 @@
    "p": "-",
    "r": "CTI-2026-039",
    "d": "NO SE PUEDE BLOQUEAR, y es el caso límite INVERSO del hueco organizativo: no es una plataforma que compró un área y nadie inventarió, es un componente de la nube al que TODA carga accede por diseño para obtener sus propias credenciales.",
-   "a": "-"
-  },
-  {
-   "id": "doblemision",
-   "l": "La doble misión como problema de triaje",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-039",
-   "d": "Cuando el mismo operador hace espionaje y extorsión, un cifrado puede ser la monetización de un acceso que el espionaje ya agotó, y una puerta trasera puede ser el preludio de un cifrado.",
    "a": "-"
   },
   {
@@ -2283,30 +2220,12 @@
    "a": "-"
   },
   {
-   "id": "checkmate",
-   "l": "Lo que una desarticulación consigue",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-040",
-   "d": "Una desarticulación no actúa sobre «una operación»: actúa sobre activos con tiempos de reemplazo muy distintos.",
-   "a": "-"
-  },
-  {
    "id": "vishinghelpdesk",
-   "l": "La mesa de ayuda como vector",
+   "l": "Suplantación de la mesa de ayuda",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-040",
    "d": "Inundación de correo basura → la víctima llama → el operador suplanta a seguridad informática → le pide lanzar Quick Assist → le pide conectarse a su sesión. Los pasos 1 a 4 NO dejan ningún artefacto distinguible, y el primero técnico aparece cuando el adversario ya está dentro.",
-   "a": "-"
-  },
-  {
-   "id": "ipsbandaancha",
-   "l": "Seis direcciones que NO hay que bloquear",
-   "t": "servicio",
-   "p": "latam",
-   "r": "CTI-2026-040",
-   "d": "De las 71 direcciones del aviso oficial AA23-061A, SEIS están registradas a entidades latinoamericanas y CINCO son banda ancha: UNE EPM y Telmex en Colombia, Telecom Argentina y NODOSUD en Argentina — verificado por RDAP el 19-11-2026.",
    "a": "-"
   },
   {
@@ -2365,30 +2284,12 @@
    "a": "-"
   },
   {
-   "id": "bloqueoesalerta",
-   "l": "El bloqueo como alerta",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-041",
-   "d": "La única medida de este lote que convierte un control YA EXISTENTE en una detección que no existía. Trece ejecutables desplegados en una hora, DOCE BLOQUEADOS: es fuerza bruta de evasión —probar una herramienta tras otra hasta que algo funcione— y una fuerza bruta es ruidosa por definición.",
-   "a": "-"
-  },
-  {
    "id": "relatoextorsion",
-   "l": "El relato del extorsionador",
+   "l": "Relato de justificación del extorsionador",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-041",
    "d": "La victimología de la extorsión la publica el extorsionista, y un sitio de fugas es antes que nada PUBLICIDAD.",
-   "a": "-"
-  },
-  {
-   "id": "copec",
-   "l": "Caso Copec (Chile, enero de 2026)",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-041",
-   "d": "El único caso de este lote con víctima regional nombrada, comunicado público de la compañía Y entrevista del atacante. El atacante declara 6 TB, acceso por la VPN corporativa, exfiltración de casi una semana A BAJA VELOCIDAD por puertas traseras, y que la defensa SÍ mitigó el cifrado.",
    "a": "-"
   },
   {
@@ -2440,30 +2341,12 @@
    "a": "-"
   },
   {
-   "id": "davila",
-   "l": "Caso Clínica Dávila (Chile, dic. 2025)",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-042",
-   "d": "La única víctima regional nombrada de los tres actores, y el SEGUNDO caso chileno de este lote por acceso remoto — cinco semanas antes del de CTI-2026-041, en otro sector y de otro grupo. Entrada reportada por VPN CON USUARIO Y CONTRASEÑA IDÉNTICOS.",
-   "a": "-"
-  },
-  {
    "id": "ecosistemabots",
    "l": "Ecosistema de 33 familias de bots",
    "t": "clúster",
    "p": "latam",
    "r": "CTI-2026-044",
    "d": "NO son 33 cosas del mismo tipo: se parten en dos negocios con economías opuestas. 26 familias venden interrupción y concentran el 90,2 % de su actividad en TRES de ellas; 7 venden ancho de banda residencial ajeno y no lanzan un solo ataque.",
-   "a": "-"
-  },
-  {
-   "id": "asimetriabots",
-   "l": "Asimetría entre objetivo e infraestructura",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-044",
-   "d": "Medición propia del 19-11-2026. El 80,2 % de los ataques de una ventana en vivo tuvo objetivo en Brasil, pero de las 573 direcciones de mando y control sólo DOCE están en Latinoamérica: el 2,1 %, frente al 56,4 % en EE. UU. y el 13,6 % en Singapur.",
    "a": "-"
   },
   {
@@ -2477,18 +2360,8 @@
    "af": "Y las dos clases NO comparten ni un bloque /24 de 206, ni más de 4 ASN de 57: un sesgo de etiquetado no produce huellas de alojamiento disjuntas, porque el clasificador no mira el bloque"
   },
   {
-   "id": "ispregionalbr",
-   "l": "El ISP regional como objetivo",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-044",
-   "d": "Diecisiete operadores regionales brasileños de fibra entre los veinte ASN más golpeados, y NINGÚN operador nacional. Halver LTDA (AS274564) en cabeza en las tres ventanas medidas.",
-   "a": "-",
-   "af": "CORROBORACIÓN INDEPENDIENTE: A10 Networks midió en una semana de febrero de 2026 17.527 ataques en Brasil con cerca del 99 % concentrado en cinco ISP regionales de fibra, dejando intactos a los grandes."
-  },
-  {
    "id": "pulso5s",
-   "l": "El ataque de pulso de cinco segundos",
+   "l": "Ataque de pulso de cinco segundos",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-044",
@@ -2545,34 +2418,14 @@
    "af": "El relé abre 165 mapeos UPnP etiquetados RELAY en el router de la víctima. La ejecución remota de código sigue sin documentarse, así que no es cabeza de puente hacia la red interna."
   },
   {
-   "id": "lisodosmodos",
-   "l": "Dos modos operativos en una familia",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-045",
-   "d": "EL HALLAZGO, y las celdas cruzadas están vacías. Modo A (2.440 ev., 85,1 %): puerto 65535, UDP 100 %, CINCO segundos, contra REDES —1.774 prefijos /20-/23—, Brasil 99,8 %. Modo B (326 ev., 11,4 %): puertos 80/443, TCP 97 %, SESENTA segundos, contra ANFITRIONES —326 de 326 son /32—, EE.",
-   "a": "-",
-   "af": "Y las dos defensas no se parecen: endurecer servidores web no reduce un paquete del modo A, y absorber tránsito no detiene al modo B. Mezclarlos bajo «nos atacó Liso» produce una respuesta que no sirve para ninguno"
-  },
-  {
    "id": "puerto65535",
-   "l": "Saturación de enlace: el puerto irrelevante",
+   "l": "Saturación de enlace por puerto irrelevante",
    "t": "modelo",
    "p": "-",
    "r": "CTI-2026-045",
    "d": "Liso usa el puerto 65535 en el 85,1 % de sus eventos, y ese puerto NO corresponde a ningún servicio: es el último del espacio y funciona como valor por omisión.",
    "a": "-",
    "af": "Y el contraste externo lo convierte en firma: las otras cinco familias medidas apuntan a servicios reales —80, 443, 53, 22, 25565, 5100, 7000, 6672—. Liso es la única excepción."
-  },
-  {
-   "id": "lisovietnam",
-   "l": "El bloque /24 como indicador duradero",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-045",
-   "d": "Liso tiene 17 direcciones de C2 en 10 países, y OCHO murieron durante nuestra ventana de medición: una lista estática habría caducado en un día.",
-   "a": "-",
-   "af": "Y la única dirección de C2 del ecosistema alojada en CHILE es de esta familia: 64.176.16.182 (AS20473), provisionada el 18-11 a las 08:32 y sin responder ya a las 08:55. Menos de media hora. Caducada como bloqueo, útil como caza retrospectiva"
   },
   {
    "id": "aisuru",
@@ -2775,16 +2628,6 @@
    "a": "-"
   },
   {
-   "id": "inflacionvictimas",
-   "l": "Inflación del recuento de víctimas",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-060",
-   "d": "Publicar matriz y filiales de un mismo grupo como entradas separadas. Hace del total un techo. El propio perfil de proveedor del actor lo declaraba antes de que la medición lo confirmara.",
-   "a": "proveedor",
-   "af": "La táctica figura declarada en la ficha del proveedor; la instancia concreta —un grupo bancario con tres entradas— es medición propia sobre los títulos y los dominios."
-  },
-  {
    "id": "republicacion",
    "l": "Republicación de catálogo ajeno",
    "t": "modelo",
@@ -2819,15 +2662,6 @@
    "p": "-",
    "r": "CTI-2026-056",
    "d": "El sitio lista cada archivo exfiltrado en lugar de una ficha por organización. La reclamación se vuelve comprobable por la víctima, y el recuento de entradas deja de medir víctimas.",
-   "a": "-"
-  },
-  {
-   "id": "concentraciongeo",
-   "l": "Concentración geográfica del catálogo",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-058",
-   "d": "Un actor acumula el 29 % de sus víctimas en un solo país y desplaza a Estados Unidos del primer puesto. No se puede decidir desde fuera si es selección de objetivo o concentración de la vía de acceso.",
    "a": "-"
   },
   {
@@ -2919,16 +2753,6 @@
    "af": "Analizada por Nokia Deepfield ERT y Comcast CTRL el 24-03-2026 sobre más de ochenta muestras. NO se declara alias de Liso: su literatura no menciona ese nombre ni su victimología brasileña."
   },
   {
-   "id": "valorpordefecto",
-   "l": "Valor por defecto como huella del operador",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-045",
-   "d": "El constructor de la familia usa 0xffff como valor por defecto de los parámetros de ataque, que en destino se observa como puerto 65535. Lo que un operador podría ajustar y no ajusta identifica su forma de trabajar.",
-   "a": "oficial",
-   "af": "Triple apoyo independiente: razonamiento por eliminación en la versión 1.0, el campo port_source de la telemetría en 4.489 de 4.489 apariciones, y el análisis de binario publicado por Deepfield."
-  },
-  {
    "id": "releupnp",
    "l": "Relé residencial por mapeo UPnP del router",
    "t": "modelo",
@@ -2937,6 +2761,16 @@
    "d": "El bot pide al router de la víctima que abra 165 puertos y los reenvíe al dispositivo infectado, etiquetando cada mapeo como RELAY. La conexión doméstica pasa a retransmitir tráfico de terceros hacia un servidor fijo del operador.",
    "a": "proveedor",
    "af": "Nokia Deepfield ERT, 24-07-2026: el relé está compilado dentro del bot de denegación de servicio y no es un módulo aparte. No se observó ninguna sesión de cliente en vivo."
+  },
+  {
+   "id": "inflacionvictimas",
+   "l": "Inflación del catálogo contando filiales",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-060",
+   "d": "Publicar la matriz y sus filiales como entradas separadas para engrosar el catálogo. El perfil de proveedor del actor declara que emplea tácticas de inflación, y la medición propia encontró un grupo bancario con tres entradas.",
+   "a": "proveedor",
+   "af": "La táctica figura declarada en la ficha del proveedor; la instancia concreta es medición propia sobre los títulos y los dominios del catálogo."
   }
  ],
  "aristas": [
@@ -4352,19 +4186,7 @@
   ],
   [
    "volttyphoon",
-   "planocontrol",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "volttyphoon",
    "arcgis",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "volttyphoon",
-   "pasarelacelular",
    "abusa",
    "proveedor"
   ],
@@ -4495,12 +4317,6 @@
    "proveedor"
   ],
   [
-   "apt28",
-   "camarasip",
-   "explota",
-   "proveedor"
-  ],
-  [
    "covertnetwork1658",
    "cvetplink",
    "explota",
@@ -4546,24 +4362,6 @@
    "storm2754",
    "frostarmada",
    "despliega",
-   "proveedor"
-  ],
-  [
-   "frostarmada",
-   "bordeajeno",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "frostarmada",
-   "avisocert",
-   "contiene",
-   "oficial"
-  ],
-  [
-   "moobot",
-   "bordeajeno",
-   "abusa",
    "proveedor"
   ],
   [
@@ -4682,12 +4480,6 @@
   ],
   [
    "apt29",
-   "misionexterior",
-   "explota",
-   "proveedor"
-  ],
-  [
-   "apt29",
    "apt28",
    "noesalias",
    "proveedor"
@@ -4735,12 +4527,6 @@
    "proveedor"
   ],
   [
-   "apt41",
-   "doblemision",
-   "contiene",
-   "oficial"
-  ],
-  [
    "winntielf",
    "dusttrap",
    "deriva",
@@ -4785,18 +4571,6 @@
   [
    "chaos",
    "vishinghelpdesk",
-   "abusa",
-   "propio"
-  ],
-  [
-   "blacksuit",
-   "checkmate",
-   "contiene",
-   "oficial"
-  ],
-  [
-   "blacksuit",
-   "ipsbandaancha",
    "abusa",
    "propio"
   ],
@@ -4856,27 +4630,9 @@
   ],
   [
    "anubisransom",
-   "copec",
-   "explota",
-   "proveedor"
-  ],
-  [
-   "anubisransom",
    "relatoextorsion",
    "contiene",
    "proveedor"
-  ],
-  [
-   "lindnor",
-   "bloqueoesalerta",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "byovd",
-   "bloqueoesalerta",
-   "vinculado",
-   "inferido"
   ],
   [
    "anubisransom",
@@ -4922,12 +4678,6 @@
   ],
   [
    "devman",
-   "davila",
-   "explota",
-   "proveedor"
-  ],
-  [
-   "devman",
    "iab",
    "usa",
    "proveedor"
@@ -4963,12 +4713,6 @@
    "inferido"
   ],
   [
-   "devman",
-   "checkmate",
-   "vinculado",
-   "inferido"
-  ],
-  [
    "ecosistemabots",
    "proxyresidencial",
    "contiene",
@@ -4985,12 +4729,6 @@
    "cereal2",
    "contiene",
    "propio"
-  ],
-  [
-   "ecosistemabots",
-   "asimetriabots",
-   "vinculado",
-   "inferido"
   ],
   [
    "botnetcl",
@@ -5018,32 +4756,14 @@
   ],
   [
    "liso",
-   "lisodosmodos",
-   "contiene",
-   "propio"
-  ],
-  [
-   "liso",
    "puerto65535",
    "contiene",
    "propio"
   ],
   [
    "liso",
-   "lisovietnam",
-   "usa",
-   "propio"
-  ],
-  [
-   "liso",
    "pulso5s",
    "usa",
-   "propio"
-  ],
-  [
-   "liso",
-   "ispregionalbr",
-   "explota",
    "propio"
   ],
   [
@@ -5051,18 +4771,6 @@
    "cereal2",
    "noesalias",
    "propio"
-  ],
-  [
-   "pulso5s",
-   "ispregionalbr",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "asimetriabots",
-   "zenlayerc2",
-   "vinculado",
-   "inferido"
   ],
   [
    "liso",
@@ -5141,12 +4849,6 @@
    "vortexactor",
    "noesalias",
    "propio"
-  ],
-  [
-   "incransom",
-   "checkmate",
-   "vinculado",
-   "inferido"
   ],
   [
    "akira",
@@ -5257,12 +4959,6 @@
    "propio"
   ],
   [
-   "stormblog",
-   "inflacionvictimas",
-   "usa",
-   "propio"
-  ],
-  [
    "braincipher",
    "inventariofichero",
    "usa",
@@ -5307,12 +5003,6 @@
   [
    "safepayactor",
    "rclone",
-   "usa",
-   "propio"
-  ],
-  [
-   "safepayactor",
-   "concentraciongeo",
    "usa",
    "propio"
   ],
@@ -5396,24 +5086,6 @@
   ],
   [
    "jackskid",
-   "valorpordefecto",
-   "usa",
-   "proveedor"
-  ],
-  [
-   "liso",
-   "valorpordefecto",
-   "usa",
-   "propio"
-  ],
-  [
-   "puerto65535",
-   "valorpordefecto",
-   "deriva",
-   "propio"
-  ],
-  [
-   "jackskid",
    "releupnp",
    "usa",
    "proveedor"
@@ -5423,6 +5095,12 @@
    "releupnp",
    "usa",
    "inferido"
+  ],
+  [
+   "stormblog",
+   "inflacionvictimas",
+   "usa",
+   "propio"
   ]
  ],
  "_evidencia": {
