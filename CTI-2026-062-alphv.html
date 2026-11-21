@@ -1,0 +1,1255 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-062 · ALPHV · BlackCat · Noberus</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-062<small>ALPHV · BlackCat · Noberus</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-cifras">E-1. Cifras</a><a href="#e-2-la-victimologia-y-los-dos-numeros-que-son-correctos-a-la-vez">E-2. La victimología, y los dos números que son correctos a la vez</a><a href="#e-3-el-reparto-20-80-y-para-que-sirve-saberlo">E-3. El reparto 20/80, y para qué sirve saberlo</a><a href="#e-4-decisiones-que-este-informe-pide">E-4. Decisiones que este informe pide</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-identificacion">O-1. Identificación</a><a href="#o-2-el-catalogo-medido">O-2. El catálogo, medido</a><a href="#o-3-la-curva-y-lo-que-el-final-tiene-de-instructivo">O-3. La curva, y lo que el final tiene de instructivo</a><a href="#o-4-el-cierre-judicial-leido-en-el-original">O-4. El cierre judicial, leído en el original</a><a href="#o-6-el-foro-que-usa-el-nombre-revisado-el-21-11-2026">O-6. El foro que usa el nombre, revisado el 21-11-2026</a><a href="#o-5-hipotesis-sobre-el-estado-actual">O-5. Hipótesis sobre el estado actual</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-por-que-este-nivel-es-corto-y-que-contiene">T-1. Por qué este nivel es corto, y qué contiene</a><a href="#t-2-el-afiliado-con-acceso-legitimo-que-es-lo-que-queda-vigente">T-2. El afiliado con acceso legítimo, que es lo que queda vigente</a><a href="#t-3-lo-que-no-se-debe-hacer-con-este-expediente">T-3. Lo que NO se debe hacer con este expediente</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores">Anexo A — Indicadores</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-como-leer-el-catalogo-de-una-marca-extinta-sin-inventar-actividad">Anexo D — Cómo leer el catálogo de una marca extinta sin inventar actividad</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de cierre de una operación de extorsión extinta</span><span class="pill p-mint">32 víctimas LATAM · 2 chilenas, abril de 2023 · apoyo policial mexicano en la captura</span><span class="pill p-sky">v1.0 · 2026-11-21</span></div><h1>ALPHV · BlackCat · Noberus</h1><p class="sub">La marca murió en marzo de 2024, el catálogo dice que vivió quince meses más, y la diferencia la decide un campo que casi nadie resta</p><p class="sub2">Cierre del expediente ALPHV: 731 entradas de las que 402 no tienen país, dos víctimas chilenas de abril de 2023, tres afiliados que trabajaban en el sector de la ciberseguridad, y un comunicado judicial que dice menos de lo que se le atribuye</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-062</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-21</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-062</code></dd></div><div><dt>Versión</dt><dd class="m">1.0</dd></div><div><dt>Clasificación</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Tipo</dt><dd class="m">Perfil de cierre de una operación extinta</dd></div><div><dt>Actor</dt><dd class="m"><code>ALPHV</code> · <code>BlackCat</code> · <code>Noberus</code></dd></div><div><dt>Emitido</dt><dd class="m">2026-11-21</dd></div><div><dt>Caduca</dt><dd class="m">2026-12-21</dd></div><div><dt>Niveles</dt><dd>Estratégico · Operacional · Táctico</dd></div><div><dt>Nivel técnico</dt><dd><strong>Omitido deliberadamente.</strong> Sin muestras ni análisis primario propio: ver §3.4</dd></div><div><dt>Medición propia</dt><dd>731 entradas del catálogo, resueltas el 2026-11-21</dd></div><div><dt>Fuente primaria</dt><dd>Comunicado 26-431 del Departamento de Justicia de EE. UU., 2026-04-30</dd></div><div><dt>Relevancia regional</dt><dd><strong>32 LATAM</strong> (4,4 % del catálogo · 9,7 % de las entradas con país) · <strong>2 chilenas</strong></dd></div></dl>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-hi rv"><div class="id">KJ-1</div>
+<h4>La operación está extinta y su última actividad real es del 3 de marzo de 2024, no de junio de 2025 como el catálogo parece indicar. De las 731 entradas medidas, diez declaran fecha de ataque posterior al 1 de marzo de 2024; cinco de ellas son coherentes —fechadas el 1 y el 3 de marzo de 2024 y descubiertas por el rastreador ese mismo día— y las otras cinco son imposibles: declaran ataques del 3 de mayo de 2024, el 2 de septiembre de 2024, el 28 de octubre de 2024, el 17 de enero de 2025 y el 3 de junio de 2026, y las cinco fueron descubiertas el 26 de julio de 2023</h4><p>Una entrada no puede descubrirse once meses antes del ataque que declara. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que las cinco sean artefacto del campo de fecha y no actividad, y <strong>muy probable</strong> <em>(80–95 %)</em> que la actividad real termine en la primera semana de marzo de 2024.</p><div class="gauge" data-p="88"><div class="lab"><span>Casi con certeza</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Medición propia, §O-2.2. <em>Consecuencia:</em> <strong>cualquier cifra de «última actividad de ALPHV» tomada de este catálogo sin restar las dos fechas está equivocada en quince meses</strong> (<code>Anexo D</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>El 55 % del catálogo no tiene país, de modo que toda proporción geográfica de este actor admite dos valores correctos y distintos, y hay que decir cuál se usa. Sólo 329 de 731 entradas (45,0 %) traen país</h4><p>Las 32 entradas latinoamericanas son por tanto <strong>el 4,4 % del catálogo completo</strong> o <strong>el 9,7 % de las entradas con país</strong>: las dos cifras son correctas y difieren en más del doble. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> los recuentos. <em>Consecuencia:</em> <strong>este expediente no sostiene ninguna afirmación sobre el reparto geográfico real de ALPHV</strong>, sólo sobre el reparto de la mitad que la fuente supo etiquetar, y la mitad etiquetada no es una muestra aleatoria de la otra (<code>E-2</code>, <code>O-2.3</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-3</div>
+<h4>Hubo dos víctimas chilenas y las dos son de abril de 2023, con diecinueve días entre ellas. Una de servicios financieros el 2 de abril de 2023 y una de comercio al detalle el 21 de abril de 2023, ambas con dominio en la entrada y ninguna con referencia de prensa</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la atribución de país sea correcta —es enriquecimiento derivado— y <strong>casi con certeza</strong> <em>(≥99 %)</em> que no haya más chilenas en el catálogo.</p><div class="gauge" data-p="68"><div class="lab"><span>Casi con certeza</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Medición propia sobre el catálogo, §E-2.2. <em>Consecuencia:</em> <strong>el expediente chileno de este actor está cerrado y es pequeño</strong>: dos reclamaciones de hace treinta y un meses, sin confirmación pública. Puestas junto a la medición de <code>CTI-2026-015</code> —donde Qilin concentra veinte de las treinta víctimas chilenas del top diez—, <strong>no mueven ninguna prioridad</strong> (<code>E-2.2</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>Tres afiliados fueron condenados o se declararon culpables en 2026, y los tres trabajaban en el sector de la ciberseguridad. El comunicado 26-431 del Departamento de Justicia, de 30 de abril de 2026, recoge que Ryan Goldberg, de 40 años, y Kevin Martin, de 36, fueron condenados a cuatro años de prisión cada uno tras declararse culpables en diciembre de 2025 de un cargo de conspiración para obstruir el comercio mediante extorsión; que despegaron ALPHV BlackCat entre abril y diciembre de 2023; y que un tercer implicado, Angelo Martino, de 41 años, se declaró culpable en abril de 2026 y tenía la sentencia fijada para el 9 de julio</h4><p>La frase del comunicado es <em>«All three men worked in the cybersecurity industry»</em>. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> el contenido del comunicado.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Fuente primaria leída en original, §O-4.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-5</div>
+<h4>Y el hallazgo que obliga a este informe a separarse de la cobertura del sector: el comunicado del Departamento de Justicia NO dice que atacaran a sus propios clientes, ni nombra a sus empleadores. La versión que circula —respondedores de incidentes y negociadores que cifraron a las organizaciones que los habían contratado, con los nombres de dos empresas de seguridad— procede de prensa especializada, no del comunicado</h4><p>Lo que el comunicado sostiene es más estrecho y sólo sobre uno de los tres: que <strong>Martino <em>«abusó de su papel de negociador para víctimas de ransomware compartiendo información confidencial de las víctimas con los actores de la amenaza para aumentar el valor del rescate pagado»</strong></em>. De Goldberg y Martin sólo dice que trabajaban en el sector. <strong>No nombra a ninguna empresa empleadora, no da cargos, y no afirma relación contractual previa entre los acusados y las víctimas.</strong> Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> esta ausencia, por lectura directa. <em>Consecuencia:</em> <strong>la afirmación «atacaron a sus clientes» es verosímil y puede ser cierta, pero quien la cite debe atribuirla a la prensa y no al Departamento de Justicia</strong>, y una organización que vaya a cambiar su política de contratación de respuesta a incidentes debería saber sobre qué base lo hace (<code>O-4.2</code>, <code>Anexo B</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-6</div>
+<h4>El reparto económico del programa de afiliados quedó documentado judicialmente, y es el dato más duradero del expediente: 20 % para los administradores, 80 % para el afiliado. El comunicado declara que los tres «acordaron pagar a los administradores de ALPHV BlackCat una participación del 20 % de cualesquiera rescates recibidos» y que, tras extorsionar con éxito a una víctima por aproximadamente 1,2 millones de dólares en bitcoin, «se repartieron su parte del 80 % entre los tres»</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> las cifras. <em>Consecuencia:</em> es una de las pocas confirmaciones judiciales del reparto de un programa de extorsión como servicio, y <strong>sirve de referencia para valorar afirmaciones sobre otros programas</strong> —incluidas las de los que declaran repartos más generosos para atraer afiliados (<code>E-3</code>).</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> </p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-7</div>
+<h4>La captura tuvo apoyo policial mexicano, y es el único punto de contacto regional documentado por fuente primaria de todo el expediente. El comunicado agradece la colaboración de la Policía de Investigación del Aeropuerto Internacional de la Ciudad de México, y consigna que, «cuando Goldberg trató de huir al extranjero, el FBI lo siguió a través de diez países»</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> el dato.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Comunicado 26-431, agradecimientos. <em>Consecuencia:</em> <strong>la región aparece en este expediente antes como eslabón de la respuesta que como víctima</strong>, lo que es poco habitual en esta cartera y conviene registrar (<code>E-2.3</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-8</div>
+<h4>El catálogo no contiene ni una sola cifra de rescate ni de volumen de datos: los dos campos están vacíos en las 731 entradas. Cobertura medida: país 45,0 %, dominio 89,6 %, captura de pantalla 93,8 %, descripción 85,4 %, referencia de prensa 5,7 %, rescate 0,0 %, tamaño de datos 0,0 %</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> las proporciones. , que son medición propia; <strong>este juicio no afirma nada sobre la veracidad de las reclamaciones</strong>, que no está corroborada en el 94,3 % de los casos sin prensa.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta para los recuentos de cobertura.</b> Medición propia de cobertura de campos, §O-2.3. <em>Consecuencia:</em> <strong>toda cifra económica sobre este actor procede de otra fuente</strong>, y la única con autoridad judicial es el 1,2 millones de <code>KJ-6</code>. El 5,7 % de cobertura de prensa significa además que <strong>el 94 % de las reclamaciones de este actor nunca fue objeto de una noticia</strong>, lo que no las hace falsas pero sí no verificadas (<code>O-2.4</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-9</div>
+<h4>El perfil de volumen dibuja un auge y un colapso, no un declive: 2023 concentra el 59 % del catálogo y 2024 cae a 62 entradas de las que 57 son de enero y febrero. Por año de ataque declarado: 2021: 14 · 2022: 220 · 2023: 433 · 2024: 62 · 2025: 2</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> el recuento y <strong>muy probable</strong> <em>(80–95 %)</em> que la forma de la curva refleje actividad real y no cobertura de la fuente, porque la caída es abrupta y coincide con un hecho externo fechado. <em>Consecuencia:</em> <strong>es el patrón de una marca que se interrumpe, no de una que se apaga</strong>, y conviene compararlo con el de las marcas que esta cartera ha visto apagarse despacio (<code>E-1</code>, <code>O-3</code>).</p><div class="gauge" data-p="88"><div class="lab"><span>Casi con certeza</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta para el dato, moderada para la lectura.</b> </p></div>
+<div class="kj kj-md rv"><div class="id">KJ-10</div>
+<h4>Lo que esta cartera debe retener no es el actor, que ya no existe, sino que su ficha sigue viva en las fuentes y produce errores medibles hoy, dos años y medio después. El catálogo sigue devolviendo 731 entradas, con fechas de ataque de hasta junio de 2025 y sin aviso alguno de que la operación esté extinta</h4><p>Valoramos <strong>probable</strong> <em>(55–80 %)</em> que cualquier producto derivado que consuma esta fuente sin el correctivo de <code>KJ-1</code> presente a ALPHV como activo o recientemente activo.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Inferencia propia sobre el estado del catálogo medido, §O-2.2. <em>Consecuencia:</em> <strong>una marca extinta es una fuente de falsos positivos de atribución</strong>, y el <code>Anexo D</code> da el procedimiento para no caer (<code>Anexo D</code>, <code>A.1</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-11</div>
+<h4>La hipótesis de reutilización del nombre no es una hipótesis: hay un foro criminal en ruso llamado ALPHV con infraestructura renovada hace once días, y las fechas de registro demuestran que NO es continuidad de la operación extinta. Revisado el 21-11-2026: alphv.pro sirve un foro sobre XenForo, íntegramente en ruso, titulado ALPHV, con secciones de «Кардинг/Хакинг» —carding y hacking—, un servicio de «Гарант | Escrow», «Страховой депозит» —depósito de seguro— y «Платное повышение» —promoción de pago—, contacto obligatorio por Telegram, y estadísticas declaradas de 7.124 temas, 19.106 mensajes y 11.002 usuarios</h4><p>Declara como propios los dominios <code>alphv.pro</code> y <code>alphv.io</code> y un servicio oculto cuyo prefijo legible es <code>alphvi</code>. <strong>Lo decisivo es el registro:</strong> <code>alphv.io</code> se creó el <strong>2 de noviembre de 2024</strong>, <strong>ocho meses después</strong> de la extinción de la operación, se actualizó el <strong>19 de noviembre de 2026</strong> —hace dos días— y sus servidores de nombres están en <code>oplotflow.net</code>, dominio creado el <strong>10 de noviembre de 2026</strong>, hace once. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que el foro existe y está mantenido, y <strong>muy probable</strong> <em>(80–95 %)</em> que <strong>no tenga continuidad operativa con el grupo original</strong>, porque su dominio es posterior al cese y porque <strong>no es la misma clase de objeto</strong>: no hay sitio de filtración, ni víctimas listadas, ni negociación de rescates.</p><div class="gauge" data-p="88"><div class="lab"><span>Casi con certeza</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta para las fechas de registro, que son verificables por whois; moderada para la ausencia de vínculo, que es un argumento de fecha y de clase, no de telemetría.</b> Lectura propia del sitio y consulta <code>whois</code>, §O-6. <em>Consecuencia:</em> <strong>el disparador <code>I-2</code> queda cumplido con un resultado inesperado</strong> —el nombre se reutilizó, pero para un foro y no para una operación— y <strong><code>H-3</code> pasa de posible a observado</strong> (<code>O-6</code>, <code>A.4</code>).</p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv"><strong>ALPHV —también llamado BlackCat y Noberus— no existe desde marzo de 2024.</strong> Fue una de las operaciones de extorsión como servicio más activas de su época, el Departamento de Justicia le atribuye <em>«más de 1.000 víctimas»</em> en conjunto, y terminó de la forma menos épica posible: desapareciendo con el dinero de sus propios afiliados. Este informe no describe una amenaza vigente. Describe un cierre, y lo hace porque <strong>el cierre sigue produciendo errores</strong>.</p>
+<p class="rv">El primero es de fechas. El catálogo público que esta cartera usa para medir victimología devuelve, para este actor, 731 entradas con fechas de ataque que llegan hasta <strong>el 3 de junio de 2025</strong>. Si uno se detiene ahí, concluye que la operación siguió golpeando quince meses después de su desaparición. <strong>No es cierto, y la prueba está en el propio registro:</strong> las cinco entradas con fecha posterior a mayo de 2024 fueron todas <strong>descubiertas por el rastreador el 26 de julio de 2023</strong>. Una reclamación no se descubre once meses antes de que exista. Restando las dos fechas —el primero de los ocho correctivos que <code>CTI-2026-054</code> dejó escritos— la actividad real termina el 3 de marzo de 2024, que es exactamente cuando la operación se derrumbó.</p>
+<p class="rv">El segundo error es de proporciones. <strong>El 55 % de las entradas no tiene país.</strong> Eso significa que las 32 víctimas latinoamericanas son el 4,4 % del catálogo o el 9,7 % de lo etiquetado, según lo que se divida, y que <strong>ninguna de las dos cifras dice cuál era el reparto geográfico real</strong>. Para Chile el dato es pequeño y cerrado: <strong>dos reclamaciones, las dos de abril de 2023</strong>, ninguna confirmada públicamente. Comparadas con la concentración de Qilin que <code>CTI-2026-015</code> midió, no mueven nada.</p>
+<p class="rv">El tercer error es de atribución de fuente, y es el que más importa. En abril de 2026 el Departamento de Justicia condenó a <strong>cuatro años de prisión a dos afiliados de ALPHV</strong>, y un tercero se declaró culpable. Los tres trabajaban en el sector de la ciberseguridad, y el caso se ha contado en el sector como el de unos respondedores de incidentes y un negociador que cifraron a las organizaciones que los habían contratado, con los nombres de sus empresas. <strong>El comunicado del Departamento de Justicia no dice eso.</strong> No nombra ninguna empresa, no da ningún cargo, y la única afirmación de abuso de posición que contiene es sobre uno de los tres: que compartió información confidencial de víctimas con los atacantes <strong>mientras negociaba en su nombre</strong>. Lo demás puede ser verdad —hay cobertura abundante que lo sostiene— pero no es lo que dice la fuente primaria, y una organización que vaya a revisar cómo contrata respuesta a incidentes merece saber qué parte está probada judicialmente y qué parte es periodismo.</p>
+<p class="rv">Lo que sí queda documentado judicialmente, y es el dato más útil del expediente, es <strong>el reparto del programa: 20 % para los administradores y 80 % para el afiliado</strong>, con un rescate concreto de aproximadamente <strong>1,2 millones de dólares en bitcoin</strong> repartido entre tres personas. Esa clase de confirmación es rara, y sirve de patrón de medida para valorar lo que otros programas prometen.</p>
+<p class="rv"><strong>Y una nota regional que no es de victimología:</strong> la captura contó con el apoyo de la <strong>Policía de Investigación del Aeropuerto Internacional de la Ciudad de México</strong>, y el FBI siguió a uno de los condenados por diez países cuando trató de huir. En este expediente la región aparece antes en la respuesta que en el daño, lo cual es infrecuente y merece quedar escrito.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Qué contiene este informe</h3>
+<p class="rv">El cierre documentado de una operación extinta: la forma de su catálogo, su victimología regional con los correctivos necesarios para leerla, el cierre judicial de tres de sus afiliados leído en la fuente primaria, y el método para no volver a tomar una marca muerta por una viva.</p>
+<h3 class="rv">3.2 Qué NO contiene</h3><ul class="rv"><li><strong>No es un informe de amenaza vigente.</strong> Si busca a quién vigilar hoy, este no es el expediente: la operación no existe.</li><li><strong>No se leyó ningún sitio de filtración.</strong> Están caídos desde 2024, y no hay acceso a Tor en este entorno.</li><li><strong>No hay muestras, análisis de binario ni telemetría propia de red.</strong> De ahí que el nivel técnico se omita (§3.4).</li><li><strong>No se reproduce ningún nombre ni dominio de víctima</strong>, incluidas las dos chilenas de <code>KJ-3</code>. Ninguna ha confirmado nada, y nombrarlas amplificaría una reclamación de adversario de hace treinta y un meses.</li><li><strong>No se entró en el foro de <code>O-6</code>.</strong> Se leyó el contenido servido públicamente; <strong>no se creó cuenta, no se envió ningún formulario y no se descargó ningún fichero.</strong> Por tanto su actividad interna real no está medida (<code>G-6</code>).</li><li><strong>No se cuantifica el destino de los afiliados dispersados.</strong> Es la brecha <code>G-3</code>: hay afirmaciones de que continuaron bajo otras marcas, y no se ha verificado ninguna correspondencia concreta.</li></ul>
+<h3 class="rv">3.3 La base de este informe, y su desigualdad</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Elemento</th><th>Base</th><th>Grado</th></tr></thead><tbody>
+<tr><td>La forma y las fechas del catálogo</td><td><strong>Medición propia</strong> sobre 731 entradas, 2026-11-21</td><td><strong>Alto</strong></td></tr>
+<tr><td>La incoherencia de las cinco entradas tardías</td><td><strong>Medición propia</strong>, verificable por cualquiera con la misma consulta</td><td><strong>Alto</strong></td></tr>
+<tr><td>El cierre judicial</td><td><strong>Fuente primaria</strong> leída en original: comunicado 26-431 del DOJ</td><td><strong>Alto</strong></td></tr>
+<tr><td>La atribución de país de las víctimas</td><td>Enriquecimiento derivado de la fuente, con 55 % de huecos</td><td><strong>Bajo</strong></td></tr>
+<tr><td>La salida fraudulenta de marzo de 2024 y su cifra</td><td>Prensa especializada y vendedores; <strong>no verificada en fuente primaria</strong></td><td><strong>Medio</strong></td></tr>
+<tr><td>Los empleadores y cargos de los condenados</td><td><strong>Prensa especializada únicamente.</strong> No están en el comunicado</td><td><strong>Medio, y marcado como tal en todo el informe</strong></td></tr>
+<tr><td>El destino de los afiliados</td><td>Afirmaciones de vendedor sin correspondencia concreta verificada</td><td><strong>Bajo</strong></td></tr></tbody></table></div>
+<h3 class="rv">3.4 Por qué se omite el nivel técnico</h3>
+<p class="rv">Esta cartera ha establecido que <strong>un perfil sin muestra no es inteligencia técnica</strong> —lo dijeron <code>CTI-2026-059</code> y <code>CTI-2026-061</code> al omitir el mismo nivel—. Aquí la razón es más fuerte: el cifrador de ALPHV está ampliamente documentado por terceros desde 2022, <strong>pero este informe no ha analizado ninguna muestra</strong>, y transcribir indicadores técnicos de hace tres años de una operación extinta produciría exactamente el problema que el <code>Anexo A</code> de este repositorio existe para evitar. <strong>Quien necesite los indicadores históricos del cifrador debe ir a los informes de proveedor de 2022–2023, no a este documento.</strong></p>
+<h3 class="rv">3.5 Lo que se afirma sobre este actor, y lo que las fuentes sostienen</h3>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Afirmación corriente</th><th>Veredicto</th><th>Base</th></tr></thead><tbody>
+<tr><td>1</td><td>ALPHV está extinto desde 2024</td><td><strong>CORROBORADO</strong></td><td>Medición propia: última actividad coherente el 2024-03-03 (<code>KJ-1</code>)</td></tr>
+<tr><td>2</td><td>Su última actividad registrada es de 2025</td><td><strong>NO SOSTENIDO</strong></td><td>Las cinco entradas tardías son artefacto de fecha: descubiertas el 2023-07-26 (<code>KJ-1</code>, <code>O-2.2</code>)</td></tr>
+<tr><td>3</td><td>Terminó con una salida fraudulenta tras el caso Change Healthcare</td><td><strong>PLAUSIBLE, no verificado aquí</strong></td><td>Coherente con la caída abrupta medida (<code>KJ-9</code>), pero la cifra y el relato son de prensa (<code>O-3.2</code>)</td></tr>
+<tr><td>4</td><td>Tenía más de 1.000 víctimas</td><td><strong>CORROBORADO como afirmación del DOJ</strong></td><td>El comunicado lo dice del grupo en conjunto; el catálogo medido tiene 731 entradas, que es otra cosa (<code>O-2.1</code>)</td></tr>
+<tr><td>5</td><td>Sus afiliados eran profesionales de la ciberseguridad</td><td><strong>CORROBORADO</strong></td><td><em>«All three men worked in the cybersecurity industry»</em>, comunicado 26-431 (<code>KJ-4</code>)</td></tr>
+<tr><td>6</td><td>Esos afiliados atacaron a sus propios clientes</td><td><strong>NO SOSTENIDO POR LA FUENTE PRIMARIA</strong></td><td>El comunicado no lo afirma de Goldberg ni Martin, y no nombra empleadores. Sólo de Martino dice que abusó de su papel de negociador (<code>KJ-5</code>, <code>O-4.2</code>)</td></tr>
+<tr><td>7</td><td>Trabajaban en Sygnia y DigitalMint</td><td><strong>NO ESTÁ EN EL COMUNICADO</strong></td><td>Procede de prensa. Se consigna como tal y no se usa como base de ningún juicio (<code>Anexo B</code>)</td></tr>
+<tr><td>8</td><td>El programa repartía 80/20 a favor del afiliado</td><td><strong>CORROBORADO judicialmente</strong></td><td>Comunicado 26-431 (<code>KJ-6</code>)</td></tr>
+<tr><td>9</td><td>Tuvo víctimas chilenas</td><td><strong>CORROBORADO como reclamación, no como brecha</strong></td><td>Dos entradas de abril de 2023, sin confirmación pública (<code>KJ-3</code>)</td></tr>
+<tr><td>10</td><td>Sus afiliados siguieron activos bajo otras marcas</td><td><strong>NO VERIFICADO</strong></td><td>Afirmación repetida por vendedores sin correspondencia concreta comprobable (<code>G-3</code>)</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Y una advertencia de método sobre esta tabla</div><p>Los veredictos 6 y 7 son los únicos del lote que <strong>contradicen la narrativa dominante</strong>, y conviene decir cómo se llegó a ellos: no por escepticismo previo, sino porque el procedimiento de esta cartera obliga a <strong>leer el documento primario en original</strong> antes de citarlo. La cobertura secundaria era unánime y coherente; el comunicado, más estrecho. <strong>Cuando las dos cosas pasan a la vez, la que manda es la fuente primaria</strong> —y el hecho de que la narrativa sea verosímil es precisamente lo que hace fácil no comprobarla.</p></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2></div>
+<section id="e-1-cifras" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Cifras</h2></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="731">0</div><div class="l">Entradas del catálogo medidas</div><div class="s">Resueltas el 2026-11-21</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="2024">0<small>--</small></div><div class="l"><strong>Última actividad coherente</strong></div><div class="s">Y no 2025-06-03, que es lo que el campo de fecha sugiere</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="5">0</div><div class="l"><strong>Entradas imposibles</strong></div><div class="s">Fecha de ataque posterior a su propia fecha de descubrimiento</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="402">0</div><div class="l">Entradas <strong>sin país</strong></div><div class="s">El 55,0 % del catálogo</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="329">0</div><div class="l">Entradas con país</div><div class="s">El 45,0 %</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="32">0</div><div class="l">Entradas latinoamericanas</div><div class="s"><strong>4,4 %</strong> del total · <strong>9,7 %</strong> de las etiquetadas</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="2">0</div><div class="l"><strong>Víctimas chilenas</strong></div><div class="s">Las dos de abril de 2023</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="0">0</div><div class="l">Entradas con cifra de rescate</div><div class="s">Y <code>0</code> con tamaño de datos</div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n">5,7 %</div><div class="l">Entradas con referencia de prensa</div><div class="s">42 de 731</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="20">0<small>%/%</small></div><div class="l"><strong>Reparto del programa</strong></div><div class="s">Administradores / afiliado. Judicialmente documentado</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n">1,2 M USD</div><div class="l"><strong>Único rescate con cifra judicial</strong></div><div class="s">En bitcoin, repartido entre tres personas</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="4">0<small>años</small></div><div class="l">Pena de cada uno de los dos condenados</div><div class="s">Comunicado DOJ 26-431, 2026-04-30</div></div></div>
+</section>
+<section id="e-2-la-victimologia-y-los-dos-numeros-que-son-correctos-a-la-vez" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>La victimología, y los dos números que son correctos a la vez</h2></div></div>
+<h3 class="rv">E-2.1 Por qué no se puede dar una proporción regional de este actor</h3>
+<p class="rv"><strong>El 55 % del catálogo no tiene país.</strong> Ese solo dato invalida cualquier frase de la forma «el X % de las víctimas de ALPHV estaba en Y», y conviene ver por qué no se arregla dividiendo sólo por lo etiquetado.</p>
+<p class="rv">Para que el 9,7 % de las entradas etiquetadas fuese una estimación válida del reparto real, <strong>las 402 entradas sin país tendrían que repartirse geográficamente igual que las 329 con país</strong>. No hay ninguna razón para creerlo y hay una para dudarlo: el país de estas fuentes se deriva habitualmente del dominio de la entrada, y <strong>los dominios genéricos —<code>.com</code>, <code>.net</code>— son los que más se resisten a la geolocalización y los que más abundan entre organizaciones estadounidenses</strong>. Si eso es así, las entradas sin país no son una muestra aleatoria: están sesgadas hacia los dominios genéricos, y por tanto hacia una geografía concreta.</p>
+<p class="rv"><strong>La consecuencia operativa, que es la única que importa:</strong> este informe da los recuentos absolutos —32 latinoamericanas, 2 chilenas— y <strong>se niega a convertirlos en proporciones del universo real</strong>. Un recuento absoluto de reclamaciones es un suelo: dice «al menos estas», y eso sí es información.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Lectura</th><th>Valor</th><th>Qué sostiene</th></tr></thead><tbody>
+<tr><td>LATAM sobre el catálogo completo</td><td><strong>4,4 %</strong></td><td>Suelo. Correcto si se dice «de las entradas del catálogo»</td></tr>
+<tr><td>LATAM sobre las entradas con país</td><td><strong>9,7 %</strong></td><td>Correcto si se dice «de las entradas que la fuente supo etiquetar»</td></tr>
+<tr><td>LATAM en el universo real de víctimas</td><td><strong>No estimable</strong></td><td>Requiere suponer que los 402 huecos se reparten como el resto, y no hay base</td></tr></tbody></table></div>
+<h3 class="rv">E-2.2 Las dos víctimas chilenas, y por qué no mueven nada</h3>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="s">Sí</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev gl big" data-k="s big"><div class="d">2023-04-02</div><div class="x">Servicios financieros</div></div>
+<div class="ev gl big" data-k="s big"><div class="d">2023-04-21</div><div class="x">Comercio al detalle y electrónico</div></div></div>
+<p class="rv">Diecinueve días entre las dos, y nada más en treinta y un meses. <strong>Ninguna tiene referencia de prensa</strong>, lo que en un catálogo cuya cobertura de prensa global es del 5,7 % no es excepcional, pero sí significa que <strong>ninguna de las dos reclamaciones fue verificada públicamente jamás</strong>.</p>
+<p class="rv">No se reproducen los nombres ni los dominios. El procedimiento para que una organización chilena compruebe si fue una de las dos está en el <code>Anexo F</code>, y <strong>no necesita este informe</strong>: necesita su propio dominio y la consulta al catálogo.</p>
+<p class="rv"><strong>Puesto en contexto, que es lo que pide una decisión:</strong> <code>CTI-2026-015</code> midió que <strong>Qilin concentra veinte de las treinta víctimas chilenas</strong> del top diez de extorsión, y <code>CTI-2026-058</code> identificó la única víctima chilena de su lote de seis actores. Dos reclamaciones de abril de 2023 de una operación que ya no existe <strong>no cambian ninguna prioridad de vigilancia</strong>. Se consignan porque el expediente chileno de un actor debe estar completo, no porque haya que actuar.</p>
+<h3 class="rv">E-2.3 La región como eslabón de la respuesta, no como víctima</h3>
+<p class="rv">Hay un dato en el comunicado judicial que no es de victimología y que esta cartera no había registrado antes: <strong>la Policía de Investigación del Aeropuerto Internacional de la Ciudad de México colaboró en el caso</strong>, y consta expresamente en los agradecimientos del Departamento de Justicia.</p>
+<p class="rv">Añádase que, <em>«cuando Goldberg trató de huir al extranjero, el FBI lo siguió a través de diez países»</em>. El comunicado no dice cuáles, ni que México fuera uno de ellos, ni en qué consistió la colaboración mexicana —<strong>y este informe no lo va a suponer</strong>—. Lo que sí se puede afirmar es que <strong>la institución aparece en un documento judicial estadounidense como colaboradora en la detención de un afiliado de extorsión</strong>.</p>
+<p class="rv"><strong>Por qué merece quedar escrito:</strong> casi todos los expedientes de esta cartera sitúan a la región en el lado del daño. Este la sitúa en el de la respuesta. Es un punto de apoyo para quien tenga que argumentar que la cooperación policial regional produce resultados, y es verificable en una fuente primaria.</p>
+</section>
+<section id="e-3-el-reparto-20-80-y-para-que-sirve-saberlo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>El reparto 20/80, y para qué sirve saberlo</h2><p>De todos los datos de este expediente, el que más durará es el que no depende de ALPHV: <strong>el reparto económico del programa, confirmado en una sentencia</strong>.</p></div></div>
+<p class="rv">El comunicado declara que los tres afiliados <em>«acordaron pagar a los administradores de ALPHV BlackCat una participación del 20 % de cualesquiera rescates recibidos»</em>, y que después de extorsionar a una víctima por <strong>aproximadamente 1,2 millones de dólares en bitcoin</strong>, <em>«se repartieron su parte del 80 % entre los tres»</em>.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Elemento</th><th>Valor</th><th>Procedencia</th></tr></thead><tbody>
+<tr><td>Comisión de los administradores</td><td><strong>20 %</strong></td><td>Comunicado 26-431</td></tr>
+<tr><td>Parte del afiliado</td><td><strong>80 %</strong></td><td>Comunicado 26-431</td></tr>
+<tr><td>Rescate del caso con cifra</td><td><strong>≈ 1,2 M USD en bitcoin</strong></td><td>Comunicado 26-431</td></tr>
+<tr><td>Reparto entre los tres afiliados</td><td>A tres partes</td><td>Comunicado 26-431</td></tr>
+<tr><td>Cantidad percibida por cada uno</td><td><strong>No consta</strong></td><td>El comunicado no la da</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Una cautela aritmética que conviene no saltarse</div><p>Aplicar el 80 % a 1,2 millones y dividir por tres da unos 320.000 dólares por persona, y es tentador escribirlo. <strong>El comunicado no da esa cifra</strong>, y el cálculo supone que el reparto fue a partes iguales y que no hubo costes intermedios. Se deja aquí como lo que es —una aproximación nuestra— y no entra en ninguna tabla de cifras del informe.</p></div>
+<p class="rv"><strong>Para qué sirve:</strong> cuando un programa de extorsión anuncia en un foro que reparte el 85 % o el 90 % para atraer afiliados, ahora hay <strong>una cifra con respaldo judicial</strong> con la que compararlo. Y hay un segundo uso, menos obvio: el 20 % de comisión indica que <strong>los administradores capturaban una fracción modesta</strong>, lo que es coherente con un modelo de volumen —muchos afiliados, muchas víctimas— y no con uno de pocas operaciones grandes muy controladas.</p>
+</section>
+<section id="e-4-decisiones-que-este-informe-pide" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Decisiones que este informe pide</h2></div></div><ol class="rv"><li><strong>Retirar ALPHV de cualquier lista de actores a vigilar</strong>, si sigue en alguna. La operación no existe desde marzo de 2024.</li><li><strong>Aplicar el correctivo de fechas a todo producto que consuma este catálogo.</strong> No es específico de ALPHV: es la clase de error que <code>CTI-2026-054</code> ya midió a escala de 68 actores.</li><li><strong>Para las dos organizaciones chilenas del catálogo, si se reconocen:</strong> la comprobación es sobre su propio dominio y no requiere este informe. No hay acción urgente: la reclamación tiene treinta y un meses.</li><li><strong>Al citar el caso judicial, atribuir correctamente.</strong> Las condenas, el reparto 20/80 y la pertenencia de los tres al sector son del Departamento de Justicia. Los empleadores y la relación cliente-proveedor son de prensa. <strong>Si la decisión que se apoya en ello es revisar cómo se contrata respuesta a incidentes, la base es más débil de lo que parece</strong> y conviene buscar los documentos del caso antes de reescribir una política.</li></ol>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2></div>
+<section id="o-1-identificacion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Identificación</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Nombres</td><td><code>ALPHV</code> · <code>BlackCat</code> · <code>Noberus</code></td></tr>
+<tr><td>Clase</td><td>Extorsión como servicio, con programa de afiliados</td></tr>
+<tr><td>Estado</td><td><strong>Extinto.</strong> Última actividad coherente: 2024-03-03</td></tr>
+<tr><td>Atribución estatal</td><td>Ninguna. Criminal con ánimo de lucro</td></tr>
+<tr><td>Entradas en el catálogo medido</td><td>731</td></tr>
+<tr><td>Atribución del DOJ</td><td><em>«más de 1.000 víctimas»</em>, referido al grupo en conjunto</td></tr></tbody></table></div>
+<p class="rv"><strong>Sobre la discrepancia entre 731 y «más de 1.000».</strong> Las dos cifras pueden ser correctas: el catálogo recoge las reclamaciones <strong>publicadas en el sitio de filtración</strong>, y el Departamento de Justicia cuenta <strong>víctimas conocidas por la investigación</strong>, que incluyen a las que pagaron y por tanto nunca se publicaron. <strong>La diferencia no es un error de nadie: es la definición de dos poblaciones distintas</strong>, y es la razón por la que esta cartera repite que el recuento de un sitio de filtración acota por abajo y por arriba nada.</p>
+</section>
+<section id="o-2-el-catalogo-medido" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>El catálogo, medido</h2></div></div>
+<h3 class="rv">O-2.1 Lo que hay</h3>
+<div class="card rv">
+<h4 style="margin-top:0">Entradas por año de ataque declarado</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">2021</span><span class="bt"><i data-w="3"></i></span><span class="bv">14</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2022</span><span class="bt"><i data-w="51"></i></span><span class="bv">220</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn"><strong>2023</strong></span><span class="bt"><i data-w="100"></i></span><span class="bv">433</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2024</span><span class="bt"><i data-w="14"></i></span><span class="bv">62</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2025</span><span class="bt"><i data-w="0"></i></span><span class="bv">2</span></div></div></div>
+<p class="rv"><strong>2023 concentra el 59,2 % del catálogo.</strong> Y 2024, con 62 entradas, es engañoso hasta que se desglosa: <strong>57 de esas 62 son de enero y febrero</strong>, y las cinco restantes son las del 1 y 3 de marzo más las imposibles de §O-2.2.</p>
+<h3 class="rv">O-2.2 Las cinco entradas imposibles, y cómo se detectan</h3>
+<p class="rv">Este es el hallazgo propio central del informe, y se reproduce en dos minutos: <strong>comparar, para cada entrada, la fecha de ataque declarada con la fecha en que el rastreador la descubrió.</strong></p>
+<div class="tw rv"><table><thead>
+<tr><th>Fecha de ataque declarada</th><th>Fecha de descubrimiento</th><th>País</th><th>Desfase</th></tr></thead><tbody>
+<tr><td>2024-05-03</td><td><strong>2023-07-26</strong></td><td>US</td><td><strong>−282 días</strong></td></tr>
+<tr><td>2024-09-02</td><td><strong>2023-07-26</strong></td><td>US</td><td><strong>−404 días</strong></td></tr>
+<tr><td>2024-10-28</td><td><strong>2023-07-26</strong></td><td>US</td><td><strong>−460 días</strong></td></tr>
+<tr><td>2025-01-17</td><td><strong>2023-07-26</strong></td><td>US</td><td><strong>−541 días</strong></td></tr>
+<tr><td>2025-06-03</td><td><strong>2023-07-26</strong></td><td>AO</td><td><strong>−678 días</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>Las cinco comparten fecha de descubrimiento al día</strong>, y las cinco declaran un ataque posterior a ella. Las cuatro primeras son estadounidenses y la quinta angoleña.</p>
+<p class="rv"><strong>Qué NO se puede concluir.</strong> No se puede decir qué produjo el error: puede ser un campo mal parseado por el enriquecedor, una fecha mal escrita en la reclamación original, o un formato de fecha ambiguo interpretado al revés. <strong>No tenemos acceso a la reclamación original —el sitio está caído desde 2024— y por tanto la causa queda abierta</strong> (<code>G-2</code>).</p>
+<p class="rv"><strong>Qué sí se puede concluir, y basta para el propósito:</strong> ninguna de las cinco sirve como evidencia de actividad en 2024 o 2025, porque <strong>la propia fuente registró su existencia en julio de 2023</strong>. Para la pregunta «¿cuándo dejó de actuar este grupo?», las cinco se descartan, y la respuesta pasa de junio de 2025 a marzo de 2024.</p>
+<div class="note info rv"><div class="t">Y la observación que generaliza</div><p>, que es la razón de que esto esté en el <code>Anexo D</code>: el correctivo no requiere saber nada del actor. <strong>Es una comprobación de coherencia interna entre dos campos de la misma entrada</strong>, y cualquiera puede ejecutarla sobre cualquier actor de cualquier catálogo. <code>CTI-2026-054</code> lo estableció como el primero de sus ocho correctivos y midió que convertía 68 actores aparentemente nuevos en 14. Aquí convierte quince meses de actividad fantasma en cero.</p></div>
+<h3 class="rv">O-2.3 La cobertura de campos, que decide qué se puede preguntar</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Entradas con dato</th><th>Cobertura</th><th>Qué permite preguntar</th></tr></thead><tbody>
+<tr><td>Captura de pantalla</td><td>686</td><td><strong>93,8 %</strong></td><td>Casi todas traen prueba de nivel 3 de la escala de <code>CTI-2026-048</code> —el nivel que más engaña—</td></tr>
+<tr><td>Dominio</td><td>655</td><td><strong>89,6 %</strong></td><td><strong>Comprobación por la propia víctima</strong>: es lo más útil del catálogo</td></tr>
+<tr><td>Descripción</td><td>624</td><td>85,4 %</td><td>Análisis de plantillas y duplicados</td></tr>
+<tr><td><strong>País</strong></td><td><strong>329</strong></td><td><strong>45,0 %</strong></td><td><strong>Casi nada.</strong> Es la limitación de <code>KJ-2</code></td></tr>
+<tr><td>Referencia de prensa</td><td>42</td><td><strong>5,7 %</strong></td><td>El 94,3 % nunca fue noticia</td></tr>
+<tr style="background:rgba(247,164,0,.05)"><td><strong>Rescate</strong></td><td><strong>0</strong></td><td><strong>0,0 %</strong></td><td><strong>Nada.</strong> Toda cifra económica viene de fuera</td></tr>
+<tr><td><strong>Tamaño de datos</strong></td><td><strong>0</strong></td><td><strong>0,0 %</strong></td><td><strong>Nada</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>La lectura de esta tabla es el informe en pequeño.</strong> La cobertura es altísima en lo que sirve para que una víctima se reconozca —dominio, captura, descripción— y nula en lo que sirve para valorar el impacto —rescate, volumen—. <strong>Un catálogo así es una herramienta de notificación, no de medición económica</strong>, y usarlo para lo segundo produce cifras inventadas con aspecto de datos.</p>
+<h3 class="rv">O-2.4 Los países etiquetados, con la salvedad de siempre</h3>
+<div class="tw rv"><table><thead>
+<tr><th>País</th><th>Entradas</th><th>Sobre las 329 etiquetadas</th></tr></thead><tbody>
+<tr><td>Estados Unidos</td><td>92</td><td>28,0 %</td></tr>
+<tr><td>Canadá</td><td>25</td><td>7,6 %</td></tr>
+<tr><td>Australia</td><td>21</td><td>6,4 %</td></tr>
+<tr><td>Reino Unido</td><td>19</td><td>5,8 %</td></tr>
+<tr><td>Alemania</td><td>13</td><td>4,0 %</td></tr>
+<tr><td><strong>Brasil</strong></td><td><strong>11</strong></td><td><strong>3,3 %</strong></td></tr>
+<tr><td>Japón</td><td>11</td><td>3,3 %</td></tr>
+<tr><td>Francia</td><td>11</td><td>3,3 %</td></tr>
+<tr><td>Italia</td><td>11</td><td>3,3 %</td></tr>
+<tr><td>India</td><td>9</td><td>2,7 %</td></tr>
+<tr><td><strong>México</strong></td><td><strong>7</strong></td><td><strong>2,1 %</strong></td></tr></tbody></table></div>
+<p class="rv"><strong>Brasil es el sexto país del catálogo etiquetado</strong>, empatado con Japón, Francia e Italia. Es el dato regional más alto del expediente y es coherente con lo que esta cartera ha medido en casi todos los actores: <strong>Brasil absorbe la mayor parte de la actividad regional</strong>, y la diferencia con el resto de la región es de un orden de magnitud.</p>
+<p class="rv">Las 32 entradas latinoamericanas se reparten así: <strong>Brasil 11 · México 7 · Colombia 4 · Argentina 2 · Chile 2 · Ecuador 2 · República Dominicana 2 · Guatemala 1 · Panamá 1 · Venezuela 1</strong>.</p>
+</section>
+<section id="o-3-la-curva-y-lo-que-el-final-tiene-de-instructivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>La curva, y lo que el final tiene de instructivo</h2></div></div>
+<h3 class="rv">O-3.1 Interrupción, no declive</h3>
+<div class="chart rv">
+<h4>Forma del catálogo</h4><p class="cap">Entradas por año de ataque declarado. La caída de 2024 no es un declive: 57 de sus 62 entradas son de enero y febrero.</p><svg viewBox="0 0 720 250" role="img" aria-label="Forma del catálogo"><defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f7a400" stop-opacity=".34"/><stop offset="100%" stop-color="#f7a400" stop-opacity="0"/></linearGradient><linearGradient id="gLine" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#375d9d"/><stop offset="45%" stop-color="#4db99c"/><stop offset="100%" stop-color="#f7a400"/></linearGradient></defs><g stroke="rgba(90,126,190,.16)" stroke-width="1"><line x1="50" y1="200.0" x2="700" y2="200.0"/><line x1="50" y1="156.0" x2="700" y2="156.0"/><line x1="50" y1="112.0" x2="700" y2="112.0"/><line x1="50" y1="68.0" x2="700" y2="68.0"/><line x1="50" y1="24.0" x2="700" y2="24.0"/></g><g class="gtxt" text-anchor="end"><text x="42" y="204.0">0</text><text x="42" y="160.0">108</text><text x="42" y="116.0">216</text><text x="42" y="72.0">325</text><text x="42" y="28.0">433</text></g><path d="M50.0,194.3 L210.0,110.6 L370.0,24.0 L530.0,174.8 L690.0,199.2 L690.0,200.0 L50.0,200.0 Z" fill="url(#gArea)"/><path class="ln" stroke="url(#gLine)" d="M50.0,194.3 L210.0,110.6 L370.0,24.0 L530.0,174.8 L690.0,199.2"/><g><circle class="pt" cx="50.0" cy="194.3" r="5" fill="#5a7ebe"><title>2021: 14</title></circle><circle class="pt" cx="210.0" cy="110.6" r="5" fill="#5a7ebe"><title>2022: 220</title></circle><circle class="pt" cx="370.0" cy="24.0" r="5" fill="#5a7ebe"><title>2023: 433</title></circle><circle class="pt" cx="530.0" cy="174.8" r="5" fill="#4db99c"><title>2024: 62</title></circle><circle class="pt" cx="690.0" cy="199.2" r="6.5" fill="#f7a400"><title>2025: 2</title></circle></g><g class="gval" text-anchor="middle"><text x="50.0" y="183.3">14</text><text x="210.0" y="99.6">220</text><text x="370.0" y="13.0">433</text><text x="530.0" y="163.8">62</text><text x="690.0" y="188.2" fill="#f7a400">2</text></g><g class="gtxt" text-anchor="middle"><text x="50.0" y="222">2021</text><text x="210.0" y="222">2022</text><text x="370.0" y="222">2023</text><text x="530.0" y="222">2024</text><text x="690.0" y="222">2025</text></g></svg></div>
+<p class="rv"><strong>La distinción entre interrupción y declive no es estilística: cambia la hipótesis.</strong> Una marca que se apaga despacio sugiere pérdida de afiliados, competencia, o desgaste de un cifrador detectado. Una que se corta en seco en la primera semana de un mes sugiere <strong>un suceso externo con fecha</strong>. Aquí la curva apunta a lo segundo, y hay un suceso externo fechado que lo explica.</p>
+<h3 class="rv">O-3.2 La salida fraudulenta, consignada con su grado</h3>
+<p class="rv">La versión aceptada es que la operación se derrumbó en marzo de 2024 cuando sus administradores cobraron el rescate del caso Change Healthcare —del grupo UnitedHealth— y desaparecieron sin repartirlo con los afiliados, después de que el FBI hubiera incautado parte de su infraestructura en diciembre de 2023. Se cita habitualmente una cifra de 22 millones de dólares.</p>
+<p class="rv"><strong>Qué sostiene este informe y qué no.</strong> La <strong>forma</strong> de la curva medida es coherente con esa versión: corte abrupto en la primera semana de marzo de 2024. Eso es medición propia. Pero <strong>ni la cifra de 22 millones ni la mecánica del fraude se han verificado aquí en fuente primaria</strong>: proceden de prensa especializada y de informes de vendedor. Se consignan como <strong>plausibles y no verificadas</strong>, con grado medio, y <strong>ningún juicio de este informe se apoya en ellas</strong>.</p>
+<p class="rv">Nótese que el comunicado judicial de 2026, que es la fuente primaria del expediente, <strong>no menciona la salida fraudulenta ni el caso Change Healthcare</strong>. No la contradice: simplemente no es su objeto, que son tres afiliados concretos y su conducta en 2023.</p>
+</section>
+<section id="o-4-el-cierre-judicial-leido-en-el-original" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>El cierre judicial, leído en el original</h2></div></div>
+<h3 class="rv">O-4.1 Lo que el comunicado dice</h3>
+<p class="rv">Comunicado <strong>26-431</strong> del Departamento de Justicia, Oficina de Asuntos Públicos, <strong>30 de abril de 2026</strong>, actualizado el mismo día.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Elemento</th><th>Dato del comunicado</th></tr></thead><tbody>
+<tr><td>Condenados</td><td><strong>Ryan Goldberg</strong>, 40 años, de Georgia · <strong>Kevin Martin</strong>, 36, de Texas</td></tr>
+<tr><td>Pena</td><td><strong>Cuatro años de prisión cada uno</strong></td></tr>
+<tr><td>Fecha de la sentencia</td><td><em>«were sentenced today»</em> — el comunicado es del 2026-04-30</td></tr>
+<tr><td>Declaración de culpabilidad</td><td><strong>Diciembre de 2025</strong>, ambos</td></tr>
+<tr><td>Cargo</td><td><strong>Un cargo</strong> de conspiración para obstruir, retrasar o afectar el comercio mediante extorsión</td></tr>
+<tr><td>Periodo de los hechos</td><td><em>«between April 2023 and December 2023»</em></td></tr>
+<tr><td>Tercer implicado</td><td><strong>Angelo Martino</strong>, 41, de Florida. Culpable en <strong>abril de 2026</strong>; sentencia fijada para el <strong>9 de julio</strong></td></tr>
+<tr><td>Reparto</td><td><strong>20 %</strong> a los administradores; el <strong>80 %</strong> repartido entre los tres</td></tr>
+<tr><td>Rescate con cifra</td><td><em>«approximately $1.2 million in Bitcoin»</em>, de una víctima</td></tr>
+<tr><td>Profesión</td><td><em>«All three men worked in the cybersecurity industry»</em></td></tr>
+<tr><td>Conducta de Martino</td><td><em>«abused his role as a negotiator for victims of ransomware by sharing confidential victim information with threat actors to increase the value of the ransom paid»</em></td></tr>
+<tr><td>Sectores de víctimas</td><td><em>«firms who were providing medical and engineering services»</em>; se menciona <strong>un consultorio médico</strong> con filtración de datos de pacientes</td></tr>
+<tr><td>Investigación</td><td><strong>FBI, oficina de campo de Miami</strong>, con apoyo del <strong>Servicio Secreto</strong></td></tr>
+<tr><td>Cooperación internacional</td><td><strong>Policía de Investigación del Aeropuerto Internacional de la Ciudad de México</strong></td></tr>
+<tr><td>Huida</td><td><em>«cuando Goldberg trató de huir al extranjero, el FBI lo siguió a través de diez países»</em></td></tr>
+<tr><td>Decomiso</td><td>Mención genérica a que <em>«forfeit the proceeds of their crimes»</em>, <strong>sin importe</strong></td></tr>
+<tr><td>Vector de acceso</td><td><strong>No consta.</strong> El comunicado no describe cómo entraron</td></tr>
+<tr><td>CVE</td><td><strong>No consta ninguno</strong></td></tr>
+<tr><td>Restitución y libertad supervisada</td><td><strong>No constan</strong></td></tr></tbody></table></div>
+<h3 class="rv">O-4.2 Lo que el comunicado NO dice, y por qué importa</h3>
+<p class="rv">Esta sección existe porque la diferencia entre el comunicado y su cobertura <strong>podría cambiar una decisión de contratación</strong>, y conviene que quien la tome sepa sobre qué se apoya.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Afirmación corriente en el sector</th><th>¿Está en el comunicado 26-431?</th></tr></thead><tbody>
+<tr><td>Los tres trabajaban en ciberseguridad</td><td><strong>SÍ</strong>, textualmente</td></tr>
+<tr><td>Goldberg era responsable de respuesta a incidentes en una empresa de seguridad concreta</td><td><strong>NO.</strong> El comunicado no nombra ninguna empresa ni da ningún cargo</td></tr>
+<tr><td>Martin era negociador en una empresa concreta</td><td><strong>NO.</strong> Misma ausencia</td></tr>
+<tr><td><strong>Atacaron a organizaciones que eran sus clientes</strong></td><td><strong>NO para Goldberg y Martin.</strong> El comunicado no afirma relación contractual previa con las víctimas</td></tr>
+<tr><td>Martino abusó de su posición como negociador de víctimas</td><td><strong>SÍ</strong>, y es la única afirmación de abuso de posición del documento</td></tr>
+<tr><td>Extorsionaron a varias víctimas con éxito</td><td><strong>AMBIGUO.</strong> Dice <em>«multiple victims»</em> y <em>«millions»</em> en general, pero sólo detalla <strong>una</strong> víctima con cifra</td></tr></tbody></table></div>
+<p class="rv"><strong>Tres consecuencias prácticas.</strong></p>
+<p class="rv"><strong>Primera, sobre el número de víctimas.</strong> El comunicado se contradice en apariencia: habla de <em>«múltiples víctimas»</em> y de extorsionar <em>«millones»</em>, pero la única cifra concreta es una víctima y 1,2 millones. <strong>La lectura prudente es que atacaron a varias y cobraron de una</strong> —que es compatible con todo el texto—, y así se consigna. Quien necesite el número exacto debe ir al expediente judicial, no al comunicado.</p>
+<p class="rv"><strong>Segunda, sobre el relato dominante.</strong> Que el comunicado no afirme la relación cliente-proveedor <strong>no la refuta</strong>: hay cobertura amplia y coherente que la sostiene, y es perfectamente posible que esté en los documentos del caso. Lo que este informe sostiene es más modesto y más seguro: <strong>a fecha de hoy, esa pieza no está respaldada por la fuente primaria que todo el mundo cita</strong>.</p>
+<p class="rv"><strong>Tercera, y es la que vale para esta cartera.</strong> Este es el caso de atribución de fuente más limpio que el repositorio ha encontrado: <strong>una narrativa unánime, verosímil, útil, y más amplia que su documento de respaldo.</strong> No hubo que desconfiar de nada para detectarlo; bastó con leer el original. Es exactamente lo que la lección de colección de esta cartera prescribe, y la razón por la que se prescribe.</p>
+</section>
+<section id="o-6-el-foro-que-usa-el-nombre-revisado-el-21-11-2026" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-6</span><div><h2>El foro que usa el nombre, revisado el 21-11-2026</h2></div></div>
+<p class="rv">A petición del consumidor de este informe se revisó <code>https://alphv.pro</code>. <strong>Es un hallazgo con consecuencias, y la principal es de clasificación: no es lo que el nombre hace esperar.</strong></p>
+<h3 class="rv">O-6.1 Qué es</h3>
+<p class="rv">Un <strong>foro de discusión criminal</strong>, servido sobre XenForo, íntegramente en ruso, titulado <code>ALPHV</code>. Sus secciones visibles, transcritas y traducidas:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Sección, literal</th><th>Traducción</th></tr></thead><tbody>
+<tr><td><code>Кардинг/Хакинг</code></td><td><strong>Carding / Hacking</strong></td></tr>
+<tr><td><code>Новости. Хакинг. Кардинг. Мошенники. Криминал.</code></td><td>Noticias. Hacking. Carding. Estafadores. Delincuencia</td></tr>
+<tr><td><code>Мессенджеры. Соцсети.</code></td><td>Mensajería. Redes sociales</td></tr>
+<tr><td><code>Гарант Форума</code> · <code>Гарант \| Escrow</code></td><td><strong>Garante del foro · Garante / Escrow</strong></td></tr>
+<tr><td><code>Депозит</code> · <code>Страховой депозит</code></td><td><strong>Depósito · Depósito de seguro</strong></td></tr>
+<tr><td><code>Платное повышение</code></td><td><strong>Promoción de pago</strong></td></tr>
+<tr><td><code>Зеркала форума</code></td><td>Espejos del foro</td></tr></tbody></table></div>
+<p class="rv">Declara <strong>7.124 temas, 19.106 mensajes y 11.002 usuarios</strong>, y exige contacto por Telegram con confirmación por mensaje privado en el propio foro.</p>
+<h3 class="rv">O-6.2 Lo que NO es, y por qué importa más que lo que es</h3>
+<p class="rv"><strong>No hay sitio de filtración. No hay víctimas listadas. No hay negociación de rescates. No aparece la palabra «ransomware» ni «extorsión» en el contenido servido.</strong></p>
+<p class="rv">Aplicando el criterio más barato y discriminante del <code>Anexo D</code> de <code>CTI-2026-042</code> —<strong>cómo contacta la víctima: portal de negociación es una operación, dirección de correo es una herramienta</strong>—, este sitio <strong>no tiene víctima a la que contactar</strong>. Lo que tiene es depósito, garante y promoción de pago, que son los mecanismos de un <strong>mercado entre delincuentes</strong>, no de una operación contra terceros. <strong>Es una tercera categoría que el triaje de <code>042</code> no contemplaba</strong>, y conviene que quede escrita: <em>mercado</em> es tan distinto de <em>operación</em> como lo es <em>herramienta</em>.</p>
+<h3 class="rv">O-6.3 Las fechas, que son lo que resuelve la atribución</h3>
+<p class="rv">Esto es lo verificable, y cuesta un minuto con <code>whois</code>:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Objeto</th><th>Fecha</th><th>Qué implica</th></tr></thead><tbody>
+<tr><td><strong>Cese de la operación ALPHV</strong></td><td><strong>2024-03-03</strong></td><td>Medición propia (<code>KJ-1</code>)</td></tr>
+<tr><td><strong>Registro de <code>alphv.io</code></strong></td><td><strong>2024-11-02</strong></td><td><strong>Ocho meses POSTERIOR al cese</strong></td></tr>
+<tr><td>Última actualización de <code>alphv.io</code></td><td><strong>2026-11-19</strong></td><td><strong>Hace dos días.</strong> Dominio mantenido</td></tr>
+<tr><td>Registro de <code>oplotflow.net</code>, sus servidores de nombres</td><td><strong>2026-11-10</strong></td><td><strong>Hace once días.</strong> Infraestructura DNS renovada</td></tr>
+<tr><td>Contenido más reciente visible en portada</td><td><strong>2026-06-27</strong></td><td>Cinco meses. Portada menos viva que la infraestructura</td></tr></tbody></table></div>
+<p class="rv"><strong>El argumento de atribución es simple y es de calendario: un dominio registrado ocho meses después de que una operación desapareciera no puede ser su infraestructura.</strong> Podría ser obra de antiguos participantes —eso no se puede descartar y no se afirma— pero <strong>no es continuidad de la operación</strong>, y cualquier producto que presente este foro como «ALPHV sigue activo» estaría cometiendo un error que se refuta con una consulta de registro.</p>
+<div class="note info rv"><div class="t">Y una discrepancia interna que conviene registrar sin resolverla</div><p>La infraestructura se renovó hace once días y el dominio se actualizó hace dos, pero <strong>el contenido más reciente visible en la portada es de junio de 2026</strong>. Las dos cosas son compatibles con un foro en declive cuyos administradores mantienen el alojamiento, y también con una portada que muestra temas fijados y no recientes. <strong>No se ha entrado al foro —no se creó cuenta ni se envió ningún formulario—, así que la actividad real interna no se ha medido</strong> (<code>G-6</code>).</p></div>
+<h3 class="rv">O-6.4 El prefijo legible, que conecta con el método de la casa</h3>
+<p class="rv">El foro declara un servicio oculto cuyos <strong>seis primeros caracteres son <code>alphvi</code></strong>. Es el mismo patrón que <code>CTI-2026-057</code> y <code>CTI-2026-058</code> analizaron y que esta cartera tiene como mecanismo propio en su grafo: <strong>generación dirigida de dirección para que la marca sea legible</strong>, lo que la hace <strong>cazable por patrón</strong>.</p>
+<p class="rv"><strong>Consecuencia operativa, y es la única acción proactiva de este expediente:</strong> si este foro migra de infraestructura y mantiene la práctica, <strong>se le puede localizar buscando el prefijo antes de que anuncie la dirección nueva</strong>. Es exactamente lo que la sección <code>X-1</code> <strong>de <code>CTI-2026-058</code></strong> propuso para otro actor.</p>
+<h3 class="rv">O-6.5 Las señales de riesgo de estafa, dichas como lo que son</h3>
+<p class="rv">El sitio presenta <strong>depósito de seguro, promoción de pago, servicio de garante propio y contacto obligatorio por Telegram</strong>. Esa combinación es a la vez el modelo de negocio normal de un foro criminal <strong>y</strong> el patrón clásico de una estafa dirigida a aspirantes a delincuentes.</p>
+<p class="rv"><strong>Este informe no decide cuál de las dos cosas es</strong>, porque decidirlo exigiría entrar, depositar y perder dinero, y <strong>no se ha hecho ni se recomienda hacerlo</strong>. Se consigna porque un analista que vea este dominio en un registro propio debe saber que <strong>la presencia de un usuario de su organización en este foro admite dos lecturas muy distintas</strong>: participación en un mercado criminal, o víctima de un fraude.</p>
+</section>
+<section id="o-5-hipotesis-sobre-el-estado-actual" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Hipótesis sobre el estado actual</h2></div></div>
+<p class="rv"><strong>H-1.</strong> <em>La marca está definitivamente extinta y no volverá.</em> <strong>Muy probable</strong> <em>(80–95 %)</em>. Apoyo: treinta y dos meses sin actividad coherente, infraestructura incautada en diciembre de 2023, administradores desaparecidos con el dinero de sus propios afiliados —lo que destruye la reputación necesaria para reclutar— y tres afiliados condenados. <strong>Una marca de extorsión como servicio vive de la confianza de sus afiliados, y ésta la quemó por completo.</strong></p>
+<p class="rv"><strong>H-2.</strong> <em>Los afiliados se dispersaron a otras marcas y siguen activos.</em> <strong>Probable</strong> <em>(55–80 %)</em>. Apoyo: es lo que ha ocurrido en todos los casos documentados de colapso de un programa, y los vendedores lo afirman. <strong>Pero no se ha verificado ni una sola correspondencia concreta en este informe</strong>, y sin eso la afirmación no es accionable: no dice a quién vigilar (<code>G-3</code>).</p>
+<p class="rv"><strong>H-3.</strong> <em>Alguien reutilizará el nombre.</em> <strong>OBSERVADO el 21-11-2026, ya no es hipótesis</strong> <em>(≥99 %)</em>. El nombre está reutilizado por un <strong>foro criminal de carding y hacking</strong> cuyo dominio se registró ocho meses después del cese (<code>KJ-11</code>, <code>O-6</code>). <strong>Y el resultado confirma la cautela que esta hipótesis anticipaba, por una vía distinta de la prevista:</strong> no es un actor de extorsión con marca heredada, es <strong>otra clase de objeto con el mismo nombre</strong>, que es exactamente el error que <code>CTI-2026-035</code> documentó al encontrar cuatro cosas compartiendo un nombre. <strong>Quien busque «ALPHV» en 2026 encontrará antes este foro que el expediente del grupo extinto.</strong></p>
+<p class="rv"><strong>H-4.</strong> <em>El catálogo seguirá produciendo falsos positivos de actividad.</em> <strong>Muy probable</strong> <em>(80–95 %)</em>. Apoyo: las cinco entradas imposibles siguen ahí hoy, treinta y dos meses después, y nada indica que vayan a corregirse.</p>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2></div>
+<section id="t-1-por-que-este-nivel-es-corto-y-que-contiene" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Por qué este nivel es corto, y qué contiene</h2></div></div>
+<p class="rv">Sin muestras y sin telemetría propia, lo táctico que este informe puede ofrecer no es cómo operaba el cifrador —eso está en los informes de proveedor de 2022 y 2023— sino <strong>lo único táctico que el expediente judicial aporta y que sigue siendo aplicable: la figura del afiliado con posición de confianza</strong>.</p>
+</section>
+<section id="t-2-el-afiliado-con-acceso-legitimo-que-es-lo-que-queda-vigente" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>El afiliado con acceso legítimo, que es lo que queda vigente</h2><p>De todo el expediente, <strong>la pieza que no caduca con la marca</strong> es la que describe el comunicado sobre Martino: un negociador de rescates que <strong>compartía información confidencial de las víctimas con los atacantes para aumentar el rescate pagado</strong>.</p></div></div>
+<p class="rv">Eso no es una técnica de ALPHV. Es una <strong>clase de riesgo del proceso de respuesta a un incidente</strong>, y sobrevive al actor porque el proceso sigue existiendo.</p>
+<p class="rv"><strong>Qué información tiene un negociador de rescates que aumenta el valor de un rescate.</strong> No hace falta especular: es la información que su posición le da por definición.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Información</th><th>Por qué sube el precio si llega al atacante</th></tr></thead><tbody>
+<tr><td>Límite real de autorización de pago</td><td>El atacante sabe hasta dónde puede pedir</td></tr>
+<tr><td>Estado y alcance de las copias de seguridad</td><td>Si no hay recuperación viable, la presión es total</td></tr>
+<tr><td>Cobertura de la póliza de ciberseguro</td><td>Fija un suelo y a menudo un techo del que el atacante no bajará</td></tr>
+<tr><td>Urgencia operativa o regulatoria</td><td>Un plazo legal o un cierre de ejercicio es una palanca</td></tr>
+<tr><td>Disposición interna a pagar</td><td>Convierte la negociación en un trámite</td></tr></tbody></table></div>
+<p class="rv"><strong>Lo que esto implica para quien contrata.</strong> La lista anterior <strong>es exactamente la información que hay que compartir con un negociador para que negocie</strong>. No se puede resolver reteniéndola. Se resuelve de dos maneras, y las dos son organizativas y no técnicas:</p><ol class="rv"><li><strong>Compartimentación del dato más sensible.</strong> El límite de autorización y la cobertura del seguro no necesitan estar en poder del negociador desde el primer minuto: pueden entregarse por tramos, según avance la negociación.</li><li><strong>Separación de proveedores.</strong> Que quien negocia no sea quien responde técnicamente al incidente, y que ninguno de los dos sea quien va a facturar la recuperación. <strong>La concentración de los tres papeles en un proveedor concentra también la oportunidad.</strong></li></ol>
+<div class="note info rv"><div class="t">Y el límite de esta recomendación, dicho con claridad</div><p>El comunicado del Departamento de Justicia <strong>sólo documenta este abuso en uno de los tres condenados y en su papel de negociador</strong>. No se ha establecido en fuente primaria que los otros dos actuaran contra clientes propios (<code>O-4.2</code>). Por tanto <strong>esta sección propone compartimentación y separación de papeles como buena práctica de proceso, no como respuesta a una amenaza cuantificada.</strong> Quien necesite dimensionar el riesgo real de esta figura antes de reorganizar su contratación tiene una brecha de inteligencia delante, no un dato (<code>G-4</code>).</p></div>
+</section>
+<section id="t-3-lo-que-no-se-debe-hacer-con-este-expediente" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Lo que NO se debe hacer con este expediente</h2></div></div><ul class="rv"><li><strong>No construir detección sobre los indicadores técnicos históricos de ALPHV.</strong> Tienen entre tres y cuatro años y pertenecen a una operación extinta. Ocuparían espacio en una consola y no dispararían nunca.</li><li><strong>No tratar el caso judicial como base para desconfiar del sector de respuesta a incidentes en bloque.</strong> Tres personas condenadas no son una tasa, y el comunicado no permite calcular ninguna.</li><li><strong>No citar «1.000 víctimas» y «731 entradas» como si fueran la misma medida.</strong> Son poblaciones distintas (<code>O-1</code>).</li></ul>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<p class="rv"><strong>G-1. No se ha leído ningún documento judicial del caso, sólo el comunicado de prensa.</strong> De ello depende resolver <code>KJ-5</code>: la relación contractual entre los acusados y las víctimas, los empleadores y el número exacto de víctimas extorsionadas con éxito están, si están en algún sitio, en el escrito de acusación y en los documentos de la vista. <strong>Es la brecha más barata de cerrar del expediente</strong> y la que más cambiaría lo que este informe puede afirmar.</p>
+<p class="rv"><strong>G-2. No se sabe qué produjo las cinco entradas con fecha imposible.</strong> Puede ser el enriquecedor, la reclamación original o un formato de fecha ambiguo. El sitio está caído desde 2024, así que la reclamación original es inaccesible. <strong>No afecta a la conclusión</strong> —las cinco se descartan igual— pero sí a saber si el mismo fallo contamina otros actores del catálogo.</p>
+<p class="rv"><strong>G-3. No se ha verificado ni una correspondencia concreta de afiliados dispersados a otras marcas.</strong> Es una afirmación repetida por vendedores que esta cartera no puede sostener ni refutar, y mientras no haya una correspondencia nominal <strong>no es accionable</strong>: no dice a quién vigilar.</p>
+<p class="rv"><strong>G-4. No se puede dimensionar el riesgo de la figura del proveedor de confianza desleal.</strong> Tres condenas no son una tasa. Para que la recomendación de <code>T-2</code> deje de ser buena práctica y pase a ser respuesta proporcionada hace falta saber cuántos casos de este tipo se han documentado, y no se ha buscado sistemáticamente.</p>
+<p class="rv"><strong>G-5. No se ha medido si las 402 entradas sin país difieren sistemáticamente de las 329 etiquetadas.</strong> La hipótesis del sesgo por dominio genérico de <code>E-2.1</code> es razonada y <strong>no está comprobada</strong>. Comprobarla exigiría clasificar los dominios por extensión, que es posible y no se ha hecho.</p>
+<p class="rv"><strong>G-6. No se ha medido la actividad interna real del foro de <code>O-6</code>.</strong> La portada declara 19.106 mensajes y muestra contenido de hace cinco meses. <strong>Resolverlo exigiría crear una cuenta, y no se ha hecho</strong>: el informe se detuvo en la lectura del contenido servido públicamente. Mientras no se mida, no se puede decir si el foro está vivo, en declive o es un escaparate.</p>
+<p class="rv"><strong>G-7. No se ha contrastado el servicio oculto del foro con el histórico de infraestructura del grupo extinto.</strong> Es la única vía que podría establecer —o descartar del todo— una relación de personas entre el foro y la operación, y requiere histórico de DNS y de certificados que este entorno no tiene.</p>
+<p class="rv"><strong>Disparadores de reevaluación.</strong> <code>I-1</code>: <strong>publicación de la sentencia de Angelo Martino</strong>, prevista para el 9 de julio, que cerraría el expediente judicial —y cuyo resultado este informe <strong>no da por conocido</strong>—. <code>I-2</code>: aparición de cualquier reclamación nueva bajo el nombre ALPHV o BlackCat, que activaría <code>H-3</code> y obligaría a tratarla como actor nuevo. — <strong>CUMPLIDO el 21-11-2026 con un resultado distinto del previsto:</strong> el nombre aparece en un <strong>foro criminal</strong> (<code>KJ-11</code>, <code>O-6</code>), no en una reclamación de extorsión. <strong>El disparador se reescribe para la próxima revisión:</strong> lo que hay que vigilar ahora es la aparición de un <strong>sitio de filtración con víctimas listadas</strong> bajo este nombre, que sería lo que este disparador quería detectar y que a día de hoy no existe. <code>I-3</code>: <strong>publicación de los documentos judiciales del caso</strong>, que resolvería <code>G-1</code> y <code>KJ-5</code>. <code>I-4</code>: aparición de una correspondencia nominal verificada entre un afiliado de ALPHV y una marca activa, que cerraría <code>G-3</code>. <code>I-5</code>: que el catálogo corrija las cinco entradas imposibles, lo que indicaría que la fuente revisa su histórico. <code>I-6</code>: confirmación pública por cualquiera de las dos organizaciones chilenas, que convertiría una reclamación en brecha.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores</h2></div></div>
+<h3 class="rv">A.1 — Lo que NO se publica, y por qué</h3>
+<div class="note info rv"><div class="t">Este anexo es deliberadamente pobre, y la pobreza es el mensaje</div><p>Un informe de cierre de una operación extinta <strong>no debe distribuir indicadores técnicos</strong>: los del cifrador de ALPHV tienen tres o cuatro años, la infraestructura está incautada o caída desde 2023-2024, y cargarlos en una consola sólo consume espacio. Lo que sigue es lo único de este expediente con valor operativo hoy.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>Tipo</th><th>Valor</th><th>Contexto</th><th>Confianza</th><th>Caducidad</th><th>Acción permitida</th></tr></thead><tbody>
+<tr><td><code>artefacto</code></td><td><strong>La marca <code>ALPHV</code> / <code>BlackCat</code> / <code>Noberus</code> como atribución</strong></td><td><strong>Extinta desde 2024-03-03.</strong> Una atribución a este nombre en un incidente de 2026 es casi con seguridad un error, una reutilización de nombre (<code>H-3</code>) o un cifrador filtrado reutilizado</td><td><span class="pill p-mint">Alta</span></td><td>Sin caducidad</td><td><strong>Rechazar la atribución y pedir la base.</strong> NUNCA es un indicador de bloqueo</td></tr>
+<tr><td><code>artefacto</code></td><td><strong>Las cinco entradas del catálogo con fecha de ataque posterior a 2024-05-01</strong></td><td>Descubiertas todas el <strong>2023-07-26</strong>: incoherencia interna verificable (<code>O-2.2</code>)</td><td><strong>Alta: medición propia</strong></td><td>Sin caducidad</td><td><strong>Descartar como evidencia de actividad.</strong> No bloquear nada</td></tr>
+<tr><td><code>pattern</code></td><td><strong>Comprobación <code>fecha_de_ataque &gt; fecha_de_descubrimiento</code></strong></td><td><strong>El correctivo reutilizable del expediente.</strong> Aplicable a cualquier actor de cualquier catálogo, sin saber nada del actor</td><td><strong>Alta como método</strong></td><td>Sin caducidad</td><td><strong>Aplicar antes de citar cualquier «última actividad»</strong></td></tr>
+<tr><td><code>pattern</code></td><td><strong>Información de negociación de rescate en poder de un tercero: límite de autorización, estado de copias, cobertura de póliza</strong></td><td><code>T-2</code>. <strong>La única pieza del expediente que no caduca con la marca</strong>, porque describe el proceso y no al actor</td><td><strong>Moderada como control</strong></td><td>Sin caducidad</td><td><strong>Compartimentar por tramos y separar papeles de proveedor</strong></td></tr></tbody></table></div>
+<h3 class="rv">A.2 — Victimología, con sus dos bases de conteo</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="cartera 731 entradas · última coherente 2024-03-03 medición propia del 2026-11-21. no confundir con las «más de 1.000 víctimas» del doj, que es otra población (o-1) · alta como recuento · — análisis"><span class="ty">cartera</span><span class="vv">731 entradas · última coherente 2024-03-03<em>Medición propia del 2026-11-21. No confundir con las «más de 1.000 víctimas» del DOJ, que es otra población (O-1) · Alta como recuento · —</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera 402 de 731 sin país (55,0 %) la limitación central del expediente (kj-2). invalida toda proporción geográfica · alta como recuento · — declarar la base de conteo en toda cita"><span class="ty">cartera</span><span class="vv">402 de 731 sin país (55,0 %)<em>La limitación central del expediente (KJ-2). Invalida toda proporción geográfica · Alta como recuento · —</em></span><span class="pill p-mint">Declarar la base de conteo en toda cita</span></div>
+<div class="ioc-row" data-s="cartera 32 entradas latam: 4,4 % del total · 9,7 % de las etiquetadas las dos cifras son correctas y difieren en más del doble · alta como recuento · — citar con la base explícita"><span class="ty">cartera</span><span class="vv">32 entradas LATAM: 4,4 % del total · 9,7 % de las etiquetadas<em>Las dos cifras son correctas y difieren en más del doble · Alta como recuento · —</em></span><span class="pill p-mint">Citar con la base explícita</span></div>
+<div class="ioc-row" data-s="cartera 2 víctimas chilenas, 2023-04-02 y 2023-04-21 las dos con dominio, ninguna con prensa, ninguna confirmada (kj-3) · moderada: país derivado · — comprobación del propio dominio por la organización afectada"><span class="ty">cartera</span><span class="vv">2 víctimas chilenas, 2023-04-02 y 2023-04-21<em>Las dos con dominio, ninguna con prensa, ninguna confirmada (KJ-3) · Moderada: país derivado · —</em></span><span class="pill p-mint">Comprobación del propio dominio por la organización afectada</span></div>
+<div class="ioc-row" data-s="cartera brasil 11 · méxico 7 · colombia 4 · argentina 2 · chile 2 · ecuador 2 · rep. dominicana 2 · guatemala 1 · panamá 1 · venezuela 1 reparto regional de las entradas etiquetadas · alta como recuento · — análisis"><span class="ty">cartera</span><span class="vv">Brasil 11 · México 7 · Colombia 4 · Argentina 2 · Chile 2 · Ecuador 2 · Rep. Dominicana 2 · Guatemala 1 · Panamá 1 · Venezuela 1<em>Reparto regional de las entradas etiquetadas · Alta como recuento · —</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="cartera rescate 0,0 % · tamaño de datos 0,0 % · prensa 5,7 % toda cifra económica sobre este actor viene de fuera del catálogo (kj-8) · alta como recuento · — no citar cifras económicas con esta fuente"><span class="ty">cartera</span><span class="vv">Rescate 0,0 % · tamaño de datos 0,0 % · prensa 5,7 %<em>Toda cifra económica sobre este actor viene de fuera del catálogo (KJ-8) · Alta como recuento · —</em></span><span class="pill p-mint">No citar cifras económicas con esta fuente</span></div></div>
+<h3 class="rv">A.3 — Del expediente judicial</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="artefacto reparto 20 % administradores / 80 % afiliado confirmado en sentencia. patrón de medida para valorar lo que otros programas prometen (kj-6, e-3) · alta: fuente primaria · sin caducidad análisis y contraste"><span class="ty">artefacto</span><span class="vv">Reparto 20 % administradores / 80 % afiliado<em>Confirmado en sentencia. Patrón de medida para valorar lo que otros programas prometen (KJ-6, E-3) · Alta: fuente primaria · Sin caducidad</em></span><span class="pill p-mint">Análisis y contraste</span></div>
+<div class="ioc-row" data-s="artefacto ≈ 1,2 m usd en bitcoin, un solo rescate la única cifra económica con respaldo judicial del expediente · alta: fuente primaria · sin caducidad análisis"><span class="ty">artefacto</span><span class="vv">≈ 1,2 M USD en bitcoin, un solo rescate<em>La única cifra económica con respaldo judicial del expediente · Alta: fuente primaria · Sin caducidad</em></span><span class="pill p-mint">Análisis</span></div>
+<div class="ioc-row" data-s="artefacto periodo de actividad de los tres afiliados: abril–diciembre de 2023 comunicado 26-431 · alta: fuente primaria · sin caducidad delimitación temporal para búsqueda retrospectiva"><span class="ty">artefacto</span><span class="vv">Periodo de actividad de los tres afiliados: abril–diciembre de 2023<em>Comunicado 26-431 · Alta: fuente primaria · Sin caducidad</em></span><span class="pill p-mint">Delimitación temporal para búsqueda retrospectiva</span></div>
+<div class="ioc-row" data-s="artefacto lo que el comunicado no dice: empleadores, cargos, relación contractual con las víctimas kj-5, o-4.2. si se cita, atribuir a prensa y no al doj · alta: ausencia verificada por lectura directa · hasta que se publiquen los documentos del caso (i-3) corregir la atribución en cualquier cita propia"><span class="ty">artefacto</span><span class="vv">Lo que el comunicado NO dice: empleadores, cargos, relación contractual con las víctimas<em>KJ-5, O-4.2. Si se cita, atribuir a prensa y no al DOJ · Alta: ausencia verificada por lectura directa · Hasta que se publiquen los documentos del caso (I-3)</em></span><span class="pill p-mint">Corregir la atribución en cualquier cita propia</span></div></div>
+<h3 class="rv">A.4 — El foro que usa el nombre, y por qué su acción permitida no es «bloqueo»</h3>
+<div class="note info rv"><div class="t">Por qué los dominios llevan tipo <code>artefacto</code> y no <code>domain</code></div><p>Porque <code>domain</code> los metería en el agregado plano <code>ioc_url.txt</code>, que esta cartera distribuye como lista ingerible, y <strong>la acción permitida de estas filas no es el bloqueo</strong>. Con tipo <code>artefacto</code> quedan en el índice contextual con su explicación y no llegan a ninguna lista. Se comprobó empíricamente tras construir, y la primera versión de esta tabla <strong>tenía esa incoherencia</strong>: decía «no bloquear» en la columna de acción y el tipo los enviaba al agregado de todos modos.</p><p><strong>Lectura obligada antes de usar esta tabla.</strong> Estos valores son de un <strong>foro criminal</strong>, no de infraestructura de ataque. No son mando y control, no sirven carga útil y no atacan a nadie. <strong>Una organización que los bloquee no se protege de ninguna intrusión</strong>; lo único que consigue es impedir que alguien de su red llegue al sitio, que puede ser deseable por política y <strong>no es una contramedida de seguridad</strong>. La distinción importa porque meter esto en una lista de indicadores de compromiso produce alertas que nadie sabrá interpretar.</p></div>
+<div class="tw rv"><table><thead>
+<tr><th>Tipo</th><th>Valor</th><th>Contexto</th><th>Confianza</th><th>Caducidad</th><th>Acción permitida</th></tr></thead><tbody>
+<tr><td><code>artefacto</code></td><td><code>alphv.pro</code></td><td><strong>Foro criminal en ruso</strong> con secciones de carding y hacking, garante y depósito. Revisado el 2026-11-21</td><td><strong>Alta: lectura propia</strong></td><td>90 días</td><td><strong>Vigilancia.</strong> Bloqueo defendible <strong>por política de uso</strong>, nunca como contramedida de intrusión</td></tr>
+<tr><td><code>artefacto</code></td><td><code>alphv.io</code></td><td>Segundo dominio declarado por el propio foro. <strong>Creado el 2024-11-02, ocho meses después del cese de la operación</strong>; actualizado el 2026-11-19</td><td><strong>Alta: <code>whois</code></strong></td><td>90 días</td><td><strong>Vigilancia.</strong> Igual salvedad</td></tr>
+<tr><td><code>artefacto</code></td><td><code>oplotflow.net</code></td><td><strong>Servidores de nombres de <code>alphv.io</code>.</strong> Dominio creado el <strong>2026-11-10</strong>, registrador Spaceship, Inc. <strong>Es el dato que fecha el mantenimiento activo</strong></td><td><strong>Alta: <code>whois</code></strong></td><td>90 días</td><td><strong>Vigilancia.</strong> NO bloquear: es infraestructura DNS y el bloqueo tendría alcance imprevisible</td></tr>
+<tr><td><code>artefacto</code></td><td><strong>Servicio oculto con prefijo legible <code>alphvi</code></strong></td><td><code>O-6.4</code>. <strong>La única vigilancia proactiva del expediente</strong>: permite localizar reaparición antes del anuncio</td><td><strong>Alta como método</strong></td><td>Hasta que aparezca una dirección suya sin prefijo</td><td><strong>Búsqueda proactiva por patrón</strong></td></tr>
+<tr><td><code>artefacto</code></td><td><strong><code>alphv.io</code> registrado 8 meses después del cese</strong></td><td><strong>El argumento de atribución del expediente</strong> (<code>KJ-11</code>): un dominio posterior al cese no es infraestructura de la operación</td><td><strong>Alta: verificable por cualquiera</strong></td><td>Sin caducidad</td><td><strong>Refutar toda afirmación de que «ALPHV sigue activo»</strong></td></tr>
+<tr><td><code>pattern</code></td><td><strong>Depósito de seguro · promoción de pago · garante propio · contacto obligatorio por Telegram</strong></td><td><code>O-6.5</code>. Modelo de negocio de foro criminal <strong>y</strong> patrón clásico de estafa a aspirantes. <strong>Indistinguibles sin depositar</strong></td><td><span class="pill p-sky">Moderada</span></td><td>Sin caducidad</td><td><strong>Alerta de doble lectura:</strong> un usuario propio en este foro puede ser partícipe o víctima</td></tr>
+<tr><td><code>artefacto</code></td><td><strong>Ausencia de sitio de filtración, de víctimas listadas y de negociación</strong></td><td><strong>Lo que prueba que no es una operación de extorsión</strong> sino un mercado (<code>O-6.2</code>)</td><td><strong>Alta: lectura propia</strong></td><td>90 días</td><td><strong>Clasificar como mercado, no como operación</strong></td></tr></tbody></table></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Fuente</th><th>Naturaleza</th><th>Fiabilidad</th><th>Credibilidad</th><th>Uso en este informe</th></tr></thead><tbody>
+<tr><td>1</td><td><strong>Comunicado 26-431, Departamento de Justicia de EE. UU., 2026-04-30</strong>, leído en original</td><td><strong>Primaria oficial</strong></td><td><span class="pill p-mint">A</span></td><td><strong>1</strong></td><td><strong>Base de <code>KJ-4</code>, <code>KJ-5</code>, <code>KJ-6</code>, <code>KJ-7</code> y de todo §O-4.</strong> La fuente de más autoridad del expediente</td></tr>
+<tr><td>2</td><td><strong>Catálogo público de reclamaciones de extorsión</strong>, consultado el 2026-11-21</td><td>Agregador de terceros</td><td><span class="pill p-amber">C</span></td><td><strong>3</strong></td><td><strong>Medición propia</strong> de <code>KJ-1</code>, <code>KJ-2</code>, <code>KJ-3</code>, <code>KJ-8</code>, <code>KJ-9</code>. Su enriquecimiento de país se usa con la salvedad de <code>E-2.1</code></td></tr>
+<tr><td>3</td><td>Prensa especializada sobre el caso judicial</td><td>Secundaria</td><td><span class="pill p-amber">C</span></td><td><strong>3</strong></td><td><strong>Consignada y NO usada como base de ningún juicio.</strong> Es el origen de los empleadores y de la relación cliente-proveedor (<code>KJ-5</code>)</td></tr>
+<tr><td>4</td><td>Informes de vendedor sobre la salida fraudulenta de 2024</td><td>Secundaria comercial</td><td><span class="pill p-amber">C</span></td><td><strong>3</strong></td><td>Consignada como plausible no verificada en <code>O-3.2</code>. Ningún juicio se apoya en ella</td></tr>
+<tr><td>5</td><td>Informes de vendedor sobre el cifrador, 2022–2023</td><td>Secundaria comercial</td><td>—</td><td>—</td><td><strong>No consultados ni citados.</strong> Ver §3.4: este informe no hace nivel técnico</td></tr>
+<tr><td>6</td><td><strong>Lectura propia de <code>https://alphv.pro</code></strong>, 2026-11-21, más consultas <code>whois</code> de <code>alphv.io</code> y <code>oplotflow.net</code></td><td><strong>Observación directa</strong> de contenido servido públicamente</td><td><span class="pill p-sky">B</span></td><td><strong>2</strong></td><td><strong>Base de <code>KJ-11</code> y de todo §O-6.</strong> Se leyó sólo el contenido público: <strong>no se creó cuenta, no se envió ningún formulario y no se descargó nada</strong> (<code>G-6</code>)</td></tr></tbody></table></div>
+<div class="note info rv"><div class="t">Nota sobre la fuente 3, que es la que exige explicación</div><p>La cobertura de prensa de este caso es abundante, coherente entre medios y verosímil, y aporta datos —los empleadores, los cargos, la relación con las víctimas— que el comunicado oficial no contiene. <strong>No se ha usado como base de ningún juicio</strong> no porque se la considere falsa, sino porque la convención de esta cartera es que <strong>un informe derivado no supera la confianza declarada por su origen</strong>, y aquí el origen de esos datos concretos no es público ni identificable desde las notas. Se consigna con precisión qué parte viene de dónde para que quien decida sobre esta base sepa sobre qué pisa.</p></div>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<p class="rv">Se emplea el léxico de la directiva ICD 203. <strong>Probabilidad</strong> —casi con certeza ≥99 %, muy probable 80–95 %, probable 55–80 %, aproximadamente igual de probable 45–55 %, improbable 20–45 %, muy improbable 5–20 %, casi con certeza no ≤5 %— es la estimación sobre el mundo. <strong>Confianza</strong> —alta, moderada, baja— es la solidez de la base sobre la que se estima. <strong>Las dos son independientes</strong>, y este informe tiene varios juicios de probabilidad casi cierta con confianza alta porque son recuentos propios, y uno de probabilidad media con confianza baja porque es interpretación de una curva.</p>
+</section>
+<section id="anexo-d-como-leer-el-catalogo-de-una-marca-extinta-sin-inventar-actividad" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Cómo leer el catálogo de una marca extinta sin inventar actividad</h2><p>El método que este informe tuvo que improvisar, generalizado. <strong>Cinco comprobaciones, en orden de coste creciente, y las tres primeras son diez minutos.</strong></p></div></div>
+<p class="rv"><strong>1 · Restar las dos fechas de cada entrada.</strong> Si la fecha de ataque declarada es <strong>posterior</strong> a la fecha en que el rastreador descubrió la entrada, <strong>la entrada es incoherente</strong> y no sirve como evidencia de actividad. Es el primero de los ocho correctivos de <code>CTI-2026-054</code> y aquí eliminó quince meses de actividad fantasma con cinco entradas. <strong>No requiere saber nada del actor.</strong></p>
+<p class="rv"><strong>2 · Mirar la forma del último año, desglosada por meses.</strong> Un total anual bajo puede ser un declive —reparto uniforme— o un corte —todo concentrado al principio—. Aquí 62 entradas en 2024 parecían declive y eran corte: 57 de enero y febrero. <strong>La diferencia cambia la hipótesis</strong>: el declive sugiere desgaste interno, el corte sugiere un suceso externo con fecha.</p>
+<p class="rv"><strong>3 · Medir la cobertura de los campos antes de preguntarles algo.</strong> Un catálogo con 0 % de cobertura de rescate no puede responder preguntas económicas, y uno con 45 % de cobertura de país no puede dar proporciones geográficas. <strong>Medir la cobertura cuesta una consulta y evita publicar una cifra inventada.</strong></p>
+<p class="rv"><strong>4 · No convertir recuentos en proporciones cuando falta más de un tercio de un campo.</strong> Y si se hace, <strong>dar las dos cifras y decir qué divide cada una</strong>. La tentación es dividir sólo por lo etiquetado, lo que supone que los huecos se reparten como el resto: hay que justificar ese supuesto o renunciar a la proporción.</p>
+<p class="rv"><strong>5 · Buscar la fuente primaria del cierre, no la cobertura del cierre.</strong> Una operación extinta suele tener un suceso terminal documentado —una incautación, un procesamiento, una desarticulación—. <strong>Leer ese documento en original es lo que distingue un informe de cierre de un resumen de prensa</strong>, y en este caso produjo el hallazgo de <code>KJ-5</code>.</p>
+<div class="note info rv"><div class="t">Y la regla que engloba las cinco:</div><p>una marca extinta <strong>no deja de generar datos</strong>. Deja de generar actividad. Los catálogos siguen devolviendo sus entradas, sin aviso de que la operación terminó, y los productos derivados que no apliquen el punto 1 la presentarán como activa. <strong>El riesgo de una marca muerta no es que ataque: es que contamine la atribución de los vivos.</strong></p></div>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Marco</th><th>Uso</th></tr></thead><tbody>
+<tr><td><strong>ICD 203</strong></td><td>Léxico de probabilidad y confianza de todos los juicios (<code>Anexo C</code>)</td></tr>
+<tr><td><strong>Escala de fiabilidad y credibilidad de fuentes</strong></td><td>Valoración del <code>Anexo B</code>, con la nota explícita sobre la fuente 3</td></tr>
+<tr><td><strong><code>Anexo D</code> de <code>CTI-2026-054</code></strong></td><td>Los ocho correctivos para citar un rastreador. El primero es la base de <code>KJ-1</code></td></tr>
+<tr><td><strong><code>Anexo D</code> de <code>CTI-2026-048</code></strong></td><td>Escala de prueba de ocho niveles. Usada para calificar el 93,8 % de capturas de pantalla como prueba de nivel 3</td></tr>
+<tr><td><strong><code>Anexo D</code> de <code>CTI-2026-042</code></strong></td><td>Triaje de actor. No se aplica: el actor no es nuevo, es extinto</td></tr>
+<tr><td><strong><code>CTI-2026-015</code></strong></td><td>Referencia de prioridad chilena con la que se contextualizan las dos víctimas de <code>KJ-3</code></td></tr></tbody></table></div>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2><p><strong>Para que una organización compruebe si fue una de las dos víctimas chilenas, sin que este informe publique ningún nombre:</strong></p></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>1. Consultar el catálogo por grupo:
+   GET https://api.ransomware.live/v2/groupvictims/alphv
+   (cabecera User-Agent propia; cortesía con un servicio gratuito de tercero)
+
+2. Filtrar por el dominio PROPIO de la organización, sobre el campo `domain`.
+
+3. Si hay coincidencia, los campos útiles son:
+   `attackdate`   — fecha de ataque declarada por el adversario
+   `discovered`   — cuándo lo vio el rastreador
+   `screenshot`   — si hay captura (93,8 % de las entradas la tiene)
+   `claim_url`    — la reclamación original, HOY INACCESIBLE: el sitio está caído
+
+4. Comprobación de coherencia OBLIGATORIA antes de dar crédito a la fecha:
+   si `attackdate` &gt; `discovered`, la fecha de ataque es artefacto (§O-2.2).
+
+5. Lo que una coincidencia significa y lo que no:
+   significa que el adversario RECLAMÓ esa organización en abril de 2023.
+   NO significa que hubiera brecha, ni que los datos se publicaran,
+   ni que siga habiendo exposición. Ninguna de las dos chilenas
+   tiene referencia de prensa, y ninguna confirmó nada públicamente.</code></pre></div>
+<p class="rv"><strong>Y la comprobación reutilizable de <code>Anexo D</code>, punto 1</strong>, aplicable a cualquier actor:</p>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code>incoherentes = [e for e in entradas
+                if e[&#x27;attackdate&#x27;][:10] &gt; e[&#x27;discovered&#x27;][:10]]
+# Si la lista no está vacía, NINGUNA de esas entradas sirve para
+# fechar la última actividad del actor.</code></pre></div>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Qué cambió</th><th>Qué juicio se movió</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-21</td><td>Emisión inicial. Informe de cierre de una operación extinta, con dos hallazgos propios: <strong>las cinco entradas con fecha de ataque posterior a su propia fecha de descubrimiento</strong>, que desplazan la última actividad de junio de 2025 a marzo de 2024 (<code>KJ-1</code>); y <strong>la discrepancia entre el comunicado del Departamento de Justicia y la narrativa del sector</strong> sobre el caso de los tres afiliados, que no nombra empleadores ni afirma relación cliente-proveedor (<code>KJ-5</code>). Incluye la medición de cobertura que invalida toda proporción geográfica del actor (<code>KJ-2</code>), el expediente chileno cerrado de dos reclamaciones (<code>KJ-3</code>), el reparto 20/80 documentado judicialmente (<code>KJ-6</code>), el apoyo policial mexicano en la captura (<code>KJ-7</code>), y el <code>Anexo D</code> con las cinco comprobaciones para leer el catálogo de una marca extinta. <strong>Incluye además la revisión del foro <code>alphv.pro</code></strong> (<code>KJ-11</code>, <code>O-6</code>), pedida por el consumidor durante la redacción: un foro criminal en ruso que usa la marca y cuyo dominio se registró <strong>ocho meses después del cese</strong>, lo que convierte <code>H-3</code> de hipótesis en observación y cumple el disparador <code>I-2</code> con un resultado distinto del previsto</td><td>—</td></tr></tbody></table></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2></div></div>
+<p class="rv">Este informe se corrige si se recibe: <strong>los documentos judiciales del caso</strong>, que resolverían <code>KJ-5</code> y <code>G-1</code> y podrían confirmar la narrativa que hoy sólo sostiene la prensa; la <strong>sentencia de Angelo Martino</strong> (<code>I-1</code>), que este informe deja expresamente como desconocida; cualquier <strong>reclamación nueva bajo el nombre</strong> (<code>I-2</code>); una <strong>correspondencia nominal verificada</strong> de un afiliado con una marca activa (<code>G-3</code>); una medición que <strong>confirme o refute el sesgo por dominio genérico</strong> de <code>E-2.1</code> (<code>G-5</code>); o <strong>confirmación pública de cualquiera de las dos organizaciones chilenas</strong> (<code>I-6</code>).</p>
+<p class="rv"><strong>Y una petición concreta a quien use este expediente:</strong> si cita el caso judicial en un producto propio, <strong>compruebe la atribución</strong>. La diferencia entre «el Departamento de Justicia estableció que atacaron a sus clientes» y «la prensa especializada informa de que atacaron a sus clientes» es la diferencia entre un hecho probado y una afirmación verosímil, y este informe existe en parte para que esa distinción no se pierda.</p>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-062 · v1.0 · 2026-11-21</strong> · caduca 2026-12-21</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Informe de cierre: la marca está extinta desde marzo de 2024 y este expediente documenta su final, no una amenaza vigente. Contiene dos hallazgos propios que afectan a cómo se cita este actor: el catálogo de la fuente <strong>parece registrar actividad hasta junio de 2025 y no la hubo</strong> —cinco entradas llevan fecha de ataque posterior a su propia fecha de descubrimiento—, y <strong>el comunicado del Departamento de Justicia no sostiene la versión que circula en el sector</strong> sobre el caso de sus tres afiliados condenados. No se reproduce ningún nombre ni dominio de víctima. Sí se citan los nombres de los condenados, por ser registro judicial público. Difusión libre conservando la atribución y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

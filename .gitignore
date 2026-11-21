@@ -16,3 +16,7 @@ __pycache__/
 # que se vio cada día— pero el JSON no: pesa ~55 KB por jornada, sólo lo consume
 # la skill el mismo día, y un año de ellos serían 20 MB sin valor histórico.
 vigilancia/parte-*.json
+
+# Caché de la compuerta de enriquecimiento (tools/cti_enriquecer.py): son
+# respuestas de terceros con un día de vida útil, no inteligencia propia.
+vigilancia/.cache-enriquecimiento.json

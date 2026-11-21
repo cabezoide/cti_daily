@@ -45,7 +45,6 @@ blogwhereyou.com
 bossmaya.xyz
 brasilmotorsvs14.com
 bravecup.com
-buildersemp.sharepoint.com
 camarasdeseguridad202420242024.duckdns.org
 carlosmendoza504070.duckdns.org
 cathaypacifice.com
@@ -62,7 +61,6 @@ comina998.ddns-ip.net
 connect-microsoft.com
 contabilidad.icu
 cort.as
-cskautogo.sharepoint.com
 culappkcuogv2omb37253e236mvmsfzvl4yw3p3incyzeoixhc6ocxqd.onion
 d16ss6sn-80.euw.devtunnels.ms
 d77tnb4bkmj3e366msrzllnwsi2t5e54e4yqh7zm7y5hlfwugnwzswad.onion
@@ -256,9 +254,6 @@ newremco.duckdns.org
 newstaticfreepoint24.ddns-ip.net
 nginxmysql.com
 nxetaioe4eelwhdwagi3ikv6ee6tttwvnqikalgkrslz7bwvuwqzdeqd.onion
-oast.fun
-oast.pro
-oast.site
 offerup.report
 onechoice.gleeze.com
 ophibre.com

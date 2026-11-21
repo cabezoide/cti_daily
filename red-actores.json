@@ -2877,6 +2877,56 @@
    "r": "CTI-2026-054",
    "d": "Agregador con 409 830 CVE con EPSS y estado de explotación, y 2,3 millones de indicadores de señuelos propios. Sus fichas de actor se contradicen consigo mismas en seis de seis casos comprobados.",
    "a": "-"
+  },
+  {
+   "id": "alphv",
+   "l": "ALPHV · BlackCat · Noberus",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-062",
+   "d": "Operación de extorsión como servicio extinta desde marzo de 2024. Catálogo de 731 entradas, dos chilenas de abril de 2023, y cinco entradas cuya fecha de ataque es posterior a su propia fecha de descubrimiento.",
+   "a": "-",
+   "af": "Medición propia del catálogo el 21-11-2026 y comunicado 26-431 del Departamento de Justicia de EE. UU. del 30-04-2026, que declara al menos 600 víctimas desde agosto de 2024."
+  },
+  {
+   "id": "reparto2080",
+   "l": "Reparto 20/80 en programa de afiliados",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-062",
+   "d": "Comisión del 20 % para los administradores y 80 % para el afiliado, confirmada en sentencia. Sirve de patrón de medida para valorar lo que otros programas prometen al reclutar.",
+   "a": "-",
+   "af": "Comunicado 26-431: los tres afiliados acordaron pagar a los administradores el 20 % de los rescates y se repartieron el 80 % de uno de 1,2 millones de dólares entre tres."
+  },
+  {
+   "id": "afiliadoconfianza",
+   "l": "Afiliado con posición de confianza en la respuesta",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-062",
+   "d": "Negociador de rescates que entrega información confidencial de la víctima al atacante para elevar el precio. Sobrevive a la marca porque describe el proceso de respuesta y no al actor.",
+   "a": "-",
+   "af": "Comunicado 26-431: uno de los tres condenados abusó de su papel de negociador para víctimas compartiendo información confidencial con los actores de la amenaza."
+  },
+  {
+   "id": "jackskid",
+   "l": "Jackskid · RCtea",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "Red de bots de DDoS para Linux e IoT derivada de Mirai, catalogada en Malpedia como elf.jackskid. ThreatFox le atribuye las diecisiete direcciones de mando y control que esta cartera mide como Liso, con confianza declarada de 100.",
+   "a": "proveedor",
+   "af": "Analizada por Nokia Deepfield ERT y Comcast CTRL el 24-03-2026 sobre más de ochenta muestras. NO se declara alias de Liso: su literatura no menciona ese nombre ni su victimología brasileña."
+  },
+  {
+   "id": "valorpordefecto",
+   "l": "Valor por defecto como huella del operador",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "El constructor de la familia usa 0xffff como valor por defecto de los parámetros de ataque, que en destino se observa como puerto 65535. Lo que un operador podría ajustar y no ajusta identifica su forma de trabajar.",
+   "a": "oficial",
+   "af": "Triple apoyo independiente: razonamiento por eliminación en la versión 1.0, el campo port_source de la telemetría en 4.489 de 4.489 apariciones, y el análisis de binario publicado por Deepfield."
   }
  ],
  "aristas": [
@@ -5302,6 +5352,54 @@
    "ctiwatch",
    "cve202328252",
    "suministra",
+   "propio"
+  ],
+  [
+   "alphv",
+   "raas",
+   "usa",
+   "oficial"
+  ],
+  [
+   "alphv",
+   "reparto2080",
+   "usa",
+   "oficial"
+  ],
+  [
+   "alphv",
+   "afiliadoconfianza",
+   "usa",
+   "oficial"
+  ],
+  [
+   "reparto2080",
+   "raas",
+   "deriva",
+   "oficial"
+  ],
+  [
+   "liso",
+   "jackskid",
+   "solapa",
+   "inferido"
+  ],
+  [
+   "jackskid",
+   "valorpordefecto",
+   "usa",
+   "proveedor"
+  ],
+  [
+   "liso",
+   "valorpordefecto",
+   "usa",
+   "propio"
+  ],
+  [
+   "puerto65535",
+   "valorpordefecto",
+   "deriva",
    "propio"
   ]
  ],

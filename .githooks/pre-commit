@@ -1,19 +1,68 @@
 #!/bin/sh
-# cti_daily — mantiene los artefactos derivados al día en cada commit.
+# cti_daily — compuerta obligatoria y, si pasa, artefactos derivados al día.
 #
-# Regenera HTML, índice del README y agregados de IOC, y añade al commit lo que
-# haya cambiado. Si falla, el commit se detiene: es preferible un commit
-# bloqueado a un índice que miente sobre su propio contenido.
+# Dos pasos, en este orden y no en el otro:
+#
+#   1. `cti_gate.py` JUZGA. Si bloquea, el commit no sale.
+#   2. `cti_build.py` CONSTRUYE, y añade al commit lo que haya cambiado.
+#
+# El orden importa: construir primero y juzgar después deja artefactos
+# derivados de un informe que la compuerta va a rechazar, y entonces el árbol
+# queda a medias. Se juzga antes de tocar nada.
+#
+# La compuerta mira **sólo los informes que el commit modifica**. Auditar la
+# cartera entera en cada commit produce cuarenta bloqueos heredados de
+# convenciones posteriores a los informes antiguos, y una compuerta que
+# bloquea siempre se omite siempre. Para la auditoría completa:
+#
+#     python3 tools/cti_gate.py --todo --avisos
 
 set -e
 RAIZ="$(git rev-parse --show-toplevel)"
 cd "$RAIZ"
 
 if ! command -v python3 >/dev/null 2>&1; then
-    echo "pre-commit: no encuentro python3; omito la construcción." >&2
+    echo "pre-commit: no encuentro python3; omito compuerta y construcción." >&2
     exit 0
 fi
 
+# ── 1 · la compuerta
+if [ -n "$CTI_GATE_OMITIR" ]; then
+    # Una omisión silenciosa no es una compuerta. Queda escrita.
+    echo "pre-commit: ⚠ CTI_GATE_OMITIR activo — compuerta OMITIDA a petición." >&2
+    echo "pre-commit: ⚠ se publica sin comprobar consistencia, veracidad ni" >&2
+    echo "pre-commit: ⚠ atribución de fuentes. Queda constancia en esta salida." >&2
+else
+    if ! python3 tools/cti_gate.py; then
+        echo "" >&2
+        echo "pre-commit: la compuerta ha BLOQUEADO el commit." >&2
+        echo "pre-commit: corrige lo anterior, o si hay una razón para publicar" >&2
+        echo "pre-commit: así, dila en voz alta:" >&2
+        echo "" >&2
+        echo "    CTI_GATE_OMITIR=1 git commit …" >&2
+        echo "" >&2
+        exit 1
+    fi
+fi
+
+# ── 2 · la compuerta de enriquecimiento, que NUNCA bloquea
+#
+# Depende de la red y de cuotas de terceros, así que no puede detener un
+# commit: si VirusTotal agota su cuota o no hay red, el informe no ha empeorado.
+# Informa y sigue. Para que bloquee a propósito hay que pedirlo a mano:
+#
+#     python3 tools/cti_enriquecer.py --estricto
+#
+# Se omite si no hay ninguna clave configurada, para no imprimir ruido en
+# máquinas donde no se ha preparado `~/.config/cti/claves.env`.
+if [ -z "$CTI_SIN_ENRIQUECER" ] && \
+   { [ -n "$CTI_THREATFOX_KEY" ] || [ -f "$HOME/.config/cti/claves.env" ]; }; then
+    python3 tools/cti_enriquecer.py 2>/dev/null || \
+        echo "pre-commit: la compuerta de enriquecimiento no pudo completarse;" \
+             "no bloquea." >&2
+fi
+
+# ── 3 · los artefactos derivados
 python3 tools/cti_build.py
 
 for f in README.md index.html red-actores-3d.html ioc_ipv4.txt ioc_ipv6.txt ioc_url.txt ioc_hash.txt ioc_index.csv; do

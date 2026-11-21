@@ -2,15 +2,15 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-058"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de operación de extorsión"
-foco_regional: "Alemania 29 % · Chile 1 víctima · México 4"
+foco_regional: "Alemania 29 % · Chile 1 víctima · México 4 · **Sudamérica declarada por AA26-293A**"
 niveles: ["Estratégico", "Operacional", "Técnico"]
 autor: "Célula CTI"
 actor: "safepay · SafePay"
 fecha: "2026-11-19"
 caduca: "2026-12-19"
-distribucion: "El actor más regular del lote, con la única víctima chilena de los seis, y con toda su infraestructura caída al cierre de este informe. Contiene una advertencia operativa: el perfil declarado por el proveedor incluye un interruptor de idioma que, si fuera cierto, haría ineficaz una contramedida que algunos equipos han adoptado. No se reproduce ningún nombre ni dominio de víctima. Difusión libre conservando la atribución y las salvedades de §3."
+distribucion: "El actor más regular del lote, con la única víctima chilena de los seis. **La versión 1.1 incorpora el aviso conjunto AA26-293A de seis agencias (20-10-2026), que el informe inicial no conocía, y corrige el recuento de días de silencio de `KJ-4`.** Contiene además un hallazgo de higiene de indicadores propio: **cuatro de las nueve direcciones IP del aviso pertenecen a Cloudflare, GitHub y Google**, y una quinta a un conjunto de acceso residencial, de modo que una ingesta ciega del aviso bloquearía servicios legítimos de uso masivo (`A.4`, `X-4`). Contiene una advertencia operativa: el perfil declarado por el proveedor incluye un interruptor de idioma que, si fuera cierto, haría ineficaz una contramedida que algunos equipos han adoptado. No se reproduce ningún nombre ni dominio de víctima. Difusión libre conservando la atribución y las salvedades de §3."
 ---
 
 # INFORME DE CIBERINTELIGENCIA — CTI-2026-058
@@ -53,11 +53,17 @@ distribucion: "El actor más regular del lote, con la única víctima chilena de
 
 **KJ-3.** **Es el actor más regular de los seis: veintinueve días de actividad repartidos en seis meses, con mediana de tres entradas por día y un máximo de diez.** No tiene tandas: `krybit` publicó 45 entradas en un día y `Storm` 73 en su primero, mientras éste nunca pasa de diez. Y su retraso mediano entre la fecha declarada y la de descubrimiento es de **0,0 días**. Valoramos **casi con certeza** *(≥99 %)* las mediciones. **Confianza: alta.** *Consecuencia:* el patrón es el de una operación con **flujo continuo de víctimas y publicación inmediata**, no de acumulación y volcado — y eso significa que **no hay ventana de semanas entre compromiso y publicación**, al contrario que en `CTI-2026-057` (`O-3`).
 
-**KJ-4.** **Y al cierre de este informe sus cinco sitios están caídos y lleva doce días sin publicar.** Ninguna de las cinco direcciones registradas responde al 19 de noviembre de 2026, y la última entrada es del 7 de noviembre. Valoramos **posible** *(40–60 %)* que la operación haya cesado, **posible** *(40–60 %)* que esté migrando infraestructura, y **improbable** *(20–45 %)* que sea una interrupción rutinaria —porque un actor que publicaba cada pocos días con regularidad de reloj se ha detenido en seco—. **Confianza: baja para la interpretación, alta para la observación.** *Consecuencia:* **es el juicio que más rápido caduca de todo el lote**, y la reevaluación está fijada a catorce días (`E-3`, `I-1`).
+**KJ-4.** *(corregido en 1.1)* **Sus sitios dejaron de responder y el actor lleva nueve días sin publicar —no doce—, y su dirección de publicación vuelve a figurar como disponible.** La versión 1.0 fijó la última entrada el 7 de noviembre y contó doce días de silencio. **Es incorrecto: la fuente registra una entrada posterior, publicada el 12 de noviembre de 2026** (Tailandia, manufactura), **corroborada de forma independiente** por el informe semanal de CYFIRMA del 20 de noviembre, que describe la publicación de datos de una empresa tailandesa de manufactura. El silencio real es por tanto de **nueve días al 21 de noviembre**, y al cierre de la versión 1.0 era de **siete**, no de doce. Y la dirección `safepaypfxn…` —la del `KJ-5`— **figura hoy como disponible** en la misma fuente que el 19 de noviembre la daba caída. Seguimos valorando **posible** *(40–60 %)* la migración y rebajamos el cese a **improbable** *(20–45 %)*, porque un actor que ha publicado hace nueve días y cuyo portal responde no es un actor cesado. **Confianza: moderada para la observación —el campo de disponibilidad de esta fuente se contradice en el 31 % de los casos (`§O-7.1` de `CTI-2026-054`) y no trae marca de tiempo del sondeo—; baja para la interpretación.** *Consecuencia:* **la fecha de decisión del 3 de diciembre se mantiene, pero el escenario por omisión pasa de cese a continuidad** (`E-3`, `A.1`).
 
 **KJ-5.** **Su única dirección de publicación lleva prefijo legible, igual que krybit, y eso la hace cazable por patrón si reaparece.** Las 134 entradas se sirvieron desde `safepaypfxntwixwjrlcscft433ggemlhgkkdupi2ynhtcmvdgubmoyd.onion`, con los siete primeros caracteres legibles. Valoramos **casi con certeza** *(≥99 %)* la observación. **Confianza: alta.** *Consecuencia:* si el actor reaparece con infraestructura nueva y mantiene la práctica, **se puede localizar antes de que publique víctimas** (`X-1`).
 
-**KJ-6.** **El perfil declarado contiene una advertencia que hay que trasladar aunque no esté corroborada: un interruptor que aborta la ejecución en sistemas configurados en idiomas de Europa del Este.** Si fuera cierto, invalidaría una contramedida que algunos equipos han adoptado —configurar el idioma o la distribución de teclado del sistema para disuadir— porque **sólo funcionaría contra este actor y no contra los demás**, y porque **depende de que el adversario mantenga una decisión que puede revertir en una compilación**. Valoramos **posible** *(40–60 %)* que el interruptor exista. **Confianza: baja.** *Consecuencia:* **no se recomienda esa contramedida**, y se consigna explícitamente por qué (`X-2`).
+**KJ-6.** **El perfil declarado contiene una advertencia que hay que trasladar aunque no esté corroborada: un interruptor que aborta la ejecución en sistemas configurados en idiomas de Europa del Este.** Si fuera cierto, invalidaría una contramedida que algunos equipos han adoptado —configurar el idioma o la distribución de teclado del sistema para disuadir— porque **sólo funcionaría contra este actor y no contra los demás**, y porque **depende de que el adversario mantenga una decisión que puede revertir en una compilación**. Valoramos **improbable** *(20–45 %)* que el interruptor exista —rebajado en 1.1 desde *posible*—. **Confianza: baja.** *Razón de la rebaja:* **el aviso conjunto `AA26-293A`, redactado por seis agencias sobre al menos 600 víctimas, no menciona en ningún punto comprobación de idioma, configuración regional, distribución de teclado ni país del sistema**, y sí documenta en detalle el resto de la cadena. Es una ausencia significativa, no un silencio neutro. *Consecuencia:* **la recomendación negativa de `X-2` se refuerza**: no se recomienda esa contramedida, y ahora tampoco la respalda la única fuente primaria del expediente (`X-2`, `O-4.2`).
+
+**KJ-8.** *(nuevo en 1.1)* **Existe un aviso conjunto de seis agencias sobre este actor, publicado el 20 de octubre de 2026, que la versión 1.0 no conocía, y eleva todo el expediente de «perfil declarado por un proveedor» a «actor con fuente primaria gubernamental».** `AA26-293A` —«#StopRansomware: SafePay Ransomware»— lo firman el **FBI**, **CISA**, el **Servicio Secreto de Estados Unidos**, el **Landeskriminalamt de Renania-Palatinado** (Alemania), la **National Crime Agency** británica y la **North West Regional Organised Crime Unit**. Declara que el grupo ha afectado a **«al menos 600 víctimas»** de «múltiples sectores de infraestructura crítica» **desde agosto de 2024**, y nombra como regiones alcanzadas **«Norteamérica, Sudamérica, Europa y Australia»**. Valoramos **casi con certeza** *(≥99 %)* el contenido del aviso. **Confianza: alta.** *Consecuencias, tres:* **(a)** la presencia del cuerpo policial de un Land alemán entre los firmantes **corrobora de forma independiente la concentración alemana de `KJ-1`**, que la versión 1.0 midió sin saber que la policía alemana estaba en el caso; **(b)** **Sudamérica figura como región alcanzada en un documento oficial**, lo que sitúa la relevancia regional del expediente por encima de la única víctima chilena de `KJ-2` —aunque el aviso **no nombra ningún país** de la región—; y **(c)** el aviso documenta **cinco CVE** y el vector de acceso, lo que cierra la brecha `G-4` (`O-7`, `A.5`).
+
+**KJ-9.** *(nuevo en 1.1)* **Y el hallazgo que más importa de este aviso no es lo que dice del actor, sino lo que le pasaría a quien ingiriera sus indicadores sin leerlos: cuatro de sus nueve direcciones IP pertenecen a Cloudflare, GitHub y Google.** Resueltas por `whois` y RDAP contra los registros regionales el 21 de noviembre de 2026: `104.26.2.223` es **CLOUDFLARENET (Cloudflare, Inc.)**; `140.82.114.4` es **GitHub, Inc.**; `185.199.108.133` es **GitHub, Inc.** (el rango de GitHub Pages); `173.194.194.94` es **Google LLC**. Una quinta, `5.255.11.134`, es un **conjunto de acceso ADSL de YemenNet** (`AS30873`). **De las nueve, el aviso califica una sola como mando y control**: `88.119.167.239` —«soc.dll command and control»—, alojada en UAB Bacloud (Lituania). Las otras llevan descripciones de rol que **no son de infraestructura del adversario**: tres dicen «SafePay victim intrusion», una «Hosting victim data», dos «Used in exfiltration» y una «Client login panels». Valoramos **casi con certeza** *(≥99 %)* la titularidad verificada. **Confianza: alta.** *Consecuencia:* **una lista de bloqueo perimetral alimentada con las nueve direcciones del aviso bloquea Cloudflare, GitHub, GitHub Pages y Google**, y además un rango residencial yemení que a estas alturas pertenece casi con seguridad a otro abonado. **El aviso no tiene la culpa y conviene decirlo**: advierte expresamente —«recomendamos a las organizaciones investigar o verificar las direcciones IP antes de actuar, por ejemplo bloqueando»— y declara que los indicadores «deben interpretarse como infraestructura observada históricamente dentro de la ventana de actividad», que fija entre **noviembre de 2024 y agosto de 2026**. **El fallo posible está en la ingesta, no en la redacción** (`A.4`, `X-4`).
+
+**KJ-10.** *(nuevo en 1.1)* **El perfil del proveedor que la versión 1.0 consignó con la advertencia de que «nada está corroborado» queda corroborado en cinco elementos y sin apoyo en cuatro, y la separación es informativa.** **Corroborado por `AA26-293A`:** el acceso por **VPN y RDP con credencial válida** —el aviso lo precisa más y añade que los operadores **usan direcciones del proveedor de VPN «Mullvad»** para el acceso inicial—; el reconocimiento con **`ShareFinder.ps1`**; la exfiltración con **WinRAR y RClone**; la **extensión `.SafePay`**; y el cifrador **en forma de biblioteca** (el aviso lista `locker.dll`). **Sin apoyo en el aviso, que no los menciona:** el **linaje LockBit** —el aviso no nombra ningún otro grupo—, la nota **`readme_safepay.txt`**, la **ofuscación por triple XOR** —sólo documenta empaquetado genérico— y el portal por **red TON** —sólo cita Tor—. Y el aviso aporta un dato que el perfil no traía: el cifrado es **híbrido, ChaCha20 con RSA**, parcial o total según tipo y tamaño de fichero. Valoramos **probable** *(55–80 %)* que los cuatro elementos sin apoyo sean inexactos del perfil y no huecos del aviso, **salvo el linaje**, que un aviso operativo no tiene por qué tratar. **Confianza: moderada.** *Consecuencia:* **el perfil del proveedor acierta en lo observable en la red y falla en lo que requiere muestra**, que es el patrón que cabía esperar y que conviene recordar la próxima vez que una ficha de proveedor sea la única fuente (`O-4.2`, `Anexo B`).
 
 **KJ-7.** **El resto del perfil declarado describe una operación de equipo cerrado y no un programa de afiliados, lo que es coherente con la regularidad medida.** La ficha del proveedor afirma linaje LockBit, acceso mediante credenciales de VPN y RDP robadas, permanencia inferior a un día antes del cifrado, cifrador en biblioteca PE32 con marca de tiempo falsificada, extensión `.safepay`, nota `readme_safepay.txt`, ofuscación por triple XOR, reconocimiento con `ShareFinder.ps1`, exfiltración con WinRAR y Rclone, y portal de negociación accesible por Tor **y por la red TON**. Nada está corroborado. Valoramos **probable** *(55–80 %)* que el carácter de equipo cerrado sea correcto, por consistencia con `KJ-3`: **un programa de afiliados produce tandas irregulares, y aquí no hay ninguna**. **Confianza: baja para el perfil, moderada para la inferencia de consistencia.** *Consecuencia:* la cadencia observada es la única corroboración indirecta de algo del perfil, y es la que más vale (`O-4`).
 
@@ -330,6 +336,34 @@ De ahí surge una tentación que este informe quiere atajar explícitamente, por
 
 ---
 
+## O-7. El aviso conjunto AA26-293A, y qué cambia
+
+<!-- cti:detalle -->
+
+El 20 de octubre de 2026 —veintinueve días antes de que se emitiera la versión 1.0 de este informe, y sin que su redacción lo recogiera— seis agencias publicaron `AA26-293A`, «#StopRansomware: SafePay Ransomware». **Que un expediente de esta cartera se emitiera sin citar un aviso conjunto existente es un fallo de colección propio, y queda consignado como tal** en el `Anexo G`.
+
+**Lo que el aviso añade sobre el actor.** Al menos 600 víctimas de múltiples sectores de infraestructura crítica desde agosto de 2024, en Norteamérica, Sudamérica, Europa y Australia. Acceso inicial por exposición de credenciales, ataques de fuerza bruta y explotación de acceso por VPN —con el detalle operativo de que **los operadores entran desde direcciones del proveedor comercial de VPN «Mullvad»**, usando cuentas obtenidas por phishing—. Cinco CVE, todos en sistemas expuestos a Internet. Movimiento lateral con PsExec, WinRM y RDP. Cifrado híbrido ChaCha20 con RSA y extensión `.SafePay`. Parada de las copias de volumen, reinicio de los NAS a valores de fábrica y, en algunos casos, borrado de todas las copias de seguridad en red.
+
+### O-7.1 Los cinco CVE, y la cautela sobre el producto
+
+El aviso lista cinco identificadores y **no nombra el producto afectado de ninguno**: los da con su CWE y los describe como vulnerabilidades «de productos de dispositivo de borde» (los dos primeros) y «en sistemas expuestos a Internet» (los tres siguientes).
+
+| CVE | CWE | Cómo lo describe el aviso |
+|---|---|---|
+| `CVE-2020-3259` | CWE-200 | «CVE conocidos de productos de dispositivo de borde» |
+| `CVE-2023-20269` | CWE-288 | «CVE conocidos de productos de dispositivo de borde» |
+| `CVE-2023-27532` | CWE-306 | Explotación «en sistemas expuestos a Internet» |
+| `CVE-2024-40711` | CWE-502 | Explotación «en sistemas expuestos a Internet» |
+| `CVE-2024-40766` | CWE-284 | Explotación «en sistemas expuestos a Internet» |
+
+**La cautela:** la correspondencia de estos identificadores con productos concretos —concentradores de acceso remoto, copias de seguridad, cortafuegos— es de dominio público en el registro CVE y en el catálogo de vulnerabilidades explotadas conocidas, **pero no la hace este aviso**. Quien priorice parcheo debe resolver cada identificador contra el registro y no contra este informe ni contra el aviso. Lo que sí se puede afirmar sin añadir nada: **los cinco son de sistemas de cara a Internet, y ninguno requiere que el adversario tenga ya un pie dentro**.
+
+### O-7.2 El eje del acceso remoto, por tercera vez
+
+El vector declarado por el aviso —credencial válida contra VPN, más RDP en el movimiento lateral— coloca a este actor en el mismo eje que la cartera ya había identificado en dos expedientes anteriores. **El dato nuevo y accionable es el de Mullvad:** si los operadores entran por un proveedor comercial de VPN conocido, entonces **el origen del acceso es caracterizable sin conocer al adversario**. Una autenticación correcta desde una dirección de salida de un servicio comercial de VPN, contra un concentrador corporativo y a horas que no corresponden al titular, es una señal construible con lo que cualquier organización ya registra.
+
+**Y la consecuencia defensiva es la que este informe ya daba en `KJ-3` por otra vía:** con retraso mediano de cero días entre fecha declarada y publicación, **no hay semanas de margen**; la detección tiene que estar en el acceso, no en la exfiltración.
+
 ## 14. Brechas de inteligencia y requisitos de colección
 
 **G-1. No sabemos si el actor ha cesado o está migrando.** Es `KJ-4`, el juicio más perecedero del lote.
@@ -393,6 +427,42 @@ De ahí surge una tentación que este informe quiere atajar explícitamente, por
 | cartera | **Sin concentración sectorial**: ninguno por encima del 18 % | Debilita la hipótesis de selección por capacidad de pago (`E-2.1`) | Alta como recuento | 90 días | Análisis |
 | artefacto | **Una segunda fuente da 618 y 521 víctimas en la misma página** | Y «visto por última vez» en marzo, **la misma fecha que asigna a otros tres actores** (`§3.2`) | Alta como observación | — | — |
 
+### A.4 — Los indicadores de `AA26-293A`, con su titularidad verificada
+
+<!-- cti:ioc -->
+
+> **Antes de leer la tabla.** El aviso declara que sus indicadores se observaron **entre noviembre de 2024 y agosto de 2026** y que «deben interpretarse como infraestructura observada históricamente dentro de la ventana de actividad». **Esa ventana se cerró hace tres meses.** Por tanto, y aplicando la regla de caducidad de esta cartera, **ninguna de las nueve direcciones va a bloqueo hoy, ni siquiera la única calificada como mando y control.** La columna de acción permitida lo refleja. La titularidad se resolvió por `whois` y RDAP contra los registros regionales el **21-11-2026**.
+
+| Tipo | Valor | Titular verificado | Rol que le da el aviso | Confianza | Caducidad | Acción permitida |
+|---|---|---|---|---|---|---|
+| `artefacto` | `88.119.167.239` | UAB Bacloud (LT) | **«soc.dll command and control»** — **la única calificada como C2** del aviso. **Tipo `artefacto` y no `ipv4` deliberadamente:** su ventana de observación cerró en agosto de 2026, la acción permitida es búsqueda retrospectiva y no bloqueo, y con tipo `ipv4` entraría en el agregado plano, que es una lista de bloqueo | Alta como registro del aviso | **Ventana cerrada en 08-2026** | **Búsqueda retrospectiva en registros. NO bloqueo por antigüedad** |
+| `ipv4` | `37.10.71.188` | servinga GmbH (DE) | «Used in exfiltration» | Alta como registro | Ventana cerrada | Búsqueda retrospectiva |
+| `ipv4` | `77.37.49.40` | HOSTINGER LT | «SafePay victim intrusion» | Alta como registro | Ventana cerrada | Búsqueda retrospectiva |
+| `ipv4` | `167.235.225.149` | Hetzner (`CLOUD-FSN1`) | «Client login panels» | Alta como registro | Ventana cerrada | Búsqueda retrospectiva |
+| `artefacto` | `104.26.2.223` | **Cloudflare, Inc.** (`CLOUDFLARENET`) | «SafePay victim intrusion» | **Alta: titularidad verificada** | — | **NUNCA bloqueo.** Red de distribución compartida por millones de sitios |
+| `artefacto` | `140.82.114.4` | **GitHub, Inc.** | «SafePay victim intrusion» | **Alta: titularidad verificada** | — | **NUNCA bloqueo.** Bloquearlo rompe el desarrollo de la organización |
+| `artefacto` | `185.199.108.133` | **GitHub, Inc.** (GitHub Pages) | «SafePay victim intrusion» | **Alta: titularidad verificada** | — | **NUNCA bloqueo** |
+| `artefacto` | `173.194.194.94` | **Google LLC** | «Hosting victim data» | **Alta: titularidad verificada** | — | **NUNCA bloqueo.** Y nótese el rol: **datos de la víctima**, no del adversario |
+| `artefacto` | `5.255.11.134` | **YemenNet**, conjunto ADSL (`AS30873`) | «Used in exfiltration» | **Alta: titularidad verificada** | — | **NUNCA bloqueo.** Dirección de acceso residencial, presumiblemente dinámica y hoy de otro abonado |
+| `artefacto` | **4 hostnames de equipo** (`WIN-…`) | — | Equipos observados en intrusiones | Moderada | Ventana cerrada | **Búsqueda en inventario propio.** Son nombres por omisión de Windows: coincidencia débil |
+| `pattern` | **Acceso inicial desde direcciones de salida del proveedor comercial de VPN «Mullvad»** | — | Vector declarado por el aviso | **Alta como registro del aviso** | Sin caducidad | **Alerta: autenticación correcta desde salida de VPN comercial contra el concentrador corporativo** |
+
+### A.5 — Herramientas del aviso: inventario, no bloqueo
+
+<!-- cti:ioc -->
+
+> **Regla de la casa, y esta vez la suscribe el propio aviso**, que advierte: «estas herramientas y aplicaciones no deben atribuirse como maliciosas sin evidencia analítica». **Ninguna entra en los agregados planos de indicadores.**
+
+| Tipo | Valor | Contexto | Confianza | Acción permitida |
+|---|---|---|---|---|
+| `herramienta` | **PsExec · WinRM · RDP** | Movimiento lateral con utillaje del sistema | Alta como registro | **Inventario y control de uso. No bloqueo** |
+| `herramienta` | **ScreenConnect · AnyDesk · TeamViewer** | El aviso los documenta usados «para transferir el programa dañino al sistema de la víctima» | Alta como registro | **Inventario: ¿están autorizados y quién los usa?** |
+| `herramienta` | **7-Zip · WinRAR · FileZilla · RClone · WinSCP · OneDrive · Backblaze (`b2.exe`)** | Compresión y exfiltración | Alta como registro | **Inventario. Alerta por volumen y destino, no por presencia** |
+| `herramienta` | **Mimikatz · `ShareFinder.ps1` · `SharpShares.exe` · NetExec (`nxc.exe`) · PowerShell** | Credenciales y descubrimiento. **`ShareFinder.ps1` corrobora el perfil del proveedor** (`KJ-10`) | Alta como registro | **Alerta por comportamiento: enumeración desde cuenta que no la hace habitualmente** |
+| `herramienta` | **`nltest.exe` · `netscan.exe` · `dcsync.exe` · `Socks.exe` · CCleaner · AcronisDiskDirector** | Descubrimiento, túnel y borrado de rastro | Moderada | Inventario |
+| `pattern` | **`svchost.exe` ejecutándose fuera de `System32`** | El aviso lo marca como sospechoso **sólo en esa condición** | Alta como control | **Alerta.** Sin la condición de ruta es un falso positivo garantizado |
+| `pattern` | **Reinicio de NAS a valores de fábrica · parada de copias de volumen · borrado de copias en red** | Destrucción de la capacidad de recuperación | Alta como registro | **Alerta de máxima prioridad: ocurre antes del cifrado** |
+
 ## Anexo B — Fuentes y valoración
 
 | # | Fuente | Grado | Qué aportó | Salvedad |
@@ -445,10 +515,16 @@ ICD 203. Escala de Almirantazgo con los grados propios de la cartera. TLP 2.0 y 
 
 | Versión | Fecha | Qué cambió | Qué juicio se movió |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Incorpora el aviso conjunto `AA26-293A` (20-10-2026, seis agencias), que la versión 1.0 no citaba pese a ser veintinueve días anterior: fallo de colección propio, consignado como tal** (`KJ-8`, `O-7`). **Corrige `KJ-4`**: la última entrada no es del 7 de noviembre sino **del 12**, corroborada por CYFIRMA, de modo que el silencio era de siete días al cierre de 1.0 y no de doce; y la dirección de publicación vuelve a figurar disponible, por lo que **el escenario por omisión pasa de cese a continuidad**. **Rebaja `KJ-6`** de *posible* a *improbable*: seis agencias con 600 víctimas no documentan el interruptor de idioma, y la ausencia refuerza la recomendación negativa de `X-2`. **Añade `KJ-9`**, hallazgo propio: **cuatro de las nueve direcciones IP del aviso son de Cloudflare, GitHub y Google, y una quinta un conjunto ADSL residencial**, con titularidad verificada por `whois`/RDAP, de modo que una ingesta ciega bloquearía servicios legítimos de uso masivo —el aviso advierte de verificar antes de bloquear, así que el fallo estaría en la ingesta— (`A.4`). **Añade `KJ-10`**: el perfil del proveedor queda corroborado en cinco elementos y sin apoyo en cuatro. Añade `O-7`, `A.4` y `A.5` | **`KJ-4` corregido · `KJ-6` rebajado a improbable · `KJ-7` apoyado en parte por `KJ-10` · `KJ-8`, `KJ-9`, `KJ-10` nuevos.** `KJ-1` gana corroboración indirecta (la policía alemana firma el aviso). **`caduca` NO se extiende: los juicios técnicos no se revalidaron** |
 | 1.0 | 2026-11-19 | Emisión inicial. Incluye la concentración alemana del 29 % con Estados Unidos desplazado (`KJ-1`), la única víctima chilena del lote (`KJ-2`), la cadencia más regular de los seis y su consecuencia invertida sobre el margen de detección (`KJ-3`, `O-3`), los cinco sitios caídos (`KJ-4`), y **la recomendación negativa explícita de `X-2`** sobre la contramedida de configuración regional | — |
 
 ## Anexo H — Realimentación del consumidor
 
-Este informe se corrige si se recibe: evidencia de que alguno de los cinco sitios responde, que invalidaría `KJ-4` entero (`I-1`); un factor común entre las 39 entradas alemanas, que resolvería `G-2` y convertiría `KJ-1` en accionable para un producto concreto; confirmación de la víctima chilena (`I-3`); un análisis primario con muestra que confirme o niegue el interruptor de idioma de `KJ-6`; o una entrada nueva publicada después del 7 de noviembre, que reclasificaría el estado.
+Este informe se corrige si se recibe: un factor común entre las entradas alemanas, que resolvería `G-2` y convertiría `KJ-1` en accionable para un producto concreto; confirmación de la víctima chilena (`I-3`); un análisis primario con muestra que confirme o niegue el interruptor de idioma de `KJ-6`; o evidencia sobre el estado real del portal que no dependa del campo de disponibilidad de la fuente.
+
+**Dos peticiones de la versión 1.0 quedaron cumplidas el 21-11-2026 y se dejan escritas en lugar de borrarse**, porque el producto de esta cartera es la cadena de razones:
+
+- *«Una entrada nueva publicada después del 7 de noviembre, que reclasificaría el estado.»* **Cumplida: existía ya al emitirse la versión 1.0** —publicada el 12 de noviembre— y no se vio. `KJ-4` corregido.
+- *«Evidencia de que alguno de los cinco sitios responde, que invalidaría `KJ-4` entero.»* **Cumplida en parte:** la dirección de publicación figura disponible, pero por el mismo campo de la fuente cuya fiabilidad el propio informe acotó en el 31 % de contradicción. **No se da `KJ-4` por invalidado: se corrige y se rebaja la confianza.**
 
 El disparador con fecha fija es **`I-1`, el 3 de diciembre de 2026**, y la decisión que se tomará en cada caso está escrita en el paso 5 del `Anexo D` para que no quede al criterio del momento.
