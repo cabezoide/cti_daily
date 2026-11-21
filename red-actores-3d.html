@@ -194,6 +194,7 @@ body.conPanel #ctrl{right:356px}
     <button id="bGirar" class="on" title="Rotación automática">Girar</button>
     <button id="bEtiq" class="on" title="Mostrar etiquetas">Etiquetas</button>
     <button id="bConac" class="on" title="Conexión débil entre actores del mismo país">Co-nacionalidad</button>
+    <button id="bPlan" class="on" title="Un planeta por país: el centro que agrupa a sus actores">Planetas</button>
     <button id="bReset" title="Volver a la vista inicial">Reencuadrar</button>
   </div>
   <div class="caja" id="ayuda">
@@ -347,14 +348,20 @@ const ZONA = [
   {l:'Oriente Medio',    ps:['ir','ps','lb'],   ang:196},
   {l:'Latinoamérica',    ps:['latam','chile'],  ang:286}
 ];
-const R_ZONA = 215, K_ANCLA = 0.0065;
+/* `R_ZONA` pasó de 215 a 360 al hacer visibles los planetas: con 215 los
+   centros de país caían DENTRO de la nube de herramientas y sus rótulos se
+   solapaban en el medio del lienzo. Separados, cada país forma su cúmulo
+   alrededor del núcleo de nodos sin nacionalidad, que es la lectura que el
+   planeta tiene que hacer evidente. El ancla sube un poco para que el cúmulo
+   llegue a formarse a esa distancia. */
+const R_ZONA = 360, K_ANCLA = 0.0090;
 const ANCLA = {};
 for (const z of ZONA){
   z.ps.forEach((pk, i) => {
     /* dentro de la zona, cada país se desplaza un poco para no solaparse
        con su vecino pero quedar contiguo a él */
-    const a = (z.ang + (i - (z.ps.length-1)/2) * 17) * Math.PI/180;
-    ANCLA[pk] = {x: Math.cos(a)*R_ZONA, y: (i%2 ? 26 : -26), z: Math.sin(a)*R_ZONA, z_: z};
+    const a = (z.ang + (i - (z.ps.length-1)/2) * 24) * Math.PI/180;
+    ANCLA[pk] = {x: Math.cos(a)*R_ZONA, y: (i%2 ? 54 : -54), z: Math.sin(a)*R_ZONA, z_: z};
   });
 }
 /* ── Co-nacionalidad ──────────────────────────────────────────────────
@@ -419,11 +426,109 @@ const CONAC = [];
 }
 let verConac = true;
 
-/* radio por grado y tipo */
+/* ── Planetas de país ─────────────────────────────────────────────────
+   Criterio del usuario: «cada país sea un planeta o nodo central
+   adicional». Hasta ahora el sector geográfico existía sólo como un ancla
+   invisible: los actores de un país se agrupaban sin que se viera POR QUÉ.
+   El planeta hace visible ese centro.
+
+   Se DERIVAN aquí y no se escriben en red-actores.json, por la misma razón
+   que las aristas de co-nacionalidad: el JSON guarda juicios del analista y
+   esto es automático. Además así la compuerta del grafo —que sólo admite
+   grupos y herramientas— no los ve, que es lo correcto: un planeta no es un
+   objeto del adversario, es el andamiaje del mapa. */
+const PLANETA = [];
+{
+  const cuenta = new Map();
+  N.forEach(n => {
+    if (!n.p || n.p === '-' || !ANCLA[n.p]) return;
+    cuenta.set(n.p, (cuenta.get(n.p) || 0) + 1);
+  });
+  for (const [pk, cu] of cuenta){
+    const a = ANCLA[pk], pa = PAIS[pk] || PAIS['-'];
+    PLANETA.push({
+      /* el rótulo del planeta se corta en la coma: «Latinoamérica, sin país
+         determinado» ocupaba media pantalla y desplazaba a sus vecinos */
+      p: pk, n: pa.n.split(',')[0], s: pa.s, c: pa.c, cuenta: cu,
+      x: a.x, y: a.y, z: a.z, rad: 60,
+      hijos: N.map((n,i) => n.p === pk ? i : -1).filter(i => i >= 0)
+    });
+  }
+}
+
+/* El planeta NO tiene un centro fijo ni un radio inventado: se ajusta al
+   cúmulo real en cada cuadro.
+
+   La primera versión lo clavaba en el ancla con un radio sacado del censo de
+   actores, y al medirlo resultó que sólo el 9 % de los actores chinos y el 0 %
+   de los demás caían dentro de su propia burbuja: la repulsión entre nodos
+   dispersa el cúmulo mucho más de lo que suponía la fórmula. Un planeta que no
+   contiene a los suyos no significa nada.
+
+   Ahora el centro es el centroide de sus actores y el radio el percentil 80 de
+   sus distancias, con un margen. Así la burbuja sigue al cúmulo, lo contiene
+   por construcción y encoge cuando el sector se compacta. Se suaviza con una
+   interpolación para que no tiemble mientras la física se asienta. */
+function ajustarPlanetas(){
+  for (const q of PLANETA){
+    if (!q.hijos.length) continue;
+    let cx = 0, cy = 0, cz = 0;
+    for (const i of q.hijos){ cx += N[i].x; cy += N[i].y; cz += N[i].z; }
+    cx /= q.hijos.length; cy /= q.hijos.length; cz /= q.hijos.length;
+    const ds = q.hijos
+      .map(i => Math.hypot(N[i].x - cx, N[i].y - cy, N[i].z - cz))
+      .sort((a, b) => a - b);
+    const p80 = ds[Math.min(ds.length - 1, Math.floor(ds.length * 0.8))];
+    const objetivo = Math.max(42, p80 + 26);
+    const k = 0.06;                        // suavizado: sigue sin dar saltos
+    q.x += (cx - q.x) * k;
+    q.y += (cy - q.y) * k;
+    q.z += (cz - q.z) * k;
+    q.rad += (objetivo - q.rad) * k;
+  }
+}
+let verPlanetas = true;
+
+/* ── Tamaño del nodo: conexiones Y SUBCONEXIONES ──────────────────────
+   Criterio del usuario: «mientras más conexiones y subconexiones tenga un
+   nodo, sea más grande». El grado directo solo no lo refleja — un nodo con
+   tres vecinos que a su vez son concentradores pesa más en la red que uno
+   con tres vecinos terminales.
+
+   Se cuenta el VECINDARIO A DOS SALTOS: los vecinos directos más los
+   vecinos de éstos, sin contarse a sí mismo y sin contar dos veces a nadie.
+   Las aristas de co-nacionalidad NO entran, por lo mismo que no entran en
+   el grado: son derivadas y no una relación observada.
+
+   La escala es logarítmica a propósito. El alcance va de 1 a más de cien, y
+   en lineal los concentradores se comerían la pantalla mientras el resto
+   quedaría en puntos indistinguibles. */
+{
+  const vecinos = N.map(() => new Set());
+  E.forEach(e => { vecinos[e.a].add(e.b); vecinos[e.b].add(e.a); });
+  N.forEach((n, i) => {
+    const dos = new Set(vecinos[i]);
+    for (const v of vecinos[i]) for (const w of vecinos[v]) dos.add(w);
+    dos.delete(i);
+    n.g1 = vecinos[i].size;      // conexiones
+    n.g2 = dos.size;             // conexiones + subconexiones
+  });
+}
+
+/* radio por alcance y tipo */
 N.forEach(n => {
-  const base = (n.t==='estado'||n.t==='suministrador') ? 5.4
-             : (n.t==='clúster'||n.t==='marco'||n.t==='crimen'||n.t==='modelo') ? 4.4 : 3.2;
-  n.rad = base + Math.min(5.2, Math.sqrt(n.g) * 1.35);
+  /* La base por tipo se aplana a propósito. Con la anterior —5,4 frente a
+     3,2— el tipo pesaba más que la red: `FamousSparrow`, con 39 subconexiones,
+     se dibujaba MÁS grande que «Extorsión como servicio», con 48, sólo por ser
+     actor estatal. Lo que el tamaño tiene que decir es cuánta red mueve el
+     nodo, así que el tipo queda como matiz y el alcance manda. */
+  /* Base ÚNICA, sin matiz por tipo, y sin tope. Con base distinta por tipo el
+     orden de tamaño dejaba de seguir al alcance —`FamousSparrow`, con 39
+     subconexiones, se dibujaba mayor que «Extorsión como servicio», con 48—, y
+     el tope de 13 saturaba a todos los concentradores en el mismo círculo. El
+     tipo ya se distingue por color y por la leyenda; el tamaño dice una sola
+     cosa y la dice sin excepciones: cuánta red mueve el nodo. */
+  n.rad = 3.4 + Math.log2(1 + n.g2) * 2.9;
 });
 
 /* semilla determinista: el mapa sale igual en cada carga */
@@ -554,6 +659,18 @@ function proyectar(){
     n.pz = z2;
     n.pe = pe;
   }
+  /* los planetas usan exactamente la misma transformación: si se proyectaran
+     aparte acabarían desalineados del sector que representan */
+  for (const q of PLANETA){
+    const x1 =  q.x*cy + q.z*sy;
+    const z1 = -q.x*sy + q.z*cy;
+    const y1 =  q.y*cp - z1*sp;
+    const z2 =  q.y*sp + z1*cp;
+    const pe = vista.dist / (vista.dist + z2);
+    q.px = W/2 + x1*pe*esc + vista.offX;
+    q.py = H/2 + y1*pe*esc + vista.offY;
+    q.pz = z2; q.pe = pe; q.esc = esc;
+  }
 }
 
 /* ───────────────── dibujo ───────────────── */
@@ -567,6 +684,33 @@ function dibujar(){
     for (const e of E){ if (e.a===sel) relacionados.add(e.b); if (e.b===sel) relacionados.add(e.a); }
   }
   const hayFoco = sel !== null || hayCoincidencia;   // sin coincidencias no se atenúa nada
+
+  /* Los planetas van los PRIMEROS: son el andamiaje del mapa y no deben
+     tapar ni una relación ni un nodo. Se dibujan con un degradado radial muy
+     tenue —el cuerpo— y un borde fino, de modo que se lean como un volumen
+     sin competir con los actores que orbitan dentro. */
+  if (verPlanetas){
+    const orbe = PLANETA.slice().sort((a,b) => a.pz - b.pz);
+    for (const q of orbe){
+      if (filtroP.size && filtroP.has(q.p)) continue;
+      const prof = Math.max(0.12, Math.min(1.2, q.pe));
+      const r = Math.max(6, q.rad * prof * (Math.min(W,H)/780) * vista.zoom);
+      const base = col(q.c);
+      const g = cx2.createRadialGradient(q.px, q.py, r*0.15, q.px, q.py, r);
+      /* hueco por dentro: el degradado es casi nulo en el centro y sólo coge
+         cuerpo cerca del borde, para que la burbuja se lea como un volumen sin
+         empañar a los actores que contiene */
+      g.addColorStop(0,    mezcla(base, 0.02 * prof));
+      g.addColorStop(0.72, mezcla(base, 0.05 * prof));
+      g.addColorStop(0.94, mezcla(base, 0.13 * prof));
+      g.addColorStop(1,    mezcla(base, 0));
+      cx2.beginPath(); cx2.arc(q.px, q.py, r, 0, 6.2832);
+      cx2.fillStyle = g; cx2.fill();
+      cx2.beginPath(); cx2.arc(q.px, q.py, r, 0, 6.2832);
+      cx2.strokeStyle = mezcla(base, 0.34 + prof*0.16);
+      cx2.lineWidth = Math.max(0.8, 1.5*prof); cx2.stroke();
+    }
+  }
 
   // co-nacionalidad primero: es el fondo, nunca debe tapar una relación real
   cx2.lineCap = 'round';
@@ -631,6 +775,43 @@ function dibujar(){
       cx2.strokeStyle = esQ && !esSel ? col('--amber') : col('--ink');
       cx2.lineWidth = 1.5; cx2.stroke();
     }
+  }
+
+  /* Nombre del planeta. Va aparte del sistema de etiquetas de los nodos y
+     siempre se dibuja: es el rótulo del sector, y si compitiera por hueco con
+     los actores desaparecería justo cuando el sector está más poblado, que es
+     cuando más falta hace saber de quién es ese cúmulo. */
+  if (verPlanetas && vista.etiquetas){
+    cx2.textBaseline = 'middle';
+    cx2.textAlign = 'center';
+    /* Los países con pocos actores acaban cerca del centro —sus nodos tienen
+       relaciones con herramientas sin nacionalidad que tiran de ellos— y sus
+       rótulos se amontonaban unos sobre otros. Se dibujan por censo
+       descendente y se descarta el que chocaría con uno ya puesto: ante dos
+       rótulos ilegibles, mejor uno legible. */
+    const puestos = [];
+    for (const q of PLANETA.slice().sort((a,b) => b.cuenta - a.cuenta)){
+      if (filtroP.size && filtroP.has(q.p)) continue;
+      const prof = Math.max(0.12, Math.min(1.2, q.pe));
+      const r = Math.max(6, q.rad * prof * (Math.min(W,H)/780) * vista.zoom);
+      const tam = Math.max(10, Math.min(19, 13*prof*vista.zoom));
+      cx2.font = '600 ' + tam.toFixed(1) + 'px ui-monospace,SFMono-Regular,Menlo,monospace';
+      const ey = q.py - r - tam*1.25;
+      const ancho = cx2.measureText(q.n.toUpperCase()).width;
+      let choca = false;
+      for (const o of puestos)
+        if (Math.abs(o.x - q.px) < (o.w + ancho)/2 + 10 && Math.abs(o.y - ey) < tam*2.1)
+          { choca = true; break; }
+      if (choca) continue;
+      puestos.push({x: q.px, y: ey, w: ancho});
+      cx2.fillStyle = mezcla(col(q.c), 0.52 + prof*0.34);
+      cx2.fillText(q.n.toUpperCase(), q.px, ey);
+      cx2.font = (tam*0.78).toFixed(1) + 'px ui-monospace,SFMono-Regular,Menlo,monospace';
+      cx2.fillStyle = mezcla(col(q.c), 0.34 + prof*0.22);
+      cx2.fillText(q.cuenta + (q.cuenta === 1 ? ' actor' : ' actores'),
+                   q.px, ey + tam*1.05);
+    }
+    cx2.textAlign = 'left';
   }
 
   // Etiquetas. Se eligen por prioridad y se descartan las que chocarían con
@@ -727,7 +908,7 @@ function suavizar(){
   vista.offY += (vista.offYd - vista.offY) * k;
   vista.zoom += (vista.zoomd - vista.zoom) * k;
 }
-function bucle(){ paso(); suavizar(); proyectar(); dibujar(); requestAnimationFrame(bucle); }
+function bucle(){ paso(); ajustarPlanetas(); suavizar(); proyectar(); dibujar(); requestAnimationFrame(bucle); }
 
 /* ───────────────── interacción ───────────────── */
 function medir(){
@@ -978,16 +1159,19 @@ const bE = document.getElementById('bEtiq');
 bE.addEventListener('click', () => { vista.etiquetas = !vista.etiquetas; sincronizar(); });
 const bC = document.getElementById('bConac');
 bC.addEventListener('click', () => { verConac = !verConac; sincronizar(); });
+const bP = document.getElementById('bPlan');
+bP.addEventListener('click', () => { verPlanetas = !verPlanetas; sincronizar(); });
 document.getElementById('bReset').addEventListener('click', () => {
   vista.rotX=-0.32; vista.rotY=0.55; vista.girar=true; vista.offXd=0; vista.offYd=0;
   consulta=''; document.getElementById('q').value='';
-  filtro.clear(); filtroP.clear(); verConac = true;
+  filtro.clear(); filtroP.clear(); verConac = true; verPlanetas = true;
   document.querySelectorAll('.lg.off').forEach(e=>{e.classList.remove('off'); e.setAttribute('aria-checked','true');});
   cerrarPanel(); encuadrar(); sincronizar();
 });
 function sincronizar(){
   bG.classList.toggle('on', vista.girar);
   bC.classList.toggle('on', verConac);
+  bP.classList.toggle('on', verPlanetas);
   bE.classList.toggle('on', vista.etiquetas);
 }
 
