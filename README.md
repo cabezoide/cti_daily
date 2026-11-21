@@ -47,7 +47,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-042` | Devman · Funky Mantis · Dire Wolf · Sauron | Perfil de ecosistema | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-042-emergentes.md) · [html](CTI-2026-042-emergentes.html) |
 | `CTI-2026-043` | Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor | Perfil de operación sin atribuir | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 88 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
 | `CTI-2026-044` | Redes de bots de DDoS y de proxy residencial · 33 familias | Perfil de ecosistema | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-044-redes-bots.md) · [html](CTI-2026-044-redes-bots.html) |
-| `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-19 | 1.3 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
+| `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-19 | 1.4 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
 | `CTI-2026-046` | Akira · Akira_v2 · Megazord · (linaje discutido) Conti | Perfil de operación de extorsión | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-046-akira.md) · [html](CTI-2026-046-akira.html) |
 | `CTI-2026-047` | INC Ransom · Inc Ransom · (marca hermana) Lynx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-047-incransom.md) · [html](CTI-2026-047-incransom.html) |
 | `CTI-2026-048` | n0n · N0n | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-048-n0n.md) · [html](CTI-2026-048-n0n.html) |
@@ -86,7 +86,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-21 |
-| Nodos del mapa de relaciones | 315, con 412 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Nodos del mapa de relaciones | 316, con 414 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 

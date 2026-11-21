@@ -2540,9 +2540,9 @@
    "t": "crimen",
    "p": "latam",
    "r": "CTI-2026-045",
-   "d": "La familia MÁS ACTIVA de las 33: 444.728 eventos acumulados y el 92,1 % del flujo de ataque en vivo. Capacidad declarada la MÁS ESTRECHA del ecosistema: sólo DDoS, sin proxy residencial y sin ejecución remota de código — un nodo infectado es un problema de ancho de banda, no una cabeza de puente.",
+   "d": "La familia MÁS ACTIVA de las 33: 444.728 eventos acumulados y el 92,1 % del flujo de ataque en vivo. La estrechez de capacidad que le atribuía la fuente NO se sostiene: el análisis de Jackskid documenta un relé residencial compilado dentro del propio bot.",
    "a": "-",
-   "af": "El volumen de cobertura mide titulares, no actividad"
+   "af": "El relé abre 165 mapeos UPnP etiquetados RELAY en el router de la víctima. La ejecución remota de código sigue sin documentarse, así que no es cabeza de puente hacia la red interna."
   },
   {
    "id": "lisodosmodos",
@@ -2927,6 +2927,16 @@
    "d": "El constructor de la familia usa 0xffff como valor por defecto de los parámetros de ataque, que en destino se observa como puerto 65535. Lo que un operador podría ajustar y no ajusta identifica su forma de trabajar.",
    "a": "oficial",
    "af": "Triple apoyo independiente: razonamiento por eliminación en la versión 1.0, el campo port_source de la telemetría en 4.489 de 4.489 apariciones, y el análisis de binario publicado por Deepfield."
+  },
+  {
+   "id": "releupnp",
+   "l": "Relé residencial por mapeo UPnP del router",
+   "t": "modelo",
+   "p": "-",
+   "r": "CTI-2026-045",
+   "d": "El bot pide al router de la víctima que abra 165 puertos y los reenvíe al dispositivo infectado, etiquetando cada mapeo como RELAY. La conexión doméstica pasa a retransmitir tráfico de terceros hacia un servidor fijo del operador.",
+   "a": "proveedor",
+   "af": "Nokia Deepfield ERT, 24-07-2026: el relé está compilado dentro del bot de denegación de servicio y no es un módulo aparte. No se observó ninguna sesión de cliente en vivo."
   }
  ],
  "aristas": [
@@ -5401,6 +5411,18 @@
    "valorpordefecto",
    "deriva",
    "propio"
+  ],
+  [
+   "jackskid",
+   "releupnp",
+   "usa",
+   "proveedor"
+  ],
+  [
+   "liso",
+   "releupnp",
+   "usa",
+   "inferido"
   ]
  ],
  "_evidencia": {
