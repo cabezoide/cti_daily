@@ -76,9 +76,19 @@ kbd{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line-strong)
 .card h3 a{color:var(--ink);text-decoration:none}
 .card h3 a:hover{color:var(--amber)}
 .card .meta{color:var(--ink-3);font-size:13px;flex:1}
-.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+/* `white-space:nowrap` evita que «TLP:CLEAR» o «vigente · 30 d» se partan, pero
+   hacía que una píldora más ancha que la tarjeta NO pudiera romperse y se
+   saliera por la derecha, montándose sobre la tarjeta vecina. Lo vimos con el
+   tipo de `CTI-2026-062`, «Perfil de cierre de una operación de extorsión
+   extinta», que invadía la tarjeta de DragonForce. `max-width` y `min-width:0`
+   son la red de seguridad: ninguna píldora puede exceder a su contenedor. */
 .pill{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;padding:3px 8px;
-  border-radius:99px;border:1px solid var(--line-strong);color:var(--ink-2);white-space:nowrap}
+  border-radius:99px;border:1px solid var(--line-strong);color:var(--ink-2);
+  white-space:nowrap;max-width:100%;min-width:0;box-sizing:border-box}
+/* La de categoría es la única con texto libre de longitud imprevisible, así que
+   es la única a la que se le permite ajustarse en varias líneas. */
+.pill.cat{white-space:normal;overflow-wrap:anywhere;text-align:left;line-height:1.45}
 .pill.ok{background:var(--mint-soft);border-color:rgba(77,185,156,.5);color:#9fe0cb}
 .pill.warn{background:var(--amber-soft);border-color:rgba(247,164,0,.5);color:#ffd27a}
 .pill.bad{background:rgba(214,77,77,.16);border-color:rgba(214,77,77,.5);color:#ffb3b3}
