@@ -466,7 +466,12 @@ def g4_higiene(inf):
         #    detecta la compuerta, que es donde debía estar.
         accion = " ".join(str(v) for k, v in fila.items()
                           if "acci" in str(k).lower()).lower()
-        niega = any(k in accion for k in (
+        # «no bloqueo PRIORITARIO» no es «no bloquear»: autoriza el bloqueo y
+        # sólo le quita precedencia. `CTI-2026-037` lo usa para el hash de un
+        # exploit probablemente no funcional, que es un indicador legítimo.
+        accion_n = re.sub(r"no bloqueo\s+(?:prioritario|urgente|inmediato|"
+                          r"preferente|automático)", "", accion)
+        niega = any(k in accion_n for k in (
             "nunca bloqueo", "no bloqueo", "no bloquear", "nunca se bloquea",
             "no implementar", "no como contramedida", "jamás bloqueo"))
         # Una negación puede referirse a un objeto DISTINTO del indicador:
@@ -478,10 +483,10 @@ def g4_higiene(inf):
         # dice «Bloqueo SÓLO de la URL completa. NO bloquear el dominio base»—
         # la fila no se contradice: autoriza lo que publica y niega otra cosa.
         autoriza = re.search(r"bloque(?:o|ar)\s+(?:s[oó]lo|[uú]nicamente|exclusivamente|"
-                             r"de la url|con revisi[oó]n|por el feed)", accion) is not None
+                             r"de la url|con revisi[oó]n|por el feed)", accion_n) is not None
         objeto_distinto = autoriza or re.search(
             r"no bloquear\s+(?!este|esta|el indicador|la direcci|el valor|el hash)"
-            r"[\w.\-]{3,}", accion) is not None
+            r"[\w.\-]{3,}", accion_n) is not None
         if destino and niega and objeto_distinto:
             ap("R7", False, "`%s` dice «no bloquear» nombrando algo que puede no "
                             "ser el indicador mismo, y su tipo `%s` lo envía a "
@@ -493,6 +498,33 @@ def g4_higiene(inf):
                            "bloquearse, y su tipo `%s` la envía al agregado "
                            "`ioc_%s.txt`, que es una lista de bloqueo. **La fila "
                            "se contradice a sí misma.** Usar `artefacto`."
+               % (corto, tipo, destino), corto)
+
+        # ── R8 · el contexto declara el valor legítimo y el tipo lo ingiere
+        #
+        #    `R7` depende de que el analista haya escrito «no bloquear» en la
+        #    acción. Si escribió «solo detección», la contradicción existe
+        #    igual y la regla no la ve: así es como el hash de `PsExec` llegó a
+        #    `ioc_hash.txt` desde `CTI-2026-024` mientras el MISMO hash estaba
+        #    bien tipado en `CTI-2026-014`.
+        #
+        #    Esta regla mira el CONTEXTO, no la acción. Y excluye dos casos que
+        #    dicen «legítimo» para negar que lo sea —un dominio que suplanta a
+        #    un fabricante, un sitio legítimo comprometido—, porque ésos sí son
+        #    infraestructura de ataque.
+        declara_legitimo = re.search(
+            r"herramienta leg[ií]tima|software leg[ií]tim|binario leg[ií]tim|"
+            r"int[eé]rprete leg[ií]tim|servicios? leg[ií]tim(?:o|os)s? de terc|"
+            r"no es un indicador|firma es v[aá]lida|firmado por su fabricante",
+            ctx) is not None
+        niega_legitimidad = re.search(
+            r"comprometid|suplanta|es del adversario|tapadera|no un dominio",
+            ctx) is not None
+        if destino and declara_legitimo and not niega_legitimidad:
+            ap("R8", True, "`%s` lleva tipo `%s`, que lo envía al agregado "
+                           "`ioc_%s.txt`, y su propio contexto lo declara "
+                           "**legítimo**. Bloquearlo rompe la organización, no "
+                           "al adversario: usar `herramienta` o `servicio`."
                % (corto, tipo, destino), corto)
 
         # ── R2 · ni datos personales ni nombres de víctima sin confirmar

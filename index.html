@@ -511,17 +511,17 @@ informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier pro
 <table>
 <thead><tr><th>Fichero</th><th>Núm.</th><th>Qué contiene</th></tr></thead>
 <tbody>
-<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">433</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
+<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">425</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
 <tr><td><a href="ioc_ipv6.txt"><code>ioc_ipv6.txt</code></a></td><td class="mono">2</td><td>Direcciones IPv6, una por línea</td></tr>
-<tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">343</td><td>Dominios y URL, una por línea</td></tr>
-<tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">458</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
+<tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">339</td><td>Dominios y URL, una por línea</td></tr>
+<tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">431</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
 <tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">3439</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
 </tbody>
 </table>
 
 <div class="note">
 <strong>Antes de cargar un <code>.txt</code> en un bloqueo.</strong> Las listas planas pierden
-la confianza, la caducidad y la acción permitida de cada indicador: 322 de los que
+la confianza, la caducidad y la acción permitida de cada indicador: 319 de los que
 contienen están marcados <em>solo retrohunt</em>, y hay indicadores marcados
 <em>no bloquear — herramienta legítima</em>. Cargarlas sin filtrar provocará cortes de
 servicio propios. Para eso está <code>ioc_index.csv</code> y su columna

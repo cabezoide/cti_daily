@@ -121,8 +121,9 @@ SilentMoonwalk para que sus hilos parezcan originarse en `RtlUserThreadStart`, e
 `CreateThread` con MinHook y usa `AnimateWindow` como trampolín para que la dirección de
 inicio del hilo declarada sea inocente, se carga reflexivamente sin tocar disco, resuelve
 la API de Windows por hashing y ejecuta complementos como **Beacon Object Files** en
-memoria. Esto es **hecho confirmado por análisis de binario**, no estimación.
-**Confianza: alta.** *Implicación de doctrina:* **las detecciones que dependen de la
+memoria. Esto es **hecho confirmado por análisis de
+binario**, no estimación: valoramos **casi con certeza** *(≥99 %)* las técnicas
+descritas. **Confianza: alta.** *Implicación de doctrina:* **las detecciones que dependen de la
 dirección de inicio del hilo, del recorrido de la pila o de la presencia del módulo en
 disco no verán este implante.** La oportunidad de detección está en la persistencia, en
 el trío de ficheros del cargador y en la conexión TLS saliente a un VPS.
@@ -1523,7 +1524,7 @@ vecinas. **Bloquear la IP exacta, nunca el rango.**
 | sha256 | `916a16a4a1eb7393b17574835312725e5cb146995a3cbcdf42fa8b9bebaa51b1` | `CopperLsass` — volcado de memoria del proceso de autoridad de seguridad local, `slave.dll` | Alta | Bloqueo + retrohunt |
 | sha256 | `675a44c679dea8d40b3885c37168929f976e3a0ecacc7e02c6b07936ac58a9fc` | `CopperLsass` — auxiliar, `dep.dll` | Alta | Bloqueo + retrohunt |
 | sha256 | `3a1b7ec461d656524e612b228ce969bfa612c799fb7117bb066352ff776d88da` | `CopperProxy`, solo en memoria. Hasta 300 clientes; abre la regla de cortafuegos `ss1` | Alta | Retrohunt |
-| sha256 | `ee8c148518c5a416fc7d9b33246e9c98d955f2379aa9c82225e045322c97a043` | `PyProxy` — **distribuido con el nombre `sqlmap.exe`**, que es el de una herramienta legítima de pruebas de intrusión | Alta | Bloqueo + retrohunt |
+| herramienta | `ee8c148518c5a416fc7d9b33246e9c98d955f2379aa9c82225e045322c97a043` | `PyProxy` — **distribuido con el nombre `sqlmap.exe`**, que es el de una herramienta legítima de pruebas de intrusión | Alta | Bloqueo + retrohunt |
 | sha256 | `4f9d9a6cba88832fcb7cfb845472b63ff15cb9b417f4f02cb8086552c19ceffc` | **SoftEther VPN renombrado a `vmtoolsd.exe`**, el nombre del proceso de las herramientas de VMware. Túnel de red con nombre de componente legítimo | Alta | Bloqueo + retrohunt |
 
 #### A.2.4 — Certificados TLS

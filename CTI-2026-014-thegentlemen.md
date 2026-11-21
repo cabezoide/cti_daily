@@ -67,7 +67,8 @@ comprometidos** que distribuye a sus afiliados. Valoramos **muy probable
 **KJ-3.** El cifrador **se auto-propaga sin intervención del operador**: con unas
 credenciales de dominio válidas, un solo host comprometido intenta 21 operaciones
 de ejecución remota contra cada máquina alcanzable. Esto está **confirmado por
-análisis de binario**. **Confianza: alta.**
+análisis de binario**. Valoramos **casi con certeza** *(≥99 %)* el mecanismo
+descrito, por estar verificado en el binario. **Confianza: alta.**
 *Implicación de doctrina:* la premisa clásica de contención —"aislar el host
 paciente cero y luego investigar"— **no es válida contra este actor**. La ventana
 de contención efectiva se mide en minutos.
@@ -92,7 +93,9 @@ este juicio eran ~868 y un 45 %, medida en septiembre—. **Y en la versión 1.4
 dato gana corroboración**: la ficha del propio rastreador que medimos recoge por
 su cuenta que **un servidor de mando y control comprometido en 2026 reveló más de
 1.570 víctimas vinculadas**, lo que convierte la fuente única original en dos
-fuentes concordantes sobre la misma cifra.
+fuentes concordantes sobre la misma cifra. Valoramos **muy probable**
+*(80–95 %)* que las cifras públicas subestimen el volumen real, y **casi con
+certeza** *(≥99 %)* los dos recuentos de partida.
 **Confianza: elevada de baja a MODERADA en la versión 1.4**, por la concordancia de dos fuentes sobre la cifra de 1.570 y porque el denominador es ahora medición propia. *Base:* la fuente original más la ficha del rastreador. **Sigue sin confirmación independiente del contenido de ese servidor**, y el juicio es sobre un recuento ajeno, no sobre brechas verificadas.
 
 **KJ-7.** **TheGentlemen opera en Latinoamérica con víctimas confirmadas en al
@@ -115,7 +118,10 @@ contradiría el modelo actual centrado en borde de red.
 
 **KJ-9.** **Medición propia del 19-11-2026: es el actor de mayor dispersión geográfica de toda la cartera —90 países— y el segundo de mayor exposición regional, con 129 víctimas latinoamericanas y nueve chilenas.** Sobre **1.020 víctimas reclamadas en 2026**, el reparto latinoamericano es: **Brasil 36**, México 24, Argentina 18, Colombia 11, **Chile 9**, Perú 8, Ecuador 5, Venezuela 4, Puerto Rico 4, Belice 3, Paraguay 2, y una cada uno en Bolivia, Nicaragua, Guatemala, Panamá y República Dominicana — **dieciséis países de la región**. Y **46 de sus registros llevan referencia de prensa**. Valoramos **casi con certeza** *(≥99 %)* las cifras, con la salvedad de que son reclamaciones y no brechas verificadas. **Confianza: alta para el recuento.** *Y la comparación que importa, sobre los mismos datos y el mismo día:* **Qilin tiene 20 víctimas chilenas frente a nuestras 9**, de modo que **en exposición chilena este actor es el segundo y no el primero**; pero **en número de países de la región alcanzados —dieciséis— no tiene rival**. *Consecuencia:* para una organización con operación multinacional en la región, **es el actor con más probabilidad de alcanzar alguna de sus filiales** (§E-2.3).
 
-**KJ-10.** **Su inventario de capacidades publicado tiene 55 técnicas en 13 tácticas, y añade tres elementos que el informe original no recogía y que cambian una hipótesis de caza.** El primero: **una cadena completa de relevo de NTLM** —`PetitPotam`, `ntlmrelayx`, `RelayKing`, `Responder`— que es un camino a administración de dominio **sin explotar ninguna vulnerabilidad de software**. El segundo: **`Velociraptor`, una herramienta legítima de respuesta a incidentes y análisis forense**, usada ofensivamente, lo que significa que **su presencia en un servidor puede parecer trabajo del propio equipo de seguridad**. El tercero: **`Censys` y `Shodan`** como herramientas de reconocimiento, es decir, **servicios de escaneo de Internet usados para elegir objetivo antes de tocarlos**. Valoramos **alta** la confianza en el inventario como dato publicado y **no lo verificamos**. *Consecuencia:* se añade la hipótesis de caza `H-13` (`T-4`) sobre relevo de NTLM, y una advertencia operativa: **`Velociraptor` en un servidor que no esté en el inventario de respuesta a incidentes es una anomalía, no una tranquilidad.**
+**KJ-10.** **Su inventario de capacidades publicado tiene 55 técnicas en 13 tácticas, y añade tres elementos que el informe original no recogía y que cambian una hipótesis de caza.** El primero: **una cadena completa de relevo de NTLM** —`PetitPotam`, `ntlmrelayx`, `RelayKing`, `Responder`— que es un camino a administración de dominio **sin explotar ninguna vulnerabilidad de software**. El segundo: **`Velociraptor`, una herramienta legítima de respuesta a incidentes y análisis forense**, usada ofensivamente, lo que significa que **su presencia en un servidor puede parecer trabajo del propio equipo de seguridad**. El tercero: **`Censys` y `Shodan`** como herramientas de reconocimiento, es decir, **servicios de escaneo de Internet usados para elegir objetivo antes de tocarlos**. Valoramos **casi con certeza** *(≥99 %)* el contenido del inventario **como dato
+publicado** —y **no lo verificamos**—, y **probable** *(55–80 %)* que las tres
+capacidades nuevas estén en uso real. **Confianza: alta para el registro, baja
+para el uso.** *Consecuencia:* se añade la hipótesis de caza `H-13` (`T-4`) sobre relevo de NTLM, y una advertencia operativa: **`Velociraptor` en un servidor que no esté en el inventario de respuesta a incidentes es una anomalía, no una tranquilidad.**
 
 ---
 
@@ -1194,7 +1200,7 @@ DeviceEvents
 |---|---|---|---|---|
 | SHA-256 | `22b38dad7da097ea03aa28d0614164cd25fafeb1383dbc15047e34c8050f6f67` | Cifrador Gentlemen | Alta | Retrohunt |
 | SHA-256 | `f918535f974591ef031bd0f30a8171e3da27a6754e6426a8ba095f83195661c8` | `G_hlm7jj_windows_amd64.exe` | Alta | Retrohunt |
-| SHA-256 | `078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b` | PsExec embebido | Alta | **No bloquear** — herramienta legítima |
+| herramienta | `078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b` | **PsExec embebido.** Tipo `herramienta` y no `SHA-256` **deliberadamente**: con tipo de hash entraría en `ioc_hash.txt`, que es una lista de bloqueo, y PsExec es utillaje legítimo de administración. La medida es el inventario, no el bloqueo | Alta | **No bloquear** — herramienta legítima |
 | SHA-256 | `fe1033335a045c696c900d435119d210361966e2fb5cd1ba3382608cfa2c8e68` | Bitmap del fondo de escritorio | Alta | Retrohunt |
 | SHA-1 | `c12c4d58541cc4f75ae19b65295a52c559570054` | Cifrador (muestra Trend) | Alta | Retrohunt |
 

@@ -1045,8 +1045,8 @@ level: critical
 | domain | `nginxmysql[.]com` | Dominio C2 de BLOODALCHEMY | Alta | Bloqueo |
 | domain | `sqlserver-sqlite[.]com` | Dominio C2 de BLOODALCHEMY | Alta | Bloqueo |
 | domain | `www[.]ddduuuppp[.]com` | Dominio C2 de BLOODALCHEMY | Alta | Bloqueo |
-| domain | `webhook.site` | Destino de devolución de resultados de comando — 491 URL rotatorias en una sola operación. **Servicio legítimo de terceros** | Alta | Bloqueo desde segmentos de servidor únicamente |
-| sha256 | `49fe70419fd19b81ca8d730a6ef7c1ec71b681d60b390761070d42686c7d2068` | Binario legítimo GameHook renombrado a `svchost.exe` — portador de BLOODALCHEMY | Alta | Bloqueo |
+| servicio | `webhook.site` | Destino de devolución de resultados de comando — 491 URL rotatorias en una sola operación. **Servicio legítimo de terceros** | Alta | Bloqueo desde segmentos de servidor únicamente |
+| herramienta | `49fe70419fd19b81ca8d730a6ef7c1ec71b681d60b390761070d42686c7d2068` | Binario legítimo GameHook renombrado a `svchost.exe` — portador de BLOODALCHEMY | Alta | Bloqueo |
 | sha256 | `3fb5a9fb3e2cb1d6208966bd4e55d10282d19c7250d827efa560463d60a12ee4` | `graphics-hook-filter64.dll` — cargador de BLOODALCHEMY | Alta | Bloqueo |
 | sha256 | `364251838edfcf5ef1107fa692da3c5bd9a540482449f645992830134bf807ab` | `graphics-hook_config.bin` — carga cifrada de BLOODALCHEMY | Alta | Bloqueo |
 | appid | `506e08f9-6e9a-4da4-942b-a099a03644ae` | Aplicación multiinquilino ConnectWise Cloud Backup — **buscar por este identificador, no por nombre visible** | Alta | Revisión obligatoria en el tenant |

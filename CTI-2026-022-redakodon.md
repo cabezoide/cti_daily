@@ -1075,9 +1075,9 @@ tags:
 | domain | `ansy10jun[.]duckdns[.]org` · `asegurar2octubre[.]duckdns[.]org` · `gotemburgoxm[.]duckdns[.]org` · `romanovas[.]duckdns[.]org` | C2 del `Cluster 5`; `gotemburgoxm` sirve REMCOS y XWorm, `romanovas` sirve LimeRAT | Alta | Bloqueo |
 | url | `hxxps://archive[.]org/replace_202505/REPLACE[.]txt` | Depósito de la carga en base64 en la campaña Shadow Vector. **Servicio legítimo: bloquear la ruta, no el dominio** | Alta | Detección; bloqueo de ruta |
 | url | `hxxps://t[.]me/xworm_v2` | Canal de Telegram que distribuye la versión crackeada de XWorm, con más de 300 miembros. **Es inteligencia de proveedor, no infraestructura de ataque** | Media | Solo detección |
-| ipv4 | `146.70.137.90` | C2 de DcRAT, AsyncRAT y REMCOS del `Cluster 1`; **servidor de VPN comercial TorGuard (AS9009)** | Alta | Solo detección; no bloquear |
-| ipv4 | `146.70.51.42` · `146.70.83.218` · `146.70.57.58` · `146.70.50.42` | C2 del `Cluster 1`; **todas servidores de VPN comercial compartida** | Alta | Solo detección; no bloquear |
-| ipv4 | `45.133.180.26` · `45.133.180.154` · `93.115.35.146` · `193.56.253.66` | C2 del `Cluster 1`; VPN comercial | Alta | Solo detección; no bloquear |
+| servicio | `146.70.137.90` | C2 de DcRAT, AsyncRAT y REMCOS del `Cluster 1`; **servidor de VPN comercial TorGuard (AS9009)**. Tipo `servicio` y no `ipv4` **deliberadamente**: es una dirección de salida **compartida** por los clientes de ese proveedor, de modo que con tipo `ipv4` entraría en `ioc_ipv4.txt` y **el bloqueo alcanzaría a usuarios legítimos, posiblemente propios** | Alta | Solo detección; no bloquear |
+| servicio | `146.70.51.42` · `146.70.83.218` · `146.70.57.58` · `146.70.50.42` | C2 del `Cluster 1`; **todas servidores de VPN comercial compartida**. Misma razón de tipo que la fila anterior | Alta | Solo detección; no bloquear |
+| servicio | `45.133.180.26` · `45.133.180.154` · `93.115.35.146` · `193.56.253.66` | C2 del `Cluster 1`; VPN comercial compartida. Misma razón de tipo | Alta | Solo detección; no bloquear |
 | ipv4 | `181.235.4.255` · `181.235.10.163` · `181.235.15.197` | C2 del `Cluster 1` en ISP colombiano (AS3816). **Probables equipos de terceros comprometidos** | Media | Solo detección |
 | ipv4 | `186.169.48.180` · `186.169.50.123` · `186.169.80.199` · `186.169.82.147` | C2 del `Cluster 1` en ISP colombiano | Media | Solo detección |
 | ipv4 | `64.188.9.172` · `64.188.9.173` · `64.188.9.175` · `64.188.9.177` | Servidores proxy del `Cluster 2` (AS36352); resuelven la serie `deadpoolstart` | Alta | Bloqueo con validación |

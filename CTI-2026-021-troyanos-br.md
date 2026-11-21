@@ -948,9 +948,9 @@ level: critical
 | sha256 | `28225c5622637cdaed8342e14560e8de7b53dd6ba145d973643fc4b5bdd67b75` | Fichero sin nombre asignado en la alerta de la Tesorería General (CSIRT `CMV24-00483`) | Media | Retrohunt |
 | sha256 | `3f9ee99d2336918d7a3df73df04115d14aebf029dacffcebedefadd88ec8c49b` | `FacturaContabilSolutionsDiciembre.msi` — campaña de factura impaga genérica (CSIRT `CMV25-00499`) | Alta | Bloqueo y retrohunt |
 | sha256 | `dd2c7a676fa3497a3761e17aab18cbcf301e6e389f63469d61c0eeb849917db6` | `5nkdggch.dll` — misma campaña (CSIRT `CMV25-00499`) | Alta | Bloqueo y retrohunt |
-| sha256 | `307215945683763731f3bdd61ada911367be4d25e02c8a158d6c314c16865d47` | `pdq-connect-agent.exe` — **software legítimo de administración remota**, listado por el CSIRT como indicador de la campaña. **NO BLOQUEAR por hash** | Alta | Solo detección; verificar contexto |
-| sha256 | `8daa7bc4f2e938960186dfd65ee38cc8917361c90dc9cfef5f2ce83306691988` | `pdq-connect-updater.exe` — **software legítimo**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `101665452ebc6e400550380510e8db10a9ce2af1e458f928ca4b0188daeceb9d` | `PDQConnectUpdater-0.3.0.msi` — **software legítimo**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `307215945683763731f3bdd61ada911367be4d25e02c8a158d6c314c16865d47` | `pdq-connect-agent.exe` — **software legítimo de administración remota**, listado por el CSIRT como indicador de la campaña. **NO BLOQUEAR por hash** | Alta | Solo detección; verificar contexto |
+| herramienta | `8daa7bc4f2e938960186dfd65ee38cc8917361c90dc9cfef5f2ce83306691988` | `pdq-connect-updater.exe` — **software legítimo**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `101665452ebc6e400550380510e8db10a9ce2af1e458f928ca4b0188daeceb9d` | `PDQConnectUpdater-0.3.0.msi` — **software legítimo**, mismo caso | Alta | Solo detección; verificar contexto |
 | sha256 | `caa9da1c55e33446eaeb783957e990847369423c7dd652f07a5c93bf1d786a66` | `WixSharp.dll` — **biblioteca legítima de construcción de instaladores**, mismo caso | Alta | Solo detección; verificar contexto |
 | sha1 | `8b683c897ecc6fa6881d29f6c41c7c159d65fa62` | `OZIW6737LTREEE.exe` — campaña dirigida a Chile de ago-2019 (ESET) | Media | Retrohunt |
 | sha256 | `4236f4d3626e61dc37d83cbd26597ee2ce1adcbfdb36bf101435d0d3e134b4ea` | `shfolder.dll` — misma campaña de 2019; **el informe lo publica bajo encabezado SHA1 pero su longitud corresponde a SHA-256** | Media | Retrohunt |
@@ -967,7 +967,7 @@ level: critical
 | sha256 | `fb3995289bac897e881141e281c18c606a772a53356cc81caf38e5c6296641d4` | Variante de Mispadu del mismo conglomerado (Unit 42) | Alta | Bloqueo y retrohunt |
 | sha256 | `46d20fa82c936c5784f86106838697ab79a1f6dc243ae6721b42f0da467eaf52` | Variante de Mispadu del mismo conglomerado (Unit 42) | Alta | Bloqueo y retrohunt |
 | sha256 | `03bdae4d40d3eb2db3c12d27b76ee170c4813f616fec5257cf25a068c46ba15f` | Variante de Mispadu del mismo conglomerado (Unit 42) | Alta | Bloqueo y retrohunt |
-| md5 | `0adb9b817f1df7807576c2d7068dd931` | **Intérprete legítimo de AutoIt** usado en casi todas las campañas de Mispadu desde jun-2024 (Cofense). **NO BLOQUEAR por hash** | Alta | Solo detección; verificar ruta y padre |
+| herramienta | `0adb9b817f1df7807576c2d7068dd931` | **Intérprete legítimo de AutoIt** usado en casi todas las campañas de Mispadu desde jun-2024 (Cofense). **NO BLOQUEAR por hash** | Alta | Solo detección; verificar ruta y padre |
 | domain | `gscjgn[.]org` | Descarga del fichero, campaña del SII (CSIRT `2CMV23-00417-01`) | Alta | Bloqueo |
 | domain | `cmg-technology[.]ro` | Contenedor de malware, campaña del SII. **Probable sitio legítimo comprometido** | Media | Detección; bloqueo con validación |
 | domain | `anchoriaatrade[.]com` | Redirección, campaña de la CGE (CSIRT `CMV24-00455`) | Alta | Bloqueo |
@@ -1003,8 +1003,8 @@ level: critical
 | ipv4 | `206.0.29[.]58` · `51.222.75[.]250` · `51.222.75[.]248` · `192.99.226[.]117` · `212.69.5[.]84` · `34.227.229[.]85` | Panel de control de `VENON` | Media | Bloqueo tras verificación |
 | ipv4 | `140.82.18[.]85` | C2 observado en la configuración de Mispadu (Cofense, feb-2026) | Media | Bloqueo tras verificación |
 | url | `hxxps://52zd[.]com/profile/analytic/Informe-21-2024.zip` | Contenedor del malware, campaña del SII de 2024 | Alta | Bloqueo |
-| url | `hxxps://s3.sa-east-1.amazonaws[.]com/8151218-25.2025.7.12.5178/modmarco2026-2.zip` | Carga de `VENON` en almacenamiento en la nube. **Servicio legítimo** | Alta | Detección; no bloquear el dominio |
-| url | `hxxps://storage.googleapis[.]com/mydns2026/startabril2026` | Depósito de configuración de `VENON`. **Servicio legítimo** | Alta | Detección; no bloquear el dominio |
+| url | `hxxps://s3.sa-east-1.amazonaws[.]com/8151218-25.2025.7.12.5178/modmarco2026-2.zip` | Carga de `VENON` en almacenamiento en la nube. **Servicio legítimo** | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
+| url | `hxxps://storage.googleapis[.]com/mydns2026/startabril2026` | Depósito de configuración de `VENON`. **Servicio legítimo** | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
 | url | `hxxp://trilivok[.]com/4g3031ar0/cb6y1dh/it.php` | Extremo de exfiltración de Mispadu; el sufijo `it.php` se repite entre campañas | Alta | Bloqueo |
 | useragent | `Microsoft-WebDAV-MiniRedir` | Petición WebDAV disparada por el `.url` de Mispadu. **Componente legítimo de Windows**: la señal es el destino externo | Media | Detección por contexto |
 | filepath | `C:\Users\Public\Temp\ChromeAuto_` | **Carpeta de perfil de navegador clonado del gusano de WhatsApp.** El artefacto más específico de la amenaza de 2026 | Alta | Detección y caza |

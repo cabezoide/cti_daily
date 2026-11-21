@@ -974,14 +974,14 @@ level: critical
 | domain | `rema200426[.]duckdns[.]org` | C2 de la compilación `JC-46` de AsyncRAT; el patrón de registro en DuckDNS sugiere uso desde abr-2020 (SpiderLabs, jul-2026) | Alta | Bloqueo |
 | domain | `startmenuexperiencehost[.]ydns[.]eu` | C2 de DCRAT; resuelve a direcciones suecas en el AS 42708 (Zscaler, dic-2025) | Alta | Bloqueo |
 | domain | `servicioseguroenlineabb[.]com` | Dominio de phishing que suplanta banca colombiana (mar-2024) | Alta | Bloqueo |
-| domain | `cort[.]as` · `acortaurl[.]com` · `gtly[.]to` | Acortadores con filtrado por geolocalización usados en la entrega. **Servicios legítimos de terceros** | Media | Solo retrohunt y correlación |
+| servicio | `cort[.]as` · `acortaurl[.]com` · `gtly[.]to` | Acortadores con filtrado por geolocalización usados en la entrega. **Servicios legítimos de terceros** | Media | Solo retrohunt y correlación |
 | url | `hxxp://62.60.226[.]64/file/4025_3980.exe` | Etapa 2 referenciada desde el fichero `.url` | Alta | Bloqueo |
 | url | `hxxp://62.60.226[.]112/file/3601_2042.exe` | Etapa 2 observada en red de cliente | Alta | Bloqueo |
-| url | `hxxps://raw.githubusercontent[.]com/Oscarito20222/file/refs/heads/main/redtube.exe` | Remcos alojado en GitHub (feb-2025) | Alta | Detección; no bloquear el dominio |
-| url | `hxxps://raw.githubusercontent[.]com/cabeto850128/comicsam` | Repositorio de etapa intermedia (jul-2026) | Alta | Detección; no bloquear el dominio |
-| url | `hxxps://bitbucket[.]org/facturacioncol/fact/downloads/FileHosting.exe` | Carga de la campaña `marte` | Alta | Detección; no bloquear el dominio |
-| url | `hxxps://bitbucket[.]org/trabajo12023/proyecto/downloads/ROSAS.exe` | Carga de la campaña `PARAISO` | Alta | Detección; no bloquear el dominio |
-| url | `hxxps://archive[.]org/download/optimized_msi_20250821/optimized_MSI.png` | PNG con el cargador `Caminho` oculto por esteganografía entre los marcadores `BaseStart-` y `-BaseEnd` | Alta | Detección; no bloquear el dominio |
+| url | `hxxps://raw.githubusercontent[.]com/Oscarito20222/file/refs/heads/main/redtube.exe` | Remcos alojado en GitHub (feb-2025) | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
+| url | `hxxps://raw.githubusercontent[.]com/cabeto850128/comicsam` | Repositorio de etapa intermedia (jul-2026) | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
+| url | `hxxps://bitbucket[.]org/facturacioncol/fact/downloads/FileHosting.exe` | Carga de la campaña `marte` | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
+| url | `hxxps://bitbucket[.]org/trabajo12023/proyecto/downloads/ROSAS.exe` | Carga de la campaña `PARAISO` | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
+| url | `hxxps://archive[.]org/download/optimized_msi_20250821/optimized_MSI.png` | PNG con el cargador `Caminho` oculto por esteganografía entre los marcadores `BaseStart-` y `-BaseEnd` | Alta | **Bloqueo de la URL completa; NO del dominio base**, que es un servicio legítimo de uso masivo. Detección y búsqueda retrospectiva|
 | url | `hxxps://paste[.]ee/r/jNJfecjT/0` | Etapa intermedia en servicio de pegado de texto (jun-2025) | Media | Detección |
 | url | `hxxps://textbin[.]net/raw/xsi2eulwpw` | Etapa intermedia en servicio de pegado de texto (jun-2025) | Media | Detección |
 | sha1 | `1d1e007a9d8939bee7a0333522cc4f7480d448cc` | Fichero `.url` de etapa 1 con señuelo judicial | Alta | Bloqueo y retrohunt |

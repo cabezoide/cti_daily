@@ -70,10 +70,10 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 433 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-040`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-058` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 425 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-040`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-058` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
-| [`ioc_url.txt`](ioc_url.txt) | 343 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-043`, `CTI-2026-054`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061` |
-| [`ioc_hash.txt`](ioc_hash.txt) | 458 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-041`, `CTI-2026-043` |
+| [`ioc_url.txt`](ioc_url.txt) | 339 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-043`, `CTI-2026-054`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 431 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-041`, `CTI-2026-043` |
 | [`ioc_index.csv`](ioc_index.csv) | 3439 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-046`, `CTI-2026-047`, `CTI-2026-048`, `CTI-2026-049`, `CTI-2026-050`, `CTI-2026-051`, `CTI-2026-052`, `CTI-2026-053`, `CTI-2026-054`, `CTI-2026-055`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061`, `CTI-2026-062` |
 
 ### Estado del ciclo
@@ -81,7 +81,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | Métrica | Valor |
 |---|---|
 | Informes publicados | 49 |
-| Indicadores en listas planas | 1236 |
+| Indicadores en listas planas | 1197 |
 | Indicadores en el índice con contexto | 3439 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |

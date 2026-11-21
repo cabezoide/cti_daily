@@ -1032,25 +1032,25 @@ tags:
 | sha256 | `a864282fea5a536510ae86c77ce46f7827687783628e4f2ceb5bf2c41b8cd3c6` | `fury_ctm1042.bin` — muestra de referencia de mayo de 2023 publicada por CronUp. **La fuente advierte expresamente que NO es la muestra usada contra el Ejército de Chile** | Alta | Bloqueo y retrohunt |
 | sha1 | `69b3d913a3967153d1e91ba1a31ebed839b297ed` | Misma muestra de referencia de CronUp, en SHA-1 | Alta | Bloqueo y retrohunt |
 | md5 | `0c8e88877383ccd23a755f429006b437` | Misma muestra de referencia de CronUp, en MD5 | Alta | Bloqueo y retrohunt |
-| sha256 | `edfae1a69522f87b12c6dac3225d930e4848832e3c551ee1e7d31736bf4525ef` | `PsExec64.exe` — **herramienta legítima de Microsoft** listada por el aviso. **NO BLOQUEAR por hash** | Alta | Solo detección; verificar contexto |
-| sha256 | `078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b` | `PsExec.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `edfae1a69522f87b12c6dac3225d930e4848832e3c551ee1e7d31736bf4525ef` | `PsExec64.exe` — **herramienta legítima de Microsoft** listada por el aviso. **NO BLOQUEAR por hash** | Alta | Solo detección; verificar contexto |
+| herramienta | `078163d5c16f64caa5a14784323fd51451b8c831c73396b967b4e35e6879937b` | `PsExec.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
 | sha256 | `a9ca77dfe03ce15004157727bb43ba66f00ceb215362c9b3d199f000edaa8d61` | `PSTools.zip` — **suite legítima completa**, observada en `C:\out\` | Alta | Solo detección; verificar contexto |
-| sha256 | `201d8e77ccc2575d910d47042a986480b1da28cf0033e7ee726ad9d45ccf4daa` | `PsGetsid64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `de73b73eeb156f877de61f4a6975d06759292ed69f31aaf06c9811f3311e03e7` | `PsInfo64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `fdadb6e15c52c41a31e3c22659dd490d5b616e017d1b1aa6070008ce09ed27ea` | `PsLoggedon64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `554f523914cdbaed8b17527170502199c185bd69a41c81102c50dbb0e5e5a78d` | `PsService64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `7ba47558c99e18c2c6449be804b5e765c48d3a70ceaa04c1e0fae67ff1d7178d` | `pskill64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `d3247f03dcd7b9335344ebba76a0b92370f32f1cb0e480c734da52db2bd8df60` | `pslist64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `5e55b4caf47a248a10abd009617684e969dbe5c448d087ee8178262aaab68636` | `psloglist64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `8d950068f46a04e77ad6637c680cccf5d703a1828fbd6bdca513268af4f2170f` | `pspasswd64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `d1f718d219930e57794bdadf9dda61406294b0759038cef282f7544b44b92285` | `psping64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `4226738489c2a67852d51dbf96574f33e44e509bc265b950d495da79bb457400` | `psshutdown64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `4bf8fbb7db583e1aacbf36c5f740d012c8321f221066cc68107031bd8b6bc1ee` | `pssuspend64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha256 | `be922312978a53c92a49fefd2c9f9cc098767b36f0e4d2e829d24725df65bc21` | `psfile64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha1 | `e66fd750c8bec06fca11b6e2919a3d66bc6c0fc1` | `StorageExplorer-windows-x64.exe` — **herramienta legítima de Microsoft** usada para mover datos a la nube, añadida en 2025. **NO BLOQUEAR por hash** | Alta | Solo detección; verificar contexto |
-| sha1 | `b26cfde4ca74d5d5377889bba5b60b5fc72dda75` | `Advanced IP Scanner` — **herramienta legítima** de escaneo de red, listada por el aviso | Alta | Solo detección; verificar contexto |
-| sha1 | `3477a173e2c1005a81d042802ab0f22cc12a4d55` | `Advanced Port Scanner` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
-| sha1 | `39950150074e5b22d0ef0c30ab4c72287e003908` | `advanced_ip_scanner.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `201d8e77ccc2575d910d47042a986480b1da28cf0033e7ee726ad9d45ccf4daa` | `PsGetsid64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `de73b73eeb156f877de61f4a6975d06759292ed69f31aaf06c9811f3311e03e7` | `PsInfo64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `fdadb6e15c52c41a31e3c22659dd490d5b616e017d1b1aa6070008ce09ed27ea` | `PsLoggedon64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `554f523914cdbaed8b17527170502199c185bd69a41c81102c50dbb0e5e5a78d` | `PsService64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `7ba47558c99e18c2c6449be804b5e765c48d3a70ceaa04c1e0fae67ff1d7178d` | `pskill64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `d3247f03dcd7b9335344ebba76a0b92370f32f1cb0e480c734da52db2bd8df60` | `pslist64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `5e55b4caf47a248a10abd009617684e969dbe5c448d087ee8178262aaab68636` | `psloglist64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `8d950068f46a04e77ad6637c680cccf5d703a1828fbd6bdca513268af4f2170f` | `pspasswd64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `d1f718d219930e57794bdadf9dda61406294b0759038cef282f7544b44b92285` | `psping64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `4226738489c2a67852d51dbf96574f33e44e509bc265b950d495da79bb457400` | `psshutdown64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `4bf8fbb7db583e1aacbf36c5f740d012c8321f221066cc68107031bd8b6bc1ee` | `pssuspend64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `be922312978a53c92a49fefd2c9f9cc098767b36f0e4d2e829d24725df65bc21` | `psfile64.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `e66fd750c8bec06fca11b6e2919a3d66bc6c0fc1` | `StorageExplorer-windows-x64.exe` — **herramienta legítima de Microsoft** usada para mover datos a la nube, añadida en 2025. **NO BLOQUEAR por hash** | Alta | Solo detección; verificar contexto |
+| herramienta | `b26cfde4ca74d5d5377889bba5b60b5fc72dda75` | `Advanced IP Scanner` — **herramienta legítima** de escaneo de red, listada por el aviso | Alta | Solo detección; verificar contexto |
+| herramienta | `3477a173e2c1005a81d042802ab0f22cc12a4d55` | `Advanced Port Scanner` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
+| herramienta | `39950150074e5b22d0ef0c30ab4c72287e003908` | `advanced_ip_scanner.exe` — **herramienta legítima**, mismo caso | Alta | Solo detección; verificar contexto |
 | sha1 | `1f76997e8a902c1cd3b1e6c68f17f694c61c5445` | `conhost.exe` — variante del cifrador (aviso `AA23-319A`) | Alta | Bloqueo y retrohunt |
 | sha1 | `e5d4a2e704ee880273aa4e8114fe9927b0019ff8` | `c:\s$\conhost.exe` — cifrador en ruta de recurso compartido administrativo | Alta | Bloqueo y retrohunt |
 | sha1 | `a506fd44ee7a6d16fe8929201bc7887b966d6d14` | `1.exe` (aviso `AA23-319A`) | Alta | Bloqueo y retrohunt |
