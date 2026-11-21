@@ -62,7 +62,19 @@ if [ -z "$CTI_SIN_ENRIQUECER" ] && \
              "no bloquea." >&2
 fi
 
-# ── 3 · los artefactos derivados
+# ── 3 · los artefactos derivados, y cómo se ven
+#
+# `cti_build.py` termina abriendo un navegador y comprobando que las páginas
+# se ven bien: que nada se salga de su tarjeta, que no haya desplazamiento
+# horizontal, que no haya errores de JavaScript y que el filtro del índice
+# filtre DE VERDAD —midiendo la geometría, no el atributo `hidden`—.
+#
+# Si encuentra algo, devuelve 1 y el commit se detiene aquí. Los dos fallos
+# que motivaron esto pasaron las dos compuertas anteriores porque el HTML era
+# correcto y sólo se veía mal.
+#
+# Si no hay Playwright instalado, avisa y sigue: no bloquea. Para saltárselo a
+# propósito:  python3 tools/cti_build.py --sin-render
 python3 tools/cti_build.py
 
 for f in README.md index.html red-actores-3d.html ioc_ipv4.txt ioc_ipv6.txt ioc_url.txt ioc_hash.txt ioc_index.csv; do

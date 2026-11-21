@@ -1185,6 +1185,8 @@ def main():
                     help="regenera todos los HTML aunque el .md no sea más reciente")
     ap.add_argument("--json", action="store_true",
                     help="volca el estado de vigencia en JSON y termina")
+    ap.add_argument("--sin-render", action="store_true",
+                    help="no comprobar las páginas en un navegador al terminar")
     opt = ap.parse_args()
 
     hoy = _dt.date.today()
@@ -1297,6 +1299,45 @@ def main():
             print("  ✓ " + c)
     else:
         print("\nsin cambios: todo estaba al día.")
+
+    # ── comprobación de representación
+    #
+    # Construir una página válida no garantiza que se vea bien. El 21-11-2026
+    # se escaparon dos fallos que ninguna compuerta podía ver sin abrir un
+    # navegador: una etiqueta que se salía de su tarjeta y se montaba sobre la
+    # vecina, y un filtro que marcaba las tarjetas como ocultas sin que
+    # dejaran de verse. Los dos pasaron porque el HTML era correcto.
+    #
+    # Si no hay Playwright, se avisa y se sigue: un repositorio que no se
+    # puede construir en una máquina sin navegador sería peor que el fallo
+    # que esto previene.
+    if not opt.sin_render:
+        try:
+            sys.path.insert(0, os.path.join(RAIZ, "tools"))
+            import cti_render
+        except Exception as ex:
+            print("aviso: no se pudo cargar cti_render (%s)" % ex, file=sys.stderr)
+            return 0
+        if not cti_render.disponible():
+            print("\naviso: Playwright no está instalado; las páginas NO se han "
+                  "comprobado en un navegador.", file=sys.stderr)
+            print("  pip install playwright && playwright install chromium",
+                  file=sys.stderr)
+            return 0
+        print("\ncomprobando la representación en un navegador…")
+        try:
+            fallos = cti_render.ejecutar(anchos=(1400, 900, 380))
+        except Exception as ex:
+            print("aviso: la comprobación de representación no pudo completarse "
+                  "(%s); no bloquea." % ex, file=sys.stderr)
+            return 0
+        if fallos:
+            cti_render.informar(fallos)
+            print("\nLos artefactos se han escrito, pero las páginas NO se ven "
+                  "bien. Para saltarse esto: python3 tools/cti_build.py "
+                  "--sin-render", file=sys.stderr)
+            return 1
+        print("  ✓ las páginas se ven bien")
     return 0
 
 
