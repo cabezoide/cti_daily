@@ -103,19 +103,36 @@ CLAVES = {
 }
 
 
-def _del_fichero():
-    if not os.path.exists(FICHERO_CLAVES):
-        return {}
+# Orden de búsqueda: entorno → `.env` del proyecto → ~/.config/cti/claves.env.
+# El `.env` del proyecto está en `.gitignore` y DEBE seguir estándolo: este
+# repositorio se publica en GitHub Pages.
+FICHEROS_CLAVES = (os.path.join(RAIZ, ".env"), FICHERO_CLAVES)
+
+
+def _leer_env(ruta):
     d = {}
+    if not os.path.exists(ruta):
+        return d
     try:
-        with open(FICHERO_CLAVES, encoding="utf-8") as f:
+        with open(ruta, encoding="utf-8") as f:
             for l in f:
                 l = l.strip()
+                if l.startswith("export "):
+                    l = l[7:].strip()
                 if l and not l.startswith("#") and "=" in l:
                     k, v = l.split("=", 1)
-                    d[k.strip()] = v.strip().strip('"').strip("'")
+                    v = v.strip().strip('"').strip("'")
+                    if v:
+                        d[k.strip()] = v
     except OSError:
         pass
+    return d
+
+
+def _del_fichero():
+    d = {}
+    for ruta in reversed(FICHEROS_CLAVES):      # el primero de la lista manda
+        d.update(_leer_env(ruta))
     return d
 
 
@@ -476,7 +493,8 @@ def main():
     a = p.parse_args()
 
     if a.fuentes:
-        print("Claves (entorno o %s):" % FICHERO_CLAVES)
+        print("Claves. Orden de búsqueda: entorno → %s"
+              % " → ".join(FICHEROS_CLAVES))
         for n in CLAVES:
             print("  %-12s %s" % (n, "disponible" if clave(n) else "FALTA"))
         print("\nCensys Search v2 está apagada (cierre 2026-09-30): no se usa.")

@@ -567,7 +567,12 @@ def _modificados():
         return {os.path.basename(x) for x in n
                 if re.match(r"^CTI-\d{4}-\d{3}.*\.md$", os.path.basename(x))}
     except Exception:
-        return set()
+        # `None` significa «no se pudo determinar», que NO es lo mismo que
+        # «ninguno». Sin esta distinción, un fallo de git auditaba la cartera
+        # entera y un commit que no toca informes también: pasó en uso real al
+        # commitear sólo `.gitignore` y `tools/`, y la compuerta lo bloqueó con
+        # los 36 bloqueos heredados de informes que ese commit no tocaba.
+        return None
 
 
 def ejecutar(patrones=None, hoy=None, todo=False):
@@ -579,7 +584,10 @@ def ejecutar(patrones=None, hoy=None, todo=False):
                  if any(fnmatch.fnmatch(i["md"], p) or p in i["id"] for p in patrones)]
     elif not todo:
         mod = _modificados()
-        if mod:
+        if mod is not None:
+            # Conjunto vacío = el commit no toca ningún informe = nada que
+            # juzgar. Auditar la cartera entera en ese caso bloquearía un
+            # cambio de utillaje por deuda ajena al cambio.
             lista = [i for i in lista if i["md"] in mod]
     H = []
     for inf in lista:
@@ -617,7 +625,12 @@ def main():
                          ensure_ascii=False, indent=1))
         return 1 if bloqueos else 0
 
-    alcance = ("cartera completa" if (a.todo or a.patron) else "sólo lo modificado")
+    if a.todo or a.patron:
+        alcance = "cartera completa"
+    elif not lista:
+        alcance = "ningún informe modificado: nada que juzgar"
+    else:
+        alcance = "sólo lo modificado"
     print("cti_gate · %d informes (%s) · %d bloqueo(s) · %d aviso(s)"
           % (len(lista), alcance, len(bloqueos), len(avisos)))
 

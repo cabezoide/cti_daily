@@ -20,3 +20,9 @@ vigilancia/parte-*.json
 # Caché de la compuerta de enriquecimiento (tools/cti_enriquecer.py): son
 # respuestas de terceros con un día de vida útil, no inteligencia propia.
 vigilancia/.cache-enriquecimiento.json
+
+# Credenciales de las fuentes de enriquecimiento. NUNCA se versionan: este
+# repositorio se publica en GitHub Pages y un commit las haría públicas.
+.env
+.env.*
+!.env.ejemplo
