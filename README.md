@@ -21,7 +21,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-016` | LockBit 5.0 · ChuongDong | Perfil de actor | 2026-11-16 | 1.1 | `TLP:CLEAR` | vigente · 25 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
 | `CTI-2026-017` | FamousSparrow · SparroWocky | Perfil de actor | 2026-11-17 | 1.2 | `TLP:CLEAR` | vigente · 88 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
 | `CTI-2026-018` | Abuso de dominios de primer nivel | Evaluación estratégica | 2026-11-15 | 1.0 | `TLP:CLEAR` | vigente · 86 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
-| `CTI-2026-019` | ARTEX · framework ofensivo agéntico | Evaluación estratégica | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 87 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
+| `CTI-2026-019` | ARTEX · framework ofensivo agéntico | Evaluación estratégica | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 87 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
 | `CTI-2026-020` | Blind Eagle · APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98 | Perfil de actor | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 87 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
 | `CTI-2026-021` | Troyanos bancarios brasileños · Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON | Perfil de ecosistema | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 87 d | [md](CTI-2026-021-troyanos-br.md) · [html](CTI-2026-021-troyanos-br.html) |
 | `CTI-2026-022` | Red Akodon · campañas «Shadow Vector» | Perfil de actor | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 87 d | [md](CTI-2026-022-redakodon.md) · [html](CTI-2026-022-redakodon.html) |
@@ -47,7 +47,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-042` | Devman · Funky Mantis · Dire Wolf · Sauron | Perfil de ecosistema | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-042-emergentes.md) · [html](CTI-2026-042-emergentes.html) |
 | `CTI-2026-043` | Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor | Perfil de operación sin atribuir | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 88 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
 | `CTI-2026-044` | Redes de bots de DDoS y de proxy residencial · 33 familias | Perfil de ecosistema | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-044-redes-bots.md) · [html](CTI-2026-044-redes-bots.html) |
-| `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-19 | 1.4 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
+| `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-21 | 1.4 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
 | `CTI-2026-046` | Akira · Akira_v2 · Megazord · (linaje discutido) Conti | Perfil de operación de extorsión | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-046-akira.md) · [html](CTI-2026-046-akira.html) |
 | `CTI-2026-047` | INC Ransom · Inc Ransom · (marca hermana) Lynx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-047-incransom.md) · [html](CTI-2026-047-incransom.html) |
 | `CTI-2026-048` | n0n · N0n | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 59 d | [md](CTI-2026-048-n0n.md) · [html](CTI-2026-048-n0n.html) |
@@ -60,7 +60,7 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-055` | Multiactor · 237 grupos en reclamaciones cruzadas | Método analítico | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 90 d | [md](CTI-2026-055-reclamaciones-cruzadas.md) · [html](CTI-2026-055-reclamaciones-cruzadas.html) |
 | `CTI-2026-056` | BrainCipher | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-056-braincipher.md) · [html](CTI-2026-056-braincipher.html) |
 | `CTI-2026-057` | krybit · Krybit | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-057-krybit.md) · [html](CTI-2026-057-krybit.html) |
-| `CTI-2026-058` | safepay · SafePay | Perfil de operación de extorsión | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-058-safepay.md) · [html](CTI-2026-058-safepay.html) |
+| `CTI-2026-058` | safepay · SafePay | Perfil de operación de extorsión | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-058-safepay.md) · [html](CTI-2026-058-safepay.html) |
 | `CTI-2026-059` | Booba Project | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-059-boobaproject.md) · [html](CTI-2026-059-boobaproject.html) |
 | `CTI-2026-060` | Storm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-060-storm.md) · [html](CTI-2026-060-storm.html) |
 | `CTI-2026-061` | DragonForce · dragonforce | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-061-dragonforce.md) · [html](CTI-2026-061-dragonforce.html) |

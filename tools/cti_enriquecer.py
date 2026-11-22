@@ -17,8 +17,8 @@ no puede depender de que alguien lo mire a mano**, así que aquí está
 automatizado: la regla `N1` detecta esa clase de fallo en cualquier indicador de
 cualquier informe.
 
-LAS CINCO REGLAS
-================
+LAS SEIS REGLAS
+===============
 
 | Regla | Qué detecta | Por qué importa |
 |---|---|---|
@@ -27,6 +27,45 @@ LAS CINCO REGLAS
 | **`N3`** | **Corroboración disponible y no citada** | Si un tercero confirma nuestro indicador, el informe gana grado y no lo sabe |
 | **`N4`** | Indicador **declarado caducado que sigue vivo**, o al revés | La caducidad es un juicio y aquí se puede comprobar |
 | **`N5`** | **Colección parcial** | Doctrina de la casa: una fuente caída no es un veredicto limpio |
+| **`N6`** | **Corroboración circular**: el tercero remite a una fuente que el informe ya cita | Contar la misma fuente dos veces sube la confianza sin añadir evidencia |
+
+EL CASO QUE ORIGINÓ `N6`, Y POR QUÉ `N2` NO BASTABA
+==================================================
+
+El **21-11-2026** la compuerta señaló tres dominios de `CTI-2026-019`
+—`nginxmysql.com`, `sqlserver-sqlite.com`, `www.ddduuuppp.com`— como conflicto
+de atribución: ThreatFox los daba a `BloodAlchemy` y el informe declara
+`actor: ARTEX`. **Los dos errores que había detrás valen más que el aviso:**
+
+**1 · `N2` miraba sólo el frontmatter.** El informe describe cada uno de esos
+dominios como «Dominio C2 de BLOODALCHEMY (VAPOR PANDA)» en la propia fila del
+Anexo A. No había conflicto: había coincidencia literal. La regla comparaba con
+`actor` e `id` e ignoraba la descripción del indicador, que es donde esta
+cartera escribe la atribución fina cuando un informe cubre varias familias
+—y los informes de herramienta compartida la cubren siempre—. Ahora `N2`
+exige que la familia **no** aparezca ni en el frontmatter ni en el contexto de
+la fila.
+
+**2 · Y arreglarlo así habría producido un error peor.** Con la familia
+reconocida, el hallazgo pasa a `N3`: *«el informe gana grado de evidencia y no
+lo cita»*. **Eso era falso.** La `reference` de los tres envíos es
+`crowdstrike.com/…/vapor-panda-uses-artex-to-scale-global-campaign/`: **el mismo
+informe de CrowdStrike del 29-10-2026 que `CTI-2026-019` ya usa como fuente**.
+El envío lo firma `anonymous` y `last_seen` viene **vacío** en los tres: nadie
+los ha reobservado. ThreatFox no aportaba una observación, **transcribía la
+fuente que ya teníamos**, y la regla lo habría presentado como segundo apoyo.
+Subir la confianza con eso es la falacia que `CTI-2026-026` `KJ-5` llama
+atribución encadenada, cometida en la dirección del grado de evidencia.
+
+**El discriminante es la observación, no el nombre del proveedor.** No sirve
+preguntar «¿cita el informe a este proveedor?», porque `CTI-2026-045` cita a
+Nokia Deepfield y sus diecisiete direcciones las reporta **`deepfield`** con
+reobservación hasta el día de la consulta: eso **sí** es corroboración, y de
+hecho es más reciente que el `ips.csv` del propio repositorio público del
+laboratorio. Las dos señales que separan los casos salen del registro:
+**quién lo reporta** y **si lo ha vuelto a ver**. `N6` sólo salta cuando la
+referencia es de una fuente ya citada **y** el envío es anónimo o sin
+reobservar.
 
 LO QUE NO HACE, Y ES DELIBERADO
 ===============================
@@ -360,6 +399,48 @@ def _es_ip(v):
         return False
 
 
+# Los envíos de ThreatFox traen una `reference`. Si apunta a una fuente que el
+# informe YA cita, la coincidencia no es corroboración: es la misma afirmación
+# contada dos veces. Sacar la marca responsable del enlace exige distinguir
+# tres clases de host, y confundirlas da nombres falsos:
+#
+#   · **Agregador** (`bazaar.abuse.ch`, `virustotal.com`): no hay marca propia.
+#     Ni el host ni la ruta la llevan —`/sample/abcd/` no es un proveedor—.
+#   · **Alojamiento** (`github.com/deepfield/…`): la marca está en el primer
+#     segmento de la ruta, no en el host.
+#   · **Propia** (`crowdstrike.com`, `blog.talosintelligence.com`): la marca es
+#     la etiqueta anterior al dominio de primer nivel.
+_HOSTS_AGREGADOR = {"abuse", "threatfox", "urlhaus", "bazaar", "malwarebazaar",
+                    "virustotal", "any", "tria", "joesandbox", "hybrid-analysis",
+                    "archive", "web", "app", "shodan", "censys", "otx",
+                    "alienvault", "greynoise", "abuseipdb"}
+_HOSTS_ALOJAMIENTO = {"github", "githubusercontent", "gitlab", "bitbucket",
+                      "pastebin", "medium", "blogspot", "wordpress",
+                      "substack", "twitter", "t", "x"}
+
+
+def _proveedor_de_url(url):
+    """La marca responsable de una referencia, o None si no se puede decir."""
+    m = re.match(r"https?://([^/]+)(/[^?#]*)?", (url or "").strip(), re.I)
+    if not m:
+        return None
+    host = m.group(1).lower().split(":")[0]
+    etiquetas = [e for e in host.split(".") if e and e != "www"]
+    if len(etiquetas) < 2:
+        return None
+    marca = etiquetas[-2]
+    # Un agregador no responde por el contenido: no es una fuente que citar.
+    if marca in _HOSTS_AGREGADOR or etiquetas[0] in _HOSTS_AGREGADOR:
+        return None
+    if marca in _HOSTS_ALOJAMIENTO:
+        for seg in (m.group(2) or "").strip("/").split("/"):
+            seg = seg.strip().lower()
+            if len(seg) > 2 and seg not in _HOSTS_ALOJAMIENTO:
+                return seg
+        return None
+    return marca if len(marca) > 2 else None
+
+
 def _familias_del_informe(inf):
     """Nombres que el informe reivindica, para comparar con los de terceros."""
     fm = inf["fm"]
@@ -372,6 +453,7 @@ def evaluar(inf, lote, cache, avisos, profundo):
     H_ = []
     ident = inf["id"]
     familias = _familias_del_informe(inf)
+    texto_inf = (inf.get("texto") or "").lower()
 
     try:
         filas = B.filas_ioc(inf)
@@ -387,7 +469,7 @@ def evaluar(inf, lote, cache, avisos, profundo):
         ingerible = tipo in TIPOS_INGERIBLES
         ctx = " ".join(str(v) for v in fila.values()).lower()
 
-        # ── N2 / N3 · cruce con el lote de ThreatFox
+        # ── N2 / N3 / N6 · cruce con el lote de ThreatFox
         if lote:
             hits = lote["idx"].get(valor.lower()) or []
             if hits:
@@ -396,26 +478,60 @@ def evaluar(inf, lote, cache, avisos, profundo):
                 fams = {f for f in fams if f}
                 amenazas = {x.get("threat_type") for x in hits if x.get("threat_type")}
                 ultima = max((x.get("last_seen") or "") for x in hits)
+                quien = sorted({(x.get("reporter") or "").strip()
+                                for x in hits if (x.get("reporter") or "").strip()})
 
+                # ¿Observó la fuente, o sólo transcribió? Es la pregunta que
+                # decide si esto vale como corroboración, y las dos señales
+                # son del propio registro.
+                reobservado = any((x.get("last_seen") or "").strip() for x in hits)
+                anonimo = all((x.get("reporter") or "").strip().lower()
+                              in ("", "anonymous") for x in hits)
+                citados = sorted({p for p in
+                                  (_proveedor_de_url(x.get("reference")) for x in hits)
+                                  if p and p in texto_inf})
+
+                # **Una familia es ajena sólo si no la nombra NI el frontmatter
+                # NI la descripción de la propia fila.** Antes se comparaba
+                # sólo con el frontmatter, y `CTI-2026-019` —que declara
+                # `actor: ARTEX` y describe cada dominio como «C2 de
+                # BLOODALCHEMY»— producía tres conflictos de atribución donde
+                # el informe y la fuente coincidían palabra por palabra.
                 ajena = {f for f in fams
                          if not any(t and (t in f.lower() or f.lower() in t)
-                                    for t in familias)}
+                                    for t in familias)
+                         and f.lower() not in ctx}
                 if ajena:
                     H_.append(H(ident, "N2", valor,
-                                "ThreatFox lo atribuye a **%s** (%s), que no es "
-                                "el actor de este informe. Visto por última vez "
+                                "ThreatFox lo atribuye a **%s** (%s), y ni el "
+                                "actor del informe ni la descripción de este "
+                                "indicador lo nombran. Visto por última vez "
                                 "%s. **Decidir si es el mismo operador, un "
                                 "solapamiento o un error de atribución.**"
                                 % (", ".join(sorted(ajena)),
                                    ", ".join(sorted(amenazas)) or "sin tipo",
                                    ultima or "sin fecha"),
                                 grave=False))
+                elif citados and (not reobservado or anonimo):
+                    H_.append(H(ident, "N6", valor,
+                                "coincide con ThreatFox, pero **no es "
+                                "corroboración independiente y no eleva el "
+                                "grado de evidencia**: el envío remite a "
+                                "**%s**, que este informe ya cita, lo "
+                                "reporta `%s` y **la fuente no lo ha "
+                                "reobservado** (`last_seen` vacío). Es la "
+                                "misma afirmación contada dos veces."
+                                % (", ".join(citados),
+                                   ", ".join(quien) or "sin reportante"),
+                                grave=False))
                 else:
                     H_.append(H(ident, "N3", valor,
-                                "ThreatFox lo corrobora (%s, visto hasta %s). "
-                                "**El informe gana grado de evidencia y no lo "
-                                "cita.**" % (", ".join(sorted(fams)) or "sin familia",
-                                             ultima or "sin fecha")))
+                                "ThreatFox lo corrobora (%s, lo reporta `%s`, "
+                                "visto hasta %s). **El informe gana grado de "
+                                "evidencia y no lo cita.**"
+                                % (", ".join(sorted(fams)) or "sin familia",
+                                   ", ".join(quien) or "sin reportante",
+                                   ultima or "sin fecha")))
 
                 # ── N4 · declarado caducado pero vivo en la fuente
                 if re.search(r"caducad|ventana cerrada|retirada|inactiv", ctx):

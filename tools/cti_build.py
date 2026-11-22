@@ -164,8 +164,17 @@ def fecha_version(texto, version, fecha_fm):
     Devuelve (fecha, avisos). Se busca la fila cuya versión coincide con la del
     front matter, no la última de la tabla: las filas no están siempre en orden.
     """
-    filas = re.findall(r"^\|\s*(\d+(?:\.\d+)*)\s*\|\s*(\d{4}-\d{2}-\d{2})\s*\|",
-                       texto, re.M)
+    # Los `\*{0,2}` no son adorno: **la convención de la cartera es escribir en
+    # negrita la fila de la versión vigente**, y sin ellos la regex no la veía.
+    # El efecto era justo el que esta función existe para evitar: el 21-11-2026
+    # la portada anunciaba `CTI-2026-045` v1.4 con su fecha de EMISIÓN, porque
+    # su fila `| **1.4** | **2026-11-21** |` no coincidía y se caía al valor por
+    # omisión. Afectaba a tres informes a la vez y el aviso lo decía en voz alta
+    # sin que nadie lo leyera.
+    filas = re.findall(
+        r"^\|\s*\*{0,2}\s*(\d+(?:\.\d+)*)\s*\*{0,2}\s*"
+        r"\|\s*\*{0,2}\s*(\d{4}-\d{2}-\d{2})\s*\*{0,2}\s*\|",
+        texto, re.M)
     if not filas:
         return fecha_fm, ["no tiene control de cambios legible; se usa la fecha de emisión"]
     m = dict(filas)

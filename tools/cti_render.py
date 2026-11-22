@@ -34,6 +34,11 @@ CÓMO SE USA
     python3 tools/cti_render.py --json       # salida legible por máquina
     python3 tools/cti_render.py --anchos 1400,900,380
 
+**Las reglas:** `R1` desbordes dentro de la tarjeta · `R2` scroll horizontal ·
+`R3` errores de JavaScript · `R4` que `hidden` oculte de verdad · `R5` que el
+buscador filtre y restaure · `R6` que las píldoras filtren · `R7` que el grafo
+dibuje lienzo · `R8` que el clique de co-nacionalidad esté completo.
+
 `tools/cti_build.py` lo llama al terminar. **Si no hay Playwright instalado, no
 falla: avisa y sigue.** Un repositorio que no se puede construir en una máquina
 sin navegador sería peor que el fallo que esto previene.
@@ -113,6 +118,32 @@ JS_VISIBLES = """() => [...document.querySelectorAll('#rejilla .card')]
 
 def _contar(pg):
     return pg.evaluate(JS_VISIBLES)
+
+
+# R8 · el clique de co-nacionalidad tiene que estar COMPLETO.
+#
+# El 21-11-2026 el usuario encontró, mirando el grafo, que «algunos nodos no
+# tienen asociados los otros nodos de su mismo país». La causa era un filtro
+# por tipo que dejaba fuera a 89 de los 154 nodos con país —79 de ellas
+# herramientas—, y ninguna compuerta lo veía: el JSON era correcto y las
+# aristas de co-nacionalidad no están en él, se derivan en el navegador.
+# **Es la tercera vez que un fallo del grafo lo encuentra el usuario a ojo.**
+# Esto lo cuenta.
+JS_CONAC = """() => {
+  if (typeof N === 'undefined' || typeof CONAC === 'undefined')
+    return {sin_datos: true};
+  const porPais = {};
+  N.forEach((n, i) => { if (n.p && n.p !== '-') (porPais[n.p] = porPais[n.p] || []).push(i); });
+  const gc = N.map(() => 0);
+  CONAC.forEach(c => { gc[c.a]++; gc[c.b]++; });
+  const faltan = [];
+  for (const [pk, l] of Object.entries(porPais))
+    for (const i of l)
+      if (gc[i] !== l.length - 1)
+        faltan.push({id: N[i].id, p: pk, tiene: gc[i], debe: l.length - 1});
+  return {faltan, conac: CONAC.length,
+          con_pais: Object.values(porPais).reduce((a, l) => a + l.length, 0)};
+}"""
 
 
 def comprobar_indice(b, anchos):
@@ -236,6 +267,27 @@ def comprobar_grafo(b):
         if vacio:
             fallos.append(Fallo("red-actores-3d.html", "R7",
                                 "el lienzo tiene tamaño cero"))
+        c = pg.evaluate(JS_CONAC)
+        if c.get("sin_datos"):
+            fallos.append(Fallo("red-actores-3d.html", "R8",
+                                "no se pudieron leer `N` ni `CONAC`: la "
+                                "comprobación del clique de co-nacionalidad "
+                                "no se ha podido hacer."))
+        elif c.get("faltan"):
+            m = c["faltan"]
+            ej = ", ".join("`%s` (%s: %d de %d)"
+                           % (x["id"], x["p"], x["tiene"], x["debe"])
+                           for x in m[:4])
+            fallos.append(Fallo("red-actores-3d.html", "R8",
+                                "**el clique de co-nacionalidad está "
+                                "incompleto**: %d de %d nodos con país no "
+                                "están unidos a todos sus compatriotas. %s%s. "
+                                "El criterio es que **todo** nodo de un país "
+                                "tenga lazo con **todos** los demás de su "
+                                "país, sea actor, herramienta o servicio."
+                                % (len(m), c.get("con_pais", 0), ej,
+                                   " …" if len(m) > 4 else "")))
+
     for e in errores:
         fallos.append(Fallo("red-actores-3d.html", "R3",
                             "error de JavaScript: %s" % e[:150]))

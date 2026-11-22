@@ -193,7 +193,7 @@ body.conPanel #ctrl{right:356px}
   <div class="caja botones">
     <button id="bGirar" class="on" title="Rotación automática">Girar</button>
     <button id="bEtiq" class="on" title="Mostrar etiquetas">Etiquetas</button>
-    <button id="bConac" class="on" title="Conexión débil entre actores del mismo país">Co-nacionalidad</button>
+    <button id="bConac" class="on" title="Lazo débil entre TODOS los nodos de un mismo país: actores, herramientas y servicios. Clic en un nodo para ver los suyos resaltados">Co-nacionalidad</button>
     <button id="bPlan" class="on" title="Un planeta por país: el centro que agrupa a sus actores">Planetas</button>
     <button id="bReset" title="Volver a la vista inicial">Reencuadrar</button>
   </div>
@@ -339,8 +339,10 @@ const EVID_ORDEN = ['oficial','propio','proveedor','inferido'];
    países vecinos ocupan sectores contiguos: el eje ex-soviético junto, Asia
    oriental junto, Oriente Medio junto. El ángulo no es decorativo — es lo
    que hace que la vecindad geográfica se lea de un vistazo. Los nodos sin
-   país no reciben ancla y los coloca la red de relaciones, que es lo
-   correcto: una herramienta no tiene nacionalidad. */
+   país **declarado** no reciben ancla y los coloca la red de relaciones, que
+   es lo correcto: una herramienta genérica no tiene nacionalidad. Una que sí
+   la tiene —`SparrowDoor` es china, `Kazuar` es rusa— la lleva en el campo de
+   país y se ancla con su país, como cualquier otro nodo. */
 const ZONA = [
   {l:'Eje ex-soviético', ps:['ru','by'],        ang:  0},
   {l:'Asia oriental',    ps:['cn','kp'],        ang: 76},
@@ -365,11 +367,11 @@ for (const z of ZONA){
   });
 }
 /* ── Co-nacionalidad ──────────────────────────────────────────────────
-   Criterio: dos ACTORES del mismo país llevan, por omisión, una conexión
-   al menos débil. No se escriben en red-actores.json porque no son juicios
+   Criterio del usuario: **dos nodos CUALESQUIERA del mismo país llevan, por
+   omisión, una asociación fundamental aunque débil** — todos con todos, no
+   sólo los actores. No se escriben en red-actores.json porque no son juicios
    del analista: son derivables del campo de país, y meterlas ahí mezclaría
    lo medido con lo automático. Se derivan aquí y se pueden apagar. */
-const T_ACTOR = new Set(['estado','crimen','clúster','subgrupo','suministrador']);
 const K_CONAC = 0.0010;
 const TIPO_ETIQ = {
   estado:'Actor estatal', subgrupo:'Subgrupo', clúster:'Clúster de actividad',
@@ -408,21 +410,48 @@ const idx = new Map(N.map((n,i)=>[n.id,i]));
 const E = DATOS.aristas.map(([a,b,r,ev]) => ({a:idx.get(a), b:idx.get(b), r, ev: ev || 'proveedor'}));
 E.forEach(e => { N[e.a].g++; N[e.b].g++; });
 
-/* Capa derivada: todos los pares de actores que comparten país. No cuentan
-   para el grado del nodo —inflarían el radio con algo que no es una relación
-   observada— y se dibujan con el trazo mínimo. */
+/* Capa derivada: TODOS los pares de nodos que comparten país —clique
+   completo por nacionalidad—. No cuentan para el grado del nodo
+   —inflarían el radio con algo que no es una relación observada— y se
+   dibujan con el trazo mínimo.
+
+   **Antes sólo unía ACTORES, y eso dejaba fuera a 89 de los 154 nodos con
+   país: 79 herramientas, 5 servicios, 3 agrupaciones, 1 marco y 1 servicio
+   público.** Visto en pantalla, el efecto era que `SparrowDoor` o `Kazuar`
+   aparecían sin ningún lazo con los demás nodos de su país, que es justo lo
+   contrario del criterio. El clique es ahora sobre todo nodo con país
+   declarado.
+
+   **Y eso obliga a normalizar la fuerza, o China implosiona.** Con una
+   constante fija por par, la cohesión que recibe un nodo crece con el
+   tamaño de su país: 69 tirones para uno chino contra 3 para uno iraní. Al
+   pasar de 28 a 70 nodos chinos la cohesión por nodo se multiplicaba por
+   2,5 y el cúmulo se cerraba en un punto. El peso `w = 1/(tam-1)` mantiene
+   **constante la fuerza total que cada nodo recibe de sus compatriotas**,
+   sea su país grande o pequeño.
+
+   `al` hace lo mismo con la tinta: el ojo no ve una línea, ve la suma de
+   las que se superponen, y 2.415 trazos chinos al alfa de 378 serían un
+   disco opaco. Se reparte el alfa y se deja un suelo para que el velo siga
+   leyéndose. Para comprobar un nodo concreto está el foco: al seleccionarlo
+   sus aristas de co-nacionalidad suben a alfa 0,30 y se ven una por una. */
 const CONAC = [];
 {
   const porPais = new Map();
   N.forEach((n,i) => {
-    if (!T_ACTOR.has(n.t) || !n.p || n.p === '-') return;
+    if (!n.p || n.p === '-') return;
     if (!porPais.has(n.p)) porPais.set(n.p, []);
     porPais.get(n.p).push(i);
   });
-  for (const [pk, lista] of porPais)
-    for (let i=0;i<lista.length;i++)
-      for (let j=i+1;j<lista.length;j++)
-        CONAC.push({a:lista[i], b:lista[j], p:pk});
+  for (const [pk, lista] of porPais){
+    const tam = lista.length;
+    if (tam < 2) continue;
+    const w  = 1 / (tam - 1);
+    const al = Math.max(0.25, Math.min(1, 8 / (tam - 1)));
+    for (let i=0;i<tam;i++)
+      for (let j=i+1;j<tam;j++)
+        CONAC.push({a:lista[i], b:lista[j], p:pk, w, al});
+  }
 }
 let verConac = true;
 
@@ -614,12 +643,14 @@ function paso(){
     a.vx += dx*f; a.vy += dy*f; a.vz += dz*f;
     b.vx -= dx*f; b.vy -= dy*f; b.vz -= dz*f;
   }
-  /* cohesión débil entre actores del mismo país: los junta sin colapsarlos */
+  /* cohesión débil entre nodos del mismo país: los junta sin colapsarlos.
+     `c.w` reparte la constante entre los compatriotas, de modo que la fuerza
+     TOTAL por nodo no dependa del tamaño del país (ver la derivación). */
   for (const c of CONAC){
     const a = N[c.a], b = N[c.b];
     const dx=b.x-a.x, dy=b.y-a.y, dz=b.z-a.z;
     const d = Math.hypot(dx,dy,dz) || 1;
-    const f = (d - L*1.9) * K_CONAC / d;
+    const f = (d - L*1.9) * K_CONAC * c.w * 24 / d;
     a.vx += dx*f; a.vy += dy*f; a.vz += dz*f;
     b.vx -= dx*f; b.vy -= dy*f; b.vz -= dz*f;
   }
@@ -720,9 +751,10 @@ function dibujar(){
       if (!visible(a) || !visible(b)) continue;
       if (hayFoco && !(c.a===sel || c.b===sel)) continue;
       const prof = Math.max(0.1, Math.min(1, (a.pe+b.pe)/2));
+      const enFoco = sel!==null && (c.a===sel||c.b===sel);
       cx2.strokeStyle = mezcla(col(PAIS[c.p] ? PAIS[c.p].c : '--neutro'),
-                               (sel!==null && (c.a===sel||c.b===sel)) ? 0.30 : 0.055 + prof*0.03);
-      cx2.lineWidth = 0.4 * prof;
+                               enFoco ? 0.30 : (0.055 + prof*0.03) * c.al);
+      cx2.lineWidth = (enFoco ? 0.7 : 0.4) * prof;
       cx2.beginPath(); cx2.moveTo(a.px,a.py); cx2.lineTo(b.px,b.py); cx2.stroke();
     }
   }

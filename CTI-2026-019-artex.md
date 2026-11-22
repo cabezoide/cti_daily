@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-019"
-version: "1.0"
+version: "1.1"
 tipo: "Evaluación estratégica"
 foco_regional: "Global · Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -30,7 +30,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas, incluido el FLASH F
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-019` |
-| Versión / fecha | `1.0` — 2026-11-16 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Evaluación estratégica + perfil de capacidad adversaria (no es un perfil de actor: el sujeto es una herramienta compartida) |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Global, con lectura específica para Latinoamérica y Chile |
@@ -1008,6 +1008,25 @@ level: critical
 > antes de usarla con fines defensivos. Se entrega con contexto, confianza y acción
 > permitida; nunca como lista para cargar en un bloqueo automático.
 
+<!-- cti:note type="warn" -->
+
+> ⚠ **Los tres dominios de BLOODALCHEMY: la coincidencia con ThreatFox no es una
+> segunda fuente.** Comprobado el **21-11-2026** por la compuerta de
+> enriquecimiento. ThreatFox conoce `nginxmysql[.]com`,
+> `sqlserver-sqlite[.]com` y `www[.]ddduuuppp[.]com`, los etiqueta
+> `BloodAlchemy` —coincidiendo con la atribución de este anexo— y los clasifica
+> `botnet_cc` con confianza 100. **Pero la referencia de los tres envíos es el
+> informe de CrowdStrike del 29-10-2026 que este informe ya usa como fuente**,
+> los firma `anonymous`, y **el campo `last_seen` viene vacío en los tres: nadie
+> los ha vuelto a observar desde que se publicaron.** De modo que la aparición
+> en ThreatFox **no añade evidencia y no eleva la confianza**: es la misma
+> afirmación por un segundo camino. Su respaldo sigue siendo **fuente única de
+> primera mano**, y no hay prueba de vigencia posterior al 29-10-2026 para
+> ninguno de los tres. La confianza se mantiene en `Alta` —la fuente es de
+> primera mano y la atribución es coherente— pero la acción `Bloqueo` debe
+> leerse con el aviso de arriba: **infraestructura observada históricamente**.
+> Es el caso que motivó la regla `N6` de `tools/cti_enriquecer.py`.
+
 <!-- cti:ioc -->
 
 | Tipo | Valor | Contexto | Confianza | Acción permitida |
@@ -1157,6 +1176,7 @@ clave, pre-mortem` · `TLP 2.0` · `PAP` · `STIX 2.1 / TAXII 2.1` · `Admiralty
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Comprueba contra terceros los tres dominios de BLOODALCHEMY del Anexo A, y el resultado es una salvedad, no un dato nuevo.** ThreatFox los conoce y **coincide** con la atribución de este informe (`BloodAlchemy`, `botnet_cc`), de modo que **no hay conflicto de atribución**; pero la referencia de los tres envíos es el mismo informe de CrowdStrike del 29-10-2026 que este informe ya cita, los firma `anonymous` y `last_seen` viene vacío en los tres. **La coincidencia es circular: no añade evidencia ni prueba vigencia.** Se anota en el Anexo A para que nadie la lea como segundo apoyo. El hallazgo originó la regla `N6` de la compuerta de enriquecimiento, y destapó que `N2` comparaba la familia del tercero sólo con el `actor` del frontmatter, ignorando la atribución fina de cada fila —que es donde un informe de herramienta compartida la escribe— | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre el texto completo del FLASH FBI-20261113-001 y nueve informes de proveedor de primera mano. Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor
