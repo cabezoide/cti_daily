@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-024"
-version: "1.1"
+version: "1.2"
 tipo: "Perfil de operación de extorsión"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -1013,7 +1013,8 @@ tags:
 > por una. Tres advertencias más: el aviso **retiró los indicadores de su versión de 2023**,
 > de modo que esta lista no es el conjunto histórico completo (brecha `G-4`); **no hay
 > direcciones IP, ni direcciones de la red Tor, ni carteras de bitcoines** en la fuente
-> gubernamental; y la muestra del caso chileno que publicó CronUp lleva su propia
+> gubernamental —la única dirección de Tor de esta lista se añadió en la versión 1.2 y
+> procede del agregador, no del aviso—; y la muestra del caso chileno que publicó CronUp lleva su propia
 > advertencia, **expresa en la fuente, de que no es la usada contra el Ejército de Chile**.
 
 <!-- cti:ioc -->
@@ -1028,6 +1029,7 @@ tags:
 | sha256 | `d0397d33239229e955eb37842ad84defbe70398bfd953c1b9657967540415aa3` | `main.dll` (aviso `AA23-319A`) | Alta | Bloqueo y retrohunt |
 | sha256 | `0c829b3dccd425f090288cb9decc1bd11107e8be2323430aa2ee38e1ee01f716` | Fichero `Merchandise Planning` (aviso `AA23-319A`) | Media | Retrohunt |
 | sha256 | `8329bcbadc7f81539a4969ca13f0be5b8eb7652b912324a1926fc9bfb6ec005a` | `Eula.txt` (aviso `AA23-319A`) | Media | Retrohunt |
+| artefacto | `rhysidavdzxlt4czlpsfotgsgplq5vddhnbuai7bisdtrstwhvyprrqd.onion` | **Sitio de filtración observado como nuevo el 22-11-2026** por el agregador de sitios de extorsión. **No procede del aviso gubernamental**, que no publica direcciones de Tor. **Lo único verificado por esta célula es el formato**, y se verificó: es una dirección de servicio oculto **v3 con suma de control válida** —56 caracteres base32, 35 bytes, byte de versión 3, suma `f8c6` coincidente—, de modo que **corresponde a una clave Ed25519 real y no a una transcripción errónea**. Que el sitio esté **servido** no se ha comprobado | **Moderada.** Una sola fuente; formato verificado, disponibilidad no | **Vigilancia y correlación.** **No bloqueo**: una dirección de Tor no se resuelve por DNS y bloquearla no produce ningún efecto. Útil para cotejar reclamaciones y para detectar acceso a Tor desde la red propia |
 | sha256 | `48f559e00c472d9ffe3965ab92c6d298f8fb3a3f0d6d203cd2069bfca4bf3a57` | `Sock5.sh` — script de proxy (aviso `AA23-319A`) | Alta | Bloqueo y retrohunt |
 | sha256 | `a864282fea5a536510ae86c77ce46f7827687783628e4f2ceb5bf2c41b8cd3c6` | `fury_ctm1042.bin` — muestra de referencia de mayo de 2023 publicada por CronUp. **La fuente advierte expresamente que NO es la muestra usada contra el Ejército de Chile** | Alta | Bloqueo y retrohunt |
 | sha1 | `69b3d913a3967153d1e91ba1a31ebed839b297ed` | Misma muestra de referencia de CronUp, en SHA-1 | Alta | Bloqueo y retrohunt |
@@ -1152,6 +1154,7 @@ tags:
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.2** | **2026-11-22** | **Sitio de filtración nuevo**, detectado por la vigilancia diaria: `rhysidavdzxlt4czlpsfotgsgplq5vddhnbuai7bisdtrstwhvyprrqd.onion`, que el agregador dio de alta el 22-11-2026. Se añade al `Anexo A` con tipo **`artefacto`**, **confianza moderada** y acción permitida de **vigilancia y no bloqueo**, y se matiza la advertencia del anexo: la afirmación de que no hay direcciones de Tor sigue siendo cierta **de la fuente gubernamental**, que es como estaba formulada, pero el anexo ya contiene una de otro origen. **Verificación propia realizada, y es la única posible sin acceso a Tor: el formato.** La dirección es una v3 con **suma de control válida**, lo que descarta error de transcripción y confirma que corresponde a una clave real; **no se ha comprobado que el sitio esté servido**, y se dice así. **Ningún juicio clave cambia**: un sitio nuevo de un actor que ya se sabe activo no altera ninguna valoración de este informe, y se consigna por completitud del inventario de infraestructura. **Y una decisión de higiene que la compuerta impuso, con razón.** La fila se escribió primero con tipo `domain`, que es la convención que esta cartera usa para los sitios `.onion`; `R7` la rechazó porque **`domain` envía el valor a `ioc_url.txt`, que es una lista de bloqueo**, y la fila declaraba «no bloquear». Es **el mismo razonamiento que `CTI-2026-044` §A.9** tuvo que hacer el mismo día con tres direcciones: **una salvedad que no viaja con el indicador no existe para quien lo consume**. De ahí el tipo `artefacto`. **Queda anotado como observación de cartera, no resuelta aquí:** hay **33 direcciones `.onion` tipadas `domain`** en otros informes que por tanto están en `ioc_url.txt`; revisar si alguna de ellas declara una acción incompatible con ese agregado es trabajo de una pasada propia y no de esta versión. **No se extiende `caduca`**, que sigue en 2027-02-16: se ha añadido un indicador, no revalidado ningún juicio | Célula CTI |
 | **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1070.001` → `T1685.005`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre un aviso conjunto del FBI, CISA y MS-ISAC en sus dos versiones comparadas, el seguimiento en tiempo real de una firma chilena, un informe de proveedor de junio de 2026, el trabajo académico del descifrador de 2024 y la consulta directa de un agregador de sitios de filtración. **El caso del Ejército de Chile se desarrolla como estudio de caso (§E-5)** por ser la única víctima chilena documentada de la serie, con la advertencia expresa de que no tiene fuente oficial, que las cifras de volumen son del atacante y que la implicación de la persona detenida está en fase judicial sin sentencia conocida. **Se incorpora una dimensión que los otros informes de extorsión de la cartera no tratan —el riesgo de persona interna en la respuesta— por lo ocurrido en ese caso** (`KJ-3`, decisión `E-c`). El episodio del descifrador de 2024 se presenta como argumento **contra** apoyar la recuperación en la esperanza (`KJ-5`, decisión `E-e`). Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 
