@@ -613,6 +613,17 @@ RE_METODO_NUESTRO = re.compile(
 RE_ROTULO_ARTICULO = re.compile(r"^(?:El|La|Los|Las|Lo|Un|Una)\s+", re.I)
 
 
+# Tipos que el grafo NO admite. `modelo` agrupaba 29 categorías —«Extorsión
+# como servicio», «Corredores de acceso inicial», «Bloque Irán»— y ninguna es
+# un objeto del adversario: son maneras nuestras de ordenarlo. Las de país,
+# además, eran redundantes con el clique de co-nacionalidad del renderizador.
+TIPOS_PROHIBIDOS = {"modelo"}
+
+# Fuentes que consultamos nosotros. Estaban tipadas como herramienta pública o
+# suministrador, y el tipo tapaba lo que eran.
+FUENTES_PROPIAS = {"ctifyi", "ctiwatch", "botnetcl", "zenlayerc2"}
+
+
 def g6_grafo():
     """El grafo sólo admite objetos del adversario."""
     H = []
@@ -675,6 +686,37 @@ def g6_grafo():
                                  "La ficha de un nodo es un puntero, no un "
                                  "resumen." % (ident, campo, len(v), techo), ident)
 
+        # ── G6.6 · el tipo tiene que ser un grupo o una herramienta
+        #
+        #    **Cuarta corrección del usuario sobre lo mismo** (21-11-2026):
+        #    «siguen apareciendo nodos como "corredores de acceso inicial",
+        #    "extorsion como servicio"». Las reglas G6.1 y G6.2 miran el
+        #    rótulo y esos pasaban: «Extorsión como servicio» no es una frase
+        #    sobre lo atacado ni lleva verbo conjugado. **Lo que fallaba no
+        #    era el rótulo sino el TIPO.** El tipo `modelo` agrupaba 29
+        #    categorías —modelos de negocio, mercados, agrupaciones por
+        #    país—, y una categoría no es un objeto del adversario por bien
+        #    rotulada que esté. Se retiró entero.
+        #
+        #    Lo mismo con las FUENTES: `cti.fyi`, `CTIWatch` y `botnet.cl`
+        #    figuraban como herramienta pública, pero son sitios que NOSOTROS
+        #    consultamos, no instrumentos del adversario. Y
+        #    `Concentración del alojamiento adversario` figuraba como
+        #    suministrador siendo una medición propia —«147 de 573
+        #    direcciones de C2 en un solo AS»—: el tipo tapaba lo que el
+        #    nodo era.
+        if n.get("t") in TIPOS_PROHIBIDOS:
+            ap("G6.6", True, "el nodo `%s` («%s») es de tipo `%s`, que **no "
+                             "existe en el grafo**: agrupaba categorías y "
+                             "modelos de negocio, no objetos del adversario. "
+                             "El grafo es de **grupos y herramientas**."
+               % (ident, rot[:46], n.get("t")), ident)
+        if ident in FUENTES_PROPIAS:
+            ap("G6.6", True, "el nodo `%s` («%s») es una **fuente que "
+                             "consultamos nosotros**, no una herramienta del "
+                             "adversario. Las fuentes van en el Anexo B de "
+                             "cada informe." % (ident, rot[:46]), ident)
+
     # ── G6.5 · integridad: sin aislados ni extremos inexistentes
     import collections as _c
     grado = _c.Counter()
@@ -688,11 +730,144 @@ def g6_grafo():
                    % (a, x))
         grado[a[0]] += 1
         grado[a[1]] += 1
-    for n in nodos:
-        if grado[n.get("id")] == 0:
-            ap("G6.5", True, "el nodo `%s` quedó **aislado**: sin una sola "
-                             "relación no aporta nada al grafo." % n.get("id"),
-               n.get("id"))
+    #    Un nodo sin aristas puede ser dos cosas muy distintas, y tratarlas
+    #    igual hace daño en los dos sentidos. Si son MUCHOS, alguien ha podado
+    #    de más y se ha llevado por delante relaciones reales —ya pasó: al
+    #    retirar «Inflación del recuento» quedó `stormblog` colgando—, y eso
+    #    debe detener el commit. Si son UNOS POCOS, lo normal es que su
+    #    informe no documente ninguna relación: un perfil de victimología y
+    #    cadencia no tiene por qué tenerla. **Eso es una brecha del informe,
+    #    no un defecto del grafo**, y se avisa sin bloquear.
+    sueltos = [n.get("id") for n in nodos if grado[n.get("id")] == 0]
+    if nodos and len(sueltos) > max(4, len(nodos) * 0.05):
+        ap("G6.5", True, "**%d nodos quedaron aislados** de %d (%.0f %%): eso "
+                         "no es una brecha puntual, es una poda que se llevó "
+                         "relaciones reales por delante. %s"
+           % (len(sueltos), len(nodos), 100.0*len(sueltos)/len(nodos),
+              ", ".join(sueltos[:10])))
+    else:
+        for i in sueltos:
+            ap("G6.5", False, "el nodo `%s` no tiene **ninguna relación "
+                              "documentada**: su informe no registra con qué "
+                              "se vincula. Si tiene país lo integra la "
+                              "co-nacionalidad; si no, queda suelto en el "
+                              "mapa. Brecha del informe, no del grafo." % i, i)
+    return H
+
+
+# ──────────────────────────────── G7 · alineamiento con MITRE ATT&CK
+
+RE_FILA_TTP = re.compile(
+    r"^\|\s*([^|]+?)\s*\|\s*(T\d{4}(?:\.\d{3})?)\s*\|\s*([^|]*?)\s*\|",
+    re.M)
+RE_ID_SUELTO = re.compile(r"\bT\d{4}(?:\.\d{3})?\b")
+RE_SEC_ATTACK = re.compile(r"^#+\s*[^\n]*MITRE\s*ATT&CK", re.M | re.I)
+
+_CAT = {"c": None, "hecho": False, "avisos": []}
+
+
+def _attack():
+    """El catálogo, una vez por ejecución. `None` si no se pudo obtener."""
+    if not _CAT["hecho"]:
+        _CAT["hecho"] = True
+        try:
+            import cti_attack
+            _CAT["c"] = cti_attack.catalogo(_CAT["avisos"])
+            _CAT["mod"] = cti_attack
+        except Exception as ex:
+            _CAT["avisos"].append("ATT&CK: no se pudo cargar el módulo (%s)" % ex)
+    return _CAT["c"]
+
+
+def g7_attack(inf):
+    """Que cada informe diga sus TTP, y que las diga bien.
+
+    **Petición del usuario del 21-11-2026:** *«alineamiento de todos los
+    informes a MITRE ATT&CK de TTPs […] y dejalo en un gate para mantenerlo
+    en el tiempo»*.
+
+    La comprobación de FORMA no basta y por eso existe `tools/cti_attack.py`.
+    Medido el día que se escribió esto, la cartera tenía **33 referencias a
+    técnicas que ATT&CK ha revocado** —nueve a `T1562.001`, que hoy es
+    `T1685`— y una que no existe en ninguna de las tres matrices. Son errores
+    que un `Tnnnn` bien formado no delata: se copian de informes viejos y
+    envejecen solos.
+
+    **Por qué bloquear y no avisar.** La compuerta juzga sólo los informes que
+    el commit modifica, así que un bloqueo aquí no detiene el trabajo ajeno:
+    obliga a poner al día el informe que ya estás tocando. La deuda se paga
+    sola, informe a informe, en vez de acumularse.
+    """
+    H = []
+    ident = inf["id"]
+    ap = lambda r, b, m, d="": H.append(
+        Hallazgo(ident, "attack", r, b, m, d))
+    texto = inf["texto"]
+
+    filas = RE_FILA_TTP.findall(texto)
+    sueltos = set(RE_ID_SUELTO.findall(texto))
+
+    # ── G7.1 · todo informe declara sus TTP
+    if not filas and not sueltos:
+        ap("G7.1", True, "el informe **no declara ni una técnica ATT&CK**. Un "
+                         "producto de inteligencia sin TTP no es accionable "
+                         "para detección: la tabla `| Táctica | ID | Técnica | "
+                         "Procedimiento observado |` bajo un epígrafe «Mapa "
+                         "MITRE ATT&CK» es obligatoria.")
+        return H
+    if not RE_SEC_ATTACK.search(texto):
+        ap("G7.1b", False, "hay identificadores de técnica pero **no un "
+                           "epígrafe «Mapa MITRE ATT&CK»**: quedan sueltos en "
+                           "el cuerpo y no se pueden extraer.")
+
+    c = _attack()
+    if c is None:
+        ap("G7.7", False, "**el catálogo ATT&CK no está disponible**, así que "
+                          "la existencia y la vigencia de las técnicas de este "
+                          "informe NO se han comprobado. Sólo la forma. "
+                          "`python3 tools/cti_attack.py --refrescar`")
+        return H
+    tec = c.get("tecnicas") or {}
+    mod = _CAT.get("mod")
+
+    vistos = set()
+    for tac, tid, nombre in filas:
+        if tid in vistos:
+            ap("G7.6", False, "`%s` aparece **más de una vez** en la tabla de "
+                              "técnicas." % tid, tid)
+        vistos.add(tid)
+        d = tec.get(tid)
+        if d is None:
+            ap("G7.3", True, "`%s` (**%s**) **no existe** en ninguna de las "
+                             "tres matrices de ATT&CK. Comprobar el "
+                             "identificador: `python3 tools/cti_attack.py %s`"
+               % (tid, nombre[:40] or "sin nombre", tid), tid)
+            continue
+        if d.get("revocada"):
+            ap("G7.4", True, "`%s` está **REVOCADA** por ATT&CK; su sustituta "
+                             "es **`%s`**. Una técnica retirada se copia de "
+                             "informes viejos y nadie lo nota."
+               % (tid, d.get("sustituida_por", "?")), tid)
+            continue
+        if d.get("obsoleta"):
+            ap("G7.5", False, "`%s` está marcada **obsoleta** en ATT&CK. "
+                              "Revisar si procede sustituirla." % tid, tid)
+        # ── G7.6 · la táctica declarada tiene que ser una de las suyas
+        clave = mod.ES_A_CLAVE.get(mod._norm(tac)) if mod else None
+        if clave and d.get("tacticas") and clave not in d["tacticas"]:
+            nombres = ", ".join((c.get("tacticas") or {}).get(x, x)
+                                for x in d["tacticas"])
+            ap("G7.6", False, "`%s` se declara en la táctica **«%s»**, y "
+                              "ATT&CK la sitúa en **%s**. Si es el "
+                              "renombrado de la v20 (Defense Evasion pasó a "
+                              "Stealth), toca migrar la fila."
+               % (tid, tac, nombres), tid)
+
+    # ── G7.2 · identificadores citados fuera de la tabla que no existen
+    for tid in sorted(sueltos - vistos):
+        if tid not in tec:
+            ap("G7.2", False, "`%s` se cita en el cuerpo y **no existe** en "
+                              "ATT&CK." % tid, tid)
     return H
 
 
@@ -773,6 +948,7 @@ def ejecutar(patrones=None, hoy=None, todo=False):
         H += g2_veracidad(inf, hoy)
         H += g3_atribucion(inf)
         H += g4_higiene(inf)
+        H += g7_attack(inf)
     H += g5_agregados()
     H += g6_grafo()
     return lista, H

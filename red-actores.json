@@ -501,60 +501,6 @@
    "a": "-"
   },
   {
-   "id": "raas",
-   "l": "Extorsión como servicio",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-014/015/016/024/035",
-   "d": "Modelo de negocio, no un actor: marca, afiliados y panel. Agrupa a los actores de extorsión de la cartera",
-   "a": "-"
-  },
-  {
-   "id": "bloqrpdc",
-   "l": "Bloque RPDC",
-   "t": "modelo",
-   "p": "kp",
-   "r": "ESET Q2–Q3 2026",
-   "d": "Agrupación por alineación, no organigrama: ESET rastrea estos grupos por separado",
-   "a": "proveedor"
-  },
-  {
-   "id": "bloqiran",
-   "l": "Bloque Irán",
-   "t": "modelo",
-   "p": "ir",
-   "r": "ESET Q2–Q3 2026",
-   "d": "Agrupación por alineación. Actividad al alza por el regreso de varios grupos",
-   "a": "proveedor"
-  },
-  {
-   "id": "fraudelatam",
-   "l": "Fraude bancario regional",
-   "t": "modelo",
-   "p": "latam",
-   "r": "CTI-2026-020/021",
-   "d": "Agrupación por finalidad: robo de credenciales de banca en Latinoamérica",
-   "a": "proveedor"
-  },
-  {
-   "id": "iaofensiva",
-   "l": "IA en capacidad ofensiva",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-019/026",
-   "d": "Los dos casos opuestos de la cartera: ARTEX documenta IA que AUMENTA la capacidad; el «vibeware» de APT36, IA que la DEGRADA",
-   "a": "-"
-  },
-  {
-   "id": "tldbaratos",
-   "l": "Abuso de TLD de registro barato",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-018",
-   "d": "Ecosistema de registro DNS: los TLD de bajo coste y registro laxo son el insumo común de actores sin relación entre sí. Gamaredon registró 189 dominios en un año; DarkWire y APT36 usan .xyz, .store, .shop, .space, .cv y .online",
-   "a": "-"
-  },
-  {
    "id": "pterolnk",
    "l": "PteroLNK",
    "t": "herramienta",
@@ -1572,15 +1518,6 @@
    "a": "-"
   },
   {
-   "id": "iab",
-   "l": "Corredores de acceso inicial",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-035",
-   "d": "Pagados entre 100 y 1.000.000 de dólares. La mayoría trabaja para VARIAS operaciones a la vez: un acceso a nuestra red puede venderse y usarse dos veces",
-   "a": "-"
-  },
-  {
    "id": "cvemedusa",
    "l": "CVE-2024-1709 · CVE-2023-48788 · CVE-2025-10035 · CVE-2026-1731",
    "t": "cve",
@@ -2069,15 +2006,6 @@
    "a": "proveedor"
   },
   {
-   "id": "devicecode",
-   "l": "Flujo de código de dispositivo",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-038",
-   "d": "Flujo LEGÍTIMO de OAuth convertido en vector: el adversario inicia la petición y convence al usuario de escribir SU código en una página AUTÉNTICA de Microsoft. La víctima autentica la sesión del atacante. Ninguna formación lo cierra: o se desactiva por política o no se cierra",
-   "a": "-"
-  },
-  {
    "id": "cvemobile",
    "l": "CVE-2023-41993 · CVE-2024-5274 · CVE-2024-4671",
    "t": "cve",
@@ -2163,15 +2091,6 @@
    "a": "-"
   },
   {
-   "id": "smtp25",
-   "l": "Puerto 25 como canal de mando",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-039",
-   "d": "La regla más robusta de este expediente, y cabe en una frase: una carga de trabajo que no es servidor de correo NO TIENE NINGUNA RAZÓN para iniciar una conexión saliente por el puerto 25.",
-   "a": "-"
-  },
-  {
    "id": "metadatosnube",
    "l": "Punto de metadatos de instancia",
    "t": "servicio",
@@ -2220,15 +2139,6 @@
    "a": "-"
   },
   {
-   "id": "vishinghelpdesk",
-   "l": "Suplantación de la mesa de ayuda",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-040",
-   "d": "Inundación de correo basura → la víctima llama → el operador suplanta a seguridad informática → le pide lanzar Quick Assist → le pide conectarse a su sesión. Los pasos 1 a 4 NO dejan ningún artefacto distinguible, y el primero técnico aparece cuando el adversario ya está dentro.",
-   "a": "-"
-  },
-  {
    "id": "anubisransom",
    "l": "Anubis (RaaS)",
    "t": "crimen",
@@ -2257,15 +2167,6 @@
    "a": "proveedor"
   },
   {
-   "id": "wipemode",
-   "l": "/WIPEMODE",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-041",
-   "d": "Rompe la lógica económica de la extorsión: vacía el CONTENIDO de los ficheros, que quedan listados a 0 KB, sin recuperación.",
-   "a": "-"
-  },
-  {
    "id": "lindnor",
    "l": "Backdoor.Lindnor",
    "t": "herramienta",
@@ -2273,24 +2174,6 @@
    "r": "CTI-2026-041",
    "d": "Puerta trasera PROPIA, inusual entre operadores de extorsión, que suelen tirar de herramientas públicas y del propio sistema. Instalada como servicio, disfrazada de componente de Chrome y de fichero de VMware, en los DOS ÚNICOS servidores de base de datos del conjunto.",
    "a": "proveedor"
-  },
-  {
-   "id": "byovd",
-   "l": "BYOVD: el controlador firmado y vulnerable",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-041",
-   "d": "NO SE BLOQUEA POR HASH: son controladores legítimos con FIRMA VÁLIDA, y un control basado en reputación de firma no ve nada. Se bloquean con la lista de controladores vulnerables del fabricante del sistema.",
-   "a": "-"
-  },
-  {
-   "id": "relatoextorsion",
-   "l": "Relato de justificación del extorsionador",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-041",
-   "d": "La victimología de la extorsión la publica el extorsionista, y un sitio de fugas es antes que nada PUBLICIDAD.",
-   "a": "-"
   },
   {
    "id": "devman",
@@ -2323,68 +2206,12 @@
    "af": "Juicio de confianza BAJA, y el límite es de nuestra colección tanto como del objeto: la ausencia de análisis primario puede ser un hueco propio"
   },
   {
-   "id": "accesoporpais",
-   "l": "Reparto de accesos por país",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-042",
-   "d": "El hallazgo del informe. Los administradores ofrecían «REDES» POR PAÍS, preguntaban al afiliado si usaría acceso propio o suministrado, e imponían ventanas de ejecución de DOS A TRES DÍAS.",
-   "a": "-"
-  },
-  {
-   "id": "scadaclaim",
-   "l": "Cifrador para SCADA (reclamado)",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-042",
-   "d": "RECLAMACIÓN DEL ADVERSARIO EN UNA ENTREVISTA, SIN VERIFICAR. Devman afirmó un cifrador que empuja los sistemas de control «más allá de sus parámetros de operación, procesadores, memoria y límites térmicos... hasta que el hardware falle».",
-   "a": "-"
-  },
-  {
    "id": "ecosistemabots",
    "l": "Ecosistema de 33 familias de bots",
    "t": "clúster",
    "p": "latam",
    "r": "CTI-2026-044",
    "d": "NO son 33 cosas del mismo tipo: se parten en dos negocios con economías opuestas. 26 familias venden interrupción y concentran el 90,2 % de su actividad en TRES de ellas; 7 venden ancho de banda residencial ajeno y no lanzan un solo ataque.",
-   "a": "-"
-  },
-  {
-   "id": "proxyresidencial",
-   "l": "Proxy residencial como negocio",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-044",
-   "d": "EL HALLAZGO. De 572 direcciones atribuidas, 487 pertenecen a siete familias de proxy residencial —CXFJ 215, Aigogo 134, LinkFog 46, SZJL 46, Hotota 24, Aisuru-Proxy 13, Titan 9— que NO registran un solo evento de ataque. Las ruidosas apenas tienen infraestructura: Cereal2 cero, Liso diecisiete.",
-   "a": "-",
-   "af": "Y las dos clases NO comparten ni un bloque /24 de 206, ni más de 4 ASN de 57: un sesgo de etiquetado no produce huellas de alojamiento disjuntas, porque el clasificador no mira el bloque"
-  },
-  {
-   "id": "pulso5s",
-   "l": "Ataque de pulso de cinco segundos",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-044",
-   "d": "Mediana de duración CINCO SEGUNDOS: 1.979 de 2.500 eventos. Y el 23,2 % de los segundos observados contienen dos o más ataques simultáneos, con un máximo de ONCE contra seis prefijos distintos del mismo operador.",
-   "a": "-"
-  },
-  {
-   "id": "botnetcl",
-   "l": "botnet.cl — la fuente y su feed BGP",
-   "t": "publica",
-   "p": "chile",
-   "r": "CTI-2026-044",
-   "d": "Servicio chileno que publica flujo de ataques en vivo, lista de C2, matriz de capacidades por familia obtenida de ingeniería inversa, y un FEED BGP DE AGUJERO NEGRO con una ruta /32 por dirección de C2, comunidad 65535:666 (RFC 7999), comunidades de familia y de antigüedad",
-   "a": "-",
-   "af": "VERIFICACIÓN PROPIA: la interfaz declaraba el 19-11-2026 176 pares BGP establecidos en 7 países — 71,6 % Brasil, 12,5 % Chile, 11,4 % Argentina. La cifra pública se corrobora y se supera. Brasil es a la vez el más atacado y el más defendido"
-  },
-  {
-   "id": "zenlayerc2",
-   "l": "Concentración del alojamiento adversario",
-   "t": "suministrador",
-   "p": "-",
-   "r": "CTI-2026-044",
-   "d": "147 de 573 direcciones de C2 —el 25,7 %— en un solo sistema autónomo, AS62610; y 322, el 56,2 %, en cinco: Zenlayer, GoCodeIT, Alibaba US Technology, Tube-Hosting y CDS Global Cloud. Con 58 ASN en total, la mitad del problema cabe en cinco interlocutores.",
    "a": "-"
   },
   {
@@ -2416,16 +2243,6 @@
    "d": "La familia MÁS ACTIVA de las 33: 444.728 eventos acumulados y el 92,1 % del flujo de ataque en vivo. La estrechez de capacidad que le atribuía la fuente NO se sostiene: el análisis de Jackskid documenta un relé residencial compilado dentro del propio bot.",
    "a": "-",
    "af": "El relé abre 165 mapeos UPnP etiquetados RELAY en el router de la víctima. La ejecución remota de código sigue sin documentarse, así que no es cabeza de puente hacia la red interna."
-  },
-  {
-   "id": "puerto65535",
-   "l": "Saturación de enlace por puerto irrelevante",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-045",
-   "d": "Liso usa el puerto 65535 en el 85,1 % de sus eventos, y ese puerto NO corresponde a ningún servicio: es el último del espacio y funciona como valor por omisión.",
-   "a": "-",
-   "af": "Y el contraste externo lo convierte en firma: las otras cinco familias medidas apuntan a servicios reales —80, 443, 53, 22, 25565, 5100, 7000, 6672—. Liso es la única excepción."
   },
   {
    "id": "aisuru",
@@ -2600,71 +2417,6 @@
    "a": "-"
   },
   {
-   "id": "prefijovanidoso",
-   "l": "Prefijo legible en servicio oculto",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-057",
-   "d": "Dirección de servicio oculto generada por fuerza bruta hasta que empieza por el nombre del actor. Cuesta cómputo y da reconocimiento de marca, pero hace la infraestructura futura localizable por patrón antes de que publique víctimas.",
-   "a": "-"
-  },
-  {
-   "id": "marcablanca",
-   "l": "Mercado de marca blanca con afiliados",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-061",
-   "d": "La plataforma entrega la carga y el afiliado publica las víctimas bajo su propio nombre comercial. Convierte el recuento de la marca matriz en un suelo de magnitud desconocida.",
-   "a": "proveedor",
-   "af": "Declarado en una ficha de proveedor sin referencias. La verificación propia alcanza a una coaparición entre la matriz y un afiliado nombrado."
-  },
-  {
-   "id": "desenmascarado",
-   "l": "Desenmascaramiento progresivo de la víctima",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-054",
-   "d": "El sitio publica primero el nombre parcialmente oculto y lo completa después. Un actor reveló cuatro identidades en veintisiete segundos; otro reveló una y repuso la máscara siete segundos más tarde.",
-   "a": "-"
-  },
-  {
-   "id": "republicacion",
-   "l": "Republicación de catálogo ajeno",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-055",
-   "d": "Una marca nueva publica víctimas que otra ya había publicado meses antes. Dirección unánime y separación consistente la distinguen del alias de expediente, que tiene separación nula y dirección repartida.",
-   "a": "-"
-  },
-  {
-   "id": "interruptoridioma",
-   "l": "Interruptor de configuración regional",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-058",
-   "d": "El cifrador aborta en sistemas configurados en idiomas de Europa del Este. No sirve como contramedida: alcance de un solo actor y revocable por el adversario en una recompilación.",
-   "a": "proveedor",
-   "af": "Declarado en una ficha de proveedor sin muestra ni referencias. La cartera lo recoge para recomendar expresamente que no se convierta en contramedida."
-  },
-  {
-   "id": "almacenseparado",
-   "l": "Almacenamiento separado del sitio de filtración",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-059",
-   "d": "Servicio oculto dedicado a servir los datos, distinto del blog y de la sala de negociación. Sostiene volúmenes de decenas de gigabytes por caso y es la pieza que el actor sustituye cuando cae.",
-   "a": "-"
-  },
-  {
-   "id": "inventariofichero",
-   "l": "Publicación del inventario de ficheros",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-056",
-   "d": "El sitio lista cada archivo exfiltrado en lugar de una ficha por organización. La reclamación se vuelve comprobable por la víctima, y el recuento de entradas deja de medir víctimas.",
-   "a": "-"
-  },
-  {
    "id": "sharefinder",
    "l": "ShareFinder.ps1",
    "t": "herramienta",
@@ -2695,24 +2447,6 @@
    "af": "Atribuida al actor por una ficha de proveedor sin referencias ni muestra. Acción permitida: verificar el parche. No permitida: atribuir una explotación observada."
   },
   {
-   "id": "ctifyi",
-   "l": "cti.fyi",
-   "t": "publica",
-   "p": "-",
-   "r": "CTI-2026-054",
-   "d": "Rastreador de sitios de filtración con 425 grupos y 35 879 entradas. Expone separadas las tres bases de fecha y registra el historial de títulos, dato que ninguna otra fuente de la cartera da.",
-   "a": "-"
-  },
-  {
-   "id": "ctiwatch",
-   "l": "CTIWatch",
-   "t": "publica",
-   "p": "-",
-   "r": "CTI-2026-054",
-   "d": "Agregador con 409 830 CVE con EPSS y estado de explotación, y 2,3 millones de indicadores de señuelos propios. Sus fichas de actor se contradicen consigo mismas en seis de seis casos comprobados.",
-   "a": "-"
-  },
-  {
    "id": "alphv",
    "l": "ALPHV · BlackCat · Noberus",
    "t": "crimen",
@@ -2723,26 +2457,6 @@
    "af": "Medición propia del catálogo el 21-11-2026 y comunicado 26-431 del Departamento de Justicia de EE. UU. del 30-04-2026, que declara al menos 600 víctimas desde agosto de 2024."
   },
   {
-   "id": "reparto2080",
-   "l": "Reparto 20/80 en programa de afiliados",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-062",
-   "d": "Comisión del 20 % para los administradores y 80 % para el afiliado, confirmada en sentencia. Sirve de patrón de medida para valorar lo que otros programas prometen al reclutar.",
-   "a": "-",
-   "af": "Comunicado 26-431: los tres afiliados acordaron pagar a los administradores el 20 % de los rescates y se repartieron el 80 % de uno de 1,2 millones de dólares entre tres."
-  },
-  {
-   "id": "afiliadoconfianza",
-   "l": "Afiliado con posición de confianza en la respuesta",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-062",
-   "d": "Negociador de rescates que entrega información confidencial de la víctima al atacante para elevar el precio. Sobrevive a la marca porque describe el proceso de respuesta y no al actor.",
-   "a": "-",
-   "af": "Comunicado 26-431: uno de los tres condenados abusó de su papel de negociador para víctimas compartiendo información confidencial con los actores de la amenaza."
-  },
-  {
    "id": "jackskid",
    "l": "Jackskid · RCtea",
    "t": "crimen",
@@ -2751,125 +2465,9 @@
    "d": "Red de bots de DDoS para Linux e IoT derivada de Mirai, catalogada en Malpedia como elf.jackskid. ThreatFox le atribuye las diecisiete direcciones de mando y control que esta cartera mide como Liso, con confianza declarada de 100.",
    "a": "proveedor",
    "af": "Analizada por Nokia Deepfield ERT y Comcast CTRL el 24-03-2026 sobre más de ochenta muestras. NO se declara alias de Liso: su literatura no menciona ese nombre ni su victimología brasileña."
-  },
-  {
-   "id": "releupnp",
-   "l": "Relé residencial por mapeo UPnP del router",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-045",
-   "d": "El bot pide al router de la víctima que abra 165 puertos y los reenvíe al dispositivo infectado, etiquetando cada mapeo como RELAY. La conexión doméstica pasa a retransmitir tráfico de terceros hacia un servidor fijo del operador.",
-   "a": "proveedor",
-   "af": "Nokia Deepfield ERT, 24-07-2026: el relé está compilado dentro del bot de denegación de servicio y no es un módulo aparte. No se observó ninguna sesión de cliente en vivo."
-  },
-  {
-   "id": "inflacionvictimas",
-   "l": "Inflación del catálogo contando filiales",
-   "t": "modelo",
-   "p": "-",
-   "r": "CTI-2026-060",
-   "d": "Publicar la matriz y sus filiales como entradas separadas para engrosar el catálogo. El perfil de proveedor del actor declara que emplea tácticas de inflación, y la medición propia encontró un grupo bancario con tres entradas.",
-   "a": "proveedor",
-   "af": "La táctica figura declarada en la ficha del proveedor; la instancia concreta es medición propia sobre los títulos y los dominios del catálogo."
   }
  ],
  "aristas": [
-  [
-   "qilin",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "lockbit5",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "gentlemen",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "rhysida",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "interlock",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "lazarus",
-   "bloqrpdc",
-   "agrupadoen",
-   "oficial"
-  ],
-  [
-   "deceptivedev",
-   "bloqrpdc",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "scarcruft",
-   "bloqrpdc",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "muddywater",
-   "bloqiran",
-   "agrupadoen",
-   "oficial"
-  ],
-  [
-   "oilrig",
-   "bloqiran",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "filthyfeline",
-   "bloqiran",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "aridviper",
-   "bloqiran",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "troyanosbr",
-   "fraudelatam",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "blindeagle",
-   "fraudelatam",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "artex",
-   "iaofensiva",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "apt36",
-   "iaofensiva",
-   "agrupadoen",
-   "proveedor"
-  ],
   [
    "frostyneighbor",
    "sandworm",
@@ -3687,30 +3285,6 @@
    "proveedor"
   ],
   [
-   "gamaredon",
-   "tldbaratos",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "apt36",
-   "tldbaratos",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "darkwire",
-   "tldbaratos",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "silentdelivery",
-   "tldbaratos",
-   "abusa",
-   "proveedor"
-  ],
-  [
    "darkcaracal",
    "gocaracal",
    "usa",
@@ -3861,18 +3435,6 @@
    "proveedor"
   ],
   [
-   "apt38",
-   "bloqrpdc",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "bluenoroff",
-   "bloqrpdc",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
    "strikeshark",
    "sharkloader",
    "usa",
@@ -4020,18 +3582,6 @@
    "medusaransom",
    "cvemedusa",
    "explota",
-   "proveedor"
-  ],
-  [
-   "iab",
-   "medusaransom",
-   "entrega",
-   "proveedor"
-  ],
-  [
-   "medusaransom",
-   "raas",
-   "agrupadoen",
    "proveedor"
   ],
   [
@@ -4419,12 +3969,6 @@
    "proveedor"
   ],
   [
-   "captivecrunch",
-   "devicecode",
-   "abusa",
-   "proveedor"
-  ],
-  [
    "apt29",
    "grapeloader",
    "usa",
@@ -4440,12 +3984,6 @@
    "grapeloader",
    "wineloader",
    "entrega",
-   "proveedor"
-  ],
-  [
-   "apt29",
-   "devicecode",
-   "abusa",
    "proveedor"
   ],
   [
@@ -4516,12 +4054,6 @@
   ],
   [
    "winntielf",
-   "smtp25",
-   "contiene",
-   "proveedor"
-  ],
-  [
-   "winntielf",
    "metadatosnube",
    "explota",
    "proveedor"
@@ -4551,42 +4083,6 @@
    "propio"
   ],
   [
-   "chaos",
-   "raas",
-   "agrupadoen",
-   "propio"
-  ],
-  [
-   "blacksuit",
-   "raas",
-   "agrupadoen",
-   "oficial"
-  ],
-  [
-   "royal",
-   "raas",
-   "agrupadoen",
-   "oficial"
-  ],
-  [
-   "chaos",
-   "vishinghelpdesk",
-   "abusa",
-   "propio"
-  ],
-  [
-   "chaos",
-   "iab",
-   "usa",
-   "propio"
-  ],
-  [
-   "blacksuit",
-   "iab",
-   "usa",
-   "propio"
-  ],
-  [
    "sphinxransom",
    "anubisransom",
    "deriva",
@@ -4600,43 +4096,7 @@
   ],
   [
    "anubisransom",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "sphinxransom",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "anubisransom",
-   "wipemode",
-   "contiene",
-   "proveedor"
-  ],
-  [
-   "anubisransom",
    "lindnor",
-   "usa",
-   "proveedor"
-  ],
-  [
-   "anubisransom",
-   "byovd",
-   "abusa",
-   "proveedor"
-  ],
-  [
-   "anubisransom",
-   "relatoextorsion",
-   "contiene",
-   "proveedor"
-  ],
-  [
-   "anubisransom",
-   "iab",
    "usa",
    "proveedor"
   ],
@@ -4654,42 +4114,6 @@
   ],
   [
    "devman",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "direwolf",
-   "raas",
-   "agrupadoen",
-   "proveedor"
-  ],
-  [
-   "devman",
-   "accesoporpais",
-   "contiene",
-   "proveedor"
-  ],
-  [
-   "devman",
-   "scadaclaim",
-   "contiene",
-   "proveedor"
-  ],
-  [
-   "devman",
-   "iab",
-   "usa",
-   "proveedor"
-  ],
-  [
-   "accesoporpais",
-   "iab",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "devman",
    "sauronransom",
    "noesalias",
    "proveedor"
@@ -4707,18 +4131,6 @@
    "proveedor"
   ],
   [
-   "devman",
-   "relatoextorsion",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "ecosistemabots",
-   "proxyresidencial",
-   "contiene",
-   "propio"
-  ],
-  [
    "ecosistemabots",
    "liso",
    "contiene",
@@ -4728,42 +4140,6 @@
    "ecosistemabots",
    "cereal2",
    "contiene",
-   "propio"
-  ],
-  [
-   "botnetcl",
-   "ecosistemabots",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "proxyresidencial",
-   "badbox3",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "proxyresidencial",
-   "zenlayerc2",
-   "usa",
-   "propio"
-  ],
-  [
-   "proxyresidencial",
-   "covertnetwork1658",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "liso",
-   "puerto65535",
-   "contiene",
-   "propio"
-  ],
-  [
-   "liso",
-   "pulso5s",
-   "usa",
    "propio"
   ],
   [
@@ -4771,12 +4147,6 @@
    "cereal2",
    "noesalias",
    "propio"
-  ],
-  [
-   "liso",
-   "botnetcl",
-   "vinculado",
-   "inferido"
   ],
   [
    "ecosistemabots",
@@ -4804,39 +4174,9 @@
   ],
   [
    "aisuru",
-   "proxyresidencial",
-   "vinculado",
-   "inferido"
-  ],
-  [
-   "aisuru",
    "cereal2",
    "vinculado",
    "inferido"
-  ],
-  [
-   "akira",
-   "raas",
-   "agrupadoen",
-   "oficial"
-  ],
-  [
-   "incransom",
-   "raas",
-   "agrupadoen",
-   "propio"
-  ],
-  [
-   "n0nactor",
-   "raas",
-   "agrupadoen",
-   "propio"
-  ],
-  [
-   "settraactor",
-   "raas",
-   "agrupadoen",
-   "propio"
   ],
   [
    "vortexactor",
@@ -4861,12 +4201,6 @@
    "qilin",
    "noesalias",
    "propio"
-  ],
-  [
-   "settraactor",
-   "relatoextorsion",
-   "vinculado",
-   "inferido"
   ],
   [
    "curiouswormactor",
@@ -4905,63 +4239,15 @@
    "propio"
   ],
   [
-   "vortexactor",
-   "accesoporpais",
-   "noesalias",
-   "propio"
-  ],
-  [
    "n0nactor",
    "gentlemen",
    "noesalias",
    "propio"
   ],
   [
-   "krybitactor",
-   "prefijovanidoso",
-   "usa",
-   "propio"
-  ],
-  [
-   "safepayactor",
-   "prefijovanidoso",
-   "usa",
-   "propio"
-  ],
-  [
-   "dragonforceactor",
-   "prefijovanidoso",
-   "parcial",
-   "inferido"
-  ],
-  [
-   "dragonforceactor",
-   "marcablanca",
-   "usa",
-   "propio"
-  ],
-  [
    "dragonforceactor",
    "devman",
    "afiliado",
-   "propio"
-  ],
-  [
-   "dragonforceactor",
-   "raas",
-   "agrupadoen",
-   "propio"
-  ],
-  [
-   "krybitactor",
-   "raas",
-   "agrupadoen",
-   "propio"
-  ],
-  [
-   "braincipher",
-   "inventariofichero",
-   "usa",
    "propio"
   ],
   [
@@ -4972,21 +4258,9 @@
   ],
   [
    "soulgroupactor",
-   "republicacion",
-   "usa",
-   "propio"
-  ],
-  [
-   "soulgroupactor",
    "insomniaactor",
    "solapa",
    "inferido"
-  ],
-  [
-   "safepayactor",
-   "interruptoridioma",
-   "usa",
-   "propio"
   ],
   [
    "safepayactor",
@@ -5003,18 +4277,6 @@
   [
    "safepayactor",
    "rclone",
-   "usa",
-   "propio"
-  ],
-  [
-   "boobaproject",
-   "almacenseparado",
-   "usa",
-   "propio"
-  ],
-  [
-   "vortexactor",
-   "desenmascarado",
    "usa",
    "propio"
   ],
@@ -5043,64 +4305,22 @@
    "propio"
   ],
   [
-   "ctifyi",
-   "desenmascarado",
-   "suministra",
-   "propio"
-  ],
-  [
-   "ctiwatch",
-   "cve202328252",
-   "suministra",
-   "propio"
-  ],
-  [
-   "alphv",
-   "raas",
-   "usa",
-   "oficial"
-  ],
-  [
-   "alphv",
-   "reparto2080",
-   "usa",
-   "oficial"
-  ],
-  [
-   "alphv",
-   "afiliadoconfianza",
-   "usa",
-   "oficial"
-  ],
-  [
-   "reparto2080",
-   "raas",
-   "deriva",
-   "oficial"
-  ],
-  [
    "liso",
    "jackskid",
    "solapa",
    "inferido"
   ],
   [
-   "jackskid",
-   "releupnp",
+   "storm0940",
+   "artex",
    "usa",
    "proveedor"
   ],
   [
-   "liso",
-   "releupnp",
-   "usa",
-   "inferido"
-  ],
-  [
-   "stormblog",
-   "inflacionvictimas",
-   "usa",
-   "propio"
+   "lockbit5",
+   "qilin",
+   "colabora",
+   "proveedor"
   ]
  ],
  "_evidencia": {

@@ -1291,6 +1291,47 @@ def main():
             ("hace %d d" % abs(dias)) if dias is not None and dias < 0
             else ("%d d" % dias) if dias is not None else ""))
 
+    # ── cobertura MITRE ATT&CK, junto a la vigencia
+    #
+    # **Petición del usuario del 21-11-2026:** alinear toda la cartera a
+    # ATT&CK y mantenerlo en el tiempo. Quien bloquea es `cti_gate.py` (G7);
+    # esto sólo lo hace VISIBLE en la salida que se mira todos los días, que
+    # es donde se nota que quince informes no declaran ni una técnica.
+    try:
+        import re as _re
+        # Dos cosas distintas, y mezclarlas daba un recuento que no cuadraba
+        # con el de la compuerta: un informe puede CITAR técnicas en el cuerpo
+        # sin tener la TABLA que las hace extraíbles. Los informes 037 a 042
+        # son ese caso. La tabla es lo que vale para detección.
+        _rf = _re.compile(r"\|\s*[^|]+?\s*\|\s*(T\d{4}(?:\.\d{3})?)\s*\|")
+        _rs = _re.compile(r"\bT\d{4}(?:\.\d{3})?\b")
+        sin_nada, solo_cuerpo, con_tabla, tecnicas = [], [], 0, set()
+        for i in lista:
+            ids = set(_rf.findall(i["texto"]))
+            if ids:
+                con_tabla += 1
+                tecnicas |= ids
+            elif _rs.search(i["texto"]):
+                solo_cuerpo.append(i["id"])
+            else:
+                sin_nada.append(i["id"])
+        corto = lambda xs: ", ".join(x.replace("CTI-2026-", "") for x in xs)
+        print()
+        print("── alineamiento MITRE ATT&CK ──")
+        print("  %d de %d informes con tabla de técnicas · %d técnicas distintas"
+              % (con_tabla, len(lista), len(tecnicas)))
+        if solo_cuerpo:
+            print("  citan técnicas sin tabla (%d): %s"
+                  % (len(solo_cuerpo), corto(solo_cuerpo)))
+        if sin_nada:
+            print("  sin ninguna técnica (%d): %s"
+                  % (len(sin_nada), corto(sin_nada)))
+        if solo_cuerpo or sin_nada:
+            print("  → `python3 tools/cti_gate.py --todo` detalla el resto; "
+                  "G7 bloquea al tocar cada informe")
+    except Exception:
+        pass
+
     if opt.check:
         if cambios:
             print("\n--check: hay %d artefacto(s) derivado(s) sin regenerar:" % len(cambios),

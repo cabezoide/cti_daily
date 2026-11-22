@@ -26,3 +26,4 @@ vigilancia/.cache-enriquecimiento.json
 .env
 .env.*
 !.env.ejemplo
+vigilancia/.cache-attack.json
