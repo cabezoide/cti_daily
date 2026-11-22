@@ -3438,3 +3438,47 @@ CTI-2026-062,2026-11-21,TLP:CLEAR,PAP:WHITE,cartera,"**Rescate 0,0 % · tamaño 
 CTI-2026-062,2026-11-21,TLP:CLEAR,PAP:WHITE,pattern,**Depósito de seguro · promoción de pago · garante propio · contacto obligatorio por Telegram**,,Moderada,Sin caducidad,Alerta de doble lectura: un usuario propio en este foro puede ser partícipe o víctima,,O-6.5. Modelo de negocio de foro criminal y patrón clásico de estafa a aspirantes. Indistinguibles sin depositar
 CTI-2026-062,2026-11-21,TLP:CLEAR,PAP:WHITE,pattern,"**Información de negociación de rescate en poder de un tercero: límite de autorización, estado de copias, cobertura de póliza**",,Moderada como control,Sin caducidad,Compartimentar por tramos y separar papeles de proveedor,,"T-2. La única pieza del expediente que no caduca con la marca, porque describe el proceso y no al actor"
 CTI-2026-062,2026-11-21,TLP:CLEAR,PAP:WHITE,pattern,fecha_de_ataque > fecha_de_descubrimiento,,Alta como método,Sin caducidad,Aplicar antes de citar cualquier «última actividad»,,"El correctivo reutilizable del expediente. Aplicable a cualquier actor de cualquier catálogo, sin saber nada del actor"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,-PollSeconds 10,,Moderada,,Caza,,Vigilante de persistencia. El aviso no publica el nombre de la tarea
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,104.21.17.120,,Alta,,NUNCA bloqueo,,"Cloudflare. Destinos de ns.mo7sen[.]dev y cdn007-digitaldownloads[.]com. Uso declarado CDN, en lista blanca"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,104.21.41.192,,Alta,,NUNCA bloqueo,,"Cloudflare. Destinos de ns.mo7sen[.]dev y cdn007-digitaldownloads[.]com. Uso declarado CDN, en lista blanca"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,172.67.166.210,,Alta,,NUNCA bloqueo,,"Cloudflare. Destinos de ns.mo7sen[.]dev y cdn007-digitaldownloads[.]com. Uso declarado CDN, en lista blanca"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,172.67.176.189,,Alta,,NUNCA bloqueo,,"Cloudflare. Destinos de ns.mo7sen[.]dev y cdn007-digitaldownloads[.]com. Uso declarado CDN, en lista blanca"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,RelayTrapLiteAlert,,Alta,,Detección y caza,,Persistencia con nombre propio
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,Run,,Alta,,Detección y caza,,Persistencia con nombre propio
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,achiel.ns.cloudflare.com,,Moderada,,Caza y vigilancia; NUNCA bloqueo,,Par de servidores de nombres compartido por los tres dominios registrados. Cloudflare los asigna por cuenta (KJ-5)
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,artefacto,pola.ns.cloudflare.com,,Moderada,,Caza y vigilancia; NUNCA bloqueo,,Par de servidores de nombres compartido por los tres dominios registrados. Cloudflare los asigna por cuenta (KJ-5)
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,domain,cdn007-digitaldownloads.com,,Alta,,Bloqueo,ioc_url.txt,Infraestructura de campaña; fuente de instalador configurada
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,domain,newnewnew.gotdns.org,,Alta,,Bloqueo,ioc_url.txt,"Relé de ScreenConnect asociado, sobre DNS dinámico"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,domain,ns.mo7sen.dev,,Alta,,Bloqueo,ioc_url.txt,"Punto de recuperación de decodificador, paquete, script y utilidad (/EadF.php)"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,domain,sc.payproofkit.com,,Alta,,Bloqueo,ioc_url.txt,Panel y fuente de instalador de ScreenConnect no autorizados
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,domain,soxnewwork.homedns.org,,Alta,,Bloqueo,ioc_url.txt,"Relé de ScreenConnect asociado, sobre DNS dinámico"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,filepath,%TEMP%\SCKitBundle,,Alta,,Detección,,Extracción del paquete y preparación del payload
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,filepath,%TEMP%\SCKit\trapkit\payload,,Alta,,Detección,,Extracción del paquete y preparación del payload
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,filepath,C:\ProgramData\RelayTrap,,Alta,,Detección y caza,,Directorio de scripts de persistencia
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,filepath,C:\Windows\Temp\sc.msi,,Alta,,Detección,,Instalador descargado
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,herramienta,ConnectWise ScreenConnect,,Alta,,"Inventario, nunca bloqueo",,"Producto legítimo. El abuso está en la instancia a la que apunta el cliente, no en el binario"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,ipv4,124.198.131.155,,Moderada,,Bloqueo tras verificación,ioc_ipv4.txt,"Destino de soxnewwork[.]homedns[.]org el 22-11-2026. 1337 Services GmbH. Medición propia, no publicada por la fuente"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,ipv4,155.94.150.39,,Alta,,Bloqueo,ioc_ipv4.txt,"Panel no autorizado. DataWagon LLC, Estados Unidos"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,ipv4,185.99.255.28,,Alta,,Bloqueo,ioc_ipv4.txt,"Servidor ScreenConnect no autorizado y fuente de instalador. DATAWAGON, Reino Unido"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,pattern,%TEMP%\k<32 hex>.ps1,,Moderada,,Detección por patrón,,Script temporal del cargador
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,pattern,/EadF.php?p=1..6&m=<MachineGuid>,,Alta,,Detección en egreso,,Protocolo de recuperación escalonada
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,servicio,gotdns.org,,Alta,,Bloqueo del subdominio concreto únicamente,,Servicios legítimos de DNS dinámico usados para los relés. Bloquear el dominio completo rompe a terceros
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,servicio,homedns.org,,Alta,,Bloqueo del subdominio concreto únicamente,,Servicios legítimos de DNS dinámico usados para los relés. Bloquear el dominio completo rompe a terceros
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha1,0be01e7bd69cfdd222645d49bb5ad9961372fef2,,Moderada,,Retrohunt,ioc_hash.txt,"Instalador, archivo o utilidad de subida. El aviso los enumera sin asignar cada hash a su fichero"
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha1,13ce33b19daee3963f7e15d461b191c38f6bc0d3,,Moderada,,Retrohunt,ioc_hash.txt,Ídem
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha1,3f81c9c874a896c46e4bccea2fad2eaa3d9f2054,,Moderada,,Retrohunt,ioc_hash.txt,Ídem
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,3c7a98f0fdb6235b8076319c74dc1085f7b349b6d750416dd0cadb07d7972ec4,,Alta,,Bloqueo,ioc_hash.txt,RelayTrap.cs
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,43b7a5e56f9e6c7b74e1ce2b7b5af63f383084625fcc2d3a5985fa1059e2db95,,Alta,,Bloqueo,ioc_hash.txt,Run-Lateral-Full.bat
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,454c43d296b1276bde9a4f6ff1da2221cb35ccdb2fc7991bdd572e45bce12a8a,,Alta,,Bloqueo,ioc_hash.txt,TRAP-PROOF.bat
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,4a1dd3cd2ea14368afadf7e9dfdd63b104e3981ef8c85bbb6510919b810af04b,,Alta,,Bloqueo,ioc_hash.txt,trapkit\install.ps1
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,50659748723e906c8b3d3c0386bd4cf692f693a3e23639398c1a14d0c31fed61,,Alta,,Bloqueo,ioc_hash.txt,runnew.cmd
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,5dd3a6ba806ac472663e243cfc1c034c534d5d9a42ec362c3dbf0f8d950148d0,,Alta,,Bloqueo,ioc_hash.txt,Stop-LabTrap.bat
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,61a672a13f03a9e81f573535ee92b1ed6cb7e848a33a06048865312d4e185ae2,,Alta,,Bloqueo,ioc_hash.txt,Paquete sc.msi
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,7a9aca9fdd4dcc13fe497cabdb13ca1e5d6a529271c8aa495e5ca1c1c80271ec,,Alta,,Bloqueo,ioc_hash.txt,Panel-Lateral.ps1
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,81cc2baa35b798d6084bd078662fa29ff28df02c46c6ccdb2b43bde97d19f781,,Alta,,Bloqueo,ioc_hash.txt,Stage0Loader.ps1
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,8cb5f48bbe70b5248db7f327f3d1ad6649df5c767d2a7e0711ee147fd92e06af,,Alta,,Bloqueo,ioc_hash.txt,ToolboxRelayUploader.exe
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,8e6912deed82e80bb6bd66f73509d024b1f78b993515366d8317e69a97cff4f4,,Alta,,Bloqueo,ioc_hash.txt,ZIP de conjunto de herramientas preparado
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,94b93c649b0ae0281352da9d01761fa9195ab1e6ac7010af3b9ba1646355eb11,,Alta,,Bloqueo,ioc_hash.txt,Panel-Lateral-free.ps1
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,b93f10f30ee453d1e1c046fec9d141c41d7680be5cd46c3aeb3febe0f4953b4d,,Alta,,Bloqueo,ioc_hash.txt,Auxiliar LabConfig.ps1
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,cf50d73fa8117a758093b1344de41cd6a6ccddc645cdda1fa91a9264efe93956,,Alta,,Bloqueo,ioc_hash.txt,Lite-Alert.ps1
+CTI-2026-063,2026-11-21,TLP:CLEAR,PAP:WHITE,sha256,d2ed7a7bf4f8ac9c7969e9b3a07ebd4dda0d858f372c876ac0a041611698de9a,,Alta,,Bloqueo,ioc_hash.txt,TrapWatch.ps1

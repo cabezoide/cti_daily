@@ -784,6 +784,56 @@ def g6_grafo():
     return H
 
 
+# ──────────────────────── G8 · atribución de las fuentes de terceros
+
+# Lo que cada servicio exige a cambio de dejarnos usar sus datos, y dónde se
+# comprueba que seguimos cumpliéndolo.
+ATRIBUCION = [
+    {"marca": "ransomware.live",
+     "donde": ["README.md", "index.html"],
+     "por_que": "sus condiciones de uso exigen atribución en cualquier "
+                "interfaz, informe o entregable, y de ahí sale toda la "
+                "victimología de extorsión de la cartera"},
+    {"marca": "botnet.cl",
+     "donde": ["README.md", "index.html"],
+     "por_que": "es la telemetría de redes de bots de CTI-2026-044 y 045"},
+]
+
+
+def g8_atribucion():
+    """Que sigamos acreditando a quien nos deja usar sus datos.
+
+    **Encontrado el 21-11-2026 al revisar `ransomware.live` a petición del
+    usuario.** Es la fuente principal de `tools/cti_vigilancia.py` desde el
+    principio, y sus términos piden atribución «in any interface, report or
+    deliverable». La acreditaban **seis de cuarenta y nueve informes**, y ni
+    el `README.md` ni la portada publicada. Usar los datos de alguien y no
+    nombrarlo no es un descuido de forma: es incumplir la condición con la
+    que nos los dieron, y este repositorio se publica en GitHub Pages.
+
+    La comprobación es deliberadamente tonta —que la marca aparezca— porque
+    lo que se vigila no es la redacción sino que nadie la borre al reescribir
+    la portada.
+    """
+    H = []
+    ap = lambda r, b, m: H.append(Hallazgo("(cartera)", "atribución", r, b, m))
+    for f in ATRIBUCION:
+        for fich in f["donde"]:
+            ruta = os.path.join(RAIZ, fich)
+            if not os.path.exists(ruta):
+                continue
+            try:
+                t = open(ruta, encoding="utf-8").read()
+            except Exception:
+                continue
+            if f["marca"] not in t:
+                ap("G8", True, "`%s` **no acredita a `%s`**, y %s. La "
+                               "atribución es una condición de uso, no una "
+                               "cortesía."
+                   % (fich, f["marca"], f["por_que"]))
+    return H
+
+
 # ──────────────────────────────── G7 · alineamiento con MITRE ATT&CK
 
 RE_FILA_TTP = re.compile(
@@ -980,6 +1030,7 @@ def ejecutar(patrones=None, hoy=None, todo=False):
         H += g7_attack(inf)
     H += g5_agregados()
     H += g6_grafo()
+    H += g8_atribucion()
     return lista, H
 
 

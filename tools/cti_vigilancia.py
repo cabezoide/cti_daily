@@ -82,6 +82,41 @@ DIR_VIG = os.path.join(RAIZ, "vigilancia")
 ESTADO = os.path.join(DIR_VIG, "estado.json")
 
 AGENTE = "cti-vigilancia/1.0"
+
+# ── Caché de respuestas, y no es una optimización: es una CONDICIÓN DE USO.
+#
+# Los términos de `ransomware.live` —§4, Fair Usage— dicen que sus datos se
+# cachean treinta minutos y que **consultar con más frecuencia «may be
+# considered a breach»**. Esta herramienta no cacheaba nada: dos ejecuciones
+# seguidas eran dos descargas completas del catálogo del año, y nada impedía
+# lanzarla cinco veces en una tarde mientras se depura.
+#
+# Treinta minutos es su número, no uno elegido por nosotros. `--sin-cache`
+# fuerza la descarga cuando hace falta de verdad, y queda dicho en la salida.
+VIDA_CACHE = 30 * 60
+RUTA_CACHE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "vigilancia", ".cache-fuentes.json")
+_CACHE = {"d": None, "sucia": False}
+
+
+def _cache():
+    if _CACHE["d"] is None:
+        try:
+            _CACHE["d"] = json.load(open(RUTA_CACHE, encoding="utf-8"))
+        except Exception:
+            _CACHE["d"] = {}
+    return _CACHE["d"]
+
+
+def _guardar_cache():
+    if not _CACHE["sucia"]:
+        return
+    try:
+        os.makedirs(os.path.dirname(RUTA_CACHE), exist_ok=True)
+        json.dump(_CACHE["d"], open(RUTA_CACHE, "w", encoding="utf-8"),
+                  ensure_ascii=False)
+    except Exception:
+        pass
 TIEMPO_ESPERA = 45
 PAUSA_ENTRE_FUENTES = 2      # segundos; cortesía con servicios gratuitos de terceros
 PAUSA_REINTENTO = 4
@@ -142,7 +177,7 @@ def clave(*partes):
     return hashlib.sha256(crudo.encode("utf-8")).hexdigest()[:16]
 
 
-def traer(url, etiqueta, reintentos=2):
+def traer(url, etiqueta, reintentos=2, usar_cache=True):
     """Descarga y decodifica JSON. Devuelve (datos, error).
 
     Reintenta con espera creciente ante fallos transitorios, y **respeta el
@@ -150,6 +185,14 @@ def traer(url, etiqueta, reintentos=2):
     gratuitos de terceros: insistir sin pausa es la forma más rápida de que
     dejen de responder, y de hecho ocurrió al probar este script.
     """
+    c = _cache()
+    guardado = c.get(url)
+    if usar_cache and guardado and time.time() - guardado.get("t", 0) < VIDA_CACHE:
+        edad = int((time.time() - guardado["t"]) / 60)
+        aviso("  %s: de la caché (%d min; se refresca a los %d)"
+              % (etiqueta, edad, VIDA_CACHE // 60))
+        return guardado.get("d"), None
+
     pet = urllib.request.Request(url, headers={
         "User-Agent": AGENTE,
         "Accept": "application/json",
@@ -160,7 +203,10 @@ def traer(url, etiqueta, reintentos=2):
             with urllib.request.urlopen(pet, timeout=TIEMPO_ESPERA) as r:
                 crudo = r.read()
             try:
-                return json.loads(crudo.decode("utf-8", "replace")), None
+                d = json.loads(crudo.decode("utf-8", "replace"))
+                c[url] = {"t": time.time(), "d": d}
+                _CACHE["sucia"] = True
+                return d, None
             except ValueError as ex:
                 return None, "%s: respuesta no es JSON (%d B): %s" % (
                     etiqueta, len(crudo), ex)
@@ -285,7 +331,7 @@ def indicadores_publicados():
 
 # ─────────────────────────────────────────────────────────── recolección
 
-def recoger(anio, errores):
+def recoger(anio, errores, usar_cache=True):
     """Consulta las fuentes en vivo.
 
     Devuelve `(datos, ok)`, donde `ok` dice **por fuente** si respondió. Esa
@@ -293,15 +339,18 @@ def recoger(anio, errores):
     colección», y la que protege la línea base (ver `main`).
     """
     datos, ok = {}, {}
-    for i, (nombre, patron) in enumerate(FUENTES.items()):
-        if i:
+    pedidas = 0
+    for nombre, patron in FUENTES.items():
+        if pedidas:
             time.sleep(PAUSA_ENTRE_FUENTES)
         url = patron % {"anio": anio} if "%(" in patron else patron
-        d, err = traer(url, nombre)
+        d, err = traer(url, nombre, usar_cache=usar_cache)
         if err:
             errores.append(err)
         datos[nombre] = d
         ok[nombre] = err is None and d is not None
+        pedidas += 1
+    _guardar_cache()
     return datos, ok
 
 
@@ -753,6 +802,11 @@ def main(argv=None):
         description="Vigilancia diaria: qué ha cambiado en las fuentes desde la última ejecución.")
     ap.add_argument("--inicializar", action="store_true",
                     help="crea la línea base sin reportar deltas (primera ejecución)")
+    ap.add_argument("--sin-cache", action="store_true",
+                    help="ignora la caché de 30 min y vuelve a descargar. "
+                         "Los términos de ransomware.live consideran posible "
+                         "incumplimiento consultar más a menudo: usar sólo "
+                         "cuando haga falta de verdad")
     ap.add_argument("--sin-red", action="store_true",
                     help="sólo inventario local: vigencia y disparadores")
     ap.add_argument("--json", action="store_true",
@@ -801,7 +855,7 @@ def main(argv=None):
     primera = not base
 
     # ── recolección
-    datos, fuente_ok = recoger(anio, errores)
+    datos, fuente_ok = recoger(anio, errores, usar_cache=not a.sin_cache)
     parte["fuentes"] = fuente_ok
     parte["parcial"] = not all(fuente_ok.values())
     victimas = datos.get("rwlive_victimas") or []

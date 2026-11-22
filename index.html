@@ -125,6 +125,17 @@ td a{color:var(--sky)}
   border-radius:var(--r-s);padding:16px 17px}
 .stat .n{font-family:var(--mono);font-size:27px;color:var(--amber);letter-spacing:-.02em}
 .stat .l{color:var(--ink-3);font-size:12.5px;margin-top:3px;line-height:1.45}
+/* La mirilla del mapa: el mismo fichero del grafo en modo reducido, no una
+   copia. `loading=lazy` para que la portada no pague el coste si nadie baja
+   hasta aquí, y una altura fija para que no salte el diseño al cargar. */
+.mirilla{margin:26px 0 34px;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;background:var(--bg2,transparent);position:relative}
+.mirilla iframe{display:block;width:100%;height:340px;border:0}
+.mirilla .pie{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;
+  justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--dim)}
+.mirilla .pie a{font-weight:500}
+@media (max-width:640px){.mirilla iframe{height:260px}}
 footer{margin-top:58px;padding-top:22px;border-top:1px solid var(--line);
   color:var(--ink-3);font-size:13px}
 footer a{color:var(--sky)}
@@ -144,8 +155,13 @@ footer a{color:var(--sky)}
   agregados de indicadores se reconstruyen desde los informes en cada construcción.</p>
 </header>
 
+<div class="mirilla">
+  <iframe src="red-actores-3d.html?mini=1" loading="lazy" title="Mapa de actores y herramientas, vista reducida"></iframe>
+  <div class="pie"><span>268 nodos y 312 relaciones extraídas de los informes. Se gira solo; arrastra para moverlo.</span><a href="#relaciones">Ver el mapa completo ↓</a></div>
+</div>
+
 <h2><span class="num">01 · catálogo</span>Informes publicados</h2>
-<p class="sub">49 informes. El buscador filtra sobre el identificador, el actor y sus
+<p class="sub">50 informes. El buscador filtra sobre el identificador, el actor y sus
 alias, la categoría y la afirmación central de cada informe; el botón abre el informe
 renderizado, y la fuente en Markdown es el documento canónico y se versiona.</p>
 
@@ -165,6 +181,13 @@ renderizado, y la fuente en Markdown es el documento canónico y se versiona.</p
 </div>
 
 <div class="grid" id="rejilla">
+<article class="card" data-b="cti-2026-063 · sckit · conjunto de herramientas sobre connectwise screenconnect · perfil de campana contra proveedor de servicios gestionados · sckit: el parche llevaba dos meses publicado y la campana entro por otra puerta · diez dias de actividad sobre instancias screenconnect de proveedores gestionados, un gusano que nadie ha visto propagarse, y cuatro direcciones de cloudflare en la lista de indicadores · tlp:clear · v1.0 · vigente · 2026-11-21 · cti-2026-063-sckit.md">
+  <div class="id">CTI-2026-063 · 2026-11-21</div>
+  <h3><a href="CTI-2026-063-sckit.html">SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect</a></h3>
+  <div class="meta">SCKit: el parche llevaba dos meses publicado y la campaña entró por otra puerta</div>
+  <div class="pills"><span class="pill cat">Perfil de campaña contra proveedor de servicios gestionados</span><span class="pill">v1.0</span><span class="pill">TLP:CLEAR</span><span class="pill ok">vigente · 30 d</span></div>
+  <div class="links"><a class="primary" href="CTI-2026-063-sckit.html">Leer el informe</a><a href="CTI-2026-063-sckit.md">fuente .md</a></div>
+</article>
 <article class="card" data-b="cti-2026-062 · alphv · blackcat · noberus · perfil de cierre de una operacion de extorsion extinta · la marca murio en marzo de 2024, el catalogo dice que vivio quince meses mas, y la diferencia la decide un campo que casi nadie resta · cierre del expediente alphv: 731 entradas de las que 402 no tienen pais, dos victimas chilenas de abril de 2023, tres afiliados que trabajaban en el sector de la ciberseguridad, y un comunicado judicial que dice menos de lo que se le atribuye · tlp:clear · v1.0 · vigente · 2026-11-21 · cti-2026-062-alphv.md">
   <div class="id">CTI-2026-062 · 2026-11-21</div>
   <h3><a href="CTI-2026-062-alphv.html">ALPHV · BlackCat · Noberus</a></h3>
@@ -513,11 +536,11 @@ renderizado, y la fuente en Markdown es el documento canónico y se versiona.</p
 Se busca sobre el identificador, el actor y sus alias, la categoría y la afirmación central
 de cada informe — no sobre el cuerpo del documento.</p>
 
-<h2><span class="num">02 · relaciones</span>Mapa de actores y herramientas</h2>
+<h2 id="relaciones"><span class="num">02 · relaciones</span>Mapa de actores y herramientas</h2>
 <p class="sub">Las relaciones entre los actores y las herramientas de esta cartera, en un grafo tridimensional navegable. Se gira con el ratón, se filtra por tipo y cada nodo abre su ficha con enlace al informe de origen. Se regenera en cada construcción desde <code>red-actores.json</code>.</p>
 <div class="grid">
 <article class="card">
-  <div class="id">265 nodos · 309 relaciones</div>
+  <div class="id">268 nodos · 312 relaciones</div>
   <h3><a href="red-actores-3d.html">Red de actores y herramientas</a></h3>
   <div class="meta">Actores estatales, clústeres, suministradores, herramientas propias y públicas, servicios legítimos abusados y vulnerabilidades. Cada nodo va pintado por su posible país de origen, y la chapa de dos letras dice si esa atribución es oficial o una valoración de proveedor.</div>
   <div class="pills"><span class="pill">HTML autocontenido</span><span class="pill">sin dependencias</span><span class="pill ok">siempre al día</span></div>
@@ -531,17 +554,17 @@ informe. Enlaces directos, utilizables con <code>curl</code> desde cualquier pro
 <table>
 <thead><tr><th>Fichero</th><th>Núm.</th><th>Qué contiene</th></tr></thead>
 <tbody>
-<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">425</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
+<tr><td><a href="ioc_ipv4.txt"><code>ioc_ipv4.txt</code></a></td><td class="mono">428</td><td>Direcciones IPv4, una por línea, ya desenmascaradas</td></tr>
 <tr><td><a href="ioc_ipv6.txt"><code>ioc_ipv6.txt</code></a></td><td class="mono">2</td><td>Direcciones IPv6, una por línea</td></tr>
-<tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">339</td><td>Dominios y URL, una por línea</td></tr>
-<tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">431</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
-<tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">3439</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
+<tr><td><a href="ioc_url.txt"><code>ioc_url.txt</code></a></td><td class="mono">344</td><td>Dominios y URL, una por línea</td></tr>
+<tr><td><a href="ioc_hash.txt"><code>ioc_hash.txt</code></a></td><td class="mono">449</td><td>Hashes de fichero, agrupados por algoritmo según su longitud</td></tr>
+<tr><td><a href="ioc_index.csv"><code>ioc_index.csv</code></a></td><td class="mono">3483</td><td>Todos los tipos, con informe de origen, confianza, caducidad, acción permitida y contexto. <strong>Es el que hay que ingerir.</strong></td></tr>
 </tbody>
 </table>
 
 <div class="note">
 <strong>Antes de cargar un <code>.txt</code> en un bloqueo.</strong> Las listas planas pierden
-la confianza, la caducidad y la acción permitida de cada indicador: 319 de los que
+la confianza, la caducidad y la acción permitida de cada indicador: 322 de los que
 contienen están marcados <em>solo retrohunt</em>, y hay indicadores marcados
 <em>no bloquear — herramienta legítima</em>. Cargarlas sin filtrar provocará cortes de
 servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
@@ -550,8 +573,8 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
 
 <h2><span class="num">04 · estado</span>Estado del ciclo</h2>
 <div class="stats">
-  <div class="stat"><div class="n">49</div><div class="l">informes publicados</div></div>
-  <div class="stat"><div class="n">3439</div><div class="l">indicadores con contexto</div></div>
+  <div class="stat"><div class="n">50</div><div class="l">informes publicados</div></div>
+  <div class="stat"><div class="n">3483</div><div class="l">indicadores con contexto</div></div>
   <div class="stat"><div class="n">0</div><div class="l">caducados, exigen revisión</div></div>
   <div class="stat"><div class="n">2026-11-21</div><div class="l">informe más reciente</div></div>
 </div>
@@ -563,6 +586,16 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
   <a href="https://github.com/cabezoide/cti_daily">github.com/cabezoide/cti_daily</a>.
   Esta portada y los agregados los regenera <code>tools/cti_build.py</code>;
   editarlos a mano no sirve de nada.
+  <br><br>
+  <strong>Fuentes de terceros.</strong> La victimología de extorsión procede de
+  <a href="https://www.ransomware.live/">ransomware.live</a>, proyecto
+  independiente de Julien Mousqueton que agrega lo que los grupos publican en
+  sus sitios de filtración; su atribución es condición de uso y los datos se
+  usan sólo con fines no comerciales. La telemetría de redes de bots procede de
+  <a href="https://botnet.cl/">botnet.cl</a>. <strong>Ninguna de las dos
+  garantiza exactitud</strong>: una entrada en un sitio de filtración es una
+  <em>reclamación del atacante</em>, no un incidente confirmado, y así se trata
+  en todos los informes.
 </footer>
 
 </div>

@@ -736,6 +736,17 @@ td a{color:var(--sky)}
   border-radius:var(--r-s);padding:16px 17px}
 .stat .n{font-family:var(--mono);font-size:27px;color:var(--amber);letter-spacing:-.02em}
 .stat .l{color:var(--ink-3);font-size:12.5px;margin-top:3px;line-height:1.45}
+/* La mirilla del mapa: el mismo fichero del grafo en modo reducido, no una
+   copia. `loading=lazy` para que la portada no pague el coste si nadie baja
+   hasta aquí, y una altura fija para que no salte el diseño al cargar. */
+.mirilla{margin:26px 0 34px;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;background:var(--bg2,transparent);position:relative}
+.mirilla iframe{display:block;width:100%;height:340px;border:0}
+.mirilla .pie{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;
+  justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--dim)}
+.mirilla .pie a{font-weight:500}
+@media (max-width:640px){.mirilla iframe{height:260px}}
 footer{margin-top:58px;padding-top:22px;border-top:1px solid var(--line);
   color:var(--ink-3);font-size:13px}
 footer a{color:var(--sky)}
@@ -841,10 +852,25 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
 
     # El mapa sólo se anuncia si existe: la portada no debe enlazar un fichero
     # que la construcción no ha generado.
+    # La mirilla va arriba y el bloque completo sigue en la sección 02: es la
+    # misma página, no una copia reducida que haya que mantener aparte.
+    mirilla = ""
+    if red_n:
+        mirilla = (
+            '\n<div class="mirilla">\n'
+            '  <iframe src="%s?mini=1" loading="lazy" title="Mapa de actores y '
+            'herramientas, vista reducida"></iframe>\n'
+            '  <div class="pie"><span>%d nodos y %d relaciones extraídas de los '
+            'informes. Se gira solo; arrastra para moverlo.</span>'
+            '<a href="#relaciones">Ver el mapa completo ↓</a></div>\n'
+            '</div>\n' % (RED_SALIDA, red_n[0], red_n[1])
+        )
+
     bloque_red = ""
     if red_n:
         bloque_red = (
-            '<h2><span class="num">02 · relaciones</span>Mapa de actores y herramientas</h2>\n'
+            '<h2 id="relaciones"><span class="num">02 · relaciones</span>'
+            'Mapa de actores y herramientas</h2>\n'
             '<p class="sub">Las relaciones entre los actores y las herramientas de esta cartera, '
             'en un grafo tridimensional navegable. Se gira con el ratón, se filtra por tipo y cada '
             'nodo abre su ficha con enlace al informe de origen. Se regenera en cada construcción '
@@ -892,7 +918,7 @@ def pagina_portada(lista, ioc, indice, hoy, red_n=None):
   alguien va a hacer, va al anexo o se borra. El repositorio se revisa a diario y los
   agregados de indicadores se reconstruyen desde los informes en cada construcción.</p>
 </header>
-
+%(mirilla)s
 <h2><span class="num">01 · catálogo</span>Informes publicados</h2>
 <p class="sub">%(n)d informes. El buscador filtra sobre el identificador, el actor y sus
 alias, la categoría y la afirmación central de cada informe; el botón abre el informe
@@ -954,6 +980,16 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
   <a href="https://github.com/cabezoide/cti_daily">github.com/cabezoide/cti_daily</a>.
   Esta portada y los agregados los regenera <code>tools/cti_build.py</code>;
   editarlos a mano no sirve de nada.
+  <br><br>
+  <strong>Fuentes de terceros.</strong> La victimología de extorsión procede de
+  <a href="https://www.ransomware.live/">ransomware.live</a>, proyecto
+  independiente de Julien Mousqueton que agrega lo que los grupos publican en
+  sus sitios de filtración; su atribución es condición de uso y los datos se
+  usan sólo con fines no comerciales. La telemetría de redes de bots procede de
+  <a href="https://botnet.cl/">botnet.cl</a>. <strong>Ninguna de las dos
+  garantiza exactitud</strong>: una entrada en un sitio de filtración es una
+  <em>reclamación del atacante</em>, no un incidente confirmado, y así se trata
+  en todos los informes.
 </footer>
 
 </div>
@@ -1046,6 +1082,7 @@ servicio propios. Para eso está <code>ioc_index.csv</code> y su columna
         "tarjetas": "\n".join(tarjetas),
         "filas_ioc": "\n".join(filas_ioc_tabla),
         "bloque_red": bloque_red,
+        "mirilla": mirilla,
         "num_ioc": "03" if red_n else "02",
         "num_estado": "04" if red_n else "03",
         "retro": retro,

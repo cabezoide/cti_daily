@@ -3,7 +3,7 @@
  "anio": 2026,
  "actores": {
   "CTI-2026-014": {
-   "total": 1020,
+   "total": 1024,
    "claves": [
     "005af39a5ca01354",
     "00d0d69532aa67a1",
@@ -45,6 +45,8 @@
     "06a83b878ee0438e",
     "0721d6c37ce0b0d6",
     "080429228cad83d5",
+    "0832f50564fbaec9",
+    "08372c4bbd6a0096",
     "0880d081a664a412",
     "09024e92bc5ce338",
     "0913aefcf495b2f2",
@@ -234,6 +236,7 @@
     "3a64573a781f2130",
     "3aa0c279a6cbb6fc",
     "3ac40dc1ecf4df06",
+    "3b17fd1a7dcd8151",
     "3b2f7c39751c9724",
     "3bf1ec978b7ff6ba",
     "3c0618d8f86f0e67",
@@ -821,6 +824,7 @@
     "cd9d2b6219237473",
     "cda8968cd8374ef9",
     "cdc5ab416a5c54af",
+    "cdd7ca48af9120e1",
     "cded36b0a88ec813",
     "cdefeced8851f4ad",
     "cea2d8e41da56c54",
@@ -1027,14 +1031,16 @@
     "ff08ea7982deeed7"
    ],
    "paises": {
-    "US": 217,
+    "SG": 9,
+    "US": 218,
+    "SE": 16,
+    "??": 30,
     "AR": 18,
     "BR": 36,
     "TZ": 2,
     "GB": 47,
     "FR": 42,
     "PL": 21,
-    "??": 29,
     "BE": 7,
     "TW": 26,
     "DE": 49,
@@ -1047,7 +1053,6 @@
     "ES": 23,
     "PE": 8,
     "CA": 29,
-    "SE": 15,
     "ZA": 12,
     "JP": 24,
     "UA": 1,
@@ -1081,7 +1086,6 @@
     "AT": 10,
     "GR": 4,
     "SN": 1,
-    "SG": 8,
     "PT": 11,
     "FI": 4,
     "AG": 1,
@@ -1119,8 +1123,9 @@
     "IQ": 1
    },
    "sectores": {
-    "Technology": 132,
-    "Healthcare": 101,
+    "Technology": 134,
+    "Healthcare": 102,
+    "Hospitality": 23,
     "Education": 38,
     "Other": 64,
     "Not Found": 62,
@@ -1131,10 +1136,10 @@
     "Government & Defense": 45,
     "Energy & Utilities": 36,
     "Transportation": 48,
-    "Retail & E-Commerce": 72,
-    "Hospitality": 22
+    "Retail & E-Commerce": 72
    },
    "por_publicacion": {
+    "2026-11-21": 4,
     "2026-11-18": 2,
     "2026-11-17": 17,
     "2026-11-12": 22,
@@ -1240,7 +1245,7 @@
     "2026-01-06": 1
    },
    "por_ataque": {
-    "2026-11-18": 1,
+    "2026-11-18": 5,
     "2026-11-17": 1,
     "2026-11-16": 16,
     "2026-11-13": 1,
@@ -1408,7 +1413,7 @@
    }
   },
   "CTI-2026-015": {
-   "total": 1221,
+   "total": 1222,
    "claves": [
     "007ce922ac671ff0",
     "008668cf27702299",
@@ -1623,6 +1628,7 @@
     "28c11a43db39bb49",
     "28c46d10279b4aac",
     "28d83f7e10beb60a",
+    "28e13de7464067bc",
     "28e451b61ef853fc",
     "297ce12f3ecb5a4c",
     "29a7ec7e2b240706",
@@ -2635,6 +2641,7 @@
    "paises": {
     "US": 452,
     "JP": 18,
+    "GB": 74,
     "PH": 14,
     "AE": 5,
     "PE": 9,
@@ -2647,7 +2654,6 @@
     "CA": 43,
     "MX": 34,
     "SG": 11,
-    "GB": 73,
     "BR": 10,
     "FR": 46,
     "TR": 17,
@@ -2718,12 +2724,12 @@
    "sectores": {
     "Financial Services": 65,
     "Manufacturing": 267,
+    "Professional Services": 189,
     "Not Found": 71,
     "Energy & Utilities": 40,
     "Government & Defense": 37,
     "Transportation": 54,
     "Other": 66,
-    "Professional Services": 188,
     "Technology": 124,
     "Retail & E-Commerce": 103,
     "Education": 41,
@@ -2733,6 +2739,7 @@
    },
    "por_publicacion": {
     "2026-11-18": 2,
+    "2026-11-21": 1,
     "2026-11-16": 13,
     "2026-11-15": 6,
     "2026-11-14": 1,
@@ -2992,7 +2999,7 @@
    },
    "por_ataque": {
     "2026-11-18": 2,
-    "2026-11-16": 13,
+    "2026-11-16": 14,
     "2026-11-15": 6,
     "2026-11-14": 1,
     "2026-11-12": 2,
@@ -4675,7 +4682,7 @@
    }
   },
   "CTI-2026-047": {
-   "total": 438,
+   "total": 439,
    "claves": [
     "01042ca52d1a3b53",
     "01645c4b93a764c4",
@@ -4697,6 +4704,7 @@
     "0b6aef073022a3c3",
     "0c17051b25bdf971",
     "0d51493c3b9dbe25",
+    "0d6966050be92379",
     "0d8a5f2d8622d89b",
     "0df791fc70f2087d",
     "0f69fbf11e5b6335",
@@ -5117,7 +5125,7 @@
     "ff8ade51549248ad"
    ],
    "paises": {
-    "US": 257,
+    "US": 258,
     "IT": 7,
     "JP": 3,
     "MY": 4,
@@ -5177,6 +5185,7 @@
     "RS": 1
    },
    "sectores": {
+    "Healthcare": 43,
     "Government & Defense": 21,
     "Energy & Utilities": 14,
     "Not Found": 19,
@@ -5187,12 +5196,12 @@
     "Transportation": 16,
     "Financial Services": 28,
     "Other": 25,
-    "Healthcare": 42,
     "Education": 17,
     "Hospitality": 9,
     "Agriculture and Food Production": 11
    },
    "por_publicacion": {
+    "2026-11-21": 1,
     "2026-11-20": 2,
     "2026-11-19": 3,
     "2026-11-16": 2,
@@ -5376,6 +5385,7 @@
     "2026-04-04": 1
    },
    "por_ataque": {
+    "2026-11-21": 1,
     "2026-11-20": 1,
     "2026-11-19": 1,
     "2026-11-18": 2,
@@ -7123,7 +7133,7 @@
    }
   },
   "CTI-2026-058": {
-   "total": 190,
+   "total": 199,
    "claves": [
     "015ef132a0d67b54",
     "0278657fac4712f8",
@@ -7158,6 +7168,7 @@
     "2ae70f85f137a38f",
     "2af5ce84f0bf4243",
     "2e861d76737df49f",
+    "2fa910fde9cfe1c2",
     "2fb4ad474b949fb8",
     "3036f6b336c559fc",
     "30940a5a22dcfab6",
@@ -7173,6 +7184,7 @@
     "3d97902eb83eee86",
     "3e50baab51082259",
     "410548d0091fe357",
+    "41cb95c31c6293ec",
     "43cb670b73e07d53",
     "456cd81a2753d21c",
     "486611838dcec0a3",
@@ -7201,6 +7213,7 @@
     "6bc3fe71e68b13f6",
     "6c69393550137524",
     "6c9c3302d982cb29",
+    "6ed0838550ecdd43",
     "6ee3be6f34cd4785",
     "6f906aaecd1c6c48",
     "6ff1413a7be6724b",
@@ -7223,12 +7236,14 @@
     "839174e0719eea1f",
     "84a1e2aa5905ae5d",
     "85554c55f0211236",
+    "85ba9d2a00dcea20",
     "872d83e103fa663f",
     "8a605b9cd8aa9856",
     "8a91db1c9f04a07b",
     "8aa65b9914f2415e",
     "8bc68e046de86d3f",
     "8ce63f8cb8fce3ee",
+    "8ebf65de8d3a1b1e",
     "8f4ca38018577f90",
     "8fb40ccf34417591",
     "9179bdfbf5512034",
@@ -7246,6 +7261,7 @@
     "a125bcbfcca5f58f",
     "a30f395d03406012",
     "a31263987509e96e",
+    "a37a0b0a40b06173",
     "a637c4bb12607649",
     "a7012b02d41651e0",
     "a79fae943fe78fea",
@@ -7275,6 +7291,8 @@
     "cd4d22ba9caf38a9",
     "ce131224409ff083",
     "d011862a9c81adf9",
+    "d0e4da470602df62",
+    "d36caf4a10366515",
     "d420611bcc783a96",
     "d56ec9d5f14a63e9",
     "d6cf444de217c1fd",
@@ -7307,6 +7325,7 @@
     "f69a02798b852b55",
     "f6cc7c489881cf21",
     "f7357ea77a9d314d",
+    "f76c2ffaa99362f3",
     "f7acc7dfeaae3a01",
     "f7c251ec6dead5d3",
     "f9749af6a92dc758",
@@ -7317,26 +7336,27 @@
     "fffbb481bd58c14a"
    ],
    "paises": {
+    "PH": 3,
+    "TW": 3,
+    "CL": 2,
+    "SG": 3,
+    "ES": 12,
+    "AR": 5,
+    "EC": 2,
+    "IL": 4,
     "TH": 1,
-    "IL": 3,
     "AU": 6,
     "DE": 55,
     "US": 33,
-    "ES": 11,
     "BE": 5,
-    "EC": 1,
-    "TW": 2,
     "PE": 2,
-    "AR": 4,
     "MX": 3,
     "JP": 8,
     "CH": 7,
     "IT": 13,
-    "CL": 1,
     "SK": 1,
     "MY": 2,
     "NL": 1,
-    "PH": 2,
     "LT": 1,
     "PT": 3,
     "CA": 10,
@@ -7345,25 +7365,26 @@
     "GB": 8,
     "AT": 1,
     "SE": 1,
-    "KH": 1,
-    "SG": 1
+    "KH": 1
    },
    "sectores": {
+    "Other": 20,
+    "Technology": 17,
+    "Hospitality": 6,
+    "Financial Services": 1,
+    "Professional Services": 29,
+    "Energy & Utilities": 2,
+    "Healthcare": 15,
     "Manufacturing": 31,
     "Not Found": 19,
-    "Other": 17,
-    "Hospitality": 5,
-    "Professional Services": 28,
     "Education": 9,
     "Transportation": 7,
     "Agriculture and Food Production": 11,
     "Retail & E-Commerce": 26,
-    "Technology": 16,
-    "Healthcare": 14,
-    "Government & Defense": 6,
-    "Energy & Utilities": 1
+    "Government & Defense": 6
    },
    "por_publicacion": {
+    "2026-11-21": 9,
     "2026-11-12": 1,
     "2026-11-07": 1,
     "2026-11-04": 8,
@@ -7411,6 +7432,7 @@
     "2026-01-23": 1
    },
    "por_ataque": {
+    "2026-11-21": 9,
     "2026-11-12": 1,
     "2026-11-07": 1,
     "2026-11-04": 7,
@@ -8457,6 +8479,14 @@
     "2025-10-23": 1,
     "2025-10-03": 1
    }
+  },
+  "CTI-2026-062": {
+   "total": 0,
+   "claves": [],
+   "paises": {},
+   "sectores": {},
+   "por_publicacion": {},
+   "por_ataque": {}
   }
  },
  "catalogo": {
@@ -8898,7 +8928,7 @@
    "description": "Qilin ransomware was first observed in July of 2022. Qilin Ransomware is written in Golang and supports multiple encryption modes; all of which are controlled by the operator. Qilin actors practice double extortion – demanding payment for a decryptor, as well as for the non-release of stolen data.",
    "locations": [
     {
-     "available": false,
+     "available": true,
      "enabled": true,
      "fqdn": "ijzn3sicrcy7guixkzjkib4ukbiilwc3xhnmby4mcbccnsd7j2rekvqd.onion",
      "slug": "http://ijzn3sicrcy7guixkzjkib4ukbiilwc3xhnmby4mcbccnsd7j2rekvqd.onion",
@@ -11850,10 +11880,18 @@
    "description": "Brain Cipher emerged in July 2024. Both Windows and Linux variants are available. Brain Cipher using the leaked build of LockBit Black for their operations. The group suspected to have exploited CVE-2023-28252 (Microsoft Windows CLFS Driver Privilege Escalation Vulnerability). The Ransom demand ranges from $150,000 to $1,00,0000. Demand to be paid with Monero (XMR) cryptocurrency. In 2025, they have shifted their new Negotiation portal to new server with vanity TOR Domain starting with 'brain'. ",
    "locations": [
     {
-     "available": true,
+     "available": false,
      "enabled": true,
-     "fqdn": "hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
-     "slug": "http://hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
+     "fqdn": "pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
+     "slug": "http://pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": false,
+     "fqdn": "zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
+     "slug": "http://zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
      "title": "",
      "type": "Files"
     },
@@ -11862,14 +11900,6 @@
      "enabled": true,
      "fqdn": "urvvoj7wlkh476p2tgntzez3nuke2ylfdkekpnkajxfz43o7jqkokeyd.onion",
      "slug": "http://urvvoj7wlkh476p2tgntzez3nuke2ylfdkekpnkajxfz43o7jqkokeyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
-     "slug": "http://aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
      "title": "",
      "type": "Files"
     },
@@ -11908,10 +11938,10 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
-     "slug": "http://vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
-     "title": "Brain Cipher Dataleak",
-     "type": "DLS"
+     "fqdn": "hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
+     "slug": "http://hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
+     "title": "",
+     "type": "Files"
     },
     {
      "available": false,
@@ -11924,10 +11954,10 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
-     "slug": "http://dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
-     "title": "",
-     "type": "Files"
+     "fqdn": "vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
+     "slug": "http://vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
+     "title": "Brain Cipher Dataleak",
+     "type": "DLS"
     },
     {
      "available": false,
@@ -11940,8 +11970,8 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
-     "slug": "http://n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
+     "fqdn": "tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
+     "slug": "http://tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
      "title": "",
      "type": "Files"
     },
@@ -11972,8 +12002,8 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
-     "slug": "http://tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
+     "fqdn": "n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
+     "slug": "http://n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
      "title": "",
      "type": "Files"
     },
@@ -12146,10 +12176,10 @@
      "type": "Files"
     },
     {
-     "available": false,
+     "available": true,
      "enabled": true,
-     "fqdn": "upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
-     "slug": "http://upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
+     "fqdn": "dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
+     "slug": "http://dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
      "title": "",
      "type": "Files"
     },
@@ -12164,24 +12194,8 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
-     "slug": "http://pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
-     "slug": "http://s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
-     "slug": "http://ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
+     "fqdn": "upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
+     "slug": "http://upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
      "title": "",
      "type": "Files"
     },
@@ -12194,10 +12208,26 @@
      "type": "Files"
     },
     {
+     "available": false,
+     "enabled": true,
+     "fqdn": "s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
+     "slug": "http://s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
      "available": true,
-     "enabled": false,
-     "fqdn": "zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
-     "slug": "http://zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
+     "enabled": true,
+     "fqdn": "aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
+     "slug": "http://aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
+     "slug": "http://ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
      "title": "",
      "type": "Files"
     },
@@ -13633,6 +13663,274 @@
     }
    ],
    "url": "https://www.ransomware.live/group/dragonforce"
+  },
+  "CTI-2026-062": {
+   "added_date": "2021-09-09",
+   "altname": "blackcat",
+   "description": "The operators of the ALPHV/BlackCat ransomware began their activity in December 2021, making posts on Dark Web forums to promote their affiliate program, offering other actors the opportunity to engage in a 'new type of ransomware family' developed from scratch using the Rust programming language.<BR> <BR> Some clear evidence indicates that the actors behind this new ransomware are not new to cybercrime, and there were links to other affiliate programs such as DarkSide, BlackMatter, and REvil. (After several attacks against large companies, these groups faced pressure and arrests, necessitating the termination of their operations).<BR> <BR> As a security measure, the operators of ALPHV implemented the requirement for the execution of the ransomware payload by providing an 'access token,' which is supplied by the owners of the Ransomware-as-a-Service to the affiliate. This token is added to the victim's ransom note so that they can contact the threat actor responsible for encrypting the data.<BR> <BR> ALPHV affiliates employ double and triple extortion techniques, meaning the publication of the company's name on leak sites, threats of data leakage, and lastly, threats of DDoS attacks against the organization.<BR>Source: https://github.com/crocodyli/ThreatActors-TTPs",
+   "locations": [
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion",
+     "slug": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion/api/blog/all/0/12",
+     "title": "THIS WEBSITE HAS BEEN SEIZED",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "alphvuzxyxv6ylumd2ngp46xzq3pw6zflomrghvxeuks6kklberrbmyd.onion",
+     "slug": "http://alphvuzxyxv6ylumd2ngp46xzq3pw6zflomrghvxeuks6kklberrbmyd.onion",
+     "title": "THIS WEBSITE HAS BEEN SEIZED",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "vqifktlreqpudvulhbzmc5gocbeawl67uvs2pttswemdorbnhaddohyd.onion",
+     "slug": "http://vqifktlreqpudvulhbzmc5gocbeawl67uvs2pttswemdorbnhaddohyd.onion/search",
+     "title": " ",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "2cuqgeerjdba2rhdiviezodpu3lc4qz2sjf4qin6f7std2evleqlzjid.onion",
+     "slug": "http://2cuqgeerjdba2rhdiviezodpu3lc4qz2sjf4qin6f7std2evleqlzjid.onion",
+     "title": "",
+     "type": "DLS"
+    }
+   ],
+   "name": "alphv",
+   "tools": [],
+   "ttps": [
+    {
+     "tactic_id": "TA0001",
+     "tactic_name": "Initial Access",
+     "techniques": [
+      {
+       "technique_details": "In some attacks, threat actors utilized ProxyShell vulnerabilities (CVE-2021-34473, CVE-2021-34523, CVE-2021-31207).",
+       "technique_id": "T1078",
+       "technique_name": "Valid Accounts"
+      },
+      {
+       "technique_details": "As an initial attack vector, insecure RDP and VPNs were exploited.",
+       "technique_id": "T1133",
+       "technique_name": "External Remote Services"
+      },
+      {
+       "technique_details": "BlackCat affiliates may purchase access to victims' network infrastructure on underground forums.",
+       "technique_id": "T1190",
+       "technique_name": "Exploit Public-Facing Application"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0002",
+     "tactic_name": "Execution",
+     "techniques": [
+      {
+       "technique_details": "When deploying ransomware on the victim's network infrastructure, BlackCat affiliates may leverage group policies, resulting in the creation of a scheduled task (on each host) initiating the ransomware.",
+       "technique_id": "T1053",
+       "technique_name": "Scheduled Task/Job"
+      },
+      {
+       "technique_details": "To disrupt IIS, delete volume shadow copies, disable recovery, clear Windows event logs, etc., BlackCat ransomware utilizes command shell to execute appropriate commands.",
+       "technique_id": "T1059.001",
+       "technique_name": "Command and Scripting Interpreter: PowerShell"
+      },
+      {
+       "technique_details": "LockBit affiliates use batch scripts to execute malicious commands.",
+       "technique_id": "T1059.003",
+       "technique_name": "Command and Scripting Interpreter: Windows Command Shell"
+      },
+      {
+       "technique_details": "Adversaries may use wmic to gather information and execute various commands, including deleting volume shadow copies. They may also use Impacket's wmiexec module to execute commands and move laterally across the network.",
+       "technique_id": "T1072",
+       "technique_name": "Windows Management Instrumentation"
+      },
+      {
+       "technique_details": "BlackCat uses native API.",
+       "technique_id": "T1106",
+       "technique_name": "Native API"
+      },
+      {
+       "technique_details": "BlackCat Ransomware for Windows can self-propagate on the local network using legitimate PsExec utility (contained within its body), which creates a temporary system service.",
+       "technique_id": "T1569.002",
+       "technique_name": "System Services: Service Execution"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0003",
+     "tactic_name": "Persistence",
+     "techniques": [
+      {
+       "technique_details": "Legitimate accounts obtained by adversaries may be used to ensure persistence in the compromised infrastructure.",
+       "technique_id": "T1078",
+       "technique_name": "Valid Accounts"
+      },
+      {
+       "technique_details": "Successful exploitation of ProxyShell vulnerabilities allowed adversaries to place a web shell on a vulnerable Microsoft Exchange server.",
+       "technique_id": "T1547",
+       "technique_name": "Server Software Component"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0004",
+     "tactic_name": "Privilege Escalation",
+     "techniques": [
+      {
+       "technique_details": "To escalate privileges, BlackCat may use stolen legitimate accounts specified in configuration data.",
+       "technique_id": "T1078",
+       "technique_name": "Valid Accounts"
+      },
+      {
+       "technique_details": "To escalate privileges, BlackCat ransomware may initiate its process using stolen authentication data and the CreateProcessWithLogonW function.",
+       "technique_id": "T1134.002",
+       "technique_name": "Access Token Manipulation: Create Process with Token"
+      },
+      {
+       "technique_details": "To bypass UAC, BlackCat ransomware may elevate privileges using the ICMLuaUtil COM interface, as well as utilize the Masquerade PEB method.",
+       "technique_id": "T1548.002",
+       "technique_name": "Abuse Elevation Control Mechanism: Bypass User Account Control"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0005",
+     "tactic_name": "Stealth",
+     "techniques": [
+      {
+       "technique_details": "BlackCat ransomware uses obfuscation.",
+       "technique_id": "T1027",
+       "technique_name": "Obfuscated Files or Information"
+      },
+      {
+       "technique_details": "Adversaries use a renamed SoftPerfect Network Scanner executable to svchost.exe.",
+       "technique_id": "T1036",
+       "technique_name": "Masquerading"
+      },
+      {
+       "technique_details": "BlackCat decrypts configuration data, as well as decrypts and unpacks legitimate PsExec utility and an additional BAT file contained within the ransomware body.",
+       "technique_id": "T1140",
+       "technique_name": "Deobfuscate/Decode Files or Information"
+      },
+      {
+       "technique_details": "For anti-analysis (including in a sandbox), ALPHV MORPH checks the access token value of the command line parameter. Its value must contain the correct first 16 characters used to decrypt BlackCat's configuration data.",
+       "technique_id": "T1497",
+       "technique_name": "Virtualization/Sandbox Evasion"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0006",
+     "tactic_name": "Credential Access",
+     "techniques": [
+      {
+       "technique_details": "Adversaries may dump the LSASS process to obtain authentication data using legitimate tools (procdump, comsvcs.dll).",
+       "technique_id": "T1003.001",
+       "technique_name": "OS Credential Dumping: LSASS Memory"
+      },
+      {
+       "technique_details": "Adversaries may use NirSoft utilities to obtain authentication data from registry and file.",
+       "technique_id": "T1552",
+       "technique_name": "Unsecured Credentials"
+      },
+      {
+       "technique_details": "Adversaries may use NirSoft utilities to extract authentication data from web browsers and other storage spaces.",
+       "technique_id": "T1555",
+       "technique_name": "Credentials from Password Stores"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0010",
+     "tactic_name": "Exfiltration",
+     "techniques": [
+      {
+       "technique_details": "After access is obtained, files from target hosts are automatically uploaded to the legitimate cloud storage service MEGA using the Rclone utility.",
+       "technique_id": "T1020",
+       "technique_name": "Automated Exfiltration"
+      },
+      {
+       "technique_details": "To avoid exceeding data size limits and triggering security controls, stolen data may be sent in fixed-size blocks.",
+       "technique_id": "T1030",
+       "technique_name": "Data Transfer Size Limits"
+      },
+      {
+       "technique_details": "When using Cobalt Strike, attackers can send collected information through the Cobalt Strike server communication channels.",
+       "technique_id": "T1041",
+       "technique_name": "Exfiltration Over C2 Channel"
+      },
+      {
+       "technique_details": "Attackers may use the ExMatter exfiltration tool, which sends stolen data to specified SFTP and WebDav resources in the ExMatter configuration.",
+       "technique_id": "T1048.002",
+       "technique_name": "Exfiltration Over Alternative Protocol: Exfiltration Over Asymmetric Encrypted Non-C2 Protocol"
+      },
+      {
+       "technique_details": "Attackers use the Rclone sync utility to upload stolen data to the legitimate cloud storage service MEGA.",
+       "technique_id": "T1567.002",
+       "technique_name": "Exfiltration Over Web Service: Exfiltration to Cloud Storage"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0040",
+     "tactic_name": "Impact",
+     "techniques": [
+      {
+       "technique_details": "If credentials to access a victim's chat leak, BlackCat affiliates can delete encryption keys, rendering file decryption impossible.",
+       "technique_id": "T1485",
+       "technique_name": "Data Destruction"
+      },
+      {
+       "technique_details": "BlackCat encrypts the content of files on the local system as well as on available network resources.",
+       "technique_id": "T1486",
+       "technique_name": "Data Encrypted for Impact"
+      },
+      {
+       "technique_details": "BlackCat stops security, backup, database, email, and other specified services in the configuration.",
+       "technique_id": "T1489",
+       "technique_name": "Service Stop"
+      },
+      {
+       "technique_details": "BlackCat deletes Windows volume shadow copies using vssadmin and wmic, disables recovery in the Windows boot menu using bccedit, and empties the Recycle Bin. BlackCat can stop backup services and destroy virtual machine snapshots.",
+       "technique_id": "T1490",
+       "technique_name": "Inhibit System Recovery"
+      },
+      {
+       "technique_details": "If the victim refuses to pay the ransom, BlackCat may conduct DDoS attacks against the victim's infrastructure.",
+       "technique_id": "T1498",
+       "technique_name": "Network Denial of Service"
+      }
+     ]
+    },
+    {
+     "tactic_id": "TA0112",
+     "tactic_name": "Defense Impairment",
+     "techniques": [
+      {
+       "technique_details": "To propagate, BlackCat uses PsExec to modify the MaxMpxCt system registry parameter to increase the number of failed network requests for each client.",
+       "technique_id": "T1112",
+       "technique_name": "Modify Registry"
+      },
+      {
+       "technique_details": "To avoid detection, adversaries terminate processes and services related to security software and antivirus.",
+       "technique_id": "T1685",
+       "technique_name": "Disable or Modify Tools"
+      },
+      {
+       "technique_details": "Using wevtutil, BlackCat can clear all Windows event logs on a compromised host.",
+       "technique_id": "T1685.005",
+       "technique_name": "Disable or Modify Tools: Clear Windows Event Logs"
+      }
+     ]
+    }
+   ],
+   "url": "https://www.ransomware.live/group/alphv"
   }
  },
  "c2": [
@@ -13757,9 +14055,6 @@
   "107.151.252.201",
   "117.55.199.204",
   "117.55.199.29",
-  "121.91.237.218",
-  "121.91.238.159",
-  "121.91.242.135",
   "122.117.26.206",
   "128.1.239.194",
   "128.14.121.76",
@@ -14098,7 +14393,6 @@
   "43.135.136.224",
   "43.173.127.241",
   "45.131.64.158",
-  "45.135.193.111",
   "45.207.157.28",
   "45.61.137.152",
   "46.203.233.95",
@@ -14286,17 +14580,15 @@
  ],
  "bgp": {
   "schema_version": 2,
-  "last_updated": "2026-11-21T19:57:06.265Z",
+  "last_updated": "2026-11-22T01:59:05.690Z",
   "active_nodes": 2,
-  "total_established": 179,
+  "total_established": 145,
   "unknown_established": 0,
   "countries": {
-   "BR": 129,
-   "CL": 22,
-   "AR": 20,
-   "US": 5,
-   "MX": 1,
-   "PY": 1,
+   "BR": 121,
+   "CL": 10,
+   "AR": 9,
+   "US": 4,
    "VE": 1
   }
  },

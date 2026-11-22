@@ -153,6 +153,26 @@ body.conPanel #ctrl{right:356px}
   body.conPanel #tema{right:14px}
   body.conPanel #ctrl{right:0}
 }
+
+/* ── Modo reducido (`?mini=1`): el mismo fichero incrustado en la portada.
+   Un segundo fichero sería un segundo sitio donde arreglar los fallos, así
+   que la versión pequeña es ésta misma con la interfaz apagada. Queda el
+   lienzo girando y un enlace para abrir la completa. */
+body.mini header,
+body.mini #ctrl,
+body.mini #panel,
+body.mini #tema,
+body.mini #flota { display: none !important; }
+body.mini { overflow: hidden; }
+body.mini #lienzo { position: fixed; inset: 0; width: 100%; height: 100%; }
+body.mini #abrirCompleto{
+  position: fixed; right: 12px; bottom: 11px; z-index: 40;
+  font: 500 12px/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .01em;
+  padding: 7px 12px; border-radius: 8px; text-decoration: none;
+  color: var(--ink); background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border: 1px solid var(--line); backdrop-filter: blur(6px);
+}
+body.mini #abrirCompleto:hover{ border-color: var(--sky); color: var(--sky); }
 </style>
 </head>
 <body>
@@ -1220,6 +1240,29 @@ function cerrarPanel(){
 }
 document.getElementById('cerrar').addEventListener('click', cerrarPanel);
 document.addEventListener('keydown', ev => { if (ev.key==='Escape') cerrarPanel(); });
+
+/* ── Modo reducido: ?mini=1 ───────────────────────────────────────────
+   Apaga la interfaz, deja el lienzo a pantalla completa del marco, enciende
+   la rotación y apaga las etiquetas, que a 340 px de alto no se leen y sólo
+   ensucian. El resto del grafo —física, planetas, co-nacionalidad— es el
+   mismo: la portada enseña exactamente lo que se abre al pulsar. */
+const MINI = new URLSearchParams(location.search).get('mini') === '1';
+if (MINI){
+  document.body.classList.add('mini');
+  /* La portada es siempre oscura y el grafo sigue el tema del sistema: en un
+     equipo en modo claro, el marco salía blanco dentro de una página negra.
+     Incrustado manda la página que lo incrusta, no el sistema. */
+  document.documentElement.setAttribute('data-theme', 'dark');
+  vista.etiquetas = false;
+  vista.girar = true;
+  vista.zoom = 0.78;
+  const a = document.createElement('a');
+  a.id = 'abrirCompleto';
+  a.href = 'red-actores-3d.html';
+  a.target = '_top';                 // sale del marco, no abre el mapa dentro
+  a.textContent = 'Abrir el mapa completo ↗';
+  document.body.appendChild(a);
+}
 
 /* ───────────────── controles ───────────────── */
 const ley = document.getElementById('leyenda');

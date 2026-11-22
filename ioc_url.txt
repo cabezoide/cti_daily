@@ -48,6 +48,7 @@ camarasdeseguridad202420242024.duckdns.org
 carlosmendoza504070.duckdns.org
 cathaypacifice.com
 cdn-gstat.com
+cdn007-digitaldownloads.com
 ceo-adviser.com
 ceofanb18.mipropia.com
 ch47f6gl-80.euw.devtunnels.ms
@@ -247,9 +248,11 @@ mybmtbgd7aprdnw2ekxht5qap5daam2wch25coqerrq2zdioanob34ad.onion
 natcloudservice.com
 net.dpworldto.com
 network-privacy.com
+newnewnew.gotdns.org
 newremco.duckdns.org
 newstaticfreepoint24.ddns-ip.net
 nginxmysql.com
+ns.mo7sen.dev
 nxetaioe4eelwhdwagi3ikv6ee6tttwvnqikalgkrslz7bwvuwqzdeqd.onion
 offerup.report
 onechoice.gleeze.com
@@ -279,6 +282,7 @@ rnl.world
 romanovas.duckdns.org
 rpoeu7zimfpwxbwmjmjyprqaprtvkj3ykfczhbc4x3voydopffn337id.onion
 safepaypfxntwixwjrlcscft433ggemlhgkkdupi2ynhtcmvdgubmoyd.onion
+sc.payproofkit.com
 sebastiancorrea905040.duckdns.org
 securestore.cv
 seemysitelive.store
@@ -290,6 +294,7 @@ sii-mail.cl
 silry.com
 soportedigital.cloud
 sostenermio2025.duckdns.org
+soxnewwork.homedns.org
 sqj.fr
 sqlserver-sqlite.com
 srkwk.3742eddi.workers.dev

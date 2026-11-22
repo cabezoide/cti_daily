@@ -65,28 +65,29 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 | `CTI-2026-060` | Storm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-060-storm.md) · [html](CTI-2026-060-storm.html) |
 | `CTI-2026-061` | DragonForce · dragonforce | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-061-dragonforce.md) · [html](CTI-2026-061-dragonforce.html) |
 | `CTI-2026-062` | ALPHV · BlackCat · Noberus | Perfil de cierre de una operación de extorsión extinta | 2026-11-21 | 1.0 | `TLP:CLEAR` | vigente · 30 d | [md](CTI-2026-062-alphv.md) · [html](CTI-2026-062-alphv.html) |
+| `CTI-2026-063` | SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect | Perfil de campaña contra proveedor de servicios gestionados | 2026-11-21 | 1.0 | `TLP:CLEAR` | vigente · 30 d | [md](CTI-2026-063-sckit.md) · [html](CTI-2026-063-sckit.html) |
 
 ### Agregados de indicadores
 
 | Fichero | Indicadores | Tipos incluidos | Informes que aportan |
 |---|---|---|---|
-| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 425 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-040`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-058` |
+| [`ioc_ipv4.txt`](ioc_ipv4.txt) | 428 | `ipv4`, `ip`, `ipv4:puerto` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-028`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-040`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-058`, `CTI-2026-063` |
 | [`ioc_ipv6.txt`](ioc_ipv6.txt) | 2 | `ipv6` | `CTI-2026-030` |
-| [`ioc_url.txt`](ioc_url.txt) | 339 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-043`, `CTI-2026-054`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061` |
-| [`ioc_hash.txt`](ioc_hash.txt) | 431 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-041`, `CTI-2026-043` |
-| [`ioc_index.csv`](ioc_index.csv) | 3439 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-046`, `CTI-2026-047`, `CTI-2026-048`, `CTI-2026-049`, `CTI-2026-050`, `CTI-2026-051`, `CTI-2026-052`, `CTI-2026-053`, `CTI-2026-054`, `CTI-2026-055`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061`, `CTI-2026-062` |
+| [`ioc_url.txt`](ioc_url.txt) | 344 | `domain`, `url`, `fqdn`, `hostname` | `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-043`, `CTI-2026-054`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061`, `CTI-2026-063` |
+| [`ioc_hash.txt`](ioc_hash.txt) | 449 | `md5`, `sha1`, `sha256`, `sha512`, `imphash` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-033`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-041`, `CTI-2026-043`, `CTI-2026-063` |
+| [`ioc_index.csv`](ioc_index.csv) | 3483 | todos: `appid`, `artefacto`, `asn`, `asunto`, `cartera`, `clave`, `contrato`, `cve`, `domain`, `email`, `filename`, `filepath`, `fqdn`, `herramienta`, `ipv4`, `ipv4:puerto`, `ipv6`, `md5`, `mutex`, `path`, `pattern`, `puerto`, `servicio`, `sha1`, `sha256`, `url`, `useragent` | `CTI-2026-014`, `CTI-2026-015`, `CTI-2026-016`, `CTI-2026-017`, `CTI-2026-018`, `CTI-2026-019`, `CTI-2026-020`, `CTI-2026-021`, `CTI-2026-022`, `CTI-2026-023`, `CTI-2026-024`, `CTI-2026-025`, `CTI-2026-026`, `CTI-2026-027`, `CTI-2026-028`, `CTI-2026-029`, `CTI-2026-030`, `CTI-2026-031`, `CTI-2026-032`, `CTI-2026-033`, `CTI-2026-034`, `CTI-2026-035`, `CTI-2026-036`, `CTI-2026-037`, `CTI-2026-038`, `CTI-2026-039`, `CTI-2026-040`, `CTI-2026-041`, `CTI-2026-042`, `CTI-2026-043`, `CTI-2026-044`, `CTI-2026-045`, `CTI-2026-046`, `CTI-2026-047`, `CTI-2026-048`, `CTI-2026-049`, `CTI-2026-050`, `CTI-2026-051`, `CTI-2026-052`, `CTI-2026-053`, `CTI-2026-054`, `CTI-2026-055`, `CTI-2026-056`, `CTI-2026-057`, `CTI-2026-058`, `CTI-2026-059`, `CTI-2026-060`, `CTI-2026-061`, `CTI-2026-062`, `CTI-2026-063` |
 
 ### Estado del ciclo
 
 | Métrica | Valor |
 |---|---|
-| Informes publicados | 49 |
-| Indicadores en listas planas | 1197 |
-| Indicadores en el índice con contexto | 3439 |
+| Informes publicados | 50 |
+| Indicadores en listas planas | 1223 |
+| Indicadores en el índice con contexto | 3483 |
 | Caducados (exigen revisión) | 0 |
 | Por caducar en 14 días | 0 |
 | Informe más reciente | 2026-11-21 |
-| Nodos del mapa de relaciones | 265, con 309 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
+| Nodos del mapa de relaciones | 268, con 312 relaciones — [`red-actores-3d.html`](red-actores-3d.html) |
 
 <!-- FIN AUTO-ÍNDICE -->
 
@@ -326,3 +327,31 @@ Los informes se organizan por **niveles de consumo** —estratégico, operaciona
 - declaración explícita de las **limitaciones de la colección** y de las brechas de inteligencia, incluido cuando una sección queda sin evaluar por falta de telemetría propia.
 
 Esa última costumbre es deliberada: un informe que no dice lo que no sabe es un informe que no se puede usar para decidir.
+
+## Fuentes de terceros y atribución
+
+Dos servicios ajenos sostienen la vigilancia diaria de esta cartera, y los dos
+piden algo a cambio.
+
+**[ransomware.live](https://www.ransomware.live/)** — proyecto independiente de
+Julien Mousqueton que monitoriza pasivamente los sitios de filtración de los
+grupos de extorsión y agrega lo que publican. De aquí sale **toda la
+victimología de extorsión** del repositorio. Sus condiciones de uso exigen
+**atribución** en cualquier interfaz, informe o entregable, limitan el uso al
+**no comercial**, piden no consultar más de una vez cada treinta minutos
+—`tools/cti_vigilancia.py` cachea ese plazo— y **prohíben republicar los datos
+en crudo**. Por eso esta cartera publica juicios, recuentos y contexto, y no
+vuelca su catálogo.
+
+**[botnet.cl](https://botnet.cl/)** — servicio chileno que publica flujo de
+ataques en vivo, lista de mando y control y un feed BGP de agujero negro. De
+aquí sale la telemetría de redes de bots de `CTI-2026-044` y `CTI-2026-045`.
+
+**Lo que ninguna de las dos garantiza, y conviene repetir:** una entrada en un
+sitio de filtración es **una reclamación del atacante**, no un incidente
+confirmado. Los propios términos de ransomware.live dicen que la inclusión de
+una entidad «no constituye una determinación ni una confirmación de que el
+evento reclamado ocurriera como se describe». Los informes de esta cartera lo
+tratan así en todas partes: se habla de víctimas *reclamadas*, y los recuentos
+llevan siempre su base —`CTI-2026-046` §O-3.1 mide hasta ×8,3 de diferencia
+entre contar por fecha de publicación o por fecha de ataque declarada.

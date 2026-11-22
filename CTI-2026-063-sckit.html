@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-063 · SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-063<small>SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-por-que-esto-importa-aunque-no-uses-screenconnect">E-1. Por qué esto importa aunque no uses ScreenConnect</a><a href="#e-2-la-ventana-de-dos-meses-que-es-el-dato-de-gestion">E-2. La ventana de dos meses, que es el dato de gestión</a><a href="#e-3-decisiones">E-3. Decisiones</a><a href="#e-4-lectura-regional">E-4. Lectura regional</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-la-cadena-con-lo-que-esta-confirmado-y-lo-que-no">O-1. La cadena, con lo que está confirmado y lo que no</a><a href="#o-2-por-que-la-etapa-06-es-la-que-hay-que-leer-con-cuidado">O-2. Por qué la etapa 06 es la que hay que leer con cuidado</a><a href="#o-3-hipotesis-consideradas">O-3. Hipótesis consideradas</a><a href="#o-4-lo-que-una-organizacion-cliente-puede-preguntar-hoy">O-4. Lo que una organización cliente puede preguntar hoy</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-mapa-mitre-att-ck">T-1. Mapa MITRE ATT&amp;CK</a><a href="#t-2-hipotesis-de-caza">T-2. Hipótesis de caza</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-medicion-propia-que-hay-detras-de-cada-indicador-publicado">X-1. Medición propia: qué hay detrás de cada indicador publicado</a><a href="#x-2-logica-de-deteccion-prioritaria">X-2. Lógica de detección prioritaria</a><a href="#x-3-mitigaciones-con-efecto-directo">X-3. Mitigaciones con efecto directo</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores-de-compromiso">Anexo A — Indicadores de compromiso</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico">Anexo C — Léxico</a><a href="#anexo-d-metodo-comprobar-la-higiene-de-los-indicadores-de-un-aviso-antes-de-ingerirlos">Anexo D — Método: comprobar la higiene de los indicadores de un aviso antes de ingerirlos</a><a href="#anexo-e-marcos-empleados">Anexo E — Marcos empleados</a><a href="#anexo-f-paquete-legible-por-maquina">Anexo F — Paquete legible por máquina</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de campaña contra proveedor de servicios gestionados</span><span class="pill p-mint">Global · lectura para Latinoamérica y Chile</span><span class="pill p-sky">v1.0 · 2026-11-21</span></div><h1>SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect</h1><p class="sub">SCKit: el parche llevaba dos meses publicado y la campaña entró por otra puerta</p><p class="sub2">Diez días de actividad sobre instancias ScreenConnect de proveedores gestionados, un gusano que nadie ha visto propagarse, y cuatro direcciones de Cloudflare en la lista de indicadores</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-063</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-21</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<div class="note info rv"><div class="t">Regla de oro del producto:</div><p>todo párrafo debe responder a un requisito de inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que alguien va a hacer, va al anexo o se borra.</p></div>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-063</code></dd></div><div><dt>Versión / fecha</dt><dd class="m"><code>1.0</code> — 2026-11-21</dd></div><div><dt>Tipo de producto</dt><dd class="m">Perfil de campaña contra proveedor de servicios gestionados</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Foco regional</dt><dd>Global, con lectura para Latinoamérica y Chile</dd></div><div><dt>Marcado de difusión</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Requisitos atendidos</dt><dd class="m"><code>PIR-03</code> (capacidades adversarias que degradan nuestros controles), <code>PIR-05</code> (riesgo de terceros y cadena de suministro), <code>PIR-07</code> (superficie expuesta a Internet), <code>PIR-09</code> (indicadores tempranos de campaña)</dd></div><div><dt>Consumidor primario</dt><dd>CISO · Jefatura de SOC · Gestión de proveedores · Responsable de herramientas de administración remota</dd></div><div><dt>Base de colección</dt><dd>Dos fuentes de primera mano: aviso de Microsoft Threat Intelligence (13-11-2026) y centro de avisos de ConnectWise. <strong>Medición propia</strong> de resolución DNS y titularidad de las direcciones, 22-11-2026 02:36 UTC. <strong>Sin telemetría propia de endpoint</strong></dd></div></dl>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-md rv"><div class="id">KJ-1</div>
+<h4>El gusano no está confirmado, y la fuente lo dice con todas las letras. La cobertura de esta campaña la describe de forma casi unánime como malware tipo gusano que se propaga entre proveedores, pero el aviso de Microsoft escribe, sobre su propio diagrama: «The dashed path describes the toolkit's propagation design, not a confirmed sequence of infections»</h4><p>Es el <strong>diseño</strong> del conjunto de herramientas, no una secuencia de infecciones observada. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la capacidad de propagación exista en el código y <strong>improbable</strong> <em>(20–45 %)</em> que se haya ejecutado con éxito en la campaña observada.</p><div class="gauge" data-p="68"><div class="lab"><span>Confirmado</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Afirmación explícita de la fuente primaria sobre el alcance de su propio hallazgo. <em>Consecuencia:</em> una respuesta dimensionada para contener un gusano activo gasta en el sitio equivocado; lo que hay que cerrar es el acceso a la consola, no la propagación lateral.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>El parche existía desde hacía dos meses, y la campaña no entró por donde el parche cierra. CVE-2026-84869 se corrigió en ScreenConnect 26.6.5 el 8 de septiembre de 2026, y la campaña arranca el 11 de noviembre</h4><p>Pero ese CVE bloquea, según ConnectWise, la transferencia de extremo a técnico —la propagación—, <strong>no el acceso inicial</strong>: Microsoft describe la entrada como <em>«an authentication flaw in RMM+ versions 1.0.31 and 1.0.32»</em>, una extensión que aceptaba una clave de acceso vacía cuando no se había configurado ninguna, y añade que <em>«the entry method for the reported campaign remains under investigation»</em>. Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que parchear el cliente sin desactivar las extensiones deje la puerta de entrada abierta.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Las dos fuentes de primera mano coinciden en separar las dos cosas.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>Cuatro de las siete direcciones a las que resuelven los indicadores publicados son de Cloudflare, y bloquearlas corta a terceros. Medición propia del 22-11-2026: de los cinco dominios que Microsoft publica, tres —ns.mo7sen[.]dev, cdn007-digitaldownloads[.]com y, por delegación, el conjunto registrado— resuelven a direcciones de Cloudflare con uso declarado Content Delivery Network y en lista blanca de AbuseIPDB</h4><p>Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que una ingesta que resuelva los dominios del aviso y bloquee el resultado provoque un corte propio.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Medición propia reproducible, §X-1. <em>Consecuencia:</em> es el mismo fallo que <code>CTI-2026-044</code> documentó en el aviso <code>AA26-293A</code>, repetido en otro aviso y a diez días de distancia (<code>Anexo D</code>).</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-4</div>
+<h4>La infraestructura propia del actor se reparte en tres alojadores, y dos de ellos son del mismo proveedor. Descontadas las direcciones de Cloudflare, quedan tres: 185.99.255.28 (DATAWAGON, Reino Unido), 155.94.150.39 (DataWagon LLC, Estados Unidos) y 124.198.131.155 (1337 Services GmbH)</h4><p><strong>Dos de las tres son DataWagon.</strong> Valoramos <strong>probable</strong> <em>(55–80 %)</em> que la concentración refleje una sola decisión de aprovisionamiento y no una coincidencia.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Medición propia; dos puntos no sostienen una serie. <em>Consecuencia:</em> son direcciones de alojamiento de un cliente, no de infraestructura compartida, y <strong>sí son bloqueables</strong> (<code>N1</code>).</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>Los tres dominios registrados comparten el mismo par de servidores de nombres de Cloudflare. mo7sen[.]dev, payproofkit[.]com y cdn007-digitaldownloads[.]com delegan los tres en achiel.ns.cloudflare.com y pola.ns.cloudflare.com</h4><p>Cloudflare asigna el par de servidores de nombres <strong>por cuenta</strong>, de modo que el mismo par es indicio de la misma cuenta. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que los tres dominios se gestionen desde una sola cuenta.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Medición propia y comportamiento documentado de la plataforma; no hemos verificado la asignación con el proveedor. <em>Consecuencia:</em> es la señal más duradera del expediente —un dominio se quema en días, una cuenta sobrevive— y es la que conviene vigilar (<code>I-2</code>).</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-6</div>
+<h4>La cifra de «400 entornos» no mide compromisos, y su propia fuente lo advierte. ConnectWise comunica alrededor de 400 entornos de socios con al menos una de las extensiones instalada, y el aviso aclara que eso no equivale a compromisos confirmados</h4><p>Las cifras que circulan en cobertura secundaria —288 extremos en 48 organizaciones— no aparecen en el aviso de Microsoft, que <strong>no publica ninguna cifra de víctimas</strong>. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que citar «400 entornos comprometidos» sea incorrecto.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> El propio aviso. <em>Consecuencia:</em> es un denominador de exposición, no un numerador de impacto (<code>CTI-2026-046</code> §O-3.1).</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-7</div>
+<h4>Lo que esta campaña ataca no es un producto, es una relación de confianza. El acceso se obtiene en la consola del proveedor gestionado y se ejerce sobre los extremos de sus clientes, que no tienen forma de distinguirlo de una intervención legítima de soporte: el agente es el mismo, el canal es el mismo y el técnico es el mismo</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que una organización que subcontrata administración remota no tenga hoy telemetría propia para detectarlo.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> Inferencia a partir de la arquitectura descrita, sin telemetría propia que lo mida. <em>Consecuencia:</em> la decisión que habilita este informe es contractual antes que técnica (§E-3, <code>E-b</code>).</p></div></div>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">El 11 de noviembre de 2026 ConnectWise comunicó que un actor estaba accediendo sin autorización a instancias de <strong>ScreenConnect alojadas en la nube</strong> pertenecientes a proveedores de servicios gestionados. El 13 de noviembre Microsoft confirmó la actividad y publicó el análisis de un conjunto de herramientas al que llama <strong>SCKit</strong>, que el atacante despliega desde la consola comprometida hacia los extremos de los clientes del proveedor.</p>
+<p class="rv">Tres cosas de este expediente no coinciden con cómo se ha contado.</p>
+<p class="rv"><strong>La primera es el gusano.</strong> La cobertura lo describe como malware de propagación automática entre proveedores. Microsoft dice explícitamente que el recorrido de propagación de su diagrama es el <strong>diseño</strong> del conjunto de herramientas y no una secuencia de infecciones confirmada. La diferencia no es de matiz: cambia dónde hay que gastar la respuesta.</p>
+<p class="rv"><strong>La segunda es el parche.</strong> <code>CVE-2026-84869</code> está corregido desde el 8 de septiembre en ScreenConnect 26.6.5, dos meses antes de la campaña. Pero ese arreglo bloquea la transferencia del extremo hacia el técnico, no la entrada. La entrada que ambas fuentes describen es otra: una extensión, <strong>RMM+ 1.0.31 y 1.0.32</strong>, que aceptaba una clave de acceso vacía cuando no se había configurado ninguna. Una organización que actualice el cliente y deje las extensiones puestas se queda con la puerta abierta.</p>
+<p class="rv"><strong>La tercera la encontramos nosotros.</strong> De los cinco dominios que Microsoft publica como indicadores, <strong>cuatro de las siete direcciones a las que resuelven son de Cloudflare</strong>. Están en lista blanca y su uso declarado es red de distribución de contenidos. Una ingesta que resuelva los dominios del aviso y bloquee el resultado no corta al adversario: corta a quien comparta ese frente. Es exactamente el fallo que esta cartera documentó en el aviso conjunto <code>AA26-293A</code> hace apenas un mes, y la segunda vez que lo vemos en un aviso de primer nivel.</p>
+<p class="rv">Descontado Cloudflare, la infraestructura propia del actor son tres direcciones en dos proveedores de alojamiento, <strong>dos de ellas de DataWagon</strong>, y esas sí se bloquean. Y los tres dominios registrados comparten el mismo par de servidores de nombres de Cloudflare, que es la señal más duradera que deja el expediente.</p>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<p class="rv"><strong>3.1 Qué cubre.</strong> La campaña comunicada entre el 11 y el 16 de noviembre de 2026 contra instancias de ConnectWise ScreenConnect de proveedores gestionados, el conjunto de herramientas SCKit que se despliega desde ellas, y la higiene de los indicadores publicados.</p>
+<p class="rv"><strong>3.2 Qué NO cubre.</strong> No es un perfil de actor: <strong>ninguna de las dos fuentes nombra a un actor ni propone atribución</strong>, y este informe no la inventa. No evalúa el resto del catálogo de ConnectWise ni otras plataformas de administración remota, aunque §E-3 señala por qué el problema no es exclusivo de ésta.</p>
+<p class="rv"><strong>3.3 Limitaciones de la colección.</strong></p>
+<p class="rv"><strong>(i) Sin telemetría propia de endpoint.</strong> Todo lo que este informe dice sobre comportamiento en el extremo es lectura de un análisis ajeno.</p>
+<p class="rv"><strong>(ii) El aviso de Microsoft se leyó en original pero no entero.</strong> La extracción devolvió unos 39.900 de 53.167 caracteres de forma literal, y el corte cae <strong>a mitad de la tabla de hashes</strong>. Los quince valores SHA-256 del <code>Anexo A</code> son los que se leyeron literalmente; <strong>puede haber más y no los tenemos</strong>. Los tres SHA-1 proceden de una consulta de caza del propio aviso que los enumera sin asignar cada uno a su fichero, y así se consignan. Se descartaron dos identificadores de cliente y una asignación de hashes que solo aparecían en un resumen automático de la parte no leída: <strong>un resumen de la fuente no es la fuente</strong> (<code>CTI-2026-054</code> Anexo D).</p>
+<p class="rv"><strong>(iii) El aviso de ConnectWise no se leyó literalmente.</strong> Su centro de avisos devolvió el texto por tramos y el de noviembre cayó fuera de los leídos. Lo que este informe le atribuye —las cifras de 400 entornos, los nombres de las extensiones, las fechas de actualización— procede de un resumen automático y se marca como <strong>no verificado en original</strong> en el <code>Anexo B</code>. Es una brecha, no un detalle: la cifra de 400 es la más citada del expediente.</p>
+<p class="rv"><strong>(iv) La medición propia es de un solo momento.</strong> Las resoluciones DNS y las titularidades del <code>Anexo A</code> se tomaron el <strong>22-11-2026 a las 02:36 UTC</strong>. La infraestructura detrás de Cloudflare puede cambiar sin que el dominio cambie, y los dos dominios de DNS dinámico pueden reapuntar en minutos.</p>
+<p class="rv"><strong>(v) La asignación de servidores de nombres por cuenta en Cloudflare</strong> es comportamiento documentado de la plataforma, no una confirmación del proveedor. <code>KJ-5</code> se apoya en eso y por eso es <em>probable</em> y no <em>casi cierto</em>.</p>
+<p class="rv"><strong>3.4 Lo que se buscó y no se encontró.</strong> No hay en ninguna de las dos fuentes: nombre de actor, atribución geográfica, motivación declarada, nota de rescate, cifrado de datos, ni víctima nombrada. No hemos encontrado ningún informe de tercero que documente una propagación de extremo a técnico <strong>ejecutada con éxito</strong>.</p>
+<h3 class="rv">3.5 Lo que el requisito afirmaba, y lo que las fuentes sostienen</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Afirmación de partida</th><th>Veredicto</th><th>En qué se apoya</th></tr></thead><tbody>
+<tr><td>«Un gusano se propaga entre proveedores gestionados»</td><td><strong>No sostenida</strong></td><td>Microsoft describe el recorrido como <em>diseño</em>, no como secuencia confirmada (<code>KJ-1</code>)</td></tr>
+<tr><td>«El CVE del producto es la vía de entrada»</td><td><strong>Refutada</strong></td><td>El CVE bloquea la propagación; la entrada descrita es la extensión RMM+ con clave vacía (<code>KJ-2</code>)</td></tr>
+<tr><td>«400 entornos comprometidos»</td><td><strong>Refutada</strong></td><td>Son entornos con la extensión instalada, y el aviso dice que no equivale a compromiso (<code>KJ-6</code>)</td></tr>
+<tr><td>«Los indicadores del aviso son bloqueables»</td><td><strong>Refutada para cuatro de siete</strong></td><td>Resuelven a Cloudflare, en lista blanca y uso CDN (<code>KJ-3</code>)</td></tr>
+<tr><td>«Parchear ScreenConnect resuelve la exposición»</td><td><strong>No sostenida</strong></td><td>Hay que actualizar el cliente de técnico <strong>y</strong> desactivar las extensiones; son acciones distintas (<code>KJ-2</code>, <code>E-a</code>)</td></tr>
+<tr><td>«Es una campaña de extorsión»</td><td><strong>Sin base</strong></td><td>Ninguna fuente menciona cifrado, nota ni sitio de filtración</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> CISO</span><span>Comité de Riesgo</span><span>Gestión de proveedores</span><span><b>Horizonte:</b> semanas–meses</span></div></div>
+<section id="e-1-por-que-esto-importa-aunque-no-uses-screenconnect" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Por qué esto importa aunque no uses ScreenConnect</h2></div></div>
+<p class="rv">El objeto atacado no es un producto: es la <strong>relación de confianza</strong> con quien administra tus equipos. Un proveedor gestionado mantiene un agente privilegiado y permanente en los extremos de sus clientes, y ese agente está diseñado precisamente para que las acciones remotas sean indistinguibles del trabajo legítimo de soporte. Cuando el atacante opera desde la consola del proveedor, la víctima observa exactamente lo que observaría un martes cualquiera.</p>
+<p class="rv">La consecuencia es incómoda y conviene decirla sin rodeos: <strong>la organización cliente no suele tener forma propia de detectar esto</strong>, porque ha subcontratado justo la capa desde la que se detectaría (<code>KJ-7</code>).</p>
+</section>
+<section id="e-2-la-ventana-de-dos-meses-que-es-el-dato-de-gestion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>La ventana de dos meses, que es el dato de gestión</h2></div></div>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev " data-k=""><div class="d">2026-09-08</div><div class="x">ConnectWise publica la corrección de <code>CVE-2026-84869</code> en ScreenConnect 26.6.5</div></div>
+<div class="ev " data-k=""><div class="d">2026-11-11</div><div class="x">ConnectWise comunica acceso no autorizado a instancias en la nube de proveedores gestionados</div></div>
+<div class="ev big" data-k="big"><div class="d">2026-11-12</div><div class="x">ConnectWise cifra en unos <strong>400 entornos de socios</strong> los que tienen al menos una extensión instalada, y advierte que no equivale a compromisos</div></div>
+<div class="ev " data-k=""><div class="d">2026-11-13</div><div class="x">Microsoft confirma la actividad y publica el análisis de SCKit. ConnectWise desactiva preventivamente tres integraciones más</div></div>
+<div class="ev " data-k=""><div class="d">2026-11-16</div><div class="x">ConnectWise da por terminada su investigación; las acciones de protección siguen siendo obligatorias</div></div>
+<div class="ev " data-k=""><div class="d">2026-11-22</div><div class="x">Medición propia de resolución y titularidad (<code>§X-1</code>)</div></div></div>
+<p class="rv"><strong>Sesenta y cuatro días</strong> entre el parche y el inicio de la campaña. Esa es la ventana real de decisión, y es la cifra que un comité de riesgo debe mirar: no cuánto tardó el proveedor en corregir, sino cuánto tardó el parque en aplicarlo.</p>
+<p class="rv">Y hay un matiz operativo que explica buena parte del retraso, porque Microsoft lo señala expresamente: <strong>actualizar la consola en la nube no actualiza los clientes de técnico</strong>. Son dos acciones, y la segunda se olvida.</p>
+</section>
+<section id="e-3-decisiones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Decisiones</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Ref</th><th>Decisión</th><th>Por qué</th><th>Plazo</th></tr></thead><tbody>
+<tr><td><strong>E-a</strong></td><td><strong>Exigir al proveedor gestionado constancia escrita de dos cosas por separado:</strong> versión del cliente de técnico ≥ 26.6.5 <strong>y</strong> extensiones RMM+ desactivadas</td><td>Son controles distintos contra problemas distintos; el parche no cubre la entrada (<code>KJ-2</code>)</td><td><span class="pill p-amber">7 días</span></td></tr>
+<tr><td><strong>E-b</strong></td><td><strong>Incorporar al contrato con proveedores de administración remota la obligación de notificar incidentes en su propia plataforma</strong>, con plazo, y el derecho a exigir registros de sesión</td><td>Hoy la organización cliente depende de que el proveedor quiera contarlo (<code>KJ-7</code>)</td><td><span class="pill p-amber">60 días</span></td></tr>
+<tr><td><strong>E-c</strong></td><td><strong>Inventariar qué proveedores tienen agente privilegiado permanente</strong> en nuestros extremos, y con qué producto</td><td>Sin inventario no hay forma de responder a la pregunta «¿nos afecta?» en menos de una semana</td><td><span class="pill p-amber">30 días</span></td></tr>
+<tr><td><strong>E-d</strong></td><td><strong>No bloquear las direcciones del aviso sin resolver su titularidad.</strong> Cuatro de siete son Cloudflare</td><td>Un corte propio por ingesta ingenua (<code>KJ-3</code>)</td><td>Inmediato</td></tr>
+<tr><td><strong>E-e</strong></td><td>Revisar si el contrato permite que el proveedor instale extensiones de terceros en la consola sin aprobación</td><td>La vía de entrada fue una extensión, no el producto</td><td><span class="pill p-amber">60 días</span></td></tr></tbody></table></div>
+</section>
+<section id="e-4-lectura-regional" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Lectura regional</h2></div></div>
+<p class="rv">Ninguna de las dos fuentes nombra países ni víctimas, de modo que <strong>no hay dato regional que reportar</strong> y no se va a fabricar uno. Lo que sí es específico de la región es la estructura del mercado: la administración de sistemas subcontratada a proveedores pequeños y medianos es la norma en buena parte del tejido empresarial latinoamericano, y esos proveedores rara vez tienen un equipo de seguridad propio que aplique un parche de septiembre antes de noviembre. <strong>La exposición regional es plausible y no está medida</strong>, y así se consigna (<code>G-3</code>).</p>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> Jefatura de SOC</span><span>Respuesta a incidentes</span><span><b>Horizonte:</b> días–semanas</span></div></div>
+<section id="o-1-la-cadena-con-lo-que-esta-confirmado-y-lo-que-no" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>La cadena, con lo que está confirmado y lo que no</h2></div></div>
+<div class="kill rv">
+<div class="kill-head">
+<h4 style="margin:0">Cadena observada</h4><span class="count">pulsa una etapa para fijarla</span></div>
+<div class="kill-stage">
+<div class="stage s-edge"><div class="st">01 · Acceso a la consola</div><h5>Acceso no autorizado a instancias de ScreenConnect en la nube de proveedores gestionados. Microsoft describe un fallo de autenticación en la extensión <strong>RMM+ 1.0.31 y 1.0.32</strong>, que aceptaba clave vacía si no se había configurado ninguna</h5><ul><li><strong>Confirmado</strong> como actividad</li><li>el método de entrada sigue <em>bajo investigación</em> según la fuente</li></ul></div>
+<div class="stage s-dom"><div class="st">02 · Despliegue al extremo</div><h5>Desde la consola, instalación de clientes de acceso remoto no autorizados en los extremos de los clientes del proveedor, con <code>sc.msi</code> descargado a <code>C:\Windows\Temp\</code></h5><ul><li><strong>Confirmado</strong></li></ul></div>
+<div class="stage s-imp"><div class="st">03 · Preparación</div><h5>Extracción del paquete a <code>%TEMP%\SCKitBundle</code> y del payload a <code>%TEMP%\SCKit\trapkit\payload</code>; recuperación de decodificador, paquete y utilidad desde <code>ns.mo7sen[.]dev/EadF.php</code> con parámetros <code>p=1</code>…<code>p=6</code> y el <code>MachineGuid</code> del equipo</h5><ul><li><strong>Confirmado</strong></li></ul></div>
+<div class="stage s-edge"><div class="st">04 · Persistencia</div><h5>Scripts en <code>C:\ProgramData\RelayTrap</code>, valor <code>RelayTrapLiteAlert</code> en la clave <code>Run</code> de máquina, y tarea programada que arranca un vigilante con <code>-PollSeconds 10</code></h5><ul><li><strong>Confirmado</strong></li></ul></div>
+<div class="stage s-dom"><div class="st">05 · Degradación de defensas</div><h5>Exclusiones plantadas en la clave de rutas excluidas de Microsoft Defender para las copias del MSI y el instalador</h5><ul><li><strong>Confirmado</strong></li></ul></div>
+<div class="stage s-imp"><div class="st">06 · Hacia el técnico</div><h5>Transferencia del extremo hacia la estación del técnico de soporte, con el objetivo declarado de alcanzar sus sesiones</h5><ul><li><strong>DISEÑO, no confirmado</strong> (<code>KJ-1</code>)</li></ul></div></div><div class="dwell"><span>⏱</span><span>next</span></div></div>
+</section>
+<section id="o-2-por-que-la-etapa-06-es-la-que-hay-que-leer-con-cuidado" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>Por qué la etapa 06 es la que hay que leer con cuidado</h2></div></div>
+<p class="rv">Es la etapa que da titulares y la única que la fuente marca como no observada. Microsoft escribe que <em>«the dashed path describes the toolkit's propagation design, not a confirmed sequence of infections»</em>, y en la misma página dice haber identificado que el gusano <em>«targets IT support technician workstations»</em> — identificar un objetivo en el código no es observar que lo alcanzó.</p>
+<p class="rv">Hay además una asimetría que refuerza la lectura prudente: ConnectWise afirma que el arreglo de <code>CVE-2026-84869</code>, publicado en septiembre, <strong>bloquea</strong> esa transferencia. Si la corrección llevaba dos meses disponible y el mecanismo depende de ella, el conjunto de extremos donde la propagación podía funcionar era el de los clientes sin actualizar, que es un subconjunto y no el parque.</p>
+<p class="rv"><strong>Lo que cambia en la práctica:</strong> la prioridad no es cazar propagación lateral entre proveedores. Es (a) cerrar el acceso a la consola, (b) encontrar los clientes de acceso remoto no autorizados ya instalados, y (c) revocar sesiones de técnico, que es lo que el diseño perseguía aunque no conste que lo lograra.</p>
+</section>
+<section id="o-3-hipotesis-consideradas" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>Hipótesis consideradas</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Hipótesis</th><th>Evaluación</th><th>Estado</th></tr></thead><tbody>
+<tr><td>H1 — Es una operación de extorsión en fase previa al cifrado</td><td>Ninguna fuente menciona cifrado, nota de rescate ni sitio de filtración. El conjunto de herramientas está orientado a acceso y persistencia</td><td><code>Posible, sin evidencia</code></td></tr>
+<tr><td>H2 — El objetivo final son las sesiones del técnico, para alcanzar a muchos clientes desde una credencial</td><td>Es lo que el diseño del kit persigue según la fuente, y explica la arquitectura observada</td><td><code>Probable</code></td></tr>
+<tr><td>H3 — La campaña es obra del mismo actor que preparó la infraestructura en julio</td><td>BleepingComputer informa de un fichero por lotes subido a VirusTotal el 25-07-2026 que referencia un identificador de cliente luego vinculado a SCKit. <strong>No verificado por nosotros ni por la fuente primaria</strong></td><td><code>Sin resolver</code></td></tr>
+<tr><td>H4 — Se trata de explotación oportunista de instancias expuestas, sin selección de víctima</td><td>Coherente con un denominador de 400 entornos y sin víctimas nombradas, pero nada lo sostiene positivamente</td><td><code>Posible</code></td></tr></tbody></table></div>
+</section>
+<section id="o-4-lo-que-una-organizacion-cliente-puede-preguntar-hoy" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>Lo que una organización cliente puede preguntar hoy</h2><p>Tres preguntas que no exigen telemetría propia y que el proveedor debe poder responder por escrito en 48 horas:</p></div></div><ol class="rv"><li>¿Qué versión tiene <strong>cada</strong> cliente de técnico, no la consola? <em>(Microsoft advierte que actualizar la consola no actualiza los clientes.)</em></li><li>¿Estuvieron instaladas en algún momento las extensiones <strong>Labtech Plus, RMM Plus, RMM+, RMM Plus Password Link o RMM+ Password Link</strong>, y cuándo se desactivaron?</li><li>¿Se han revocado las sesiones web de ScreenConnect <strong>y las del proveedor de identidad</strong>, desde un equipo limpio, y se han rotado las credenciales? <em>(Cambiar la contraseña no invalida una sesión ya robada.)</em></li></ol>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>Threat hunting</span><span><b>Horizonte:</b> días</span></div></div>
+<section id="t-1-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Desarrollo de recursos <i>1</i></h5>
+<div class="tq" data-s="desarrollo de recursos t1583.001 acquire infrastructure: domains tres dominios registrados —mo7sen[.]dev, payproofkit[.]com, cdn007-digitaldownloads[.]com— delegados en el mismo par de servidores de nombres de cloudflare (kj-5)"><div class="tid">T1583.001</div><div class="tn">Acquire Infrastructure: Domains</div><div class="tp">Tres dominios registrados —<code>mo7sen[.]dev</code>, <code>payproofkit[.]com</code>, <code>cdn007-digitaldownloads[.]com</code>— delegados en el <strong>mismo par de servidores de nombres de Cloudflare</strong> (<code>KJ-5</code>)</div></div></div>
+<div class="mcol" data-col><h5>Acceso inicial <i>2</i></h5>
+<div class="tq" data-s="acceso inicial t1199 trusted relationship acceso a los extremos del cliente a través de la consola del proveedor gestionado, por un canal que la víctima no puede distinguir del soporte legítimo"><div class="tid">T1199</div><div class="tn">Trusted Relationship</div><div class="tp">Acceso a los extremos del cliente <strong>a través de la consola del proveedor gestionado</strong>, por un canal que la víctima no puede distinguir del soporte legítimo</div></div>
+<div class="tq" data-s="acceso inicial t1078 valid accounts fallo de autenticación en la extensión rmm+ 1.0.31/1.0.32: clave de acceso vacía aceptada cuando no había ninguna configurada"><div class="tid">T1078</div><div class="tn">Valid Accounts</div><div class="tp">Fallo de autenticación en la extensión RMM+ 1.0.31/1.0.32: clave de acceso vacía aceptada cuando no había ninguna configurada</div></div></div>
+<div class="mcol" data-col><h5>Mando y control <i>4</i></h5>
+<div class="tq" data-s="mando y control t1219 remote access tools instalación de clientes screenconnect no autorizados apuntando a servidor propio; la herramienta es legítima y el abuso está en la instancia"><div class="tid">T1219</div><div class="tn">Remote Access Tools</div><div class="tp">Instalación de clientes <strong>ScreenConnect no autorizados</strong> apuntando a servidor propio; la herramienta es legítima y el abuso está en la instancia</div></div>
+<div class="tq" data-s="mando y control t1071.001 application layer protocol: web protocols peticiones http a ns.mo7sen[.]dev/eadf.php con parámetros p=1 a p=6 y el machineguid"><div class="tid">T1071.001</div><div class="tn">Application Layer Protocol: Web Protocols</div><div class="tp">Peticiones HTTP a <code>ns.mo7sen[.]dev/EadF.php</code> con parámetros <code>p=1</code> a <code>p=6</code> y el <code>MachineGuid</code></div></div>
+<div class="tq" data-s="mando y control t1105 ingress tool transfer recuperación escalonada de decodificador, paquete, script y utilidad desde el mismo punto"><div class="tid">T1105</div><div class="tn">Ingress Tool Transfer</div><div class="tp">Recuperación escalonada de decodificador, paquete, script y utilidad desde el mismo punto</div></div>
+<div class="tq" data-s="mando y control t1568 dynamic resolution dos relés sobre dns dinámico: newnewnew[.]gotdns[.]org y soxnewwork[.]homedns[.]org"><div class="tid">T1568</div><div class="tn">Dynamic Resolution</div><div class="tp">Dos relés sobre <strong>DNS dinámico</strong>: <code>newnewnew[.]gotdns[.]org</code> y <code>soxnewwork[.]homedns[.]org</code></div></div></div>
+<div class="mcol" data-col><h5>Sigilo <i>2</i></h5>
+<div class="tq" data-s="sigilo t1218.007 system binary proxy execution: msiexec paquete sc.msi descargado a c:\windows\temp\ e instalado"><div class="tid">T1218.007</div><div class="tn">System Binary Proxy Execution: Msiexec</div><div class="tp">Paquete <code>sc.msi</code> descargado a <code>C:\Windows\Temp\</code> e instalado</div></div>
+<div class="tq" data-s="sigilo t1036 masquerading el cliente de acceso remoto instalado es screenconnect legítimo; lo ilegítimo es a qué servidor apunta"><div class="tid">T1036</div><div class="tn">Masquerading</div><div class="tp">El cliente de acceso remoto instalado es ScreenConnect legítimo; lo ilegítimo es a qué servidor apunta</div></div></div>
+<div class="mcol" data-col><h5>Ejecución <i>1</i></h5>
+<div class="tq" data-s="ejecución t1059.001 command and scripting interpreter: powershell stage0loader.ps1, panel-lateral.ps1, trapwatch.ps1, lite-alert.ps1 y un script temporal %temp%\k.ps1"><div class="tid">T1059.001</div><div class="tn">Command and Scripting Interpreter: PowerShell</div><div class="tp"><code>Stage0Loader.ps1</code>, <code>Panel-Lateral.ps1</code>, <code>TrapWatch.ps1</code>, <code>Lite-Alert.ps1</code> y un script temporal <code>%TEMP%\k&lt;32-hex&gt;.ps1</code></div></div></div>
+<div class="mcol" data-col><h5>Persistencia <i>1</i></h5>
+<div class="tq" data-s="persistencia t1547.001 boot or logon autostart: registry run keys valor relaytraplitealert en la clave run de ámbito de máquina"><div class="tid">T1547.001</div><div class="tn">Boot or Logon Autostart: Registry Run Keys</div><div class="tp">Valor <strong><code>RelayTrapLiteAlert</code></strong> en la clave <code>Run</code> de ámbito de máquina</div></div></div>
+<div class="mcol" data-col><h5>Ejecución · Persistencia <i>1</i></h5>
+<div class="tq" data-s="ejecución · persistencia t1053.005 scheduled task/job: scheduled task tarea que arranca el vigilante con -pollseconds 10. el aviso no publica el nombre de la tarea"><div class="tid">T1053.005</div><div class="tn">Scheduled Task/Job: Scheduled Task</div><div class="tp">Tarea que arranca el vigilante con <code>-PollSeconds 10</code>. <strong>El aviso no publica el nombre de la tarea</strong></div></div></div>
+<div class="mcol" data-col><h5>Degradación de defensas <i>1</i></h5>
+<div class="tq" data-s="degradación de defensas t1685 disable or modify tools exclusiones de ruta plantadas en la clave de exclusiones de microsoft defender para las copias del msi y el instalador"><div class="tid">T1685</div><div class="tn">Disable or Modify Tools</div><div class="tp">Exclusiones de ruta plantadas en la clave de exclusiones de Microsoft Defender para las copias del MSI y el instalador</div></div></div>
+<div class="mcol" data-col><h5>Degradación de defensas · Persistencia <i>1</i></h5>
+<div class="tq" data-s="degradación de defensas · persistencia t1112 modify registry escritura en run, en exclusiones de defender y lectura de cryptography\machineguid"><div class="tid">T1112</div><div class="tn">Modify Registry</div><div class="tp">Escritura en <code>Run</code>, en exclusiones de Defender y lectura de <code>Cryptography\MachineGuid</code></div></div></div>
+<div class="mcol" data-col><h5>Descubrimiento <i>2</i></h5>
+<div class="tq" data-s="descubrimiento t1082 system information discovery machineguid de hklm\software\microsoft\cryptography usado como identificador del equipo en las peticiones"><div class="tid">T1082</div><div class="tn">System Information Discovery</div><div class="tp"><code>MachineGuid</code> de <code>HKLM\SOFTWARE\Microsoft\Cryptography</code> usado como identificador del equipo en las peticiones</div></div>
+<div class="tq" data-s="descubrimiento t1012 query registry lectura del registro para obtener el identificador anterior"><div class="tid">T1012</div><div class="tn">Query Registry</div><div class="tp">Lectura del registro para obtener el identificador anterior</div></div></div>
+<div class="mcol" data-col><h5>Acceso a credenciales <i>1</i></h5>
+<div class="tq" data-s="acceso a credenciales t1539 steal web session cookie objetivo declarado del diseño: las sesiones autenticadas de los técnicos de soporte. no consta que se alcanzara (kj-1)"><div class="tid">T1539</div><div class="tn">Steal Web Session Cookie</div><div class="tp"><strong>Objetivo declarado del diseño</strong>: las sesiones autenticadas de los técnicos de soporte. No consta que se alcanzara (<code>KJ-1</code>)</div></div></div></div>
+</section>
+<section id="t-2-hipotesis-de-caza" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Hipótesis de caza</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Ref</th><th>Hipótesis</th><th>Dónde mirar</th><th>Por qué funciona</th></tr></thead><tbody>
+<tr><td><strong>H-1</strong></td><td>Hay un cliente de ScreenConnect instalado que apunta a un servidor que no es el de nuestro proveedor</td><td>Inventario de servicios y configuración de los agentes ScreenConnect; relés y servidores configurados</td><td><strong>Es la detección de más valor del expediente.</strong> El binario es legítimo y firmado; lo anómalo es el destino</td></tr>
+<tr><td><strong>H-2</strong></td><td>Existe la carpeta <code>C:\ProgramData\RelayTrap</code> o un valor <code>RelayTrapLiteAlert</code> en <code>Run</code></td><td>Sistema de ficheros y registro</td><td>Artefactos de persistencia con nombre propio, triviales de buscar y específicos</td></tr>
+<tr><td><strong>H-3</strong></td><td>Alguien ha añadido exclusiones de ruta a Defender que nadie documentó</td><td>Clave de exclusiones de rutas de Defender, comparada con la línea base de configuración</td><td>Una exclusión no autorizada es señal con independencia de esta campaña</td></tr>
+<tr><td><strong>H-4</strong></td><td>Hay tareas programadas con intervalo de sondeo de 10 segundos creadas en la ventana del 11 al 16 de noviembre</td><td>Inventario de tareas con fecha de creación</td><td>El intervalo es inusualmente corto para una tarea legítima</td></tr>
+<tr><td><strong>H-5</strong></td><td>Un equipo resolvió alguno de los cinco dominios del <code>Anexo A</code></td><td>Registros de DNS recursivo</td><td><strong>Funciona aunque las direcciones cambien</strong>, que es justo lo que las vuelve inútiles (<code>KJ-3</code>)</td></tr>
+<tr><td><strong>H-6</strong></td><td>Una sesión de técnico se usó desde una dirección o un horario que no cuadra</td><td>Registros de autenticación de ScreenConnect y del proveedor de identidad</td><td>Es lo que el diseño perseguía; conviene mirarlo aunque no conste que se lograra</td></tr></tbody></table></div>
+<p class="rv"><strong>H-5 merece una nota:</strong> cazar por <strong>dominio</strong> en los registros de DNS es superior a cazar por dirección en este expediente, porque las direcciones de tres de los cinco dominios son de Cloudflare y por tanto no identifican nada, mientras que el nombre sí.</p>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>TIP/SIEM</span><span><b>Vida útil:</b> días–semanas</span></div></div>
+<section id="x-1-medicion-propia-que-hay-detras-de-cada-indicador-publicado" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>Medición propia: qué hay detrás de cada indicador publicado</h2></div></div>
+<p class="rv">Resolución y titularidad tomadas el <strong>22-11-2026 a las 02:36 UTC</strong> — es decir, la noche del 21 en hora de Chile, que es la fecha de emisión de este informe. La marca se da en UTC porque es la que permite reproducir la consulta. El método es reproducible con <code>dig</code> y una consulta de titularidad; se detalla en el <code>Anexo D</code>.</p>
+<div class="tw rv"><table><thead>
+<tr><th>Dominio publicado</th><th>Resuelve a</th><th>Titular</th><th>Acción</th></tr></thead><tbody>
+<tr><td><code>ns.mo7sen[.]dev</code></td><td><code>104.21.17.120</code>, <code>172.67.176.189</code></td><td><strong>Cloudflare</strong> (CDN, lista blanca)</td><td>Bloquear el <strong>dominio</strong>; <strong>NUNCA</strong> las direcciones</td></tr>
+<tr><td><code>cdn007-digitaldownloads[.]com</code></td><td><code>104.21.41.192</code>, <code>172.67.166.210</code></td><td><strong>Cloudflare</strong> (CDN, lista blanca)</td><td>Bloquear el <strong>dominio</strong>; <strong>NUNCA</strong> las direcciones</td></tr>
+<tr><td><code>sc.payproofkit[.]com</code></td><td><code>155.94.150.39</code></td><td>DataWagon LLC (EE. UU.)</td><td>Bloquear dominio y dirección</td></tr>
+<tr><td><code>newnewnew[.]gotdns[.]org</code></td><td><code>185.99.255.28</code></td><td>DATAWAGON (Reino Unido)</td><td>Bloquear dominio y dirección</td></tr>
+<tr><td><code>soxnewwork[.]homedns[.]org</code></td><td><code>124.198.131.155</code></td><td>1337 Services GmbH</td><td>Bloquear dominio y dirección</td></tr></tbody></table></div>
+<p class="rv"><strong>Cuatro de las siete direcciones son de Cloudflare.</strong> Las dos que Microsoft publica directamente como indicadores —<code>185.99.255.28</code> y <code>155.94.150.39</code>— <strong>sí</strong> son de alojamiento de un solo cliente y sí se bloquean; el problema aparece cuando alguien resuelve los dominios y añade el resultado a la misma lista. Eso es un <code>N1</code> de libro (<code>tools/cti_enriquecer.py</code>).</p>
+<p class="rv"><strong>Y la señal duradera:</strong> los tres dominios registrados delegan en el mismo par de servidores de nombres, <code>achiel.ns.cloudflare.com</code> y <code>pola.ns.cloudflare.com</code>. Cloudflare asigna ese par por cuenta.</p>
+</section>
+<section id="x-2-logica-de-deteccion-prioritaria" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Lógica de detección prioritaria</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># 1 · Agente ScreenConnect que apunta a un servidor que no es el nuestro
+#     Ajustar la lista blanca al relé legítimo del proveedor.
+DeviceProcessEvents
+| where FileName =~ &quot;ScreenConnect.ClientService.exe&quot;
+   or ProcessCommandLine has_any (&quot;ScreenConnect&quot;, &quot;ConnectWiseControl&quot;)
+| where not(ProcessCommandLine has_any (&lt;RELES_LEGITIMOS&gt;))</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># 2 · Persistencia con nombre propio
+DeviceRegistryEvents
+| where RegistryKey has @&quot;\CurrentVersion\Run&quot;
+| where RegistryValueName =~ &quot;RelayTrapLiteAlert&quot;</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># 3 · Exclusión de Defender añadida fuera de proceso de cambio
+DeviceRegistryEvents
+| where RegistryKey has @&quot;Windows Defender\Exclusions\Paths&quot;
+| where ActionType == &quot;RegistryValueSet&quot;</code></pre></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># 4 · Resolución de los dominios del expediente (vale aunque cambien las IP)
+DeviceNetworkEvents
+| where RemoteUrl has_any (&quot;mo7sen.dev&quot;, &quot;payproofkit.com&quot;,
+                           &quot;cdn007-digitaldownloads.com&quot;,
+                           &quot;newnewnew.gotdns.org&quot;, &quot;soxnewwork.homedns.org&quot;)</code></pre></div>
+<p class="rv"><strong>Detecciones del proveedor</strong> que el aviso nombra y que conviene comprobar que están activas: <code>Trojan:Win32/SuspScreenConnectDownload.EA</code> y <code>Trojan:PowerShell/RelayPersist.FC!MTB</code>.</p>
+</section>
+<section id="x-3-mitigaciones-con-efecto-directo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-3</span><div><h2>Mitigaciones con efecto directo</h2></div></div><ol class="rv"><li><strong>Actualizar cada cliente de técnico a 26.6.5 o posterior, uno a uno.</strong> La consola no los actualiza.</li><li><strong>Mantener desactivadas</strong> Labtech Plus, RMM Plus, RMM+, RMM Plus Password Link y RMM+ Password Link, y revisar su historial de instalación.</li><li><strong>Investigar por un canal fuera de banda</strong>, nunca a través de ScreenConnect. Si la consola está comprometida, el canal de respuesta también.</li><li><strong>Revocar sesiones</strong> de ScreenConnect y del proveedor de identidad desde un equipo limpio, y rotar credenciales. Cambiar la contraseña no basta.</li><li><strong>No usar el script de limpieza del propio kit.</strong></li><li><strong>Conservar evidencia antes de limpiar</strong>: registros de extensiones, de autenticación, de ejecución de comandos y del Toolbox.</li></ol>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2><p><strong>G-1.</strong> <strong>El aviso de ConnectWise no se ha leído en original</strong> (§3.3-iii). La cifra de 400 entornos, los nombres de las extensiones y las fechas de actualización dependen de un resumen automático. <em>Requisito:</em> localizar la URL propia del aviso de noviembre y leerlo.</p></div></div>
+<p class="rv"><strong>G-2.</strong> <strong>La tabla de hashes de Microsoft está incompleta</strong> (§3.3-ii): el corte cae a mitad. <em>Requisito:</em> obtener el resto.</p>
+<p class="rv"><strong>G-3.</strong> <strong>No hay dato de exposición regional.</strong> Ninguna fuente nombra países. <em>Requisito:</em> preguntar a los proveedores gestionados del entorno chileno si usan ScreenConnect y en qué versión; es colección propia y barata.</p>
+<p class="rv"><strong>G-4.</strong> <strong>No sabemos si la propagación al técnico se ejecutó alguna vez.</strong> Es la brecha que sostiene <code>KJ-1</code>.</p>
+<p class="rv"><strong>Disparadores de reevaluación.</strong> <code>I-1</code>: <strong>cualquier informe que documente una transferencia de extremo a técnico ejecutada con éxito</strong> — convertiría <code>KJ-1</code> en refutado y cambiaría la prioridad de respuesta. <code>I-2</code>: <strong>aparición de un dominio nuevo delegado en <code>achiel.ns.cloudflare.com</code> + <code>pola.ns.cloudflare.com</code> con patrón de nombre similar</strong> — confirmaría <code>KJ-5</code> y daría indicador anticipado. <code>I-3</code>: atribución de la campaña a un actor con nombre, que hoy no existe en ninguna fuente. <code>I-4</code>: aparición de cifrado o de sitio de filtración, que convertiría esto en una operación de extorsión y resolvería <code>H1</code>. <code>I-5</code>: que alguna de las tres direcciones de alojamiento aparezca en otra campaña —vigilable con <code>tools/cti_enriquecer.py</code>—.</p>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores-de-compromiso" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores de compromiso</h2></div></div>
+<div class="note warn rv"><div class="t">⚠ Leer antes de usar</div><p><strong>Cuatro de las siete direcciones a las que resuelven los dominios de este expediente son de Cloudflare</strong>, con uso declarado de red de distribución de contenidos y en lista blanca de AbuseIPDB. Van abajo con tipo <code>artefacto</code> y marca <strong>NUNCA bloqueo</strong>, y <strong>no entran en ninguna lista plana</strong>. Bloquear el <strong>dominio</strong> es correcto; bloquear su dirección corta a terceros. Es el mismo fallo que <code>CTI-2026-044</code> documentó en el aviso <code>AA26-293A</code>.</p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="domain ns.mo7sen[.]dev punto de recuperación de decodificador, paquete, script y utilidad (/eadf.php) · alta bloqueo"><span class="ty">domain</span><span class="vv">ns.mo7sen[.]dev<em>Punto de recuperación de decodificador, paquete, script y utilidad (/EadF.php) · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain sc.payproofkit[.]com panel y fuente de instalador de screenconnect no autorizados · alta bloqueo"><span class="ty">domain</span><span class="vv">sc.payproofkit[.]com<em>Panel y fuente de instalador de ScreenConnect no autorizados · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain cdn007-digitaldownloads[.]com infraestructura de campaña; fuente de instalador configurada · alta bloqueo"><span class="ty">domain</span><span class="vv">cdn007-digitaldownloads[.]com<em>Infraestructura de campaña; fuente de instalador configurada · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain newnewnew[.]gotdns[.]org relé de screenconnect asociado, sobre dns dinámico · alta bloqueo"><span class="ty">domain</span><span class="vv">newnewnew[.]gotdns[.]org<em>Relé de ScreenConnect asociado, sobre DNS dinámico · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain soxnewwork[.]homedns[.]org relé de screenconnect asociado, sobre dns dinámico · alta bloqueo"><span class="ty">domain</span><span class="vv">soxnewwork[.]homedns[.]org<em>Relé de ScreenConnect asociado, sobre DNS dinámico · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="ipv4 185.99.255[.]28 servidor screenconnect no autorizado y fuente de instalador. datawagon, reino unido · alta bloqueo"><span class="ty">ipv4</span><span class="vv">185.99.255[.]28<em>Servidor ScreenConnect no autorizado y fuente de instalador. DATAWAGON, Reino Unido · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="ipv4 155.94.150[.]39 panel no autorizado. datawagon llc, estados unidos · alta bloqueo"><span class="ty">ipv4</span><span class="vv">155.94.150[.]39<em>Panel no autorizado. DataWagon LLC, Estados Unidos · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="ipv4 124.198.131[.]155 destino de soxnewwork[.]homedns[.]org el 22-11-2026. 1337 services gmbh. medición propia, no publicada por la fuente · moderada bloqueo tras verificación"><span class="ty">ipv4</span><span class="vv">124.198.131[.]155<em>Destino de soxnewwork[.]homedns[.]org el 22-11-2026. 1337 Services GmbH. Medición propia, no publicada por la fuente · Moderada</em></span><span class="pill p-mint">Bloqueo tras verificación</span></div>
+<div class="ioc-row" data-s="artefacto 104.21.17[.]120 · 172.67.176[.]189 · 104.21.41[.]192 · 172.67.166[.]210 cloudflare. destinos de ns.mo7sen[.]dev y cdn007-digitaldownloads[.]com. uso declarado cdn, en lista blanca · alta nunca bloqueo"><span class="ty">artefacto</span><span class="vv">104.21.17[.]120 · 172.67.176[.]189 · 104.21.41[.]192 · 172.67.166[.]210<em>Cloudflare. Destinos de ns.mo7sen[.]dev y cdn007-digitaldownloads[.]com. Uso declarado CDN, en lista blanca · Alta</em></span><span class="pill p-mint">NUNCA bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto achiel.ns.cloudflare.com · pola.ns.cloudflare.com par de servidores de nombres compartido por los tres dominios registrados. cloudflare los asigna por cuenta (kj-5) · moderada caza y vigilancia; nunca bloqueo"><span class="ty">artefacto</span><span class="vv">achiel.ns.cloudflare.com · pola.ns.cloudflare.com<em>Par de servidores de nombres compartido por los tres dominios registrados. Cloudflare los asigna por cuenta (KJ-5) · Moderada</em></span><span class="pill p-mint">Caza y vigilancia; NUNCA bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 61a672a13f03a9e81f573535ee92b1ed6cb7e848a33a06048865312d4e185ae2 paquete sc.msi · alta bloqueo"><span class="ty">sha256</span><span class="vv">61a672a13f03a9e81f573535ee92b1ed6cb7e848a33a06048865312d4e185ae2<em>Paquete sc.msi · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 8e6912deed82e80bb6bd66f73509d024b1f78b993515366d8317e69a97cff4f4 zip de conjunto de herramientas preparado · alta bloqueo"><span class="ty">sha256</span><span class="vv">8e6912deed82e80bb6bd66f73509d024b1f78b993515366d8317e69a97cff4f4<em>ZIP de conjunto de herramientas preparado · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 8cb5f48bbe70b5248db7f327f3d1ad6649df5c767d2a7e0711ee147fd92e06af toolboxrelayuploader.exe · alta bloqueo"><span class="ty">sha256</span><span class="vv">8cb5f48bbe70b5248db7f327f3d1ad6649df5c767d2a7e0711ee147fd92e06af<em>ToolboxRelayUploader.exe · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 94b93c649b0ae0281352da9d01761fa9195ab1e6ac7010af3b9ba1646355eb11 panel-lateral-free.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">94b93c649b0ae0281352da9d01761fa9195ab1e6ac7010af3b9ba1646355eb11<em>Panel-Lateral-free.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 7a9aca9fdd4dcc13fe497cabdb13ca1e5d6a529271c8aa495e5ca1c1c80271ec panel-lateral.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">7a9aca9fdd4dcc13fe497cabdb13ca1e5d6a529271c8aa495e5ca1c1c80271ec<em>Panel-Lateral.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 b93f10f30ee453d1e1c046fec9d141c41d7680be5cd46c3aeb3febe0f4953b4d auxiliar labconfig.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">b93f10f30ee453d1e1c046fec9d141c41d7680be5cd46c3aeb3febe0f4953b4d<em>Auxiliar LabConfig.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 3c7a98f0fdb6235b8076319c74dc1085f7b349b6d750416dd0cadb07d7972ec4 relaytrap.cs · alta bloqueo"><span class="ty">sha256</span><span class="vv">3c7a98f0fdb6235b8076319c74dc1085f7b349b6d750416dd0cadb07d7972ec4<em>RelayTrap.cs · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 d2ed7a7bf4f8ac9c7969e9b3a07ebd4dda0d858f372c876ac0a041611698de9a trapwatch.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">d2ed7a7bf4f8ac9c7969e9b3a07ebd4dda0d858f372c876ac0a041611698de9a<em>TrapWatch.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 4a1dd3cd2ea14368afadf7e9dfdd63b104e3981ef8c85bbb6510919b810af04b trapkit\install.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">4a1dd3cd2ea14368afadf7e9dfdd63b104e3981ef8c85bbb6510919b810af04b<em>trapkit\install.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 cf50d73fa8117a758093b1344de41cd6a6ccddc645cdda1fa91a9264efe93956 lite-alert.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">cf50d73fa8117a758093b1344de41cd6a6ccddc645cdda1fa91a9264efe93956<em>Lite-Alert.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 81cc2baa35b798d6084bd078662fa29ff28df02c46c6ccdb2b43bde97d19f781 stage0loader.ps1 · alta bloqueo"><span class="ty">sha256</span><span class="vv">81cc2baa35b798d6084bd078662fa29ff28df02c46c6ccdb2b43bde97d19f781<em>Stage0Loader.ps1 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 43b7a5e56f9e6c7b74e1ce2b7b5af63f383084625fcc2d3a5985fa1059e2db95 run-lateral-full.bat · alta bloqueo"><span class="ty">sha256</span><span class="vv">43b7a5e56f9e6c7b74e1ce2b7b5af63f383084625fcc2d3a5985fa1059e2db95<em>Run-Lateral-Full.bat · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 50659748723e906c8b3d3c0386bd4cf692f693a3e23639398c1a14d0c31fed61 runnew.cmd · alta bloqueo"><span class="ty">sha256</span><span class="vv">50659748723e906c8b3d3c0386bd4cf692f693a3e23639398c1a14d0c31fed61<em>runnew.cmd · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 5dd3a6ba806ac472663e243cfc1c034c534d5d9a42ec362c3dbf0f8d950148d0 stop-labtrap.bat · alta bloqueo"><span class="ty">sha256</span><span class="vv">5dd3a6ba806ac472663e243cfc1c034c534d5d9a42ec362c3dbf0f8d950148d0<em>Stop-LabTrap.bat · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha256 454c43d296b1276bde9a4f6ff1da2221cb35ccdb2fc7991bdd572e45bce12a8a trap-proof.bat · alta bloqueo"><span class="ty">sha256</span><span class="vv">454c43d296b1276bde9a4f6ff1da2221cb35ccdb2fc7991bdd572e45bce12a8a<em>TRAP-PROOF.bat · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="sha1 0be01e7bd69cfdd222645d49bb5ad9961372fef2 instalador, archivo o utilidad de subida. el aviso los enumera sin asignar cada hash a su fichero · moderada retrohunt"><span class="ty">sha1</span><span class="vv">0be01e7bd69cfdd222645d49bb5ad9961372fef2<em>Instalador, archivo o utilidad de subida. El aviso los enumera sin asignar cada hash a su fichero · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 3f81c9c874a896c46e4bccea2fad2eaa3d9f2054 ídem · moderada retrohunt"><span class="ty">sha1</span><span class="vv">3f81c9c874a896c46e4bccea2fad2eaa3d9f2054<em>Ídem · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="sha1 13ce33b19daee3963f7e15d461b191c38f6bc0d3 ídem · moderada retrohunt"><span class="ty">sha1</span><span class="vv">13ce33b19daee3963f7e15d461b191c38f6bc0d3<em>Ídem · Moderada</em></span><span class="pill p-grey">Retrohunt</span></div>
+<div class="ioc-row" data-s="filepath c:\programdata\relaytrap directorio de scripts de persistencia · alta detección y caza"><span class="ty">filepath</span><span class="vv">C:\ProgramData\RelayTrap<em>Directorio de scripts de persistencia · Alta</em></span><span class="pill p-mint">Detección y caza</span></div>
+<div class="ioc-row" data-s="filepath c:\windows\temp\sc.msi instalador descargado · alta detección"><span class="ty">filepath</span><span class="vv">C:\Windows\Temp\sc.msi<em>Instalador descargado · Alta</em></span><span class="pill p-mint">Detección</span></div>
+<div class="ioc-row" data-s="filepath %temp%\sckitbundle · %temp%\sckit\trapkit\payload extracción del paquete y preparación del payload · alta detección"><span class="ty">filepath</span><span class="vv">%TEMP%\SCKitBundle · %TEMP%\SCKit\trapkit\payload<em>Extracción del paquete y preparación del payload · Alta</em></span><span class="pill p-mint">Detección</span></div>
+<div class="ioc-row" data-s="artefacto valor relaytraplitealert en la clave run de máquina persistencia con nombre propio · alta detección y caza"><span class="ty">artefacto</span><span class="vv">Valor RelayTrapLiteAlert en la clave Run de máquina<em>Persistencia con nombre propio · Alta</em></span><span class="pill p-mint">Detección y caza</span></div>
+<div class="ioc-row" data-s="artefacto tarea programada con -pollseconds 10 vigilante de persistencia. el aviso no publica el nombre de la tarea · moderada caza"><span class="ty">artefacto</span><span class="vv">Tarea programada con -PollSeconds 10<em>Vigilante de persistencia. El aviso no publica el nombre de la tarea · Moderada</em></span><span class="pill p-mint">Caza</span></div>
+<div class="ioc-row" data-s="pattern %temp%\k.ps1 script temporal del cargador · moderada detección por patrón"><span class="ty">pattern</span><span class="vv">%TEMP%\k.ps1<em>Script temporal del cargador · Moderada</em></span><span class="pill p-mint">Detección por patrón</span></div>
+<div class="ioc-row" data-s="pattern /eadf.php?p=1..6&amp;m= protocolo de recuperación escalonada · alta detección en egreso"><span class="ty">pattern</span><span class="vv">/EadF.php?p=1..6&amp;m=<em>Protocolo de recuperación escalonada · Alta</em></span><span class="pill p-mint">Detección en egreso</span></div>
+<div class="ioc-row" data-s="servicio gotdns.org · homedns.org servicios legítimos de dns dinámico usados para los relés. bloquear el dominio completo rompe a terceros · alta bloqueo del subdominio concreto únicamente"><span class="ty">servicio</span><span class="vv">gotdns.org · homedns.org<em>Servicios legítimos de DNS dinámico usados para los relés. Bloquear el dominio completo rompe a terceros · Alta</em></span><span class="pill p-mint">Bloqueo del subdominio concreto únicamente</span></div>
+<div class="ioc-row" data-s="herramienta connectwise screenconnect producto legítimo. el abuso está en la instancia a la que apunta el cliente, no en el binario · alta inventario, nunca bloqueo"><span class="ty">herramienta</span><span class="vv">ConnectWise ScreenConnect<em>Producto legítimo. El abuso está en la instancia a la que apunta el cliente, no en el binario · Alta</em></span><span class="pill p-mint">Inventario, nunca bloqueo</span></div></div>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>#</th><th>Fuente</th><th>Fecha</th><th>Admiralty</th><th>Nota</th></tr></thead><tbody>
+<tr><td>1</td><td>Microsoft Threat Intelligence, <em>SCKit abuses ScreenConnect…</em></td><td>2026-11-13</td><td><strong>B1</strong></td><td><strong>Leída en original</strong>, de forma literal hasta ~39.900 de 53.167 caracteres (§3.3-ii)</td></tr>
+<tr><td>2</td><td>ConnectWise, centro de avisos</td><td>2026-11-11 a 16</td><td><strong>B2</strong></td><td><strong>NO leída en original</strong> (§3.3-iii). Lo que se le atribuye procede de un resumen automático</td></tr>
+<tr><td>3</td><td>Medición propia de resolución DNS y titularidad</td><td>2026-11-22 02:36 UTC (noche del 21 en Chile)</td><td><strong>A1</strong></td><td>Reproducible; método en el <code>Anexo D</code></td></tr>
+<tr><td>4</td><td>Cobertura secundaria (BleepingComputer, Blackpoint, Field Effect)</td><td>2026-11</td><td><strong>C3</strong></td><td>Consultada para contraste. <strong>Sus cifras de víctimas no se reproducen</strong>: no aparecen en las fuentes primarias (<code>KJ-6</code>)</td></tr></tbody></table></div>
+<p class="rv"><strong>B.1 — Lo que se consultó y no se reprodujo.</strong> Las cifras «288 extremos en 48 organizaciones» y «400+ entornos comprometidos» circulan en cobertura secundaria, se contradicen entre sí y <strong>no están en ninguna de las dos fuentes primarias</strong>. No se reproducen (<code>KJ-6</code>).</p>
+</section>
+<section id="anexo-c-lexico" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico</h2></div></div>
+<p class="rv">Probabilidad y confianza se declaran por separado, según ICD 203. Probabilidad: <em>casi con certeza</em> (≥99 %), <em>muy probable</em> (80–95 %), <em>probable</em> (55–80 %), <em>posibilidad real</em> (45–55 %), <em>improbable</em> (20–45 %), <em>muy improbable</em> (5–20 %). Confianza: <em>alta</em>, <em>moderada</em>, <em>baja</em>, y mide la calidad de la base, no la fuerza del juicio.</p>
+</section>
+<section id="anexo-d-metodo-comprobar-la-higiene-de-los-indicadores-de-un-aviso-antes-de-ingerirlos" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Método: comprobar la higiene de los indicadores de un aviso antes de ingerirlos</h2></div></div>
+<p class="rv"><strong>El problema.</strong> Un aviso de primer nivel publica dominios y direcciones. La ingesta resuelve los dominios y añade todo a la lista de bloqueo. Si alguno está detrás de una red de distribución de contenidos, la lista corta a terceros y el fallo es <strong>silencioso</strong>: nadie relaciona la caída de un servicio con la lista que se cargó anteayer.</p>
+<p class="rv"><strong>Es la segunda vez en un mes.</strong> <code>CTI-2026-044</code> lo documentó en el aviso conjunto <code>AA26-293A</code>, donde cuatro de nueve direcciones eran Cloudflare, GitHub y Google. Aquí son cuatro de siete. <strong>No es un descuido de un aviso concreto: es una propiedad de publicar indicadores de infraestructura moderna.</strong></p>
+<p class="rv"><strong>El procedimiento, que cuesta dos minutos por aviso:</strong></p><ol class="rv"><li><strong>Resolver cada dominio</strong> del aviso, no solo leer las direcciones que publica: <code>dig +short &lt;dominio&gt; A</code>. Las direcciones peligrosas suelen ser las que el aviso <strong>no</strong> lista, porque aparecen al resolver.</li><li><strong>Consultar la titularidad</strong> de cada dirección resultante. Las tres señales que descalifican el bloqueo son: <strong>lista blanca</strong> del servicio de reputación, <strong>uso declarado «Content Delivery Network»</strong>, e <strong>ISP en la lista de infraestructura compartida</strong>. Ojo: <em>Data Center/Web Hosting</em> con puntuación cero <strong>no</strong> descalifica — describe cualquier servidor privado virtual, incluido el del adversario (<code>tools/cti_enriquecer.py</code>, regla <code>N1</code>).</li><li><strong>Separar en la tabla</strong> lo bloqueable de lo que no, con tipo distinto. En esta cartera, <code>ipv4</code> entra en los agregados planos y <code>artefacto</code> no: el tipo es el mecanismo, no una etiqueta descriptiva.</li><li><strong>Consultar los servidores de nombres</strong> (<code>dig +short &lt;dominio&gt; NS</code>). Si varios dominios del aviso comparten par, hay un vínculo de cuenta y una señal que dura más que cualquier dirección.</li><li><strong>Preferir la caza por dominio</strong> en los registros de DNS recursivo. Sobrevive a la rotación de direcciones y no se contamina con la infraestructura compartida.</li></ol>
+<p class="rv"><strong>El criterio que resume todo:</strong> <em>una dirección detrás de una red de distribución de contenidos no identifica a nadie.</em> El nombre sí.</p>
+</section>
+<section id="anexo-e-marcos-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos empleados</h2><p>MITRE ATT&amp;CK Enterprise v20.1 para los procedimientos; ICD 203 para el lenguaje estimativo; código Admiralty para la valoración de fuentes.</p></div></div>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina</h2><p>Los indicadores de este informe se exportan a <code>ioc_index.csv</code> con su tipo, contexto, confianza y acción permitida. Las entradas con tipo <code>artefacto</code>, <code>servicio</code> y <code>herramienta</code> <strong>no</strong> entran en <code>ioc_ipv4.txt</code> ni en <code>ioc_url.txt</code> por diseño.</p></div></div>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Autor</th></tr></thead><tbody>
+<tr><td>1.0</td><td>2026-11-21</td><td>Emisión inicial. Establece tres cosas que la cobertura de la campaña no sostiene: que el gusano es <strong>diseño y no propagación observada</strong> (<code>KJ-1</code>), que el parche de septiembre <strong>no cubre la vía de entrada</strong> (<code>KJ-2</code>), y que la cifra de 400 entornos es un <strong>denominador de exposición y no de compromiso</strong> (<code>KJ-6</code>). Aporta medición propia de resolución y titularidad que encuentra <strong>cuatro direcciones de Cloudflare entre los destinos de los indicadores publicados</strong> (<code>KJ-3</code>), la concentración en DataWagon (<code>KJ-4</code>) y el par de servidores de nombres compartido (<code>KJ-5</code>). <code>Anexo D</code> con el procedimiento de higiene de indicadores de un aviso, que es la segunda vez que esta cartera lo necesita</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2><p>Este informe cambia si aparece: una propagación de extremo a técnico documentada (<code>I-1</code>), un dominio nuevo con el mismo par de servidores de nombres (<code>I-2</code>), o una atribución con nombre (<code>I-3</code>). Quien observe cualquiera de las tres, que lo diga.</p></div></div>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-063 · v1.0 · 2026-11-21</strong> · caduca 2026-12-21</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Elaborado sobre el aviso de Microsoft Threat Intelligence del 13-11-2026, leído en original, más el centro de avisos de ConnectWise y medición propia de resolución DNS y titularidad de direcciones. <strong>Advertencia de uso: cuatro de las siete direcciones a las que resuelven los dominios publicados por Microsoft son de Cloudflare y NO deben bloquearse</strong> —van en el Anexo A con tipo artefacto y marca NUNCA bloqueo—. Difusión libre conservando la atribución de las fuentes y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>

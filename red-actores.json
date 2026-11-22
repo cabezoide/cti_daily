@@ -2465,6 +2465,36 @@
    "d": "Red de bots de DDoS para Linux e IoT derivada de Mirai, catalogada en Malpedia como elf.jackskid. ThreatFox le atribuye las diecisiete direcciones de mando y control que esta cartera mide como Liso, con confianza declarada de 100.",
    "a": "proveedor",
    "af": "Analizada por Nokia Deepfield ERT y Comcast CTRL el 24-03-2026 sobre más de ochenta muestras. NO se declara alias de Liso: su literatura no menciona ese nombre ni su victimología brasileña."
+  },
+  {
+   "id": "sckit",
+   "l": "SCKit",
+   "t": "herramienta",
+   "p": "-",
+   "r": "CTI-2026-063",
+   "a": "-",
+   "d": "Conjunto de herramientas que se despliega desde una consola ScreenConnect comprometida hacia los equipos del cliente: instalador MSI, cargador PowerShell, persistencia en C:\\ProgramData\\RelayTrap y exclusiones plantadas en Defender",
+   "af": "Analisis de Microsoft Threat Intelligence del 13-11-2026, leido en original. Su capacidad de propagacion hacia la estacion del tecnico es DISENO del kit: la fuente dice que su diagrama no es una secuencia de infecciones confirmada"
+  },
+  {
+   "id": "screenconnect",
+   "l": "ConnectWise ScreenConnect",
+   "t": "servicio",
+   "p": "-",
+   "r": "CTI-2026-063",
+   "a": "-",
+   "d": "Producto legitimo de administracion remota. El abuso no esta en el binario sino en la instancia a la que apunta el cliente instalado, y el agente es indistinguible del soporte legitimo para la victima",
+   "af": "Vector registrado en nueve informes de la cartera. La campana de noviembre de 2026 entra por un fallo de autenticacion de la extension RMM+ 1.0.31 y 1.0.32, no por el producto"
+  },
+  {
+   "id": "datawagon",
+   "l": "DataWagon",
+   "t": "suministrador",
+   "p": "-",
+   "r": "CTI-2026-063",
+   "a": "-",
+   "d": "Proveedor de alojamiento que concentra dos de las tres direcciones propias de la campana SCKit: 185.99.255.28 en Reino Unido y 155.94.150.39 en Estados Unidos",
+   "af": "MEDICION PROPIA del 22-11-2026: consulta de titularidad de las direcciones publicadas por Microsoft. Dos de tres en el mismo proveedor; dos puntos no sostienen una serie, de ahi que el juicio sea probable y no cierto"
   }
  ],
  "aristas": [
@@ -4320,6 +4350,24 @@
    "lockbit5",
    "qilin",
    "colabora",
+   "proveedor"
+  ],
+  [
+   "sckit",
+   "screenconnect",
+   "abusa",
+   "proveedor"
+  ],
+  [
+   "sckit",
+   "datawagon",
+   "usa",
+   "propio"
+  ],
+  [
+   "screenconnect",
+   "rmmcomercial",
+   "contiene",
    "proveedor"
   ]
  ],
