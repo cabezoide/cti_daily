@@ -82,6 +82,8 @@ TACTICAS = {
     "exfiltration":           "Exfiltración",
     "impact":                 "Impacto",
     "stealth":                "Sigilo",
+    "defense-impairment":     "Degradación de defensas",
+    "defense-evasion":        "Evasión de defensas",
     "network-effects":        "Efectos de red",
     "remote-service-effects": "Efectos sobre servicios remotos",
     "impair-process-control": "Degradación del control de proceso",

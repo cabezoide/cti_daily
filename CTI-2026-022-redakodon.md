@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-022"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor"
 foco_regional: "Colombia · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -32,7 +32,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. Difusión
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-022` |
-| Versión / fecha | `1.0` — 2026-11-16 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Perfil de actor **en disputa de atribución** más evaluación de transferibilidad del método. **No es un perfil cerrado:** el sujeto es un conjunto de actividad que un proveedor sigue como actor propio y otro vincula a un actor mayor sin resolver la relación |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | **Colombia como objetivo documentado.** Chile entra por transferibilidad del método, no por victimología observada |
@@ -472,10 +472,10 @@ Esta amenaza tiene dos objetivos observados que conviven y que no exigen el mism
 | Evasión | T1027.009 | Obfuscated Files or Information: Embedded Payloads | Carga en base64 tras el marcador de fin de un `JPEG`, o en los píxeles de la imagen |
 | Evasión | T1027.013 | Obfuscated Files or Information: Encrypted/Encoded File | `ZIP` protegido con contraseña, con la contraseña en el `SVG` o en el cuerpo del correo |
 | Evasión | T1140 | Deobfuscate/Decode Files or Information | Base64, XOR con dos claves de 16 bytes, Unicode y ofuscación con emoticonos en los scripts |
-| Evasión | T1574.002 | Hijack Execution Flow: DLL Side-Loading | `libbrotlicommon.dll` y `CiscoSparkLauncher.dll` legítimas cargando `mscorlib.dll` y `VERSION.dll` maliciosas |
+| Sigilo | T1574.001 | Hijack Execution Flow: DLL | `libbrotlicommon.dll` y `CiscoSparkLauncher.dll` legítimas cargando `mscorlib.dll` y `VERSION.dll` maliciosas |
 | Evasión | T1055.012 | Process Injection: Process Hollowing | `AddInProcess32.exe` creado suspendido y vaciado. **Técnica enlazada por Acronis** |
 | Evasión | T1620 | Reflective Code Loading | `[Reflection.Assembly]::Load()` y llamada al método `VAI`, sin escritura en disco |
-| Evasión | T1562.001 | Impair Defenses: Disable or Modify Tools | Lista de terminación con más de noventa procesos de productos de seguridad |
+| Degradación de defensas | T1685 | Disable or Modify Tools | Lista de terminación con más de noventa procesos de productos de seguridad |
 | Evasión | T1497 | Virtualization/Sandbox Evasion | Fabricante con `VIRTUAL`, `vmware`, `VirtualBox`; `CheckRemoteDebuggerPresent`; `SbieDll.dll`; disco menor de 61 GB; comprobación de Windows XP |
 | Evasión | T1112 | Modify Registry | Consignada por Recorded Future en su propio mapeo |
 | Evasión | T1036.007 | Masquerading: Double File Extension | `RELACIÓN DE SALDOS - CUENTA DE COBRO.pdf.exe` |
@@ -1184,6 +1184,7 @@ clave, pre-mortem` · `TLP 2.0` · `PAP` · `STIX 2.1 / TAXII 2.1` · `Admiralty
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.001`, `T1574.002` → `T1574.001`, `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre dos informes de proveedor de primera mano. **El informe que da nombre al actor no pudo leerse** y queda consignado como brecha `G-1` y como valoración F/6 en el Anexo B; todo lo que se le atribuye está marcado como cita de segunda mano. **La disputa de atribución no se resuelve: se consigna como hallazgo** (`KJ-5`, `H2`, `H3`). Chile entra por transferibilidad del método y no por victimología observada, lo que queda dicho en `KJ-7`, en §E-2 y en la brecha `G-4`. Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

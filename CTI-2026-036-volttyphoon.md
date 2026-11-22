@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-036"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor estatal"
 foco_regional: "Latinoamérica · EE. UU."
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -759,13 +759,13 @@ El aviso `AA24-038A` publica su mapeo sobre **ATT&CK v14**, que es la versión q
 | Persistencia | T1037 | Boot or Logon Initialization Scripts | **Modificación de guiones de servicio** del sistema de arranque del orquestador de SD-WAN para lanzar los componentes del implante *(2026, fuente distinta del aviso)* |
 | Escalada | T1068 | Exploitation for Privilege Escalation | Escalada en el sistema operativo o en los servicios de red del dispositivo de borde para obtener las primeras credenciales |
 | Evasión | T1006 | Direct Volume Access | `vssadmin create shadow` para esquivar el bloqueo de ficheros de la base de datos del directorio |
-| Evasión | T1070.001 | Indicator Removal: Clear Windows Event Logs | Borrado **selectivo** de registros de eventos. **El aviso instruye investigar todo evento `1102`** |
+| Degradación de defensas | T1685.005 | Clear Windows Event Logs | Borrado **selectivo** de registros de eventos. **El aviso instruye investigar todo evento `1102`** |
 | Evasión | T1070.004 | Indicator Removal: File Deletion | Creación y posterior borrado de `systeminfo.dat` en `C:\Users\Public\Documents` |
 | Evasión | T1070.006 | Timestomp | Copia de metadatos de un fichero de referencia con `touch --reference=` y `chmod --reference=` en el orquestador comprometido *(2026)* |
 | Evasión | T1027.002 | Obfuscated Files or Information: Software Packing | Clientes de proxy inverso y utilidad de escaneo de puertos **empaquetados con UPX**. Y, en 2026, **carga ELF cifrada con RC4 dentro de un cargador estático sin cabeceras de sección** |
 | Evasión | T1036.005 | Masquerading: Match Legitimate Name or Location | Nombres de fichero suplantados: `SMSvcService.exe`, `WmiPrvSE.exe`, `cisco_up.exe`, `vm3dservice.exe`. **Y, en 2026, un servicio que se hace pasar por el de autenticación de la plataforma** |
 | Evasión | T1497.001 | Virtualization/Sandbox Evasion: System Checks | El cargador de 2026 **comprueba si hay un depurador** antes de desempaquetar *(2026)* |
-| Evasión | T1562 | Impair Defenses | **No por ataque, sino por diseño:** sin malware en la víctima no hay nada que un motor de firmas pueda marcar *(mapeo propio del razonamiento)* |
+| Degradación de defensas | T1685 | Disable or Modify Tools | **No por ataque, sino por diseño:** sin malware en la víctima no hay nada que un motor de firmas pueda marcar *(mapeo propio del razonamiento)* |
 | Credenciales | T1003.003 | OS Credential Dumping: NTDS | **El objetivo real.** Extracción de `NTDS.dit` y de la rama `SYSTEM`, **repetida en el tiempo sobre la misma víctima** |
 | Credenciales | T1003.001 | OS Credential Dumping: LSASS Memory | Versión antigua de `comsvcs.dll` en carpeta no estándar, con `MiniDump` y el identificador del proceso de autenticación |
 | Credenciales | T1110.002 | Brute Force: Password Cracking | Rotura de los resúmenes **fuera de línea**, después de exfiltrar la base de datos |
@@ -1442,6 +1442,7 @@ Este anexo no es sobre Volt Typhoon. Es el método que la escritura de este info
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1070.001`, `T1562` → `T1685`, `T1685.005`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-18 | Emisión inicial. **Se corrigen o amplían seis afirmaciones del requisito en `§3.5`** —entre ellas la actividad en Perú y Chile, que no se sostiene, y la caracterización de «sin días cero», que dejó de ser cierta para el acceso inicial—; se establece que **la huella regional documentada de este actor es de infraestructura y no de victimología** (`KJ-5`), con un método generalizado en el `Anexo D`; se **confirma el eje geoespacial** que `CTI-2026-034` declaró como hipótesis, activando su disparador `I-5`, y se eleva a confianza alta sobre la base de un requisito de colección declarado (`KJ-6`); se consigna la valoración de proveedor según la cual **este actor y el de `CTI-2026-034` responden probablemente al mismo cliente** (`H3`, `E-1.A`); se **declara inservible y potencialmente dañina la capa de indicadores de red** de este expediente, con la consecuencia de que el informe no aporta direcciones de la cadena a los agregados planos (`T-3`, `E-1.B`, `A.4`); se consigna el incidente chileno de Huatacondo **sin atribución y con descarte expreso de cualquier vínculo** (`H7`); y se documenta la decisión sobre una fuente con marcado de propiedad en el `Anexo B.1`, distinguiéndola del precedente de `CTI-2026-031` | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

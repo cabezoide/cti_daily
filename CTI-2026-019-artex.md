@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-019"
-version: "1.1"
+version: "1.2"
 tipo: "Evaluación estratégica"
 foco_regional: "Global · Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -30,7 +30,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas, incluido el FLASH F
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-019` |
-| Versión / fecha | `1.1` — 2026-11-21 |
+| Versión / fecha | `1.2` — 2026-11-21 |
 | Tipo de producto | Evaluación estratégica + perfil de capacidad adversaria (no es un perfil de actor: el sujeto es una herramienta compartida) |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Global, con lectura específica para Latinoamérica y Chile |
@@ -498,7 +498,7 @@ Tres cosas, y conviene entenderlas porque cada una tiene un contraataque distint
 | Escalamiento de privilegios | T1484.002 | Domain or Tenant Policy Modification: Trust Modification | Abuso de delegación restringida basada en recursos (RBCD) para alcanzar privilegio de dominio |
 | Evasión de defensas | T1574.001 | Hijack Execution Flow: DLL | BLOODALCHEMY: binario legítimo GameHook renombrado a `svchost.exe` carga lateralmente `graphics-hook-filter64.dll`, que descifra `graphics-hook_config.bin` |
 | Evasión de defensas | T1036.005 | Masquerading: Match Legitimate Resource Name or Location | Renombrado del binario portador como `svchost.exe`; nombres de fichero y rutas que imitan recursos legítimos de captura de vídeo |
-| Evasión de defensas | T1562.001 | Impair Defenses: Disable or Modify Tools | No se observó desactivación de EDR; en su lugar, **selección de hosts sin sensor** tras inventariar la cobertura (véase T1518.001) |
+| Degradación de defensas | T1685 | Disable or Modify Tools | No se observó desactivación de EDR; en su lugar, **selección de hosts sin sensor** tras inventariar la cobertura (véase T1518.001) |
 | Descubrimiento | T1518.001 | Software Discovery: Security Software Discovery | Instrucción explícita del operador: localizar máquinas Windows del dominio sin el sensor de EDR, juzgando por `tasklist` y listados de carpetas |
 | Descubrimiento | T1087.002 | Account Discovery: Domain Account | Enumeración de más de 110.000 objetos de Active Directory desde un controlador de dominio, con recuperación del grupo Domain Admins; listado de cuentas de servicio administradas por grupo |
 | Movimiento lateral | T1550.003 | Use Alternate Authentication Material: Pass the Ticket | Intentos de Pass-the-Ticket contra controladores de dominio |
@@ -1176,6 +1176,7 @@ clave, pre-mortem` · `TLP 2.0` · `PAP` · `STIX 2.1 / TAXII 2.1` · `Admiralty
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.2** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.001` → `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | **1.1** | **2026-11-21** | **Comprueba contra terceros los tres dominios de BLOODALCHEMY del Anexo A, y el resultado es una salvedad, no un dato nuevo.** ThreatFox los conoce y **coincide** con la atribución de este informe (`BloodAlchemy`, `botnet_cc`), de modo que **no hay conflicto de atribución**; pero la referencia de los tres envíos es el mismo informe de CrowdStrike del 29-10-2026 que este informe ya cita, los firma `anonymous` y `last_seen` viene vacío en los tres. **La coincidencia es circular: no añade evidencia ni prueba vigencia.** Se anota en el Anexo A para que nadie la lea como segundo apoyo. El hallazgo originó la regla `N6` de la compuerta de enriquecimiento, y destapó que `N2` comparaba la familia del tercero sólo con el `actor` del frontmatter, ignorando la atribución fina de cada fila —que es donde un informe de herramienta compartida la escribe— | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre el texto completo del FLASH FBI-20261113-001 y nueve informes de proveedor de primera mano. Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 

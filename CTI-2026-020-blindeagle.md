@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-020"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor"
 foco_regional: "Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -30,7 +30,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR. No incorp
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-020` |
-| Versión / fecha | `1.0` — 2026-11-16 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Perfil de actor + informe de campaña |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Latinoamérica, con lectura específica para Chile |
@@ -458,7 +458,7 @@ La trayectoria técnica del grupo a lo largo de dos años muestra un patrón cla
 | Evasión | T1027.016 | Obfuscated Files or Information: Junk Code Insertion | Inserción de caracteres y código basura para ofuscar los scripts |
 | Evasión | T1055.012 | Process Injection: Process Hollowing | **Vaciado de proceso sobre `RegSvcs.exe`, `MSBuild.exe`, `InstallUtil.exe`, `jsc.exe`, `AppLaunch.exe` y `csc.exe`** |
 | Evasión | T1134.004 | Access Token Manipulation: Parent PID Spoofing | Suplantación del proceso padre a `explorer.exe` mediante `PROC_THREAD_ATTRIBUTE_PARENT_PROCESS` |
-| Evasión | T1562.001 | Impair Defenses: Disable or Modify Tools | Exclusión de Defender para todo el volumen `C:\`; desactivación de Defender; técnica de evasión de AMSI para 32 y 64 bits |
+| Degradación de defensas | T1685 | Disable or Modify Tools | Exclusión de Defender para todo el volumen `C:\`; desactivación de Defender; técnica de evasión de AMSI para 32 y 64 bits |
 | Evasión | T1548.002 | Abuse Elevation Control Mechanism: Bypass UAC | Cinco mecanismos observados: `fodhelper`, `cmstp`, `eventvwr`, `computerdefaults` y XML del Programador de tareas |
 | Evasión | T1480 | Execution Guardrails | Filtrado por geolocalización en la entrega: si la conexión no procede del país objetivo, el ataque se cancela y la víctima se redirige al sitio legítimo suplantado |
 | Evasión | T1497.001 | Virtualization/Sandbox Evasion: System Checks | Inspección de descripciones de memoria del caché de WMI para detectar entorno de análisis |
@@ -1109,6 +1109,7 @@ estimativo) · `ACH, supuestos clave, pre-mortem` · `TLP 2.0` · `PAP` ·
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.001` → `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre seis informes de proveedor de primera mano y la ficha `G0099` v2.0 de MITRE. La alerta TLP:AMBER del ColCERT se cita por su existencia y no se incorpora. Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

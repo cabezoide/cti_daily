@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-015"
-version: "1.2"
+version: "1.3"
 tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -662,11 +662,10 @@ destruir los respaldos y en exfiltrar antes de cifrar.
 | Persistencia | T1547 | Boot or Logon Autostart Execution | Claves de registro con patrón de asterisco seguido de seis caracteres alfabéticos minúsculos aleatorios |
 | Escalada de privilegios | T1134 | Access Token Manipulation | Suplantación de tokens para operar con privilegios de cuentas administrativas |
 | Evasión | T1211 / T1068 | Exploitation for Defense Evasion (BYOVD) | Carga de `rwdrv.sys` (ThrottleStop renombrado: acceso a memoria física en modo kernel) y `hlpdrv.sys` (terminación de procesos de más de 300 controladores EDR) |
-| Evasión | T1574.002 | Hijack Execution Flow: DLL Side-Loading | `msimg32.dll` malicioso cargado por un binario legítimo; variante con `upd.exe` firmado que carga `avupdate.dll` |
-| Evasión | T1562.001 | Impair Defenses: Disable or Modify Tools | Desactivación de la protección en tiempo real de Microsoft Defender; versión personalizada de `EDRSandblast` |
-| Evasión | T1562.006 | Impair Defenses: Indicator Blocking | Supresión de Event Tracing for Windows (ETW) |
-| Evasión | T1562.009 | Impair Defenses: Safe Mode Boot | Reinicio en modo seguro para cifrar con los productos de seguridad inactivos |
-| Evasión | T1070.001 | Indicator Removal: Clear Windows Event Logs | Script PowerShell que enumera y vacía todos los registros con entradas, vía `EventLogSession.ClearLog` |
+| Sigilo | T1574.001 | Hijack Execution Flow: DLL | `msimg32.dll` malicioso cargado por un binario legítimo; variante con `upd.exe` firmado que carga `avupdate.dll` |
+| Degradación de defensas | T1685 | Disable or Modify Tools | Desactivación de la protección en tiempo real de Microsoft Defender; versión personalizada de `EDRSandblast`. **Y supresión de Event Tracing for Windows (ETW)**, que hasta la v20 de ATT&CK era técnica aparte (`T1562.006`, *Indicator Blocking*) |
+| Degradación de defensas | T1688 | Safe Mode Boot | Reinicio en modo seguro para cifrar con los productos de seguridad inactivos |
+| Degradación de defensas | T1685.005 | Clear Windows Event Logs | Script PowerShell que enumera y vacía todos los registros con entradas, vía `EventLogSession.ClearLog` |
 | Evasión | T1027 | Obfuscated Files or Information | Cargador con ejecución íntegramente en memoria, ofuscación del flujo de control y de las llamadas a API, neutralización de hooks en espacio de usuario |
 | Evasión | T1202 | Indirect Command Execution | Ejecución de cifradores ELF de Linux dentro de WSL para operar fuera del alcance del EDR de Windows |
 | Acceso a credenciales | T1003.001 | OS Credential Dumping: LSASS Memory | Módulo Mimikatz embebido contra `lsass.exe`, `winlogon.exe` y `wininit.exe` |
@@ -1241,6 +1240,7 @@ firma no confiable, tal como se expresa en D-6.
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.3** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1070.001`, `T1562.001`, `T1562.006`, `T1562.009`, `T1574.002` → `T1574.001`, `T1685`, `T1685.005`, `T1688`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **Dos filas se funden en una:** `T1562.001` y `T1562.006` van las dos a `T1685`, y se conservan los dos procedimientos —Defender y `EDRSandblast`, más la supresión de ETW— para no perder lo que el informe medía. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-09-16 | Emisión inicial | Célula CTI |
 | 1.2 | 2026-11-19 | **Actualización de victimología con medición propia** sobre un rastreador público (§E-2.1, nuevos `KJ-9` y `KJ-10`): **1.221 víctimas reclamadas en 2026 —la cifra más alta de cualquier actor medido en esta cartera— y 122 latinoamericanas, de las cuales 20 chilenas**, con el reparto completo por país y la comparación con los diez actores del top 10 sobre los mismos datos. **Qilin concentra veinte de las treinta víctimas chilenas del conjunto**, lo que cuantifica la priorización que la versión 1.0 pedía. Se añade además lo que el inventario de capacidades publicado —**71 técnicas en 15 tácticas, el más amplio de los 426 grupos del rastreador**— aporta al expediente, con tres elementos nuevos: **Evilginx**, que **invalida el segundo factor por código como protección del acceso inicial** y obliga a exigir factor resistente a suplantación; **el actualizador del sensor de un producto de seguridad usado como herramienta**, que no se puede bloquear y hay que detectar por comportamiento; y un **controlador de gestión de energía usado como BYOVD**. **La caducidad NO se extiende**: sigue en 2026-12-16, porque esta versión añade victimología y capacidades publicadas, y no revalida los juicios técnicos de septiembre. **Se repara además la clave `distribucion` del frontmatter, que contenía un byte de control desde el commit inicial del repositorio** | Célula CTI |
 | 1.1 | 2026-11-16 | **Reclasificación de TLP:AMBER a TLP:CLEAR** por decisión del emisor, para publicación en el repositorio abierto `cti_daily`. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. **Sin cambios en los juicios analíticos ni en los indicadores.** Se mantiene PAP:AMBER | Célula CTI |

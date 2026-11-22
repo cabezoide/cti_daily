@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-016"
-version: "1.1"
+version: "1.2"
 tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -30,7 +30,7 @@ distribucion: "Reclasificado a TLP:CLEAR el 2026-11-16 por decisión del emisor.
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-016` |
-| Versión / fecha | `1.1` — 2026-09-16 |
+| Versión / fecha | `1.2` — 2026-11-21 |
 | Tipo de producto | Perfil de actor + informe de campaña |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Chile · Latinoamérica |
@@ -610,9 +610,8 @@ respuesta sobre horas, no sobre días.
 | Escalada | T1134 | Access Token Manipulation | Robo y suplantación de token para movimiento con privilegios |
 | Evasión | T1055.012 | Process Injection: Process Hollowing | Ejecución del cifrador dentro de un proceso legítimo vaciado |
 | Evasión | T1620 | Reflective Code Loading | Carga del payload por reflexión de DLL, sin escritura en disco |
-| Evasión | T1562.001 | Impair Defenses: Disable or Modify Tools | Terminación de 63 servicios de seguridad y respaldo identificados por hash CRC32 |
-| Evasión | T1562.006 | Impair Defenses: Indicator Blocking | Parcheo de `EtwEventWrite` con `0xC3`; *unhooking* de las funciones enganchadas por el EDR en espacio de usuario; evasión de AMSI |
-| Evasión | T1070.001 | Indicator Removal: Clear Windows Event Logs | `EvtClearLog` tras completar el cifrado |
+| Degradación de defensas | T1685 | Disable or Modify Tools | Terminación de 63 servicios de seguridad y respaldo identificados por hash CRC32. **Y el cegado del canal de telemetría**, que hasta la v20 era técnica aparte (`T1562.006`): parcheo de `EtwEventWrite` con `0xC3`, *unhooking* de las funciones enganchadas por el EDR en espacio de usuario, y evasión de AMSI |
+| Degradación de defensas | T1685.005 | Clear Windows Event Logs | `EvtClearLog` tras completar el cifrado |
 | Evasión | T1070.004 | Indicator Removal: File Deletion | Borrado de TEMP, autoeliminación (desactivable con `-k`) y borrado de espacio libre (`-w`) |
 | Evasión | T1027.002 | Obfuscated Files or Information: Software Packing | Empaquetado y ofuscación del loader; carga XOR + LZ del payload |
 | Evasión | T1497 | Virtualization/Sandbox Evasion | Detección de `TracerPid` en `/proc/self/status` y huella de VM por `/proc/ioports` (Linux); retardo de ejecución configurable |
@@ -1182,6 +1181,7 @@ medida de protección principal.
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.2** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1070.001`, `T1562.001`, `T1562.006` → `T1685`, `T1685.005`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **Dos filas se funden en una:** `T1562.001` y `T1562.006` van las dos a `T1685`; se conservan la terminación de 63 servicios por CRC32 y el cegado del canal de telemetría (`EtwEventWrite`, *unhooking*, AMSI). **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-09-16 | Emisión inicial | Célula CTI |
 | 1.1 | 2026-11-16 | **Reclasificación de TLP:AMBER a TLP:CLEAR** por decisión del emisor, para publicación en el repositorio abierto `cti_daily`. Verificado previamente que el documento no contiene referencias a la organización emisora ni a marcas asociadas, telemetría propia, direccionamiento interno, nombres de personas ni datos de terceros. **Sin cambios en los juicios analíticos ni en los indicadores.** Se mantiene PAP:AMBER | Célula CTI |
 

@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-034"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor estatal"
 foco_regional: "Paraguay · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -529,7 +529,7 @@ El aviso publica su propio mapeo sobre **ATT&CK v19**. La tabla siguiente lo rec
 | Credenciales | T1110.003 | Brute Force: Password Spraying | EBurst a través de **diez interfaces** del servidor de correo |
 | Credenciales | T1003.006 | OS Credential Dumping: DCSync | **Replicación de controlador de dominio** mediante llamada a procedimiento remoto y servicio de replicación de directorio, para copiar credenciales, pertenencias a grupos y relaciones de confianza |
 | Defensa | T1036.003 | Masquerading: Rename Legitimate Utilities | **Doble uso.** Los instaladores de SoftEther se renombran a `conhost.exe` o `dllhost.exe`; y el ejecutable de la carga de *cross-site scripting* **arranca un proceso con el nombre de un servicio legítimo de Windows** |
-| Defensa | T1562 | Impair Defenses | **No por ataque, sino por elección de herramienta:** el aviso señala que el software de detección de endpoint es menos probable que marque SoftEther **porque es una VPN legítima** *(mapeo propio del razonamiento)* |
+| Degradación de defensas | T1685 | Disable or Modify Tools | **No por ataque, sino por elección de herramienta:** el aviso señala que el software de detección de endpoint es menos probable que marque SoftEther **porque es una VPN legítima** *(mapeo propio del razonamiento)* |
 | Recolección | T1114.002 | Email Collection: Remote Email Collection | Bot en PHP contra la interfaz de servicios web de Exchange, que permite acceder a correo, calendarios y contactos |
 | Recolección | T1074.001 | Data Staged: Local Data Staging | El guion busca un directorio con permiso de escritura recorriendo una lista concreta, saltando los directorios del sistema |
 | Recolección | T1560.003 | Archive Collected Data: Archive via Custom Method | Compresión del correo antes de la exfiltración y cifrado con **RC4 o AES-128-CBC**, con clave y vector de inicialización fijos en el guion |
@@ -1185,6 +1185,7 @@ Este anexo no es sobre Flax Typhoon. Es el hallazgo que la escritura de este inf
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562` → `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. Se corrigen tres afirmaciones del requisito de origen en `§3.5` —la actividad en Perú y Chile, el puerto de Chancay y el ciclo electoral peruano, y la vigencia del modelo de red de bots—, se establece **Paraguay** como único caso sudamericano confirmado y la cuestión taiwanesa como criterio de selección hipotético y falsable, se resuelve la discrepancia de la cobertura secundaria sobre el número de países firmantes del aviso (**siete países, diez organizaciones**), y se identifica en el Anexo D un **eje geoespacial que atraviesa tres informes de esta cartera** | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

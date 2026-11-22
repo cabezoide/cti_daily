@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-024"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de operación de extorsión"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -32,7 +32,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, incluidos
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-024` |
-| Versión / fecha | `1.0` — 2026-11-16 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Perfil de operación de extorsión más **estudio de caso nacional**. El caso del Ejército de Chile se desarrolla como tal porque es la única víctima chilena documentada de este actor y porque su gestión pública aporta lecciones que no son técnicas |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | **Chile como víctima documentada** (Ejército de Chile, mayo-junio de 2023), con el conjunto de 317 víctimas publicadas como contexto |
@@ -490,7 +490,7 @@ El cuarto es un dato que conviene no sobreinterpretar: el agregador muestra una 
 | Ejecución | T1059.003 | Command and Scripting Interpreter: Windows Command Shell | `S_0.bat`, `S_1.bat` y `S_2.bat`; comandos de registro sin ofuscar |
 | Ejecución | T1059.009 | Command and Scripting Interpreter: Cloud API | `AZCopy`, añadido en 2025 |
 | Escalada de privilegios | T1055.002 | Process Injection: Portable Executable Injection | El cifrador se inyecta en procesos en ejecución |
-| Evasión | T1070.001 | Indicator Removal: Clear Windows Event Logs | **`wevtutil` borra los registros de sistema, aplicación y seguridad** |
+| Degradación de defensas | T1685.005 | Clear Windows Event Logs | **`wevtutil` borra los registros de sistema, aplicación y seguridad** |
 | Evasión | T1070.004 | Indicator Removal: File Deletion | PowerShell borra el cifrador tras la ejecución; el binario se autoelimina |
 | Evasión | T1564.003 | Hide Artifacts: Hidden Window | PowerShell ejecutado desde ventana oculta |
 | Acceso a credenciales | T1003.003 | OS Credential Dumping: NTDS | **`secretsdump` y volcado de `NTDS.dit` con `ntdsutil`** |
@@ -1152,6 +1152,7 @@ tags:
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1070.001` → `T1685.005`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre un aviso conjunto del FBI, CISA y MS-ISAC en sus dos versiones comparadas, el seguimiento en tiempo real de una firma chilena, un informe de proveedor de junio de 2026, el trabajo académico del descifrador de 2024 y la consulta directa de un agregador de sitios de filtración. **El caso del Ejército de Chile se desarrolla como estudio de caso (§E-5)** por ser la única víctima chilena documentada de la serie, con la advertencia expresa de que no tiene fuente oficial, que las cifras de volumen son del atacante y que la implicación de la persona detenida está en fase judicial sin sentencia conocida. **Se incorpora una dimensión que los otros informes de extorsión de la cartera no tratan —el riesgo de persona interna en la respuesta— por lo ocurrido en ese caso** (`KJ-3`, decisión `E-c`). El episodio del descifrador de 2024 se presenta como argumento **contra** apoyar la recuperación en la esperanza (`KJ-5`, decisión `E-e`). Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-033"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de operación sin atribuir"
 foco_regional: "Colombia · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -467,15 +467,13 @@ La fuente no publica identificadores de técnica. La tabla es **mapeo propio** s
 | Persistencia | T1505.003 | Server Software Component: Web Shell | Tras la explotación, despliegue de interfaces web de administración remota. **La fuente no recuperó los ficheros**, pero los comandos observados y las detecciones los implican |
 | Persistencia | T1053.005 | Scheduled Task/Job: Scheduled Task | **Dos tareas creadas por interfaces COM del programador**: una cada cinco minutos que permanece, y otra **cada segundo** que se borra a los 1,5 s. Y, en otro caso, `\Microsoft\Windows\Edge\Edgeupdate` ejecutando como `SYSTEM` a diario |
 | Persistencia | T1547.001 | Registry Run Keys / Startup Folder | Clave `Run` creada a mano con el valor `MFUpdate` apuntando a `SystemSettings.exe` en el perfil del usuario |
-| Defensa | T1574.002 | Hijack Execution Flow: DLL Side-Loading | **El eje de la cadena.** `SystemSettings.exe` legítimo cargando `SystemSettings.dll` malicioso. Variantes con `msedge.dll`, `PrintDialog.dll` y `miracastview.dll` |
-| Defensa | T1574.001 | Hijack Execution Flow: DLL | **«Perfect DLL Hijacking»:** manipulación de `LdrpLoaderLock` y `LdrpWorkInProgress` en `ntdll.dll` para soltar el cerrojo del cargador y crear un hilo desde la inicialización |
+| Sigilo | T1574.001 | Hijack Execution Flow: DLL | **El eje de la cadena, por dos caminos que la v20 de ATT&CK unificó en esta técnica.** *Carga lateral* (hasta la v20, `T1574.002`): `SystemSettings.exe` legítimo cargando `SystemSettings.dll` malicioso, con variantes `msedge.dll`, `PrintDialog.dll` y `miracastview.dll`. *«Perfect DLL Hijacking»:* manipulación de `LdrpLoaderLock` y `LdrpWorkInProgress` en `ntdll.dll` para soltar el cerrojo del cargador y crear un hilo desde la inicialización |
 | Defensa | T1620 | Reflective Code Loading | Los dos módulos cifrados se descifran y **se cargan reflexivamente en memoria sin escribirse en disco** |
 | Defensa | T1027.009 | Obfuscated Files or Information: Embedded Payloads | Beacon y biblioteca de ganchos comprimidos con `zlib` y embebidos en el módulo; PDF señuelo en el recurso `TELEMETRY` del cuentagotas |
 | Defensa | T1027.002 | Software Packing | Los PE descifrados están protegidos por **un empaquetador propio no identificado** |
 | Defensa | T1140 | Deobfuscate/Decode Files or Information | **Blowfish-ECB** con clave de 16 bytes al principio del fichero para un módulo; **AES-128** con clave e IV de 16 bytes cada uno para el otro |
 | Defensa | T1036.005 | Masquerading: Match Legitimate Name or Location | Nombres de tarea que imitan a OneDrive, Edge y Windows Update; **directorios con nombres de proveedores de seguridad**; módulos cifrados con nombres como `NtfsLog.etl`, `diagerr.xml` o `VistaCompat.nls` |
-| Defensa | T1562.006 | Impair Defenses: Indicator Blocking | **`EtwEventWrite` devuelve 1; `EventWrite` y `EventWriteEx` devuelven 0.** El registro de eventos del sistema queda anulado en el proceso |
-| Defensa | T1562.001 | Impair Defenses: Disable or Modify Tools | **Treinta ganchos de API con Microsoft Detours**, más dos con MinHook sobre reserva de memoria y reposo |
+| Degradación de defensas | T1685 | Disable or Modify Tools | **Treinta ganchos de API con Microsoft Detours**, más dos con MinHook sobre reserva de memoria y reposo. **Y el cegado del registro de eventos**, que hasta la v20 era técnica aparte (`T1562.006`): `EtwEventWrite` devuelve 1, `EventWrite` y `EventWriteEx` devuelven 0, y el registro del sistema queda anulado en el proceso |
 | Defensa | T1106 | Native API | **Construcción en tiempo de ejecución de llamadas directas al núcleo con `jitasm`** para cerca de una veintena de funciones, eludiendo los ganchos en espacio de usuario |
 | Defensa | T1134.004 | Access Token Manipulation: Parent PID Spoofing | **Los ganchos de creación de proceso buscan un `svchost.exe` del mismo contexto de seguridad y lo fijan como padre.** Todo lo que lance el Beacon aparece colgando de `svchost.exe` |
 | Defensa | T1027.007 | Obfuscated Files or Information: Dynamic API Resolution | Resolución por hash: **ROR13** para `LdrLoadDll`, **Murmur32** para los nombres exportados en el gancho de resolución de funciones |
@@ -1209,6 +1207,7 @@ Este anexo no es sobre StrikeShark. Es el método que este informe tuvo que impr
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.001`, `T1562.006`, `T1574.002` → `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **Dos fusiones:** `T1574.002` entra en `T1574.001`, que el informe ya usaba —carga lateral y «Perfect DLL Hijacking» quedan en la misma fila—, y `T1562.006` entra en `T1685` junto a los treinta ganchos de Detours. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. Se corrige la ubicación sectorial de la víctima colombiana que afirmaba el requisito de origen (`§3.5`, punto 3), se documenta el vector concreto de ese caso —GeoServer, `CVE-2024-36401`— y se eleva a decisión regional el inventario de componentes geoespaciales (`E-b`), se documenta en `O-2.1` una inflación de confianza en la atribución entre la fuente primaria y su cobertura secundaria, y se añade `X-3.1`: la lista de ocho preguntas al fabricante de EDR derivada de las técnicas de evasión del cargador | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-043"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de operación sin atribuir"
 foco_regional: "Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -530,7 +530,7 @@ El hecho que más admite lecturas distintas es la **coexistencia** de implantes 
 | Persistencia | T1543.003 | Create or Modify System Process: Windows Service | `zoomit.exe` arrancado como servicio de Windows; módulos `CreateService`, `start_service`, `stop_service`, `DeleteService` |
 | Persistencia | T1136.001 | Create Account: Local Account | Módulos `AddUser` (`NetUserAdd`) y `AddUserToGroup`, para grupos globales y locales |
 | Persistencia | T1547 | Boot or Logon Autostart Execution | Fichero cerrojo `%APPDATA%\log.lock`: si existe al arrancar la puerta trasera, el registro de pulsaciones se reanuda solo |
-| Escalada / Evasión | T1574.002 | Hijack Execution Flow: DLL Side-Loading | `jli.dll` con `javaw.exe`; `SbieDll.dll` con `start.exe`; `python39.dll` con una aplicación Python; `WINMM.dll` con `zoomit.exe`; `libcef.dll` |
+| Sigilo | T1574.001 | Hijack Execution Flow: DLL | `jli.dll` con `javaw.exe`; `SbieDll.dll` con `start.exe`; `python39.dll` con una aplicación Python; `WINMM.dll` con `zoomit.exe`; `libcef.dll` |
 | Evasión | T1574.013 | Hijack Execution Flow: KernelCallbackTable | Módulo de inyección por manipulación de la tabla de retrollamadas del proceso, con llamadas al sistema directas |
 | Evasión | T1027 | Obfuscated Files or Information | Aplanamiento del flujo de control; envoltorios anidados de funciones auxiliares; llamadas indirectas; Base64 con alfabeto propio `ABCDEFGHIJ01234ZYXWVUTSRQPONMLKzyxwvutsrqponmlkjihgfedcba98765/+` |
 | Evasión | T1027.007 | Dynamic API Resolution | Resolución por hash del nombre: CRC32 en el cargador tipo 1, FNV-1 (`FNV_prime` = `0x1000193`) en su variante, DJB2 en `GraphDoor`; nombres de biblioteca y de función descifrados con XOR de 7 bytes `\x11\xAF\xCE\xDC\xA6\x12\x05` |
@@ -538,7 +538,7 @@ El hecho que más admite lecturas distintas es la **coexistencia** de implantes 
 | Evasión | T1036.005 | Masquerading: Match Legitimate Name or Location | `excint.exe` es un componente renombrado de Avast; `pdf.exe` y `pdfset.exe` dentro de `C:\Program Files\PDF24\`; `imzimzgo 2.2.0 x64` es Mimikatz renombrado |
 | Evasión | T1036.008 | Masquerading: Masquerade File Type | Ficheros de órdenes y de datos con extensión `.js.map` (mapa de código JavaScript) y módulos con extensión `.ts` (TypeScript) |
 | Evasión | T1622 | Debugger Evasion | El cargador tipo 2 instala un manejador vectorizado de excepciones y **pone a cero el registro `DR7`** para borrar los puntos de ruptura por hardware; comprueba además el nombre del proceso anfitrión |
-| Evasión | T1562.004 | Impair Defenses: Disable or Modify System Firewall | Módulo `Firewall`: añade, elimina y enumera reglas de entrada y de salida |
+| Degradación de defensas | T1686 | Disable or Modify System Firewall | Módulo `Firewall`: añade, elimina y enumera reglas de entrada y de salida |
 | Evasión | T1070.004 | Indicator Removal: File Deletion | Módulos `WipeFileContent` (sobrescritura con ceros) y `DeleteDirectoryRecursively` |
 | Evasión | T1140 | Deobfuscate/Decode Files or Information | Cadena completa: Base64 → XOR con el nombre del fichero como clave → Base64 → AES-256-ECB con clave aleatoria transportada en el propio JSON |
 | Acceso a credenciales | T1003.001 | OS Credential Dumping: LSASS Memory | Mimikatz con `sekurlsa::logonpasswords full` |
@@ -1273,6 +1273,7 @@ Ninguna de las dos fuentes primarias publica paquete STIX. Si alguna lo hace, **
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.004`, `T1574.002` → `T1574.001`, `T1686`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. Incluye la reconciliación de `KJ-2` con sus trece coincidencias (`O-2.1`), el indicador de inquilino de `A.1` que no figura en ninguna lista publicada, los indicios lingüísticos de `KJ-6`, la advertencia sobre `38.52.17[.]113` de `A.4`, la verificación propia de dominios de `A.5`, el material nuevo para `CTI-2026-017` de `A.7` y el método del `Anexo D` | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

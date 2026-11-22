@@ -1120,6 +1120,17 @@ def construir_red(lista):
             .replace("/*__ARCHIVOS__*/",
                      "const ARCHIVOS = " + json.dumps(
                          archivos, ensure_ascii=False, indent=2) + ";")
+            # El `tipo` que cada informe declara en su frontmatter. Sirve para
+            # el eje de agrupación POR FUNCIÓN del grafo: «Perfil de red de
+            # bots» o «Perfil de operación de extorsión» ya son juicios
+            # escritos por el analista, así que la función de un actor no hay
+            # que inventarla ni etiquetarla a mano — se lee de su informe.
+            .replace("/*__TIPOS__*/",
+                     "const TIPOS_INFORME = " + json.dumps(
+                         {i["id"]: {"t": i["fm"].get("tipo") or "",
+                                    "a": i["fm"].get("actor") or ""}
+                          for i in publicables.values()},
+                         ensure_ascii=False, indent=1) + ";")
             .replace("__N_NODOS__", str(len(nodos)))
             .replace("__N_ARISTAS__", str(len(aristas))))
     return html, avisos

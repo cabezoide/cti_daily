@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-029"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor"
 foco_regional: "Ucrania · Polonia · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -32,7 +32,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR: los infor
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-029` |
-| Versión / fecha | `1.0` — 2026-11-17 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Perfil de actor destructivo más **evaluación de recuperabilidad**. La segunda mitad es lo que distingue este informe de los cinco anteriores de la cartera: contra un actor que destruye, las preguntas útiles son de continuidad y de respaldo, no de detección |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | **Sin víctimas latinoamericanas documentadas.** El informe se escribe por dos razones concretas: su **vector de distribución es la directiva de grupo de Active Directory**, que tenemos; y su **victimología sectorial incluye el agroalimentario exportador y la logística**, que es la columna de la economía chilena |
@@ -514,7 +514,7 @@ Y sobre `Sting`: se ejecutaba desde una tarea programada cuyo nombre es una expr
 | Persistencia | T1484.001 | Domain or Tenant Policy Modification: Group Policy Modification | **La técnica central del expediente.** Escritura de una directiva de grupo para distribuir el borrador a todo el dominio |
 | Escalada de privilegios | T1484.001 | Group Policy Modification | La misma técnica, usada también para elevar alcance (inf.) |
 | Sigilo | T1036 | Masquerading | Nombre de tarea programada en argot, y uso de una herramienta legítima firmada |
-| Sigilo | T1562 | Impair Defenses | Esperable en la fase previa al borrado; **no documentado en detalle en las fuentes leídas** (inf.) |
+| Degradación de defensas | T1685 | Disable or Modify Tools | Esperable en la fase previa al borrado; **no documentado en detalle en las fuentes leídas** (inf.) |
 | Acceso a credenciales | T1003 | OS Credential Dumping | Necesario para alcanzar capacidad de escritura de directivas; **no documentado en estas fuentes** (inf.) |
 | Descubrimiento | T1482 | Domain Trust Discovery | Necesario para determinar el alcance de la directiva (inf.) |
 | Movimiento lateral | — | **(ninguna)** | **Deliberadamente vacío.** No hay movimiento lateral: hay distribución centralizada autorizada. Es el hallazgo de §O-3 |
@@ -1186,6 +1186,7 @@ Este anexo es el entregable transversal del informe, y es deliberadamente de con
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562` → `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. Primer perfil de actor destructivo de la cartera. **Invierte la estructura habitual del producto**: el consumidor primario es Continuidad de Negocio antes que el SOC, el Anexo A es el apéndice menos importante por diseño, y la detección de mayor prioridad (`D-0`) es una verificación de arquitectura y no una regla. Cierra con `CTI-2026-028` el argumento del lote de noviembre de 2026 sobre los rankings de prevalencia | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

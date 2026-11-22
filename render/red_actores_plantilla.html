@@ -162,8 +162,8 @@ body.conPanel #ctrl{right:356px}
   <h1>Red de actores y <span>herramientas</span></h1>
   <p>__N_NODOS__ nodos y __N_ARISTAS__ relaciones extraídas de los informes de
      <a href="./">cti_daily</a>. Arrastra para girar, rueda para acercar, clic en un nodo para ver su ficha.
-     <strong>El color es el posible país de origen</strong>, y la chapa de dos letras dice con qué base se afirma:
-     rellena si un Estado o un tribunal lo ha atribuido, con sólo el contorno si es valoración de proveedor.</p>
+     <span id="leerColor"><strong>El color es el posible país de origen</strong>, y la chapa de dos letras dice con qué base se afirma:
+     rellena si un Estado o un tribunal lo ha atribuido, con sólo el contorno si es valoración de proveedor.</span></p>
 </header>
 
 <button id="tema" title="Cambiar tema" aria-label="Cambiar tema"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.2a6.8 6.8 0 1 0 0 13.6A6.8 6.8 0 0 0 8 1.2Zm0 1.5v10.6a5.3 5.3 0 0 1 0-10.6Z" fill="currentColor"/></svg></button>
@@ -194,7 +194,8 @@ body.conPanel #ctrl{right:356px}
     <button id="bGirar" class="on" title="Rotación automática">Girar</button>
     <button id="bEtiq" class="on" title="Mostrar etiquetas">Etiquetas</button>
     <button id="bConac" class="on" title="Lazo débil entre TODOS los nodos de un mismo país: actores, herramientas y servicios. Clic en un nodo para ver los suyos resaltados">Co-nacionalidad</button>
-    <button id="bPlan" class="on" title="Un planeta por país: el centro que agrupa a sus actores">Planetas</button>
+    <button id="bPlan" class="on" title="Un planeta por grupo: el centro que agrupa a sus nodos">Planetas</button>
+    <button id="bEje" title="Cambia POR QUÉ se agrupa: por país de origen, o por lo que el nodo hace —extorsión, denegación de servicio, espionaje, instrumental—. La red de relaciones es la misma; cambia la lectura">Agrupar: país</button>
     <button id="bReset" title="Volver a la vista inicial">Reencuadrar</button>
   </div>
   <div class="caja" id="ayuda">
@@ -206,6 +207,7 @@ body.conPanel #ctrl{right:356px}
 /*__DATOS__*/
 
 /*__ARCHIVOS__*/
+/*__TIPOS__*/
 
 'use strict';
 
@@ -284,6 +286,64 @@ const EVID = {
 };
 const EVID_ORDEN = ['oficial','propio','proveedor','inferido'];
 
+/* ── El segundo eje: agrupar por FUNCIÓN ──────────────────────────────
+   El usuario lo propuso como «un país DDoS» —que las familias de denegación
+   de servicio salieran juntas— y eso **no podía ir en el campo de país**:
+   `p` significa posible país de ORIGEN, arrastra la chapa de dos letras y el
+   grado de atribución, y el clique de co-nacionalidad afirma que sus nodos
+   comparten origen. Liso, Aisuru y Jackskid no lo comparten, así que dibujar
+   ese lazo sería afirmar lo que ninguna fuente sostiene. Además un nodo sólo
+   tiene un país: una familia china perdería su origen a cambio del grupo.
+
+   La solución es un eje **paralelo e independiente**, conmutable. El origen
+   sigue siendo el origen y la función es otra lectura del mismo mapa.
+
+   **La función NO se etiqueta a mano ni se escribe en el JSON: se lee del
+   informe.** Cada expediente declara en su frontmatter `tipo` —«Perfil de
+   red de bots», «Perfil de operación de extorsión»— y `actor`, y eso ya es
+   un juicio escrito por el analista. `TIPOS_INFORME` lo trae del build.
+
+   El único caso que el `tipo` no resuelve: `CTI-2026-042` y `CTI-2026-044`
+   son los dos «Perfil de ecosistema», pero uno es de extorsión y el otro de
+   redes de bots. Lo desempata el campo `actor`, que en el 044 dice «Redes de
+   bots de DDoS y de proxy residencial». */
+const FUNCION = {
+  extorsion:    {c:'--crimen', s:'EX', n:'Extorsión'},              // #ef5f8c
+  ddos:         {c:'--ru',     s:'DS', n:'Denegación de servicio'}, // #e2574c
+  estatal:      {c:'--amber',  s:'ES', n:'Espionaje estatal'},      // #f7a400
+  suministro:   {c:'--kp',     s:'SU', n:'Suministro de capacidad'},// #9b6dd6
+  instrumental: {c:'--mint',   s:'IN', n:'Instrumental'},           // #4db99c
+  servicio:     {c:'--sky',    s:'SV', n:'Infraestructura abusada'},// #5a7ebe
+  vuln:         {c:'--ir',     s:'VU', n:'Vulnerabilidad'},         // #3fb8d4
+  '-':          {c:'--neutro', s:'',   n:'Sin función determinada'}
+};
+
+function _funcionDe(n){
+  const t = n.t;
+  if (t === 'suministrador') return 'suministro';
+  if (t === 'herramienta' || t === 'publica' || t === 'marco') return 'instrumental';
+  if (t === 'servicio') return 'servicio';
+  if (t === 'cve') return 'vuln';
+  const inf = (typeof TIPOS_INFORME !== 'undefined' && TIPOS_INFORME[n.r]) || null;
+  const txt = ((inf ? inf.t + ' ' + inf.a : '')).toLowerCase();
+  if (/red(es)? de bots|ddos|denegaci/.test(txt)) return 'ddos';
+  if (/extorsi/.test(txt))                         return 'extorsion';
+  if (/actor estatal|bloque de actores/.test(txt)) return 'estatal';
+  if (t === 'estado')                              return 'estatal';
+  if (t === 'crimen')                              return 'extorsion';
+  if (t === 'clúster' || t === 'subgrupo')         return 'estatal';
+  return '-';
+}
+
+/* Sectores del eje de función, con el mismo criterio que los geográficos:
+   lo que se parece, contiguo. */
+const ZONA_FN = [
+  {l:'Operaciones criminales', ps:['extorsion','ddos'],       ang:  0},
+  {l:'Estatal y suministro',   ps:['estatal','suministro'],   ang:100},
+  {l:'Instrumental',           ps:['instrumental','servicio'],ang:200},
+  {l:'Superficie',             ps:['vuln'],                   ang:290}
+];
+
 /* ── Sectores geográficos ──────────────────────────────────────────────
    Los actores de un mismo país se agrupan en un sector del espacio, y los
    países vecinos ocupan sectores contiguos: el eje ex-soviético junto, Asia
@@ -307,14 +367,30 @@ const ZONA = [
    planeta tiene que hacer evidente. El ancla sube un poco para que el cúmulo
    llegue a formarse a esa distancia. */
 const R_ZONA = 360, K_ANCLA = 0.0090;
+/* `EJE` decide por QUÉ se agrupa: el origen o la función. Todo lo que
+   depende de la agrupación —anclas, clique, planetas, leyenda— se reconstruye
+   al cambiarlo, y la red de relaciones no se toca: es la misma, mirada de
+   otra manera. */
+let EJE = 'pais';
+const tablaEje = () => EJE === 'pais' ? PAIS : FUNCION;
+const zonasEje = () => EJE === 'pais' ? ZONA : ZONA_FN;
+const claveDe  = n => EJE === 'pais' ? (n.p || '-') : (n.fn || '-');
+/* Una clave agrupa si no es la de «sin determinar». Un nodo sin país no
+   recibe ancla y lo coloca la red; por función, en cambio, todos tienen una. */
+const agrupa = k => k && k !== '-';
+
 const ANCLA = {};
-for (const z of ZONA){
-  z.ps.forEach((pk, i) => {
-    /* dentro de la zona, cada país se desplaza un poco para no solaparse
-       con su vecino pero quedar contiguo a él */
-    const a = (z.ang + (i - (z.ps.length-1)/2) * 24) * Math.PI/180;
-    ANCLA[pk] = {x: Math.cos(a)*R_ZONA, y: (i%2 ? 54 : -54), z: Math.sin(a)*R_ZONA, z_: z};
-  });
+function construirAnclas(){
+  for (const k of Object.keys(ANCLA)) delete ANCLA[k];
+  for (const z of zonasEje()){
+    z.ps.forEach((pk, i) => {
+      /* dentro de la zona, cada grupo se desplaza un poco para no solaparse
+         con su vecino pero quedar contiguo a él */
+      const a = (z.ang + (i - (z.ps.length-1)/2) * 24) * Math.PI/180;
+      ANCLA[pk] = {x: Math.cos(a)*R_ZONA, y: (i%2 ? 54 : -54),
+                   z: Math.sin(a)*R_ZONA, z_: z};
+    });
+  }
 }
 /* ── Co-nacionalidad ──────────────────────────────────────────────────
    Criterio del usuario: **dos nodos CUALESQUIERA del mismo país llevan, por
@@ -356,6 +432,7 @@ const cx2 = lienzo.getContext('2d');
 let W = 0, H = 0, DPR = 1;
 
 const N = DATOS.nodos.map(n => ({...n, x:0,y:0,z:0, vx:0,vy:0,vz:0, g:0, px:0,py:0,pz:0,pe:1}));
+N.forEach(n => { n.fn = _funcionDe(n); });
 const idx = new Map(N.map((n,i)=>[n.id,i]));
 const E = DATOS.aristas.map(([a,b,r,ev]) => ({a:idx.get(a), b:idx.get(b), r, ev: ev || 'proveedor'}));
 E.forEach(e => { N[e.a].g++; N[e.b].g++; });
@@ -386,14 +463,16 @@ E.forEach(e => { N[e.a].g++; N[e.b].g++; });
    leyéndose. Para comprobar un nodo concreto está el foco: al seleccionarlo
    sus aristas de co-nacionalidad suben a alfa 0,30 y se ven una por una. */
 const CONAC = [];
-{
-  const porPais = new Map();
+function construirConac(){
+  CONAC.length = 0;
+  const porGrupo = new Map();
   N.forEach((n,i) => {
-    if (!n.p || n.p === '-') return;
-    if (!porPais.has(n.p)) porPais.set(n.p, []);
-    porPais.get(n.p).push(i);
+    const k = claveDe(n);
+    if (!agrupa(k)) return;
+    if (!porGrupo.has(k)) porGrupo.set(k, []);
+    porGrupo.get(k).push(i);
   });
-  for (const [pk, lista] of porPais){
+  for (const [pk, lista] of porGrupo){
     const tam = lista.length;
     if (tam < 2) continue;
     const w  = 1 / (tam - 1);
@@ -422,23 +501,37 @@ const LOTE_CONAC = new Map();
    grupos y herramientas— no los ve, que es lo correcto: un planeta no es un
    objeto del adversario, es el andamiaje del mapa. */
 const PLANETA = [];
-{
+function construirPlanetas(){
+  PLANETA.length = 0;
+  const T = tablaEje();
   const cuenta = new Map();
   N.forEach(n => {
-    if (!n.p || n.p === '-' || !ANCLA[n.p]) return;
-    cuenta.set(n.p, (cuenta.get(n.p) || 0) + 1);
+    const k = claveDe(n);
+    if (!agrupa(k) || !ANCLA[k]) return;
+    cuenta.set(k, (cuenta.get(k) || 0) + 1);
   });
   for (const [pk, cu] of cuenta){
-    const a = ANCLA[pk], pa = PAIS[pk] || PAIS['-'];
+    const a = ANCLA[pk], pa = T[pk] || T['-'] || {n: pk, s: '', c: '--neutro'};
     PLANETA.push({
       /* el rótulo del planeta se corta en la coma: «Latinoamérica, sin país
          determinado» ocupaba media pantalla y desplazaba a sus vecinos */
       p: pk, n: pa.n.split(',')[0], s: pa.s, c: pa.c, cuenta: cu,
       x: a.x, y: a.y, z: a.z, rad: 60,
-      hijos: N.map((n,i) => n.p === pk ? i : -1).filter(i => i >= 0)
+      hijos: N.map((n,i) => claveDe(n) === pk ? i : -1).filter(i => i >= 0)
     });
   }
 }
+
+/* Cambiar de eje rehace las tres cosas que dependen de la agrupación. Los
+   nodos conservan su posición: la física los lleva a su sitio nuevo y se ve
+   la transición, que es justamente la lectura interesante —quién se va con
+   quién cuando dejas de mirar el origen y miras lo que hace—. */
+function aplicarEje(){
+  construirAnclas();
+  construirConac();
+  construirPlanetas();
+}
+aplicarEje();
 
 /* El planeta NO tiene un centro fijo ni un radio inventado: se ajusta al
    cúmulo real en cada cuadro.
@@ -543,8 +636,9 @@ const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).
 let cache = {};
 const col = v => (cache[v] ||= css(v));
 function colorNodo(n){
-  const pa = PAIS[n.p];
-  if (pa && n.p !== '-') return col(pa.c);        // el país manda
+  /* manda el grupo del eje activo: el país, o la función si se ha conmutado */
+  const k = claveDe(n), T = tablaEje();
+  if (agrupa(k) && T[k]) return col(T[k].c);
   const p = PALETA_TIPO[n.t] || 'nc';
   if (p === 'crimen') return col('--crimen');
   if (p === 'amber')  return col('--amber');
@@ -567,7 +661,7 @@ const mezcla = (hex, a) => {
   return `rgba(${f[0]},${f[1]},${f[2]},${a})`;
 };
 const visible = n => (!filtro.size  || !filtro.has(n.t))
-                  && (!filtroP.size || !filtroP.has(n.p));
+                  && (!filtroP.size || !filtroP.has(claveDe(n)));
 const coincide = n => consulta && (n.l.toLowerCase().includes(consulta) || n.id.includes(consulta));
 
 /* ───────────────── simulación ───────────────── */
@@ -613,7 +707,7 @@ function paso(){
   for (const n of N){
     /* ancla del sector geográfico: sustituye la atracción al centro en los
        nodos con país, para que cada nacionalidad ocupe su propia región */
-    const an = ANCLA[n.p];
+    const an = ANCLA[claveDe(n)];
     if (an){
       n.vx += (an.x - n.x)*K_ANCLA;
       n.vy += (an.y - n.y)*K_ANCLA;
@@ -735,7 +829,8 @@ function dibujar(){
       if (!n) continue;
       const enFoco = g.banda < 0;
       const prof = enFoco ? 1 : (g.banda + 0.5) / N_BANDA;
-      cx2.strokeStyle = mezcla(col(PAIS[g.p] ? PAIS[g.p].c : '--neutro'),
+      const _T = tablaEje();
+      cx2.strokeStyle = mezcla(col(_T[g.p] ? _T[g.p].c : '--neutro'),
                                enFoco ? 0.30 : (0.055 + prof*0.03) * g.al);
       cx2.lineWidth = (enFoco ? 0.7 : 0.4) * prof;
       cx2.beginPath();
@@ -867,7 +962,8 @@ function dibujar(){
       // La banderita: chapa con el código de dos letras del posible país.
       // Rellena si la atribución es oficial, con sólo contorno si es una
       // valoración de proveedor. Es el mismo dato que el anillo, legible de cerca.
-      const pa = PAIS[n.p];
+      const _k = claveDe(n), _T = tablaEje();
+      const pa = _T[_k];
       const sigla = pa && pa.s ? pa.s : '';
       const fsCh = Math.max(7.5, fs*0.76);
       let anchoCh = 0;
@@ -1127,12 +1223,26 @@ document.addEventListener('keydown', ev => { if (ev.key==='Escape') cerrarPanel(
 
 /* ───────────────── controles ───────────────── */
 const ley = document.getElementById('leyenda');
+/* El primer grupo de la leyenda es el del eje activo, y sus píldoras filtran
+   por esa misma clave. Se regenera al conmutar. */
+const FUNCIONES_LEY = [
+  {k:'extorsion', l:'Extorsión'}, {k:'ddos', l:'Denegación de servicio'},
+  {k:'estatal', l:'Espionaje estatal'}, {k:'suministro', l:'Suministro'},
+  {k:'instrumental', l:'Instrumental'}, {k:'servicio', l:'Infraestructura abusada'},
+  {k:'vuln', l:'Vulnerabilidad'}
+];
+function grupoEje(){
+  const esPais = EJE === 'pais', T = tablaEje();
+  const lista = esPais ? ORIGENES : FUNCIONES_LEY;
+  return '<span class="grp"><b>' + (esPais ? 'Origen:' : 'Función:') + '</b>' +
+    lista.map(g => {
+      const pa = T[g.k] || T['-'];
+      return `<span class="lg" data-p="${g.k}" role="checkbox" aria-checked="true" tabindex="0"
+         title="${pa.n}"><i class="pt" style="background:var(${pa.c})"></i>${g.l}</span>`;
+    }).join('') + '</span>';
+}
 ley.innerHTML =
-  '<span class="grp"><b>Origen:</b>' + ORIGENES.map(g => {
-    const pa = PAIS[g.k];
-    return `<span class="lg" data-p="${g.k}" role="checkbox" aria-checked="true" tabindex="0"
-       title="${pa.n}"><i class="pt" style="background:var(${pa.c})"></i>${g.l}</span>`;
-  }).join('') + '</span>' +
+  grupoEje() +
   '<span class="grp"><b>Tipo:</b>' + GRUPOS.map(g =>
     `<span class="lg" data-k="${g.ks.join('|')}" role="checkbox" aria-checked="true" tabindex="0"
        ><i class="pt vacia" style="border-color:var(${g.c})"></i>${g.l}</span>`).join('') + '</span>' +
@@ -1142,7 +1252,7 @@ ley.innerHTML =
   '<span class="grp clave"><b>Grosor:</b>' + EVID_ORDEN.map(k =>
     `<span class="lg est" title="${EVID[k].l}"><i class="tz" style="height:${Math.max(1, Math.round(EVID[k].w))}px"></i>${k}</span>`
   ).join('') + '</span>' +
-  '<span class="grp clave"><b>Sectores:</b>' + ZONA.map(z =>
+  '<span class="grp clave sectores"><b>Sectores:</b>' + ZONA.map(z =>
     `<span class="lg est" title="${z.ps.join(', ')}">${esc(z.l)}</span>`).join('') + '</span>';
 
 function alternarFiltro(el){
@@ -1155,12 +1265,40 @@ function alternarFiltro(el){
   el.classList.toggle('off', apagando);
   el.setAttribute('aria-checked', String(!apagando));
 }
-ley.querySelectorAll('.lg:not(.est)').forEach(el => {
-  el.addEventListener('click', () => alternarFiltro(el));
-  el.addEventListener('keydown', ev => {
-    if (ev.key===' ' || ev.key==='Enter'){ ev.preventDefault(); alternarFiltro(el); }
+function engancharFiltros(){
+  ley.querySelectorAll('.lg:not(.est)').forEach(el => {
+    if (el._eng) return;
+    el._eng = true;
+    el.addEventListener('click', () => alternarFiltro(el));
+    el.addEventListener('keydown', ev => {
+      if (ev.key===' ' || ev.key==='Enter'){ ev.preventDefault(); alternarFiltro(el); }
+    });
   });
-});
+}
+engancharFiltros();
+
+/* Al conmutar el eje se rehace el primer grupo de la leyenda —que pasa de
+   «Origen» a «Función»— y el de sectores, porque las zonas son otras. El
+   filtro se limpia: sus claves pertenecían al eje anterior y mantenerlas
+   ocultaría nodos por un criterio que ya no está en pantalla. */
+function refrescarLeyenda(){
+  /* La cabecera explica qué significa el color, y en modo función decía algo
+     falso: ahí el color no es el origen. */
+  const lc = document.getElementById('leerColor');
+  if (lc) lc.innerHTML = EJE === 'pais'
+    ? '<strong>El color es el posible país de origen</strong>, y la chapa de dos '
+      + 'letras dice con qué base se afirma: rellena si un Estado o un tribunal lo '
+      + 'ha atribuido, con sólo el contorno si es valoración de proveedor.'
+    : '<strong>El color es lo que el nodo HACE</strong> —extorsión, denegación de '
+      + 'servicio, espionaje, instrumental—, leído del tipo que declara su propio '
+      + 'informe. El país de origen sigue en la ficha de cada nodo.';
+  const prim = ley.querySelector('.grp');
+  if (prim) prim.outerHTML = grupoEje();
+  const sec = ley.querySelector('.grp.sectores');
+  if (sec) sec.innerHTML = '<b>Sectores:</b>' + zonasEje().map(z =>
+    `<span class="lg est" title="${z.ps.join(', ')}">${esc(z.l)}</span>`).join('');
+  engancharFiltros();
+}
 
 document.getElementById('q').addEventListener('input', ev => {
   consulta = ev.target.value.trim().toLowerCase();
@@ -1180,6 +1318,18 @@ const bC = document.getElementById('bConac');
 bC.addEventListener('click', () => { verConac = !verConac; sincronizar(); });
 const bP = document.getElementById('bPlan');
 bP.addEventListener('click', () => { verPlanetas = !verPlanetas; sincronizar(); });
+const bX = document.getElementById('bEje');
+bX.addEventListener('click', () => {
+  EJE = EJE === 'pais' ? 'funcion' : 'pais';
+  filtroP.clear();
+  aplicarEje();
+  refrescarLeyenda();
+  /* Un empujón de energía para que la física recoloque los cúmulos en vez de
+     dejarlos donde los puso el eje anterior. */
+  N.forEach(n => { n.vx += (Math.random()-0.5)*2; n.vy += (Math.random()-0.5)*2;
+                   n.vz += (Math.random()-0.5)*2; });
+  sincronizar();
+});
 document.getElementById('bReset').addEventListener('click', () => {
   vista.rotX=-0.32; vista.rotY=0.55; vista.girar=true; vista.offXd=0; vista.offYd=0;
   consulta=''; document.getElementById('q').value='';
@@ -1188,6 +1338,10 @@ document.getElementById('bReset').addEventListener('click', () => {
   cerrarPanel(); encuadrar(); sincronizar();
 });
 function sincronizar(){
+  if (typeof bX !== 'undefined' && bX){
+    bX.textContent = EJE === 'pais' ? 'Agrupar: país' : 'Agrupar: función';
+    bX.classList.toggle('on', EJE === 'funcion');
+  }
   bG.classList.toggle('on', vista.girar);
   bC.classList.toggle('on', verConac);
   bP.classList.toggle('on', verPlanetas);

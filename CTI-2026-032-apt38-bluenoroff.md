@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-032"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de bloque de actores"
 foco_regional: "Chile · región andina · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -539,7 +539,7 @@ La fuente primaria publica su mapeo en un anexo no extraíble. La tabla siguient
 | Persistencia | T1543 | Create or Modify System Process | **Modelo B.** Técnicas de persistencia documentadas en el informe de abril *(fuente primaria, por referencia)* |
 | Defensa | T1055 | Process Injection | **Modelo B.** Declarado por la fuente entre las técnicas con detección en producción *(fuente primaria)* |
 | Defensa | T1036 | Masquerading | **Modelo B.** Marcas y nombres legítimos suplantados: Chrome, visores de PDF, plataformas de reunión, reproductores de medios *(fuente primaria)* |
-| Defensa | T1656 | Impersonation | **Modelo B.** **Vídeo sintético de personas reales e identificables** en reuniones. La fuente adopta la definición de *deepfake* de la GAO estadounidense y clasifica por procedencia, no por apariencia *(fuente primaria)* |
+| Sigilo | T1684.001 | Social Engineering: Impersonation | **Modelo B.** **Vídeo sintético de personas reales e identificables** en reuniones. La fuente adopta la definición de *deepfake* de la GAO estadounidense y clasifica por procedencia, no por apariencia *(fuente primaria)* |
 | Credenciales | T1555.003 | Credentials from Password Stores: Credentials from Web Browsers | **Modelo B.** Objetivo declarado: credenciales y accesos del individuo *(mapeo propio)* |
 | Credenciales | T1539 | Steal Web Session Cookie | **Modelo B.** Sesiones autenticadas, que eluden el segundo factor sin atacarlo *(mapeo propio)* |
 | Descubrimiento | T1087 | Account Discovery | **Modelo A.** Reconocimiento interno durante la permanencia prolongada *(mapeo propio)* |
@@ -1227,6 +1227,7 @@ Este anexo no es sobre Corea del Norte. Es el método que estructura el informe,
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1656` → `T1684.001`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. Se descompone el alias agregado en tres modelos operativos con la prueba de indicadores disjuntos (`O-1.2`), se corrigen tres afirmaciones del requisito de origen en `§3.5` —incluida la de las cooperativas reguladas por la SEPS, que no se ha podido corroborar—, se recupera el expediente del Banco de Chile de 2018 como hipótesis de plan de respuesta y no como conjunto de indicadores, y se declara en el Anexo B.1 la imposibilidad de transcribir el anexo de indicadores de la fuente primaria | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-027"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor"
 foco_regional: "Global · Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -32,7 +32,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR: el análi
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-027` |
-| Versión / fecha | `1.0` — 2026-11-17 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Perfil de actor, más **evaluación de capacidad** —el actor con mayor capacidad técnica demostrada de este lote— y **evaluación de resiliencia a la acción policial**: es el único de la cartera que sobrevivió a un desmantelamiento judicial documentado |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | **Sin víctimas latinoamericanas documentadas, pero con victimología global real**: Europa, Estados Unidos, Indo-Pacífico, y sectores que sí tenemos (marítimo-portuario, hidroeléctrico, diplomático). **Es el primer actor de este lote cuya exposición indirecta no es hipotética** |
@@ -558,10 +558,10 @@ Tres cuestiones requieren análisis en este expediente.
 | Ejecución | T1569.002 | System Services: Service Execution | Carga del rootkit como servicio |
 | Persistencia | T1543.003 | Create or Modify System Process: Windows Service | **Instalación de `msagent.sys` como servicio de Windows** |
 | Escalada de privilegios | T1068 | Exploitation for Privilege Escalation | Acceso al espacio de núcleo por controlador firmado (inf.) |
-| Sigilo | T1574.002 | Hijack Execution Flow: DLL Side-Loading | `Claimloader`, `CANONSTAGER`, y el método dominante del arsenal |
+| Sigilo | T1574.001 | Hijack Execution Flow: DLL | `Claimloader`, `CANONSTAGER`, y el método dominante del arsenal |
 | Sigilo | T1014 | **Rootkit** | **`msagent.sys`: ocultación de procesos, protección de ficheros y claves, filtrado de red.** Es la técnica central del expediente |
 | Sigilo | T1553.002 | Subvert Trust Controls: Code Signing | **El controlador y el descargador llevan firma digital válida** |
-| Sigilo | T1562.001 | Impair Defenses: Disable or Modify Tools | El filtrado de red del rootkit degrada la visibilidad de los productos de seguridad (inf., y es el supuesto clave de §O-6) |
+| Degradación de defensas | T1685 | Disable or Modify Tools | El filtrado de red del rootkit degrada la visibilidad de los productos de seguridad (inf., y es el supuesto clave de §O-6) |
 | Sigilo | T1564.001 | Hide Artifacts: Hidden Files and Directories | Directorio oculto en la unidad USB, con `USBConfig.exe` como único fichero visible |
 | Sigilo | T1036.005 | Masquerading: Match Legitimate Name or Location | **`msagent.sys` imita el nombre de un componente legítimo de Windows** |
 | Sigilo | T1055 | Process Injection | Carga en memoria de la variante cifrada de `PlugX` (`SOGU.SEC`) |
@@ -1224,6 +1224,7 @@ Este anexo es el entregable transversal del informe, y existe porque los desmant
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.001`, `T1574.002` → `T1574.001`, `T1685`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-17 | Emisión inicial. Perfil de capacidad construido sobre ocho fuentes, una de ellas judicial. **Corrige parcialmente la conclusión de `CTI-2026-025` y `CTI-2026-026` sobre la lectura de los rankings de prevalencia** | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

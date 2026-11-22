@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-021"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de ecosistema"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -30,7 +30,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas TLP:CLEAR, incluidas
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-021` |
-| Versión / fecha | `1.0` — 2026-11-16 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Perfil de ecosistema de malware + evaluación regional. **No es un perfil de actor:** el sujeto son seis familias con operadores distintos que comparten mercado, técnicas y proveedores |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | **Chile como objetivo primario**, con el ecosistema regional como contexto |
@@ -458,8 +458,8 @@ El objetivo es el fraude, y la cadena de monetización determina qué controles 
 | Evasión | T1036.005 | Masquerading: Match Legitimate Resource Name or Location | Ficheros con nombre de biblioteca de sistema (`shfolder.dll`, `ssleay32.dll`, `libeay32.dll`) |
 | Evasión | T1574.001 | Hijack Execution Flow: DLL | Carga lateral de DLL; en `VENON`, `libcef.dll` malicioso cargado por un binario firmado de NVIDIA |
 | Evasión | T1497 | Virtualization/Sandbox Evasion | Vigilancia de procesos de máquina virtual, `IsDebuggerPresent`, comprobaciones anti-caja de arena |
-| Evasión | T1562.002 | Impair Defenses: Disable Windows Event Logging | Citado en la alerta de la Tesorería General |
-| Evasión | T1562.001 | Impair Defenses: Disable or Modify Tools | Exclusión de Defender para la carpeta de trabajo; evasión de AMSI y de ETW en `VENON` |
+| Degradación de defensas | T1685.001 | Disable or Modify Windows Event Log | Citado en la alerta de la Tesorería General |
+| Degradación de defensas | T1685 | Disable or Modify Tools | Exclusión de Defender para la carpeta de trabajo; evasión de AMSI y de ETW en `VENON` |
 | Evasión | T1518.001 | Software Discovery: Security Software Discovery | Búsqueda de productos de seguridad instalados |
 | Evasión | T1564.003 | Hide Artifacts: Hidden Window | Navegador sin interfaz; PowerShell con `ShowWindow=0`; ocultación en el Administrador de tareas |
 | Evasión | T1490 | Inhibit System Recovery | Citado en la alerta `CMV25-00499` |
@@ -1101,6 +1101,7 @@ clave, pre-mortem` · `TLP 2.0` · `PAP` · `STIX 2.1 / TAXII 2.1` · `Admiralty
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1562.001`, `T1562.002` → `T1685`, `T1685.001`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-16 | Emisión inicial. Elaborado sobre cinco alertas del CSIRT Nacional de Chile y siete informes de proveedor de primera mano. **El encargo partía de la premisa de que Mispadu era la familia de mayor relevancia chilena; la colección mostró que es Mekotio y el foco se reorientó**, lo que queda consignado en §3.3. Sin telemetría propia: §O-4 sin evaluar | Célula CTI |
 
 ## Anexo H — Realimentación del consumidor

@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-018"
-version: "1.0"
+version: "1.1"
 tipo: "Evaluación estratégica"
 foco_regional: "Global · Latinoamérica · Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -30,7 +30,7 @@ distribucion: "Elaborado íntegramente con fuentes abiertas y datos primarios pu
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-018` |
-| Versión / fecha | `1.0` — 2026-11-15 |
+| Versión / fecha | `1.1` — 2026-11-21 |
 | Tipo de producto | Evaluación estratégica (infraestructura y ecosistema, no actor) |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Global, con lectura específica para Latinoamérica y Chile |
@@ -604,7 +604,7 @@ pasivo) **antes** de que llegue el primer correo.
 | Acceso inicial | T1566.002 | Phishing: Spearphishing Link | Enlace a dominio recién registrado en gTLD de nicho |
 | Acceso inicial | T1660 | Phishing (móvil) | Smishing con `.top`, `.icu`, `.vip`, `.autos`, `.shop`, `.space` suplantando correo postal y organismos |
 | Ejecución | T1204.004 | User Execution: Malicious Copy and Paste | ClickFix con reCAPTCHA falso (Macfinger) |
-| Evasión | T1656 | Impersonation | Suplantación del identificador de tenant corporativo y de portales de soporte |
+| Sigilo | T1684.001 | Social Engineering: Impersonation | Suplantación del identificador de tenant corporativo y de portales de soporte |
 | Mando y control | T1568.002 | Dynamic Resolution: Domain Generation Algorithms | Dominios de patrón pseudoaleatorio en `.ws`, `.life` y similares |
 | Mando y control | T1102.001 | Web Service: Dead Drop Resolver | Resolución del C2 mediante contrato inteligente en Polygon (Phexia) |
 | Mando y control | T1071.001 | Application Layer Protocol: Web Protocols | Rotación diaria del dominio de cargador manteniendo el identificador de víctima |
@@ -1049,6 +1049,7 @@ eso no figuran en este anexo.
 
 | Versión | Fecha | Cambio | Autor |
 |---|---|---|---|
+| **1.1** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1656` → `T1684.001`. Son referencias que un `Tnnnn` bien formado no delata y que se copian de informes viejos. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` contra el catálogo oficial | Célula CTI |
 | 1.0 | 2026-11-15 | Emisión inicial | Célula CTI |
 
 ## Anexo G — Realimentación del consumidor

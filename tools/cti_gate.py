@@ -342,6 +342,18 @@ def _bloques_kj(t):
     return salida
 
 
+# Un KJ que declara ser HECHO y no estimación queda fuera de la exigencia de
+# probabilidad de `A1`. Las formas que la cartera usa de verdad, no inventadas:
+# «es un hecho confirmado por análisis de binario, no una estimación», «esto es
+# hecho medido, no estimación», «confirmado por análisis de binario».
+RE_HECHO_MEDIDO = re.compile(
+    r"(?:es|esto es|son)\s+(?:un\s+)?\*{0,2}hechos?\b[^.]{0,80}"
+    r"(?:no\s+(?:es\s+)?(?:una\s+)?estimaci|confirmad|medid)"
+    r"|\bhecho\s+medido\b"
+    r"|\bconfirmado\s+por\s+an[áa]lisis\s+de\s+binario\b"
+    r"|\bdato\s+publicado\b.{0,60}\bno\s+lo\s+verificamos\b")
+
+
 def g3_atribucion(inf):
     """Quién dice cada cosa, y con cuánta confianza puede decirla."""
     H = []
@@ -349,12 +361,29 @@ def g3_atribucion(inf):
     ap = lambda r, b, m, d="": H.append(Hallazgo(ident, "atribución", r, b, m, d))
 
     # ── A1 · todo KJ lleva probabilidad y confianza del léxico
+    #
+    #    **Con una excepción que la primera versión no hacía, y que producía
+    #    falsos positivos que bloqueaban commits.** ICD 203 pide expresar la
+    #    probabilidad de los JUICIOS ANALÍTICOS; un hecho observado no lleva
+    #    probabilidad, y exigírsela obliga a escribir «casi con certeza» sobre
+    #    algo que no se estimó sino que se midió. Cuatro juicios de la cartera
+    #    lo decían con todas las letras —`CTI-2026-016` `KJ-3`: *«Esto es un
+    #    hecho confirmado por análisis de binario, no una estimación»*;
+    #    `CTI-2026-018` `KJ-2`: *«Esto es hecho medido, no estimación»*— y la
+    #    regla los marcaba igual.
+    #
+    #    La excepción **no es una puerta trasera**: exige las dos cosas a la
+    #    vez. Que el párrafo declare explícitamente que es hecho medido o
+    #    confirmado, Y que declare confianza, que se sigue comprobando abajo.
+    #    Decir «es un hecho» sin más no basta para saltarse el léxico.
     bloques = _bloques_kj(t)
     for kj, bl in bloques:
         bajo = bl.lower()
-        if not any(p in bajo for p in PROBABILIDAD):
-            ap("A1", True, "%s no usa ninguna probabilidad del léxico ICD 203. "
-                           "Un juicio sin probabilidad no es un juicio: es una opinión."
+        es_hecho = RE_HECHO_MEDIDO.search(bajo)
+        if not any(p in bajo for p in PROBABILIDAD) and not es_hecho:
+            ap("A1", True, "%s no usa ninguna probabilidad del léxico ICD 203 "
+                           "ni se declara hecho medido. Un juicio sin "
+                           "probabilidad no es un juicio: es una opinión."
                % kj, kj)
         if "confianza" not in bajo:
             ap("A1", True, "%s no declara confianza." % kj, kj)

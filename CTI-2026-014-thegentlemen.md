@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:AMBER"
 id: "CTI-2026-014"
-version: "1.4"
+version: "1.5"
 tipo: "Perfil de actor"
 foco_regional: "Chile · Latinoamérica"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -26,7 +26,7 @@ distribucion: "Actualizado el 2026-11-19 con medición propia de victimología (
 | Campo | Valor |
 |---|---|
 | Identificador | `CTI-2026-014` |
-| Versión / fecha | `1.2` — 2026-09-15 |
+| Versión / fecha | `1.5` — 2026-11-21 |
 | Tipo de producto | Perfil de actor + informe de campaña |
 | Niveles cubiertos | Estratégico · Operacional · Táctico · Técnico |
 | Foco regional | Chile · Latinoamérica |
@@ -786,16 +786,16 @@ Del borde de red al cifrado de dominio completo, en una mediana de dos días.
 | Persistencia | T1547.001 | Registry Run Keys | `GupdateS` (HKLM), `GupdateU` (HKCU) |
 | Persistencia | T1136.002 | Create Account: Domain | Cuentas tipo `MicrosoftSupporte` con acceso a SQL/Veeam |
 | Persistencia | T1098 | Account Manipulation | Reseteo de contraseña root en ESXi |
-| Escalada | T1548.008 | Abuse Elevation Control | CVE-2025-7771 (`ThrottleStop.sys`) |
+| Escalada de privilegios | T1068 | Exploitation for Privilege Escalation | CVE-2025-7771 en `ThrottleStop.sys`: controlador firmado y vulnerable cargado para escalar (BYOVD). **La versión anterior lo mapeaba a `T1548.008`, que no existe en ATT&CK** |
 | Escalada | T1484.001 | Domain Policy Modification | GPO vía `gpme.msc` para distribución dominio-completo |
 | Escalada | T1068 | Exploitation for Priv Esc | BadSuccessor, CVE-2025-32463, CVE-2024-37085 (ESXi) |
-| Evasión | T1562.001 | Disable or Modify Tools | `Set-MpPreference -DisableRealtimeMonitoring`; exclusión de `C:\` |
-| Evasión | T1562.004 | Disable System Firewall | `Set-NetFirewallProfile -Enabled False` |
-| Evasión | T1562.008 | Disable Windows Event Logging | `wevtutil`; registro AutoLogger/GlobalLogger de WMI |
+| Degradación de defensas | T1685 | Disable or Modify Tools | `Set-MpPreference -DisableRealtimeMonitoring`; exclusión de `C:\` |
+| Degradación de defensas | T1686 | Disable or Modify System Firewall | `Set-NetFirewallProfile -Enabled False` |
+| Degradación de defensas | T1685.001 | Disable or Modify Windows Event Log | `wevtutil`; registro AutoLogger/GlobalLogger de WMI |
 | Evasión | T1014 | Rootkit / BYOVD | `ThrottleBlood.sys`, `viragt64.sys`, `nogbc.sys`, `G11.sys` |
 | Evasión | T1036.005 | Masquerading | `avastrclone.exe`, `svchost32.exe`, EDR killers con nombre de AV |
 | Evasión | T1112 | Modify Registry | `RestrictSendingNTLMTraffic=0`, `DisableRestrictedAdmin=0`, `EveryoneIncludesAnonymous=1` |
-| Evasión | T1070.001 | Clear Windows Event Logs | Security, System, Application (EID 1102 / 104) |
+| Degradación de defensas | T1685.005 | Clear Windows Event Logs | Security, System, Application (EID 1102 / 104) |
 | Acceso credenciales | T1003.004 | DPAPI Backup Key | Impacket `dpapi.py`, DonPAPI |
 | Acceso credenciales | T1555 | Credentials from Password Stores | `ChromeKB3.exe`, bases de datos de Veeam (CVE-2023-27532) |
 | Acceso credenciales | T1557.001 | LLMNR/NBT-NS Poisoning y SMB Relay | Módulo `coerce_plus` de NetExec; PetitPotam, PrinterBug |
@@ -1347,6 +1347,7 @@ de A.3.
 
 | Versión | Fecha | Cambio |
 |---|---|---|
+| **1.5** | **2026-11-21** | **Alineamiento con MITRE ATT&CK v20.1.** ATT&CK reorganizó la matriz y este informe citaba identificadores que la fuente ha **revocado**: `T1070.001` → `T1685.005`, `T1562.001` → `T1685`, `T1562.004` → `T1686`. **Y corrige dos errores de origen que la comprobación contra el catálogo destapó:** `T1548.008` **no existe en ATT&CK**, y el procedimiento que describía —CVE-2025-7771 en `ThrottleStop.sys`, un controlador firmado y vulnerable— es `T1068`; y `T1562.008` era *Disable Cloud Logs*, mientras que el procedimiento escrito (`wevtutil`, registro AutoLogger/GlobalLogger de WMI) es el de eventos de **Windows**, de modo que migra a `T1685.001` y no a `T1685.002` como indicaría la tabla de revocación. **No se extiende `caduca`: se ha puesto al día la nomenclatura de los TTP, no revalidado ningún juicio.** Lo comprueba en adelante la familia `G7` de `tools/cti_gate.py` | Célula CTI |
 | 1.0 | 2026-09-15 | Emisión inicial. Todo-fuente externa; §O-4 pendiente de telemetría propia |
 | 1.1 | 2026-09-15 | **Incorporación del eje regional Chile/LATAM** (fuentes 13–17): nuevo KJ-7; §E-2.1 con contexto chileno y obligación regulatoria; §O-6.1 con cronología regional y contraste con la alerta `AIA26-00012` del CSIRT Nacional; hipótesis de caza H-10 a H-12; detecciones D-13 y D-14; decisiones E-f a E-h; brechas G-8 a G-11. **Cambio de juicio:** el acceso inicial deja de considerarse exclusivamente por explotación de CVE — se añade la vía de cuenta válida con credenciales de infostealer como concurrente y no cubierta por el parcheo |
 | 1.4 | 2026-11-19 | **Medición propia de victimología** sobre un rastreador público (§E-2.3, nuevos `KJ-9` y `KJ-10`): **1.020 víctimas reclamadas en 2026, 129 latinoamericanas en dieciséis países de la región y 90 países en total** —las dos cifras de dispersión más altas de la cartera—, con nueve víctimas chilenas. **Y una corrección de impresión que la comparación obliga a hacer: en exposición chilena este actor es el SEGUNDO**, con nueve frente a las veinte de Qilin; su dato regional central no es Chile sino **la amplitud**. **Se eleva `KJ-6` de confianza baja a moderada** y se recalcula su cifra del 45 % al **54 %**, porque el denominador es ahora medición propia (1.020 en lugar de ~868) y porque **la ficha del rastreador corrobora por su cuenta la cifra de más de 1.570 víctimas reveladas por un servidor de mando y control comprometido**, convirtiendo una fuente única en dos concordantes. Se añaden además tres elementos del inventario publicado que no estaban: **la cadena completa de relevo de NTLM** —de la que sale la nueva hipótesis de caza `H-13`, que **funciona contra sistemas totalmente parcheados** y se cierra con configuración—, **`Velociraptor` usado ofensivamente**, cuya presencia puede confundirse con trabajo del propio equipo de seguridad, y **`Censys` y `Shodan`** como reconocimiento que no deja rastro en nuestros registros. **La caducidad no se extiende**: sigue en 2026-12-15 | Célula CTI |
