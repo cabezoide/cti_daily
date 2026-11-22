@@ -911,11 +911,19 @@ function dibujar(){
     }
   }
 
-  /* Nombre del planeta. Va aparte del sistema de etiquetas de los nodos y
-     siempre se dibuja: es el rótulo del sector, y si compitiera por hueco con
-     los actores desaparecería justo cuando el sector está más poblado, que es
-     cuando más falta hace saber de quién es ese cúmulo. */
-  if (verPlanetas && vista.etiquetas){
+  /* Nombre del planeta. Va aparte del sistema de etiquetas de los nodos: es
+     el rótulo del sector, y si compitiera por hueco con los actores
+     desaparecería justo cuando el sector está más poblado, que es cuando más
+     falta hace saber de quién es ese cúmulo.
+
+     **Depende de `verPlanetas`, no de `vista.etiquetas`**, y eso es un
+     arreglo: el comentario decía «siempre se dibuja» mientras el código lo
+     ataba al conmutador de etiquetas de nodo. Se notó en la mirilla de la
+     portada, que apaga las etiquetas porque a 340 px no se leen y se quedaba
+     también sin los nombres de país, que son justo lo que hace legible la
+     vista pequeña. El rótulo pertenece al planeta: para quitarlo está el
+     botón `Planetas`. */
+  if (verPlanetas){
     cx2.textBaseline = 'middle';
     cx2.textAlign = 'center';
     /* Los países con pocos actores acaban cerca del centro —sus nodos tienen
@@ -928,22 +936,32 @@ function dibujar(){
       if (filtroP.size && filtroP.has(q.p)) continue;
       const prof = Math.max(0.12, Math.min(1.2, q.pe));
       const r = Math.max(6, q.rad * prof * (Math.min(W,H)/780) * vista.zoom);
-      const tam = Math.max(10, Math.min(19, 13*prof*vista.zoom));
+      /* En la mirilla el zoom es 0,78 y el lienzo mide 340 px de alto: con la
+         escala normal el rótulo caía al mínimo de 10 px y los nombres se
+         amontonaban en el centro, ilegibles. Incrustado se fija un suelo más
+         alto y el antisolape se encarga del resto —descartar un rótulo que
+         chocaría es preferible a dibujar dos que no se leen—. */
+      const tam = MINI
+        ? Math.max(13, Math.min(17, 15*prof))
+        : Math.max(10, Math.min(19, 13*prof*vista.zoom));
       cx2.font = '600 ' + tam.toFixed(1) + 'px ui-monospace,SFMono-Regular,Menlo,monospace';
       const ey = q.py - r - tam*1.25;
       const ancho = cx2.measureText(q.n.toUpperCase()).width;
       let choca = false;
       for (const o of puestos)
-        if (Math.abs(o.x - q.px) < (o.w + ancho)/2 + 10 && Math.abs(o.y - ey) < tam*2.1)
+        if (Math.abs(o.x - q.px) < (o.w + ancho)/2 + (MINI ? 18 : 10) &&
+            Math.abs(o.y - ey) < tam*(MINI ? 1.6 : 2.1))
           { choca = true; break; }
       if (choca) continue;
       puestos.push({x: q.px, y: ey, w: ancho});
       cx2.fillStyle = mezcla(col(q.c), 0.52 + prof*0.34);
       cx2.fillText(q.n.toUpperCase(), q.px, ey);
-      cx2.font = (tam*0.78).toFixed(1) + 'px ui-monospace,SFMono-Regular,Menlo,monospace';
-      cx2.fillStyle = mezcla(col(q.c), 0.34 + prof*0.22);
-      cx2.fillText(q.cuenta + (q.cuenta === 1 ? ' actor' : ' actores'),
-                   q.px, ey + tam*1.05);
+      if (!MINI){
+        cx2.font = (tam*0.78).toFixed(1) + 'px ui-monospace,SFMono-Regular,Menlo,monospace';
+        cx2.fillStyle = mezcla(col(q.c), 0.34 + prof*0.22);
+        cx2.fillText(q.cuenta + (q.cuenta === 1 ? ' nodo' : ' nodos'),
+                     q.px, ey + tam*1.05);
+      }
     }
     cx2.textAlign = 'left';
   }
