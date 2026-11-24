@@ -2495,6 +2495,116 @@
    "a": "-",
    "d": "Proveedor de alojamiento que concentra dos de las tres direcciones propias de la campana SCKit: 185.99.255.28 en Reino Unido y 155.94.150.39 en Estados Unidos",
    "af": "MEDICION PROPIA del 22-11-2026: consulta de titularidad de las direcciones publicadas por Microsoft. Dos de tres en el mismo proveedor; dos puntos no sostienen una serie, de ahi que el juicio sea probable y no cierto"
+  },
+  {
+   "id": "shinyhunters",
+   "l": "ShinyHunters",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "Marca de robo de datos y extorsión activa desde 2020. Su sitio de filtración dejó de estar disponible el 30-09-2026 tras dos detenciones; el 23-11-2026 un sitio nuevo reivindica el nombre con firmas de dos claves PGP revocadas",
+   "a": "oficial",
+   "af": "El FBI le dedica el aviso público I-051526-PSA del 15-05-2026. La continuidad del operador tras noviembre NO está acreditada: medición propia de la cadena de claves, CTI-2026-064 §X-1"
+  },
+  {
+   "id": "inception",
+   "l": "INCEPTION",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "Sitio de filtración aparecido el 16-11-2026 que publica organizaciones atacadas por el mismo clúster de llamadas fraudulentas que alimentaba el sitio anterior. Siete reclamaciones en cinco días, ninguna confirmada",
+   "a": "proveedor",
+   "af": "Okta Threat Intelligence, 24-11-2026, que declara NO poder valorar con confianza alta quién lo opera. Suma de control de su dirección validada por medición propia"
+  },
+  {
+   "id": "ounc053",
+   "l": "O-UNC-053",
+   "t": "clúster",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "Clúster de intrusión activo desde marzo de 2026. Alimentó el sitio de ShinyHunters entre marzo y septiembre y el de INCEPTION desde noviembre, sin interrumpir el registro de infraestructura entre uno y otro",
+   "a": "proveedor",
+   "af": "Okta Threat Intelligence con serie temporal propia de registros de dominio; corroborado por medición propia de WHOIS en tres dominios del conjunto"
+  },
+  {
+   "id": "shinysp1d3r",
+   "l": "ShinySp1d3r",
+   "t": "herramienta",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "Plataforma de cifrado como servicio anunciada en noviembre de 2025 contra entornos VMware ESXi. A los doce meses no tiene ninguna víctima publicada, y la dirección que un agregador le atribuye es un marcador de posición",
+   "a": "proveedor",
+   "af": "Medición propia del 24-11-2026: la consulta de víctimas devuelve «no victims found», y la dirección de 49 caracteres no es una v3 válida"
+  },
+  {
+   "id": "kitssoadaptado",
+   "l": "Kit de interceptación de SSO adaptado al inquilino",
+   "t": "herramienta",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "Página que imita el proveedor de identidad concreto de cada objetivo, filtra visitantes no deseados y los reenvía al portal legítimo. La mayoría imita Okta y una variante imita NetIQ y OpenText Access Manager",
+   "a": "proveedor",
+   "af": "ReversingLabs sobre 21 dominios con comportamiento confirmado; Okta no pudo analizarlo porque los retos de Cloudflare se lo impidieron"
+  },
+  {
+   "id": "prospero",
+   "l": "PROSPERO OOO",
+   "t": "suministrador",
+   "p": "ru",
+   "r": "CTI-2026-064",
+   "d": "Alojador ruso con AS200593. Titular de tres de las cuatro direcciones asociadas al sitio de filtración caído. Sus dos prefijos siguen anunciados y visibles el 24-11-2026",
+   "a": "-",
+   "af": "Medición propia del 24-11-2026: RDAP para la titularidad y RIPEstat para el origen y la visibilidad, 313 de 322 pares RIS"
+  },
+  {
+   "id": "proton66",
+   "l": "Proton66 OOO",
+   "t": "suministrador",
+   "p": "ru",
+   "r": "CTI-2026-064",
+   "d": "Alojador ruso con AS198953. Titular de la cuarta dirección asociada al sitio de filtración, en un prefijo visto por primera vez en enero de 2026 y todavía anunciado el 24-11-2026",
+   "a": "-",
+   "af": "Medición propia del 24-11-2026: RDAP y RIPEstat, 311 de 322 pares RIS viendo el prefijo 176.120.22.0/24"
+  },
+  {
+   "id": "nicenic",
+   "l": "NICENIC",
+   "t": "suministrador",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "Registrador de dominios que concentra la mayoría de los señuelos del clúster. Sus servidores de nombres por omisión delatan el dominio aparcado tras la fase activa de la campaña",
+   "a": "proveedor",
+   "af": "ReversingLabs lo identifica como registrador principal; medición propia lo confirma en dos de tres dominios consultados por WHOIS"
+  },
+  {
+   "id": "cve202635273",
+   "l": "CVE-2026-35273",
+   "t": "cve",
+   "p": "-",
+   "r": "CTI-2026-064",
+   "d": "PeopleSoft Enterprise PeopleTools 8.61 y 8.62: toma de control sin autenticación previa por HTTP. CVSS 9.8, publicada el 11-06-2026, tres meses antes de la reivindicación que la presentó como día cero",
+   "a": "oficial",
+   "af": "Medición propia contra el NVD el 24-11-2026: fecha de publicación, puntuación y estado Analyzed. La atribución del identificador la aporta cobertura secundaria"
+  },
+  {
+   "id": "cxfj",
+   "l": "CXFJ",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "Familia de proxy residencial con 230 de las 524 direcciones de mando y control vivas del ecosistema, el 43,9 %. Aprovisionó dieciséis direcciones en un solo bloque en seis horas el 23-11-2026",
+   "a": "-",
+   "af": "Medición propia del 24-11-2026 sobre la telemetría en vivo. Su huella de servicio es abanico 12337-12406 con reino de autenticación Proxy, verificada en Shodan el 22-11-2026"
+  },
+  {
+   "id": "potassium",
+   "l": "Potassium",
+   "t": "crimen",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "Familia de DDoS con terminal interactiva y actualización de ejecutables. Tercera por volumen de eventos del ecosistema, y la única con mando y control alojado en Chile en dos observaciones distintas",
+   "a": "-",
+   "af": "Capacidades declaradas por la matriz de la fuente; dos direcciones en el prefijo de Santiago del proveedor confirmadas por medición propia y por el geofeed del operador el 24-11-2026"
   }
  ],
  "aristas": [
@@ -4369,6 +4479,84 @@
    "rmmcomercial",
    "contiene",
    "proveedor"
+  ],
+  [
+   "ounc053",
+   "shinyhunters",
+   "afiliado",
+   "proveedor"
+  ],
+  [
+   "ounc053",
+   "inception",
+   "afiliado",
+   "proveedor"
+  ],
+  [
+   "shinyhunters",
+   "inception",
+   "solapa",
+   "inferido"
+  ],
+  [
+   "shinyhunters",
+   "shinysp1d3r",
+   "usa",
+   "proveedor"
+  ],
+  [
+   "shinyhunters",
+   "prospero",
+   "usa",
+   "propio"
+  ],
+  [
+   "shinyhunters",
+   "proton66",
+   "usa",
+   "propio"
+  ],
+  [
+   "shinyhunters",
+   "cve202635273",
+   "explota",
+   "inferido"
+  ],
+  [
+   "ounc053",
+   "kitssoadaptado",
+   "usa",
+   "proveedor"
+  ],
+  [
+   "kitssoadaptado",
+   "nicenic",
+   "abusa",
+   "propio"
+  ],
+  [
+   "kitssoadaptado",
+   "cloudflare",
+   "abusa",
+   "proveedor"
+  ],
+  [
+   "ecosistemabots",
+   "cxfj",
+   "contiene",
+   "propio"
+  ],
+  [
+   "ecosistemabots",
+   "potassium",
+   "contiene",
+   "propio"
+  ],
+  [
+   "cxfj",
+   "potassium",
+   "noesalias",
+   "propio"
   ]
  ],
  "_evidencia": {
