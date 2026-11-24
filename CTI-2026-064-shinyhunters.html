@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CTI-2026-064 · ShinyHunters, INCEPTION y el clúster de intrusión O-UNC-053</title>
+<style>
+/* ============================================================
+   CTI-2026-014 — Hoja de estilo
+   Paleta: #f7a400 · #4db99c · #375d9d · #5a7ebe
+   ============================================================ */
+:root{
+  --amber:#f7a400;
+  --mint:#4db99c;
+  --deep:#375d9d;
+  --sky:#5a7ebe;
+
+  --amber-soft:rgba(247,164,0,.14);
+  --mint-soft:rgba(77,185,156,.14);
+  --deep-soft:rgba(55,93,157,.18);
+  --sky-soft:rgba(90,126,190,.16);
+
+  --bg:#080c18;
+  --bg-2:#0b1225;
+  --surface:#0f1830;
+  --surface-2:#131e3a;
+  --line:rgba(90,126,190,.22);
+  --line-strong:rgba(90,126,190,.42);
+
+  --ink:#e9eefb;
+  --ink-2:#b9c6e2;
+  --ink-3:#8294b8;
+
+  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --r:14px;
+  --r-s:9px;
+  --shadow:0 18px 48px -22px rgba(0,0,0,.85);
+  --nav-w:286px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%, rgba(55,93,157,.38), transparent 62%),
+    radial-gradient(760px 560px at 92% 4%, rgba(247,164,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 60% 108%, rgba(77,185,156,.10), transparent 62%),
+    linear-gradient(180deg,#080c18 0%,#080c18 40%,#070a14 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(rgba(90,126,190,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.055) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(1200px 800px at 50% 0%,#000 0%,transparent 78%);
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--sky);text-decoration:none;border-bottom:1px solid rgba(90,126,190,.35);transition:color .18s,border-color .18s}
+a:hover{color:var(--mint);border-color:var(--mint)}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  padding-top:env(safe-area-inset-top,0px);
+  background:rgba(8,12,24,.82);backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:11px 20px;max-width:1560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:14.5px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft);flex:none}
+.brand small{display:block;font-weight:500;color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.topbar .spacer{flex:1}
+.tlp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;
+  padding:5px 10px;border-radius:6px;background:var(--amber);color:#1a1200;white-space:nowrap
+}
+.pap{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;padding:5px 10px;border-radius:6px;
+  background:var(--amber-soft);color:var(--amber);border:1px solid rgba(247,164,0,.45);white-space:nowrap}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--sky),var(--mint),var(--amber));transition:width .1s linear}
+.navtoggle{
+  display:none;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)
+}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1560px;margin:0 auto}
+nav.toc{
+  position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow-y:auto;
+  padding:26px 14px 60px 22px;border-right:1px solid var(--line);scrollbar-width:thin
+}
+nav.toc::-webkit-scrollbar{width:7px}
+nav.toc::-webkit-scrollbar-thumb{background:rgba(90,126,190,.3);border-radius:4px}
+nav.toc h6{
+  margin:20px 0 8px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700;
+  display:flex;align-items:center;gap:8px
+}
+nav.toc h6::before{content:"";width:16px;height:2px;border-radius:2px;background:currentColor;opacity:.5}
+nav.toc h6:first-child{margin-top:0}
+nav.toc a{
+  display:block;padding:6px 12px;margin:1px 0;border-radius:8px;font-size:13.4px;line-height:1.4;
+  color:var(--ink-2);border:0;border-left:2px solid transparent;transition:all .16s
+}
+nav.toc a:hover{background:rgba(90,126,190,.12);color:var(--ink)}
+nav.toc a.on{background:rgba(90,126,190,.16);color:#fff;border-left-color:var(--sky);font-weight:600}
+nav.toc .g-e h6{color:var(--deep)} nav.toc .g-e a.on{border-left-color:var(--deep)}
+nav.toc .g-o h6{color:var(--sky)}  nav.toc .g-o a.on{border-left-color:var(--sky)}
+nav.toc .g-t h6{color:var(--mint)} nav.toc .g-t a.on{border-left-color:var(--mint)}
+nav.toc .g-x h6{color:var(--amber)}nav.toc .g-x a.on{border-left-color:var(--amber)}
+
+main{padding:0 clamp(16px,3.2vw,52px) 120px;min-width:0}
+section{scroll-margin-top:92px}
+.wrap{max-width:1020px;margin:0 auto}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.18;margin:0}
+h2{font-size:clamp(25px,3.1vw,35px);font-weight:700;margin:0 0 6px}
+h3{font-size:clamp(19px,2.2vw,23px);font-weight:670;margin:44px 0 12px;color:#fff}
+h4{font-size:16.5px;font-weight:650;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px;color:var(--ink-2)}
+strong{color:#fff;font-weight:650}
+em{color:var(--ink);font-style:italic}
+code{font-family:var(--mono);font-size:.875em;background:rgba(90,126,190,.15);border:1px solid var(--line);
+  padding:1.5px 6px;border-radius:5px;color:#cfe0ff;white-space:nowrap}
+ul,ol{margin:0 0 16px;padding-left:22px;color:var(--ink-2)}
+li{margin:5px 0}
+li::marker{color:var(--sky)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+/* ---------- Encabezado de sección ---------- */
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 26px;padding-top:8px}
+.sec-num{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding:6px 11px;border-radius:8px;background:var(--surface);border:1px solid var(--line-strong);
+  color:var(--sky);flex:none;margin-top:6px
+}
+.sec-head p{margin:6px 0 0;font-size:15px;color:var(--ink-3)}
+
+/* Divisores de nivel */
+.level{
+  position:relative;margin:86px 0 40px;padding:30px 30px 28px;border-radius:var(--r);
+  border:1px solid var(--line);overflow:hidden;background:var(--surface)
+}
+.level::before{content:"";position:absolute;inset:0;opacity:.9;
+  background:linear-gradient(115deg,var(--lv-soft) 0%,transparent 58%)}
+.level::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--lv)}
+.level>*{position:relative}
+.level .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lv);font-weight:700}
+.level h2{margin:8px 0 8px;color:#fff}
+.level .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.level .meta b{color:var(--ink-2);font-weight:600}
+.lv-e{--lv:var(--deep);--lv-soft:var(--deep-soft)}
+.lv-o{--lv:var(--sky);--lv-soft:var(--sky-soft)}
+.lv-t{--lv:var(--mint);--lv-soft:var(--mint-soft)}
+.lv-x{--lv:var(--amber);--lv-soft:var(--amber-soft)}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+.card.tight{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+
+/* Cifras */
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-34px;top:-34px;width:104px;height:104px;border-radius:50%;background:var(--c,var(--sky));opacity:.09}
+.stat .n{font-size:clamp(28px,4.2vw,38px);font-weight:750;letter-spacing:-.03em;line-height:1;color:var(--c,var(--sky));font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.44em;font-weight:600;letter-spacing:0;margin-left:3px;color:var(--ink-3)}
+.stat .l{margin-top:9px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.stat .s{margin-top:5px;font-size:11.5px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* Notas */
+.note{
+  border-radius:var(--r);padding:16px 20px;margin:20px 0;border:1px solid var(--line);
+  background:var(--surface-2);position:relative;padding-left:22px
+}
+.note::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--nc,var(--sky))}
+.note p:last-child{margin-bottom:0}
+.note .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--nc,var(--sky));margin-bottom:8px}
+.note.warn{--nc:var(--amber);background:rgba(247,164,0,.07);border-color:rgba(247,164,0,.3)}
+.note.good{--nc:var(--mint);background:rgba(77,185,156,.07);border-color:rgba(77,185,156,.28)}
+.note.info{--nc:var(--sky)}
+.note.gap{--nc:#8294b8;background:rgba(130,148,184,.08)}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);margin:18px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:520px}
+thead th{
+  text-align:left;padding:12px 15px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;background:rgba(90,126,190,.09);border-bottom:1px solid var(--line-strong);white-space:nowrap
+}
+tbody td{padding:11px 15px;border-bottom:1px solid rgba(90,126,190,.12);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(90,126,190,.06)}
+tbody td strong{color:#fff}
+table.mono td:nth-child(2){font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---------- Píldoras ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;letter-spacing:.03em;
+  padding:3px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;line-height:1.5}
+.p-amber{color:var(--amber);background:var(--amber-soft)}
+.p-mint{color:var(--mint);background:var(--mint-soft)}
+.p-sky{color:var(--sky);background:var(--sky-soft)}
+.p-deep{color:#7d9fdd;background:var(--deep-soft)}
+.p-grey{color:var(--ink-3);background:rgba(130,148,184,.1)}
+.p-red{color:#ff8b7a;background:rgba(255,139,122,.12)}
+
+/* ---------- Código ---------- */
+pre{
+  background:#060a14;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.6px;line-height:1.62;color:#c6d6f2;margin:16px 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)
+}
+pre code{background:none;border:0;padding:0;color:inherit;white-space:pre}
+.codewrap{position:relative;margin:16px 0}
+.codewrap pre{margin:0}
+.codehead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface-2);border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;
+  padding:8px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase
+}
+.codewrap .codehead+pre{border-radius:0 0 var(--r) var(--r)}
+.copy{background:rgba(90,126,190,.16);border:1px solid var(--line-strong);color:var(--ink-2);border-radius:6px;
+  padding:3px 9px;font-size:11px;font-family:var(--mono);cursor:pointer;transition:.16s;letter-spacing:.04em}
+.copy:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+.copy.ok{background:var(--mint);color:#04140f;border-color:var(--mint)}
+.tok-k{color:var(--amber)} .tok-s{color:var(--mint)} .tok-c{color:#5f7296;font-style:italic} .tok-n{color:#d8a6ff}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  :root{--nav-w:0px}
+  .shell{grid-template-columns:1fr}
+  nav.toc{
+    position:fixed;top:0;left:0;bottom:0;width:284px;z-index:70;background:var(--bg-2);
+    height:100dvh;padding-top:calc(24px + env(safe-area-inset-top,0px));
+    transform:translateX(-102%);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow)
+  }
+  nav.toc.open{transform:none}
+  .navtoggle{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(4,7,14,.66);z-index:69;backdrop-filter:blur(2px)}
+}
+@media (max-width:560px){
+  body{font-size:15.3px}
+  .card{padding:17px 15px}
+  .level{padding:22px 18px}
+  .topbar-in{padding:9px 14px;gap:9px}
+  .brand small{display:none}
+}
+
+/* ---------- Impresión ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  body::before,body::after,nav.toc,.topbar,.scrim,.hero-3d,.fab{display:none!important}
+  .shell{display:block}
+  .card,.note,.tw,pre{break-inside:avoid;border-color:#ccc;background:#fff;color:#111}
+  a{color:#375d9d}
+  .rv{opacity:1;transform:none}
+}
+
+/* ============================================================
+   COMPONENTES ESPECIALES
+   ============================================================ */
+
+/* ---------- Portada ---------- */
+.hero{position:relative;padding:clamp(46px,8vw,92px) 0 46px;overflow:hidden}
+.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:22px}
+.hero h1{font-size:clamp(33px,6.1vw,64px);font-weight:760;letter-spacing:-.036em;line-height:1.03;margin:0 0 6px;max-width:15ch}
+.hero h1 .hl{
+  background:linear-gradient(105deg,var(--amber) 0%,#ffd06b 42%,var(--mint) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero .sub{font-size:clamp(16px,2.1vw,20.5px);color:var(--ink-2);max-width:62ch;margin:16px 0 0;line-height:1.55}
+.hero .sub2{font-size:15px;color:var(--ink-3);max-width:58ch;margin:10px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+
+/* Escena 3D de portada: red que se auto-propaga */
+.hero-3d{position:relative;height:clamp(290px,38vw,392px);perspective:1100px;user-select:none}
+.scene{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-34deg);
+  transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.scene .plane{
+  position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border:1px solid rgba(90,126,190,.34);border-radius:10px;transform-style:preserve-3d;
+  background-image:linear-gradient(rgba(90,126,190,.1) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(90,126,190,.1) 1px,transparent 1px);
+  background-size:37.5px 37.5px
+}
+.scene .plane.p1{transform:translateZ(0);background-color:rgba(55,93,157,.1)}
+.scene .plane.p2{transform:translateZ(62px);background-color:rgba(90,126,190,.07)}
+.scene .plane.p3{transform:translateZ(124px);background-color:rgba(247,164,0,.05);border-color:rgba(247,164,0,.3)}
+.scene .plabel{
+  position:absolute;left:308px;top:132px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;transform:rotateZ(90deg) rotateY(0deg);transform-origin:0 0
+}
+.node{
+  position:absolute;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:3px;
+  background:var(--sky);box-shadow:0 0 0 0 rgba(90,126,190,.5);transform-style:preserve-3d;transition:background .35s,box-shadow .35s
+}
+.node.host{background:rgba(90,126,190,.42)}
+.node.seed{background:var(--amber);box-shadow:0 0 14px 2px rgba(247,164,0,.6)}
+.node.hit{background:var(--amber);box-shadow:0 0 12px 1px rgba(247,164,0,.55)}
+.node.edr{background:var(--mint)}
+.hero-3d .legend{
+  position:absolute;left:0;bottom:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.3px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.03em
+}
+.hero-3d .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.hero-3d .hint{position:absolute;right:0;top:0;font-size:11px;color:var(--ink-3);font-family:var(--mono);opacity:.75}
+
+/* Metadatos de portada */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.meta-grid div{background:var(--bg-2);padding:14px 16px}
+.meta-grid dt{font-size:10.6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:0 0 5px}
+.meta-grid dd{margin:0;font-size:14px;color:var(--ink);font-weight:600}
+.meta-grid dd.m{font-family:var(--mono);font-size:13px}
+
+/* ---------- Juicios clave ---------- */
+.kj{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;
+  position:relative;overflow:hidden;transition:border-color .2s,transform .2s
+}
+.kj:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.kj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--kc,var(--sky))}
+.kj .id{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--kc,var(--sky))}
+.kj h4{margin:8px 0 10px;font-size:16.5px;line-height:1.38;color:#fff}
+.kj p{font-size:14.4px;margin:0 0 12px}
+.kj .base{font-size:12.6px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px;margin:12px 0 0}
+.kj .base b{color:var(--ink-2)}
+.kj-hi{--kc:var(--amber)} .kj-md{--kc:var(--sky)} .kj-lo{--kc:var(--ink-3)}
+
+/* Medidor de probabilidad */
+.gauge{margin:12px 0 6px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:11.4px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.05em;margin-bottom:6px;gap:12px}
+.gauge .lab b{color:var(--kc,var(--sky));font-weight:700}
+.gauge .track{height:7px;border-radius:99px;background:rgba(90,126,190,.16);overflow:hidden;position:relative}
+.gauge .track i{display:block;height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--deep),var(--kc,var(--sky)))}
+.gauge .track::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 19px,rgba(8,12,24,.55) 19px 20px)}
+
+/* ---------- Gráfico de crecimiento ---------- */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px 14px;margin:18px 0}
+.chart h4{margin:0 0 4px}
+.chart .cap{font-size:12.8px;color:var(--ink-3);margin:0 0 16px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.7s cubic-bezier(.22,1,.3,1)}
+.in .ln{stroke-dashoffset:0}
+.pt{cursor:pointer;transition:r .18s}
+.pt:hover{r:7}
+.gtxt{font-family:var(--mono);font-size:10.5px;fill:var(--ink-3);letter-spacing:.04em}
+.gval{font-family:var(--mono);font-size:12px;font-weight:700;fill:#fff}
+
+/* Barras horizontales */
+.bars{display:grid;gap:9px;margin:14px 0 4px}
+.bar{display:grid;grid-template-columns:minmax(96px,auto) 1fr minmax(38px,auto);gap:12px;align-items:center;font-size:13.4px}
+.bar .bn{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .bt{height:9px;border-radius:99px;background:rgba(90,126,190,.13);overflow:hidden}
+.bar .bt i{display:block;height:100%;width:0;border-radius:99px;background:var(--bc,var(--sky));
+  transition:width 1.05s cubic-bezier(.16,1,.3,1)}
+.bar .bv{font-family:var(--mono);font-size:12.4px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- Cronología ---------- */
+.tl{position:relative;margin:22px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--deep),var(--sky) 42%,var(--mint) 72%,var(--amber))}
+.tl .ev{position:relative;padding:0 0 20px 6px}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.4px solid var(--ec,var(--sky));box-shadow:0 0 0 4px rgba(8,12,24,.9)}
+.tl .ev.big::before{background:var(--ec,var(--amber));box-shadow:0 0 0 4px rgba(8,12,24,.9),0 0 14px 2px var(--ec)}
+.tl .d{font-family:var(--mono);font-size:11.6px;letter-spacing:.06em;color:var(--ec,var(--sky));font-weight:700}
+.tl .x{font-size:14.3px;color:var(--ink-2);margin-top:3px}
+.tl .x b{color:#fff}
+.tl .ev.cl{--ec:var(--amber)} .tl .ev.gl{--ec:var(--sky)} .tl .ev.ok{--ec:var(--mint)}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{
+  font-size:12.4px;font-weight:600;padding:5px 13px;border-radius:99px;cursor:pointer;
+  background:rgba(90,126,190,.1);border:1px solid var(--line);color:var(--ink-2);transition:.17s;font-family:var(--sans)
+}
+.chip:hover{border-color:var(--line-strong);color:#fff}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#06101f}
+.chip.on.a{background:var(--amber);border-color:var(--amber);color:#1a1200}
+
+/* ---------- Cadena de intrusión isométrica ---------- */
+.kill{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;overflow:hidden}
+.kill-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.kill-stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+@media (max-width:760px){.kill-stage{grid-template-columns:1fr}}
+.stage{
+  position:relative;border-radius:12px;padding:16px 16px 14px;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--sc-soft),transparent 72%);transition:transform .22s,border-color .22s
+}
+.stage:hover,.stage.fixed{transform:translateY(-3px);border-color:var(--sc)}
+.stage.fixed{box-shadow:0 0 0 1px var(--sc),0 18px 40px -22px rgba(0,0,0,.9)}
+.stage .st{font-family:var(--mono);font-size:10.6px;letter-spacing:.15em;text-transform:uppercase;color:var(--sc);font-weight:700}
+.stage h5{margin:7px 0 10px;font-size:15.6px;color:#fff;font-weight:650;letter-spacing:-.01em}
+.stage ul{margin:0;padding-left:16px;font-size:13.2px}
+.stage li{margin:4px 0;color:var(--ink-2)}
+.stage li::marker{color:var(--sc)}
+.s-edge{--sc:var(--deep);--sc-soft:var(--deep-soft)}
+.s-dom{--sc:var(--sky);--sc-soft:var(--sky-soft)}
+.s-imp{--sc:var(--amber);--sc-soft:var(--amber-soft)}
+.dwell{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:10px;
+  background:rgba(247,164,0,.08);border:1px solid rgba(247,164,0,.26);font-size:13.6px;color:var(--ink-2)}
+.dwell b{color:var(--amber)}
+
+/* ---------- Pirámide del Dolor 3D ---------- */
+.pyr-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px;align-items:center;margin:20px 0}
+@media (max-width:820px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{perspective:900px;height:330px;position:relative;user-select:none}
+.pyr-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(64deg) rotateZ(0deg);
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.slab{
+  position:absolute;left:50%;top:50%;border-radius:8px;transform-style:preserve-3d;cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s;
+  display:flex;align-items:center;justify-content:center
+}
+.slab span{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none
+}
+.slab.act{box-shadow:0 0 0 2px #fff, 0 16px 40px -12px rgba(0,0,0,.8);filter:brightness(1.18)}
+.pyr-info{min-height:132px}
+.pyr-info .lv{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--pc,var(--sky))}
+.pyr-info h4{margin:7px 0 8px;color:#fff}
+.pyr-info p{margin:0 0 10px;font-size:14.3px}
+.pyr-info .pv{font-size:13px;color:var(--ink-3)}
+
+/* ---------- Matriz ATT&CK ---------- */
+.attck-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 14px}
+.search{
+  flex:1;min-width:190px;display:flex;align-items:center;gap:9px;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:10px;padding:9px 13px
+}
+.search input{
+  flex:1;background:none;border:0;outline:none;color:var(--ink);font-family:var(--sans);font-size:14px;min-width:0
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;opacity:.6}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px;margin:12px 0}
+.mcol{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px;min-width:0}
+.mcol h5{margin:0 0 9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);font-weight:700;
+  display:flex;justify-content:space-between;gap:8px;align-items:center}
+.mcol h5 i{font-style:normal;font-family:var(--mono);font-size:10.6px;color:var(--ink-3);
+  background:rgba(90,126,190,.14);border-radius:5px;padding:1px 6px}
+.tq{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:7px;
+  cursor:default;transition:.16s
+}
+.tq:hover{border-color:var(--mint);background:rgba(77,185,156,.08)}
+.tq .tid{font-family:var(--mono);font-size:10.8px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.tq .tn{font-size:13px;color:#fff;font-weight:600;margin:2px 0 3px;line-height:1.3}
+.tq .tp{font-size:11.8px;color:var(--ink-3);line-height:1.45}
+.tq .tp code{font-size:10.8px;white-space:normal}
+
+/* ---------- Acordeón de hipótesis ---------- */
+.acc{border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.acc>button{
+  width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;background:none;border:0;cursor:pointer;
+  padding:14px 16px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:620;line-height:1.4;transition:background .16s
+}
+.acc>button:hover{background:rgba(90,126,190,.08)}
+.acc .hid{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--hc,var(--mint));flex:none;margin-top:2px;
+  background:var(--hc-soft,var(--mint-soft));border-radius:6px;padding:2px 7px;letter-spacing:.05em}
+.acc .ht{flex:1;min-width:0}
+.acc .ar{flex:none;transition:transform .25s;color:var(--ink-3);margin-top:3px}
+.acc.open .ar{transform:rotate(180deg)}
+.acc .body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .34s cubic-bezier(.16,1,.3,1),padding .34s}
+.acc.open .body{padding:0 16px 16px;max-height:1400px}
+.acc .body p,.acc .body ul{font-size:14.1px;margin-bottom:10px}
+.acc .body p:last-child,.acc .body ul:last-child{margin-bottom:0}
+.h-crit{--hc:var(--amber);--hc-soft:var(--amber-soft)}
+.h-reg{--hc:#7d9fdd;--hc-soft:var(--deep-soft)}
+
+/* ---------- Detecciones ---------- */
+.det{border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden;margin-bottom:11px}
+.det .dh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,var(--dc-soft),transparent 60%)}
+.det .did{font-family:var(--mono);font-size:12.4px;font-weight:700;color:var(--dc);letter-spacing:.06em}
+.det .dn{font-size:14.4px;font-weight:620;color:#fff;flex:1;min-width:140px}
+.det pre{border:0;border-radius:0;margin:0;background:#060a14;font-size:12.2px}
+.det .act{padding:10px 15px;font-size:13.2px;color:var(--ink-2);border-top:1px solid var(--line);background:rgba(90,126,190,.05)}
+.det .act b{color:var(--dc)}
+.d-crit{--dc:var(--amber);--dc-soft:var(--amber-soft)}
+.d-high{--dc:var(--sky);--dc-soft:var(--sky-soft)}
+.d-med{--dc:var(--ink-3);--dc-soft:rgba(130,148,184,.1)}
+
+/* ---------- IOC ---------- */
+.ioc-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;
+  border-bottom:1px solid rgba(90,126,190,.12);font-size:13.4px}
+.ioc-row:last-child{border-bottom:0}
+.ioc-row .ty{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(90,126,190,.12);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.ioc-row .vv{font-family:var(--mono);font-size:12px;color:#cfe0ff;word-break:break-all;line-height:1.5}
+.ioc-row .vv em{display:block;font-family:var(--sans);font-style:normal;font-size:12.4px;color:var(--ink-3);margin-top:2px}
+
+/* ---------- Fuentes ---------- */
+.src{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:13px 15px;
+  border-bottom:1px solid rgba(90,126,190,.12)}
+.src:last-child{border-bottom:0}
+.src .rank{font-family:var(--mono);font-size:13px;font-weight:700;border-radius:7px;padding:4px 8px;white-space:nowrap;
+  background:var(--rc-soft,rgba(90,126,190,.14));color:var(--rc,var(--sky));border:1px solid currentColor}
+.src .sn{font-size:14.2px;color:#fff;font-weight:600;line-height:1.35}
+.src .sm{font-size:12.4px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.r-a{--rc:var(--mint);--rc-soft:var(--mint-soft)}
+.r-b{--rc:var(--sky);--rc-soft:var(--sky-soft)}
+.r-c{--rc:var(--amber);--rc-soft:var(--amber-soft)}
+.r-d{--rc:var(--ink-3);--rc-soft:rgba(130,148,184,.12)}
+
+/* ---------- Botón flotante ---------- */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s,background .2s;transform:translateY(8px)
+}
+.fab.show{opacity:1;pointer-events:auto;transform:none}
+.fab:hover{background:var(--sky);color:#06101f;border-color:var(--sky)}
+
+/* ---------- Pie ---------- */
+footer{border-top:1px solid var(--line);margin-top:70px;padding:34px 0 10px;color:var(--ink-3);font-size:13.2px}
+footer .fg{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in"><button class="navtoggle" id="navToggle" aria-label="Abrir índice">&#9776; Índice</button><div class="brand"><span class="dot"></span><span>CTI-2026-064<small>ShinyHunters, INCEPTION y el clúster de intrusión O-UNC-053</small></span></div><div class="spacer"></div><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div><div class="progress"><i id="prog"></i></div></header>
+<div class="shell">
+<nav class="toc" id="toc"><div class="g-top"><h6>Apertura</h6><a href="#portada">Portada y control</a><a href="#0-cabecera-de-control">0. Cabecera de control</a><a href="#1-bluf-juicios-clave">1. BLUF — Juicios clave</a><a href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a><a href="#3-alcance-y-limitaciones">3. Alcance y limitaciones</a></div><div class="g-e"><h6>Estratégico</h6><a href="#e-1-lo-que-el-expediente-mide-y-lo-que-no">E-1. Lo que el expediente mide, y lo que no</a><a href="#e-2-la-marca-como-activo-separable-que-es-la-novedad-de-este-expediente">E-2. La marca como activo separable, que es la novedad de este expediente</a><a href="#e-3-decisiones">E-3. Decisiones</a><a href="#e-4-lectura-regional-donde-aparece-chile-en-este-expediente-y-donde-no">E-4. Lectura regional: dónde aparece Chile en este expediente, y dónde no</a></div><div class="g-o"><h6>Operacional</h6><a href="#o-1-los-tres-objetos-que-reclaman-el-nombre-y-como-se-distinguen">O-1. Los tres objetos que reclaman el nombre, y cómo se distinguen</a><a href="#o-2-el-catalogo-medido">O-2. El catálogo, medido</a><a href="#o-3-la-infraestructura-medida">O-3. La infraestructura, medida</a><a href="#o-4-el-comunicado-contra-el-fbi-comparado-con-el-documento-original">O-4. El comunicado contra el FBI, comparado con el documento original</a><a href="#o-5-hipotesis-sobre-quien-publico-el-23-de-noviembre">O-5. Hipótesis sobre quién publicó el 23 de noviembre</a></div><div class="g-t"><h6>Táctico</h6><a href="#t-1-mapa-mitre-att-ck">T-1. Mapa MITRE ATT&amp;CK</a><a href="#t-2-hipotesis-de-caza-y-las-cuatro-consultas-que-responden-nos-han-llamado">T-2. Hipótesis de caza, y las cuatro consultas que responden «¿nos han llamado?»</a><a href="#t-3-lo-que-no-hay-que-hacer-con-este-expediente">T-3. Lo que NO hay que hacer con este expediente</a></div><div class="g-x"><h6>Técnico</h6><a href="#x-1-la-cadena-de-claves-medida-paso-a-paso">X-1. La cadena de claves, medida paso a paso</a><a href="#x-2-medicion-de-la-infraestructura-de-senuelo">X-2. Medición de la infraestructura de señuelo</a><a href="#x-3-deteccion-y-mitigacion-en-orden-de-efecto">X-3. Detección y mitigación, en orden de efecto</a><a href="#14-brechas-de-inteligencia-y-requisitos-de-coleccion">14. Brechas de inteligencia y requisitos de colección</a></div><div class="g-an"><h6>Anexos</h6><a href="#anexo-a-indicadores-de-compromiso">Anexo A — Indicadores de compromiso</a><a href="#anexo-b-fuentes-y-valoracion">Anexo B — Fuentes y valoración</a><a href="#anexo-c-lexico-de-probabilidad-y-confianza">Anexo C — Léxico de probabilidad y confianza</a><a href="#anexo-d-metodo-como-evaluar-una-prueba-criptografica-de-continuidad-de-marca">Anexo D — Método: cómo evaluar una prueba criptográfica de continuidad de marca</a><a href="#anexo-e-marcos-de-referencia-empleados">Anexo E — Marcos de referencia empleados</a><a href="#anexo-f-paquete-legible-por-maquina-y-reproduccion-de-las-mediciones">Anexo F — Paquete legible por máquina y reproducción de las mediciones</a><a href="#anexo-g-control-de-cambios">Anexo G — Control de cambios</a><a href="#anexo-h-realimentacion-del-consumidor">Anexo H — Realimentación del consumidor</a></div></nav>
+<main>
+<section id="portada" class="hero">
+<div class="wrap"><div class="hero-grid"><div><div class="eyebrow"><span class="pill p-amber">Perfil de actor y evaluacion de continuidad de marca</span><span class="pill p-mint">Global · lectura para Latinoamérica y Chile</span><span class="pill p-sky">v1.0 · 2026-11-24</span></div><h1>ShinyHunters, INCEPTION y el clúster de intrusión O-UNC-053</h1><p class="sub">La marca volvió el 23 de noviembre firmada con dos claves que su propio dueño había retirado en marzo</p><p class="sub2">Tres objetos distintos reclaman hoy el nombre ShinyHunters, el clúster que alimentaba su sitio de filtración nunca se detuvo, y la única prueba criptográfica del regreso es verificable desde fuera —lo hicimos— y no acredita lo que se le atribuye</p></div><div class="hero-3d" id="hero3d">
+  <div class="scene" id="scene">
+    <div class="plane p1" id="plane1"></div>
+    <div class="plane p2" id="plane2"></div>
+    <div class="plane p3" id="plane3"></div>
+  </div>
+  <div class="hint">arrastra para girar &#8635;</div>
+  <div class="legend">
+    <span><i style="background:var(--amber)"></i>host comprometido</span>
+    <span><i style="background:var(--sky)"></i>alcanzable</span>
+    <span><i style="background:rgba(90,126,190,.42)"></i>no alcanzado</span>
+  </div>
+</div></div>
+<dl class="meta-grid rv"><div><dt>Identificador</dt><dd class="m">CTI-2026-064</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-24</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Autor (analista)</dt><dd>Célula CTI</dd></div><div><dt>Marcado de difusión</dt><dd class="m" style="color:var(--amber)">TLP:CLEAR · PAP:WHITE</dd></div></dl></div>
+</section>
+<div class="note info rv"><div class="t">Regla de oro del producto:</div><p>todo párrafo debe responder a un requisito de inteligencia (PIR) y habilitar una decisión. Si un párrafo no cambia lo que alguien va a hacer, va al anexo o se borra.</p></div>
+<section id="0-cabecera-de-control" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">0</span><div><h2>Cabecera de control</h2></div></div>
+<dl class="meta-grid rv" style="margin-top:0"><div><dt>Identificador</dt><dd class="m"><code>CTI-2026-064</code></dd></div><div><dt>Versión / fecha</dt><dd class="m"><code>1.0</code> — 2026-11-24</dd></div><div><dt>Tipo de producto</dt><dd class="m">Perfil de actor y evaluación de continuidad de marca</dd></div><div><dt>Niveles cubiertos</dt><dd>Estratégico · Operacional · Táctico · Técnico</dd></div><div><dt>Foco regional</dt><dd>Global, con lectura para Latinoamérica y Chile</dd></div><div><dt>Marcado de difusión</dt><dd class="m"><code>TLP:CLEAR</code> · <code>PAP:WHITE</code></dd></div><div><dt>Requisitos atendidos</dt><dd class="m"><code>PIR-01</code> (actores con capacidad e intención sobre nuestro sector), <code>PIR-02</code> (robo de datos y extorsión sin cifrado), <code>PIR-03</code> (capacidades que degradan nuestros controles de identidad), <code>PIR-05</code> (riesgo de terceros y cadena de suministro SaaS), <code>PIR-09</code> (indicadores tempranos de campaña)</dd></div><div><dt>Consumidor primario</dt><dd>CISO · Jefatura de SOC · Responsable de identidad y accesos · Mesa de ayuda · Comunicación de crisis</dd></div><div><dt>Ventana de observación</dt><dd>2020-01-28 → 2026-11-24, con foco en 2026-09-15 → 2026-11-24</dd></div><div><dt>Base de colección</dt><dd>Tres fuentes de primera mano leídas en original: expediente de <strong>Okta Threat Intelligence</strong> (24-11-2026), investigación de <strong>ReversingLabs</strong> y aviso <strong><code>I-051526-PSA</code></strong> del <strong>IC3 del FBI</strong> (15-05-2026). Prensa especializada con verificación propia declarada: <strong>BleepingComputer</strong> (23-11-2026). <strong>Medición propia del 24-11-2026</strong>: servidores de claves OpenPGP, <code>gpg --list-packets</code>, validación de suma de control de seis direcciones de servicio oculto, DNS, WHOIS, RDAP, RIPEstat, NVD y dos agregadores de extorsión. <strong>Sin telemetría propia de identidad ni de extremo</strong></dd></div><div><dt>Autor (analista)</dt><dd class="m">Célula CTI</dd></div><div><dt>Caducidad / revisión</dt><dd class="m">2026-12-24</dd></div><div><dt>Productos relacionados</dt><dd class="m"><code>CTI-2026-018</code> (el clúster <code>.report</code>, donde la atribución a este actor se descartó como hecho) · <code>CTI-2026-047</code> (evaluar una afirmación de rebranding) · <code>CTI-2026-055</code> (reclamaciones cruzadas) · <code>CTI-2026-058</code> (decidir si un actor cesó o migró) · <code>CTI-2026-048</code> (escala de prueba de ocho niveles) · <code>CTI-2026-063</code> (el parche que existía y la campaña que entró por otra puerta)</dd></div><div><dt>Paquete legible por máquina</dt><dd class="m">Anexo F</dd></div></dl>
+<div class="note warn rv"><div class="t">⚠ Limitación estructural</div><p>Este informe <strong>no incorpora telemetría propia de identidad, de correo ni de extremo</strong>. Todo lo que se afirma sobre el modo de entrada del adversario procede de dos proveedores; lo que es medición propia está marcado como tal y es reproducible con los comandos del <code>Anexo F</code>. En consecuencia, <strong>no se evalúa la eficacia real de ninguna detección</strong> en nuestro entorno: §T-2 propone hipótesis de caza, no resultados.</p></div>
+</section>
+<section id="1-bluf-juicios-clave" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">1</span><div><h2>BLUF — Juicios clave</h2></div></div>
+<div class="grid g2">
+<div class="kj kj-md rv"><div class="id">KJ-1</div>
+<h4>La única prueba criptográfica del regreso está firmada con dos claves que su propio titular revocó ocho meses antes, y la clave que declaró vigente no aparece. Medición propia del 24-11-2026 sobre keys.openpgp.org y keyserver.ubuntu.com: las dos claves de 2020 usadas para autenticar el anuncio del 23-11-2026 —1FC4D0B1…C989B3 y 828537C1…C7CE51— llevan certificado de autorrevocación fechado el 17-03-2026, con razón 0x01, «clave sustituida», y con un puntero a la sustituta</h4><p>Recuperamos ese puntero y la clave que designa es <code>F4953411…20978A</code>, <strong>que no está revocada</strong>. Ninguno de los mensajes de noviembre examinados por la fuente que los verificó está firmado con ella. Que las firmas son válidas y que las claves están revocadas es <strong>hecho medido, no estimación</strong>; <strong>confianza: alta</strong>. Sobre lo que eso significa, valoramos <strong>probable</strong> <em>(55–80 %)</em> que quien publicó el anuncio <strong>no tenga</strong> la clave vigente de marzo.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base">Medición propia reproducible, §X-1. <em>Consecuencia:</em> la continuidad del operador no está acreditada, y tratar al que volvió como «el mismo actor» es una decisión, no una lectura de la evidencia.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-2</div>
+<h4>Hoy hay tres objetos distintos reclamando el nombre, y la atribución por marca ya no identifica a un operador. A 24-11-2026 conviven: el sitio nuevo del 23-11 que reivindica ser ShinyHunters; INCEPTION, aparecido el 16-11 y alimentado por el clúster de intrusión que durante seis meses alimentó el sitio anterior; y ShinySp1d3r, la plataforma de cifrado anunciada hace doce meses</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que un incidente nuevo atribuido «a ShinyHunters» en las próximas semanas corresponda a uno de estos tres y no se pueda asignar sin medir infraestructura.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Las tres apariciones están datadas por fuentes distintas y medidas por nosotros, §O-1. <em>Consecuencia:</em> en una comunicación de crisis, el nombre del grupo <strong>no</strong> es un dato; la vía de entrada sí.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-3</div>
+<h4>El clúster que ejecuta las intrusiones no se detuvo en ningún momento: lo que se cayó fue el escaparate. Okta documenta que O-UNC-053 siguió registrando infraestructura de suplantación durante octubre y la primera mitad de noviembre sin ningún sitio donde publicar, y que reaparece en INCEPTION con la misma infraestructura y las mismas tácticas</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que las detenciones de septiembre hayan afectado a la publicación y al cobro, <strong>no</strong> a la capacidad de intrusión.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Fuente primaria con serie temporal de registros propia, corroborada por nuestra medición de WHOIS en tres dominios, §X-2. <em>Consecuencia:</em> una defensa dimensionada contra «el grupo desarticulado» se dimensiona contra el objeto equivocado.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-4</div>
+<h4>El catálogo de 161 entradas no mide 161 víctimas, y la propia fuente permite demostrarlo. Medición propia del 24-11-2026 sobre ransomware.live: dos entradas no son víctimas sino comunicados del adversario dirigidos al FBI; el campo de rescate está vacío en 161 de 161, el de volumen de datos en 161 de 161, y hay captura de pantalla en sólo 47 de 161 (29,2 %)</h4><p>El segundo agregador que esta cartera usa cuenta <strong>109</strong> entradas para el mismo actor: <strong>una discrepancia del 32,3 %</strong>. Y el conjunto anual de la primera fuente da <strong>110</strong>, que <strong>no es un tercer recuento sino el subconjunto de 2026</strong> —parecido engañoso que invita a tomar dos cifras incomparables por corroboración mutua, §O-2.3—. Valoramos <strong>casi con certeza</strong> <em>(≥99 %)</em> que cualquier cifra de víctimas de este actor citada sin declarar su fuente y su base de conteo sea incorrecta.</p><div class="gauge" data-p="97"><div class="lab"><span>Casi con certeza</span><b>97 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> Medición propia, §O-2. <em>Consecuencia:</em> es el mismo defecto que <code>CTI-2026-060</code> y <code>CTI-2026-061</code> documentaron en otros catálogos, aquí con un agravante: <strong>el adversario publica en su propio catálogo entradas que no son reclamaciones</strong>.</p></div>
+<div class="kj kj-md rv"><div class="id">KJ-5</div>
+<h4>La reivindicación de «día cero» contra el FBI no se sostiene si el identificador que la cobertura asigna es correcto. CVE-2026-35273 —PeopleSoft Enterprise PeopleTools 8.61 y 8.62, toma de control sin autenticar— figura en el NVD publicada el 11-06-2026, con CVSS 9.8 y estado Analyzed: medición propia del 24-11-2026</h4><p>La reivindicación es de <strong>septiembre de 2026</strong>, tres meses después. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que lo ocurrido fuese un parche crítico no aplicado por un tercero y <strong>improbable</strong> <em>(20–45 %)</em> que hubiera día cero. , porque el identificador lo aporta cobertura secundaria y no la fuente primaria.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: moderada.</b> §O-4.2. <em>Consecuencia:</em> es exactamente el patrón de <code>CTI-2026-063</code>, y la decisión que habilita es de gestión de parches en terceros, no de capacidad adversaria.</p></div>
+<div class="kj kj-lo rv"><div class="id">KJ-6</div>
+<h4>Chile no aparece en este expediente como víctima, sino como un dato de registrante en el WHOIS de la infraestructura de señuelo, y eso no es corroborable desde fuera. De las 161 entradas del catálogo, ninguna tiene país CL; hay dos latinoamericanas, una colombiana y una mexicana</h4><p>En cambio, ReversingLabs declara que los dominios de señuelo registrados en NICENIC repiten <strong>tres perfiles de ubicación de registrante: Carolina del Norte, Chile y Bermudas</strong>. Comprobamos el WHOIS público de tres de esos dominios el 24-11-2026 y <strong>el campo de registrante viene redactado o vacío en los tres</strong>: el dato existe para quien tiene acceso a WHOIS histórico o no redactado, y <strong>nosotros no podemos confirmarlo</strong>. Valoramos <strong>probable</strong> <em>(55–80 %)</em> que el perfil chileno sea un dato de registro falso y no un indicio de operación en el país.</p><div class="gauge" data-p="68"><div class="lab"><span>Probable</span><b>55–80 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: baja.</b> Afirmación de proveedor no corroborable con los medios de esta célula, §E-4 y brecha <code>G-3</code>.</p></div>
+<div class="kj kj-hi rv"><div class="id">KJ-7</div>
+<h4>El sitio de filtración cayó, pero los prefijos que lo alojaban siguen anunciados y en manos del mismo alojador. Medición propia del 24-11-2026: las cuatro direcciones que los agregadores asocian al sitio están en PROSPERO OOO (AS200593) y Proton66 OOO (AS198953); 91.202.233.0/24 lo anuncia AS200593 con 313 de 322 pares RIS viéndolo y 176.120.22.0/24 lo anuncia AS198953 con 311 de 322, ambos con última observación de hoy a las 08:00 UTC</h4><p>Valoramos <strong>muy probable</strong> <em>(80–95 %)</em> que el bloque <code>/24</code> del alojador sobreviva a cualquier marca que opere sobre él.</p><div class="gauge" data-p="88"><div class="lab"><span>Muy probable</span><b>80–95 %</b></div><div class="track"><i></i></div></div><p class="base"><b>Confianza: alta.</b> RDAP y RIPEstat, §X-2. <em>Consecuencia:</em> el indicador duradero es el prefijo, no la dirección de servicio oculto, que no se resuelve por DNS y cuyo bloqueo no produce efecto alguno.</p></div></div>
+<p class="rv"><strong>Qué cambiaría estos juicios.</strong> Tres falsadores concretos y observables: <strong>(1)</strong> que aparezca un mensaje firmado con <code>F4953411…20978A</code>, la clave vigente de marzo —eso convertiría <code>KJ-1</code> en lo contrario y acreditaría continuidad—; <strong>(2)</strong> que una organización nombrada en INCEPTION o en el sitio nuevo <strong>confirme</strong> una brecha, lo que daría por primera vez un numerador a las reclamaciones; <strong>(3)</strong> que <code>ShinySp1d3r</code> publique una primera víctima verificable, lo que lo movería de «plataforma anunciada» a «capacidad en uso» y cambiaría por completo el perfil de impacto de §E-1.</p>
+</section>
+<section id="2-resumen-ejecutivo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">2</span><div><h2>Resumen ejecutivo</h2></div></div>
+<p class="rv">El 30 de septiembre de 2026 el sitio de filtración de ShinyHunters dejó de estar disponible, un día después de que expirase un plazo que el propio grupo había dado al FBI y quince días después de la primera de las detenciones de ese mes. Siete semanas más tarde el nombre ha vuelto, pero no en un sitio: <strong>en tres</strong>. El 16 de noviembre apareció INCEPTION, que publica a organizaciones atacadas por el mismo clúster de llamadas telefónicas fraudulentas que alimentaba el sitio anterior. El 23 de noviembre apareció un servicio oculto que reivindica ser ShinyHunters y que, para probarlo, publica dos mensajes firmados con claves criptográficas históricas del grupo. Y sigue en catálogo, desde hace doce meses y sin una sola víctima, la plataforma de cifrado ShinySp1d3r.</p>
+<p class="rv"><strong>Lo que este informe aporta y no estaba publicado es que la prueba criptográfica se puede comprobar desde fuera, y que al comprobarla no dice lo que se le atribuye.</strong> Las dos claves de 2020 con que se firmó el anuncio del 23 de noviembre <strong>las revocó su propio titular el 17 de marzo de 2026</strong>, declarando el motivo «clave sustituida» y dejando en el propio certificado un puntero a la sustituta. Recuperamos el puntero, recuperamos la clave que designa, y comprobamos que <strong>no está revocada</strong>: es la única que el grupo declaró vigente. No se usó. Firmar con ella era gratis y zanjaba la cuestión.</p>
+<p class="rv">Para la organización esto se traduce en tres cosas concretas. <strong>Primera</strong>, que el nombre del grupo ha dejado de ser un dato útil: lo que identifica al adversario que nos importaría es la vía de entrada, y la de este ecosistema es una llamada de teléfono a una persona de la casa para que teclee sus credenciales y apruebe un segundo factor en una página que imita exactamente nuestro proveedor de identidad. <strong>Segunda</strong>, que el control que lo detiene está identificado y es uno: autenticación resistente a suplantación. El kit que estos operadores usan <strong>no</strong> es capaz de superar FIDO2 o passkeys, y eso lo afirma el proveedor de identidad cuyos clientes están siendo atacados. <strong>Tercera</strong>, que la infraestructura previa de los señuelos es visible días antes del ataque: los dominios se registran con nuestro nombre y una palabra jurídica, en ventana vespertina UTC, sin registros de correo —no sirven para enviar correo porque el engaño llega por teléfono—, y entre uno y veintiocho días antes de que la organización aparezca en un sitio de filtración.</p>
+<p class="rv"><strong>Lo que no se puede decir</strong> es cuántas víctimas tiene este actor. Las dos fuentes que esta cartera usa a diario discrepan en un tercio, dos de las entradas del catálogo no son víctimas sino comunicados al FBI, y el 71 % de las entradas no alcanza ni el nivel de prueba de una captura de pantalla.</p>
+<div class="grid g2 rv">
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">01 · continuidad</div>
+<h4 style="margin:0 0 6px">La marca es separable del operador</h4><p style="font-size:13.8px;margin:0">Desarticular a quien cobra no desarticula a quien entra; el escaparate se reconstruye en semanas</p></div>
+<div class="card tight" style="border-top:2px solid var(--sky)"><div class="pill p-sky" style="margin-bottom:9px">02 · identidad</div>
+<h4 style="margin:0 0 6px">El objetivo es la capa de identidad, no el extremo</h4><p style="font-size:13.8px;margin:0">Ningún antivirus participa en esta cadena: el adversario entra autenticado y a la primera</p></div>
+<div class="card tight" style="border-top:2px solid var(--mint)"><div class="pill p-mint" style="margin-bottom:9px">03 · teléfono</div>
+<h4 style="margin:0 0 6px">El engaño llega fuera de banda</h4><p style="font-size:13.8px;margin:0">La llamada no pasa por el filtro de correo, y el dominio del señuelo no tiene ni MX</p></div>
+<div class="card tight" style="border-top:2px solid var(--deep)"><div class="pill p-deep" style="margin-bottom:9px">04 · suplantación</div>
+<h4 style="margin:0 0 6px">El kit se adapta a nuestro proveedor</h4><p style="font-size:13.8px;margin:0">La página imita el inquilino concreto de la víctima, comprobado antes de llamar</p></div>
+<div class="card tight" style="border-top:2px solid var(--amber)"><div class="pill p-amber" style="margin-bottom:9px">05 · prueba</div>
+<h4 style="margin:0 0 6px">La prueba de la reclamación casi nunca existe</h4><p style="font-size:13.8px;margin:0">Rescate y volumen vacíos en 161 de 161 entradas; captura en 47</p></div></div>
+<div class="grid g4 rv">
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="3">0</div><div class="l">marcas distintas reclamando el nombre a 24-11-2026</div><div class="s">Sitio nuevo del 23-11, INCEPTION del 16-11 y ShinySp1d3r desde 2025-11-15</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="17">0<small>--</small></div><div class="l">fecha de revocación de las dos claves usadas como prueba el 23-11-2026</div><div class="s">Razón declarada por el titular: «clave sustituida»</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="0">0</div><div class="l">mensajes de noviembre firmados con la clave vigente de marzo</div><div class="s">Es la omisión sobre la que descansa <code>KJ-1</code></div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="161">0<small>vs</small></div><div class="l">entradas del mismo actor en los dos agregadores de la cartera</div><div class="s">Discrepancia del <strong>32,3 %</strong></div></div>
+<div class="stat" style="--c:var(--amber)"><div class="n" data-count="0">0<small>de</small></div><div class="l">entradas con cifra de rescate o volumen de datos</div><div class="s">La prueba de la reclamación no está en el catálogo</div></div>
+<div class="stat" style="--c:var(--sky)"><div class="n" data-count="0">0</div><div class="l">víctimas chilenas en el catálogo</div><div class="s">Chile aparece como perfil de registrante en WHOIS, no como objetivo</div></div>
+<div class="stat" style="--c:var(--mint)"><div class="n" data-count="12">0<small>meses</small></div><div class="l">desde el anuncio de ShinySp1d3r sin una sola víctima publicada</div><div class="s">La API responde «no victims found»</div></div>
+<div class="stat" style="--c:var(--deep)"><div class="n" data-count="313">0<small>de</small></div><div class="l">pares RIS que ven el prefijo del alojador del sitio caído, hoy</div><div class="s">El escaparate cae; el bloque <code>/24</code> no</div></div></div>
+<div class="note good rv"><div class="t">✅ Decisión que se solicita a Dirección:</div><p><strong>(a)</strong> declarar la autenticación resistente a suplantación —FIDO2, passkeys, autenticadores ligados al origen— <strong>obligatoria</strong> para todo acceso administrativo y para todo acceso a SaaS con datos de clientes, con plazo de 60 días; <strong>(b)</strong> aprobar un procedimiento de verificación de identidad para la mesa de ayuda que <strong>prohíba</strong> restablecer credencial o segundo factor a partir de una llamada entrante, con plazo de 15 días; <strong>(c)</strong> encargar a gestión de proveedores el inventario de aplicaciones conectadas con tokens de larga vida sobre nuestro CRM y nuestra mensajería, con plazo de 30 días.</p></div>
+</section>
+<section id="3-alcance-y-limitaciones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">3</span><div><h2>Alcance y limitaciones</h2></div></div>
+<h3 class="rv">3.1 Qué contiene este informe</h3>
+<p class="rv">La evaluación de <strong>continuidad de marca</strong> de ShinyHunters entre el 15 de septiembre y el 24 de noviembre de 2026, con el método para resolverla desde fuera; el perfil del clúster de intrusión que alimentaba su sitio de filtración y que hoy alimenta otro; la medición propia de la infraestructura de los tres objetos que reclaman el nombre; la medición del catálogo de víctimas y de lo que ese catálogo no prueba; y la lectura de todo ello para una organización chilena o latinoamericana.</p>
+<h3 class="rv">3.2 Qué NO contiene, por decisión</h3><ul class="rv"><li><strong>No se reproducen los nombres de las personas detenidas.</strong> Son personas físicas con presunción de inocencia, los cargos no están probados y ninguno de los juicios de este informe depende de su identidad: lo que los sostiene son <strong>las fechas</strong>. Las fuentes que los nombran están en el <code>Anexo B</code> para quien necesite seguirlas.</li><li><strong>No se reproducen los nombres de las organizaciones reivindicadas</strong> en ningún sitio de filtración, ni las siete de INCEPTION ni las del catálogo anterior. Son reclamaciones del adversario sin muestras verificadas; reproducirlas es amplificarlas. <strong>Sí se publican los dominios de señuelo</strong>, que contienen marcas de terceros: la justificación de esa asimetría está en el <code>Anexo A.1</code> y no es cómoda, pero es defendible.</li><li><strong>No se evalúa el contenido de ningún conjunto de datos filtrado.</strong> No se descarga, no se abre y no se cuentan registros.</li><li><strong>No hay análisis de binario.</strong> No existe muestra pública del kit de suplantación: la propia Okta declara que los retos de Cloudflare delante de los dominios <strong>le impidieron analizarlo en profundidad</strong>. El nivel técnico de este informe es, por tanto, medición de infraestructura y de criptografía, no ingeniería inversa.</li></ul>
+<h3 class="rv">3.3 La base de este informe, y su desigualdad</h3>
+<p class="rv">Hay <strong>tres fuentes de primera mano leídas en original</strong>: el expediente de Okta, la investigación de ReversingLabs y el aviso del IC3. Hay <strong>una fuente de prensa especializada que declara verificación propia</strong> —BleepingComputer verificó las firmas PGP con la clave pública que ya había usado en agosto de 2025— y esa declaración es la que permite que <code>KJ-1</code> exista: nosotros podemos comprobar el estado de las claves, pero <strong>no tenemos los dos mensajes firmados</strong>, que viven en un servicio oculto al que esta célula no accede. Esa es la asimetría, y conviene verla con claridad:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Lo que medimos nosotros</th><th>Lo que tomamos de un tercero</th></tr></thead><tbody>
+<tr><td>Que las dos claves de 2020 están revocadas el 17-03-2026, con razón <code>0x01</code></td><td>Que los mensajes del 23-11-2026 se firmaron con ellas</td></tr>
+<tr><td>Que el puntero de la revocación lleva a <code>F4953411…20978A</code> y que esa clave no está revocada</td><td>Que ninguno de los mensajes de noviembre se firmó con ella</td></tr>
+<tr><td>Que la clave presentada el 23-11 se creó el <strong>31-10-2026</strong> y no lleva certificación de terceros en dos servidores</td><td>Que el sitio nuevo existe y qué dice</td></tr></tbody></table></div>
+<p class="rv"><strong>Si la verificación de BleepingComputer fuera errónea, <code>KJ-1</code> cae.</strong> Se consigna así en lugar de presentarlo como medición completa propia.</p>
+<h3 class="rv">3.4 Lo que la ausencia de telemetría propia deja sin evaluar</h3>
+<p class="rv">Sin registros de nuestro proveedor de identidad no podemos decir si esta campaña nos ha llamado. La pregunta <strong>sí tiene respuesta</strong> y está en §T-2: son cuatro consultas sobre registros que la organización ya tiene. Mientras no se ejecuten, la afirmación «no nos afecta» no tiene base, y este informe no la hace.</p>
+<h3 class="rv">3.5 Lo que se afirma sobre este actor, y lo que las fuentes sostienen</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Afirmación de partida</th><th>Veredicto</th><th>En qué se apoya</th></tr></thead><tbody>
+<tr><td>«ShinyHunters ha vuelto»</td><td><strong>No sostenida como hecho</strong></td><td>La prueba son dos firmas con claves revocadas por su titular en marzo; la clave vigente no aparece (<code>KJ-1</code>)</td></tr>
+<tr><td>«INCEPTION es ShinyHunters con otro nombre»</td><td><strong>No sostenida</strong></td><td>Okta afirma el cambio de afiliación del <strong>clúster de intrusión</strong>, y dice expresamente que <strong>no</strong> puede determinar con confianza alta quién opera el sitio (<code>KJ-2</code>)</td></tr>
+<tr><td>«Las detenciones desarticularon al grupo»</td><td><strong>Refutada</strong></td><td>El clúster siguió registrando infraestructura todo octubre y noviembre; lo que cesó fue la publicación (<code>KJ-3</code>)</td></tr>
+<tr><td>«El actor tiene N víctimas»</td><td><strong>Indeterminable con las fuentes públicas</strong></td><td>161 frente a 109 según el agregador, dos entradas que no son víctimas, y cero con rescate o volumen (<code>KJ-4</code>)</td></tr>
+<tr><td>«Explotaron un día cero de PeopleSoft»</td><td><strong>Improbable</strong></td><td>El CVE que la cobertura asigna se publicó el 11-06-2026, tres meses antes de la reivindicación (<code>KJ-5</code>)</td></tr>
+<tr><td>«El FBI publicó un informe FLASH sobre el grupo en el segundo trimestre»</td><td><strong>Inexacta</strong></td><td>El documento es un <strong>PSA</strong> del IC3, <code>I-051526-PSA</code>, del 15-05-2026, y versa sobre el ataque a una plataforma educativa (<code>O-4.1</code>)</td></tr>
+<tr><td>«El grupo opera desde Chile»</td><td><strong>Sin base</strong></td><td>El único vínculo es un perfil de registrante en WHOIS que no es corroborable con medios públicos (<code>KJ-6</code>)</td></tr>
+<tr><td>«ShinySp1d3r es una capacidad de cifrado en uso»</td><td><strong>No sostenida</strong></td><td>Doce meses sin una víctima publicada, y la dirección que el agregador le atribuye <strong>no es una dirección de Tor válida</strong> (<code>O-1.3</code>)</td></tr></tbody></table></div>
+</section>
+<div class="level lv-e rv" id="nivel-e"><div class="kicker">Nivel 01</div><h2>Estratégico</h2><div class="meta"><span><b>Para:</b> CISO</span><span>Comité de Riesgo</span><span>Comunicación de crisis</span><span><b>Horizonte:</b> semanas–meses</span></div></div>
+<section id="e-1-lo-que-el-expediente-mide-y-lo-que-no" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-1</span><div><h2>Lo que el expediente mide, y lo que no</h2></div></div>
+<div class="card rv">
+<h4 style="margin-top:0">Entradas del catálogo por mes de ataque declarado</h4>
+<div class="bars" data-bars><div class="bar" style="--bc:var(--sky)"><span class="bn">2025-05</span><span class="bt"><i data-w="30"></i></span><span class="bv">7</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2025-06</span><span class="bt"><i data-w="48"></i></span><span class="bv">11</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2025-07</span><span class="bt"><i data-w="30"></i></span><span class="bv">7</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2025-08</span><span class="bt"><i data-w="26"></i></span><span class="bv">6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2025-09</span><span class="bt"><i data-w="30"></i></span><span class="bv">7</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2025-10</span><span class="bt"><i data-w="22"></i></span><span class="bv">5</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-01</span><span class="bt"><i data-w="9"></i></span><span class="bv">2</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-02</span><span class="bt"><i data-w="39"></i></span><span class="bv">9</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-03</span><span class="bt"><i data-w="70"></i></span><span class="bv">16</span></div><div class="bar" style="--bc:var(--amber)"><span class="bn">2026-04</span><span class="bt"><i data-w="100"></i></span><span class="bv">23</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-05</span><span class="bt"><i data-w="39"></i></span><span class="bv">9</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-06</span><span class="bt"><i data-w="83"></i></span><span class="bv">19</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-07</span><span class="bt"><i data-w="26"></i></span><span class="bv">6</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-08</span><span class="bt"><i data-w="78"></i></span><span class="bv">18</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-09</span><span class="bt"><i data-w="30"></i></span><span class="bv">7</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-10</span><span class="bt"><i data-w="0"></i></span><span class="bv">0</span></div><div class="bar" style="--bc:var(--sky)"><span class="bn">2026-11</span><span class="bt"><i data-w="0"></i></span><span class="bv">0</span></div></div></div>
+<p class="rv"><strong>Tres lecturas, y la tercera es la que vale.</strong> La primera, la obvia: la actividad crece a lo largo de 2026 y se detiene en seco en septiembre. La segunda, la cautelosa: el mes de ataque lo declara el adversario y no lo verifica nadie, de modo que la serie mide <strong>lo que el adversario dice haber hecho y cuándo</strong>. La tercera, que es la útil: <strong>la última entrada del catálogo es del 24 de septiembre de 2026 y las dos siguientes casillas están a cero</strong>, lo que sitúa el cese de publicación —no el cese de actividad— entre la primera detención y el final del plazo que el grupo había dado al FBI.</p>
+<p class="rv"><strong>Y hay un escalón de cobertura que invalida cualquier medida de «cuándo apareció este actor».</strong> Por fecha de descubrimiento, <strong>45 de las 161 entradas se registraron en octubre de 2025</strong>, el mes en que el sitio se dio de alta en el agregador, con fechas de ataque declaradas que van de noviembre de 2023 a octubre de 2025. Es el defecto que el <code>Anexo D</code> de <code>CTI-2026-054</code> describe y cuyo correctivo es restar: <strong>la antigüedad del expediente mide al observador, no al observado</strong>.</p>
+</section>
+<section id="e-2-la-marca-como-activo-separable-que-es-la-novedad-de-este-expediente" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-2</span><div><h2>La marca como activo separable, que es la novedad de este expediente</h2></div></div>
+<p class="rv">Esta cartera ha documentado ya rebranding (<code>CTI-2026-047</code>), cese frente a migración (<code>CTI-2026-058</code>) y reclamaciones cruzadas entre actores (<code>CTI-2026-055</code>). Lo de ahora es distinto y conviene nombrarlo bien: <strong>no es que un grupo se cambie de nombre, es que un nombre se queda sin dueño determinable y varios lo usan a la vez.</strong></p>
+<p class="rv">La estructura que lo hace posible la describe la propia fuente primaria: el operador del sitio de filtración <strong>tenía relación con varios operadores de intrusión a la vez</strong> —Okta lo afirma porque observó en ese sitio organizaciones que su clúster no había atacado—, de modo que el sitio era un <strong>servicio de publicación y cobro</strong> y no el grupo. Separados el escaparate y la intrusión, cada parte sobrevive por su cuenta: la intrusión cambió de escaparate en siete semanas, y el nombre del escaparate quedó disponible para quien tuviera con qué reclamarlo.</p>
+<div class="tlfilter rv" data-for="timeline"><button class="chip on" data-tl="all">Todo</button><button class="chip" data-tl="medicinpropi">Medición propia</button><button class="chip" data-tl="fuenteoficia">Fuente oficial</button><button class="chip" data-tl="prensacitada">Prensa, citada por fuente primaria</button><button class="chip" data-tl="fuenteprimar">Fuente primaria y medición propia</button><button class="chip" data-tl="dosfuentespr">Dos fuentes primarias</button><button class="chip" data-tl="prensaconver">Prensa con verificación declarada</button><button class="chip" data-tl="big">Hitos</button></div>
+<div class="tl rv" id="timeline">
+<div class="ev gl" data-k="medicinpropi"><div class="d">2020-01-28</div><div class="x">Creación de la primera de las dos claves PGP históricas</div></div>
+<div class="ev gl" data-k="medicinpropi"><div class="d">2020-08-25</div><div class="x">Creación de la segunda</div></div>
+<div class="ev gl" data-k="medicinpropi"><div class="d">2025-10-03</div><div class="x">Alta del sitio de filtración en el agregador, con volcado retrospectivo de 45 entradas</div></div>
+<div class="ev gl" data-k="medicinpropi"><div class="d">2025-11-15</div><div class="x">Alta de ShinySp1d3r en el agregador, como plataforma de cifrado</div></div>
+<div class="ev gl" data-k="medicinpropi"><div class="d">2026-03-16</div><div class="x">Publicación de la clave sustituta <code>F4953411…20978A</code></div></div>
+<div class="ev gl big" data-k="medicinpropi big"><div class="d">2026-03-17</div><div class="x"><strong>Autorrevocación de las dos claves de 2020</strong>, razón «clave sustituida»</div></div>
+<div class="ev gl" data-k="fuenteoficia"><div class="d">2026-05-15</div><div class="x">Aviso <code>I-051526-PSA</code> del IC3 del FBI sobre el actor</div></div>
+<div class="ev gl" data-k="prensacitada"><div class="d">2026-09-15</div><div class="x">Primera detención del mes, en los Países Bajos</div></div>
+<div class="ev gl" data-k="medicinpropi"><div class="d">2026-09-22</div><div class="x">El actor publica en su propio sitio un comunicado dirigido al FBI con un plazo de una semana</div></div>
+<div class="ev gl big" data-k="medicinpropi big"><div class="d">2026-09-24</div><div class="x"><strong>Última entrada del catálogo</strong></div></div>
+<div class="ev gl" data-k="prensacitada"><div class="d">2026-09-29</div><div class="x">Segunda detención del mes, en Jordania</div></div>
+<div class="ev gl" data-k="prensacitada"><div class="d">2026-09-30</div><div class="x">El sitio de filtración deja de estar disponible</div></div>
+<div class="ev gl" data-k="fuenteprimar"><div class="d">2026-10-26</div><div class="x">Arranca la campaña de señuelos con tema jurídico</div></div>
+<div class="ev gl big" data-k="medicinpropi big"><div class="d">2026-10-31</div><div class="x"><strong>Creación de la clave que se presentará el 23-11</strong></div></div>
+<div class="ev gl" data-k="dosfuentespr"><div class="d">2026-11-16</div><div class="x">Aparece INCEPTION</div></div>
+<div class="ev gl" data-k="prensaconver"><div class="d">2026-11-23</div><div class="x">Aparece el sitio que reivindica ser ShinyHunters, con dos firmas de 2020</div></div>
+<div class="ev gl" data-k="fuenteprimar"><div class="d">2026-11-24</div><div class="x">Okta publica la evaluación de cambio de afiliación; esta célula mide la cadena de claves</div></div></div>
+</section>
+<section id="e-3-decisiones" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-3</span><div><h2>Decisiones</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Decisión</th><th>Qué implica</th><th>Por qué ahora</th></tr></thead><tbody>
+<tr><td><strong>E-a · Autenticación resistente a suplantación, obligatoria</strong></td><td>FIDO2, passkeys o autenticadores ligados al origen en todo acceso administrativo y a SaaS con datos de clientes. Plazo 60 días</td><td>Es el <strong>único</strong> control que las dos fuentes primarias señalan como efectivo: el kit <strong>no</strong> puede superarlo. Un segundo factor por código o por notificación <strong>no protege</strong> aquí, porque el adversario está al teléfono pidiendo que se apruebe</td></tr>
+<tr><td><strong>E-b · La mesa de ayuda no restablece nada desde una llamada entrante</strong></td><td>Procedimiento de verificación por canal alternativo antes de tocar credencial o segundo factor. Plazo 15 días</td><td>Es la puerta concreta de esta cadena, y es un cambio de proceso que no cuesta licencias</td></tr>
+<tr><td><strong>E-c · Inventario de aplicaciones conectadas con token de larga vida</strong></td><td>Sobre CRM, mensajería y repositorios documentales; revocación de lo que no tenga dueño. Plazo 30 días</td><td>El historial de este ecosistema incluye el abuso de tokens de integración de terceros, y un token no se detiene con autenticación fuerte: ya está autenticado</td></tr>
+<tr><td><strong>E-d · Vigilancia de registros de dominio con nuestra marca y término jurídico</strong></td><td>Alta en transparencia de certificados y en registros nuevos, con el patrón de §T-2</td><td>La infraestructura aparece entre <strong>1 y 28 días</strong> antes de la publicación: es aviso previo real y gratuito</td></tr>
+<tr><td><strong>E-e · Protocolo de comunicación que no nombre al grupo</strong></td><td>La nota pública describe vía de entrada y alcance, no marca</td><td><code>KJ-2</code>: hoy el nombre no identifica operador, y atribuir a un grupo desarticulado invita a una corrección pública</td></tr></tbody></table></div>
+</section>
+<section id="e-4-lectura-regional-donde-aparece-chile-en-este-expediente-y-donde-no" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--deep)">E-4</span><div><h2>Lectura regional: dónde aparece Chile en este expediente, y dónde no</h2></div></div>
+<p class="rv"><strong>No aparece como víctima.</strong> De las 161 entradas, <strong>ninguna</strong> lleva país <code>CL</code>. Hay dos latinoamericanas —una colombiana con fecha de ataque declarada en mayo de 2026 y una mexicana de julio de 2025— sobre 151 entradas con país asignado, es decir <strong>un 1,3 %</strong>. El reparto está dominado por Estados Unidos, con <strong>114 de 161 (70,8 %)</strong>, y detrás vienen Francia con 6, Alemania con 5 y Suiza, Países Bajos y Japón con 3 cada uno. <strong>Diez entradas no tienen país</strong>, de modo que el denominador real es 151 y no 161.</p>
+<p class="rv"><strong>Aparece, en cambio, en el registro de la infraestructura.</strong> ReversingLabs declara que los dominios de señuelo registrados a través de NICENIC repiten tres perfiles de ubicación de registrante, y uno de los tres es <strong>Chile</strong>. Esto no dice que el adversario opere desde Chile: un perfil de registrante es un dato que el registrante escribe. Lo comprobamos en el WHOIS público de tres dominios del conjunto el 24-11-2026 y <strong>el campo viene redactado o vacío en los tres</strong>, de modo que <strong>no podemos corroborarlo</strong> y queda como <code>G-3</code>.</p>
+<p class="rv"><strong>La lectura que sí sirve para una organización chilena es la tercera.</strong> Este adversario no selecciona por país: selecciona por <strong>marca reconocible con mesa de ayuda centralizada y proveedor de identidad estándar</strong>, y la lista de señuelos que ReversingLabs publica —donde hay cadenas de comida rápida, estudios de videojuegos, aerolíneas, un bufete y operadores de medios— se explica por tamaño y por reconocimiento, no por geografía. La pregunta útil no es «¿nos tienen por objetivo?» sino la del <code>Anexo D</code> de <code>CTI-2026-036</code>: <strong>¿tendríamos el dato si la respuesta fuera sí?</strong> Y la respuesta está en §T-2: cuatro consultas sobre registros que ya existen.</p>
+</section>
+<div class="level lv-o rv" id="nivel-o"><div class="kicker">Nivel 02</div><h2>Operacional</h2><div class="meta"><span><b>Para:</b> Jefatura de SOC</span><span>Respuesta a incidentes</span><span>Gestión de identidad</span><span><b>Horizonte:</b> días–semanas</span></div></div>
+<section id="o-1-los-tres-objetos-que-reclaman-el-nombre-y-como-se-distinguen" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-1</span><div><h2>Los tres objetos que reclaman el nombre, y cómo se distinguen</h2></div></div>
+<h3 class="rv">O-1.1 El clúster de intrusión, que es el único cuya continuidad está acreditada</h3>
+<p class="rv">Okta lo rastrea como <strong><code>O-UNC-053</code></strong> desde <strong>marzo de 2026</strong>. Lo que hace, en la descripción de la fuente primaria: <strong>ingeniería social por teléfono en varias etapas</strong>, en la que quien llama se hace pasar por personal de soporte y empuja al usuario a restablecer su contraseña con urgencia. Detrás hay un kit que intercepta el flujo de autenticación: primero recoge usuario y contraseña, después pide los segundos factores, y mientras tanto el operador —al teléfono— convence a la persona de que le dicte el código o apruebe la notificación. Con eso entra en las aplicaciones SaaS y extrae datos.</p>
+<p class="rv">Dos rasgos importan para la defensa. El primero, que la fuente declara el límite del kit: <strong>no puede superar autenticación resistente a suplantación</strong>. El segundo, que los temas de los dominios de señuelo <strong>cambian cada cuatro a seis semanas</strong>, y el actual, desde finales de octubre de 2026, es <strong>jurídico</strong>.</p>
+<h3 class="rv">O-1.2 INCEPTION, que es un escaparate nuevo sobre el mismo canal de entrada</h3>
+<p class="rv">Apareció el <strong>16 de noviembre de 2026</strong>. Lo que Okta afirma, y conviene citar con precisión porque la cobertura lo ha redondeado: que <code>O-UNC-053</code> <strong>ha cambiado muy probablemente de afiliación de marca</strong>, y que <strong>no puede valorar con confianza alta</strong> si ese clúster opera el sitio por sí mismo o se ha asociado con otro actor de extorsión. El apoyo es un intervalo medido: la infraestructura de señuelo de los objetivos que INCEPTION nombra se registró <strong>entre 6 y 19 días antes</strong> de que aparecieran en el sitio, igual que antes aparecían en el sitio anterior <strong>entre 1 y 28 días</strong> después del registro.</p>
+<h3 class="rv">O-1.3 ShinySp1d3r, que en doce meses no ha publicado una víctima — y cuya dirección no es válida</h3>
+<p class="rv">Se dio de alta en el agregador el <strong>15-11-2025</strong> como plataforma de cifrado como servicio contra entornos VMware ESXi. Medición propia del 24-11-2026: la consulta de víctimas de ese grupo devuelve <strong><code>No victims found for group 'ShinySp1d3r'</code></strong>. Doce meses, cero entradas.</p>
+<p class="rv"><strong>Y hay un defecto en la fuente que conviene documentar porque afecta a cualquiera que la ingiera.</strong> La dirección de servicio oculto que el agregador atribuye a ShinySp1d3r es <code>sh1nysp1d3rxyz123456789abcdefghijklmnopqrstuvwxyz.onion</code>. Aplicando la validación de suma de control que esta cartera adoptó el 22-11-2026: <strong>tiene 49 caracteres y una dirección v3 tiene exactamente 56</strong>, y el cuerpo es la secuencia <code>xyz</code> seguida de los dígitos y el alfabeto en orden. <strong>No es una dirección: es un marcador de posición.</strong> No decodifica, no corresponde a ninguna clave Ed25519 y no puede validarse. Quien la ingiera como indicador distribuye una cadena inventada. Las otras cinco direcciones del mismo expediente <strong>sí</strong> validan, y eso es lo que hace al defecto detectable: el control no es una sospecha, es aritmética. Va al <code>Anexo A.4</code> con tipo <code>artefacto</code> y marca de no bloqueo, y a la brecha <code>G-5</code>.</p>
+</section>
+<section id="o-2-el-catalogo-medido" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-2</span><div><h2>El catálogo, medido</h2></div></div>
+<h3 class="rv">O-2.1 Lo que hay, y lo que falta</h3>
+<div class="tw rv"><table><thead>
+<tr><th>Campo</th><th>Relleno</th><th>Cobertura</th><th>Qué se puede preguntar con él</th></tr></thead><tbody>
+<tr><td><code>activity</code> (sector)</td><td>160 / 161</td><td>99,4 %</td><td>Reparto sectorial, con una entrada «Not Found» ×4 dentro del propio campo</td></tr>
+<tr><td><code>country</code></td><td>151 / 161</td><td>93,8 %</td><td>Reparto geográfico <strong>sobre 151</strong>, nunca sobre 161</td></tr>
+<tr><td><code>domain</code></td><td>108 / 161</td><td>67,1 %</td><td>Correlación con exposición propia, por quien tenga el dominio</td></tr>
+<tr><td><code>screenshot</code></td><td>47 / 161</td><td><strong>29,2 %</strong></td><td>Nivel 3 de la escala de prueba de <code>CTI-2026-048</code>, el que más engaña</td></tr>
+<tr><td><code>press</code></td><td>17 / 161</td><td><strong>10,6 %</strong></td><td>Único camino hacia confirmación independiente</td></tr>
+<tr><td><code>data_size</code></td><td><strong>0 / 161</strong></td><td><strong>0 %</strong></td><td>Nada</td></tr>
+<tr><td><code>ransom</code></td><td><strong>0 / 161</strong></td><td><strong>0 %</strong></td><td>Nada</td></tr></tbody></table></div>
+<p class="rv"><strong>Las dos últimas filas son el hallazgo.</strong> Un catálogo de extorsión en el que <strong>ninguna</strong> entrada declara volumen ni importe no permite ninguna afirmación sobre el tamaño del daño. Y el 71 % que no llega ni a captura de pantalla no permite afirmar que el conjunto de datos exista: es exactamente la advertencia que el <strong>aviso oficial del FBI</strong> hace al público —que los actores <em>«pueden afirmar falsamente tener información sensible o comprometedora […] que con frecuencia no existe»</em>— y que el propio actor, en su comunicado, califica de alegación falsa. <strong>La cobertura de campos del catálogo da la razón al aviso, y no hace falta creer a ninguna de las dos partes para verlo.</strong></p>
+<h3 class="rv">O-2.2 Dos entradas que no son víctimas, y por qué importa el detalle</h3>
+<p class="rv">Dos de las 161 entradas son <strong>comunicados del adversario</strong> colocados en el catálogo con formato de víctima: uno del 22-09-2026, dirigido nominalmente a dos cargos del FBI, y su seguimiento del 24-09-2026. El agregador los indexa como entradas porque su recolector lee el sitio y cada publicación es una fila.</p>
+<p class="rv">La consecuencia es doble. <strong>Para el recuento</strong>, que el total bruto sobreestima en al menos dos —y «al menos» porque hay además una entrada cuyo nombre aparece parcialmente enmascarado, que es una reclamación en curso y no una víctima publicada—. <strong>Para el análisis</strong>, que esas dos filas son <strong>fuente primaria del adversario</strong> y valen más que cualquier víctima del catálogo: es el actor explicando por escrito su propio móvil (§O-4).</p>
+<h3 class="rv">O-2.3 Las dos fuentes discrepan en un tercio</h3>
+<p class="rv">El mismo actor, el mismo día, en los dos agregadores que esta cartera usa: <strong>161 entradas</strong> en uno y <strong>109</strong> en el otro. Una diferencia de 52 entradas, el <strong>32,3 %</strong> del mayor. No es contradicción de nadie: son recolectores con cadencias, históricos y criterios de deduplicación distintos. Es la razón por la que <strong>ninguna cifra de volumen de este informe se cita sin decir de qué fuente sale y en qué fecha se midió</strong>, y es el mismo defecto que <code>CTI-2026-056</code>, <code>060</code> y <code>061</code> documentaron en otros catálogos.</p>
+<p class="rv"><strong>Y hay una tercera cifra, que es la que de verdad engaña.</strong> El recolector diario de esta cartera consulta el <strong>conjunto anual</strong> de la primera fuente y para este actor obtiene <strong>110</strong>. Medido el 24-11-2026, eso <strong>no es un tercer recuento del catálogo</strong>: es el subconjunto de entradas <strong>descubiertas en 2026</strong>. Se demuestra con dos entradas que ese conjunto incluye y cuya <strong>fecha de ataque declarada es de 2023 y de 2024</strong>, de modo que el año del endpoint se calcula sobre la fecha de publicación y no sobre la del ataque.</p>
+<p class="rv"><strong>La trampa está en el parecido.</strong> <code>110</code> del conjunto anual de una fuente y <code>109</code> del histórico completo de la otra son dos cifras casi idénticas que miden cosas distintas, y quien ponga una al lado de la otra concluirá que <strong>dos fuentes independientes se corroboran</strong>. No se corroboran: una cuenta un año y la otra cuenta todo. Es corroboración circular con otro disfraz, el mismo que <code>N6</code> de la compuerta de enriquecimiento vigila en los indicadores.</p>
+<p class="rv"><strong>Y una discrepancia interna de la misma fuente, que conviene conocer antes de fiarse del delta diario.</strong> Filtrando el histórico del grupo por fecha de descubrimiento en 2026 salen <strong>116</strong> entradas; el conjunto anual trae <strong>110</strong>. Las <strong>seis</strong> que faltan están en el histórico y no en el conjunto anual —cinco de enero y una de abril de 2026, todas con nombre de organización reconocible—, y en el sentido contrario no falta ninguna: el conjunto anual es un <strong>subconjunto estricto</strong> del histórico del grupo. La consecuencia operativa es concreta y afecta a cualquiera que vigile con el endpoint anual: <strong>esas seis entradas no aparecerán nunca como víctimas nuevas en ningún parte diario</strong>, porque no están en el conjunto que el parte compara. Se consigna como <code>G-8</code>.</p>
+<h3 class="rv">O-2.4 El reparto sectorial, con su salvedad</h3>
+<p class="rv">Tecnología 35, comercio y venta en línea 27, servicios financieros 22, servicios profesionales 15, educación 15, salud 14, transporte 7, hostelería 6, manufactura 5, administración y defensa 3, alimentación 3. <strong>La salvedad es que el sector lo asigna el agregador, no la víctima</strong>, y que la lista de objetivos de señuelo que ReversingLabs publica incluye sectores que el catálogo apenas tiene —medios, videojuegos, un bufete—, lo que indica que <strong>el catálogo refleja quién acabó publicado, no quién fue atacado</strong>.</p>
+</section>
+<section id="o-3-la-infraestructura-medida" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-3</span><div><h2>La infraestructura, medida</h2></div></div>
+<h3 class="rv">O-3.1 El sitio caído sigue alojado donde estaba</h3>
+<p class="rv">Las cuatro direcciones que los agregadores asocian al sitio de filtración se reparten en dos alojadores, los dos rusos: <strong><code>PROSPERO OOO</code>, <code>AS200593</code></strong> —tres direcciones en <code>91.202.233.0/24</code> y <code>91.215.85.0/24</code>— y <strong><code>Proton66 OOO</code>, <code>AS198953</code></strong>, una dirección en <code>176.120.22.0/24</code>. Medición propia del 24-11-2026 contra RDAP y RIPEstat: los dos prefijos <strong>siguen anunciados por esos mismos sistemas autónomos</strong>, vistos respectivamente por <strong>313 y 311 de 322</strong> pares RIS, con última observación de <strong>hoy a las 08:00 UTC</strong>. El <code>/24</code> de Proton66 aparece por primera vez en enero de 2026; el de Prospero viene de 2015, con otro origen.</p>
+<p class="rv"><strong>La lectura operativa es la de <code>CTI-2026-040</code>:</strong> lo que cae es la marca y el servicio oculto; <strong>el bloque del alojador sobrevive</strong>, y es el objeto que conviene vigilar.</p>
+<h3 class="rv">O-3.2 Un dato de tercero que matiza la narrativa del cese, y su salvedad</h3>
+<p class="rv">El segundo agregador marca las <strong>cinco direcciones de servicio oculto</strong> del expediente como <strong>no disponibles</strong>, con últimos sondeos repartidos entre abril y octubre de 2026, y marca en cambio las <strong>cuatro direcciones IP</strong> como <strong>disponibles</strong>, con sondeos del <strong>23 y 24 de noviembre de 2026</strong>, uno de ellos de las 16:24 UTC de hoy.</p>
+<p class="rv"><strong>Hay que leerlo con cuidado y no concluir más de lo que dice.</strong> Que una dirección responda a un sondeo no significa que sirva el sitio de filtración: puede ser el mismo alojador sirviendo otra cosa, o un servicio cualquiera en el puerto que el recolector prueba. <strong>Esta célula no ha sondeado esas direcciones</strong> y no va a hacerlo. Lo que el dato sostiene es modesto y suficiente: <strong>la infraestructura de red no se ha retirado</strong>, aunque los servicios ocultos no respondan. Queda como <code>G-4</code>.</p>
+<h3 class="rv">O-3.3 El dominio público del grupo está retirado por el registro nacional</h3>
+<p class="rv"><code>shinyhunte.rs</code> —el dominio que el propio grupo designó en marzo de 2026 para publicar su clave sustituta— <strong>no tiene delegación DNS</strong> al 24-11-2026, y el registro de Serbia lo declara en estado <strong><code>Inactive</code></strong> y <strong><code>serverHold</code></strong>, con prohibiciones de actualización, transferencia y borrado impuestas por el servidor. Es decir: <strong>retirado por el registro, no abandonado por el titular</strong>. Esto tiene una consecuencia directa sobre <code>KJ-1</code> y es la razón por la que la cadena de claves hubo que reconstruirla desde una copia archivada (§X-1).</p>
+</section>
+<section id="o-4-el-comunicado-contra-el-fbi-comparado-con-el-documento-original" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-4</span><div><h2>El comunicado contra el FBI, comparado con el documento original</h2></div></div>
+<h3 class="rv">O-4.1 Las tres citas son textuales; el tipo de documento no</h3>
+<p class="rv">El comunicado del 22-09-2026 reprocha al FBI un documento del segundo trimestre de 2026 y cita de él tres frases. Descargamos el documento oficial y comparamos:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Lo que el actor cita</th><th>Está en el documento oficial</th><th>Observación</th></tr></thead><tbody>
+<tr><td><em>«Threat actors often use their real or exaggerated claims of access to sensitive or personal information to prompt payment from victims»</em></td><td><strong>Sí, literal</strong></td><td>—</td></tr>
+<tr><td><em>«To exert pressure on victims[1], SH actors commonly use harassment strategies, sending threatening text messages and phone calls to victims and their family members, and in some cases, swatting»</em></td><td><strong>Sí, literal</strong></td><td>Arrastró incluso <strong>el marcador de nota al pie <code>[1]</code></strong>, lo que indica copia desde la versión web</td></tr>
+<tr><td><em>«Threat actors may falsely claim to ha[ve sensitive or compromising information]»</em></td><td><strong>Sí, literal</strong></td><td>—</td></tr></tbody></table></div>
+<p class="rv"><strong>Pero el documento no es lo que el actor dice que es.</strong> Lo llama <em>«FLASH report»</em> y <em>«2026 Quarter 2 FLASH report»</em>; el documento es un <strong>Public Service Announcement del IC3</strong>, identificado <strong><code>I-051526-PSA</code></strong> y fechado el <strong>15-05-2026</strong> —que sí cae en el segundo trimestre—, y su asunto no es el grupo: es <strong>advertir al público del posible impacto de un ataque a una plataforma educativa de gestión del aprendizaje</strong>, con recomendaciones dirigidas a estudiantes y centros. Las tres frases que el actor califica de «alegaciones falsas» son <strong>advertencias genéricas al público sobre tácticas de presión</strong>, no imputaciones sobre un incidente concreto.</p>
+<p class="rv"><strong>Y una nota de honestidad sobre el propio documento del FBI:</strong> su nota al pie número 1 aclara que el uso de la palabra «víctima» <strong>no implica</strong> que quien la recibe cumpla la definición legal de víctima ni que haya sido identificada como tal en una investigación. Es la misma cautela que esta cartera aplica en sus propios anexos, y conviene señalar que la fuente oficial la aplica también.</p>
+<h3 class="rv">O-4.2 Lo que el actor dijo querer, y por qué eso es el dato</h3>
+<p class="rv">El comunicado pide <strong>la retirada o corrección del aviso en el plazo de una semana</strong>, y el seguimiento del 24-09 insiste: <em>«no estamos extorsionando a la entidad en cuestión, esto NO tiene motivación financiera y NO es un rescate»</em>. <strong>El móvil declarado es reputacional.</strong> Para una organización, el dato aprovechable es que este ecosistema trata el relato público como objetivo operativo, lo que convierte la comunicación de crisis en parte de la superficie de ataque y refuerza la decisión §E-3 <code>E-e</code>.</p>
+<p class="rv">Sobre la vía de entrada reivindicada —día cero en el portal de empleo— la medición dice otra cosa: <strong><code>CVE-2026-35273</code></strong>, el identificador que la cobertura secundaria asigna, consta en el NVD <strong>publicado el 11-06-2026</strong>, con <strong>CVSS 9.8</strong> y estado <em>Analyzed</em>, y afecta a PeopleSoft Enterprise PeopleTools <strong>8.61 y 8.62</strong> permitiendo la toma de control <strong>sin autenticación previa</strong>. Si el identificador es correcto, en septiembre no había día cero: había <strong>un parche crítico de tres meses sin aplicar en un tercero</strong>, que es el patrón de <code>CTI-2026-063</code>. La confianza es <strong>moderada</strong> porque el identificador no lo aporta la fuente primaria; lo que <strong>sí</strong> es medición propia es la fecha y la puntuación del CVE.</p>
+</section>
+<section id="o-5-hipotesis-sobre-quien-publico-el-23-de-noviembre" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--sky)">O-5</span><div><h2>Hipótesis sobre quién publicó el 23 de noviembre</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Hipótesis</th><th>A favor</th><th>En contra</th><th>Valoración</th></tr></thead><tbody>
+<tr><td><strong>H1 · Operadores remanentes del grupo original</strong></td><td>Poseen las privadas de 2020; conocen la historia interna y los detalles de los detenidos</td><td><strong>No usan la clave que ellos mismos declararon vigente en marzo</strong>, que es gratis y zanjaría la duda</td><td><strong>Posibilidad real</strong> <em>(45–55 %)</em></td></tr>
+<tr><td><strong>H2 · Antiguos allegados con acceso a las claves de 2020</strong></td><td>Las claves de 2020 <strong>circularon entre varias personas</strong>, según la fuente que las verificó; la de 2020 es la única prueba que presentan</td><td>No explica el conocimiento de detalle sobre los detenidos, que también podría ser público</td><td><strong>Posibilidad real</strong> <em>(45–55 %)</em></td></tr>
+<tr><td><strong>H3 · Suplantación oportunista sin relación previa</strong></td><td>El nombre tiene valor de mercado y el escaparate quedó libre</td><td><strong>Las firmas son criptográficamente válidas</strong>: quien firmó tenía las privadas. Esto no es gratis</td><td><strong>Improbable</strong> <em>(20–45 %)</em></td></tr>
+<tr><td><strong>H4 · Operación de desinformación de un tercero hostil al grupo</strong></td><td>Coherente con la mención a antiguos miembros y con el móvil reputacional</td><td>Ninguna evidencia positiva; requiere también las privadas</td><td><strong>Remota</strong> <em>(5–15 %)</em></td></tr></tbody></table></div>
+<p class="rv"><strong>Lo que separaría H1 de H2 es observable y está en el falsador de <code>KJ-1</code>:</strong> un mensaje firmado con <code>F4953411…20978A</code>. Mientras no aparezca, <strong>la cartera no declara continuidad</strong> —es la misma cautela de <code>CTI-2026-045</code> con el alias de Jackskid y la de <code>CTI-2026-018</code> con el clúster <code>.report</code>, donde la atribución a este mismo actor se descartó como hecho—.</p>
+</section>
+<div class="level lv-t rv" id="nivel-t"><div class="kicker">Nivel 03</div><h2>Táctico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>Threat hunting</span><span>Mesa de ayuda</span><span><b>Horizonte:</b> días</span></div></div>
+<section id="t-1-mapa-mitre-att-ck" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-1</span><div><h2>Mapa MITRE ATT&amp;CK</h2></div></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="attckSearch" type="search" placeholder="Buscar: técnica, ID, herramienta…" autocomplete="off"></label><span class="count" id="attckCount"></span></div>
+<div class="matrix" id="matrix">
+<div class="mcol" data-col><h5>Reconocimiento <i>2</i></h5>
+<div class="tq" data-s="reconocimiento t1591 gather victim org information el kit se adapta al proveedor de identidad concreto del objetivo: la mayoría imita okta y uno imita netiq / opentext access manager, de modo que el operador comprueba el inquilino antes de llamar"><div class="tid">T1591</div><div class="tn">Gather Victim Org Information</div><div class="tp">El kit se adapta al proveedor de identidad <strong>concreto</strong> del objetivo: la mayoría imita Okta y uno imita NetIQ / OpenText Access Manager, de modo que el operador comprueba el inquilino <strong>antes</strong> de llamar</div></div>
+<div class="tq" data-s="reconocimiento t1598.004 phishing for information: spearphishing voice llamada en la que quien llama se hace pasar por personal de soporte y empuja a un restablecimiento urgente de contraseña"><div class="tid">T1598.004</div><div class="tn">Phishing for Information: Spearphishing Voice</div><div class="tp">Llamada en la que quien llama se hace pasar por personal de soporte y empuja a un restablecimiento urgente de contraseña</div></div></div>
+<div class="mcol" data-col><h5>Desarrollo de recursos <i>2</i></h5>
+<div class="tq" data-s="desarrollo de recursos t1583.001 acquire infrastructure: domains dos procedimientos distintos, en una sola fila porque att&amp;ck no los separa. denominación y registro: patrones legal-[.]com, legaldept-[.]com, [.]legal, -legal[.]com; registro en nicenic sobre todo, y también spaceship, namesilo y tucows, y medición propia añade dynadot (§x-2). configuración: ausencia deliberada de mx, dkim y dmarc —el dominio sólo sirve web porque el engaño llega por teléfono—, verificada por medición propia en 13 de 13 dominios"><div class="tid">T1583.001</div><div class="tn">Acquire Infrastructure: Domains</div><div class="tp"><strong>Dos procedimientos distintos, en una sola fila porque ATT&amp;CK no los separa.</strong> <em>Denominación y registro:</em> patrones <code>legal-&lt;objetivo&gt;[.]com</code>, <code>legaldept-&lt;objetivo&gt;[.]com</code>, <code>&lt;objetivo&gt;[.]legal</code>, <code>&lt;objetivo&gt;-legal[.]com</code>; registro en <strong>NICENIC</strong> sobre todo, y también Spaceship, NameSilo y Tucows, y <strong>medición propia añade Dynadot</strong> (§X-2). <em>Configuración:</em> <strong>ausencia deliberada de MX, DKIM y DMARC</strong> —el dominio sólo sirve web porque el engaño llega por teléfono—, verificada por medición propia en 13 de 13 dominios</div></div>
+<div class="tq" data-s="desarrollo de recursos t1586.002 compromise accounts: email accounts cuenta de contacto en onionmail[.]org declarada en el identificador de usuario de la clave presentada el 23-11-2026"><div class="tid">T1586.002</div><div class="tn">Compromise Accounts: Email Accounts</div><div class="tp">Cuenta de contacto en <code>onionmail[.]org</code> declarada en el identificador de usuario de la clave presentada el 23-11-2026</div></div></div>
+<div class="mcol" data-col><h5>Acceso inicial <i>3</i></h5>
+<div class="tq" data-s="acceso inicial t1566.004 phishing: spearphishing voice vector principal del clúster: voz, no correo"><div class="tid">T1566.004</div><div class="tn">Phishing: Spearphishing Voice</div><div class="tp">Vector principal del clúster: voz, no correo</div></div>
+<div class="tq" data-s="acceso inicial t1078.004 valid accounts: cloud accounts acceso autenticado a aplicaciones saas con la credencial de inicio de sesión único de la víctima"><div class="tid">T1078.004</div><div class="tn">Valid Accounts: Cloud Accounts</div><div class="tp">Acceso autenticado a aplicaciones SaaS con la credencial de inicio de sesión único de la víctima</div></div>
+<div class="tq" data-s="acceso inicial t1190 exploit public-facing application vía reivindicada en septiembre de 2026 contra un portal peoplesoft; cve-2026-35273, cvss 9.8, publicado tres meses antes (kj-5)"><div class="tid">T1190</div><div class="tn">Exploit Public-Facing Application</div><div class="tp">Vía reivindicada en septiembre de 2026 contra un portal PeopleSoft; <code>CVE-2026-35273</code>, CVSS 9.8, <strong>publicado tres meses antes</strong> (<code>KJ-5</code>)</div></div></div>
+<div class="mcol" data-col><h5>Acceso a credenciales <i>2</i></h5>
+<div class="tq" data-s="acceso a credenciales t1111 multi-factor authentication interception el kit intercepta el flujo: recoge usuario y contraseña y a continuación solicita los factores"><div class="tid">T1111</div><div class="tn">Multi-Factor Authentication Interception</div><div class="tp">El kit intercepta el flujo: recoge usuario y contraseña y a continuación solicita los factores</div></div>
+<div class="tq" data-s="acceso a credenciales t1621 multi-factor authentication request generation el operador, al teléfono, induce a aprobar la notificación o a dictar el código de un solo uso"><div class="tid">T1621</div><div class="tn">Multi-Factor Authentication Request Generation</div><div class="tp">El operador, al teléfono, induce a aprobar la notificación o a dictar el código de un solo uso</div></div></div>
+<div class="mcol" data-col><h5>Sigilo <i>1</i></h5>
+<div class="tq" data-s="sigilo t1684.001 masquerading: impersonation suplantación de personal de soporte en la llamada, y del portal de identidad en la página"><div class="tid">T1684.001</div><div class="tn">Masquerading: Impersonation</div><div class="tp">Suplantación de personal de soporte en la llamada, y del portal de identidad en la página</div></div></div>
+<div class="mcol" data-col><h5>Mando y control <i>1</i></h5>
+<div class="tq" data-s="mando y control t1665 hide infrastructure sitios de suplantación servidos detrás de cloudflare, cuyos retos impidieron a la propia okta analizar el kit; filtrado de visitantes y reenvío del tráfico no deseado al portal legítimo de la víctima"><div class="tid">T1665</div><div class="tn">Hide Infrastructure</div><div class="tp">Sitios de suplantación servidos <strong>detrás de Cloudflare</strong>, cuyos retos impidieron a la propia Okta analizar el kit; filtrado de visitantes y reenvío del tráfico no deseado al portal legítimo de la víctima</div></div></div>
+<div class="mcol" data-col><h5>Movimiento lateral <i>1</i></h5>
+<div class="tq" data-s="movimiento lateral t1550.001 use alternate authentication material: application access token patrón histórico del ecosistema: abuso de tokens de integración de terceros sobre el crm de la víctima; sostiene la decisión §e-3 e-c"><div class="tid">T1550.001</div><div class="tn">Use Alternate Authentication Material: Application Access Token</div><div class="tp">Patrón histórico del ecosistema: abuso de tokens de integración de terceros sobre el CRM de la víctima; sostiene la decisión §E-3 <code>E-c</code></div></div></div>
+<div class="mcol" data-col><h5>Recolección <i>3</i></h5>
+<div class="tq" data-s="recolección t1213.002 data from information repositories: sharepoint extracción desde repositorios documentales alcanzables con la sesión obtenida"><div class="tid">T1213.002</div><div class="tn">Data from Information Repositories: Sharepoint</div><div class="tp">Extracción desde repositorios documentales alcanzables con la sesión obtenida</div></div>
+<div class="tq" data-s="recolección t1213.005 data from information repositories: messaging applications extracción desde mensajería corporativa"><div class="tid">T1213.005</div><div class="tn">Data from Information Repositories: Messaging Applications</div><div class="tp">Extracción desde mensajería corporativa</div></div>
+<div class="tq" data-s="recolección t1530 data from cloud storage extracción desde almacenamiento en la nube del inquilino"><div class="tid">T1530</div><div class="tn">Data from Cloud Storage</div><div class="tp">Extracción desde almacenamiento en la nube del inquilino</div></div></div>
+<div class="mcol" data-col><h5>Exfiltración <i>1</i></h5>
+<div class="tq" data-s="exfiltración t1567.002 exfiltration over web service: exfiltration to cloud storage los operadores anuncian una red de distribución propia para alojar los datos robados"><div class="tid">T1567.002</div><div class="tn">Exfiltration Over Web Service: Exfiltration to Cloud Storage</div><div class="tp">Los operadores anuncian una red de distribución propia para alojar los datos robados</div></div></div>
+<div class="mcol" data-col><h5>Impacto <i>1</i></h5>
+<div class="tq" data-s="impacto t1657 financial theft extorsión bajo amenaza de publicación, sin cifrado; shinysp1d3r añadiría t1486 si llegara a usarse, lo que a 24-11-2026 no consta"><div class="tid">T1657</div><div class="tn">Financial Theft</div><div class="tp">Extorsión bajo amenaza de publicación, sin cifrado; <code>ShinySp1d3r</code> añadiría <code>T1486</code> <strong>si llegara a usarse</strong>, lo que a 24-11-2026 no consta</div></div></div></div>
+<p class="rv"><strong>Nota de versión.</strong> Alineado a <strong>ATT&amp;CK v20.1</strong>. <code>T1656</code> <em>Impersonation</em> está <strong>revocada</strong> y aquí se usa su sustituta <strong><code>T1684.001</code></strong>; <em>Defense Evasion</em> se denomina <strong>Sigilo</strong> en esta versión.</p>
+</section>
+<section id="t-2-hipotesis-de-caza-y-las-cuatro-consultas-que-responden-nos-han-llamado" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-2</span><div><h2>Hipótesis de caza, y las cuatro consultas que responden «¿nos han llamado?»</h2><p><strong>Las cuatro se ejecutan sobre registros que la organización ya tiene</strong>, y ninguna necesita una herramienta nueva.</p></div></div><ol class="rv"><li><strong>Dominios con nuestra marca y término jurídico.</strong> Buscar en registros de DNS, proxy y transparencia de certificados, desde el <strong>21-10-2026</strong>, cualquier resolución o certificado para <code>legal-&lt;nuestra marca&gt;</code>, <code>&lt;nuestra marca&gt;-legal</code>, <code>legaldept-&lt;nuestra marca&gt;</code>, <code>law-&lt;nuestra marca&gt;</code> y <code>&lt;nuestra marca&gt;.legal</code>. <strong>Es la consulta más barata y la que da aviso previo</strong>: la infraestructura se registra entre 1 y 28 días antes de la publicación.</li><li><strong>Referente de origen cruzado en el inicio de sesión único.</strong> Autenticaciones correctas cuyo referente no sea nuestro dominio ni el del proveedor de identidad. Un inicio de sesión legítimo no llega desde un dominio de terceros recién registrado.</li><li><strong>Restablecimientos de credencial o de segundo factor seguidos de acceso inmediato.</strong> Secuencia: restablecimiento → inscripción de un factor nuevo → acceso a SaaS con datos de clientes, todo en menos de una hora. <strong>Es la firma de esta cadena</strong>, y la contramedida de proceso es la decisión §E-3 <code>E-b</code>.</li><li><strong>Inscripción de dispositivo o de factor desde red no habitual.</strong> Combinar con geolocalización y tipo de dirección; en esta campaña el operador necesita inscribir algo para conservar el acceso.</li></ol>
+<p class="rv"><strong>Y una hipótesis de caza negativa, que es la que evita gastar en el sitio equivocado:</strong> no buscar muestras en los extremos. <strong>En esta cadena no hay binario.</strong> Quien dedique la caza al extremo no encontrará nada y concluirá que no le afecta.</p>
+</section>
+<section id="t-3-lo-que-no-hay-que-hacer-con-este-expediente" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--mint)">T-3</span><div><h2>Lo que NO hay que hacer con este expediente</h2></div></div><ul class="rv"><li><strong>No bloquear las direcciones de Cloudflare.</strong> Las dos a las que resuelve el foro asociado al actor son de Cloudflare; bloquearlas corta a terceros y posiblemente a nosotros. Van al <code>Anexo A</code> con tipo <code>artefacto</code>. Es el mismo fallo que <code>CTI-2026-063</code> documentó con el aviso de Microsoft y <code>CTI-2026-044</code> con <code>AA26-293A</code>.</li><li><strong>No bloquear direcciones de servicio oculto.</strong> Un <code>.onion</code> no se resuelve por DNS: la entrada en una lista de bloqueo no produce ningún efecto. Sirven para correlacionar reclamaciones y para detectar uso de Tor desde la red propia.</li><li><strong>No ingerir la dirección de ShinySp1d3r del agregador.</strong> Es un marcador de posición (§O-1.3).</li><li><strong>No citar un recuento de víctimas de este actor sin fuente y fecha.</strong> Las dos fuentes discrepan en un 32,3 % (§O-2.3).</li><li><strong>No atribuir un incidente nuevo «a ShinyHunters» en comunicación pública.</strong> <code>KJ-2</code>.</li></ul>
+</section>
+<div class="level lv-x rv" id="nivel-x"><div class="kicker">Nivel 04</div><h2>Técnico</h2><div class="meta"><span><b>Para:</b> Ingeniería de detección</span><span>TIP/SIEM</span><span>Analistas de infraestructura</span><span><b>Vida útil:</b> la medición es del 24-11-2026</span></div></div>
+<section id="x-1-la-cadena-de-claves-medida-paso-a-paso" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-1</span><div><h2>La cadena de claves, medida paso a paso</h2><p>Todo lo de esta sección es <strong>medición propia del 24-11-2026</strong>, reproducible con los comandos del <code>Anexo F</code>. El procedimiento generalizado está en el <code>Anexo D</code>.</p></div></div>
+<p class="rv"><strong>Paso 1 · Las dos claves presentadas como prueba existen y están revocadas.</strong> Descargadas de <code>keys.openpgp.org</code> por huella y analizadas con <code>gpg --list-packets</code>:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Huella</th><th>Creada</th><th>Paquete de revocación</th><th>Razón declarada</th></tr></thead><tbody>
+<tr><td><code>1FC4D0B1DEE914BB05B57FABF1F1B98A51C989B3</code></td><td><strong>2020-08-25</strong></td><td>Firma <code>sigclass 0x20</code> de <strong>2026-03-17</strong></td><td><code>0x01</code> — <strong>clave sustituida</strong></td></tr>
+<tr><td><code>828537C15F43F135A8317153CD16A1660CC7CE51</code></td><td><strong>2020-01-28</strong></td><td>Firma <code>sigclass 0x20</code> de <strong>2026-03-17</strong></td><td><code>0x01</code> — <strong>clave sustituida</strong></td></tr></tbody></table></div>
+<p class="rv"><code>sigclass 0x20</code> es, en OpenPGP, la revocación de la clave primaria, y va <strong>firmada por la propia clave</strong>: no la puede emitir un tercero. Es decir, <strong>las revocó su titular</strong>.</p>
+<p class="rv"><strong>Paso 2 · La razón de revocación trae un puntero, y el puntero funciona a medias.</strong> El subpaquete 29 de las dos revocaciones contiene el mismo texto: <em>«New key can be found at this location https://shinyhunte.rs/newpgp or https://web.archive.org/…/pastebin.com/raw/…»</em>. <strong>La primera vía está muerta</strong> —<code>shinyhunte.rs</code> sin delegación DNS y en <code>serverHold</code> en el registro serbio, §O-3.3—. <strong>La segunda funciona</strong>: la copia archivada del 16-03-2026 a las 23:55 UTC contiene un bloque de clave pública.</p>
+<p class="rv"><strong>Paso 3 · La clave archivada es la sustituta, y no está revocada.</strong> Importada, su huella es <strong><code>F4953411767DE71BEDCDABCB76F4E26F7A20978A</code></strong>, RSA de 4096 bits, creada el <strong>2026-03-16</strong>, identificador de usuario <code>ShinyHunters</code>, <strong>sin paquete de revocación</strong>. Coincide con la clave que la cobertura de marzo describió como sustituta. <strong>Esta es, por declaración de su propio titular, la clave vigente.</strong></p>
+<p class="rv"><strong>Paso 4 · La clave presentada el 23-11-2026 es nueva, y de después de las detenciones.</strong> <strong><code>27DA9D5B183247CADFC322880ABC63E30F73822E</code></strong>, Ed25519, creada el <strong>2026-10-31</strong>, identificador <code>ShinyHunters &lt;shcorp@onionmail[.]org&gt;</code>. Dos semanas y media antes de aparecer el sitio; <strong>seis semanas después</strong> de las detenciones de septiembre.</p>
+<p class="rv"><strong>Paso 5 · La clave nueva no lleva aval criptográfico de ninguna de las anteriores en los servidores públicos.</strong> Consultados dos: en <code>keys.openpgp.org</code> sólo trae su autofirma, y ahí <strong>no prueba nada</strong> porque ese servidor <strong>no distribuye certificaciones de terceros por política</strong>; pero en <strong><code>keyserver.ubuntu.com</code>, que sí las distribuye</strong>, tampoco aparece ninguna. El aval que la respalda es <strong>textual</strong> —el anuncio dice que las claves viejas autentican la nueva—, no una firma cruzada publicada.</p>
+<p class="rv"><strong>Paso 6 · La omisión, que es el hallazgo.</strong> Los mensajes de noviembre se firmaron con las <strong>dos claves revocadas</strong> y, según la fuente que los verificó, <strong>ninguno con <code>F4953411…20978A</code></strong>. Cualquier implementación conforme de OpenPGP marca una firma hecha con una clave revocada como <strong>no válida para autenticar</strong>: la revocación es precisamente la declaración del titular de que esa clave ya no le representa. Y aquí la razón declarada no es compromiso, es sustitución, de modo que el titular dejó dicho <strong>cuál</strong> le representa.</p>
+<p class="rv"><strong>Por qué la omisión es el dato y no un detalle.</strong> Firmar con la clave vigente <strong>no cuesta nada</strong> a quien la tenga, y resuelve la duda por completo. Que se recurra a dos claves retiradas ocho meses antes, de las que la propia fuente dice que <strong>circularon entre varias personas</strong>, admite dos explicaciones: que no se disponga de la vigente, o que se prefiera el valor simbólico de las de 2020. La primera es más económica y tiene una consecuencia operativa: <strong>quien volvió no es quien operaba el sitio en marzo</strong>. De ahí <code>KJ-1</code>, con su probabilidad y no como certeza.</p>
+</section>
+<section id="x-2-medicion-de-la-infraestructura-de-senuelo" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-2</span><div><h2>Medición de la infraestructura de señuelo</h2><p>Trece dominios del conjunto publicado, medidos el 24-11-2026 con <code>dig</code> y <code>whois</code>:</p></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Qué se midió</th><th>Resultado</th><th>Hallazgo</th></tr></thead><tbody>
+<tr><td>Registros MX</td><td><strong>0 de 13</strong></td><td>Corrobora de forma independiente la afirmación de ReversingLabs: el dominio <strong>no puede recibir correo</strong></td></tr>
+<tr><td><code>_dmarc</code> y TXT</td><td><strong>0 de 13</strong></td><td>Igual. No hay intención de enviar correo desde ellos</td></tr>
+<tr><td>Registro A</td><td><strong>2 de 13</strong> resuelven</td><td>La campaña del 16-11 ya está en gran parte retirada ocho días después</td></tr>
+<tr><td>Servidores de nombres</td><td>2 de 13 con <code>ns3</code>/<code>ns4.my-ndns[.]com</code></td><td>Son los servidores <strong>por omisión de NICENIC</strong> —dominio registrado en el propio NICENIC en 2022—: confirma registrador y confirma que están <strong>aparcados de vuelta</strong></td></tr>
+<tr><td>Estado del registro</td><td><code>legal-anthropic[.]com</code> en <strong><code>clientHold</code></strong></td><td><strong>Suspendido por el registrador</strong>, no sólo sin DNS</td></tr>
+<tr><td>Fechas y hora de registro</td><td><code>legal-anthropic[.]com</code> <strong>2026-11-15 19:20 UTC</strong>; <code>legal-mcdonalds[.]com</code> <strong>2026-11-17 19:17 UTC</strong></td><td>Corrobora la <strong>ventana vespertina UTC</strong> que describen las dos fuentes</td></tr>
+<tr><td>Registrador</td><td><code>legal-autozone[.]com</code> en <strong>DYNADOT</strong>, creado 2026-11-16</td><td><strong>Quinto registrador, no mencionado por la fuente.</strong> Amplía el conjunto a vigilar</td></tr>
+<tr><td>Dirección de ese dominio</td><td><code>137.131.40.164</code> → <strong>Oracle Corporation</strong></td><td><strong>Divergencia:</strong> la fuente describe el conjunto fronteado por Cloudflare. Lo más económico es un aparcamiento posterior a la fase activa; <strong>no se concluye más</strong></td></tr>
+<tr><td>Campo de registrante</td><td>Redactado o vacío en 3 de 3 consultados</td><td><strong>No podemos corroborar</strong> el perfil «Chile» de la fuente (<code>KJ-6</code>, <code>G-3</code>)</td></tr></tbody></table></div>
+<p class="rv"><strong>Y la medición de la infraestructura del sitio de filtración</strong>, con RDAP y RIPEstat:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Prefijo</th><th>Origen</th><th>Titular</th><th>Visibilidad RIS</th><th>Primera observación</th><th>Última</th></tr></thead><tbody>
+<tr><td><code>91.202.233.0/24</code></td><td><code>AS200593</code></td><td>PROSPERO OOO, RU</td><td><strong>313 / 322</strong></td><td>2015-04-30, con otro origen</td><td><strong>2026-11-24 08:00 UTC</strong></td></tr>
+<tr><td><code>91.215.85.0/24</code></td><td><code>AS200593</code></td><td>PROSPERO OOO, RU</td><td>—</td><td>—</td><td>activo</td></tr>
+<tr><td><code>176.120.22.0/24</code></td><td><code>AS198953</code></td><td>Proton66 OOO, RU</td><td><strong>311 / 322</strong></td><td>2026-01-14</td><td><strong>2026-11-24 08:00 UTC</strong></td></tr></tbody></table></div>
+</section>
+<section id="x-3-deteccion-y-mitigacion-en-orden-de-efecto" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">X-3</span><div><h2>Detección y mitigación, en orden de efecto</h2></div></div>
+<div class="codewrap rv"><div class="codehead"><span>código</span><button class="copy">copiar</button></div>
+<pre><code># 1 · Dominios con nuestra marca más término jurídico (el aviso previo)
+#     Fuentes: transparencia de certificados, registros de DNS recursivo, proxy.
+#     Patrones: legal-&lt;marca&gt;.com | &lt;marca&gt;-legal.com | legaldept-&lt;marca&gt;.com
+#               law-&lt;marca&gt;.com   | &lt;marca&gt;.legal
+#     Ventana: desde 2026-10-21. Ojo: el tema cambia cada 4-6 semanas,
+#     así que el patrón «legal» caduca; lo estable es «nuestra marca
+#     en un dominio que no es nuestro».
+
+# 2 · Autenticación correcta con referente de origen cruzado
+#     Registro del proveedor de identidad: éxito de inicio de sesión
+#     cuyo referente no sea nuestro dominio ni el del proveedor.
+
+# 3 · La secuencia de la mesa de ayuda (la firma de esta cadena)
+#     restablecimiento de contraseña
+#       -&gt; inscripción de factor nuevo
+#         -&gt; acceso a SaaS con datos de clientes
+#     en una ventana de 60 minutos, para la misma identidad.
+
+# 4 · Inscripción de factor o dispositivo desde red no habitual
+#     Correlacionar con tipo de dirección: proxy anonimizador,
+#     red residencial de un país donde no tenemos personal.
+
+# 5 · Lo que NO sirve, dicho para que nadie lo intente
+#     - Buscar hashes de muestra: no hay binario en esta cadena.
+#     - Bloquear direcciones de Cloudflare del Anexo A: corta a terceros.
+#     - Bloquear .onion: no se resuelve por DNS, no produce efecto.</code></pre></div>
+<p class="rv"><strong>Mitigaciones, por efecto decreciente:</strong></p><ol class="rv"><li><strong>Autenticación resistente a suplantación</strong> —FIDO2, passkeys, autenticadores ligados al origen— en acceso administrativo y a SaaS con datos de clientes. Es el único control que la fuente primaria declara <strong>efectivo contra el kit</strong>.</li><li><strong>Prohibición de restablecer credencial o factor desde llamada entrante</strong>, con verificación por canal alternativo. Cambio de proceso, coste cero en licencias.</li><li><strong>Restricción de acceso a dispositivo gestionado</strong> para las aplicaciones sensibles.</li><li><strong>Alerta obligatoria al titular</strong> ante cualquier cambio de factor, por canal independiente.</li><li><strong>Revisión de aplicaciones conectadas con token de larga vida</strong> (§E-3 <code>E-c</code>): un token ya está autenticado y la autenticación fuerte no lo detiene.</li><li><strong>Parcheo de aplicaciones expuestas en terceros con acuerdo de plazo verificable</strong>, que es la lección de <code>KJ-5</code> y de <code>CTI-2026-063</code>.</li></ol>
+</section>
+<section id="14-brechas-de-inteligencia-y-requisitos-de-coleccion" class="wrap"><div class="sec-head rv"><span class="sec-num" style="color:var(--amber)">14</span><div><h2>Brechas de inteligencia y requisitos de colección</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Id</th><th>Brecha</th><th>Efecto en los juicios</th><th>Cómo se cerraría</th><th>Prioridad</th></tr></thead><tbody>
+<tr><td><code>G-1</code></td><td>No tenemos los dos mensajes firmados del 23-11-2026: viven en un servicio oculto al que esta célula no accede</td><td><code>KJ-1</code> depende de la verificación declarada por un tercero (§3.3)</td><td>Obtención de los mensajes por una fuente con acceso, o publicación del texto firmado por cualquier proveedor</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td><code>G-2</code></td><td>No hay muestra pública del kit de suplantación; los retos de Cloudflare impidieron a la propia Okta analizarlo</td><td>Sin lógica de detección de contenido; §T-2 sólo propone caza por comportamiento</td><td>Una muestra o una captura del flujo por parte de una víctima</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td><code>G-3</code></td><td>El perfil de registrante «Chile» no es corroborable: el WHOIS público viene redactado</td><td><code>KJ-6</code> queda en confianza baja</td><td>Acceso a WHOIS histórico o no redactado del conjunto NICENIC</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td><code>G-4</code></td><td>No sabemos qué sirven hoy las cuatro direcciones del alojador que un tercero marca como disponibles</td><td>§O-3.2 no puede ir más allá de «la red no se ha retirado»</td><td>Sondeo autorizado, o telemetría de un tercero que declare qué puerto y qué servicio</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td><code>G-5</code></td><td>El expediente de ShinySp1d3r en el agregador contiene una dirección que es un marcador de posición</td><td>No afecta a ningún juicio; afecta a cualquiera que ingiera la fuente</td><td>Aviso al agregador y comprobación de si hay más expedientes con el mismo defecto</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td><code>G-6</code></td><td>No tenemos telemetría propia de identidad: no sabemos si esta campaña nos ha llamado</td><td>§3.4; la afirmación «no nos afecta» no tiene base</td><td>Ejecución de las cuatro consultas de §T-2</td><td><span class="pill p-amber">Alta</span></td></tr>
+<tr><td><code>G-7</code></td><td>El identificador <code>CVE-2026-35273</code> lo asigna cobertura secundaria, no la fuente primaria</td><td><code>KJ-5</code> queda en confianza moderada</td><td>Confirmación oficial del vector, o del propio proveedor del portal afectado</td><td><span class="pill p-sky">Media</span></td></tr>
+<tr><td><code>G-8</code></td><td>El conjunto anual de la primera fuente es un <strong>subconjunto estricto</strong> de su propio histórico de grupo: 110 frente a 116 para 2026, y faltan seis entradas</td><td>Ninguna cifra de este informe depende de ello, porque todas salen del histórico. <strong>Afecta al recolector diario de la cartera</strong>, que consulta el conjunto anual</td><td>Reproducir la comparación para otros actores y, si el defecto es general, consultar el histórico por grupo en lugar del conjunto anual</td><td><strong>Alta</strong> para el utillaje, baja para este informe</td></tr></tbody></table></div>
+<p class="rv"><strong>Disparadores de reevaluación.</strong> Cada uno, si se cumple, obliga a abrir versión:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Id</th><th>Disparador</th><th>Qué movería</th></tr></thead><tbody>
+<tr><td><code>I-1</code></td><td>Aparece un mensaje firmado con <code>F4953411…20978A</code></td><td><strong>Invierte <code>KJ-1</code></strong>: acreditaría continuidad del operador</td></tr>
+<tr><td><code>I-2</code></td><td>Una organización nombrada en INCEPTION o en el sitio nuevo <strong>confirma</strong> la brecha</td><td>Daría numerador a las reclamaciones; movería <code>KJ-4</code></td></tr>
+<tr><td><code>I-3</code></td><td><code>ShinySp1d3r</code> publica una primera víctima verificable</td><td>Cambia el perfil de impacto de §E-1 y añade <code>T1486</code> a §T-1</td></tr>
+<tr><td><code>I-4</code></td><td>Okta o ReversingLabs atribuyen con confianza alta la operación del sitio INCEPTION</td><td>Movería <code>KJ-2</code> y la tabla de §3.5</td></tr>
+<tr><td><code>I-5</code></td><td>Aparece una campaña de señuelos con <strong>tema distinto</strong> del jurídico</td><td>Caduca el patrón de §X-3 punto 1; hay que reescribirlo</td></tr>
+<tr><td><code>I-6</code></td><td>Los prefijos de PROSPERO o Proton66 dejan de anunciarse, o el sitio reaparece en otro alojador</td><td>Movería <code>KJ-7</code> y el objeto a vigilar</td></tr>
+<tr><td><code>I-7</code></td><td>Una víctima chilena o latinoamericana aparece en cualquiera de los tres sitios</td><td>Reabre §E-4 por completo</td></tr></tbody></table></div>
+</section>
+<div class="level  rv" id="nivel-an" style="--lv:var(--ink-3);--lv-soft:rgba(130,148,184,.12)"><h2>Anexos</h2></div>
+<section id="anexo-a-indicadores-de-compromiso" class="wrap"><div class="sec-head rv"><div><h2>Anexo A — Indicadores de compromiso</h2></div></div>
+<h3 class="rv">A.1 — Una decisión de publicación que conviene explicar</h3>
+<p class="rv">Este anexo publica <strong>dominios que contienen marcas de terceros</strong> y <strong>no publica los nombres de las organizaciones reivindicadas</strong> en ningún sitio de filtración. La asimetría es deliberada y éstas son las razones:</p><ul class="rv"><li>Un <strong>dominio de señuelo</strong> es infraestructura del adversario. Prueba un <strong>intento</strong> —el registro existe, está medido y lo publican dos proveedores con nombre—, y su publicación tiene valor defensivo inmediato: un equipo puede bloquearlo hoy. No afirma que la organización haya sido comprometida.</li><li>Una <strong>entrada en un sitio de filtración</strong> es una reclamación del adversario. En este expediente, <strong>el 71 % no llega ni a captura de pantalla</strong> y <strong>ninguna</strong> declara volumen ni importe. Reproducir el nombre amplifica la reclamación y hace el trabajo de presión del adversario, que es exactamente lo que el aviso oficial del FBI recomienda no hacer.</li><li>Para quien necesite comprobar <strong>su propio</strong> caso, el <code>Anexo F</code> da el procedimiento completo. Es la misma solución que <code>CTI-2026-062</code> adoptó con las víctimas chilenas de otro catálogo.</li></ul>
+<p class="rv"><strong>Vida útil.</strong> Los dominios de esta campaña <strong>se queman en días</strong>: la medición del 24-11-2026 encontró que <strong>11 de 13 ya no resuelven</strong> y uno está suspendido por su registrador. Lo que dura es el <strong>patrón</strong> y los <strong>prefijos</strong> del alojador, no la lista.</p>
+<h3 class="rv">A.2 — Dominios de señuelo del clúster de intrusión</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="pattern legal-[.]com · legaldept-[.]com · [.]legal · -legal[.]com · law-[.]com patrones de denominación del clúster a noviembre de 2026. valen más que la lista: el tema cambia cada 4–6 semanas y el patrón estable es «marca ajena en dominio que no es suyo» · alta caza y bloqueo preventivo con la marca propia"><span class="ty">pattern</span><span class="vv">legal-[.]com · legaldept-[.]com · [.]legal · -legal[.]com · law-[.]com<em>Patrones de denominación del clúster a noviembre de 2026. Valen más que la lista: el tema cambia cada 4–6 semanas y el patrón estable es «marca ajena en dominio que no es suyo» · Alta</em></span><span class="pill p-mint">Caza y bloqueo preventivo con la marca propia</span></div>
+<div class="ioc-row" data-s="domain legal-duolingo[.]com · legal-morningstar[.]com · legal-westernunion[.]com · legal-ea[.]com · legal-dropbox[.]com · legal-riotgames[.]com · legal-indeed[.]com · legal-creditkarma[.]com · legal-vrtx[.]com · legal-aexp[.]com conjunto confirmado por reversinglabs con comportamiento de kit de suplantación de inicio de sesión único · alta bloqueo"><span class="ty">domain</span><span class="vv">legal-duolingo[.]com · legal-morningstar[.]com · legal-westernunion[.]com · legal-ea[.]com · legal-dropbox[.]com · legal-riotgames[.]com · legal-indeed[.]com · legal-creditkarma[.]com · legal-vrtx[.]com · legal-aexp[.]com<em>Conjunto confirmado por ReversingLabs con comportamiento de kit de suplantación de inicio de sesión único · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain legal-expeditors[.]com · legal-twitch[.]tv · legal-lvmh[.]com · legal-amd[.]com · legal-carvana[.]com · legal-pepsico[.]com · legal-caesars[.]com · legal-rbi[.]com · legal-grubhub[.]com · legal-lucidmotors[.]com · activisionblizzard-legal[.]com conjunto confirmado, continuación. legal-lucidmotors[.]com es el que imita netiq / opentext, no okta · alta bloqueo"><span class="ty">domain</span><span class="vv">legal-expeditors[.]com · legal-twitch[.]tv · legal-lvmh[.]com · legal-amd[.]com · legal-carvana[.]com · legal-pepsico[.]com · legal-caesars[.]com · legal-rbi[.]com · legal-grubhub[.]com · legal-lucidmotors[.]com · activisionblizzard-legal[.]com<em>Conjunto confirmado, continuación. legal-lucidmotors[.]com es el que imita NetIQ / OpenText, no Okta · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain legal-cigna[.]com · legal-paychex[.]com · legal-henryschein[.]com · henryschein-legal[.]com · law-henryschein[.]com · legal-lucid[.]com · legal-autozone[.]com dominios asociados a organizaciones que el sitio nombró. tres variantes de un mismo objetivo registradas en registradores distintos en trece minutos y al día siguiente: indicio de una sola mano · alta bloqueo"><span class="ty">domain</span><span class="vv">legal-cigna[.]com · legal-paychex[.]com · legal-henryschein[.]com · henryschein-legal[.]com · law-henryschein[.]com · legal-lucid[.]com · legal-autozone[.]com<em>Dominios asociados a organizaciones que el sitio nombró. Tres variantes de un mismo objetivo registradas en registradores distintos en trece minutos y al día siguiente: indicio de una sola mano · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain legal-anthropic[.]com · legal-openai[.]com · legal-tesla[.]com · legal-netflix[.]com · legal-adobe[.]com · legal-nestle[.]com · legal-delta[.]com · legal-kfc[.]com · legal-starbucks[.]com · legal-mcdonalds[.]com · mcdonalds-legal[.]com alta confianza, sin prueba directa de kit: coinciden en denominación, registrador, ventana horaria y servidores de nombres. medición propia: legal-anthropic[.]com registrado 2026-11-15 19:20 utc, hoy en clienthold · moderada–alta bloqueo"><span class="ty">domain</span><span class="vv">legal-anthropic[.]com · legal-openai[.]com · legal-tesla[.]com · legal-netflix[.]com · legal-adobe[.]com · legal-nestle[.]com · legal-delta[.]com · legal-kfc[.]com · legal-starbucks[.]com · legal-mcdonalds[.]com · mcdonalds-legal[.]com<em>Alta confianza, sin prueba directa de kit: coinciden en denominación, registrador, ventana horaria y servidores de nombres. Medición propia: legal-anthropic[.]com registrado 2026-11-15 19:20 UTC, hoy en clientHold · Moderada–alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain legal-nintendo[.]com · nintendo-legal[.]com · legal-paramount[.]com · paramount[.]legal · legal-warnerbros[.]com · warnerbros-legal[.]com · legal-wernerbros[.]com · legal-nbcuniversal[.]com · legal-ubisoft[.]com · legal-epicgames[.]com · legal-reddit[.]com · reddit-legal[.]com alta confianza, continuación. legal-wernerbros[.]com conserva el error ortográfico del registrante, que es útil como huella · moderada–alta bloqueo"><span class="ty">domain</span><span class="vv">legal-nintendo[.]com · nintendo-legal[.]com · legal-paramount[.]com · paramount[.]legal · legal-warnerbros[.]com · warnerbros-legal[.]com · legal-wernerbros[.]com · legal-nbcuniversal[.]com · legal-ubisoft[.]com · legal-epicgames[.]com · legal-reddit[.]com · reddit-legal[.]com<em>Alta confianza, continuación. legal-wernerbros[.]com conserva el error ortográfico del registrante, que es útil como huella · Moderada–alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="domain legal-alaskaair[.]com · legal-jcpenney[.]com · legal-mtb[.]com · legal-molinahealthcare[.]com · legal-verisk[.]com · verisk-legal[.]com · verisk-law[.]com · legal-colpipe[.]com · legal-ssctech[.]com · legal-ulta[.]com · legal-nfl[.]com · legal-arthrex[.]com · legal-ml[.]com · legal-jonesday[.]com · legal-iheartmedia[.]com · iheartmedia-legal[.]com · legal-wynnresorts[.]com · wynnresorts[.]legal · legal-everpuredata[.]com alta y media confianza. ninguna de estas organizaciones figura en ningún sitio de filtración: son objetivos preparados, no víctimas · moderada bloqueo"><span class="ty">domain</span><span class="vv">legal-alaskaair[.]com · legal-jcpenney[.]com · legal-mtb[.]com · legal-molinahealthcare[.]com · legal-verisk[.]com · verisk-legal[.]com · verisk-law[.]com · legal-colpipe[.]com · legal-ssctech[.]com · legal-ulta[.]com · legal-nfl[.]com · legal-arthrex[.]com · legal-ml[.]com · legal-jonesday[.]com · legal-iheartmedia[.]com · iheartmedia-legal[.]com · legal-wynnresorts[.]com · wynnresorts[.]legal · legal-everpuredata[.]com<em>Alta y media confianza. Ninguna de estas organizaciones figura en ningún sitio de filtración: son objetivos preparados, no víctimas · Moderada</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="pattern ns3[.]my-ndns[.]com · ns4[.]my-ndns[.]com servidores de nombres por omisión de nicenic. medición propia: dos de los trece dominios medidos han vuelto a ellos, señal de dominio aparcado tras la fase activa. no es infraestructura de ataque: es huella de registrador · alta caza y correlación de registrador"><span class="ty">pattern</span><span class="vv">ns3[.]my-ndns[.]com · ns4[.]my-ndns[.]com<em>Servidores de nombres por omisión de NICENIC. Medición propia: dos de los trece dominios medidos han vuelto a ellos, señal de dominio aparcado tras la fase activa. No es infraestructura de ataque: es huella de registrador · Alta</em></span><span class="pill p-mint">Caza y correlación de registrador</span></div>
+<div class="ioc-row" data-s="artefacto 137.131.40.164 oracle corporation. dirección a la que resuelve legal-autozone[.]com el 24-11-2026. divergencia con la fuente, que describe el conjunto detrás de cloudflare; explicación más económica: aparcamiento posterior. infraestructura de un proveedor de nube con millones de clientes · moderada nunca bloqueo"><span class="ty">artefacto</span><span class="vv">137.131.40.164<em>Oracle Corporation. Dirección a la que resuelve legal-autozone[.]com el 24-11-2026. Divergencia con la fuente, que describe el conjunto detrás de Cloudflare; explicación más económica: aparcamiento posterior. Infraestructura de un proveedor de nube con millones de clientes · Moderada</em></span><span class="pill p-mint">NUNCA bloqueo</span></div></div>
+<h3 class="rv">A.3 — Infraestructura del sitio de filtración caído</h3>
+<div class="note warn rv"><div class="t">⚠ Leer antes de usar</div><p>Las dos direcciones del foro asociado son de <strong>Cloudflare</strong> y van con tipo <code>artefacto</code> y marca <strong>NUNCA bloqueo</strong>: bloquearlas corta a terceros. Las cuatro direcciones de los alojadores <strong>sí</strong> son bloqueables —son espacio de un cliente, no infraestructura compartida—. Y <strong>ninguna dirección de servicio oculto se bloquea</strong>: no se resuelve por DNS y la entrada en una lista no produce efecto.</p></div>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="ipv4 91.202.233.104 dirección asociada al sitio de filtración. prospero ooo, as200593, rusia (medición propia rdap, 24-11-2026) · alta bloqueo"><span class="ty">ipv4</span><span class="vv">91.202.233.104<em>Dirección asociada al sitio de filtración. PROSPERO OOO, AS200593, Rusia (medición propia RDAP, 24-11-2026) · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="ipv4 91.215.85.22 · 91.215.85.103 ídem, mismo titular y mismo /24 · alta bloqueo"><span class="ty">ipv4</span><span class="vv">91.215.85.22 · 91.215.85.103<em>Ídem, mismo titular y mismo /24 · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="ipv4 176.120.22.24 ídem. proton66 ooo, as198953, rusia · alta bloqueo"><span class="ty">ipv4</span><span class="vv">176.120.22.24<em>Ídem. Proton66 OOO, AS198953, Rusia · Alta</em></span><span class="pill p-mint">Bloqueo</span></div>
+<div class="ioc-row" data-s="pattern 91.202.233.0/24 · 91.215.85.0/24 · 176.120.22.0/24 los prefijos son el indicador duradero, no las direcciones: los tres siguen anunciados por los mismos sistemas autónomos el 24-11-2026, con 313 y 311 de 322 pares ris viéndolos · alta vigilancia del prefijo y bloqueo selectivo tras verificación"><span class="ty">pattern</span><span class="vv">91.202.233.0/24 · 91.215.85.0/24 · 176.120.22.0/24<em>Los prefijos son el indicador duradero, no las direcciones: los tres siguen anunciados por los mismos sistemas autónomos el 24-11-2026, con 313 y 311 de 322 pares RIS viéndolos · Alta</em></span><span class="pill p-mint">Vigilancia del prefijo y bloqueo selectivo tras verificación</span></div>
+<div class="ioc-row" data-s="asn as200593 · as198953 prospero ooo y proton66 ooo. el alojador sobrevive a la marca: es el objeto a vigilar según kj-7 · alta vigilancia de anuncios y de prefijos nuevos"><span class="ty">asn</span><span class="vv">AS200593 · AS198953<em>PROSPERO OOO y Proton66 OOO. El alojador sobrevive a la marca: es el objeto a vigilar según KJ-7 · Alta</em></span><span class="pill p-mint">Vigilancia de anuncios y de prefijos nuevos</span></div>
+<div class="ioc-row" data-s="artefacto 172.67.165.58 · 104.21.81.218 cloudflare. direcciones a las que resuelve breachforums[.]hn el 24-11-2026 (medición propia). sirven a millones de terceros · alta nunca bloqueo"><span class="ty">artefacto</span><span class="vv">172.67.165.58 · 104.21.81.218<em>Cloudflare. Direcciones a las que resuelve breachforums[.]hn el 24-11-2026 (medición propia). Sirven a millones de terceros · Alta</em></span><span class="pill p-mint">NUNCA bloqueo</span></div>
+<div class="ioc-row" data-s="domain breachforums[.]hn foro asociado al actor en el inventario de los dos agregadores. registrado 2024-04-19, registrador 101domain · moderada bloqueo del nombre; no de sus direcciones"><span class="ty">domain</span><span class="vv">breachforums[.]hn<em>Foro asociado al actor en el inventario de los dos agregadores. Registrado 2024-04-19, registrador 101Domain · Moderada</em></span><span class="pill p-mint">Bloqueo del nombre; no de sus direcciones</span></div>
+<div class="ioc-row" data-s="artefacto shinypogk4jjniry5qi7247tznop6mxdrdte2k6pdu5cyo43vdzmrwid[.]onion sitio de filtración principal. suma de control validada: c8d9 coincidente, luego corresponde a una clave ed25519 real. marcado no disponible por el segundo agregador, último sondeo 2026-07-17 · alta correlación y detección de uso de tor; no bloqueo"><span class="ty">artefacto</span><span class="vv">shinypogk4jjniry5qi7247tznop6mxdrdte2k6pdu5cyo43vdzmrwid[.]onion<em>Sitio de filtración principal. Suma de control validada: c8d9 coincidente, luego corresponde a una clave Ed25519 real. Marcado no disponible por el segundo agregador, último sondeo 2026-07-17 · Alta</em></span><span class="pill p-mint">Correlación y detección de uso de Tor; no bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto espeonsh2drryv4bsonur5ud7d6gooho2mvktqdmakdpoxkwwersinid[.]onion · toolatedhs5dtr2pv6h5kdraneak5gs3sxrecqhoufc5e45edior7mqd[.]onion · shnyhntww34phqoa6dcgnvps2yu7dlwzmy5lkvejwjdo6z7bmgshzayd[.]onion sitios de respaldo del mismo actor. sumas validadas: 2435, 1fb2, 7c83. los tres, no disponibles · alta correlación; no bloqueo"><span class="ty">artefacto</span><span class="vv">espeonsh2drryv4bsonur5ud7d6gooho2mvktqdmakdpoxkwwersinid[.]onion · toolatedhs5dtr2pv6h5kdraneak5gs3sxrecqhoufc5e45edior7mqd[.]onion · shnyhntww34phqoa6dcgnvps2yu7dlwzmy5lkvejwjdo6z7bmgshzayd[.]onion<em>Sitios de respaldo del mismo actor. Sumas validadas: 2435, 1fb2, 7c83. Los tres, no disponibles · Alta</em></span><span class="pill p-mint">Correlación; no bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto shinyazvxkdfoqmpht7xyqo2xa2vlqzzalkqqmkfq3nsfbinmkukhjad[.]onion sitio aparecido el 23-11-2026 que reivindica ser el actor. suma validada: a3a4 coincidente. el segundo agregador lo marca disponible; esta célula no ha comprobado que esté servido · moderada correlación; no bloqueo"><span class="ty">artefacto</span><span class="vv">shinyazvxkdfoqmpht7xyqo2xa2vlqzzalkqqmkfq3nsfbinmkukhjad[.]onion<em>Sitio aparecido el 23-11-2026 que reivindica ser el actor. Suma validada: a3a4 coincidente. El segundo agregador lo marca disponible; esta célula no ha comprobado que esté servido · Moderada</em></span><span class="pill p-mint">Correlación; no bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto incptbug3ziqym4rhgsj7h7hbpzt3v4ympcf42gsdb5haqq237fziaad[.]onion sitio inception, indexado el 17-11-2026. suma validada: 9400 coincidente · alta correlación; no bloqueo"><span class="ty">artefacto</span><span class="vv">incptbug3ziqym4rhgsj7h7hbpzt3v4ympcf42gsdb5haqq237fziaad[.]onion<em>Sitio INCEPTION, indexado el 17-11-2026. Suma validada: 9400 coincidente · Alta</em></span><span class="pill p-mint">Correlación; no bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto sh1nysp1d3rxyz123456789abcdefghijklmnopqrstuvwxyz[.]onion no es una dirección válida. 49 caracteres frente a los 56 de una v3, y cuerpo con el alfabeto en orden: es un marcador de posición del agregador. se consigna para que nadie lo ingiera (g-5) · alta, en cuanto a que es inválida nunca ingerir como indicador"><span class="ty">artefacto</span><span class="vv">sh1nysp1d3rxyz123456789abcdefghijklmnopqrstuvwxyz[.]onion<em>NO ES UNA DIRECCIÓN VÁLIDA. 49 caracteres frente a los 56 de una v3, y cuerpo con el alfabeto en orden: es un marcador de posición del agregador. Se consigna para que nadie lo ingiera (G-5) · Alta, en cuanto a que es inválida</em></span><span class="pill p-mint">NUNCA ingerir como indicador</span></div>
+<div class="ioc-row" data-s="domain shinyhunte[.]rs dominio público del actor, designado por él mismo en marzo de 2026 para publicar su clave. medición propia: sin delegación dns y en inactive / serverhold en el registro serbio · alta bloqueo del nombre; vigilancia de reactivación"><span class="ty">domain</span><span class="vv">shinyhunte[.]rs<em>Dominio público del actor, designado por él mismo en marzo de 2026 para publicar su clave. Medición propia: sin delegación DNS y en Inactive / serverHold en el registro serbio · Alta</em></span><span class="pill p-mint">Bloqueo del nombre; vigilancia de reactivación</span></div></div>
+<h3 class="rv">A.4 — Material criptográfico, que es la prueba del expediente</h3>
+<div class="attck-bar rv"><label class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg><input id="iocSearch" type="search" placeholder="Filtrar indicadores…" autocomplete="off"></label><span class="count" id="iocCount"></span></div>
+<div class="card rv" style="padding:0">
+<div class="ioc-row" data-s="artefacto 1fc4d0b1dee914bb05b57fabf1f1b98a51c989b3 clave pgp del actor creada 2020-08-25. revocada por su titular el 2026-03-17, razón 0x01 «clave sustituida». usada para firmar el anuncio del 23-11-2026 · alta, medición propia correlación y atribución; nunca bloqueo"><span class="ty">artefacto</span><span class="vv">1FC4D0B1DEE914BB05B57FABF1F1B98A51C989B3<em>Clave PGP del actor creada 2020-08-25. REVOCADA por su titular el 2026-03-17, razón 0x01 «clave sustituida». Usada para firmar el anuncio del 23-11-2026 · Alta, medición propia</em></span><span class="pill p-mint">Correlación y atribución; NUNCA bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto 828537c15f43f135a8317153cd16a1660cc7ce51 clave pgp creada 2020-01-28. revocada el 2026-03-17, misma razón. usada también el 23-11-2026 · alta, medición propia correlación y atribución; nunca bloqueo"><span class="ty">artefacto</span><span class="vv">828537C15F43F135A8317153CD16A1660CC7CE51<em>Clave PGP creada 2020-01-28. REVOCADA el 2026-03-17, misma razón. Usada también el 23-11-2026 · Alta, medición propia</em></span><span class="pill p-mint">Correlación y atribución; NUNCA bloqueo</span></div>
+<div class="ioc-row" data-s="artefacto f4953411767de71bedcdabcb76f4e26f7a20978a la clave vigente según su propio titular. rsa 4096, creada 2026-03-16, sin revocación. recuperada de la copia archivada que el certificado de revocación señala. su ausencia en las firmas de noviembre es el hallazgo de kj-1 · alta, medición propia correlación; vigilar su aparición en cualquier firma nueva (i-1)"><span class="ty">artefacto</span><span class="vv">F4953411767DE71BEDCDABCB76F4E26F7A20978A<em>La clave vigente según su propio titular. RSA 4096, creada 2026-03-16, sin revocación. Recuperada de la copia archivada que el certificado de revocación señala. Su ausencia en las firmas de noviembre es el hallazgo de KJ-1 · Alta, medición propia</em></span><span class="pill p-mint">Correlación; vigilar su aparición en cualquier firma nueva (I-1)</span></div>
+<div class="ioc-row" data-s="artefacto 27da9d5b183247cadfc322880abc63e30f73822e clave presentada el 23-11-2026. ed25519, creada 2026-10-31 —seis semanas después de las detenciones—. sin certificación de terceros en los dos servidores consultados · alta, medición propia correlación y atribución; nunca bloqueo"><span class="ty">artefacto</span><span class="vv">27DA9D5B183247CADFC322880ABC63E30F73822E<em>Clave presentada el 23-11-2026. Ed25519, creada 2026-10-31 —seis semanas después de las detenciones—. Sin certificación de terceros en los dos servidores consultados · Alta, medición propia</em></span><span class="pill p-mint">Correlación y atribución; NUNCA bloqueo</span></div>
+<div class="ioc-row" data-s="email shcorp@onionmail[.]org identificador de usuario de la clave anterior. único contacto nuevo publicado · moderada detección en correo entrante y en notas de extorsión"><span class="ty">email</span><span class="vv">shcorp@onionmail[.]org<em>Identificador de usuario de la clave anterior. Único contacto nuevo publicado · Moderada</em></span><span class="pill p-mint">Detección en correo entrante y en notas de extorsión</span></div>
+<div class="ioc-row" data-s="cve cve-2026-35273 peoplesoft enterprise peopletools 8.61 y 8.62; toma de control sin autenticar. cvss 9.8, publicada 2026-06-11, estado analyzed en el nvd (medición propia). vía reivindicada en septiembre de 2026 · moderada en la atribución, alta en el dato del cve parcheo prioritario, propio y en terceros"><span class="ty">cve</span><span class="vv">CVE-2026-35273<em>PeopleSoft Enterprise PeopleTools 8.61 y 8.62; toma de control sin autenticar. CVSS 9.8, publicada 2026-06-11, estado Analyzed en el NVD (medición propia). Vía reivindicada en septiembre de 2026 · Moderada en la atribución, alta en el dato del CVE</em></span><span class="pill p-mint">Parcheo prioritario, propio y en terceros</span></div></div>
+<h3 class="rv">A.5 — Lo que NO se publica, y por qué</h3><ul class="rv"><li><strong>Los nombres de las 161 entradas del catálogo</strong> y de las siete de INCEPTION. Son reclamaciones sin muestras verificadas (<code>A.1</code>).</li><li><strong>Los nombres de las personas detenidas.</strong> Personas físicas, cargos no probados, y ningún juicio depende de su identidad (§3.2).</li><li><strong>El nombre parcialmente enmascarado</strong> de una entrada del catálogo: es un nombre que el adversario ocultó a medias, y completarlo o difundirlo haría permanente lo que él mismo no publicó. Regla de la casa desde <code>CTI-2026-054</code> §E-3.</li><li><strong>Los cargos públicos nombrados en el comunicado del adversario</strong> se citan en §O-4 por su función institucional, porque la cita es necesaria para fechar y caracterizar el comunicado, y porque son cargos públicos actuando como tales.</li></ul>
+</section>
+<section id="anexo-b-fuentes-y-valoracion" class="wrap"><div class="sec-head rv"><div><h2>Anexo B — Fuentes y valoración</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Fuente</th><th>Qué aportó</th><th>Valoración</th><th>Vía</th></tr></thead><tbody>
+<tr><td><strong>Okta Threat Intelligence</strong>, «Former ShinyHunters-affiliated cluster O-UNC-053 moves to new INCEPTION leak site»</td><td>El clúster, sus patrones de dominio, el intervalo registro→publicación, la evaluación de cambio de marca y el límite del kit</td><td><strong>A-1.</strong> Primaria, leída en original; declara sus límites y distingue lo que no puede valorar con confianza alta</td><td>Descarga directa</td></tr>
+<tr><td><strong>ReversingLabs</strong>, «Threat Researcher's Notebook: SSO Vishing Campaign Associated with Emerging Inception Extortion Group»</td><td>Los tres niveles de confianza de dominios, la ausencia de MX/DKIM/DMARC, los registradores, los pares de servidores de nombres y los perfiles de registrante</td><td><strong>A-1.</strong> Primaria, leída en original; publica su lista completa y separa confirmado de inferido</td><td>Descarga directa</td></tr>
+<tr><td><strong>IC3 / FBI</strong>, aviso <code>I-051526-PSA</code> del 15-05-2026</td><td>El documento que el actor exigió retirar, íntegro, con sus tres frases citadas y su nota al pie sobre el término «víctima»</td><td><strong>Oficial.</strong> Fuente de Estado, leída en original</td><td>Descarga directa</td></tr>
+<tr><td><strong>NVD</strong>, <code>CVE-2026-35273</code></td><td>Fecha de publicación, CVSS 9.8, versiones afectadas y estado</td><td><strong>Oficial.</strong> Consulta a la API</td><td>Medición propia</td></tr>
+<tr><td><strong>BleepingComputer</strong> (23-11-2026)</td><td>Existencia y contenido del sitio del 23-11, y <strong>verificación propia declarada</strong> de las dos firmas PGP contra la clave pública que ya usó en agosto de 2025</td><td><strong>B-2.</strong> Prensa especializada que declara el método de verificación y sus límites —dice expresamente que las claves circularon y que no prueban identidad—</td><td>Descarga directa</td></tr>
+<tr><td><strong>Help Net Security</strong> (24-11-2026)</td><td>Cobertura del expediente de Okta y de la investigación de ReversingLabs, con citas atribuidas</td><td><strong>B-2.</strong> Secundaria usada como vehículo de citas, no como análisis</td><td>Descarga directa</td></tr>
+<tr><td><strong>Reuters</strong> (30-09-2026 y 03-10-2026)</td><td>Caída del sitio tras el vencimiento del plazo, y la segunda detención</td><td><strong>B-2</strong>, <strong>citada a través del expediente de Okta</strong>: no se accedió al original. La credibilidad se degrada <strong>por la vía</strong>, no por la fuente</td><td>Vía terciaria</td></tr>
+<tr><td><strong><code>ransomware.live</code></strong></td><td>Catálogo de 161 entradas con sus campos, inventario de sitios, y el expediente de ShinySp1d3r</td><td><strong>C-2</strong> como fuente, <strong>medición propia</strong> en lo que se midió sobre ella. Con los cuatro defectos ya documentados por esta cartera</td><td>API</td></tr>
+<tr><td><strong><code>cti.fyi</code></strong></td><td>Recuento alternativo de 109 entradas, estado de disponibilidad de los sitios y dos sitios que la otra fuente no lista</td><td><strong>C-2</strong>, ídem. Consultada <strong>sin clave</strong>: el expediente de grupo respondió público</td><td>API</td></tr>
+<tr><td><strong>RIPEstat · RDAP · WHOIS · DNS · servidores de claves OpenPGP</strong></td><td>Todo lo marcado como medición propia</td><td><strong>Medición propia</strong>, reproducible con el <code>Anexo F</code></td><td>Directa</td></tr>
+<tr><td><strong>Security Boulevard</strong>, «Aftermath of the September ShinyHunters Arrests: Battle Over the Brand Name»</td><td>—</td><td><strong>Consultada y NO accesible</strong>: el servidor devolvió <code>403</code> a la descarga. <strong>No se cita su contenido</strong>, ni siquiera a través de resúmenes de buscador, porque no pudimos leer el original</td><td>No accesible</td></tr>
+<tr><td>Diversos sitios agregadores de noticias de seguridad</td><td>—</td><td><strong>Descartados.</strong> Varios de los resultados de búsqueda sobre este actor son sitios con cifras que no citan fuente y que se contradicen entre sí. <strong>Ninguna cifra de este informe procede de ellos</strong></td><td>Descartada</td></tr></tbody></table></div>
+<p class="rv"><strong>Nota sobre lo que no se corroboró.</strong> Las cifras que circulan sobre este ecosistema —«más de 400 organizaciones», «más de 140 organizaciones y 70 millones de dólares en pagos», «mil millones de registros»— <strong>no se reproducen como medidas</strong> en este informe. Unas son reclamaciones del adversario, otras declaraciones de funcionarios recogidas en cobertura secundaria, y ninguna viene con base de conteo. Se consignan aquí como existentes y no verificadas, que es lo que esta cartera hace con lo que no puede medir.</p>
+</section>
+<section id="anexo-c-lexico-de-probabilidad-y-confianza" class="wrap"><div class="sec-head rv"><div><h2>Anexo C — Léxico de probabilidad y confianza</h2></div></div>
+<p class="rv">Se usa el léxico ICD 203 ya adoptado por la cartera. <strong>Probabilidad</strong>: remota <em>(5–15 %)</em>, improbable <em>(20–45 %)</em>, posibilidad real <em>(45–55 %)</em>, probable <em>(55–80 %)</em>, muy probable <em>(80–95 %)</em>, casi con certeza <em>(≥99 %)</em>. <strong>Confianza</strong>: alta, moderada, baja, según la calidad y la corroboración de la base, <strong>nunca según lo probable que parezca el hecho</strong>. Un <strong>hecho medido</strong> no lleva probabilidad: lleva la declaración de que es medición y la confianza en el método.</p>
+</section>
+<section id="anexo-d-metodo-como-evaluar-una-prueba-criptografica-de-continuidad-de-marca" class="wrap"><div class="sec-head rv"><div><h2>Anexo D — Método: cómo evaluar una prueba criptográfica de continuidad de marca</h2></div></div>
+<p class="rv"><strong>El problema.</strong> Un actor desaparece y vuelve. Para probar que es el mismo, publica algo firmado con una clave histórica. ¿Qué acredita eso? La respuesta por defecto —«la firma verifica, luego es él»— es falsa, y este expediente da el contraejemplo. El método tiene <strong>seis pasos, cuesta veinte minutos y no necesita acceso al sitio del adversario.</strong></p>
+<p class="rv"><strong>1 · Obtener la clave por su huella, no por su nombre.</strong> Un identificador de usuario es texto libre; la huella es el objeto. Dos servidores como mínimo, y conviene saber por qué: <code>keys.openpgp.org</code> <strong>no distribuye certificaciones de terceros por política</strong>, de modo que su ausencia ahí no significa nada; <code>keyserver.ubuntu.com</code> sí las distribuye, y ahí la ausencia <strong>sí</strong> es un dato.</p>
+<p class="rv"><strong>2 · Buscar el paquete de revocación antes que nada.</strong> <code>gpg --list-packets</code> y mirar si hay una firma <code>sigclass 0x20</code>. Si la hay, <strong>la clave está muerta por decisión de su titular</strong> y cualquier firma hecha con ella es, para una implementación conforme, no válida para autenticar. Esto es lo que casi nadie comprueba.</p>
+<p class="rv"><strong>3 · Leer la RAZÓN de la revocación, que es donde está la inteligencia.</strong> El subpaquete 29 trae un código y un texto libre. El código distingue dos mundos: <code>0x02</code> <strong>clave comprometida</strong> —el titular avisa de que alguien más la tiene, y entonces una firma posterior no prueba nada en absoluto— frente a <code>0x01</code> <strong>clave sustituida</strong> —el titular dice cuál le representa ahora—. Y el texto libre suele traer <strong>dónde</strong> está la sustituta, que es un indicador en sí mismo: aquí dio un dominio propio y una copia archivada.</p>
+<p class="rv"><strong>4 · Seguir el puntero y determinar la clave VIGENTE.</strong> Si el puntero está muerto, buscar la copia archivada: un archivo web con fecha anterior al suceso que se investiga es <strong>evidencia contemporánea</strong>, y eso es más valioso que cualquier recuerdo de la cobertura. Importar la clave y comprobar que <strong>no</strong> está revocada.</p>
+<p class="rv"><strong>5 · Fechar la clave nueva y compararla con los sucesos.</strong> La fecha de creación va en el paquete de clave pública y no se puede falsear sin invalidar las autofirmas. Una clave creada <strong>después</strong> del suceso que explica la desaparición es un dato duro.</p>
+<p class="rv"><strong>6 · Preguntar qué clave NO se usó, que es la pregunta que decide.</strong> La escala:</p>
+<div class="tw rv"><table><thead>
+<tr><th>Nivel</th><th>Qué se presenta</th><th>Qué acredita</th></tr></thead><tbody>
+<tr><td><strong>5</strong></td><td>Firma con la clave <strong>vigente</strong> declarada por el titular</td><td>Continuidad acreditada, salvo robo de la privada</td></tr>
+<tr><td><strong>4</strong></td><td>Firma con la vigente <strong>más</strong> certificación cruzada publicada de la nueva</td><td>Ídem, y además transición ordenada</td></tr>
+<tr><td><strong>3</strong></td><td>Firma con clave <strong>revocada por sustitución</strong>, pudiendo usar la vigente</td><td><strong>Posesión de una privada retirada. No acredita continuidad</strong></td></tr>
+<tr><td><strong>2</strong></td><td>Firma con clave <strong>revocada por compromiso</strong></td><td>No acredita nada: el titular ya dijo que otros la tienen</td></tr>
+<tr><td><strong>1</strong></td><td>Publicación de la clave <strong>pública</strong> sin firmar nada</td><td>Nada: una clave pública la tiene cualquiera</td></tr>
+<tr><td><strong>0</strong></td><td>Afirmación textual sin material criptográfico</td><td>Nada</td></tr></tbody></table></div>
+<p class="rv"><strong>El caso de este informe queda en el nivel 3</strong>, y la razón por la que eso es informativo —y no simplemente insuficiente— es económica: <strong>usar la clave vigente no cuesta nada a quien la tenga</strong>. Cuando un adversario elige la prueba más débil pudiendo elegir la más fuerte, la elección es el dato.</p>
+<p class="rv"><strong>Los tres errores que este método evita.</strong> <strong>(a)</strong> Tomar «la firma verifica» por «es el mismo actor»: verifica que alguien tiene una privada, y las privadas se copian, se heredan y se incautan. <strong>(b)</strong> Tomar la ausencia de firmas cruzadas en un servidor moderno por prueba de nada o por prueba de todo: depende de la política del servidor, y hay que saber cuál es. <strong>(c)</strong> Fiarse de la memoria de la cobertura sobre qué clave era la vigente: el certificado de revocación lo dice, con fecha y firmado.</p>
+<p class="rv"><strong>Dónde encaja con lo que ya teníamos.</strong> Es el eslabón criptográfico que faltaba a los tres métodos de marca de esta cartera: <code>CTI-2026-047</code> evalúa un rebranding por solapamiento temporal, <code>CTI-2026-055</code> clasifica reclamaciones cruzadas por dirección, y <code>CTI-2026-058</code> decide cese frente a migración midiendo el silencio en unidades de la propia cadencia del actor. Ninguno de los tres responde «¿es el mismo operador?». Éste lo responde cuando el adversario comete la cortesía de ofrecer una prueba.</p>
+</section>
+<section id="anexo-e-marcos-de-referencia-empleados" class="wrap"><div class="sec-head rv"><div><h2>Anexo E — Marcos de referencia empleados</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Marco</th><th>Uso en este informe</th></tr></thead><tbody>
+<tr><td><strong>MITRE ATT&amp;CK v20.1</strong></td><td>§T-1. Tres matrices en el catálogo local; <code>T1656</code> revocada sustituida por <code>T1684.001</code>; <em>Defense Evasion</em> ahora <strong>Sigilo</strong></td></tr>
+<tr><td><strong>ICD 203</strong></td><td>Léxico de probabilidad y confianza en los siete juicios clave (<code>Anexo C</code>)</td></tr>
+<tr><td><strong>Escala de prueba de <code>CTI-2026-048</code></strong></td><td>§O-2.1, para situar el 29,2 % de entradas con captura de pantalla en el nivel 3, el que más engaña</td></tr>
+<tr><td><strong>OpenPGP (RFC 4880 y sucesores)</strong></td><td>§X-1 y <code>Anexo D</code>: clases de firma, códigos de razón de revocación y subpaquetes</td></tr>
+<tr><td><strong>Validación de dirección de servicio oculto v3</strong></td><td>§O-1.3 y <code>Anexo A.3</code>: 56 caracteres base32, 35 bytes, suma <code>sha3_256</code> de dos bytes</td></tr>
+<tr><td><strong>Admiralty / OTAN</strong></td><td><code>Anexo B</code>, con la convención de la casa de degradar <strong>por la vía</strong> y no por la fuente</td></tr>
+<tr><td><strong>TLP 2.0 · PAP</strong></td><td>Marcado de difusión</td></tr></tbody></table></div>
+</section>
+<section id="anexo-f-paquete-legible-por-maquina-y-reproduccion-de-las-mediciones" class="wrap"><div class="sec-head rv"><div><h2>Anexo F — Paquete legible por máquina y reproducción de las mediciones</h2><p>Todo lo marcado como medición propia se reproduce con lo siguiente. <strong>Ninguno de estos comandos toca infraestructura del adversario</strong>, salvo el que recupera una copia archivada de una clave pública.</p></div></div>
+<div class="codewrap rv"><div class="codehead"><span>BASH</span><button class="copy">copiar</button></div>
+<pre><code><span class="tok-c"># ── 1 · La cadena de claves (§X-1) ────────────────────────────────────</span>
+<span class="tok-k">for</span> F in 1FC4D0B1DEE914BB05B57FABF1F1B98A51C989B3 \
+         828537C15F43F135A8317153CD16A1660CC7CE51 \
+         <span class="tok-k">F4953411767DE71BEDCDABCB76F4E26F7A20978A</span> \
+         27DA9D5B183247CADFC322880ABC63E30F73822E; do
+  <span class="tok-k">curl</span> -s &quot;https://keys.openpgp.org/vks/v1/by-fingerprint/$F&quot; -o &quot;k-$F.asc&quot;
+  <span class="tok-k">echo</span> &quot;── $F&quot;; gpg --list-packets &quot;k-$F.asc&quot; | grep -E &quot;created|sigclass|revocation|user ID&quot;
+<span class="tok-k">done</span>
+<span class="tok-c"># Lo que hay que ver: sigclass 0x20 en las dos primeras, con fecha 2026-03-17</span>
+<span class="tok-c"># y subpaquete 29 con razon 0x01. Y el puntero de ese subpaquete.</span>
+
+<span class="tok-c"># Firmas de terceros: hay que preguntar al servidor que las distribuye</span>
+<span class="tok-k">curl</span> -s &quot;https://keyserver.ubuntu.com/pks/lookup?op=get&amp;search=0x&lt;HUELLA&gt;&amp;options=mr&quot;
+
+<span class="tok-c"># ── 2 · Validacion de una direccion de servicio oculto v3 (§O-1.3) ────</span>
+<span class="tok-k">python3</span> -I - &lt;&lt;&#x27;PY&#x27;
+<span class="tok-k">import</span> base64, hashlib
+<span class="tok-k">d</span> = &quot;incptbug3ziqym4rhgsj7h7hbpzt3v4ympcf42gsdb5haqq237fziaad&quot;
+<span class="tok-k">assert</span> len(d) == 56, f&quot;longitud {len(d)}: no es una direccion v3&quot;
+<span class="tok-k">raw</span> = base64.b32decode(d.upper())
+<span class="tok-k">clave</span>, suma, version = raw[:32], raw[32:34], raw[34]
+<span class="tok-k">calc</span> = hashlib.sha3_256(b&quot;.onion checksum&quot; + clave + bytes([version])).digest()[:2]
+<span class="tok-k">print</span>(version, suma.hex(), calc.hex(), &quot;OK&quot; if suma == calc else &quot;NO CUADRA&quot;)
+<span class="tok-k">PY</span>
+
+<span class="tok-c"># ── 3 · Infraestructura de senuelo (§X-2) ─────────────────────────────</span>
+<span class="tok-k">for</span> D in legal-anthropic.com legal-mcdonalds.com legal-autozone.com; do
+  <span class="tok-k">echo</span> &quot;── $D&quot;
+  <span class="tok-k">dig</span> +short A &quot;$D&quot;; dig +short NS &quot;$D&quot;; dig +short MX &quot;$D&quot;
+  <span class="tok-k">dig</span> +short TXT &quot;_dmarc.$D&quot;
+  <span class="tok-k">whois</span> &quot;$D&quot; | grep -iE &quot;^(registrar:|creation date|domain status|registrant)&quot;
+<span class="tok-k">done</span>
+
+<span class="tok-c"># ── 4 · Titularidad y visibilidad de los prefijos (§X-2) ──────────────</span>
+<span class="tok-k">for</span> IP in 91.202.233.104 176.120.22.24; do
+  <span class="tok-k">whois</span> &quot;$IP&quot; | grep -iE &quot;^(inetnum|netname|org-name|country|origin)&quot;
+  <span class="tok-k">curl</span> -s &quot;https://stat.ripe.net/data/routing-status/data.json?resource=$IP&quot; |
+    <span class="tok-k">python3</span> -I -c &#x27;import json,sys; d=json.load(sys.stdin)[&quot;data&quot;]; print(d[&quot;origins&quot;], d[&quot;visibility&quot;], d[&quot;last_seen&quot;])&#x27;
+<span class="tok-k">done</span>
+
+<span class="tok-c"># ── 5 · El catalogo, y sus dos bases de conteo (§O-2) ─────────────────</span>
+<span class="tok-k">curl</span> -s &quot;https://api.ransomware.live/v2/groupvictims/shinyhunters&quot; -o v.json
+<span class="tok-k">python3</span> -I -c &#x27;
+<span class="tok-k">import</span> json, collections
+<span class="tok-k">v</span> = json.load(open(&quot;v.json&quot;))
+<span class="tok-k">print</span>(&quot;entradas:&quot;, len(v))
+<span class="tok-k">print</span>(&quot;sin pais:&quot;, sum(1 for x in v if not x.get(&quot;country&quot;)))
+<span class="tok-k">for</span> campo in (&quot;ransom&quot;, &quot;data_size&quot;, &quot;screenshot&quot;, &quot;press&quot;):
+    <span class="tok-k">print</span>(campo, &quot;relleno:&quot;, sum(1 for x in v if x.get(campo)), &quot;/&quot;, len(v))
+<span class="tok-k">print</span>(collections.Counter(x.get(&quot;country&quot;) or &quot;«vacio»&quot; for x in v).most_common())
+&#x27;
+<span class="tok-c"># Segunda base de conteo, para la discrepancia del 32,3 %:</span>
+<span class="tok-k">curl</span> -s &quot;https://cti.fyi/api/v1/groups/shinyhunters&quot; |
+  <span class="tok-k">python3</span> -I -c &#x27;import json,sys; print(&quot;post_count:&quot;, json.load(sys.stdin)[&quot;post_count&quot;])&#x27;
+
+<span class="tok-c"># ── 6 · El CVE (§O-4.2) ───────────────────────────────────────────────</span>
+<span class="tok-k">curl</span> -s &quot;https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2026-35273&quot;
+
+<span class="tok-c"># ── 7 · El aviso oficial, y la comparacion de citas (§O-4.1) ──────────</span>
+<span class="tok-k">curl</span> -s &quot;https://www.ic3.gov/psa/2026/psa260515&quot; -o ic3.html
+<span class="tok-k">python3</span> -I h2t.py ic3.html | grep -i &quot;harassment strategies&quot;</code></pre></div>
+<p class="rv"><strong>Para comprobar el propio caso sin reproducir el nombre de nadie</strong> (el procedimiento que <code>A.1</code> promete): descargar el catálogo con el bloque 5, y buscar <strong>el dominio propio</strong> en el campo <code>domain</code> y <strong>el propio nombre</strong> en el campo <code>victim</code>. Si aparece, la entrada trae sus dos fechas, su sector y si hay captura o prensa. Si no aparece, no hay reclamación en esa fuente, que no es lo mismo que no haber sido atacado.</p>
+</section>
+<section id="anexo-g-control-de-cambios" class="wrap"><div class="sec-head rv"><div><h2>Anexo G — Control de cambios</h2></div></div>
+<div class="tw rv"><table><thead>
+<tr><th>Versión</th><th>Fecha</th><th>Qué juicio se movió</th><th>Autor</th></tr></thead><tbody>
+<tr><td><code>1.0</code></td><td>2026-11-24</td><td>Primera emisión. Establece los siete juicios clave. El que sostiene el informe es <strong><code>KJ-1</code></strong>: la prueba criptográfica del regreso del 23-11-2026 <strong>no acredita continuidad del operador</strong>, porque está firmada con dos claves autorrevocadas el 17-03-2026 por razón de sustitución y omite la clave que el propio titular declaró vigente —medición propia reproducible, §X-1—. Se establece además que <strong>la atribución por marca ha dejado de identificar operador</strong> (<code>KJ-2</code>), que <strong>el clúster de intrusión nunca se detuvo</strong> (<code>KJ-3</code>), y que <strong>el catálogo de este actor no permite ninguna cifra de víctimas</strong> (<code>KJ-4</code>). Aporta <code>Anexo D</code> nuevo: evaluación de una prueba criptográfica de continuidad de marca, con escala de seis niveles. Se consignan dos defectos de fuentes que esta cartera usa a diario: una dirección de servicio oculto que es un <strong>marcador de posición</strong> en un agregador (<code>G-5</code>) y una discrepancia del <strong>32,3 %</strong> entre los dos recuentos del mismo actor</td><td>Célula CTI</td></tr></tbody></table></div>
+</section>
+<section id="anexo-h-realimentacion-del-consumidor" class="wrap"><div class="sec-head rv"><div><h2>Anexo H — Realimentación del consumidor</h2><p>Tres preguntas, y la tercera es la que más vale:</p></div></div><ol class="rv"><li>¿Alguna de las cuatro consultas de §T-2 devolvió algo? <strong>Un resultado negativo también es información</strong>, y cierra <code>G-6</code>.</li><li>¿La decisión §E-3 <code>E-b</code> —la mesa de ayuda no restablece nada desde una llamada entrante— se puede implantar en quince días, o hay un proceso de negocio que lo impide? Si lo hay, <strong>ese proceso es la exposición</strong> y conviene que esté escrito.</li><li>¿Hay en la organización algún caso de recepción de llamada de supuesto soporte pidiendo restablecer contraseña, aunque no haya prosperado? <strong>Los intentos fallidos son la mejor telemetría disponible</strong> de este adversario, y hoy no se recogen en ninguna parte.</li></ol>
+</section>
+<footer class="wrap"><div class="fg"><div><strong style="color:var(--ink-2)">CTI-2026-064 · v1.0 · 2026-11-24</strong> · caduca 2026-12-24</div><div style="display:flex;gap:8px;align-items:center"><span class="tlp">TLP:CLEAR</span><span class="pap">PAP:WHITE</span></div></div><p style="margin:14px 0 0;font-size:12.6px;max-width:74ch">Elaborado sobre tres fuentes de primera mano leídas en original —el expediente de Okta Threat Intelligence del 24-11-2026, la investigación de ReversingLabs y el aviso público <code>I-051526-PSA</code> del IC3 del FBI— más <strong>medición propia del 24-11-2026</strong> sobre servidores de claves OpenPGP, DNS, WHOIS, RDAP, RIPEstat, NVD y dos agregadores de sitios de extorsión. <strong>No se reproducen los nombres de las personas detenidas</strong> —§3.2— ni los nombres de las organizaciones que un sitio de filtración reivindica sin muestras. <strong>Advertencia de uso: las dos direcciones de <code>breachforums.hn</code> son de Cloudflare y NO deben bloquearse</strong>; van en el Anexo A con tipo artefacto y marca NUNCA bloqueo. Difusión libre conservando la atribución de las fuentes y las salvedades de §3.</p></footer>
+<div class="fab" id="toTop" title="Volver arriba" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+</main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add("in"); animateIn(e.target); io.unobserve(e.target);
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  $$(".rv").forEach(function(el){io.observe(el);});
+
+  function animateIn(root){
+    $$(".gauge",root).concat(root.classList&&root.classList.contains("gauge")?[root]:[]).forEach(function(g){
+      var p = Math.max(0,Math.min(100, parseFloat(g.getAttribute("data-p"))||0));
+      var bar = $(".track i",g); if(bar) setTimeout(function(){bar.style.width = p+"%";},60);
+    });
+    $$("[data-bars] i[data-w]",root).forEach(function(i,k){
+      setTimeout(function(){ i.style.width = i.getAttribute("data-w")+"%"; }, 40+k*55);
+    });
+    $$("[data-count]",root).forEach(countUp);
+  }
+
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var target = parseFloat(el.getAttribute("data-count"))||0;
+    var suf = el.querySelector("small"); var sufHTML = suf ? suf.outerHTML : "";
+    if(reduce){ el.innerHTML = target.toLocaleString("es-CL")+sufHTML; return; }
+    var dur = 1100, t0 = performance.now();
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.innerHTML = Math.round(target*e).toLocaleString("es-CL")+sufHTML;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var prog = $("#prog"), fab = $("#toTop");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(prog) prog.style.width = (h>0 ? (window.scrollY/h)*100 : 0).toFixed(2)+"%";
+    if(fab) fab.classList.toggle("show", window.scrollY > 700);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  if(fab){
+    var up=function(){ window.scrollTo({top:0,behavior: reduce?"auto":"smooth"}); };
+    fab.addEventListener("click", up);
+    fab.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){e.preventDefault();up();} });
+  }
+
+  var links = $$("nav.toc a"), map = {};
+  links.forEach(function(a){
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if(s) map[s.id] = a;
+  });
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting || !map[e.target.id]) return;
+      links.forEach(function(l){l.classList.remove("on");});
+      map[e.target.id].classList.add("on");
+    });
+  },{rootMargin:"-88px 0px -72% 0px",threshold:0});
+  Object.keys(map).forEach(function(k){ spy.observe(document.getElementById(k)); });
+
+  var toc = $("#toc"), toggle = $("#navToggle"), scrim = null;
+  function closeNav(){ if(toc) toc.classList.remove("open"); if(scrim){scrim.remove(); scrim=null;} }
+  if(toggle) toggle.addEventListener("click", function(){
+    if(toc.classList.contains("open")) return closeNav();
+    toc.classList.add("open");
+    scrim = document.createElement("div"); scrim.className="scrim";
+    scrim.addEventListener("click", closeNav); document.body.appendChild(scrim);
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if(window.innerWidth<=1080) closeNav(); }); });
+
+  /* escena 3D de portada */
+  (function(){
+    var scene = $("#scene"), host = $("#hero3d"); if(!scene||!host) return;
+    var planes = [$("#plane1"),$("#plane2"),$("#plane3")], G=5, nodes=[];
+    planes.forEach(function(pl,pi){
+      for(var r=0;r<G;r++) for(var c=0;c<G;c++){
+        if(pi===0 && (r+c)%2===1) continue;
+        if(pi===2 && (r%2===1||c%2===1)) continue;
+        var n=document.createElement("i"); n.className="node host";
+        n.style.left=(12+c*19)+"%"; n.style.top=(12+r*19)+"%";
+        pl.appendChild(n); nodes.push({el:n,p:pi,r:r,c:c,on:false});
+      }
+    });
+    function neighbours(n){
+      return nodes.filter(function(m){
+        if(m.on) return false;
+        var dp=Math.abs(m.p-n.p), dr=Math.abs(m.r-n.r), dc=Math.abs(m.c-n.c);
+        if(dp===0) return dr+dc<=2 && dr+dc>0;
+        if(dp===1) return dr<=2 && dc<=2;
+        return false;
+      });
+    }
+    var queue=[];
+    function seed(){
+      nodes.forEach(function(n){n.on=false;n.el.className="node host";});
+      queue=[];
+      var start=nodes.filter(function(n){return n.p===0;});
+      var s=start[Math.floor(Math.random()*start.length)];
+      s.on=true; s.el.className="node seed"; queue.push(s); step();
+    }
+    function step(){
+      if(reduce) return;
+      setTimeout(function(){
+        if(!queue.length){ setTimeout(seed,1600); return; }
+        var batch=queue.splice(0,2), next=[];
+        batch.forEach(function(n){
+          neighbours(n).slice(0,3).forEach(function(m){
+            if(m.on) return; m.on=true; m.el.className="node hit"; next.push(m);
+          });
+        });
+        queue=queue.concat(next); step();
+      },220);
+    }
+    if(!reduce) seed(); else nodes.forEach(function(n,i){ if(i%3===0) n.el.className="node hit"; });
+    drag(host, scene, 58, -34, 24, 80);
+  })();
+
+  /* pirámide 3D, alimentada por data-* */
+  (function(){
+    var pyr=$("#pyr"), inner=$("#pyrIn"); if(!pyr||!inner) return;
+    var slabs=$$(".slab",inner), infoEl=$("#pyrInfo");
+    function darken(hex,f){
+      var n=parseInt(hex.slice(1),16);
+      return "rgb("+Math.round(((n>>16)&255)*f)+","+Math.round(((n>>8)&255)*f)+","+Math.round((n&255)*f)+")";
+    }
+    slabs.forEach(function(s){
+      var col=s.style.getPropertyValue("--col").trim();
+      s.style.width=s.style.getPropertyValue("--w").trim();
+      s.style.height=s.style.getPropertyValue("--d").trim();
+      s.style.background="linear-gradient(135deg,"+col+","+darken(col,.78)+")";
+      s.style.transform="translate(-50%,-50%) translateZ("+s.style.getPropertyValue("--z").trim()+")";
+      var side=darken(col,.5), sh=[];
+      for(var i=1;i<=13;i++) sh.push("0 "+i+"px 0 "+side);
+      sh.push("0 22px 34px -12px rgba(0,0,0,.75)");
+      s.style.boxShadow=sh.join(",");
+    });
+    function select(i){
+      slabs.forEach(function(s){ s.classList.toggle("act", +s.getAttribute("data-i")===i); });
+      var s=slabs.filter(function(x){return +x.getAttribute("data-i")===i;})[0]; if(!s) return;
+      infoEl.style.setProperty("--pc", s.style.getPropertyValue("--col").trim());
+      $("#pyrLv").textContent = s.getAttribute("data-lv")||"";
+      $("#pyrTitle").textContent = s.getAttribute("data-t")||"";
+      $("#pyrBody").innerHTML = s.getAttribute("data-b")||"";
+      var src=$("#pyrSrc"); if(src) src.innerHTML = s.getAttribute("data-s")||"";
+    }
+    slabs.forEach(function(s){
+      s.addEventListener("click", function(){ select(+s.getAttribute("data-i")); });
+    });
+    if(slabs.length) select(slabs.length-1);
+    drag(pyr, inner, 64, 0, 20, 84);
+  })();
+
+  /* rotación por arrastre, compartida */
+  function drag(host, target, rx0, rz0, minX, maxX){
+    var rx=rx0, rz=rz0, on=false, sx=0, sy=0;
+    function apply(){ target.style.transform="rotateX("+rx+"deg) rotateZ("+rz+"deg)"; }
+    function pt(e){ var t=e.touches&&e.touches[0]; return {x:t?t.clientX:e.clientX, y:t?t.clientY:e.clientY}; }
+    function down(e){ on=true; var p=pt(e); sx=p.x; sy=p.y; target.style.transition="none"; }
+    function move(e){
+      if(!on) return; var p=pt(e);
+      rz += (p.x-sx)*0.44; rx = Math.max(minX, Math.min(maxX, rx-(p.y-sy)*0.3));
+      sx=p.x; sy=p.y; apply();
+      if(e.type==="touchmove" && e.cancelable) e.preventDefault();
+    }
+    function up(){ on=false; target.style.transition=""; }
+    host.addEventListener("mousedown",down);
+    host.addEventListener("touchstart",down,{passive:true});
+    window.addEventListener("mousemove",move);
+    window.addEventListener("touchmove",move,{passive:false});
+    window.addEventListener("mouseup",up);
+    window.addEventListener("touchend",up);
+    apply();
+  }
+
+  /* cronologías con filtros */
+  $$(".tlfilter").forEach(function(bar){
+    var tl = document.getElementById(bar.getAttribute("data-for")); if(!tl) return;
+    var evs = $$(".ev", tl);
+    $$("[data-tl]", bar).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var k = btn.getAttribute("data-tl");
+        $$("[data-tl]", bar).forEach(function(b){ b.classList.remove("on","a"); });
+        btn.classList.add("on");
+        if(k!=="all" && k!=="gl") btn.classList.add("a");
+        evs.forEach(function(ev){
+          var keys=(ev.getAttribute("data-k")||"").split(" ");
+          ev.hidden = !(k==="all" || keys.indexOf(k)>=0);
+        });
+      });
+    });
+  });
+
+  /* buscadores */
+  function wire(inputId, counterId, itemSel, groupSel, noun){
+    var input=$("#"+inputId); if(!input) return;
+    var items=$$(itemSel), groups=groupSel?$$(groupSel):[], counter=$("#"+counterId);
+    function run(){
+      var q=input.value.trim().toLowerCase(), shown=0;
+      items.forEach(function(t){
+        var hay=((t.getAttribute("data-s")||"")+" "+t.textContent).toLowerCase();
+        var ok = !q || hay.indexOf(q)>=0; t.hidden=!ok; if(ok) shown++;
+      });
+      groups.forEach(function(g){ g.hidden = $$(itemSel,g).every(function(t){return t.hidden;}); });
+      if(counter) counter.textContent = shown+" de "+items.length+" "+noun;
+    }
+    input.addEventListener("input", run); run();
+  }
+  wire("attckSearch","attckCount",".tq","[data-col]","técnicas");
+  wire("iocSearch","iocCount",".ioc-row",null,"indicadores");
+
+  $$(".ioc-row .vv").forEach(function(v){
+    v.style.cursor="copy"; v.title="Pulsa para copiar";
+    v.addEventListener("click", function(){
+      var txt = v.childNodes[0] ? v.childNodes[0].textContent.trim() : v.textContent.trim();
+      copy(txt, function(ok){
+        var old=v.style.color; v.style.color= ok?"#4db99c":"#f7a400";
+        setTimeout(function(){ v.style.color=old; },700);
+      });
+    });
+  });
+
+  $$(".acc > button").forEach(function(b){
+    b.addEventListener("click", function(){ b.parentElement.classList.toggle("open"); });
+  });
+
+  $$(".stage").forEach(function(s){
+    s.addEventListener("click", function(){
+      var on=s.classList.contains("fixed");
+      $$(".stage").forEach(function(o){ o.classList.remove("fixed"); });
+      if(!on) s.classList.add("fixed");
+    });
+  });
+
+  function copy(text, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){cb(true);},function(){cb(false);}); return;
+    }
+    try{
+      var ta=document.createElement("textarea"); ta.value=text;
+      ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); cb(true);
+    }catch(e){ cb(false); }
+  }
+  $$(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var wrap=btn.closest(".codewrap"), pre=wrap?wrap.querySelector("pre"):null; if(!pre) return;
+      copy(pre.innerText, function(ok){
+        btn.textContent = ok?"copiado ✓":"error"; btn.classList.toggle("ok",ok);
+        setTimeout(function(){ btn.textContent="copiar"; btn.classList.remove("ok"); },1500);
+      });
+    });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key==="/" && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)){
+      var vis=$$(".search input").filter(function(i){
+        var r=i.getBoundingClientRect(); return r.top>0 && r.top<window.innerHeight;
+      });
+      if(vis.length){ e.preventDefault(); vis[0].focus(); }
+    }
+    if(e.key==="Escape") closeNav();
+  });
+})();
+</script>
+</body>
+</html>
