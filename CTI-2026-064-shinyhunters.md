@@ -2,7 +2,7 @@
 tlp: "TLP:CLEAR"
 pap: "PAP:WHITE"
 id: "CTI-2026-064"
-version: "1.0"
+version: "1.1"
 tipo: "Perfil de actor y evaluacion de continuidad de marca"
 foco_regional: "Global · lectura para Latinoamérica y Chile"
 niveles: ["Estratégico", "Operacional", "Táctico", "Técnico"]
@@ -462,6 +462,18 @@ operativa es concreta y afecta a cualquiera que vigile con el endpoint anual: **
 entradas no aparecerán nunca como víctimas nuevas en ningún parte diario**, porque no
 están en el conjunto que el parte compara. Se consigna como `G-8`.
 
+**RESUELTO el mismo día, y el defecto era general.** Reproducida la comparación
+sobre **dieciocho grupos**, la carencia aparece en nueve de ellos, de modo que
+no es una particularidad de este actor. El recolector de la cartera
+—`tools/cti_vigilancia.py`— **consulta ya el histórico por grupo** para los
+grupos que tienen informe, y en su primera ejecución con esa regla recuperó
+**90 entradas en siete grupos**: 36 de `akira`, 20 de `thegentlemen`, 16 de
+`incransom`, 8 de `qilin`, **6 de este actor** —las mismas seis que esta
+sección midió—, 3 de `dragonforce` y 1 de `safepay`. **Cuatro de las 90 son de
+países prioritarios y ninguna es actividad del día**: todas declaran fecha de
+ataque en 2025. Es relleno de catálogo, y por eso el parte las cuenta aparte
+de las víctimas nuevas de la jornada (`G-8`, cerrada en la versión 1.1).
+
 ### O-2.4 El reparto sectorial, con su salvedad
 
 Tecnología 35, comercio y venta en línea 27, servicios financieros 22, servicios
@@ -793,7 +805,7 @@ Trece dominios del conjunto publicado, medidos el 24-11-2026 con `dig` y `whois`
 | `G-5` | El expediente de ShinySp1d3r en el agregador contiene una dirección que es un marcador de posición | No afecta a ningún juicio; afecta a cualquiera que ingiera la fuente | Aviso al agregador y comprobación de si hay más expedientes con el mismo defecto | Media |
 | `G-6` | No tenemos telemetría propia de identidad: no sabemos si esta campaña nos ha llamado | §3.4; la afirmación «no nos afecta» no tiene base | Ejecución de las cuatro consultas de §T-2 | **Alta** |
 | `G-7` | El identificador `CVE-2026-35273` lo asigna cobertura secundaria, no la fuente primaria | `KJ-5` queda en confianza moderada | Confirmación oficial del vector, o del propio proveedor del portal afectado | Media |
-| `G-8` | El conjunto anual de la primera fuente es un **subconjunto estricto** de su propio histórico de grupo: 110 frente a 116 para 2026, y faltan seis entradas | Ninguna cifra de este informe depende de ello, porque todas salen del histórico. **Afecta al recolector diario de la cartera**, que consulta el conjunto anual | Reproducir la comparación para otros actores y, si el defecto es general, consultar el histórico por grupo en lugar del conjunto anual | **Alta** para el utillaje, baja para este informe |
+| `G-8` **(CERRADA en 1.1)** | El conjunto anual de la primera fuente es un **subconjunto estricto** de su propio histórico de grupo: 110 frente a 116 para 2026, y faltan seis entradas | Ninguna cifra de este informe depende de ello, porque todas salen del histórico. Afectaba al recolector diario de la cartera | **CERRADA el 24-11-2026.** Comprobado sobre dieciocho grupos —falla en nueve—, el recolector consulta ya el histórico por grupo y recuperó **90 entradas en siete grupos**, seis de ellas de este actor. Ver `§O-2.3` | — |
 
 **Disparadores de reevaluación.** Cada uno, si se cumple, obliga a abrir versión:
 
@@ -1107,7 +1119,8 @@ fuente, que no es lo mismo que no haber sido atacado.
 
 | Versión | Fecha | Qué juicio se movió | Autor |
 |---|---|---|---|
-| `1.0` | 2026-11-24 | Primera emisión. Establece los siete juicios clave. El que sostiene el informe es **`KJ-1`**: la prueba criptográfica del regreso del 23-11-2026 **no acredita continuidad del operador**, porque está firmada con dos claves autorrevocadas el 17-03-2026 por razón de sustitución y omite la clave que el propio titular declaró vigente —medición propia reproducible, §X-1—. Se establece además que **la atribución por marca ha dejado de identificar operador** (`KJ-2`), que **el clúster de intrusión nunca se detuvo** (`KJ-3`), y que **el catálogo de este actor no permite ninguna cifra de víctimas** (`KJ-4`). Aporta `Anexo D` nuevo: evaluación de una prueba criptográfica de continuidad de marca, con escala de seis niveles. Se consignan dos defectos de fuentes que esta cartera usa a diario: una dirección de servicio oculto que es un **marcador de posición** en un agregador (`G-5`) y una discrepancia del **32,3 %** entre los dos recuentos del mismo actor | Célula CTI |
+| **1.1** | **2026-11-24** | **Ningún juicio se movió. Se cierra la brecha de utillaje `G-8` y se generaliza su medición.** La carencia del conjunto anual frente al histórico por grupo **no es propia de este actor**: comprobada sobre dieciocho grupos, aparece en nueve. El recolector de la cartera consulta ya el histórico para los grupos con informe y recuperó **90 entradas en siete grupos** —seis de ellas las que `§O-2.3` midió aquí—, **ninguna actividad del día** y cuatro de países prioritarios. `§O-2.3` lo consigna y la fila de `G-8` queda cerrada | **Sin cambios en los juicios. `caduca` no se extiende: no se ha revalidado ninguna medición del informe** |
+| **1.0** | **2026-11-24** | Primera emisión. Establece los siete juicios clave. El que sostiene el informe es **`KJ-1`**: la prueba criptográfica del regreso del 23-11-2026 **no acredita continuidad del operador**, porque está firmada con dos claves autorrevocadas el 17-03-2026 por razón de sustitución y omite la clave que el propio titular declaró vigente —medición propia reproducible, §X-1—. Se establece además que **la atribución por marca ha dejado de identificar operador** (`KJ-2`), que **el clúster de intrusión nunca se detuvo** (`KJ-3`), y que **el catálogo de este actor no permite ninguna cifra de víctimas** (`KJ-4`). Aporta `Anexo D` nuevo: evaluación de una prueba criptográfica de continuidad de marca, con escala de seis niveles. Se consignan dos defectos de fuentes que esta cartera usa a diario: una dirección de servicio oculto que es un **marcador de posición** en un agregador (`G-5`) y una discrepancia del **32,3 %** entre los dos recuentos del mismo actor | Célula CTI |
 
 ---
 
