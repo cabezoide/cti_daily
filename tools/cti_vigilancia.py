@@ -46,6 +46,16 @@ citados):
       terceros. (`CTI-2026-049` Anexo D)
   R5. **Nada se da por nuevo sin comprobarlo contra el índice.** Un indicador
       ya publicado no es un hallazgo. (`CTI-2026-032`)
+  R7. **El fichero anual no es el universo.** El conjunto `victims/<año>` de
+      `ransomware.live` es un **subconjunto estricto** del histórico por grupo
+      `groupvictims/<grupo>`: medido el 24-11-2026, 110 entradas frente a 116
+      con `discovered` de 2026 para `shinyhunters`, y la misma carencia en
+      nueve de dieciocho grupos muestreados. Una entrada que la fuente añade
+      al histórico y no al anual **nunca** aparecería como nueva en un parte.
+      Por eso los grupos que tienen informe en la cartera se completan con su
+      histórico —sólo ellos, por cortesía con la fuente—. Es `G-8` de
+      `CTI-2026-064`.
+
   R6. **El front-end y la API pueden no coincidir.** Si un grupo existe en el
       catálogo pero no tiene víctimas en el fichero anual, se marca como
       discrepancia y no como ausencia. (`CTI-2026-053` §KJ-2)
@@ -72,6 +82,7 @@ import sys
 import time
 import unicodedata
 import urllib.error
+import urllib.parse
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -143,6 +154,12 @@ FUENTES = {
     "botnetcl_ataques": "https://botnet.cl/api/v1/attacks?family=all&limit=100",
     "botnetcl_bgp": "https://botnet.cl/api/v1/bgp/leaderboard",
 }
+
+# R7 · el histórico por grupo. Va FUERA de `FUENTES` a propósito: `recoger()`
+# formatea esa tabla entera con `%(anio)s` y una plantilla con otra clave la
+# rompe —ocurrió al escribirlo—. Se consulta aparte y sólo para los grupos
+# correlacionados con un informe.
+FUENTE_HISTORICO = "https://api.ransomware.live/v2/groupvictims/%(grupo)s"
 
 
 # ───────────────────────────────────────────────────────────── utilidades
@@ -401,6 +418,55 @@ def resumir_victimas(registros):
     }
 
 
+def completar_con_historico(por_grupo, nombres, anio, errores, usar_cache=True):
+    """Completa `por_grupo` con lo que el fichero anual no trae (R7).
+
+    El conjunto anual de `ransomware.live` es un subconjunto estricto del
+    histórico por grupo —`G-8` de `CTI-2026-064`—, y la consecuencia no es
+    cosmética: **una entrada que sólo está en el histórico no aparece como
+    nueva en ningún parte, nunca**, porque el delta diario compara contra un
+    universo que no la contiene.
+
+    Se consulta sólo para los grupos que casan con un informe de la cartera,
+    con pausa entre peticiones: son del orden de veinte, no de doscientos.
+    """
+    resultado = []
+    for i, nombre in enumerate([n for n in nombres if n]):
+        if i:
+            time.sleep(PAUSA_ENTRE_FUENTES)
+        url = FUENTE_HISTORICO % {"grupo": urllib.parse.quote(nombre, safe="")}
+        d, err = traer(url, "histórico de «%s»" % nombre, usar_cache=usar_cache)
+        if err:
+            errores.append(err)
+            continue
+        if not isinstance(d, list):
+            errores.append("histórico de «%s»: la respuesta no es una lista" % nombre)
+            continue
+        ya = {clave(v.get("group"), v.get("victim"), dia(v.get("discovered")))
+              for v in (por_grupo.get(nombre) or [])}
+        nuevas = []
+        for v in d:
+            if str(v.get("discovered") or "")[:4] != str(anio):
+                continue
+            v.setdefault("group", nombre)
+            if clave(v.get("group"), v.get("victim"), dia(v.get("discovered"))) in ya:
+                continue
+            # Marca de procedencia. Sin ella, las entradas recuperadas se
+            # cuentan como «víctimas nuevas de hoy» y el parte publica un
+            # salto que no ocurrió: la primera ejecución con R7 recuperó 90
+            # entradas y el recuento del día pasó de 1 a 91. Son relleno de
+            # catálogo con fecha de ataque de 2025, no actividad de la jornada.
+            v["_procedencia"] = "historico"
+            nuevas.append(v)
+        if nuevas:
+            por_grupo.setdefault(nombre, []).extend(nuevas)
+            resultado.append({"grupo": nombre, "anadidas": len(nuevas),
+                              "historico": len(d)})
+            aviso("  histórico de «%s»: %d entrada(s) del año en curso que el "
+                  "fichero anual no traía" % (nombre, len(nuevas)))
+    return resultado
+
+
 # ────────────────────────────────────────────────────────────────── deltas
 
 def delta_actor(idi, nombre, nuevo, viejo, registros_nuevos):
@@ -437,6 +503,7 @@ def delta_actor(idi, nombre, nuevo, viejo, registros_nuevos):
                 "ataque_declarado": dia(v.get("attackdate")),
                 "tiene_dominio": bool(v.get("domain")),
                 "tiene_prensa": bool(v.get("press")),
+                "recuperada": v.get("_procedencia") == "historico",
                 # R4: ni nombre ni descripción.
             }
             h["detalle_nuevas"].append(reg)
@@ -448,6 +515,9 @@ def delta_actor(idi, nombre, nuevo, viejo, registros_nuevos):
 
     # R1: el reparto de las dos fechas sobre lo nuevo, que es lo que permite
     # distinguir una tanda de un ritmo.
+    h["recuperadas"] = sum(1 for r in h["detalle_nuevas"] if r.get("recuperada"))
+    h["nuevas_de_hoy"] = h["victimas_nuevas"] - h["recuperadas"]
+
     if h["detalle_nuevas"]:
         pub = {}
         for r in h["detalle_nuevas"]:
@@ -545,13 +615,14 @@ def _lineas_urgente(p):
     prio = [(h, r) for h, r in reg if r.get("prioritario")]
     if prio:
         L.append("### ⚠ Víctimas nuevas en países prioritarios\n")
-        L.append("| Informe | Actor en la fuente | País | Sector | Publicada | Ataque declarado | ¿Dominio? |")
-        L.append("|---|---|---|---|---|---|---|")
+        L.append("| Informe | Actor en la fuente | País | Sector | Publicada | Ataque declarado | ¿Dominio? | Procedencia |")
+        L.append("|---|---|---|---|---|---|---|---|")
         for h, r in prio:
-            L.append("| `%s` | %s | **%s** | %s | %s | %s | %s |" % (
+            L.append("| `%s` | %s | **%s** | %s | %s | %s | %s | %s |" % (
                 h["informe"], h["fuente_nombre"], r["pais_nombre"], r["sector"],
                 r["publicada"] or "—", r["ataque_declarado"] or "—",
-                "sí" if r["tiene_dominio"] else "**no**"))
+                "sí" if r["tiene_dominio"] else "**no**",
+                "**histórico** (R7)" if r.get("recuperada") else "anual"))
         L.append("")
         L.append("> **Qué hacer con esto.** Son **reclamaciones de sitio de "
                  "filtración, no brechas verificadas**. Antes de escribirlas en "
@@ -584,6 +655,20 @@ def _lineas_urgente(p):
                  "tipo, su confianza, su caducidad y su acción permitida "
                  "escritas por quien la analice: el índice no acepta una "
                  "dirección sin contexto, y con razón.\n")
+    ch = p.get("completado_historico") or []
+    if ch:
+        L.append("### Entradas recuperadas del histórico por grupo (R7)\n")
+        L.append("> El fichero anual de la fuente es un **subconjunto "
+                 "estricto** de su histórico por grupo (`G-8` de "
+                 "`CTI-2026-064`). Estas entradas **no habrían aparecido "
+                 "nunca** en un parte sin consultar el histórico, y ya van "
+                 "incluidas en los deltas de arriba.\n")
+        L.append("| Grupo | Entradas del año recuperadas | Histórico total |")
+        L.append("|---|---|---|")
+        for x in sorted(ch, key=lambda y: -y["anadidas"]):
+            L.append("| `%s` | **%d** | %d |" % (x["grupo"], x["anadidas"], x["historico"]))
+        L.append("")
+
     cad = [r for r in p["inventario"] if r["vigencia"] == "caducado"]
     if cad:
         L.append("### ⚠ Informes caducados\n")
@@ -634,12 +719,21 @@ def escribir_parte(p, ruta_md):
         L.append("| Fuentes que respondieron | %d de %d |" % (
             sum(1 for v in p["fuentes"].values() if v), len(p["fuentes"])))
     L.append("| Informes correlacionados con una fuente viva | %d |" % p["correlacionados"])
+    tot_rec = sum(h.get("recuperadas", 0) for h in p["actores"])
     L.append("| **Víctimas nuevas observadas** | **%d** |" % tot_vic)
+    if tot_rec:
+        L.append("| de ellas, **recuperadas del histórico** (R7; **no son "
+                 "actividad de hoy**) | **%d** |" % tot_rec)
+        L.append("| **Víctimas nuevas de la jornada** | **%d** |" % (tot_vic - tot_rec))
     L.append("| **Víctimas nuevas en la región** | **%d** |" % tot_reg)
     L.append("| **Candidatos a indicador nuevos** | **%d** |" % len(p["c2"].get("candidatos_a_ioc") or []))
     L.append("| Direcciones de C2 en la fuente | %d (antes %d) |" % (
         p["c2"].get("total_ahora", 0), p["c2"].get("total_antes", 0)))
     L.append("| Cambios de catálogo (sitios, herramientas, TTP) | %d |" % len(p["catalogo"]))
+    ch = p.get("completado_historico") or []
+    if ch:
+        L.append("| **Entradas que el fichero anual no traía** (R7) | **%d en %d grupo(s)** |"
+                 % (sum(x["anadidas"] for x in ch), len(ch)))
     L.append("| Actores nuevos sin informe | %d |" % len(p["actores_sin_informe"]))
     L.append("| Informes caducados | %d |" % sum(
         1 for r in p["inventario"] if r["vigencia"] == "caducado"))
@@ -895,6 +989,13 @@ def main(argv=None):
     # ── correlación informe ↔ fuente
     por_rw, por_bn = correlacionar(inv, list(por_grupo) + list(fichas), familias)
     parte["correlacionados"] = len({**por_rw, **por_bn})
+
+    # R7 · el fichero anual pierde entradas que el histórico por grupo sí
+    # tiene. Se completa para los grupos con informe, antes de calcular
+    # cualquier delta: si se hiciera después, lo añadido no se compararía.
+    parte["completado_historico"] = completar_con_historico(
+        por_grupo, sorted(set(por_rw.values())), anio, errores,
+        usar_cache=not a.sin_cache)
 
     base_act = base.get("actores", {})
     base_cat = base.get("catalogo", {})

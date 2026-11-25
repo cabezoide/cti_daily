@@ -449,6 +449,21 @@ def _familias_del_informe(inf):
     return {p.strip() for p in piezas if len(p.strip()) > 2}
 
 
+_RE_FILA_VERSION = re.compile(r"^\|\s*\*{0,2}[\d.]+\*{0,2}\s*\|\s*\*{0,2}(\d{4}-\d{2}-\d{2})",
+                              re.M)
+
+
+def _fechas_de_versiones(inf):
+    """Fechas del control de cambios del informe, de mayor a menor.
+
+    La fecha del frontmatter es la de **emisión** y no se mueve al publicar una
+    versión nueva —es la convención de esta cartera—, así que usarla como corte
+    temporal hace que una corrección publicada hoy parezca ignorar un dato de
+    anteayer.
+    """
+    return sorted(_RE_FILA_VERSION.findall(inf.get("texto") or ""), reverse=True)
+
+
 def evaluar(inf, lote, cache, avisos, profundo):
     H_ = []
     ident = inf["id"]
@@ -533,13 +548,50 @@ def evaluar(inf, lote, cache, avisos, profundo):
                                    ", ".join(quien) or "sin reportante",
                                    ultima or "sin fecha")))
 
-                # ── N4 · declarado caducado pero vivo en la fuente
-                if re.search(r"caducad|ventana cerrada|retirada|inactiv", ctx):
-                    H_.append(H(ident, "N4", valor,
-                                "el informe lo da por **caducado o retirado** y "
-                                "ThreatFox lo ha visto hasta **%s**. Revisar la "
-                                "caducidad declarada." % (ultima or "sin fecha"),
-                                grave=True))
+                # ── N4 · declarado caducado pero vivo DESPUÉS del informe
+                #
+                # La comparación de fechas no estaba y hacía falta: un informe
+                # que declara una dirección caducada el 19-11 no se contradice
+                # porque la fuente la hubiera visto el 19-11 —eso es lo que el
+                # informe midió—, sino porque la hubiera visto DESPUÉS. Sin el
+                # filtro, los siete graves del 24-11-2026 sobre `CTI-2026-045`
+                # mezclaban dos direcciones cuya retirada se confirmó con cinco
+                # cuya vida posterior era real, y el analista tenía que
+                # separarlas a mano. Con el filtro, el aviso señala sólo lo que
+                # el informe no pudo saber.
+                # Dos precisiones que el 24-11-2026 hicieron falta:
+                #
+                #  · Se mira **la columna de caducidad**, no la fila entera.
+                #    Un informe que CORRIGE una caducidad escribe la palabra
+                #    «retirada» en su prosa para decir que la retirada no
+                #    ocurrió, y la regla leía esa prosa como la declaración.
+                #  · El corte es la fecha de la **última fila del control de
+                #    cambios**, no la del frontmatter: lo que el informe pudo
+                #    saber es lo de su versión vigente, no lo de su emisión.
+                caduc = (fila.get("caducidad") or "").lower()
+                if re.search(r"caducad|ventana cerrada|retirad|inactiv", caduc):
+                    corte = max([(fila.get("fecha_informe") or "")[:10]]
+                                + _fechas_de_versiones(inf))
+                    posterior = bool(ultima) and ultima[:10] > corte if corte else bool(ultima)
+                    if posterior:
+                        H_.append(H(ident, "N4", valor,
+                                    "el informe lo da por **caducado o retirado** "
+                                    "y ThreatFox lo ha visto hasta **%s**, "
+                                    "**después de la fecha del informe (%s)**: no "
+                                    "es la medición del informe, es vida "
+                                    "posterior. Revisar la caducidad declarada."
+                                    % (ultima, corte or "sin fecha"),
+                                    grave=True))
+                    elif ultima:
+                        H_.append(H(ident, "N4", valor,
+                                    "el informe lo da por caducado y la última "
+                                    "observación de ThreatFox (**%s**) es "
+                                    "anterior o igual a la fecha del informe "
+                                    "(%s): **coherente**, no hay conflicto. Se "
+                                    "consigna para que la coherencia sea "
+                                    "visible y no haya que comprobarla a mano."
+                                    % (ultima, corte or "sin fecha"),
+                                    grave=False))
 
         # ── N1 · infraestructura legítima publicada como indicador
         if not _es_ip(valor):

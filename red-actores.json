@@ -2605,6 +2605,15 @@
    "d": "Familia de DDoS con terminal interactiva y actualización de ejecutables. Tercera por volumen de eventos del ecosistema, y la única con mando y control alojado en Chile en dos observaciones distintas",
    "a": "-",
    "af": "Capacidades declaradas por la matriz de la fuente; dos direcciones en el prefijo de Santiago del proveedor confirmadas por medición propia y por el geofeed del operador el 24-11-2026"
+  },
+  {
+   "id": "leet1337",
+   "l": "1337 Services GmbH",
+   "t": "suministrador",
+   "p": "-",
+   "r": "CTI-2026-044",
+   "d": "Alojador de AS210558, asignación RIPE LEET-193-26-115-0. En 193.26.115.99 sirve el mismo certificado autofirmado que dos anfitriones de Liso, y aloja infraestructura propia del actor de CTI-2026-063: el mismo proveedor en dos expedientes",
+   "a": "-"
   }
  ],
  "aristas": [
@@ -4556,6 +4565,18 @@
    "cxfj",
    "potassium",
    "noesalias",
+   "propio"
+  ],
+  [
+   "liso",
+   "leet1337",
+   "usa",
+   "inferido"
+  ],
+  [
+   "sckit",
+   "leet1337",
+   "usa",
    "propio"
   ]
  ],

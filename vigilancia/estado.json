@@ -3,7 +3,7 @@
  "anio": 2026,
  "actores": {
   "CTI-2026-014": {
-   "total": 1026,
+   "total": 1046,
    "claves": [
     "005af39a5ca01354",
     "00d0d69532aa67a1",
@@ -24,6 +24,7 @@
     "039aa4a9c89fb1b2",
     "03ad8a9085bcc7ab",
     "03d613329919c64e",
+    "040b605310ebb592",
     "0434ab97ba0ac8b5",
     "0469816b8b7f46a8",
     "04886b893fff4129",
@@ -48,6 +49,7 @@
     "0832f50564fbaec9",
     "08372c4bbd6a0096",
     "0880d081a664a412",
+    "08ba6b834d9da584",
     "09024e92bc5ce338",
     "0913aefcf495b2f2",
     "097e500f25f52cff",
@@ -84,8 +86,10 @@
     "0f3f5f094d1cb9ef",
     "0f61934a24c3f0a0",
     "0fb3ed62c634adc4",
+    "0fd9146e9b7436a1",
     "10145a24af4cab95",
     "1062a0fc46062a25",
+    "107d3c2db31a1a5b",
     "109f7f743e86458d",
     "10ed4931a38535f9",
     "1128daf6d019c424",
@@ -160,6 +164,8 @@
     "259e5819ec925ea0",
     "25c74b77fc25b592",
     "2674e81f6e89e1d2",
+    "26f269bda0bad137",
+    "270a42d891cd4b32",
     "27a67f512cb4d61e",
     "27ca8d3bd19ad905",
     "281976e3e278b91c",
@@ -245,6 +251,7 @@
     "3caae76af312ea9b",
     "3ccb1d324d3e35be",
     "3d01e0bac4343f95",
+    "3d7e2cb2eaa7fc4a",
     "3da493dc381c31bc",
     "3da78187c45773b1",
     "3ddc0e246d044dbd",
@@ -388,6 +395,7 @@
     "5d448b4598396576",
     "5d4c727cb93b9021",
     "5d4d3d43897a221f",
+    "5db5d0e2dcbc36ea",
     "5e098ac048c242d8",
     "5e2b38a246fc67d9",
     "5e5ac32954761cb4",
@@ -464,6 +472,7 @@
     "6dde22421a4120af",
     "6e07cdaf37d502e6",
     "6e15a878eb422df9",
+    "6e243ac0a728e00f",
     "6e72c0052ee37dc3",
     "6e909fafc70b1261",
     "6f17b1fc720aa539",
@@ -596,6 +605,7 @@
     "8f45844ea68b38c0",
     "8f8a14d2b5af0fcb",
     "8f8ddd72d2190887",
+    "8f9dc25faa5bfe63",
     "90361545bed6938c",
     "904b0064f06cfdef",
     "9083fbef25c472d1",
@@ -610,6 +620,7 @@
     "92071a398e8a269a",
     "920ddfbbc908dd0c",
     "92dbadc7665fa142",
+    "9313bfe0bf97fb05",
     "93b9a954ea30ca53",
     "9445a5b7178e0938",
     "94a7362f19941567",
@@ -648,6 +659,7 @@
     "9bd6fe0689fb2a7e",
     "9c1844de4eb622c2",
     "9c2cfbaa6dcfddb8",
+    "9c2d0e2b4f032466",
     "9c4eded525592e02",
     "9cb57719de3735d6",
     "9d212f22bf713556",
@@ -666,6 +678,7 @@
     "9ff63c6248ea77a4",
     "a093a1e80c57dff4",
     "a0ae1e59c60d5c1f",
+    "a0ec8fe032ed5e09",
     "a12c6414a9429919",
     "a1e4698c76e0cadc",
     "a1eee8f8eab084ea",
@@ -716,6 +729,7 @@
     "b004e2ba302fa47c",
     "b06e6765f38f8db6",
     "b0e55bf3986e7720",
+    "b10738b60da3b7d3",
     "b158780dd4208fb4",
     "b16537c0c3c09482",
     "b173b62e71cab1b8",
@@ -726,6 +740,7 @@
     "b3924f9386443722",
     "b3cbe555a948cc98",
     "b424776ffd27cf30",
+    "b4313c919aad2c93",
     "b464a1cd67858450",
     "b46c8ceb6bfbbd1d",
     "b4794bd4cd55337a",
@@ -793,6 +808,7 @@
     "c69df897d97cbb83",
     "c73de71cc0f8b6f0",
     "c761c81c16d8c764",
+    "c7da8460e15446b7",
     "c7eb0bcc33bb0c12",
     "c855585c6d1c190d",
     "c85e13f91516feb9",
@@ -803,6 +819,7 @@
     "c92418bb2332532f",
     "c957a0f557bf36fa",
     "c97aec8b53e6e26d",
+    "c998664a47e8760e",
     "c9cf40e93e29cbbb",
     "c9dcc69bea6e8cb0",
     "c9e338d3e80b797e",
@@ -929,6 +946,7 @@
     "e339b223e5c99b8b",
     "e363bd862a5f611e",
     "e3940b2616eb6c8c",
+    "e39ead90229f6f2a",
     "e3ba1c24d6c738b4",
     "e424125ff3a33842",
     "e43db4c22eb98743",
@@ -944,6 +962,7 @@
     "e59562baebe6e8cf",
     "e63a4e7661dffa64",
     "e67170d3ea3d19c0",
+    "e68da022f02d8ba6",
     "e6d5c956f6883db6",
     "e712e5acb03b3461",
     "e72ddb075c0c31ea",
@@ -991,6 +1010,7 @@
     "f49006b67c8add3a",
     "f4978311c3738bb8",
     "f4fe9ff4a960a798",
+    "f51031ef0844d499",
     "f52bc7577fa13998",
     "f5a74140247c2bea",
     "f606f3f21d7889f1",
@@ -1034,27 +1054,27 @@
    ],
    "paises": {
     "TW": 27,
-    "US": 218,
+    "US": 222,
     "SE": 16,
     "??": 30,
     "AR": 18,
-    "BR": 36,
+    "BR": 38,
     "TZ": 2,
-    "GB": 48,
+    "GB": 50,
     "FR": 42,
-    "PL": 21,
+    "PL": 22,
     "BE": 7,
     "DE": 49,
-    "MU": 1,
+    "MU": 2,
     "MX": 24,
     "MK": 2,
     "HK": 9,
-    "KE": 1,
+    "KE": 2,
     "SA": 6,
     "ES": 23,
     "PE": 8,
     "CA": 29,
-    "ZA": 12,
+    "ZA": 14,
     "JP": 24,
     "UA": 1,
     "VE": 4,
@@ -1064,13 +1084,13 @@
     "VN": 6,
     "BO": 1,
     "AU": 21,
-    "IT": 35,
+    "IT": 36,
     "IN": 34,
     "CO": 11,
     "CY": 2,
     "EC": 5,
     "ID": 5,
-    "TR": 10,
+    "TR": 12,
     "NO": 3,
     "DK": 7,
     "AD": 1,
@@ -1102,7 +1122,7 @@
     "AE": 9,
     "MA": 1,
     "HU": 3,
-    "PH": 4,
+    "PH": 5,
     "IS": 2,
     "CI": 1,
     "NL": 6,
@@ -1117,7 +1137,7 @@
     "IR": 1,
     "GH": 3,
     "PG": 1,
-    "CN": 4,
+    "CN": 7,
     "PA": 1,
     "LB": 1,
     "RO": 2,
@@ -1125,20 +1145,20 @@
     "IQ": 1
    },
    "sectores": {
-    "Technology": 134,
+    "Technology": 139,
     "Healthcare": 102,
     "Hospitality": 23,
-    "Education": 38,
+    "Education": 40,
     "Other": 64,
     "Not Found": 62,
-    "Manufacturing": 191,
+    "Manufacturing": 196,
     "Agriculture and Food Production": 48,
-    "Professional Services": 119,
-    "Financial Services": 43,
-    "Government & Defense": 45,
+    "Professional Services": 121,
+    "Financial Services": 46,
+    "Government & Defense": 46,
     "Energy & Utilities": 36,
     "Transportation": 49,
-    "Retail & E-Commerce": 72
+    "Retail & E-Commerce": 74
    },
    "por_publicacion": {
     "2026-11-21": 4,
@@ -1205,10 +1225,10 @@
     "2026-05-12": 10,
     "2026-05-09": 10,
     "2026-05-06": 40,
-    "2026-04-26": 3,
+    "2026-04-26": 4,
     "2026-04-23": 4,
     "2026-04-19": 23,
-    "2026-03-21": 4,
+    "2026-03-21": 5,
     "2026-04-14": 15,
     "2026-04-08": 22,
     "2026-04-04": 17,
@@ -1224,11 +1244,11 @@
     "2026-03-04": 3,
     "2026-03-01": 5,
     "2026-02-27": 4,
-    "2026-02-26": 4,
+    "2026-02-26": 5,
     "2026-02-25": 7,
     "2026-02-24": 10,
     "2026-03-03": 1,
-    "2026-02-21": 10,
+    "2026-02-21": 11,
     "2026-02-15": 7,
     "2026-03-20": 1,
     "2026-02-13": 9,
@@ -1237,14 +1257,19 @@
     "2026-02-10": 8,
     "2026-02-08": 2,
     "2026-02-06": 19,
-    "2026-01-31": 4,
+    "2026-01-31": 6,
     "2026-01-21": 6,
-    "2026-01-20": 15,
+    "2026-01-20": 19,
     "2026-01-19": 1,
-    "2026-01-11": 3,
+    "2026-01-11": 7,
     "2026-01-24": 1,
-    "2026-01-07": 2,
-    "2026-01-06": 1
+    "2026-01-07": 3,
+    "2026-01-06": 1,
+    "2026-01-16": 1,
+    "2026-04-27": 1,
+    "2026-02-04": 1,
+    "2026-01-30": 1,
+    "2026-01-14": 1
    },
    "por_ataque": {
     "2026-11-18": 5,
@@ -1411,11 +1436,18 @@
     "2026-01-02": 1,
     "2025-12-26": 1,
     "2024-09-22": 1,
-    "2023-09-19": 1
+    "2023-09-19": 1,
+    "2025-12-08": 1,
+    "2025-11-04": 1,
+    "2025-10-07": 1,
+    "2025-10-04": 1,
+    "2025-09-09": 1,
+    "2025-08-25": 1,
+    "2025-02-19": 14
    }
   },
   "CTI-2026-015": {
-   "total": 1229,
+   "total": 1238,
    "claves": [
     "007ce922ac671ff0",
     "008668cf27702299",
@@ -1477,6 +1509,7 @@
     "0c426f3ca37cc7b8",
     "0cb807f7a6dc744a",
     "0ccbb176f582440f",
+    "0ce461b84d2b8900",
     "0d1706af50061165",
     "0d4d07f2b2b23dc8",
     "0d5562ea2eae65e0",
@@ -1510,6 +1543,7 @@
     "129442ab9c34a974",
     "129bbeb351444bbe",
     "12ac3d30f8317790",
+    "1326781aeb9d6551",
     "13306272acdf75e6",
     "133eccfa659c2fda",
     "13655a9651da0ea6",
@@ -1531,6 +1565,7 @@
     "171147ba896adc85",
     "17193c3d38fcd9ba",
     "17247bb7783498e0",
+    "1725e5b1171b6770",
     "17872f3ce87107f4",
     "17a7de36ef53ea55",
     "17b110f908e81c6a",
@@ -1821,6 +1856,7 @@
     "50a7d71ff8973216",
     "50ad53a95171eec3",
     "50f331140761cd6a",
+    "50fc7b53875ea68a",
     "5188c475ebdabab0",
     "51cfe56a78c76730",
     "521d441a1ce0e5b4",
@@ -1883,6 +1919,7 @@
     "5e80ade0df4342b4",
     "5eadd34e6141d0a3",
     "5ef4cddc06109ee2",
+    "5efee587bfaafb42",
     "5f104168c3831b81",
     "5f326e5369add108",
     "5fd75a634682fbe3",
@@ -1912,6 +1949,7 @@
     "65b2186ccabc1d57",
     "65bbb3c3ef93e704",
     "65eb6e919ac347c7",
+    "6626052f596e65ef",
     "666ba0502d5b372c",
     "66dac2bdf9f89a9e",
     "66f354249e89925f",
@@ -1975,6 +2013,7 @@
     "70c7fefd54a47ecf",
     "70ef0cc69e7f202c",
     "716837d4a0430cb2",
+    "71de9f132e063d04",
     "7209142477fb0fa7",
     "7210a0a7c3c60540",
     "727382d8034f4d01",
@@ -2046,6 +2085,7 @@
     "7fb545e065e4245d",
     "7fe466c79dd0986f",
     "807999bca2b14c1d",
+    "80d1923400278784",
     "80d9ae318e7d8f96",
     "810bb41e57af1594",
     "810c6309754f2d2f",
@@ -2565,6 +2605,7 @@
     "edb46680f11eea61",
     "eef9b74f37f4d9c1",
     "ef09ee819b365a5b",
+    "ef0d644b6b881efe",
     "ef359658377cb6bf",
     "ef4c9d9c464a8676",
     "ef7fe10012ff9b77",
@@ -2649,10 +2690,10 @@
    ],
    "paises": {
     "DE": 73,
-    "MX": 35,
+    "US": 460,
+    "MX": 36,
     "??": 31,
     "HU": 3,
-    "US": 453,
     "JP": 18,
     "GB": 74,
     "PH": 14,
@@ -2677,7 +2718,7 @@
     "MM": 1,
     "CH": 8,
     "NL": 5,
-    "BD": 1,
+    "BD": 2,
     "AR": 27,
     "IN": 6,
     "TH": 15,
@@ -2732,22 +2773,22 @@
    },
    "sectores": {
     "Manufacturing": 270,
+    "Education": 43,
     "Other": 67,
-    "Retail & E-Commerce": 104,
+    "Retail & E-Commerce": 106,
     "Professional Services": 191,
     "Financial Services": 65,
     "Not Found": 71,
     "Energy & Utilities": 40,
-    "Government & Defense": 37,
+    "Government & Defense": 39,
     "Transportation": 54,
     "Technology": 124,
-    "Education": 41,
     "Healthcare": 77,
     "Hospitality": 34,
-    "Agriculture and Food Production": 54
+    "Agriculture and Food Production": 57
    },
    "por_publicacion": {
-    "2026-11-24": 1,
+    "2026-11-24": 2,
     "2026-11-23": 4,
     "2026-11-22": 2,
     "2026-11-18": 2,
@@ -2908,7 +2949,7 @@
     "2026-05-08": 10,
     "2026-05-07": 2,
     "2026-05-06": 8,
-    "2026-05-05": 1,
+    "2026-05-05": 2,
     "2026-05-04": 8,
     "2026-05-02": 4,
     "2026-05-01": 1,
@@ -2919,7 +2960,7 @@
     "2026-04-25": 11,
     "2026-04-24": 7,
     "2026-04-23": 5,
-    "2026-04-21": 11,
+    "2026-04-21": 12,
     "2026-04-20": 9,
     "2026-04-19": 3,
     "2026-04-18": 1,
@@ -2944,13 +2985,13 @@
     "2026-03-21": 4,
     "2026-03-20": 3,
     "2026-03-19": 2,
-    "2026-03-18": 8,
+    "2026-03-18": 9,
     "2026-03-16": 5,
     "2026-03-15": 1,
     "2026-03-14": 1,
     "2026-03-13": 3,
     "2026-03-12": 3,
-    "2026-03-11": 10,
+    "2026-03-11": 11,
     "2026-03-10": 5,
     "2026-03-09": 4,
     "2026-03-07": 6,
@@ -2960,7 +3001,7 @@
     "2026-03-03": 11,
     "2026-03-01": 6,
     "2026-02-28": 4,
-    "2026-02-27": 3,
+    "2026-02-27": 4,
     "2026-02-26": 3,
     "2026-02-24": 3,
     "2026-02-23": 7,
@@ -2976,7 +3017,7 @@
     "2026-02-13": 1,
     "2026-02-10": 4,
     "2026-02-09": 5,
-    "2026-02-07": 8,
+    "2026-02-07": 9,
     "2026-02-06": 2,
     "2026-02-05": 4,
     "2026-02-04": 6,
@@ -3007,11 +3048,12 @@
     "2026-01-07": 3,
     "2026-01-06": 5,
     "2026-01-04": 3,
-    "2026-01-02": 11
+    "2026-01-02": 12,
+    "2026-03-17": 1
    },
    "por_ataque": {
     "2026-11-24": 1,
-    "2026-11-23": 2,
+    "2026-11-23": 3,
     "2026-11-22": 2,
     "2026-11-18": 3,
     "2026-11-16": 14,
@@ -3281,7 +3323,15 @@
     "2025-12-21": 1,
     "2025-09-29": 1,
     "2023-11-27": 1,
-    "2023-10-30": 1
+    "2023-10-30": 1,
+    "2025-12-24": 1,
+    "2025-12-23": 1,
+    "2025-12-08": 1,
+    "2025-10-07": 1,
+    "2025-09-11": 1,
+    "2025-08-19": 1,
+    "2025-01-31": 1,
+    "2023-03-05": 1
    }
   },
   "CTI-2026-024": {
@@ -3886,7 +3936,7 @@
    }
   },
   "CTI-2026-046": {
-   "total": 421,
+   "total": 457,
    "claves": [
     "00054f366d35e72b",
     "00de09cdedda5902",
@@ -3908,6 +3958,7 @@
     "096b68e09504c724",
     "0972eb34e9b39352",
     "09f2f6db56b02076",
+    "0aa0c982e1453407",
     "0b98240573c27666",
     "0ba83348a2792140",
     "0c698f968736f2b0",
@@ -3915,8 +3966,10 @@
     "0d0f8630a5d21ebd",
     "0de5c1e5652d1f2d",
     "0f02fe33b2044cd4",
+    "0fda1bf51d6a999e",
     "0ff343f837cc72bf",
     "10df845ba53514c7",
+    "10e9b8e20caa9c18",
     "12c82a07490e562e",
     "13be78cf42cf7fe4",
     "13c68b2cd6533db9",
@@ -3925,6 +3978,7 @@
     "15721d44b5523a71",
     "15d5a35b10c360cb",
     "15f2dc6b2ec748b2",
+    "16f223e48310f066",
     "1866459f7d40bf61",
     "1972478c7e83a9b7",
     "1af23ace03568f41",
@@ -3932,6 +3986,7 @@
     "1bd4bd726de52698",
     "1c85cbc24f971009",
     "1e930e3099345d0b",
+    "1ec23e9fb59294d0",
     "1ee4a2290579b470",
     "1ef73ddf45484b8f",
     "200b1b9904fdf236",
@@ -3956,9 +4011,11 @@
     "29f5eb92613b2e88",
     "29fc936f3c9fec6c",
     "2a5d81c90c6ba7d7",
+    "2a78e3ad5cf590d7",
     "2c01e91d9dcf1c39",
     "2f42c03bc348d757",
     "2fd561b085549d6f",
+    "309c7c6ad134f02c",
     "30bb8d9ea3e97c44",
     "30cb1cd2fd94df8a",
     "315c95257ec6152c",
@@ -3982,19 +4039,24 @@
     "3b0fdbe7de5cafbb",
     "3b3d1828584e0462",
     "3bd45ab231e41d11",
+    "3bdd24f7545b4d9f",
     "3c404c51f5fce204",
     "3de27c56c519b405",
     "3e4666b845fdb5e2",
     "3e8df522a859725e",
+    "3e9b55154e033667",
     "3eda2b4a058aa2c7",
+    "3f0ab1dd6eb50552",
     "3f7824f290ad289c",
     "3f8af3ed3fee18b0",
     "3fdadb8192ee6d4c",
     "4083a386d9ca5df0",
+    "417efff25d87ee0b",
     "418273f4d7131666",
     "41dffba92c47f5d9",
     "4260d44eaab4fdad",
     "4333c055cc4fbe02",
+    "434ff1e86b91fe2b",
     "43a3e6f45c15f35b",
     "43bc3961fb6ff6e2",
     "4476d385d3ac6fff",
@@ -4005,8 +4067,11 @@
     "4622cb593c1b2188",
     "4631375a30871f32",
     "47667451818289bd",
+    "477984798b5f71c5",
+    "48083c0748ea85ce",
     "493090e6be64b849",
     "4975f5f58caf19c2",
+    "49864595979caa59",
     "4a2b0d3ec2f02668",
     "4aaf8b7398c302a0",
     "4b8cb96d304f6989",
@@ -4022,6 +4087,8 @@
     "507a4032da0ae403",
     "508aeda9e8e8246b",
     "517adbd643820937",
+    "51a025beb9745caf",
+    "51bf016edd853d8f",
     "5218db1ab6270bab",
     "525aa466a84e0acd",
     "527d927e72178ada",
@@ -4070,10 +4137,13 @@
     "69e9bf1b86534171",
     "6a9067794cd64571",
     "6b870860c332853f",
+    "6bdc6105481bece2",
     "6cd680f51d51c2fe",
     "6d30cffe11a902b9",
+    "6e490af071060095",
     "6e5e7ebc7ab11e5f",
     "6ee57855bdd6726a",
+    "6f5e64142ef20107",
     "6f8dabda1a9c06a4",
     "70aa1c6c3445feb8",
     "70b089edae6503c4",
@@ -4096,13 +4166,17 @@
     "7989134a83651bc5",
     "7a0389ee2cd9753a",
     "7b15f2215f599756",
+    "7b3f46d26d43c330",
+    "7bb86e54979b9a03",
     "7c9934a4cf00eaa3",
+    "7dc680c74d6bb473",
     "7dde5df9f4177d69",
     "7e185014bd1a953b",
     "7eb24615f7e44614",
     "7eda01091673bde9",
     "7efab6704ae7c54e",
     "81aeb256c2cfad95",
+    "81c33727abdca214",
     "81d321b2d5274170",
     "823995964ada93ff",
     "82d934b722fa0192",
@@ -4195,8 +4269,10 @@
     "b83260b2118572d4",
     "b846c94150b42c13",
     "b8b8ccd77b0508f4",
+    "b8d73b771c9857ba",
     "b9de191a555f14ab",
     "ba24324bf8053af0",
+    "ba7d80284f8a094e",
     "bae8e6515c630ed2",
     "bbc563482278b4e1",
     "bc0560275f4f76cf",
@@ -4213,12 +4289,14 @@
     "bf90215a65d89786",
     "bf99eab523c1ce16",
     "c025654e9232af49",
+    "c0800a578a1dc9c8",
     "c18b3f0d1940073a",
     "c304f2c6d4cf2762",
     "c35210c61ada671b",
     "c3523732bed17403",
     "c3657b725908c4ff",
     "c3cd66e05d1f5d5d",
+    "c3d10a69b21845f7",
     "c58cab56f58b901f",
     "c58e5f08e0f2b073",
     "c5954bbb7698ac94",
@@ -4257,6 +4335,7 @@
     "d7fa61f19a89dde7",
     "d8c638378a5bd6b3",
     "d8e3a6b65f61d2da",
+    "d9027213394ff38e",
     "dafee21f881da8a9",
     "dc076992f09f89f5",
     "dccfe5efc276989a",
@@ -4273,9 +4352,11 @@
     "e1b75e19c389cd04",
     "e1f74b93b1d0d870",
     "e2553a0a2ed2ac84",
+    "e269027ef5342087",
     "e33917bbfcf69d83",
     "e34f9d5b999e15fd",
     "e4dac71381ba2d7a",
+    "e6128c648fd89da7",
     "e645f9cce0257f37",
     "e66ab2f7d844d309",
     "e7d9d992a29de2db",
@@ -4286,12 +4367,17 @@
     "e9b191597a2c6507",
     "e9b6c665a8a9c28d",
     "e9c7658b74e12cfb",
+    "ea3cf91c6b70a444",
     "ea4b95ce05cb377d",
     "eae62f0dcb99e460",
+    "ebc92c499172c25a",
     "ecfc644bafb04567",
     "edb3b28c8e2fcbe0",
     "ee1bf8cb16058371",
+    "ee296e5c60ad45ee",
+    "eea09d92ce85693e",
     "ef960041991df3ed",
+    "f096d14bde0e2788",
     "f0a064bfafcc9234",
     "f0ebfbb535743907",
     "f0f98bf13909ac2f",
@@ -4312,15 +4398,15 @@
    ],
    "paises": {
     "IT": 8,
-    "??": 109,
-    "US": 207,
-    "CA": 15,
+    "??": 110,
+    "US": 228,
+    "CA": 19,
     "FR": 7,
     "CH": 12,
     "KR": 1,
     "NL": 3,
-    "DE": 21,
-    "GB": 13,
+    "DE": 28,
+    "GB": 15,
     "MX": 3,
     "BR": 3,
     "CZ": 3,
@@ -4333,18 +4419,19 @@
     "IE": 1,
     "BE": 1,
     "AU": 1,
-    "CN": 1
+    "CN": 1,
+    "HK": 1
    },
    "sectores": {
     "Other": 16,
-    "Financial Services": 22,
-    "Technology": 33,
+    "Financial Services": 23,
+    "Technology": 35,
     "Hospitality": 12,
-    "Manufacturing": 124,
-    "Professional Services": 81,
-    "Transportation": 17,
-    "Retail & E-Commerce": 38,
-    "Not Found": 21,
+    "Manufacturing": 138,
+    "Professional Services": 91,
+    "Transportation": 20,
+    "Retail & E-Commerce": 43,
+    "Not Found": 22,
     "Energy & Utilities": 15,
     "Healthcare": 19,
     "Education": 3,
@@ -4400,7 +4487,7 @@
     "2026-08-18": 1,
     "2026-09-21": 1,
     "2026-08-13": 1,
-    "2026-08-25": 1,
+    "2026-08-25": 2,
     "2026-08-10": 3,
     "2026-08-06": 2,
     "2026-08-04": 1,
@@ -4435,7 +4522,7 @@
     "2026-06-25": 2,
     "2026-06-04": 2,
     "2026-06-03": 4,
-    "2026-06-23": 1,
+    "2026-06-23": 2,
     "2026-05-29": 3,
     "2026-05-27": 2,
     "2026-05-26": 1,
@@ -4448,12 +4535,12 @@
     "2026-05-07": 3,
     "2026-05-15": 1,
     "2026-05-13": 2,
-    "2026-05-12": 3,
+    "2026-05-12": 4,
     "2026-05-05": 3,
     "2026-07-16": 1,
     "2026-04-30": 1,
     "2026-05-14": 1,
-    "2026-04-22": 1,
+    "2026-04-22": 2,
     "2026-04-21": 4,
     "2026-05-06": 4,
     "2026-04-23": 2,
@@ -4461,37 +4548,37 @@
     "2026-04-15": 4,
     "2026-04-14": 4,
     "2026-04-13": 1,
-    "2026-04-09": 2,
-    "2026-04-07": 4,
+    "2026-04-09": 5,
+    "2026-04-07": 5,
     "2026-04-06": 3,
-    "2026-04-03": 3,
-    "2026-04-01": 3,
+    "2026-04-03": 4,
+    "2026-04-01": 5,
     "2026-04-24": 1,
-    "2026-03-31": 3,
+    "2026-03-31": 4,
     "2026-03-30": 2,
-    "2026-03-27": 4,
-    "2026-03-24": 4,
+    "2026-03-27": 6,
+    "2026-03-24": 5,
     "2026-03-23": 6,
     "2026-04-08": 1,
     "2026-04-02": 1,
     "2026-03-19": 3,
-    "2026-03-16": 4,
-    "2026-04-10": 1,
+    "2026-03-16": 5,
+    "2026-04-10": 2,
     "2026-03-20": 5,
     "2026-03-11": 4,
-    "2026-03-10": 2,
-    "2026-03-09": 4,
-    "2026-03-05": 4,
-    "2026-03-18": 3,
+    "2026-03-10": 3,
+    "2026-03-09": 6,
+    "2026-03-05": 6,
+    "2026-03-18": 4,
     "2026-03-04": 7,
     "2026-03-13": 2,
     "2026-02-27": 6,
-    "2026-02-24": 4,
-    "2026-03-12": 2,
+    "2026-02-24": 5,
+    "2026-03-12": 4,
     "2026-03-06": 3,
     "2026-02-20": 3,
     "2026-02-18": 3,
-    "2026-02-16": 4,
+    "2026-02-16": 5,
     "2026-02-14": 1,
     "2026-02-13": 2,
     "2026-02-12": 2,
@@ -4504,17 +4591,20 @@
     "2026-01-30": 3,
     "2026-01-29": 8,
     "2026-01-23": 3,
-    "2026-01-22": 4,
+    "2026-01-22": 5,
     "2026-01-21": 2,
     "2026-01-16": 5,
     "2026-01-15": 3,
     "2026-01-14": 5,
     "2026-01-13": 2,
     "2026-01-12": 6,
-    "2026-01-09": 2,
-    "2026-01-08": 3,
-    "2026-01-07": 2,
-    "2026-01-05": 4
+    "2026-01-09": 3,
+    "2026-01-08": 4,
+    "2026-01-07": 4,
+    "2026-01-05": 5,
+    "2026-04-20": 1,
+    "2026-05-20": 1,
+    "2026-02-10": 1
    },
    "por_ataque": {
     "2026-11-20": 1,
@@ -4668,7 +4758,7 @@
     "2026-02-21": 5,
     "2026-02-20": 4,
     "2026-02-19": 2,
-    "2026-02-18": 4,
+    "2026-02-18": 5,
     "2026-02-17": 1,
     "2026-02-16": 3,
     "2026-02-14": 1,
@@ -4704,11 +4794,42 @@
     "2025-12-12": 1,
     "2025-12-10": 1,
     "2025-11-18": 1,
-    "2025-04-12": 1
+    "2025-04-12": 1,
+    "2025-12-23": 1,
+    "2025-12-19": 1,
+    "2025-12-18": 1,
+    "2025-12-08": 1,
+    "2025-12-03": 1,
+    "2025-12-01": 1,
+    "2025-11-22": 1,
+    "2025-11-13": 2,
+    "2025-11-12": 1,
+    "2025-10-21": 1,
+    "2025-10-20": 1,
+    "2025-10-15": 1,
+    "2025-10-13": 1,
+    "2025-10-08": 1,
+    "2025-10-07": 1,
+    "2025-10-06": 1,
+    "2025-09-25": 1,
+    "2025-09-24": 1,
+    "2025-09-23": 1,
+    "2025-09-22": 1,
+    "2025-09-21": 1,
+    "2025-09-20": 1,
+    "2025-09-10": 1,
+    "2025-09-01": 1,
+    "2025-07-22": 1,
+    "2025-05-13": 4,
+    "2025-02-23": 1,
+    "2025-02-11": 1,
+    "2025-02-10": 1,
+    "2025-02-09": 1,
+    "2025-01-21": 1
    }
   },
   "CTI-2026-047": {
-   "total": 444,
+   "total": 460,
    "claves": [
     "01042ca52d1a3b53",
     "01645c4b93a764c4",
@@ -4750,7 +4871,9 @@
     "143672928263619f",
     "14d1423f46ccedba",
     "14f52d81aba5bb3f",
+    "153041243add2d1b",
     "1723d6c5f71ea2a9",
+    "17771e737f38a014",
     "179ab78c1ae1db69",
     "18154cc3cd7fbd8f",
     "189f5a8667fa6b56",
@@ -4775,11 +4898,13 @@
     "212ee53eb006321d",
     "21f1e710e3bebfa1",
     "2250bd5699f0d801",
+    "2307561a17c2587f",
     "23ba662550eda8a6",
     "243eac136f345898",
     "25671f672aeca338",
     "25752bc6ecfe3f4b",
     "2629291bf64632ac",
+    "26e1674be96ed785",
     "279915a43f98eb10",
     "27d84fc66e431642",
     "28335d85af18accd",
@@ -4797,6 +4922,7 @@
     "2f1daa27f658f064",
     "2fa58397f32d5ffd",
     "301d2d66441b40c0",
+    "309c5f4f4812b7bb",
     "30a6c146a731e289",
     "310869031cf96f0d",
     "314b650ff16fadd9",
@@ -4820,6 +4946,7 @@
     "3ce89c20e47dbfe1",
     "3d310f53cf796ebe",
     "3d5ed76d2513f49f",
+    "3e55e9ee3d40e2ea",
     "3e737581d5ad0f3c",
     "3f66f76a44e3cc99",
     "403dd7b9594b6181",
@@ -4834,6 +4961,7 @@
     "48ab9a9a0fa3e2c7",
     "49e73da05d2aa67f",
     "4a444ad22fd1f65f",
+    "4abef1958bf5b22b",
     "4b80d1ca1c6c7f1a",
     "4c46077de3bef642",
     "4cccf96d1fc15c57",
@@ -4860,6 +4988,7 @@
     "58639879da043446",
     "58e3ec3ce971f6a9",
     "59dac4b4f7ca4456",
+    "5ac35c160a43e8b3",
     "5b27386fe9a570b2",
     "5b5710ac1dc53e4c",
     "5b6e112dd6dc26a0",
@@ -4876,6 +5005,7 @@
     "603ce4d6f1a50817",
     "604b4526125709cd",
     "60a97f94a2ab32a5",
+    "60e4b31dea41f3c3",
     "618ef9b25e85b53e",
     "61a0e3f6bc403f37",
     "61fe35f4c45d746c",
@@ -4958,6 +5088,7 @@
     "8d5208387d453edc",
     "8e7254eadc1c634d",
     "8f2ca5cb9c56c0d6",
+    "8f2ecb0d39ce4b27",
     "8fe8e87517602377",
     "909e4aae067b6091",
     "9223f71601ebebd6",
@@ -4979,6 +5110,7 @@
     "97fbfb711fff6c63",
     "986c2acb1741aa2d",
     "988444d01cc774f4",
+    "990819b0016d5505",
     "99693d6df0cc9107",
     "99b35b74a68d541d",
     "99b51d8e9e89b764",
@@ -4992,12 +5124,15 @@
     "9fc5985e757ecd2c",
     "a1071ff388a84de2",
     "a2ced42338e98fc0",
+    "a35eb280a04321bf",
     "a61a90f3d1aaaa0a",
     "a76c7cfd4c1447d9",
     "a8dcb70184fcfcd6",
     "a8fc5622ff7b59bd",
     "a9aa30754940f88d",
+    "aa0c319d0db086a6",
     "aab025180d54e22a",
+    "ab2ad1684cc24818",
     "ab38b9e7a11e1764",
     "acf3853a1ad369ac",
     "acf968c7317dc760",
@@ -5056,6 +5191,7 @@
     "c5e0af2d4ce6fc9c",
     "c611de893c0a0b20",
     "c6602f51837166ab",
+    "c6cd6932a73a1fc5",
     "c6ef6a42d7232461",
     "c816aeb011020fa2",
     "c84ef290463a68e5",
@@ -5143,6 +5279,7 @@
     "f70044cd6e35e362",
     "f88b4ec3e6a32f5e",
     "f906825231abaf87",
+    "f9149dbec83329e5",
     "f99955987b776473",
     "f9c6469714a7a946",
     "fa6492acf30a73d0",
@@ -5156,33 +5293,33 @@
     "ff8ade51549248ad"
    ],
    "paises": {
-    "US": 260,
+    "US": 269,
     "IT": 7,
-    "JP": 3,
+    "JP": 4,
     "IN": 11,
     "MY": 4,
     "ID": 3,
-    "TW": 7,
+    "TW": 8,
     "MX": 6,
     "BE": 1,
     "FR": 4,
     "AL": 1,
     "CA": 15,
     "ES": 5,
-    "GB": 7,
+    "GB": 8,
     "KR": 2,
-    "AE": 7,
+    "AE": 8,
     "HK": 2,
     "IE": 1,
     "JM": 1,
-    "DE": 12,
+    "DE": 13,
     "PL": 2,
     "CR": 1,
     "SE": 4,
-    "BR": 9,
+    "BR": 10,
     "CH": 4,
     "PH": 3,
-    "TH": 3,
+    "TH": 4,
     "ZA": 5,
     "NL": 3,
     "TR": 3,
@@ -5217,19 +5354,19 @@
    },
    "sectores": {
     "Financial Services": 29,
-    "Agriculture and Food Production": 12,
+    "Agriculture and Food Production": 13,
     "Healthcare": 43,
-    "Government & Defense": 21,
+    "Government & Defense": 23,
     "Energy & Utilities": 14,
     "Not Found": 19,
-    "Technology": 46,
-    "Manufacturing": 60,
-    "Professional Services": 113,
-    "Retail & E-Commerce": 20,
+    "Technology": 48,
+    "Manufacturing": 62,
+    "Professional Services": 116,
+    "Retail & E-Commerce": 21,
     "Transportation": 16,
-    "Other": 25,
-    "Education": 17,
-    "Hospitality": 9
+    "Other": 26,
+    "Education": 19,
+    "Hospitality": 11
    },
    "por_publicacion": {
     "2026-11-24": 1,
@@ -5254,9 +5391,9 @@
     "2026-10-19": 1,
     "2026-10-15": 4,
     "2026-10-14": 1,
-    "2026-10-13": 1,
+    "2026-10-13": 2,
     "2026-10-12": 1,
-    "2026-10-07": 5,
+    "2026-10-07": 8,
     "2026-10-06": 1,
     "2026-10-01": 5,
     "2026-09-29": 1,
@@ -5266,7 +5403,7 @@
     "2026-09-23": 1,
     "2026-09-21": 2,
     "2026-09-18": 2,
-    "2026-09-17": 2,
+    "2026-09-17": 3,
     "2026-10-02": 1,
     "2026-09-10": 1,
     "2026-09-09": 2,
@@ -5346,7 +5483,7 @@
     "2026-04-27": 4,
     "2026-04-25": 1,
     "2026-04-24": 2,
-    "2026-04-22": 2,
+    "2026-04-22": 3,
     "2026-04-20": 1,
     "2026-04-17": 4,
     "2026-04-12": 2,
@@ -5371,13 +5508,13 @@
     "2026-03-09": 3,
     "2026-03-19": 1,
     "2026-03-05": 3,
-    "2026-03-04": 9,
-    "2026-03-03": 4,
+    "2026-03-04": 10,
+    "2026-03-03": 5,
     "2026-04-02": 2,
     "2026-03-02": 3,
     "2026-03-01": 4,
     "2026-02-27": 4,
-    "2026-02-26": 4,
+    "2026-02-26": 5,
     "2026-02-23": 3,
     "2026-02-21": 1,
     "2026-02-20": 1,
@@ -5398,7 +5535,7 @@
     "2026-03-06": 1,
     "2026-01-30": 1,
     "2026-01-28": 3,
-    "2026-01-27": 5,
+    "2026-01-27": 7,
     "2026-01-26": 2,
     "2026-01-23": 4,
     "2026-01-22": 1,
@@ -5409,14 +5546,16 @@
     "2026-01-15": 1,
     "2026-01-31": 1,
     "2026-01-14": 1,
-    "2026-01-13": 6,
+    "2026-01-13": 7,
     "2026-01-12": 2,
     "2026-01-10": 2,
     "2026-08-24": 1,
-    "2026-01-09": 1,
+    "2026-01-09": 2,
     "2026-01-08": 1,
-    "2026-01-03": 2,
-    "2026-04-04": 1
+    "2026-01-03": 3,
+    "2026-04-04": 1,
+    "2026-02-11": 1,
+    "2026-03-13": 1
    },
    "por_ataque": {
     "2026-11-24": 1,
@@ -5639,9 +5778,22 @@
     "2026-01-03": 2,
     "2026-01-02": 1,
     "2026-01-01": 1,
-    "2025-12-26": 1,
-    "2025-12-19": 1,
-    "2024-10-21": 1
+    "2025-12-26": 2,
+    "2025-12-19": 2,
+    "2024-10-21": 1,
+    "2025-12-29": 1,
+    "2025-12-18": 1,
+    "2025-12-16": 2,
+    "2025-12-14": 1,
+    "2025-12-12": 1,
+    "2025-12-10": 1,
+    "2025-12-09": 1,
+    "2025-11-10": 1,
+    "2025-10-07": 1,
+    "2025-07-10": 1,
+    "2025-02-25": 1,
+    "2025-01-05": 1,
+    "2024-05-03": 1
    }
   },
   "CTI-2026-048": {
@@ -7218,7 +7370,7 @@
    }
   },
   "CTI-2026-058": {
-   "total": 209,
+   "total": 210,
    "claves": [
     "015ef132a0d67b54",
     "0278657fac4712f8",
@@ -7324,6 +7476,7 @@
     "7f0a28d31e57372d",
     "7f497f6976cb6e36",
     "7f62a2ca3ab51718",
+    "8022593b1929f3ef",
     "81cd25f41d954e40",
     "824628d8e763819a",
     "839174e0719eea1f",
@@ -7443,7 +7596,7 @@
     "SG": 3,
     "AR": 5,
     "EC": 2,
-    "IL": 4,
+    "IL": 5,
     "AU": 6,
     "BE": 5,
     "PE": 2,
@@ -7464,7 +7617,7 @@
     "KH": 1
    },
    "sectores": {
-    "Technology": 18,
+    "Technology": 19,
     "Manufacturing": 35,
     "Retail & E-Commerce": 27,
     "Not Found": 20,
@@ -7526,7 +7679,7 @@
     "2026-02-07": 3,
     "2026-01-26": 1,
     "2026-01-24": 6,
-    "2026-01-19": 2,
+    "2026-01-19": 3,
     "2026-01-23": 1
    },
    "por_ataque": {
@@ -7604,7 +7757,8 @@
     "2026-01-13": 1,
     "2026-01-11": 1,
     "2026-01-09": 1,
-    "2026-01-04": 1
+    "2026-01-04": 1,
+    "2025-12-29": 1
    }
   },
   "CTI-2026-059": {
@@ -7937,7 +8091,7 @@
    }
   },
   "CTI-2026-061": {
-   "total": 329,
+   "total": 332,
    "claves": [
     "00b3359ac100071c",
     "01baeaa59ff45f7a",
@@ -8030,6 +8184,7 @@
     "44adc7b76323fda9",
     "462f962c4121640f",
     "47d9a1cb46acab6a",
+    "48a94ccbc5cc8bad",
     "4a2d15f2fdce552f",
     "4a42cdbdd7c50548",
     "4a51bb57640ea507",
@@ -8162,6 +8317,7 @@
     "b14e3ed17cfb6036",
     "b19b8dd47ba0f503",
     "b1d3ee8f7d2f92b1",
+    "b22353883aa5bb8d",
     "b253f2261164a78e",
     "b406c55549d4428a",
     "b6996a1b6fc228dc",
@@ -8205,6 +8361,7 @@
     "d0d0388ff4abbe07",
     "d16c799762016c81",
     "d1d03fd1edeb8f28",
+    "d32430718b659e16",
     "d38a6a7e70e8cb68",
     "d3a0a080f87d09dd",
     "d3a1a05baa9a3891",
@@ -8271,7 +8428,7 @@
    ],
    "paises": {
     "??": 8,
-    "US": 142,
+    "US": 145,
     "UA": 2,
     "CA": 14,
     "PE": 1,
@@ -8325,12 +8482,12 @@
    "sectores": {
     "Technology": 40,
     "Energy & Utilities": 12,
-    "Manufacturing": 70,
+    "Manufacturing": 72,
     "Education": 5,
     "Other": 13,
     "Healthcare": 21,
     "Retail & E-Commerce": 25,
-    "Professional Services": 65,
+    "Professional Services": 66,
     "Financial Services": 22,
     "Not Found": 11,
     "Hospitality": 17,
@@ -8401,7 +8558,7 @@
     "2026-05-13": 3,
     "2026-05-08": 2,
     "2026-05-04": 1,
-    "2026-04-27": 12,
+    "2026-04-27": 13,
     "2026-04-22": 3,
     "2026-04-21": 1,
     "2026-04-17": 1,
@@ -8414,7 +8571,7 @@
     "2026-04-05": 1,
     "2026-04-04": 5,
     "2026-04-03": 1,
-    "2026-04-02": 11,
+    "2026-04-02": 12,
     "2026-04-01": 4,
     "2026-03-29": 1,
     "2026-03-27": 3,
@@ -8452,7 +8609,8 @@
     "2026-01-22": 1,
     "2026-01-16": 2,
     "2026-01-15": 1,
-    "2026-01-02": 2
+    "2026-01-02": 2,
+    "2026-01-01": 1
    },
    "por_ataque": {
     "2026-10-29": 1,
@@ -8539,7 +8697,7 @@
     "2026-03-29": 1,
     "2026-03-27": 3,
     "2026-03-26": 3,
-    "2026-03-24": 2,
+    "2026-03-24": 3,
     "2026-03-20": 8,
     "2026-03-19": 5,
     "2026-03-18": 6,
@@ -8577,7 +8735,9 @@
     "2025-12-25": 1,
     "2025-12-06": 1,
     "2025-10-23": 1,
-    "2025-10-03": 1
+    "2025-10-03": 1,
+    "2025-12-27": 1,
+    "2025-01-18": 1
    }
   },
   "CTI-2026-062": {
@@ -8589,7 +8749,7 @@
    "por_ataque": {}
   },
   "CTI-2026-064": {
-   "total": 110,
+   "total": 116,
    "claves": [
     "047be753cafac7fb",
     "055d779135f75b65",
@@ -8639,6 +8799,7 @@
     "5fd936fc92e3e24d",
     "61cbe55373dbb581",
     "62b7cb5500a093eb",
+    "63dd288131fefc0b",
     "6b02e19c8198a2ee",
     "6e517707a7527ac0",
     "70bd25d2642d41e9",
@@ -8663,10 +8824,13 @@
     "96c16c71c39ba478",
     "98a57307b04a8e42",
     "9a994b96787b60d3",
+    "9bbd5460f187f0f7",
     "a43f3f7c8e4420d1",
+    "a64bdba6db9dd3a9",
     "ac09a981dffeddd1",
     "af0523ed33e0c6ec",
     "b0c14a391b9977b4",
+    "b3e36393d1d43d8b",
     "b5efc0fdd13104cc",
     "b60c014a558bc29a",
     "b85ee8cc6c56b607",
@@ -8678,6 +8842,7 @@
     "c2c170555111eead",
     "c444e9a4e5543bc8",
     "c76852e324c3f1c2",
+    "c8fa64d8250231d9",
     "ccb10cf977a2d936",
     "cdd73a6d9a88b443",
     "ce9fbc67e643228d",
@@ -8693,6 +8858,7 @@
     "e26d2137f98ef2be",
     "e69397f0357d86bd",
     "ea9a31a80f6e2fa9",
+    "ebdf89a6688ec7c3",
     "f2c5f80ad6b7b731",
     "f511b58e0b829d5c",
     "f67b52dfb41d35f1",
@@ -8704,8 +8870,8 @@
    ],
    "paises": {
     "??": 10,
-    "DE": 2,
-    "US": 82,
+    "DE": 3,
+    "US": 87,
     "CH": 3,
     "SE": 1,
     "IL": 2,
@@ -8723,9 +8889,9 @@
     "Manufacturing": 3,
     "Government & Defense": 3,
     "Agriculture and Food Production": 2,
-    "Financial Services": 17,
-    "Technology": 24,
-    "Retail & E-Commerce": 10,
+    "Financial Services": 18,
+    "Technology": 28,
+    "Retail & E-Commerce": 11,
     "—": 1,
     "Professional Services": 13,
     "Education": 13,
@@ -8786,7 +8952,10 @@
     "2026-02-27": 1,
     "2026-02-24": 8,
     "2026-01-28": 1,
-    "2026-01-27": 2
+    "2026-01-27": 2,
+    "2026-01-24": 2,
+    "2026-01-23": 3,
+    "2026-04-01": 1
    },
    "por_ataque": {
     "2026-09-24": 1,
@@ -8856,7 +9025,13 @@
     "2026-01-28": 1,
     "2026-01-27": 1,
     "2024-03-22": 1,
-    "2023-11-10": 1
+    "2023-11-10": 1,
+    "2025-09-30": 1,
+    "2025-09-29": 1,
+    "2025-09-28": 1,
+    "2025-09-20": 1,
+    "2025-08-10": 1,
+    "2024-04-24": 1
    }
   }
  },
@@ -9299,20 +9474,20 @@
    "description": "Qilin ransomware was first observed in July of 2022. Qilin Ransomware is written in Golang and supports multiple encryption modes; all of which are controlled by the operator. Qilin actors practice double extortion – demanding payment for a decryptor, as well as for the non-release of stolen data.",
    "locations": [
     {
-     "available": false,
-     "enabled": false,
-     "fqdn": "kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion",
-     "slug": "http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion",
-     "title": "DDOS Protection",
-     "type": "DLS"
-    },
-    {
      "available": true,
      "enabled": true,
      "fqdn": "ijzn3sicrcy7guixkzjkib4ukbiilwc3xhnmby4mcbccnsd7j2rekvqd.onion",
      "slug": "http://ijzn3sicrcy7guixkzjkib4ukbiilwc3xhnmby4mcbccnsd7j2rekvqd.onion",
      "title": "Qilin blog",
      "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "ji57fr53anp7wb44tbbnp72qcgbhqywy4jmbncawdcrejj5amuvh3zqd.onion",
+     "slug": "http://ji57fr53anp7wb44tbbnp72qcgbhqywy4jmbncawdcrejj5amuvh3zqd.onion/site/login",
+     "title": "Sign In",
+     "type": "Admin"
     },
     {
      "available": false,
@@ -9325,10 +9500,10 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "ji57fr53anp7wb44tbbnp72qcgbhqywy4jmbncawdcrejj5amuvh3zqd.onion",
-     "slug": "http://ji57fr53anp7wb44tbbnp72qcgbhqywy4jmbncawdcrejj5amuvh3zqd.onion/site/login",
-     "title": "Sign In",
-     "type": "Admin"
+     "fqdn": "kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion",
+     "slug": "http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion",
+     "title": "DDOS Protection",
+     "type": "DLS"
     }
    ],
    "name": "qilin",
@@ -9834,33 +10009,9 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "rhysidavdzxlt4czlpsfotgsgplq5vddhnbuai7bisdtrstwhvyprrqd.onion",
-     "slug": "http://rhysidavdzxlt4czlpsfotgsgplq5vddhnbuai7bisdtrstwhvyprrqd.onion",
-     "title": "Onionsite Not Found",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "rhysidafohrhyy2aszi7bm32tnjat5xri65fopcxkdfxhi4tidsg7cad.onion",
-     "slug": "http://rhysidafohrhyy2aszi7bm32tnjat5xri65fopcxkdfxhi4tidsg7cad.onion/archive.php?auction",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": true,
-     "enabled": true,
      "fqdn": "rhysidaqho36b6i6mvpmy5di4ro5zglovtxixrirky6q3fgack7q5uyd.onion",
      "slug": "http://rhysidaqho36b6i6mvpmy5di4ro5zglovtxixrirky6q3fgack7q5uyd.onion",
      "title": "Onionsite Not Found",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "rhysidaeoxtkejwuheks3a7htk4zn3dfuynt5mqw6oawlcx6kcxjdeyd.onion",
-     "slug": "http://rhysidaeoxtkejwuheks3a7htk4zn3dfuynt5mqw6oawlcx6kcxjdeyd.onion",
-     "title": "",
      "type": "Files"
     },
     {
@@ -9882,8 +10033,8 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "rhysidaxx6gdihss7urv4ecbh2yz4izhnfulfbrb4ua5dwkocm653yid.onion",
-     "slug": "http://rhysidaxx6gdihss7urv4ecbh2yz4izhnfulfbrb4ua5dwkocm653yid.onion",
+     "fqdn": "rhysidavdzxlt4czlpsfotgsgplq5vddhnbuai7bisdtrstwhvyprrqd.onion",
+     "slug": "http://rhysidavdzxlt4czlpsfotgsgplq5vddhnbuai7bisdtrstwhvyprrqd.onion",
      "title": "Onionsite Not Found",
      "type": "Files"
     },
@@ -9894,6 +10045,30 @@
      "slug": "http://rhysidafc6lm7qa2mkiukbezh7zuth3i4wof4mh2audkymscjm6yegad.onion",
      "title": "Rhysida",
      "type": "DLS"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "rhysidaxx6gdihss7urv4ecbh2yz4izhnfulfbrb4ua5dwkocm653yid.onion",
+     "slug": "http://rhysidaxx6gdihss7urv4ecbh2yz4izhnfulfbrb4ua5dwkocm653yid.onion",
+     "title": "Onionsite Not Found",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "rhysidafohrhyy2aszi7bm32tnjat5xri65fopcxkdfxhi4tidsg7cad.onion",
+     "slug": "http://rhysidafohrhyy2aszi7bm32tnjat5xri65fopcxkdfxhi4tidsg7cad.onion/archive.php?auction",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "rhysidaeoxtkejwuheks3a7htk4zn3dfuynt5mqw6oawlcx6kcxjdeyd.onion",
+     "slug": "http://rhysidaeoxtkejwuheks3a7htk4zn3dfuynt5mqw6oawlcx6kcxjdeyd.onion",
+     "title": "",
+     "type": "Files"
     }
    ],
    "name": "rhysida",
@@ -10162,6 +10337,14 @@
    "locations": [
     {
      "available": false,
+     "enabled": false,
+     "fqdn": "hupxs7ps7md24kpz4lwsbra64abgxjx3pcc2wuca5ibawf2g5hlpfyqd.onion",
+     "slug": "http://hupxs7ps7md24kpz4lwsbra64abgxjx3pcc2wuca5ibawf2g5hlpfyqd.onion",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
      "enabled": true,
      "fqdn": "7aqabivkwmpvjkyefonf3gpy5gsubopqni7kcirsrq3pflckxq5zz4id.onion",
      "slug": "http://7aqabivkwmpvjkyefonf3gpy5gsubopqni7kcirsrq3pflckxq5zz4id.onion",
@@ -10171,57 +10354,9 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "kyfiw76eol6ph2mq7pi5e5tdvce37bicddhai62qhdc5ja6jdchz4qqd.onion",
-     "slug": "http://kyfiw76eol6ph2mq7pi5e5tdvce37bicddhai62qhdc5ja6jdchz4qqd.onion",
+     "fqdn": "medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion",
+     "slug": "http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/",
      "title": "Human Verify",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "hupxs7ps7md24kpz4lwsbra64abgxjx3pcc2wuca5ibawf2g5hlpfyqd.onion",
-     "slug": "http://hupxs7ps7md24kpz4lwsbra64abgxjx3pcc2wuca5ibawf2g5hlpfyqd.onion",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "xfv4jzckytb4g3ckwemcny3ihv4i5p4lqzdpi624cxisu35my5fwi5qd.onion",
-     "slug": "http://xfv4jzckytb4g3ckwemcny3ihv4i5p4lqzdpi624cxisu35my5fwi5qd.onion",
-     "title": "Human Verify",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "cx5u7zxbvrfyoj6ughw76oa264ucuuizmmzypwum6ear7pct4yc723qd.onion",
-     "slug": "http://cx5u7zxbvrfyoj6ughw76oa264ucuuizmmzypwum6ear7pct4yc723qd.onion",
-     "title": "Human Verify",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "medusakxxtp3uo7vusntvubnytaph4d3amxivbggl3hnhpk2nmus34yd.onion",
-     "slug": "http://medusakxxtp3uo7vusntvubnytaph4d3amxivbggl3hnhpk2nmus34yd.onion",
-     "title": "Medusa Chat",
-     "type": "Chat"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "62foekhv5humjrfwjdyd2dgextpbf5i7obguhwvfoghmu3nxpkmxlcid.onion",
-     "slug": "http://62foekhv5humjrfwjdyd2dgextpbf5i7obguhwvfoghmu3nxpkmxlcid.onion",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "dlmfciajg5s4vliyo5dhs5jyzhi2xr2fnkebul46lpf4xudtqiue4nid.onion",
-     "slug": "http://dlmfciajg5s4vliyo5dhs5jyzhi2xr2fnkebul46lpf4xudtqiue4nid.onion",
-     "title": "503 Service Temporarily Unavailable",
      "type": "DLS"
     },
     {
@@ -10235,8 +10370,48 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion",
-     "slug": "http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/",
+     "fqdn": "dlmfciajg5s4vliyo5dhs5jyzhi2xr2fnkebul46lpf4xudtqiue4nid.onion",
+     "slug": "http://dlmfciajg5s4vliyo5dhs5jyzhi2xr2fnkebul46lpf4xudtqiue4nid.onion",
+     "title": "503 Service Temporarily Unavailable",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "62foekhv5humjrfwjdyd2dgextpbf5i7obguhwvfoghmu3nxpkmxlcid.onion",
+     "slug": "http://62foekhv5humjrfwjdyd2dgextpbf5i7obguhwvfoghmu3nxpkmxlcid.onion",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "medusakxxtp3uo7vusntvubnytaph4d3amxivbggl3hnhpk2nmus34yd.onion",
+     "slug": "http://medusakxxtp3uo7vusntvubnytaph4d3amxivbggl3hnhpk2nmus34yd.onion",
+     "title": "Medusa Chat",
+     "type": "Chat"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "cx5u7zxbvrfyoj6ughw76oa264ucuuizmmzypwum6ear7pct4yc723qd.onion",
+     "slug": "http://cx5u7zxbvrfyoj6ughw76oa264ucuuizmmzypwum6ear7pct4yc723qd.onion",
+     "title": "Human Verify",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "xfv4jzckytb4g3ckwemcny3ihv4i5p4lqzdpi624cxisu35my5fwi5qd.onion",
+     "slug": "http://xfv4jzckytb4g3ckwemcny3ihv4i5p4lqzdpi624cxisu35my5fwi5qd.onion",
+     "title": "Human Verify",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "kyfiw76eol6ph2mq7pi5e5tdvce37bicddhai62qhdc5ja6jdchz4qqd.onion",
+     "slug": "http://kyfiw76eol6ph2mq7pi5e5tdvce37bicddhai62qhdc5ja6jdchz4qqd.onion",
      "title": "Human Verify",
      "type": "DLS"
     },
@@ -10988,14 +11163,6 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "anubisyfkh5rixydjpoo3jqucauajz2juybrbtuglcppjj2y3eg3y6ad.onion",
-     "slug": "http://anubisyfkh5rixydjpoo3jqucauajz2juybrbtuglcppjj2y3eg3y6ad.onion",
-     "title": "Anubis blog",
-     "type": "DLS"
-    },
-    {
-     "available": true,
-     "enabled": true,
      "fqdn": "om6q4a6cyipxvt7ioudxt24cw4oqu4yodmqzl25mqd2hgllymrgu4aqd.onion",
      "slug": "http://om6q4a6cyipxvt7ioudxt24cw4oqu4yodmqzl25mqd2hgllymrgu4aqd.onion",
      "title": "Anubis blog",
@@ -11008,6 +11175,14 @@
      "slug": "http://6g3aoky5hft4mvzcqt2bugo4r465woaorjhd7em2k2v24sr2exaro5id.onion",
      "title": "Chat",
      "type": "Chat"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "anubisyfkh5rixydjpoo3jqucauajz2juybrbtuglcppjj2y3eg3y6ad.onion",
+     "slug": "http://anubisyfkh5rixydjpoo3jqucauajz2juybrbtuglcppjj2y3eg3y6ad.onion",
+     "title": "Anubis blog",
+     "type": "DLS"
     }
    ],
    "name": "anubis",
@@ -11023,14 +11198,6 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "wugurgyscp5rxpihef5vl6b6m5ont3b6sezhl7boboso2enib2k3q6qd.onion",
-     "slug": "http://wugurgyscp5rxpihef5vl6b6m5ont3b6sezhl7boboso2enib2k3q6qd.onion",
-     "title": "DEVMAN 2.0 - Leaked Data",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
      "fqdn": "qljmlmp4psnn3wqskkf3alqquatymo6hntficb4rhq5n76kuogcv7zyd.onion",
      "slug": "http://qljmlmp4psnn3wqskkf3alqquatymo6hntficb4rhq5n76kuogcv7zyd.onion",
      "title": "Devman's Place",
@@ -11042,6 +11209,14 @@
      "fqdn": "devmanblggk7ddrtqj3tsocnayow3bwnozab2s4yhv4shpv6ueitjzid.onion",
      "slug": "http://devmanblggk7ddrtqj3tsocnayow3bwnozab2s4yhv4shpv6ueitjzid.onion",
      "title": "Devman Ransomware",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "wugurgyscp5rxpihef5vl6b6m5ont3b6sezhl7boboso2enib2k3q6qd.onion",
+     "slug": "http://wugurgyscp5rxpihef5vl6b6m5ont3b6sezhl7boboso2enib2k3q6qd.onion",
+     "title": "DEVMAN 2.0 - Leaked Data",
      "type": "DLS"
     }
    ],
@@ -11226,18 +11401,18 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion",
-     "slug": "https://akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion",
-     "title": "/",
-     "type": "Chat"
-    },
-    {
-     "available": true,
-     "enabled": true,
      "fqdn": "akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion",
      "slug": "https://akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion",
      "title": "",
      "type": "DLS"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion",
+     "slug": "https://akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion",
+     "title": "/",
+     "type": "Chat"
     }
    ],
    "name": "akira",
@@ -11631,42 +11806,18 @@
    "description": "INC Ransom is a prolific ransomware-as-a-service operation active since July 2023 that systematically targets healthcare, government, education, and manufacturing sectors in North America and Europe, having posted over 200 victims in 2025 alone with no sector off-limits.",
    "locations": [
     {
-     "available": false,
-     "enabled": false,
-     "fqdn": "incbackrlasjesgpfu5brktfjknbqoahe2hhmqfhasc5fb56mtukn4yd.onion",
-     "slug": "http://incbackrlasjesgpfu5brktfjknbqoahe2hhmqfhasc5fb56mtukn4yd.onion/api/blog/get-leaks",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "incbacg6bfwtrlzwdbqc55gsfl763s3twdtwhp27dzuik6s6rwdcityd.onion",
-     "slug": "http://incbacg6bfwtrlzwdbqc55gsfl763s3twdtwhp27dzuik6s6rwdcityd.onion/api/v1/blog/get/announcements?page=1&perPage=15",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "incapt.su",
-     "slug": "http://incapt.su/blog/leaks",
-     "title": "Error Response Page",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "incapt.blog",
-     "slug": "http://incapt.blog/blog/leaks",
-     "title": "INC Ransom",
-     "type": "DLS"
-    },
-    {
      "available": true,
      "enabled": true,
      "fqdn": "incblog4uttkxd6b4grii6k2qcj2tn5k37seep5xto3dlghyqla7u7qd.onion",
      "slug": "http://incblog4uttkxd6b4grii6k2qcj2tn5k37seep5xto3dlghyqla7u7qd.onion/api/v2/blog/news?limit=100",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "incbackrlasjesgpfu5brktfjknbqoahe2hhmqfhasc5fb56mtukn4yd.onion",
+     "slug": "http://incbackrlasjesgpfu5brktfjknbqoahe2hhmqfhasc5fb56mtukn4yd.onion/api/blog/get-leaks",
      "title": "",
      "type": "DLS"
     },
@@ -11681,6 +11832,22 @@
     {
      "available": false,
      "enabled": false,
+     "fqdn": "incblog7vmuq7rktic73r4ha4j757m3ptym37tyvifzp2roedyyzzxid.onion",
+     "slug": "http://incblog7vmuq7rktic73r4ha4j757m3ptym37tyvifzp2roedyyzzxid.onion/blog/leaks",
+     "title": "INC Ransom",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "incapt.blog",
+     "slug": "http://incapt.blog/blog/leaks",
+     "title": "INC Ransom",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
      "fqdn": "incbackend.top",
      "slug": "http://incbackend.top/api/blog/get-leaks",
      "title": "Error Response Page",
@@ -11689,9 +11856,17 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "incblog7vmuq7rktic73r4ha4j757m3ptym37tyvifzp2roedyyzzxid.onion",
-     "slug": "http://incblog7vmuq7rktic73r4ha4j757m3ptym37tyvifzp2roedyyzzxid.onion/blog/leaks",
-     "title": "INC Ransom",
+     "fqdn": "incapt.su",
+     "slug": "http://incapt.su/blog/leaks",
+     "title": "Error Response Page",
+     "type": "DLS"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "incbacg6bfwtrlzwdbqc55gsfl763s3twdtwhp27dzuik6s6rwdcityd.onion",
+     "slug": "http://incbacg6bfwtrlzwdbqc55gsfl763s3twdtwhp27dzuik6s6rwdcityd.onion/api/v1/blog/get/announcements?page=1&perPage=15",
+     "title": "",
      "type": "DLS"
     }
    ],
@@ -12080,32 +12255,16 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "c3u3g7dz2yxkefci3x34jfvfa4gka4iogi4zfjkyxx2c536oqdld4kid.onion",
-     "slug": "http://c3u3g7dz2yxkefci3x34jfvfa4gka4iogi4zfjkyxx2c536oqdld4kid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "settra5ceeidlmbt2d7zupsb3r7djl2azjj4mho5kznmdap6vnoxoxqd.onion",
-     "slug": "http://settra5ceeidlmbt2d7zupsb3r7djl2azjj4mho5kznmdap6vnoxoxqd.onion",
-     "title": "Chat Panel",
-     "type": "Chat"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "wqdopgpr7cubbjcf2kiac6ilvamch3renqlzrly2dtwm3uyv2235zryd.onion",
-     "slug": "http://wqdopgpr7cubbjcf2kiac6ilvamch3renqlzrly2dtwm3uyv2235zryd.onion",
+     "fqdn": "pbxvml6h3wz35qlr5muy2cg5jvjsd4qhjlsztmxj4lqkyohnfdrntqyd.onion",
+     "slug": "http://pbxvml6h3wz35qlr5muy2cg5jvjsd4qhjlsztmxj4lqkyohnfdrntqyd.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": false,
      "enabled": true,
-     "fqdn": "r2vpglmz42fs5762tchek55bg4kdg3c6ozipg7wqs2ghzbhsdtwkzmyd.onion",
-     "slug": "http://r2vpglmz42fs5762tchek55bg4kdg3c6ozipg7wqs2ghzbhsdtwkzmyd.onion",
+     "fqdn": "26z3gms2rshr2zzedxhw5fbucilmgt2inhmxzmuhteyztpxohoqplgyd.onion",
+     "slug": "http://26z3gms2rshr2zzedxhw5fbucilmgt2inhmxzmuhteyztpxohoqplgyd.onion",
      "title": "",
      "type": "Files"
     },
@@ -12120,16 +12279,40 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "pbxvml6h3wz35qlr5muy2cg5jvjsd4qhjlsztmxj4lqkyohnfdrntqyd.onion",
-     "slug": "http://pbxvml6h3wz35qlr5muy2cg5jvjsd4qhjlsztmxj4lqkyohnfdrntqyd.onion",
+     "fqdn": "r2vpglmz42fs5762tchek55bg4kdg3c6ozipg7wqs2ghzbhsdtwkzmyd.onion",
+     "slug": "http://r2vpglmz42fs5762tchek55bg4kdg3c6ozipg7wqs2ghzbhsdtwkzmyd.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": false,
      "enabled": true,
+     "fqdn": "wqdopgpr7cubbjcf2kiac6ilvamch3renqlzrly2dtwm3uyv2235zryd.onion",
+     "slug": "http://wqdopgpr7cubbjcf2kiac6ilvamch3renqlzrly2dtwm3uyv2235zryd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "settra5ceeidlmbt2d7zupsb3r7djl2azjj4mho5kznmdap6vnoxoxqd.onion",
+     "slug": "http://settra5ceeidlmbt2d7zupsb3r7djl2azjj4mho5kznmdap6vnoxoxqd.onion",
+     "title": "Chat Panel",
+     "type": "Chat"
+    },
+    {
+     "available": false,
+     "enabled": true,
      "fqdn": "hhj2nouojnatg6gvhfgrcqdanoe244gf26pixpnrcoxs7jiqu4atvzyd.onion",
      "slug": "http://hhj2nouojnatg6gvhfgrcqdanoe244gf26pixpnrcoxs7jiqu4atvzyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "c3u3g7dz2yxkefci3x34jfvfa4gka4iogi4zfjkyxx2c536oqdld4kid.onion",
+     "slug": "http://c3u3g7dz2yxkefci3x34jfvfa4gka4iogi4zfjkyxx2c536oqdld4kid.onion",
      "title": "",
      "type": "Files"
     },
@@ -12144,24 +12327,16 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "26z3gms2rshr2zzedxhw5fbucilmgt2inhmxzmuhteyztpxohoqplgyd.onion",
-     "slug": "http://26z3gms2rshr2zzedxhw5fbucilmgt2inhmxzmuhteyztpxohoqplgyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion/leaks",
-     "slug": "http://settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion/leaks",
+     "fqdn": "settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion",
+     "slug": "http://settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion",
      "title": "SETTRA - Leaked Data Blog",
      "type": "DLS"
     },
     {
-     "available": true,
+     "available": false,
      "enabled": true,
-     "fqdn": "settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion",
-     "slug": "http://settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion",
+     "fqdn": "settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion/leaks",
+     "slug": "http://settra5ldqwgtw5q7z5awbsvlksakyfojuc5slgrz5lvapune4fantqd.onion/leaks",
      "title": "SETTRA - Leaked Data Blog",
      "type": "DLS"
     }
@@ -12260,14 +12435,6 @@
    "locations": [
     {
      "available": false,
-     "enabled": false,
-     "fqdn": "cuuhrxbg52c5agytmtjpwfu7mrs4xtaitc4mukkiy2kqdxeqbcmuhaid.onion",
-     "slug": "http://cuuhrxbg52c5agytmtjpwfu7mrs4xtaitc4mukkiy2kqdxeqbcmuhaid.onion/",
-     "title": "BrainCipher Storage",
-     "type": "Files"
-    },
-    {
-     "available": false,
      "enabled": true,
      "fqdn": "ovw7qnv4pfmah7lae42rynehsrr2v2cvrq6g3uf2nhhpasbr2u3xrwid.onion",
      "slug": "http://ovw7qnv4pfmah7lae42rynehsrr2v2cvrq6g3uf2nhhpasbr2u3xrwid.onion",
@@ -12276,353 +12443,65 @@
     },
     {
      "available": false,
-     "enabled": true,
-     "fqdn": "ea52lfk4w6dza6hmmb4o6ndef7ep45wkkjxuo7sfzkyqt7rplyph3zyd.onion",
-     "slug": "http://ea52lfk4w6dza6hmmb4o6ndef7ep45wkkjxuo7sfzkyqt7rplyph3zyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
      "enabled": false,
-     "fqdn": "mybmtbgd7aprdnw2ekxht5qap5daam2wch25coqerrq2zdioanob34ad.onion",
-     "slug": "http://mybmtbgd7aprdnw2ekxht5qap5daam2wch25coqerrq2zdioanob34ad.onion",
-     "title": "Brain Cipher Client Area",
-     "type": "Chat"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
-     "slug": "http://n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "h4zmek6bf3lebauy7dtyxmui67n6ro5t4zdrooddpw3kyfktg2nmhgid.onion",
-     "slug": "http://h4zmek6bf3lebauy7dtyxmui67n6ro5t4zdrooddpw3kyfktg2nmhgid.onion",
+     "fqdn": "rpoeu7zimfpwxbwmjmjyprqaprtvkj3ykfczhbc4x3voydopffn337id.onion",
+     "slug": "http://rpoeu7zimfpwxbwmjmjyprqaprtvkj3ykfczhbc4x3voydopffn337id.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": true,
      "enabled": true,
-     "fqdn": "dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
-     "slug": "http://dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
-     "slug": "http://aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
-     "slug": "http://upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "ltxnzpfvmr3c3rcbw5x4q2ejy6fmbp7kc35oql3gooyydg7belfmnyad.onion",
-     "slug": "http://ltxnzpfvmr3c3rcbw5x4q2ejy6fmbp7kc35oql3gooyydg7belfmnyad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "urvvoj7wlkh476p2tgntzez3nuke2ylfdkekpnkajxfz43o7jqkokeyd.onion",
-     "slug": "http://urvvoj7wlkh476p2tgntzez3nuke2ylfdkekpnkajxfz43o7jqkokeyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
-     "slug": "http://s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "ipkxv2cccgrklc2tktzpqe6nm76mikdmvqqgauklvqvv5rl4ib3nmryd.onion",
-     "slug": "http://ipkxv2cccgrklc2tktzpqe6nm76mikdmvqqgauklvqvv5rl4ib3nmryd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
-     "slug": "http://ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "cjuogz6kvmozrapbw6cgf3ovfxgxe2fy3ajlgxm53w3xjve5x5sichyd.onion",
-     "slug": "http://cjuogz6kvmozrapbw6cgf3ovfxgxe2fy3ajlgxm53w3xjve5x5sichyd.onion",
+     "fqdn": "guonv3yxlb5t7mptz2cwxsqrsnmsocrufkz3z3nvuv45h66submxe4yd.onion",
+     "slug": "http://guonv3yxlb5t7mptz2cwxsqrsnmsocrufkz3z3nvuv45h66submxe4yd.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": true,
      "enabled": false,
-     "fqdn": "zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
-     "slug": "http://zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
+     "fqdn": "6ft2dfh26wm3w44orpjcgviutvfp25ez2iyh5ego5egvfmifrws7vvqd.onion",
+     "slug": "http://6ft2dfh26wm3w44orpjcgviutvfp25ez2iyh5ego5egvfmifrws7vvqd.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": false,
      "enabled": false,
-     "fqdn": "p6wmotxzvg34tdmpwm4beqgrcyp5iys43snkccsahnw74la3k3xx6pad.onion",
-     "slug": "http://p6wmotxzvg34tdmpwm4beqgrcyp5iys43snkccsahnw74la3k3xx6pad.onion/",
-     "title": "BrainCipher Client Area",
-     "type": "Chat"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "keoz3i32ljvnfrsxo3cwolzv2mhkvbi5y5wlwtn5ngbswu4qzdnjvrqd.onion",
-     "slug": "http://keoz3i32ljvnfrsxo3cwolzv2mhkvbi5y5wlwtn5ngbswu4qzdnjvrqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "7dfw4p3pzo3zlcy5hzm7y43z3kfke2rhd3eudncmvknwhsqqvseadkad.onion",
-     "slug": "http://7dfw4p3pzo3zlcy5hzm7y43z3kfke2rhd3eudncmvknwhsqqvseadkad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "lhsxojxowgtwdqlryl72d2v5cpgqv3sll4d47yyqdisersigvfbl5uid.onion",
-     "slug": "http://lhsxojxowgtwdqlryl72d2v5cpgqv3sll4d47yyqdisersigvfbl5uid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "bosgzz4d53h6tqoaidjogoiq4jaxszll6q2puiepchxhxxop6dxoozqd.onion",
-     "slug": "http://bosgzz4d53h6tqoaidjogoiq4jaxszll6q2puiepchxhxxop6dxoozqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "sjyd42k47guvygfiyfdv5dmllytpgdzr3ioiqsuytz726is6ss67imid.onion",
-     "slug": "http://sjyd42k47guvygfiyfdv5dmllytpgdzr3ioiqsuytz726is6ss67imid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
-     "slug": "http://hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
-     "slug": "http://vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
-     "title": "Brain Cipher Dataleak",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "zktnif5vckhmz5tyrukp5bamatbfhkxjnb23rspsanyzywcrx3bvtqad.onion",
-     "slug": "http://zktnif5vckhmz5tyrukp5bamatbfhkxjnb23rspsanyzywcrx3bvtqad.onion/",
+     "fqdn": "cuuhrxbg52c5agytmtjpwfu7mrs4xtaitc4mukkiy2kqdxeqbcmuhaid.onion",
+     "slug": "http://cuuhrxbg52c5agytmtjpwfu7mrs4xtaitc4mukkiy2kqdxeqbcmuhaid.onion/",
      "title": "BrainCipher Storage",
      "type": "Files"
     },
     {
      "available": false,
-     "enabled": true,
-     "fqdn": "3fg2gfwrdks46drwvejpgpak5klrflclsjjo35dxtqfk3poeez6oezad.onion",
-     "slug": "http://3fg2gfwrdks46drwvejpgpak5klrflclsjjo35dxtqfk3poeez6oezad.onion",
-     "title": "",
+     "enabled": false,
+     "fqdn": "4ldgw2wuidqu5ef3rzx4byonf3y7rdnh43jiw2z4sbtjiwic6gkov7yd.onion",
+     "slug": "http://4ldgw2wuidqu5ef3rzx4byonf3y7rdnh43jiw2z4sbtjiwic6gkov7yd.onion/",
+     "title": "Not Found",
      "type": "Files"
     },
     {
      "available": false,
-     "enabled": true,
-     "fqdn": "tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
-     "slug": "http://tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "emdnfl2fv32jhssxcbxlo6dzg2at4d7qbw2md6inz63qzdfgyln5cwyd.onion",
-     "slug": "http://emdnfl2fv32jhssxcbxlo6dzg2at4d7qbw2md6inz63qzdfgyln5cwyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
-     "slug": "http://pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "3jbhn5gsv7yd22n7yasftjab2aystm7mw2x3cvonzipsrnxpjqufmgyd.onion",
-     "slug": "http://3jbhn5gsv7yd22n7yasftjab2aystm7mw2x3cvonzipsrnxpjqufmgyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "zztabnlnggxpbeiyvpievqtxl6te4amttfobwusmgo2l3hcabfpcgyad.onion",
-     "slug": "http://zztabnlnggxpbeiyvpievqtxl6te4amttfobwusmgo2l3hcabfpcgyad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "x3nb7qcygpem2j5xzstyzdtgzofzkwkx4eko3ug4r73i6uhcgvyffjyd.onion",
-     "slug": "http://x3nb7qcygpem2j5xzstyzdtgzofzkwkx4eko3ug4r73i6uhcgvyffjyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "mwf23uiaoiyyg3jgh3diwpmcn2qgg6i7kadivsbyncycz2mw2nyuwtqd.onion",
-     "slug": "http://mwf23uiaoiyyg3jgh3diwpmcn2qgg6i7kadivsbyncycz2mw2nyuwtqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "psv5ejeysrncs6ltu4pkjyazswcmw3atmxi4eg44a6luudin5ufchcqd.onion",
-     "slug": "http://psv5ejeysrncs6ltu4pkjyazswcmw3atmxi4eg44a6luudin5ufchcqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "qvfgzg2yukem4ldat2zk6umidqbzydhf7au5ecfybp7d65av6q3jyjad.onion",
-     "slug": "http://qvfgzg2yukem4ldat2zk6umidqbzydhf7au5ecfybp7d65av6q3jyjad.onion",
+     "enabled": false,
+     "fqdn": "7n4vqiaqxenaqy4t47ayqvurbmg6vfg2ir7iobwjazwizjncwyt7jhad.onion",
+     "slug": "http://7n4vqiaqxenaqy4t47ayqvurbmg6vfg2ir7iobwjazwizjncwyt7jhad.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": false,
      "enabled": false,
-     "fqdn": "inzk64xcf3sm6qzkehmio7piwhkslhnab3rlviniyg7alcgsxvy7kcyd.onion",
-     "slug": "http://inzk64xcf3sm6qzkehmio7piwhkslhnab3rlviniyg7alcgsxvy7kcyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "a4vbe7yp4kluped6khuhpr5nmzshiimx2jt5j22ozriiq6ngsm3fcpyd.onion",
-     "slug": "http://a4vbe7yp4kluped6khuhpr5nmzshiimx2jt5j22ozriiq6ngsm3fcpyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "3frnhzcnlkjnw5q3tm6elzizinm2k3bmrtf2xwqjzpcxzeqwn2tv6wyd.onion",
-     "slug": "http://3frnhzcnlkjnw5q3tm6elzizinm2k3bmrtf2xwqjzpcxzeqwn2tv6wyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "7ept6u4u3bczpq5sagycyd2mapv47ctkehzzc3ybugs7vtjl23i52gid.onion",
-     "slug": "http://7ept6u4u3bczpq5sagycyd2mapv47ctkehzzc3ybugs7vtjl23i52gid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "gkwqyosd75hpu72jfalfo7xepdebl5p5rhorbxzfwswyg53jckg7wxad.onion",
-     "slug": "http://gkwqyosd75hpu72jfalfo7xepdebl5p5rhorbxzfwswyg53jckg7wxad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "ljex7r7uv7j6lek6jef7o2pqw23ojauom5q7nhgyxjhoebwilbc3eqqd.onion",
-     "slug": "http://ljex7r7uv7j6lek6jef7o2pqw23ojauom5q7nhgyxjhoebwilbc3eqqd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "kxlw35vctxgbmwtz6474xwtkm2kywifg4efs6ixmvgdgbgi2uaurenid.onion",
-     "slug": "http://kxlw35vctxgbmwtz6474xwtkm2kywifg4efs6ixmvgdgbgi2uaurenid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "zfpcqpp6kfe5wl72b2cfb5qbp4kkzi4oj6if4r226idr3efvtocgd6id.onion",
-     "slug": "http://zfpcqpp6kfe5wl72b2cfb5qbp4kkzi4oj6if4r226idr3efvtocgd6id.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "brain4zoadgr6clxecixffvxjsw43cflyprnpfeak72nfh664kqqriyd.onion",
-     "slug": "http://brain4zoadgr6clxecixffvxjsw43cflyprnpfeak72nfh664kqqriyd.onion/",
+     "fqdn": "77nrxelcwh47yikvpaz2rvtsten4sen2elybo5r5st6wlxsbitv255qd.onion",
+     "slug": "http://77nrxelcwh47yikvpaz2rvtsten4sen2elybo5r5st6wlxsbitv255qd.onion/",
      "title": "BrainCipher Client Area",
      "type": "Chat"
     },
     {
      "available": false,
-     "enabled": false,
-     "fqdn": "mejouwrwja4iou7myj34rqi7cixyhn7vsa42e2n2dhxzc5mmkiaki3yd.onion",
-     "slug": "http://mejouwrwja4iou7myj34rqi7cixyhn7vsa42e2n2dhxzc5mmkiaki3yd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
      "enabled": true,
-     "fqdn": "jxyphr6ipbeeusnf64sbqubpl57n7cvao3ef3zi5p64lqaggs6nydgid.onion",
-     "slug": "http://jxyphr6ipbeeusnf64sbqubpl57n7cvao3ef3zi5p64lqaggs6nydgid.onion",
+     "fqdn": "alkkq3vhb7epl3jh6qzutj2vyyfdgvs2nukw5hwdsijl5la3jrinrryd.onion",
+     "slug": "http://alkkq3vhb7epl3jh6qzutj2vyyfdgvs2nukw5hwdsijl5la3jrinrryd.onion",
      "title": "",
      "type": "Files"
     },
@@ -12637,56 +12516,352 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "alkkq3vhb7epl3jh6qzutj2vyyfdgvs2nukw5hwdsijl5la3jrinrryd.onion",
-     "slug": "http://alkkq3vhb7epl3jh6qzutj2vyyfdgvs2nukw5hwdsijl5la3jrinrryd.onion",
+     "fqdn": "jxyphr6ipbeeusnf64sbqubpl57n7cvao3ef3zi5p64lqaggs6nydgid.onion",
+     "slug": "http://jxyphr6ipbeeusnf64sbqubpl57n7cvao3ef3zi5p64lqaggs6nydgid.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": false,
      "enabled": false,
-     "fqdn": "77nrxelcwh47yikvpaz2rvtsten4sen2elybo5r5st6wlxsbitv255qd.onion",
-     "slug": "http://77nrxelcwh47yikvpaz2rvtsten4sen2elybo5r5st6wlxsbitv255qd.onion/",
+     "fqdn": "mejouwrwja4iou7myj34rqi7cixyhn7vsa42e2n2dhxzc5mmkiaki3yd.onion",
+     "slug": "http://mejouwrwja4iou7myj34rqi7cixyhn7vsa42e2n2dhxzc5mmkiaki3yd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "brain4zoadgr6clxecixffvxjsw43cflyprnpfeak72nfh664kqqriyd.onion",
+     "slug": "http://brain4zoadgr6clxecixffvxjsw43cflyprnpfeak72nfh664kqqriyd.onion/",
      "title": "BrainCipher Client Area",
      "type": "Chat"
     },
     {
-     "available": false,
-     "enabled": false,
-     "fqdn": "7n4vqiaqxenaqy4t47ayqvurbmg6vfg2ir7iobwjazwizjncwyt7jhad.onion",
-     "slug": "http://7n4vqiaqxenaqy4t47ayqvurbmg6vfg2ir7iobwjazwizjncwyt7jhad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "4ldgw2wuidqu5ef3rzx4byonf3y7rdnh43jiw2z4sbtjiwic6gkov7yd.onion",
-     "slug": "http://4ldgw2wuidqu5ef3rzx4byonf3y7rdnh43jiw2z4sbtjiwic6gkov7yd.onion/",
-     "title": "Not Found",
-     "type": "Files"
-    },
-    {
      "available": true,
-     "enabled": false,
-     "fqdn": "6ft2dfh26wm3w44orpjcgviutvfp25ez2iyh5ego5egvfmifrws7vvqd.onion",
-     "slug": "http://6ft2dfh26wm3w44orpjcgviutvfp25ez2iyh5ego5egvfmifrws7vvqd.onion",
+     "enabled": true,
+     "fqdn": "zfpcqpp6kfe5wl72b2cfb5qbp4kkzi4oj6if4r226idr3efvtocgd6id.onion",
+     "slug": "http://zfpcqpp6kfe5wl72b2cfb5qbp4kkzi4oj6if4r226idr3efvtocgd6id.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": true,
      "enabled": true,
-     "fqdn": "guonv3yxlb5t7mptz2cwxsqrsnmsocrufkz3z3nvuv45h66submxe4yd.onion",
-     "slug": "http://guonv3yxlb5t7mptz2cwxsqrsnmsocrufkz3z3nvuv45h66submxe4yd.onion",
+     "fqdn": "kxlw35vctxgbmwtz6474xwtkm2kywifg4efs6ixmvgdgbgi2uaurenid.onion",
+     "slug": "http://kxlw35vctxgbmwtz6474xwtkm2kywifg4efs6ixmvgdgbgi2uaurenid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ljex7r7uv7j6lek6jef7o2pqw23ojauom5q7nhgyxjhoebwilbc3eqqd.onion",
+     "slug": "http://ljex7r7uv7j6lek6jef7o2pqw23ojauom5q7nhgyxjhoebwilbc3eqqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "gkwqyosd75hpu72jfalfo7xepdebl5p5rhorbxzfwswyg53jckg7wxad.onion",
+     "slug": "http://gkwqyosd75hpu72jfalfo7xepdebl5p5rhorbxzfwswyg53jckg7wxad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "7ept6u4u3bczpq5sagycyd2mapv47ctkehzzc3ybugs7vtjl23i52gid.onion",
+     "slug": "http://7ept6u4u3bczpq5sagycyd2mapv47ctkehzzc3ybugs7vtjl23i52gid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "3frnhzcnlkjnw5q3tm6elzizinm2k3bmrtf2xwqjzpcxzeqwn2tv6wyd.onion",
+     "slug": "http://3frnhzcnlkjnw5q3tm6elzizinm2k3bmrtf2xwqjzpcxzeqwn2tv6wyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "a4vbe7yp4kluped6khuhpr5nmzshiimx2jt5j22ozriiq6ngsm3fcpyd.onion",
+     "slug": "http://a4vbe7yp4kluped6khuhpr5nmzshiimx2jt5j22ozriiq6ngsm3fcpyd.onion",
      "title": "",
      "type": "Files"
     },
     {
      "available": false,
      "enabled": false,
-     "fqdn": "rpoeu7zimfpwxbwmjmjyprqaprtvkj3ykfczhbc4x3voydopffn337id.onion",
-     "slug": "http://rpoeu7zimfpwxbwmjmjyprqaprtvkj3ykfczhbc4x3voydopffn337id.onion",
+     "fqdn": "inzk64xcf3sm6qzkehmio7piwhkslhnab3rlviniyg7alcgsxvy7kcyd.onion",
+     "slug": "http://inzk64xcf3sm6qzkehmio7piwhkslhnab3rlviniyg7alcgsxvy7kcyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "qvfgzg2yukem4ldat2zk6umidqbzydhf7au5ecfybp7d65av6q3jyjad.onion",
+     "slug": "http://qvfgzg2yukem4ldat2zk6umidqbzydhf7au5ecfybp7d65av6q3jyjad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "psv5ejeysrncs6ltu4pkjyazswcmw3atmxi4eg44a6luudin5ufchcqd.onion",
+     "slug": "http://psv5ejeysrncs6ltu4pkjyazswcmw3atmxi4eg44a6luudin5ufchcqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "mwf23uiaoiyyg3jgh3diwpmcn2qgg6i7kadivsbyncycz2mw2nyuwtqd.onion",
+     "slug": "http://mwf23uiaoiyyg3jgh3diwpmcn2qgg6i7kadivsbyncycz2mw2nyuwtqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "x3nb7qcygpem2j5xzstyzdtgzofzkwkx4eko3ug4r73i6uhcgvyffjyd.onion",
+     "slug": "http://x3nb7qcygpem2j5xzstyzdtgzofzkwkx4eko3ug4r73i6uhcgvyffjyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "zztabnlnggxpbeiyvpievqtxl6te4amttfobwusmgo2l3hcabfpcgyad.onion",
+     "slug": "http://zztabnlnggxpbeiyvpievqtxl6te4amttfobwusmgo2l3hcabfpcgyad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "3jbhn5gsv7yd22n7yasftjab2aystm7mw2x3cvonzipsrnxpjqufmgyd.onion",
+     "slug": "http://3jbhn5gsv7yd22n7yasftjab2aystm7mw2x3cvonzipsrnxpjqufmgyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
+     "slug": "http://pcmhzcqprvp3zyiez5tphrjzjqiydaod76idk6k66usmdyvdcb72l4id.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "emdnfl2fv32jhssxcbxlo6dzg2at4d7qbw2md6inz63qzdfgyln5cwyd.onion",
+     "slug": "http://emdnfl2fv32jhssxcbxlo6dzg2at4d7qbw2md6inz63qzdfgyln5cwyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "3fg2gfwrdks46drwvejpgpak5klrflclsjjo35dxtqfk3poeez6oezad.onion",
+     "slug": "http://3fg2gfwrdks46drwvejpgpak5klrflclsjjo35dxtqfk3poeez6oezad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "zktnif5vckhmz5tyrukp5bamatbfhkxjnb23rspsanyzywcrx3bvtqad.onion",
+     "slug": "http://zktnif5vckhmz5tyrukp5bamatbfhkxjnb23rspsanyzywcrx3bvtqad.onion/",
+     "title": "BrainCipher Storage",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "sjyd42k47guvygfiyfdv5dmllytpgdzr3ioiqsuytz726is6ss67imid.onion",
+     "slug": "http://sjyd42k47guvygfiyfdv5dmllytpgdzr3ioiqsuytz726is6ss67imid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "bosgzz4d53h6tqoaidjogoiq4jaxszll6q2puiepchxhxxop6dxoozqd.onion",
+     "slug": "http://bosgzz4d53h6tqoaidjogoiq4jaxszll6q2puiepchxhxxop6dxoozqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "lhsxojxowgtwdqlryl72d2v5cpgqv3sll4d47yyqdisersigvfbl5uid.onion",
+     "slug": "http://lhsxojxowgtwdqlryl72d2v5cpgqv3sll4d47yyqdisersigvfbl5uid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "7dfw4p3pzo3zlcy5hzm7y43z3kfke2rhd3eudncmvknwhsqqvseadkad.onion",
+     "slug": "http://7dfw4p3pzo3zlcy5hzm7y43z3kfke2rhd3eudncmvknwhsqqvseadkad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "keoz3i32ljvnfrsxo3cwolzv2mhkvbi5y5wlwtn5ngbswu4qzdnjvrqd.onion",
+     "slug": "http://keoz3i32ljvnfrsxo3cwolzv2mhkvbi5y5wlwtn5ngbswu4qzdnjvrqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "p6wmotxzvg34tdmpwm4beqgrcyp5iys43snkccsahnw74la3k3xx6pad.onion",
+     "slug": "http://p6wmotxzvg34tdmpwm4beqgrcyp5iys43snkccsahnw74la3k3xx6pad.onion/",
+     "title": "BrainCipher Client Area",
+     "type": "Chat"
+    },
+    {
+     "available": true,
+     "enabled": false,
+     "fqdn": "zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
+     "slug": "http://zijgmuqjzb6dc7pofxhtaiz36qqyg35lhutybmzaz6whzgei2casjgid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "cjuogz6kvmozrapbw6cgf3ovfxgxe2fy3ajlgxm53w3xjve5x5sichyd.onion",
+     "slug": "http://cjuogz6kvmozrapbw6cgf3ovfxgxe2fy3ajlgxm53w3xjve5x5sichyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
+     "slug": "http://ao63qafejccvb2fdfn5vb7dxaeptxnyroktllnxhzh4ru3df26wivoid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ipkxv2cccgrklc2tktzpqe6nm76mikdmvqqgauklvqvv5rl4ib3nmryd.onion",
+     "slug": "http://ipkxv2cccgrklc2tktzpqe6nm76mikdmvqqgauklvqvv5rl4ib3nmryd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
+     "slug": "http://s27k4va5sqe2h2sbw4wmbikibaz6lnwdjngl4v3qptcffsvtrdxx7yyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
+     "slug": "http://hv5on6i3k3g24qtu3ac6vtbrcgl2imz3sasakhfslhbnbqbcri73mqad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
+     "slug": "http://upiqcdsgvh6v5owteasjzyxbj2xug574dj4fctthehd7zjq7wmuxbwqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ea52lfk4w6dza6hmmb4o6ndef7ep45wkkjxuo7sfzkyqt7rplyph3zyd.onion",
+     "slug": "http://ea52lfk4w6dza6hmmb4o6ndef7ep45wkkjxuo7sfzkyqt7rplyph3zyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
+     "slug": "http://tbspzruwy3qhjg3p3pyl2f6zqa5x4tcn6gpask4rvb672hgjzlkrnpyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
+     "slug": "http://aj3ocrawf43r6u5miezvmzh5sjtuv2rx6na3tm26fao3laobu5unfhyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
+     "slug": "http://dkeqrg3fxrijolpgpbsmk6eacare4bg5awrracxdiestki2onyz5bnyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
+     "slug": "http://vkvsgl7lhipjirmz6j5ubp3w3bwvxgcdbpi3fsbqngfynetqtw4w5hyd.onion",
+     "title": "Brain Cipher Dataleak",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ltxnzpfvmr3c3rcbw5x4q2ejy6fmbp7kc35oql3gooyydg7belfmnyad.onion",
+     "slug": "http://ltxnzpfvmr3c3rcbw5x4q2ejy6fmbp7kc35oql3gooyydg7belfmnyad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "h4zmek6bf3lebauy7dtyxmui67n6ro5t4zdrooddpw3kyfktg2nmhgid.onion",
+     "slug": "http://h4zmek6bf3lebauy7dtyxmui67n6ro5t4zdrooddpw3kyfktg2nmhgid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
+     "slug": "http://n2yygycbmyeguft4n6tfokfkbvgkyzchlyn4jbpg7har6goel4eskfqd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "mybmtbgd7aprdnw2ekxht5qap5daam2wch25coqerrq2zdioanob34ad.onion",
+     "slug": "http://mybmtbgd7aprdnw2ekxht5qap5daam2wch25coqerrq2zdioanob34ad.onion",
+     "title": "Brain Cipher Client Area",
+     "type": "Chat"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "urvvoj7wlkh476p2tgntzez3nuke2ylfdkekpnkajxfz43o7jqkokeyd.onion",
+     "slug": "http://urvvoj7wlkh476p2tgntzez3nuke2ylfdkekpnkajxfz43o7jqkokeyd.onion",
      "title": "",
      "type": "Files"
     }
@@ -12760,8 +12935,32 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "krybitxdpxohsmjooeb3gbgpmdddreh6mnflzac6bnezz74b7yje67yd.onion",
-     "slug": "http://krybitxdpxohsmjooeb3gbgpmdddreh6mnflzac6bnezz74b7yje67yd.onion",
+     "fqdn": "krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.onion",
+     "slug": "http://krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.onion",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.",
+     "slug": "http://krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "krybivdln3oc3twbin4budgznzq7dmcolldnsx455lspxxe23b56y5qd.onion",
+     "slug": "http://krybivdln3oc3twbin4budgznzq7dmcolldnsx455lspxxe23b56y5qd.onion",
+     "title": "KRYBit | Leaks",
+     "type": "DLS"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "krybieodq754vlwufrsuxaswxb5zpxyibaawmed2jaduoz2e5m56hmid.onion",
+     "slug": "http://krybieodq754vlwufrsuxaswxb5zpxyibaawmed2jaduoz2e5m56hmid.onion",
      "title": "",
      "type": "DLS"
     },
@@ -12776,32 +12975,8 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "krybieodq754vlwufrsuxaswxb5zpxyibaawmed2jaduoz2e5m56hmid.onion",
-     "slug": "http://krybieodq754vlwufrsuxaswxb5zpxyibaawmed2jaduoz2e5m56hmid.onion",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.onion",
-     "slug": "http://krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.onion",
-     "title": "",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "krybivdln3oc3twbin4budgznzq7dmcolldnsx455lspxxe23b56y5qd.onion",
-     "slug": "http://krybivdln3oc3twbin4budgznzq7dmcolldnsx455lspxxe23b56y5qd.onion",
-     "title": "KRYBit | Leaks",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd.",
-     "slug": "http://krybitqsdzwmhnitvwuhvsntfgf2wrhxveyxroxpc44c6gkft2cqldyd",
+     "fqdn": "krybitxdpxohsmjooeb3gbgpmdddreh6mnflzac6bnezz74b7yje67yd.onion",
+     "slug": "http://krybitxdpxohsmjooeb3gbgpmdddreh6mnflzac6bnezz74b7yje67yd.onion",
      "title": "",
      "type": "DLS"
     }
@@ -12827,8 +13002,8 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "cqkrkmmivhakl3fwgxscurduu3znmroablt7jskxszkctixyseij5gad.onion",
-     "slug": "http://cqkrkmmivhakl3fwgxscurduu3znmroablt7jskxszkctixyseij5gad.onion",
+     "fqdn": "nz4z6ruzcekriti5cjjiiylzvrmysyqwibxztk6voem4trtx7gstpjid.onion",
+     "slug": "http://nz4z6ruzcekriti5cjjiiylzvrmysyqwibxztk6voem4trtx7gstpjid.onion",
      "title": "SAFEPAY",
      "type": "DLS"
     },
@@ -12851,8 +13026,8 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "nz4z6ruzcekriti5cjjiiylzvrmysyqwibxztk6voem4trtx7gstpjid.onion",
-     "slug": "http://nz4z6ruzcekriti5cjjiiylzvrmysyqwibxztk6voem4trtx7gstpjid.onion",
+     "fqdn": "cqkrkmmivhakl3fwgxscurduu3znmroablt7jskxszkctixyseij5gad.onion",
+     "slug": "http://cqkrkmmivhakl3fwgxscurduu3znmroablt7jskxszkctixyseij5gad.onion",
      "title": "SAFEPAY",
      "type": "DLS"
     }
@@ -13767,18 +13942,18 @@
     {
      "available": true,
      "enabled": true,
-     "fqdn": "7t3zi3e7ki6iseun77ofqtr6wmbpgnpc2ada6gstcxp54lw6q2zb7jad.onion",
-     "slug": "http://7t3zi3e7ki6iseun77ofqtr6wmbpgnpc2ada6gstcxp54lw6q2zb7jad.onion",
-     "title": "Booba Project",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": true,
      "fqdn": "culappkcuogv2omb37253e236mvmsfzvl4yw3p3incyzeoixhc6ocxqd.onion",
      "slug": "http://culappkcuogv2omb37253e236mvmsfzvl4yw3p3incyzeoixhc6ocxqd.onion",
      "title": "Booba Storage",
      "type": "Files"
+    },
+    {
+     "available": true,
+     "enabled": true,
+     "fqdn": "7t3zi3e7ki6iseun77ofqtr6wmbpgnpc2ada6gstcxp54lw6q2zb7jad.onion",
+     "slug": "http://7t3zi3e7ki6iseun77ofqtr6wmbpgnpc2ada6gstcxp54lw6q2zb7jad.onion",
+     "title": "Booba Project",
+     "type": "DLS"
     }
    ],
    "name": "Booba Project",
@@ -13813,38 +13988,6 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "ewrxgpvv7wsrqq7itfwg5jr7lkc6zzknndmru5su2ugrowxo3wwy5yad.onion",
-     "slug": "http://ewrxgpvv7wsrqq7itfwg5jr7lkc6zzknndmru5su2ugrowxo3wwy5yad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "zsglo7t7osxyk3vcl7zxzup7hs4ir52sntteymmw63zvoxzcqytlw7qd.onion",
-     "slug": "http://zsglo7t7osxyk3vcl7zxzup7hs4ir52sntteymmw63zvoxzcqytlw7qd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "bpoowhokr3vi32l3t4mjdtdxfrfpigwachopk5ojwmgxihnojhsawuyd.onion",
-     "slug": "http://bpoowhokr3vi32l3t4mjdtdxfrfpigwachopk5ojwmgxihnojhsawuyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "eogeko3sdn66gb7vjpwpmlmmmzfx7umtwaugpf5l6tb5jveolfydnuad.onion",
-     "slug": "http://eogeko3sdn66gb7vjpwpmlmmmzfx7umtwaugpf5l6tb5jveolfydnuad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
      "fqdn": "4wcrfql53ljekid3sn66z6swjot725muveddq77utxltaelw64eikfid.onion",
      "slug": "http://4wcrfql53ljekid3sn66z6swjot725muveddq77utxltaelw64eikfid.onion",
      "title": "",
@@ -13853,82 +13996,10 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "jziu7k7uee467r2wt66ndrwymmw7tsmqgcqi7aemcaxraqmaf2hdm3yd.onion",
-     "slug": "http://jziu7k7uee467r2wt66ndrwymmw7tsmqgcqi7aemcaxraqmaf2hdm3yd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "guestuctexqqaoxuahuydfa6ovxuhtng66pgyr5gqcrsi7qgchpkad.onion",
-     "slug": "http://guestuctexqqaoxuahuydfa6ovxuhtng66pgyr5gqcrsi7qgchpkad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "73h3lxn24kuayyfkn4t6ij7e67jklo24vqzqdhpts3ygmim7hu6u6aid.onion",
-     "slug": "http://73h3lxn24kuayyfkn4t6ij7e67jklo24vqzqdhpts3ygmim7hu6u6aid.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "nwtetzmrqhxieetg5lvth7szzvg35gfrqt23ly46vku56oo7pkueswyd.onion",
-     "slug": "http://nwtetzmrqhxieetg5lvth7szzvg35gfrqt23ly46vku56oo7pkueswyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "3ro23rujyigqrlrwk3e4keh3a3i6ntgrm3f42tbiqtf7vke47c6a6ayd.onion",
-     "slug": "http://3ro23rujyigqrlrwk3e4keh3a3i6ntgrm3f42tbiqtf7vke47c6a6ayd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "xtcwd3xmxpggtizn7kmwwqeizexflkkyqsytg2kauccau6ddsfa4gfyd.onion",
-     "slug": "http://xtcwd3xmxpggtizn7kmwwqeizexflkkyqsytg2kauccau6ddsfa4gfyd.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "dbvczza7nhwdb5kdvkzjtkrcvwnrt5viw7mihutueprvajy7rxhwq6id.onion",
-     "slug": "http://dbvczza7nhwdb5kdvkzjtkrcvwnrt5viw7mihutueprvajy7rxhwq6id.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion",
-     "slug": "http://dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion",
-     "title": "",
+     "fqdn": "xjhmtitnrdrgzw4vmsghirdoo2fk35a3tzj4enlmah4pvehdspydsiyd.onion",
+     "slug": "http://xjhmtitnrdrgzw4vmsghirdoo2fk35a3tzj4enlmah4pvehdspydsiyd.onion",
+     "title": "DragonForce | Blog",
      "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "6dgi54prfmpuuolutr4hl3akasxbx4o34g5y2bj4blrvzzkjemhxenad.onion",
-     "slug": "http://6dgi54prfmpuuolutr4hl3akasxbx4o34g5y2bj4blrvzzkjemhxenad.onion",
-     "title": "",
-     "type": "Files"
-    },
-    {
-     "available": false,
-     "enabled": true,
-     "fqdn": "2yczff6zyiey3gkgl5anwejktdp73abxbzbnvwobmrwkwgf3hudpyvyd.onion",
-     "slug": "http://2yczff6zyiey3gkgl5anwejktdp73abxbzbnvwobmrwkwgf3hudpyvyd.onion",
-     "title": "",
-     "type": "Files"
     },
     {
      "available": false,
@@ -13965,10 +14036,114 @@
     {
      "available": false,
      "enabled": true,
-     "fqdn": "xjhmtitnrdrgzw4vmsghirdoo2fk35a3tzj4enlmah4pvehdspydsiyd.onion",
-     "slug": "http://xjhmtitnrdrgzw4vmsghirdoo2fk35a3tzj4enlmah4pvehdspydsiyd.onion",
-     "title": "DragonForce | Blog",
+     "fqdn": "6dgi54prfmpuuolutr4hl3akasxbx4o34g5y2bj4blrvzzkjemhxenad.onion",
+     "slug": "http://6dgi54prfmpuuolutr4hl3akasxbx4o34g5y2bj4blrvzzkjemhxenad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "ewrxgpvv7wsrqq7itfwg5jr7lkc6zzknndmru5su2ugrowxo3wwy5yad.onion",
+     "slug": "http://ewrxgpvv7wsrqq7itfwg5jr7lkc6zzknndmru5su2ugrowxo3wwy5yad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion",
+     "slug": "http://dragongoztkdfmnd7jkchznd3fvkpdmeh4vhbt6p3usrlsoy5dw2bhyd.onion",
+     "title": "",
      "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "dbvczza7nhwdb5kdvkzjtkrcvwnrt5viw7mihutueprvajy7rxhwq6id.onion",
+     "slug": "http://dbvczza7nhwdb5kdvkzjtkrcvwnrt5viw7mihutueprvajy7rxhwq6id.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "xtcwd3xmxpggtizn7kmwwqeizexflkkyqsytg2kauccau6ddsfa4gfyd.onion",
+     "slug": "http://xtcwd3xmxpggtizn7kmwwqeizexflkkyqsytg2kauccau6ddsfa4gfyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "3ro23rujyigqrlrwk3e4keh3a3i6ntgrm3f42tbiqtf7vke47c6a6ayd.onion",
+     "slug": "http://3ro23rujyigqrlrwk3e4keh3a3i6ntgrm3f42tbiqtf7vke47c6a6ayd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "guestuctexqqaoxuahuydfa6ovxuhtng66pgyr5gqcrsi7qgchpkad.onion",
+     "slug": "http://guestuctexqqaoxuahuydfa6ovxuhtng66pgyr5gqcrsi7qgchpkad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "eogeko3sdn66gb7vjpwpmlmmmzfx7umtwaugpf5l6tb5jveolfydnuad.onion",
+     "slug": "http://eogeko3sdn66gb7vjpwpmlmmmzfx7umtwaugpf5l6tb5jveolfydnuad.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "bpoowhokr3vi32l3t4mjdtdxfrfpigwachopk5ojwmgxihnojhsawuyd.onion",
+     "slug": "http://bpoowhokr3vi32l3t4mjdtdxfrfpigwachopk5ojwmgxihnojhsawuyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "zsglo7t7osxyk3vcl7zxzup7hs4ir52sntteymmw63zvoxzcqytlw7qd.onion",
+     "slug": "http://zsglo7t7osxyk3vcl7zxzup7hs4ir52sntteymmw63zvoxzcqytlw7qd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "2yczff6zyiey3gkgl5anwejktdp73abxbzbnvwobmrwkwgf3hudpyvyd.onion",
+     "slug": "http://2yczff6zyiey3gkgl5anwejktdp73abxbzbnvwobmrwkwgf3hudpyvyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "nwtetzmrqhxieetg5lvth7szzvg35gfrqt23ly46vku56oo7pkueswyd.onion",
+     "slug": "http://nwtetzmrqhxieetg5lvth7szzvg35gfrqt23ly46vku56oo7pkueswyd.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "73h3lxn24kuayyfkn4t6ij7e67jklo24vqzqdhpts3ygmim7hu6u6aid.onion",
+     "slug": "http://73h3lxn24kuayyfkn4t6ij7e67jklo24vqzqdhpts3ygmim7hu6u6aid.onion",
+     "title": "",
+     "type": "Files"
+    },
+    {
+     "available": false,
+     "enabled": true,
+     "fqdn": "jziu7k7uee467r2wt66ndrwymmw7tsmqgcqi7aemcaxraqmaf2hdm3yd.onion",
+     "slug": "http://jziu7k7uee467r2wt66ndrwymmw7tsmqgcqi7aemcaxraqmaf2hdm3yd.onion",
+     "title": "",
+     "type": "Files"
     }
    ],
    "name": "dragonforce",
@@ -14059,6 +14234,14 @@
     {
      "available": false,
      "enabled": false,
+     "fqdn": "2cuqgeerjdba2rhdiviezodpu3lc4qz2sjf4qin6f7std2evleqlzjid.onion",
+     "slug": "http://2cuqgeerjdba2rhdiviezodpu3lc4qz2sjf4qin6f7std2evleqlzjid.onion",
+     "title": "",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
      "fqdn": "alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion",
      "slug": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion/api/blog/all/0/12",
      "title": "THIS WEBSITE HAS BEEN SEIZED",
@@ -14070,14 +14253,6 @@
      "fqdn": "alphvuzxyxv6ylumd2ngp46xzq3pw6zflomrghvxeuks6kklberrbmyd.onion",
      "slug": "http://alphvuzxyxv6ylumd2ngp46xzq3pw6zflomrghvxeuks6kklberrbmyd.onion",
      "title": "THIS WEBSITE HAS BEEN SEIZED",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
-     "fqdn": "2cuqgeerjdba2rhdiviezodpu3lc4qz2sjf4qin6f7std2evleqlzjid.onion",
-     "slug": "http://2cuqgeerjdba2rhdiviezodpu3lc4qz2sjf4qin6f7std2evleqlzjid.onion",
-     "title": "",
      "type": "DLS"
     }
    ],
@@ -14317,11 +14492,27 @@
    "description": "ShinyHunters is a financially motivated data-theft and extortion group active since 2020, responsible for high-profile breaches including Ticketmaster (via Snowflake) and PowerSchool; by 2025 they launched a RaaS offering called \"shinysp1d3r,\" and in August 2025 French authorities arrested four members.",
    "locations": [
     {
+     "available": true,
+     "enabled": true,
+     "fqdn": "breachforums.hn",
+     "slug": "https://breachforums.hn/",
+     "title": "This Domain Has Been Seized",
+     "type": "DLS"
+    },
+    {
      "available": false,
      "enabled": false,
      "fqdn": "shinypogk4jjniry5qi7247tznop6mxdrdte2k6pdu5cyo43vdzmrwid.onion",
      "slug": "http://shinypogk4jjniry5qi7247tznop6mxdrdte2k6pdu5cyo43vdzmrwid.onion",
      "title": "Loading http://shnyhntww34phqoa6dcgnvps2yu7dlwzmy5lkvejwjdo6z7bmgshzayd.onion/",
+     "type": "DLS"
+    },
+    {
+     "available": false,
+     "enabled": false,
+     "fqdn": "toolatedhs5dtr2pv6h5kdraneak5gs3sxrecqhoufc5e45edior7mqd.onion",
+     "slug": "http://toolatedhs5dtr2pv6h5kdraneak5gs3sxrecqhoufc5e45edior7mqd.onion",
+     "title": "SH",
      "type": "DLS"
     },
     {
@@ -14357,7 +14548,7 @@
      "type": "Files"
     },
     {
-     "available": false,
+     "available": true,
      "enabled": true,
      "fqdn": "91.215.85.103",
      "slug": "http://91.215.85.103",
@@ -14367,25 +14558,9 @@
     {
      "available": false,
      "enabled": false,
-     "fqdn": "toolatedhs5dtr2pv6h5kdraneak5gs3sxrecqhoufc5e45edior7mqd.onion",
-     "slug": "http://toolatedhs5dtr2pv6h5kdraneak5gs3sxrecqhoufc5e45edior7mqd.onion",
-     "title": "SH",
-     "type": "DLS"
-    },
-    {
-     "available": false,
-     "enabled": false,
      "fqdn": "shnyhntww34phqoa6dcgnvps2yu7dlwzmy5lkvejwjdo6z7bmgshzayd.onion",
      "slug": "http://shnyhntww34phqoa6dcgnvps2yu7dlwzmy5lkvejwjdo6z7bmgshzayd.onion",
      "title": "SH",
-     "type": "DLS"
-    },
-    {
-     "available": true,
-     "enabled": true,
-     "fqdn": "breachforums.hn",
-     "slug": "https://breachforums.hn/",
-     "title": "This Domain Has Been Seized",
      "type": "DLS"
     }
    ],
@@ -14995,13 +15170,13 @@
  ],
  "bgp": {
   "schema_version": 2,
-  "last_updated": "2026-11-24T17:40:36.515Z",
+  "last_updated": "2026-11-24T21:03:45.278Z",
   "active_nodes": 2,
   "total_established": 185,
   "unknown_established": 0,
   "countries": {
-   "BR": 132,
-   "AR": 23,
+   "BR": 131,
+   "AR": 24,
    "CL": 22,
    "US": 5,
    "MX": 1,
