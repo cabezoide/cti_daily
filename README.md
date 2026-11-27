@@ -16,57 +16,57 @@ No es un archivo histórico ni un volcado de *feeds*. Cada documento está escri
 
 | Informe | Tema | Tipo | Versión de | Ver. | TLP | Vigencia | Formatos |
 |---|---|---|---|---|---|---|---|
-| `CTI-2026-014` | TheGentlemen · Storm-2697 | Perfil de actor | 2026-11-21 | 1.5 | `TLP:CLEAR` | vigente · 19 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
-| `CTI-2026-015` | Qilin · Agenda · Storm-1934 | Perfil de actor | 2026-11-21 | 1.3 | `TLP:CLEAR` | vigente · 20 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
-| `CTI-2026-016` | LockBit 5.0 · ChuongDong | Perfil de actor | 2026-11-21 | 1.2 | `TLP:CLEAR` | vigente · 20 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
-| `CTI-2026-017` | FamousSparrow · SparroWocky | Perfil de actor | 2026-11-17 | 1.2 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
-| `CTI-2026-018` | Abuso de dominios de primer nivel | Evaluación estratégica | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 81 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
-| `CTI-2026-019` | ARTEX · framework ofensivo agéntico | Evaluación estratégica | 2026-11-21 | 1.2 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
-| `CTI-2026-020` | Blind Eagle · APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98 | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
-| `CTI-2026-021` | Troyanos bancarios brasileños · Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON | Perfil de ecosistema | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-021-troyanos-br.md) · [html](CTI-2026-021-troyanos-br.html) |
-| `CTI-2026-022` | Red Akodon · campañas «Shadow Vector» | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-022-redakodon.md) · [html](CTI-2026-022-redakodon.html) |
-| `CTI-2026-023` | Machete · El Machete · APT-C-43 · G0095 | Perfil de actor | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 171 d | [md](CTI-2026-023-machete.md) · [html](CTI-2026-023-machete.html) |
-| `CTI-2026-024` | Rhysida · Vanilla Tempest | Perfil de operación de extorsión | 2026-11-22 | 1.2 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-024-rhysida.md) · [html](CTI-2026-024-rhysida.html) |
-| `CTI-2026-025` | Gamaredon · Primitive Bear · Shuckworm · Aqua Blizzard · G0047 | Perfil de actor | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 51 d | [md](CTI-2026-025-gamaredon.md) · [html](CTI-2026-025-gamaredon.html) |
-| `CTI-2026-026` | APT36 · Transparent Tribe · Mythic Leopard · G0134 | Perfil de actor | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-026-apt36.md) · [html](CTI-2026-026-apt36.html) |
-| `CTI-2026-027` | Mustang Panda · Earth Preta · RedDelta · Twill Typhoon · G0129 | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-027-mustangpanda.md) · [html](CTI-2026-027-mustangpanda.html) |
-| `CTI-2026-028` | UNC3886 · G1048 · campaña «RedPenguin» | Perfil de actor | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-028-unc3886.md) · [html](CTI-2026-028-unc3886.html) |
-| `CTI-2026-029` | Sandworm · APT44 · Seashell Blizzard · TeleBots · G0034 | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-029-sandworm.md) · [html](CTI-2026-029-sandworm.html) |
-| `CTI-2026-030` | Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-030-salttyphoon.md) · [html](CTI-2026-030-salttyphoon.html) |
-| `CTI-2026-031` | Dark Caracal · G0070 | Perfil de actor estatal | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-031-darkcaracal.md) · [html](CTI-2026-031-darkcaracal.html) |
-| `CTI-2026-032` | APT38 · BlueNoroff · TraderTraitor · Sapphire Sleet · Lazarus Group · G0082 | Perfil de bloque de actores | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-032-apt38-bluenoroff.md) · [html](CTI-2026-032-apt38-bluenoroff.html) |
-| `CTI-2026-033` | StrikeShark · cargador SharkLoader | Perfil de operación sin atribuir | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-033-strikeshark.md) · [html](CTI-2026-033-strikeshark.html) |
-| `CTI-2026-034` | Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919 | Perfil de actor estatal | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-034-flaxtyphoon.md) · [html](CTI-2026-034-flaxtyphoon.html) |
-| `CTI-2026-035` | Medusa | Perfil de operación de extorsión | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-035-medusa.md) · [html](CTI-2026-035-medusa.html) |
-| `CTI-2026-036` | Volt Typhoon · Vanguard Panda · VOLTZITE · Insidious Taurus | Perfil de actor estatal | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-036-volttyphoon.md) · [html](CTI-2026-036-volttyphoon.html) |
-| `CTI-2026-037` | APT28 · Fancy Bear · Forest Blizzard · Sednit · Sofacy · G0007 | Perfil de actor estatal | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-037-apt28.md) · [html](CTI-2026-037-apt28.html) |
-| `CTI-2026-038` | APT29 · Midnight Blizzard · Cozy Bear · NOBELIUM · G0016 | Perfil de actor estatal | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-038-apt29.md) · [html](CTI-2026-038-apt29.html) |
-| `CTI-2026-039` | APT41 · Winnti · Wicked Panda · Brass Typhoon · G0096 | Perfil de actor estatal | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-039-apt41.md) · [html](CTI-2026-039-apt41.html) |
-| `CTI-2026-040` | BlackSuit · Royal · Chaos | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-040-blacksuit.md) · [html](CTI-2026-040-blacksuit.html) |
-| `CTI-2026-041` | Anubis · Hawkmoth · Sphinx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-041-anubis.md) · [html](CTI-2026-041-anubis.html) |
-| `CTI-2026-042` | Devman · Funky Mantis · Dire Wolf · Sauron | Perfil de ecosistema | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-042-emergentes.md) · [html](CTI-2026-042-emergentes.html) |
-| `CTI-2026-043` | Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor | Perfil de operación sin atribuir | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
-| `CTI-2026-044` | Redes de bots de DDoS y de proxy residencial · 33 familias | Perfil de ecosistema | 2026-11-24 | 1.5 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-044-redes-bots.md) · [html](CTI-2026-044-redes-bots.html) |
-| `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-24 | 1.5 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
-| `CTI-2026-046` | Akira · Akira_v2 · Megazord · (linaje discutido) Conti | Perfil de operación de extorsión | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-046-akira.md) · [html](CTI-2026-046-akira.html) |
-| `CTI-2026-047` | INC Ransom · Inc Ransom · (marca hermana) Lynx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-047-incransom.md) · [html](CTI-2026-047-incransom.html) |
-| `CTI-2026-048` | n0n · N0n | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-048-n0n.md) · [html](CTI-2026-048-n0n.html) |
-| `CTI-2026-049` | settra · Settra | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-049-settra.md) · [html](CTI-2026-049-settra.html) |
-| `CTI-2026-050` | Vortex | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-050-vortex.md) · [html](CTI-2026-050-vortex.html) |
-| `CTI-2026-051` | PixelLeaks · Pixelleaks | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-051-pixelleaks.md) · [html](CTI-2026-051-pixelleaks.html) |
-| `CTI-2026-052` | Curious Worm · curiousworm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 54 d | [md](CTI-2026-052-curiousworm.md) · [html](CTI-2026-052-curiousworm.html) |
-| `CTI-2026-053` | SoulGroup · Soulgroup | Perfil de operación de extorsión | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-053-soulgroup.md) · [html](CTI-2026-053-soulgroup.html) |
-| `CTI-2026-054` | No aplica · Evaluación de un rastreador | Evaluación de fuentes | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-054-ctifyi.md) · [html](CTI-2026-054-ctifyi.html) |
-| `CTI-2026-055` | Multiactor · 237 grupos en reclamaciones cruzadas | Método analítico | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 85 d | [md](CTI-2026-055-reclamaciones-cruzadas.md) · [html](CTI-2026-055-reclamaciones-cruzadas.html) |
-| `CTI-2026-056` | BrainCipher | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-056-braincipher.md) · [html](CTI-2026-056-braincipher.html) |
-| `CTI-2026-057` | krybit · Krybit | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-057-krybit.md) · [html](CTI-2026-057-krybit.html) |
-| `CTI-2026-058` | safepay · SafePay | Perfil de operación de extorsión | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-058-safepay.md) · [html](CTI-2026-058-safepay.html) |
-| `CTI-2026-059` | Booba Project | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-059-boobaproject.md) · [html](CTI-2026-059-boobaproject.html) |
-| `CTI-2026-060` | Storm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-060-storm.md) · [html](CTI-2026-060-storm.html) |
-| `CTI-2026-061` | DragonForce · dragonforce | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 23 d | [md](CTI-2026-061-dragonforce.md) · [html](CTI-2026-061-dragonforce.html) |
-| `CTI-2026-062` | ALPHV · BlackCat · Noberus | Perfil de cierre de una operación de extorsión extinta | 2026-11-21 | 1.0 | `TLP:CLEAR` | vigente · 25 d | [md](CTI-2026-062-alphv.md) · [html](CTI-2026-062-alphv.html) |
-| `CTI-2026-063` | SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect | Perfil de campaña contra proveedor de servicios gestionados | 2026-11-21 | 1.0 | `TLP:CLEAR` | vigente · 25 d | [md](CTI-2026-063-sckit.md) · [html](CTI-2026-063-sckit.html) |
-| `CTI-2026-064` | ShinyHunters, INCEPTION y el clúster de intrusión O-UNC-053 | Perfil de actor y evaluacion de continuidad de marca | 2026-11-24 | 1.1 | `TLP:CLEAR` | vigente · 28 d | [md](CTI-2026-064-shinyhunters.md) · [html](CTI-2026-064-shinyhunters.html) |
+| `CTI-2026-014` | TheGentlemen · Storm-2697 | Perfil de actor | 2026-11-21 | 1.5 | `TLP:CLEAR` | vigente · 18 d | [md](CTI-2026-014-thegentlemen.md) · [html](CTI-2026-014-thegentlemen.html) |
+| `CTI-2026-015` | Qilin · Agenda · Storm-1934 | Perfil de actor | 2026-11-21 | 1.3 | `TLP:CLEAR` | vigente · 19 d | [md](CTI-2026-015-qilin.md) · [html](CTI-2026-015-qilin.html) |
+| `CTI-2026-016` | LockBit 5.0 · ChuongDong | Perfil de actor | 2026-11-21 | 1.2 | `TLP:CLEAR` | vigente · 19 d | [md](CTI-2026-016-lockbit5.md) · [html](CTI-2026-016-lockbit5.html) |
+| `CTI-2026-017` | FamousSparrow · SparroWocky | Perfil de actor | 2026-11-17 | 1.2 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-017-famoussparrow.md) · [html](CTI-2026-017-famoussparrow.html) |
+| `CTI-2026-018` | Abuso de dominios de primer nivel | Evaluación estratégica | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 80 d | [md](CTI-2026-018-abuso-tld.md) · [html](CTI-2026-018-abuso-tld.html) |
+| `CTI-2026-019` | ARTEX · framework ofensivo agéntico | Evaluación estratégica | 2026-11-21 | 1.2 | `TLP:CLEAR` | vigente · 81 d | [md](CTI-2026-019-artex.md) · [html](CTI-2026-019-artex.html) |
+| `CTI-2026-020` | Blind Eagle · APT-C-36 · TAG-144 · AguilaCiega · APT-Q-98 | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 81 d | [md](CTI-2026-020-blindeagle.md) · [html](CTI-2026-020-blindeagle.html) |
+| `CTI-2026-021` | Troyanos bancarios brasileños · Mekotio · Mispadu · Grandoreiro · Astaroth · Coyote · VENON | Perfil de ecosistema | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 81 d | [md](CTI-2026-021-troyanos-br.md) · [html](CTI-2026-021-troyanos-br.html) |
+| `CTI-2026-022` | Red Akodon · campañas «Shadow Vector» | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 81 d | [md](CTI-2026-022-redakodon.md) · [html](CTI-2026-022-redakodon.html) |
+| `CTI-2026-023` | Machete · El Machete · APT-C-43 · G0095 | Perfil de actor | 2026-11-16 | 1.0 | `TLP:CLEAR` | vigente · 170 d | [md](CTI-2026-023-machete.md) · [html](CTI-2026-023-machete.html) |
+| `CTI-2026-024` | Rhysida · Vanilla Tempest | Perfil de operación de extorsión | 2026-11-22 | 1.2 | `TLP:CLEAR` | vigente · 81 d | [md](CTI-2026-024-rhysida.md) · [html](CTI-2026-024-rhysida.html) |
+| `CTI-2026-025` | Gamaredon · Primitive Bear · Shuckworm · Aqua Blizzard · G0047 | Perfil de actor | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 50 d | [md](CTI-2026-025-gamaredon.md) · [html](CTI-2026-025-gamaredon.html) |
+| `CTI-2026-026` | APT36 · Transparent Tribe · Mythic Leopard · G0134 | Perfil de actor | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-026-apt36.md) · [html](CTI-2026-026-apt36.html) |
+| `CTI-2026-027` | Mustang Panda · Earth Preta · RedDelta · Twill Typhoon · G0129 | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-027-mustangpanda.md) · [html](CTI-2026-027-mustangpanda.html) |
+| `CTI-2026-028` | UNC3886 · G1048 · campaña «RedPenguin» | Perfil de actor | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-028-unc3886.md) · [html](CTI-2026-028-unc3886.html) |
+| `CTI-2026-029` | Sandworm · APT44 · Seashell Blizzard · TeleBots · G0034 | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-029-sandworm.md) · [html](CTI-2026-029-sandworm.html) |
+| `CTI-2026-030` | Salt Typhoon · OPERATOR PANDA · RedMike · UNC5807 · GhostEmperor | Perfil de actor | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-030-salttyphoon.md) · [html](CTI-2026-030-salttyphoon.html) |
+| `CTI-2026-031` | Dark Caracal · G0070 | Perfil de actor estatal | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-031-darkcaracal.md) · [html](CTI-2026-031-darkcaracal.html) |
+| `CTI-2026-032` | APT38 · BlueNoroff · TraderTraitor · Sapphire Sleet · Lazarus Group · G0082 | Perfil de bloque de actores | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-032-apt38-bluenoroff.md) · [html](CTI-2026-032-apt38-bluenoroff.html) |
+| `CTI-2026-033` | StrikeShark · cargador SharkLoader | Perfil de operación sin atribuir | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-033-strikeshark.md) · [html](CTI-2026-033-strikeshark.html) |
+| `CTI-2026-034` | Flax Typhoon · Ethereal Panda · RedJuliett · Storm-0919 | Perfil de actor estatal | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-034-flaxtyphoon.md) · [html](CTI-2026-034-flaxtyphoon.html) |
+| `CTI-2026-035` | Medusa | Perfil de operación de extorsión | 2026-11-17 | 1.0 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-035-medusa.md) · [html](CTI-2026-035-medusa.html) |
+| `CTI-2026-036` | Volt Typhoon · Vanguard Panda · VOLTZITE · Insidious Taurus | Perfil de actor estatal | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 83 d | [md](CTI-2026-036-volttyphoon.md) · [html](CTI-2026-036-volttyphoon.html) |
+| `CTI-2026-037` | APT28 · Fancy Bear · Forest Blizzard · Sednit · Sofacy · G0007 | Perfil de actor estatal | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-037-apt28.md) · [html](CTI-2026-037-apt28.html) |
+| `CTI-2026-038` | APT29 · Midnight Blizzard · Cozy Bear · NOBELIUM · G0016 | Perfil de actor estatal | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-038-apt29.md) · [html](CTI-2026-038-apt29.html) |
+| `CTI-2026-039` | APT41 · Winnti · Wicked Panda · Brass Typhoon · G0096 | Perfil de actor estatal | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-039-apt41.md) · [html](CTI-2026-039-apt41.html) |
+| `CTI-2026-040` | BlackSuit · Royal · Chaos | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-040-blacksuit.md) · [html](CTI-2026-040-blacksuit.html) |
+| `CTI-2026-041` | Anubis · Hawkmoth · Sphinx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-041-anubis.md) · [html](CTI-2026-041-anubis.html) |
+| `CTI-2026-042` | Devman · Funky Mantis · Dire Wolf · Sauron | Perfil de ecosistema | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-042-emergentes.md) · [html](CTI-2026-042-emergentes.html) |
+| `CTI-2026-043` | Operation ShadowCloud · BRONZE SANDCASTLE · GitDoor · GraphDoor | Perfil de operación sin atribuir | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 82 d | [md](CTI-2026-043-shadowcloud.md) · [html](CTI-2026-043-shadowcloud.html) |
+| `CTI-2026-044` | Redes de bots de DDoS y de proxy residencial · 33 familias | Perfil de ecosistema | 2026-11-24 | 1.5 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-044-redes-bots.md) · [html](CTI-2026-044-redes-bots.html) |
+| `CTI-2026-045` | Liso | Perfil de red de bots | 2026-11-24 | 1.5 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-045-liso.md) · [html](CTI-2026-045-liso.html) |
+| `CTI-2026-046` | Akira · Akira_v2 · Megazord · (linaje discutido) Conti | Perfil de operación de extorsión | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-046-akira.md) · [html](CTI-2026-046-akira.html) |
+| `CTI-2026-047` | INC Ransom · Inc Ransom · (marca hermana) Lynx | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-047-incransom.md) · [html](CTI-2026-047-incransom.html) |
+| `CTI-2026-048` | n0n · N0n | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-048-n0n.md) · [html](CTI-2026-048-n0n.html) |
+| `CTI-2026-049` | settra · Settra | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-049-settra.md) · [html](CTI-2026-049-settra.html) |
+| `CTI-2026-050` | Vortex | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-050-vortex.md) · [html](CTI-2026-050-vortex.html) |
+| `CTI-2026-051` | PixelLeaks · Pixelleaks | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-051-pixelleaks.md) · [html](CTI-2026-051-pixelleaks.html) |
+| `CTI-2026-052` | Curious Worm · curiousworm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 53 d | [md](CTI-2026-052-curiousworm.md) · [html](CTI-2026-052-curiousworm.html) |
+| `CTI-2026-053` | SoulGroup · Soulgroup | Perfil de operación de extorsión | 2026-11-19 | 1.2 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-053-soulgroup.md) · [html](CTI-2026-053-soulgroup.html) |
+| `CTI-2026-054` | No aplica · Evaluación de un rastreador | Evaluación de fuentes | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-054-ctifyi.md) · [html](CTI-2026-054-ctifyi.html) |
+| `CTI-2026-055` | Multiactor · 237 grupos en reclamaciones cruzadas | Método analítico | 2026-11-19 | 1.1 | `TLP:CLEAR` | vigente · 84 d | [md](CTI-2026-055-reclamaciones-cruzadas.md) · [html](CTI-2026-055-reclamaciones-cruzadas.html) |
+| `CTI-2026-056` | BrainCipher | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-056-braincipher.md) · [html](CTI-2026-056-braincipher.html) |
+| `CTI-2026-057` | krybit · Krybit | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-057-krybit.md) · [html](CTI-2026-057-krybit.html) |
+| `CTI-2026-058` | safepay · SafePay | Perfil de operación de extorsión | 2026-11-21 | 1.1 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-058-safepay.md) · [html](CTI-2026-058-safepay.html) |
+| `CTI-2026-059` | Booba Project | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-059-boobaproject.md) · [html](CTI-2026-059-boobaproject.html) |
+| `CTI-2026-060` | Storm | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-060-storm.md) · [html](CTI-2026-060-storm.html) |
+| `CTI-2026-061` | DragonForce · dragonforce | Perfil de operación de extorsión | 2026-11-19 | 1.0 | `TLP:CLEAR` | vigente · 22 d | [md](CTI-2026-061-dragonforce.md) · [html](CTI-2026-061-dragonforce.html) |
+| `CTI-2026-062` | ALPHV · BlackCat · Noberus | Perfil de cierre de una operación de extorsión extinta | 2026-11-21 | 1.0 | `TLP:CLEAR` | vigente · 24 d | [md](CTI-2026-062-alphv.md) · [html](CTI-2026-062-alphv.html) |
+| `CTI-2026-063` | SCKit · conjunto de herramientas sobre ConnectWise ScreenConnect | Perfil de campaña contra proveedor de servicios gestionados | 2026-11-21 | 1.0 | `TLP:CLEAR` | vigente · 24 d | [md](CTI-2026-063-sckit.md) · [html](CTI-2026-063-sckit.html) |
+| `CTI-2026-064` | ShinyHunters, INCEPTION y el clúster de intrusión O-UNC-053 | Perfil de actor y evaluacion de continuidad de marca | 2026-11-24 | 1.1 | `TLP:CLEAR` | vigente · 27 d | [md](CTI-2026-064-shinyhunters.md) · [html](CTI-2026-064-shinyhunters.html) |
 
 ### Agregados de indicadores
 
